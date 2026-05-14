@@ -1,1 +1,38 @@
-
+[
+  {
+    "id": "bss_babel",
+    "nama": "Bank Sumsel Babel",
+    "bunga_min": 10.0,
+    "bunga_max": 12.0,
+    "tenor_min": 1,
+    "tenor_max": 5,
+    "biaya_admin": 500000,
+    "sektor": ["pangan", "energi"],
+    "komisi_persen": 1.0,
+    "aktif": true
+  },
+  {
+    "id": "mandiri_umkm",
+    "nama": "Bank Mandiri UMKM",
+    "bunga_min": 10.5,
+    "bunga_max": 13.0,
+    "tenor_min": 1,
+    "tenor_max": 4,
+    "biaya_admin": 750000,
+    "sektor": ["pangan"],
+    "komisi_persen": 1.2,
+    "aktif": true
+  },
+  {
+    "id": "bri_mikro",
+    "nama": "BRI Mikro",
+    "bunga_min": 11.0,
+    "bunga_max": 14.0,
+    "tenor_min": 1,
+    "tenor_max": 3,
+    "biaya_admin": 300000,
+    "sektor": ["pangan", "energi", "lainnya"],
+    "komisi_persen": 0.8,
+    "aktif": true
+  }
+]
