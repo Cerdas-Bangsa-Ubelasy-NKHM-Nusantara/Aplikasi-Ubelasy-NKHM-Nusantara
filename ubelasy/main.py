@@ -123,12 +123,15 @@ def main():
                 st.write(f"**Sektor:** {app['profil']['sektor']}, **Tenor:** {app['profil']['tenor']} tahun")
                 if app.get('catatan'):
                     st.write(f"**Catatan:** {app['catatan']}")
-    
-    # Admin panel (hanya muncul jika ada parameter ?admin=1)
+                    
+                    
     if st.query_params.get("admin") == "1":
     from ubelasy.admin import admin_page
     admin_page()
     st.stop()
+    
+    # Admin panel (hanya muncul jika ada parameter ?admin=1)
+    
 
     # Catatan untuk debitur
     if app.get('catatan'):
