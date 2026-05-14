@@ -1,35 +1,22 @@
 import streamlit as st
 
-# Konfigurasi halaman utama (hanya sekali)
-st.set_page_config(
-    page_title="Sistem Keuangan Nusantara - Ubelasy & NKHM",
-    page_icon="🌾",
-    layout="wide"
-)
+st.set_page_config(page_title="Sistem Keuangan Nusantara", layout="wide")
 
 # ========== SPLASH SCREEN ==========
-if not st.session_state.get("splash_selesai", False):
-    # Bersihkan area utama
+# Gunakan kunci session state baru agar tidak terpengaruh session lama
+if not st.session_state.get("splash_two_in_one_done", False):
     splash_holder = st.empty()
-
     with splash_holder.container():
-        # Layout 3 kolom untuk center
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            # Logo dari raw GitHub (pastikan URL benar)
+            # Logo dari raw GitHub (dengan fallback)
             logo_url = "https://raw.githubusercontent.com/SRPakpahanSST/Ubelasy-NKHM-Nusantara/main/assets/pmd_logo.jpg"
-            st.markdown(
-                f'<div style="display: flex; justify-content: center;"><img src="{logo_url}" width="180"></div>',
-                unsafe_allow_html=True
-            )
-
-            # Judul utama (2 baris: baris1 = Ubelasy + NKHM Nusantara)
-            st.markdown(
-                "<h1 style='text-align: center;'>Ubelasy + NKHM Nusantara</h1>",
-                unsafe_allow_html=True
-            )
-
-            # Deskripsi (baris2: penjelasan singkat)
+            try:
+                st.image(logo_url, width=180)
+            except:
+                st.markdown("<h2 style='text-align: center;'>🌾</h2>", unsafe_allow_html=True)
+            
+            st.markdown("<h1 style='text-align: center;'>Ubelasy + NKHM Nusantara</h1>", unsafe_allow_html=True)
             st.markdown(
                 "<p style='text-align: center; font-size: 18px;'>"
                 "Aplikasi Sistem Keuangan (Pinjaman) Ubelasy Berbasis Pembebasan Sisa Hutang (PSH),<br>"
@@ -37,8 +24,7 @@ if not st.session_state.get("splash_selesai", False):
                 "</p>",
                 unsafe_allow_html=True
             )
-
-            # CSS untuk tombol hijau besar
+            # CSS tombol hijau
             st.markdown(
                 """
                 <style>
@@ -58,17 +44,13 @@ if not st.session_state.get("splash_selesai", False):
                 """,
                 unsafe_allow_html=True
             )
-
-            # Tombol "Mulai"
             if st.button("🚀 Mulai", use_container_width=True):
-                st.session_state.splash_selesai = True
+                st.session_state.splash_two_in_one_done = True
                 st.rerun()
-
-    # Hentikan eksekusi sampai tombol ditekan
     st.stop()
 
 # ========== APLIKASI UTAMA (SETELAH SPLASH) ==========
-# Impor modul (dengan penanganan error)
+# Impor modul dengan penanganan error
 try:
     from ubelasy.main import main as ubelasy_main
     from nkhm.main import main as nkhm_main
@@ -76,7 +58,6 @@ except Exception as e:
     st.error(f"Gagal memuat modul: {e}")
     st.stop()
 
-# Sidebar untuk memilih aplikasi
 st.sidebar.title("🚀 Pilih Aplikasi")
 app_mode = st.sidebar.radio(
     "",
