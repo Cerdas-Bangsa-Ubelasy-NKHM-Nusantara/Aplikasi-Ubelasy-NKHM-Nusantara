@@ -88,7 +88,7 @@ def main():
             st.title("🇮🇩 NKHM NUSANTARA")
             st.markdown("### Asah 4 Kecerdasan + Nasionalisme")
             st.markdown("---")
-            name = st.text_input("🖊️ Masukkan namamu", placeholder="contoh: Budi Santoso")
+            name = st.text_input("🖊️ Masukkan namamu", placeholder="contoh: Ahmad Sobari")
             col_a, col_b = st.columns(2)
             with col_a:
                 st.caption("🧠 IQ = Intelektual")
