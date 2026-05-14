@@ -1,14 +1,14 @@
 # Tim Cerdas Bangsa Berkarya: Aplikasi-Ubelasy-NKHM-Nusantara
 Aplikasi Keuangan Ubelasy Sistem Pinjaman Berbasis PSH, dan Aplikasi Gaming NKHM Nusantara Model 4 Kecerdasan + Nasionalisme  Berbasis Data Personal
 
-Two in One dalam Satu Aplikasi yang memiliki dua mode di sidebar kiri (Aplikasi 🌾 Sistem Ubelasy: Simulasi pinjaman keuangan berkelanjutan, dan  🌿 NKHM Nusantara: Game asah 4 Kecerdasan + Nasionalisme.
+Two in One dalam Satu Aplikasi yang memiliki dua mode di sidebar kiri (Aplikasi 🌾 Sistem Ubelasy: Agregator & Simulasi pinjaman keuangan berkelanjutan, dan  🌿 NKHM Nusantara: Game asah 4 Kecerdasan + Nasionalisme.
 
 Klik Lencana di bawah sini:
 <p align="center">
   <a href="https://ubelasy-nkhm-nusantara.streamlit.app">
     <img src="https://img.shields.io/badge/🚀_Coba_Sekarang-Ubelasy + NKHM Nusantara-2e7d32?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit App">
   </a>
-  <a href="https://github.com/SRPakpahanSST/Sistem-Keuangan-Nusantara">
+  <a href="https://github.com/SRPakpahanSST/Cerdas-Bangsa-Ubelasy-NKHM-Nusantara">
     <img src="https://img.shields.io/badge/📁_Source_Code-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
   </a>
 </p>
