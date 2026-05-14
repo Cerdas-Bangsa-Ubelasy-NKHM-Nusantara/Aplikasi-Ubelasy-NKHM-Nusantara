@@ -125,5 +125,19 @@ def main():
                 if app.get('catatan'):
                     st.write(f"**Catatan:** {app['catatan']}")
 
+    
+    if st.query_params.get("admin") == "1":
+    from ubelasy.admin import admin_page
+    admin_page()
+    st.stop()
+
+
+    # Di ubelasy/main.py, setelah bagian status pengajuan
+
+ 
+
+
+
+
 if __name__ == "__main__":
     main()
