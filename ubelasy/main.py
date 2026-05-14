@@ -131,6 +131,10 @@ def main():
     admin_page()
     st.stop()
 
+    # Catatan untuk debitur
+    if app.get('catatan'):
+    st.write(f"**Catatan:** {app['catatan']}")
+
 
 if __name__ == "__main__":
     main()
