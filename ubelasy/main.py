@@ -124,7 +124,7 @@ def main():
                 if app.get('catatan'):
                     st.write(f"**Catatan:** {app['catatan']}")
                     
-         # Admin panel (hanya muncul jika ada parameter ?admin=1)               
+    # Admin panel (hanya muncul jika ada parameter ?admin=1)               
     if st.query_params.get("admin") == "1":
         from ubelasy.admin import admin_page
         admin_page()
@@ -132,7 +132,7 @@ def main():
 
     # Catatan untuk debitur
     if app.get('catatan'):
-    st.write(f"**Catatan:** {app['catatan']}")
+        st.write(f"**Catatan:** {app['catatan']}")
     
     
 if __name__ == "__main__":
