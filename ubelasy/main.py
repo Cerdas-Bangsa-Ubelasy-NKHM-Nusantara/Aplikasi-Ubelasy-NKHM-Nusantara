@@ -59,43 +59,39 @@ def main():
     st.markdown("---")
     st.subheader("🏦 Cari Pinjaman dari Bank Mitra")
     
-    # Form input profil debitur
-    with st.form("form_aggregator"):
+    # Form untuk input kriteria (tombol submit di dalam form)
+    with st.form("form_cari_pinjaman"):
         col_a, col_b = st.columns(2)
         with col_a:
             jumlah_pinjaman = st.number_input("Jumlah pinjaman (Rp)", value=50_000_000, step=10_000_000)
             sektor_usaha = st.selectbox("Sektor usaha", ["pangan", "energi", "lainnya"])
         with col_b:
             tenor = st.slider("Tenor (tahun)", 1, 5, 3)
-            # Opsi: ambil skor NKHM dari session state jika ada
-            nkhm_score = st.session_state.get("nkhm_scores", None)
-            if nkhm_score:
-                st.caption(f"Skor NKHM (dari game): {nkhm_score['IQ']+nkhm_score['EQ']+nkhm_score['SQ']+nkhm_score['AQ']}")
-        
         submitted = st.form_submit_button("🔍 Cari Rekomendasi")
-        
-        if submitted:
-            profil = {
-                "jumlah_pinjaman": jumlah_pinjaman,
-                "sektor": sektor_usaha,
-                "tenor": tenor,
-                "nkhm_score": nkhm_score
-            }
-            rekom = get_recommendations(profil)
-            if rekom:
-                st.success(f"Ditemukan {len(rekom)} bank yang cocok:")
-                for r in rekom:
-                    with st.expander(f"🏦 {r['bank']}"):
-                        st.write(f"**Estimasi bunga:** {r['bunga']}% per tahun")
-                        st.write(f"**Estimasi angsuran/bulan:** Rp {r['estimasi_angsuran']:,.0f}".replace(",", "."))
-                        st.write(f"**Biaya admin:** Rp {r['biaya_admin']:,.0f}".replace(",", "."))
-                        # Tombol ajukan
-                        if st.button(f"Ajukan ke {r['bank']}", key=r['id']):
-                            app_id = submit_application(profil, r['id'])
-                            st.success(f"Pengajuan berhasil dikirim! ID: {app_id}")
-                            st.info("Bank akan menghubungi Anda dalam 1x24 jam.")
-            else:
-                st.warning("Belum ada bank yang cocok. Coba ubah kriteria pinjaman.")
+    
+    # Simpan hasil pencarian di session state agar tidak hilang
+    if submitted:
+        profil = {"jumlah_pinjaman": jumlah_pinjaman, "sektor": sektor_usaha, "tenor": tenor}
+        st.session_state.rekomendasi = get_recommendations(profil)
+        st.session_state.profil_terakhir = profil
+        st.rerun()
+    
+    # Tampilkan rekomendasi jika ada (di luar form)
+    if "rekomendasi" in st.session_state and st.session_state.rekomendasi:
+        rekom = st.session_state.rekomendasi
+        st.success(f"Ditemukan {len(rekom)} bank yang cocok:")
+        for r in rekom:
+            with st.expander(f"🏦 {r['bank']}"):
+                st.write(f"**Estimasi bunga:** {r['bunga']}% per tahun")
+                st.write(f"**Estimasi angsuran/bulan:** Rp {r['estimasi_angsuran']:,.0f}".replace(",", "."))
+                st.write(f"**Biaya admin:** Rp {r['biaya_admin']:,.0f}".replace(",", "."))
+                # Tombol ini sekarang di luar form (di dalam expander tapi tidak di dalam form), aman
+                if st.button(f"Ajukan ke {r['bank']}", key=r['id']):
+                    app_id = submit_application(st.session_state.profil_terakhir, r['id'])
+                    st.success(f"Pengajuan berhasil dikirim! ID: {app_id}")
+                    st.info("Bank akan menghubungi Anda dalam 1x24 jam.")
+    elif "rekomendasi" in st.session_state:
+        st.warning("Belum ada bank yang cocok. Coba ubah kriteria pinjaman.")
     
     # ========== STATUS PENGAJUAN ==========
     st.markdown("---")
@@ -115,7 +111,7 @@ def main():
                 st.write(f"**Bank:** {app['bank_id']}")
                 st.write(f"**Jumlah pinjaman:** Rp {app['profil']['jumlah_pinjaman']:,.0f}".replace(",", "."))
                 st.write(f"**Sektor:** {app['profil']['sektor']}, **Tenor:** {app['profil']['tenor']} tahun")
-                if app['catatan']:
+                if app.get('catatan'):
                     st.write(f"**Catatan:** {app['catatan']}")
 
 if __name__ == "__main__":
