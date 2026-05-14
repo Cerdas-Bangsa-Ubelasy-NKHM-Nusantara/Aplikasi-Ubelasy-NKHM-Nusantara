@@ -1,5 +1,17 @@
 [
   {
+    "id": "bri_bogor",
+    "nama": "BRI Bogor",
+    "bunga_min": 9.5,
+    "bunga_max": 12.0,
+    "tenor_min": 1,
+    "tenor_max": 5,
+    "biaya_admin": 400000,
+    "sektor": ["pangan", "energi", "lainnya"],
+    "komisi_persen": 0.9,
+    "aktif": true
+  }
+  {
     "id": "bss_babel",
     "nama": "Bank Sumsel Babel",
     "bunga_min": 10.0,
