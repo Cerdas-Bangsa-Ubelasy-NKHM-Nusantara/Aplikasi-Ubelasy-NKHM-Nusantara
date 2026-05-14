@@ -3,15 +3,16 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
 from ubelasy.calculator import calculate_loan
-from ubelasy.aggregator import get_recommendations
+from ubelasy.aggregator import get_recommendations, submit_application, get_all_applications_for_user
 
 def main():
     st.title("🌾 Ubelasy – Agregator Pinjaman Berkelanjutan")
     st.markdown("**Skema PSH & Penurunan Suku Bunga 0,5% per Periode**")
     st.markdown("---")
     
+    # ========== SIDEBAR UNTUK SIMULASI ==========
     with st.sidebar:
-        st.header("⚙️ Parameter Simulasi")
+        st.header("⚙️ Simulasi Pinjaman")
         K = st.number_input("Pinjaman per Periode (Rp)", value=36_000_000, step=1_000_000, format="%d")
         r1 = st.number_input("Suku bunga awal (%)", value=11.0, step=0.5)
         delta = st.number_input("Penurunan per periode (%)", value=0.5, step=0.1)
@@ -22,6 +23,7 @@ def main():
         biaya_dana = st.number_input("Biaya Dana+Overhead (%)", value=9.0, step=0.5)
         hitung = st.button("🚀 Hitung Simulasi", type="primary", use_container_width=True)
     
+    # Simulasi (kalkulator)
     if hitung:
         if m > tp:
             st.error(f"⚠️ m ({m}) tidak boleh > tp ({tp})")
@@ -52,29 +54,69 @@ def main():
         ax.set_title("Penurunan Suku Bunga 0.5% per Periode")
         ax.grid(True, linestyle='--', alpha=0.5)
         st.pyplot(fig)
-    else:
-        st.info("👈 Masukkan parameter di sidebar dan tekan tombol **Hitung Simulasi**")
     
+    # ========== AGREGATOR: Cari Pinjaman ==========
     st.markdown("---")
     st.subheader("🏦 Cari Pinjaman dari Bank Mitra")
+    
+    # Form input profil debitur
     with st.form("form_aggregator"):
         col_a, col_b = st.columns(2)
         with col_a:
-            jumlah = st.number_input("Jumlah pinjaman (Rp)", value=50_000_000, step=10_000_000)
-            sektor = st.selectbox("Sektor usaha", ["pangan", "energi", "lainnya"])
+            jumlah_pinjaman = st.number_input("Jumlah pinjaman (Rp)", value=50_000_000, step=10_000_000)
+            sektor_usaha = st.selectbox("Sektor usaha", ["pangan", "energi", "lainnya"])
         with col_b:
             tenor = st.slider("Tenor (tahun)", 1, 5, 3)
+            # Opsi: ambil skor NKHM dari session state jika ada
+            nkhm_score = st.session_state.get("nkhm_scores", None)
+            if nkhm_score:
+                st.caption(f"Skor NKHM (dari game): {nkhm_score['IQ']+nkhm_score['EQ']+nkhm_score['SQ']+nkhm_score['AQ']}")
+        
         submitted = st.form_submit_button("🔍 Cari Rekomendasi")
+        
         if submitted:
-            profil = {"jumlah_pinjaman": jumlah, "sektor": sektor, "tenor": tenor}
+            profil = {
+                "jumlah_pinjaman": jumlah_pinjaman,
+                "sektor": sektor_usaha,
+                "tenor": tenor,
+                "nkhm_score": nkhm_score
+            }
             rekom = get_recommendations(profil)
             if rekom:
-                st.success(f"Ditemukan {len(rekom)} bank:")
+                st.success(f"Ditemukan {len(rekom)} bank yang cocok:")
                 for r in rekom:
                     with st.expander(f"🏦 {r['bank']}"):
-                        st.write(f"**Bunga:** {r['bunga']}% per tahun")
+                        st.write(f"**Estimasi bunga:** {r['bunga']}% per tahun")
                         st.write(f"**Estimasi angsuran/bulan:** Rp {r['estimasi_angsuran']:,.0f}".replace(",", "."))
                         st.write(f"**Biaya admin:** Rp {r['biaya_admin']:,.0f}".replace(",", "."))
-                        st.button(f"Ajukan ke {r['bank']}", key=r['bank'])
+                        # Tombol ajukan
+                        if st.button(f"Ajukan ke {r['bank']}", key=r['id']):
+                            app_id = submit_application(profil, r['id'])
+                            st.success(f"Pengajuan berhasil dikirim! ID: {app_id}")
+                            st.info("Bank akan menghubungi Anda dalam 1x24 jam.")
             else:
-                st.warning("Belum ada bank yang cocok. Coba ubah kriteria.")
+                st.warning("Belum ada bank yang cocok. Coba ubah kriteria pinjaman.")
+    
+    # ========== STATUS PENGAJUAN ==========
+    st.markdown("---")
+    st.subheader("📋 Status Pengajuan Anda")
+    apps = get_all_applications_for_user()
+    if not apps:
+        st.info("Belum ada pengajuan. Silakan cari pinjaman di atas.")
+    else:
+        for app in apps[-5:]:  # tampilkan 5 terakhir
+            status_color = {
+                "Dikirim": "🔵",
+                "Diproses": "🟡",
+                "Disetujui": "✅",
+                "Ditolak": "❌"
+            }.get(app["status"], "⚪")
+            with st.expander(f"{status_color} {app['id']} - {app['tanggal']} - {app['status']}"):
+                st.write(f"**Bank:** {app['bank_id']}")
+                st.write(f"**Jumlah pinjaman:** Rp {app['profil']['jumlah_pinjaman']:,.0f}".replace(",", "."))
+                st.write(f"**Sektor:** {app['profil']['sektor']}, **Tenor:** {app['profil']['tenor']} tahun")
+                if app['catatan']:
+                    st.write(f"**Catatan:** {app['catatan']}")
+
+if __name__ == "__main__":
+    main()
