@@ -1,28 +1,61 @@
 import streamlit as st
 
-# Konfigurasi halaman utama (hanya satu kali)
+# ========== KONFIGURASI HALAMAN ==========
 st.set_page_config(
-    page_title="Sistem Keuangan Berkelanjutan Nusantara",
+    page_title="Sistem Keuangan Nusantara - Ubelasy & NKHM",
     page_icon="🌾",
     layout="wide"
 )
 
-# Sidebar untuk memilih aplikasi
-st.sidebar.title("🚀 Pilih Sistem")
+# ========== SPLASH SCREEN ==========
+if "splash_done" not in st.session_state:
+    st.session_state.splash_done = False
+
+if not st.session_state.splash_done:
+    # Kosongkan area utama
+    splash_placeholder = st.empty()
+    
+    with splash_placeholder.container():
+        # Layout 3 kolom untuk center
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            # Logo
+            try:
+                st.image("assets/pmd_logo.jpg", width=200)
+            except:
+                st.markdown("<h1 style='text-align: center;'>🌾</h1>", unsafe_allow_html=True)
+            
+            # Baris 1
+            st.markdown(
+                "<h2 style='text-align: center;'>Ubelasy + NKHM Nusantara</h2>",
+                unsafe_allow_html=True
+            )
+            # Baris 2
+            st.markdown(
+                "<p style='text-align: center;'>Aplikasi Sistem Keuangan (Pinjaman) Ubelasy Berbasis Pembebasan Sisa Hutang (PSH),<br>"
+                "dan gaming 4 Kecerdasan (IQ, EQ, SQ, AQ) + Nasionalisme Berbasis Data Personal</p>",
+                unsafe_allow_html=True
+            )
+            
+            # Tombol Mulai
+            if st.button("🚀 Mulai", use_container_width=True):
+                st.session_state.splash_done = True
+                st.rerun()
+    
+    # Hentikan eksekusi sampai tombol ditekan
+    st.stop()
+
+# ========== APLIKASI UTAMA (SETELAH SPLASH) ==========
+st.sidebar.title("🚀 Pilih Aplikasi")
 app_mode = st.sidebar.radio(
-    "Aplikasi Keuangan Berkelanjutan",
-    ["🌾 Sistem Ubelasy (Pinjaman Berbasis PSH)", "🌿 NKHM Nusantara (4 Kecerdasan + Nasionalisme + AI)"],
+    "",
+    ["🌾 Ubelasy (Loan Aggregator)", "🌿 NKHM Nusantara (Gamifikasi)"],
     index=0
 )
 
-st.sidebar.markdown("---")
-st.sidebar.caption("© 2026 Tim Cerdas Bangsa")
-
-# Panggil modul sesuai pilihan
-if app_mode == "🌾 Sistem Ubelasy (Pinjaman Berbasis PSH)":
-    import ubelasy as active_app
+if app_mode == "🌾 Ubelasy (Loan Aggregator)":
+    from ubelasy.main import main as ubelasy_main
+    ubelasy_main()
 else:
-    import nkhm as active_app
-
-# Jalankan halaman utama modul
-active_app.main()
+    from nkhm.main import main as nkhm_main
+    nkhm_main()
