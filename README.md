@@ -1,7 +1,6 @@
 # Aplikasi-Ubelasy-NKHM-Nusantara
 Aplikasi Keuangan Ubelasy Sistem Pinjaman Berbasis PSH, dan Aplikasi Gaming NKHM Nusantara Model 4 Kecerdasan + Nasionalisme  Berbasis Data Personal
 
-# Ubelasy-NKHM-Nusantara
 Two in One dalam Satu Aplikasi yang memiliki dua mode di sidebar kiri (Aplikasi 🌾 Sistem Ubelasy: Simulasi pinjaman keuangan berkelanjutan, dan  🌿 NKHM Nusantara: Game asah 4 Kecerdasan + Nasionalisme.
 
 Klik Lencana di bawah sini:
