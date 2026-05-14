@@ -16,7 +16,7 @@ def main():
         if "nkhm_scores" in st.session_state:
             nkhm_total = sum(st.session_state.nkhm_scores.values())
             st.metric("🧠 Skor NKHM", nkhm_total)
-            st.caption("(Semakin tinggi, semakin baik peluang pinjaman)")
+            st.caption("(Semakin tinggi skor, semakin baik peluang mendapat pinjaman)")
             st.markdown("---")
         else:
             st.info("Mainkan game NKHM untuk meningkatkan skor Anda!")
