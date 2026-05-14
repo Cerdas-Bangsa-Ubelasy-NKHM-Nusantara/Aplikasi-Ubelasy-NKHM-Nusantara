@@ -15,11 +15,11 @@ def main():
         # Tampilkan skor NKHM jika tersedia dari session state
         if "nkhm_scores" in st.session_state:
             nkhm_total = sum(st.session_state.nkhm_scores.values())
-            st.metric("🧠 Skor NKHM Anda", nkhm_total)
+            st.metric("🧠 Skor NKHM", nkhm_total)
             st.caption("(Semakin tinggi, semakin baik peluang pinjaman)")
             st.markdown("---")
         else:
-            st.info("Belum ada skor NKHM. Mainkan game NKHM untuk meningkatkan skor Anda!")
+            st.info("Mainkan game NKHM untuk meningkatkan skor Anda!")
             st.markdown("---")        
         
         st.header("⚙️ Simulasi Pinjaman")
