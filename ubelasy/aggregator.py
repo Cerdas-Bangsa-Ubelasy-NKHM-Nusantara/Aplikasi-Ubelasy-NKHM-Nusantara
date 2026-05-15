@@ -8,6 +8,8 @@ import uuid
 from ubelasy.notifications import send_email, send_whatsapp
 # Import API bank untuk integrasi dengan bank mitra
 from ubelasy.bank_api import submit_to_bank
+# Import skor kredit
+from ubelasy.credit_score import calculate_credit_score, get_credit_grade, adjust_interest_rate
 
 # Path ke file data
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
@@ -27,7 +29,10 @@ def load_banks():
              "komisi_persen": 1.0, "aktif": True},
             {"id": "mandiri_umkm", "nama": "Bank Mandiri UMKM", "bunga_min": 10.5, "bunga_max": 13.0,
              "tenor_min": 1, "tenor_max": 4, "biaya_admin": 750000, "sektor": ["pangan"],
-             "komisi_persen": 1.2, "aktif": True}
+             "komisi_persen": 1.2, "aktif": True},
+            {"id": "bri_bogor", "nama": "BRI Bogor", "bunga_min": 9.5, "bunga_max": 12.0,
+             "tenor_min": 1, "tenor_max": 5, "biaya_admin": 400000, "sektor": ["pangan", "energi", "lainnya"],
+             "komisi_persen": 0.9, "aktif": True}
         ]
         with open(BANKS_FILE, "w") as f:
             json.dump(contoh_bank, f, indent=2)
@@ -51,9 +56,33 @@ def save_applications(apps):
 def get_recommendations(profil):
     """
     Mencari bank yang sesuai berdasarkan profil debitur.
-    profil = {"jumlah_pinjaman": int, "sektor": str, "tenor": int, "nkhm_score": int (opsional)}
+    Menggunakan skor kredit untuk menentukan suku bunga dan prioritas.
+    
+    profil = {
+        "jumlah_pinjaman": int, 
+        "sektor": str, 
+        "tenor": int, 
+        "nkhm_score": int (opsional),
+        "riwayat_pinjaman": list (opsional)
+    }
     """
     banks = load_banks()
+    
+    # Hitung skor kredit debitur
+    nkhm_scores = profil.get("nkhm_score", 0)
+    riwayat = profil.get("riwayat_pinjaman", [])
+    
+    # Jika nkhm_score masih dalam bentuk integer (total), konversi ke dict untuk kalkulasi
+    if isinstance(nkhm_scores, int):
+        # Asumsikan total NKHM didistribusikan merata (demo)
+        each = nkhm_scores // 4
+        nkhm_dict = {"IQ": each, "EQ": each, "SQ": each, "AQ": each}
+    else:
+        nkhm_dict = nkhm_scores if isinstance(nkhm_scores, dict) else {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0}
+    
+    credit_score = calculate_credit_score(nkhm_dict, riwayat)
+    credit_grade = get_credit_grade(credit_score)
+    
     cocok = []
     for bank in banks:
         if not bank.get("aktif", True):
@@ -64,18 +93,32 @@ def get_recommendations(profil):
         # Cek tenor
         if profil["tenor"] < bank["tenor_min"] or profil["tenor"] > bank["tenor_max"]:
             continue
-        # Estimasi suku bunga (dapat disesuaikan dengan NKHM score nanti)
-        bunga = bank["bunga_min"]  # default minimal
+        
+        # Hitung suku bunga berdasarkan skor kredit
+        base_bunga = bank["bunga_min"]
+        adjusted_bunga = adjust_interest_rate(base_bunga, credit_grade)
+        # Batasi antara bunga_min dan bunga_max
+        bunga = max(bank["bunga_min"], min(adjusted_bunga, bank["bunga_max"]))
+        
         estimasi_angsuran = (profil["jumlah_pinjaman"] * (bunga/100)) / 12
+        
         cocok.append({
             "id": bank["id"],
             "bank": bank["nama"],
-            "bunga": bunga,
+            "bunga": round(bunga, 2),
             "estimasi_angsuran": estimasi_angsuran,
             "biaya_admin": bank["biaya_admin"],
-            "komisi": bank["komisi_persen"]
+            "komisi": bank["komisi_persen"],
+            "credit_score": credit_score,
+            "credit_grade": credit_grade
         })
-    return cocok
+    
+    # Urutkan berdasarkan prioritas: 
+    # 1. Skor kredit tertinggi (prioritas pertama)
+    # 2. Bunga terendah (prioritas kedua)
+    cocok.sort(key=lambda x: (-x["credit_score"], x["bunga"]))
+    
+    return cocok, credit_score, credit_grade
 
 def submit_application(profil, bank_id):
     # 1. Simpan pengajuan ke file internal terlebih dahulu
@@ -86,7 +129,7 @@ def submit_application(profil, bank_id):
         "tanggal": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "profil": profil,
         "bank_id": bank_id,
-        "status": "Dikirim",  # status awal
+        "status": "Dikirim",
         "catatan": ""
     }
     apps.append(new_app)
@@ -108,17 +151,13 @@ def submit_application(profil, bank_id):
     try:
         api_response = submit_to_bank(bank_data, bank_id)
         if api_response.get("status") == "success":
-            # Jika API berhasil, update status menjadi "Diproses" atau "Disetujui"
             update_application_status(app_id, "Diproses", f"Pengajuan diterima bank. Ref: {api_response.get('reference', '')}")
-            # Notifikasi tambahan bisa ditambahkan di sini jika perlu
         else:
-            # Jika API gagal, status tetap "Dikirim" tapi catatan ditambahkan
             update_application_status(app_id, "Dikirim", f"Gagal mengirim ke bank: {api_response.get('message', '')}")
     except Exception as e:
-        # Jika terjadi error (misal koneksi timeout), catat error
         update_application_status(app_id, "Dikirim", f"Error API: {str(e)}")
     
-    # 4. Kirim notifikasi ke debitur (email/WA)
+    # 4. Kirim notifikasi ke debitur
     email = profil.get("email", "")
     phone = profil.get("phone", "")
     if email:
@@ -134,7 +173,6 @@ def update_application_status(app_id, status, catatan=""):
         if app["id"] == app_id:
             app["status"] = status
             app["catatan"] = catatan
-            # Ambil profil dari data aplikasi
             profil = app.get("profil", {})
             email = profil.get("email", "")
             phone = profil.get("phone", "")
@@ -153,6 +191,5 @@ def get_application(app_id):
     return None
 
 def get_all_applications_for_user(profil_hash=None):
-    """Untuk demo, kita kembalikan semua pengajuan (karena tidak ada login)"""
     return load_applications()
     
