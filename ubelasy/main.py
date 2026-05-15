@@ -69,19 +69,28 @@ def main():
     st.markdown("---")
     st.subheader("🏦 Cari Pinjaman dari Bank Mitra")
     
-    # Form untuk input kriteria (tombol submit di dalam form)
+    # Form untuk input kriteria (termasuk email dan phone)
     with st.form("form_cari_pinjaman"):
         col_a, col_b = st.columns(2)
         with col_a:
             jumlah_pinjaman = st.number_input("Jumlah pinjaman (Rp)", value=50_000_000, step=10_000_000)
             sektor_usaha = st.selectbox("Sektor usaha", ["pangan", "energi", "lainnya"])
+            email = st.text_input("Email (untuk notifikasi)", placeholder="email@domain.com")
         with col_b:
             tenor = st.slider("Tenor (tahun)", 1, 5, 3)
+            phone = st.text_input("Nomor WhatsApp (untuk notifikasi)", placeholder="08123456789")
         submitted = st.form_submit_button("🔍 Cari Rekomendasi")
     
     # Simpan hasil pencarian di session state agar tidak hilang
     if submitted:
-        profil = {"jumlah_pinjaman": jumlah_pinjaman, "sektor": sektor_usaha, "tenor": tenor}
+        # Validasi sederhana email dan phone (opsional)
+        profil = {
+            "jumlah_pinjaman": jumlah_pinjaman,
+            "sektor": sektor_usaha,
+            "tenor": tenor,
+            "email": email.strip(),
+            "phone": phone.strip()
+        }
         st.session_state.rekomendasi = get_recommendations(profil)
         st.session_state.profil_terakhir = profil
         st.rerun()
@@ -95,7 +104,7 @@ def main():
                 st.write(f"**Estimasi bunga:** {r['bunga']}% per tahun")
                 st.write(f"**Estimasi angsuran/bulan:** Rp {r['estimasi_angsuran']:,.0f}".replace(",", "."))
                 st.write(f"**Biaya admin:** Rp {r['biaya_admin']:,.0f}".replace(",", "."))
-                # Tombol ini sekarang di luar form (di dalam expander tapi tidak di dalam form), aman
+                # Tombol Ajukan (menggunakan profil yang sudah disimpan)
                 if st.button(f"Ajukan ke {r['bank']}", key=r['id']):
                     app_id = submit_application(st.session_state.profil_terakhir, r['id'])
                     st.success(f"Pengajuan berhasil dikirim! ID: {app_id}")
@@ -124,24 +133,18 @@ def main():
                 if app.get('catatan'):
                     st.write(f"**Catatan:** {app['catatan']}")
                     
-    # Admin panel (hanya muncul jika ada parameter ?admin=1)               
+    # ========== ADMIN PANEL GLOBAL ==========
     if st.query_params.get("admin") == "1":
         from ubelasy.admin import admin_page
         admin_page()
         st.stop()
         
     # ========== BANK ADMIN PANEL (per bank) ==========
-    if st.query_params.get("bank")
+    if st.query_params.get("bank"):
         bank_id = st.query_params.get("bank")
         from ubelasy.bank_admin import bank_admin_page
         bank_admin_page(bank_id)
         st.stop()
 
-    # Catatan untuk debitur
-    if app.get('catatan'):
-        st.write(f"**Catatan:** {app['catatan']}")
-        # Di ubelasy/main.py, setelah bagian admin panel global
-    
-    
 if __name__ == "__main__":
     main()
