@@ -103,6 +103,14 @@ def update_application_status(app_id, status, catatan=""):
             app["catatan"] = catatan
             break
     save_applications(apps)
+    
+    # Di aggregator.py, setelah menyimpan pengajuan
+    from ubelasy.notifications import send_email, send_whatsapp
+    # asumsikan profil punya 'email' dan 'phone'
+    send_email(profil.get('email', ''), "Pengajuan Pinjaman Diterima", f"ID {app_id} telah kami terima.")
+    # Untuk status update:
+    send_email(profil.get('email', ''), f"Status Pinjaman {app_id}", f"Status berubah menjadi {status}")
+
 
 def get_application(app_id):
     apps = load_applications()
@@ -114,3 +122,4 @@ def get_application(app_id):
 def get_all_applications_for_user(profil_hash=None):
     """Untuk demo, kita kembalikan semua pengajuan (karena tidak ada login)"""
     return load_applications()
+    
