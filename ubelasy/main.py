@@ -83,17 +83,32 @@ def main():
     
     # Simpan hasil pencarian di session state agar tidak hilang
     if submitted:
-        # Validasi sederhana email dan phone (opsional)
+        # Hitung total NKHM jika ada (untuk skor kredit)
+        nkhm_total = 0
+        if "nkhm_scores" in st.session_state:
+            nkhm_total = sum(st.session_state.nkhm_scores.values())
+        
         profil = {
             "jumlah_pinjaman": jumlah_pinjaman,
             "sektor": sektor_usaha,
             "tenor": tenor,
             "email": email.strip(),
-            "phone": phone.strip()
+            "phone": phone.strip(),
+            "nkhm_score": nkhm_total,      # kirim skor NKHM untuk perhitungan kredit
+            "riwayat_pinjaman": []          # bisa diisi dari database nanti
         }
-        st.session_state.rekomendasi = get_recommendations(profil)
+        # Panggil get_recommendations yang mengembalikan 3 nilai
+        rekom, credit_score, credit_grade = get_recommendations(profil)
+        st.session_state.rekomendasi = rekom
         st.session_state.profil_terakhir = profil
+        st.session_state.credit_score = credit_score
+        st.session_state.credit_grade = credit_grade
         st.rerun()
+    
+    # ========== TAMPILAN SKOR KREDIT DEBITUR ==========
+    # Tampilkan skor kredit debitur jika tersedia
+    if "credit_score" in st.session_state:
+        st.info(f"📊 **Skor Kredit Anda: {st.session_state.credit_score}** ({st.session_state.credit_grade}) - Semakin tinggi skor, semakin rendah bunga yang ditawarkan.")
     
     # Tampilkan rekomendasi jika ada (di luar form)
     if "rekomendasi" in st.session_state and st.session_state.rekomendasi:
@@ -104,7 +119,9 @@ def main():
                 st.write(f"**Estimasi bunga:** {r['bunga']}% per tahun")
                 st.write(f"**Estimasi angsuran/bulan:** Rp {r['estimasi_angsuran']:,.0f}".replace(",", "."))
                 st.write(f"**Biaya admin:** Rp {r['biaya_admin']:,.0f}".replace(",", "."))
-                # Tombol Ajukan (menggunakan profil yang sudah disimpan)
+                # Tampilkan skor kredit dan grade untuk rekomendasi ini
+                st.caption(f"📈 Skor kredit Anda: {r.get('credit_score', 'N/A')} ({r.get('credit_grade', 'N/A')}) → bunga disesuaikan")
+                # Tombol Ajukan
                 if st.button(f"Ajukan ke {r['bank']}", key=r['id']):
                     app_id = submit_application(st.session_state.profil_terakhir, r['id'])
                     st.success(f"Pengajuan berhasil dikirim! ID: {app_id}")
@@ -148,3 +165,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
