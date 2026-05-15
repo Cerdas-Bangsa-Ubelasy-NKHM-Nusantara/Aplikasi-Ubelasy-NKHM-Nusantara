@@ -7,7 +7,7 @@ from datetime import datetime
 from nkhm.questions import load_all_questions
 from nkhm.utils import calculate_nkhm, get_nkhm_level
 from nkhm.ai_assistant import get_ai_response
-from nkhm.leaderboard import show_leaderboard
+from nkhm.leaderboard import show_leaderboard, save_score   # <-- tambah import save_score
 
 def init_session_state():
     if "nkhm_user" not in st.session_state:
@@ -114,6 +114,16 @@ def main():
                 if selected == q['correct']:
                     st.session_state.nkhm_scores[q['type']] = min(100, st.session_state.nkhm_scores[q['type']] + 10)
                     st.success(f"✅ BENAR! +10 poin untuk {q['type']}")
+                    
+                    # Hitung ulang NKHM setelah skor berubah
+                    nkhm_baru = calculate_nkhm(
+                        st.session_state.nkhm_scores["IQ"],
+                        st.session_state.nkhm_scores["EQ"],
+                        st.session_state.nkhm_scores["SQ"],
+                        st.session_state.nkhm_scores["AQ"]
+                    )
+                    # Simpan ke leaderboard
+                    save_score(st.session_state.nkhm_user, nkhm_baru)
                 else:
                     st.error(f"❌ SALAH! Jawaban: {q['correct']}")
                 st.session_state.nkhm_history.append({
