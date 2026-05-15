@@ -129,17 +129,18 @@ def main():
         from ubelasy.admin import admin_page
         admin_page()
         st.stop()
-
-    # Catatan untuk debitur
-    if app.get('catatan'):
-        st.write(f"**Catatan:** {app['catatan']}")
-        # Di ubelasy/main.py, setelah bagian admin panel global
-
+        
+    # ========== BANK ADMIN PANEL (per bank) ==========
     if st.query_params.get("bank")
         bank_id = st.query_params.get("bank")
         from ubelasy.bank_admin import bank_admin_page
         bank_admin_page(bank_id)
         st.stop()
+
+    # Catatan untuk debitur
+    if app.get('catatan'):
+        st.write(f"**Catatan:** {app['catatan']}")
+        # Di ubelasy/main.py, setelah bagian admin panel global
     
     
 if __name__ == "__main__":
