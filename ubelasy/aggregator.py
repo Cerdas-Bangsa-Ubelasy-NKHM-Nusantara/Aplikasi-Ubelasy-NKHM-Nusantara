@@ -4,8 +4,10 @@ import os
 import streamlit as st
 from datetime import datetime
 import uuid
-# Import notifikasi di atas (pastikan file notifications.py sudah ada)
+# Import notifikasi
 from ubelasy.notifications import send_email, send_whatsapp
+# Import API bank untuk integrasi dengan bank mitra
+from ubelasy.bank_api import submit_to_bank
 
 # Path ke file data
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
@@ -76,20 +78,47 @@ def get_recommendations(profil):
     return cocok
 
 def submit_application(profil, bank_id):
+    # 1. Simpan pengajuan ke file internal terlebih dahulu
     apps = load_applications()
-    app_id = str(uuid.uuid4())[:8]   # simpan ID ke variabel
+    app_id = str(uuid.uuid4())[:8]
     new_app = {
         "id": app_id,
         "tanggal": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "profil": profil,
         "bank_id": bank_id,
-        "status": "Dikirim",
+        "status": "Dikirim",  # status awal
         "catatan": ""
     }
     apps.append(new_app)
     save_applications(apps)
     
-    # Kirim notifikasi jika email disediakan
+    # 2. Siapkan data untuk dikirim ke bank via API
+    bank_data = {
+        "app_id": app_id,
+        "jumlah_pinjaman": profil.get("jumlah_pinjaman"),
+        "tenor": profil.get("tenor"),
+        "sektor": profil.get("sektor"),
+        "nama_debitur": profil.get("nama", "Tidak ada nama"),
+        "email": profil.get("email", ""),
+        "phone": profil.get("phone", ""),
+        "nkhm_score": profil.get("nkhm_score", 0)
+    }
+    
+    # 3. Panggil API bank
+    try:
+        api_response = submit_to_bank(bank_data, bank_id)
+        if api_response.get("status") == "success":
+            # Jika API berhasil, update status menjadi "Diproses" atau "Disetujui"
+            update_application_status(app_id, "Diproses", f"Pengajuan diterima bank. Ref: {api_response.get('reference', '')}")
+            # Notifikasi tambahan bisa ditambahkan di sini jika perlu
+        else:
+            # Jika API gagal, status tetap "Dikirim" tapi catatan ditambahkan
+            update_application_status(app_id, "Dikirim", f"Gagal mengirim ke bank: {api_response.get('message', '')}")
+    except Exception as e:
+        # Jika terjadi error (misal koneksi timeout), catat error
+        update_application_status(app_id, "Dikirim", f"Error API: {str(e)}")
+    
+    # 4. Kirim notifikasi ke debitur (email/WA)
     email = profil.get("email", "")
     phone = profil.get("phone", "")
     if email:
