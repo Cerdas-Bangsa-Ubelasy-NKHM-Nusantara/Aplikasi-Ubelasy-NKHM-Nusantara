@@ -87,6 +87,13 @@ def submit_application(profil, bank_id):
     apps.append(new_app)
     save_applications(apps)
     return new_app["id"]
+    
+    # Di aggregator.py, setelah menyimpan pengajuan
+    from ubelasy.notifications import send_email, send_whatsapp
+    # asumsikan profil punya 'email' dan 'phone'
+    send_email(profil.get('email', ''), "Pengajuan Pinjaman Diterima", f"ID {app_id} telah kami terima.")
+    # Untuk status update:
+    send_email(profil.get('email', ''), f"Status Pinjaman {app_id}", f"Status berubah menjadi {status}")
 
 def update_application_status(app_id, status, catatan=""):
     apps = load_applications()
