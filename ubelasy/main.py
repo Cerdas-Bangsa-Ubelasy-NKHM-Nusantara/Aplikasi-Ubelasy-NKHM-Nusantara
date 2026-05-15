@@ -133,6 +133,13 @@ def main():
     # Catatan untuk debitur
     if app.get('catatan'):
         st.write(f"**Catatan:** {app['catatan']}")
+        # Di ubelasy/main.py, setelah bagian admin panel global
+
+    if st.query_params.get("bank")
+        bank_id = st.query_params.get("bank")
+        from ubelasy.bank_admin import bank_admin_page
+        bank_admin_page(bank_id)
+        st.stop()
     
     
 if __name__ == "__main__":
