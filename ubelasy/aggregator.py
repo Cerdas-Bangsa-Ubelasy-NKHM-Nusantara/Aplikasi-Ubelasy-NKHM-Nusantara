@@ -4,6 +4,8 @@ import os
 import streamlit as st
 from datetime import datetime
 import uuid
+# Import notifikasi di atas (pastikan file notifications.py sudah ada)
+from ubelasy.notifications import send_email, send_whatsapp
 
 # Path ke file data
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
@@ -74,26 +76,28 @@ def get_recommendations(profil):
     return cocok
 
 def submit_application(profil, bank_id):
-    """Simpan pengajuan ke file JSON"""
     apps = load_applications()
+    app_id = str(uuid.uuid4())[:8]   # simpan ID ke variabel
     new_app = {
-        "id": str(uuid.uuid4())[:8],
+        "id": app_id,
         "tanggal": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "profil": profil,
         "bank_id": bank_id,
-        "status": "Dikirim",  # Dikirim, Diproses, Disetujui, Ditolak
+        "status": "Dikirim",
         "catatan": ""
     }
     apps.append(new_app)
     save_applications(apps)
-    return new_app["id"]
     
-    # Di aggregator.py, setelah menyimpan pengajuan
-    from ubelasy.notifications import send_email, send_whatsapp
-    # asumsikan profil punya 'email' dan 'phone'
-    send_email(profil.get('email', ''), "Pengajuan Pinjaman Diterima", f"ID {app_id} telah kami terima.")
-    # Untuk status update:
-    send_email(profil.get('email', ''), f"Status Pinjaman {app_id}", f"Status berubah menjadi {status}")
+    # Kirim notifikasi jika email disediakan
+    email = profil.get("email", "")
+    phone = profil.get("phone", "")
+    if email:
+        send_email(email, "Pengajuan Pinjaman Diterima", f"ID {app_id} telah kami terima.")
+    if phone:
+        send_whatsapp(phone, f"Pengajuan pinjaman ID {app_id} telah diterima.")
+    
+    return app_id
 
 def update_application_status(app_id, status, catatan=""):
     apps = load_applications()
@@ -101,17 +105,17 @@ def update_application_status(app_id, status, catatan=""):
         if app["id"] == app_id:
             app["status"] = status
             app["catatan"] = catatan
+            # Ambil profil dari data aplikasi
+            profil = app.get("profil", {})
+            email = profil.get("email", "")
+            phone = profil.get("phone", "")
+            if email:
+                send_email(email, f"Status Pinjaman {app_id}", f"Status berubah menjadi {status}\nCatatan: {catatan}")
+            if phone:
+                send_whatsapp(phone, f"Status pinjaman {app_id}: {status}. Catatan: {catatan}")
             break
     save_applications(apps)
     
-    # Di aggregator.py, setelah menyimpan pengajuan
-    from ubelasy.notifications import send_email, send_whatsapp
-    # asumsikan profil punya 'email' dan 'phone'
-    send_email(profil.get('email', ''), "Pengajuan Pinjaman Diterima", f"ID {app_id} telah kami terima.")
-    # Untuk status update:
-    send_email(profil.get('email', ''), f"Status Pinjaman {app_id}", f"Status berubah menjadi {status}")
-
-
 def get_application(app_id):
     apps = load_applications()
     for app in apps:
