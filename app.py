@@ -25,9 +25,10 @@ if not st.session_state.splash_two_in_one_done:
 # ========== SIDEBAR UTAMA ==========
 st.sidebar.title("🚀 Pilih Aplikasi")
 app_mode = st.sidebar.radio(
-    "",
+    "Pilih Aplikasi",  # ← beri label yang bermakna
     ["🌾 Ubelasy (Loan Aggregator)", "🌿 NKHM Nusantara (Gamifikasi)"],
-    index=0
+    index=0,
+    label_visibility="collapsed"  # opsional: sembunyikan label tapi tetap ada nilainya
 )
 st.sidebar.markdown("---")   # Pemisah agar radio tetap terlihat
 
