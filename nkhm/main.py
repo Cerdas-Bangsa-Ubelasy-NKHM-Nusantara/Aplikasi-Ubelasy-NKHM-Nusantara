@@ -2,14 +2,15 @@
 ‎import streamlit as st
 ‎import pandas as pd
 ‎import random
-‎import os
+import os
 ‎from pathlib import Path
 ‎from datetime import datetime
-‎from nkhm.questions import load_all_questions
-‎from nkhm.utils import calculate_nkhm, get_nkhm_level
+‎from nkhm.questions import
+load_all_questions
+from nkhm.utils import calculate_nkhm, get_nkhm_level
 ‎from nkhm.ai_assistant import get_ai_response
 ‎from nkhm.leaderboard import show_leaderboard, save_score
-‎
+
 ‎def init_session_state():
 ‎    if "nkhm_user" not in st.session_state:
 ‎        st.session_state.nkhm_user = ""
