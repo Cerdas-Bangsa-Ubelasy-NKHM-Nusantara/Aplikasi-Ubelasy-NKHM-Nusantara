@@ -1,26 +1,36 @@
 # ubelasy/main.py
-# ubelasy/main.py
 import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
 import os
+from pathlib import Path
 from ubelasy.calculator import calculate_loan
 from ubelasy.aggregator import get_recommendations, submit_application, get_all_applications_for_user
 
 def main():
-    # ========== TAMPILAN HEADER DENGAN GAMBAR ==========
-    # Tampilkan gambar dari folder assets jika ada
-    image_path = os.path.join("assets", "ubelasy.jpg")
-    if os.path.exists(image_path):
-        st.image(image_path, use_container_width=True)
-    else:
-        # Fallback jika gambar tidak ditemukan
-        st.warning("Gambar ubelasy.jpg tidak ditemukan di folder assets/")
+    # ========== TAMPILAN HEADER DENGAN GAMBAR DI TENGAH ==========
+    script_dir = Path(__file__).parent.parent  # naik ke root karena ubelasy/ di dalam folder
+    image_path = script_dir / "assets" / "ubelasy.jpg"
     
-    st.title("🌾 Ubelasy – Agregator Pinjaman Berkelanjutan")
-    st.markdown("**Skema PSH & Penurunan Suku Bunga 0,5% per Periode**")
+    # Gunakan kolom untuk memusatkan konten header
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        # Tampilkan gambar di tengah
+        if image_path.exists():
+            st.image(str(image_path), use_container_width=True)
+        else:
+            st.warning("Gambar ubelasy.jpg tidak ditemukan di folder assets/")
+        
+        # Judul di tengah
+        st.markdown(
+            "<h1 style='text-align: center;'>🌾 Ubelasy – Agregator Pinjaman Berkelanjutan</h1>",
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            "<p style='text-align: center;'><strong>Skema PSH & Penurunan Suku Bunga 0,5% per Periode</strong></p>",
+            unsafe_allow_html=True
+        )
     st.markdown("---")
-    
     
     # ========== SIDEBAR UNTUK SIMULASI ==========
     with st.sidebar:
@@ -106,10 +116,9 @@ def main():
             "tenor": tenor,
             "email": email.strip(),
             "phone": phone.strip(),
-            "nkhm_score": nkhm_total,      # kirim skor NKHM untuk perhitungan kredit
-            "riwayat_pinjaman": []          # bisa diisi dari database nanti
+            "nkhm_score": nkhm_total,
+            "riwayat_pinjaman": []
         }
-        # Panggil get_recommendations yang mengembalikan 3 nilai
         rekom, credit_score, credit_grade = get_recommendations(profil)
         st.session_state.rekomendasi = rekom
         st.session_state.profil_terakhir = profil
@@ -118,11 +127,10 @@ def main():
         st.rerun()
     
     # ========== TAMPILAN SKOR KREDIT DEBITUR ==========
-    # Tampilkan skor kredit debitur jika tersedia
     if "credit_score" in st.session_state:
         st.info(f"📊 **Skor Kredit Anda: {st.session_state.credit_score}** ({st.session_state.credit_grade}) - Semakin tinggi skor, semakin rendah bunga yang ditawarkan.")
     
-    # Tampilkan rekomendasi jika ada (di luar form)
+    # Tampilkan rekomendasi jika ada
     if "rekomendasi" in st.session_state and st.session_state.rekomendasi:
         rekom = st.session_state.rekomendasi
         st.success(f"Ditemukan {len(rekom)} bank yang cocok:")
@@ -131,9 +139,7 @@ def main():
                 st.write(f"**Estimasi bunga:** {r['bunga']}% per tahun")
                 st.write(f"**Estimasi angsuran/bulan:** Rp {r['estimasi_angsuran']:,.0f}".replace(",", "."))
                 st.write(f"**Biaya admin:** Rp {r['biaya_admin']:,.0f}".replace(",", "."))
-                # Tampilkan skor kredit dan grade untuk rekomendasi ini
                 st.caption(f"📈 Skor kredit Anda: {r.get('credit_score', 'N/A')} ({r.get('credit_grade', 'N/A')}) → bunga disesuaikan")
-                # Tombol Ajukan
                 if st.button(f"Ajukan ke {r['bank']}", key=r['id']):
                     app_id = submit_application(st.session_state.profil_terakhir, r['id'])
                     st.success(f"Pengajuan berhasil dikirim! ID: {app_id}")
@@ -148,7 +154,7 @@ def main():
     if not apps:
         st.info("Belum ada pengajuan. Silakan cari pinjaman di atas.")
     else:
-        for app in apps[-5:]:  # tampilkan 5 terakhir
+        for app in apps[-5:]:
             status_color = {
                 "Dikirim": "🔵",
                 "Diproses": "🟡",
@@ -177,4 +183,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
