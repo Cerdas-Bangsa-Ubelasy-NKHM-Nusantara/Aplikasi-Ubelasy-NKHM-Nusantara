@@ -14,7 +14,7 @@ if not st.session_state.get("splash_selesai", False):
         col_kiri, col_tengah, col_kanan = st.columns([1, 2, 1])
         with col_tengah:
             # 1. Gambar logo (pakai raw URL dari GitHub)
-            logo_url = "https://raw.githubusercontent.com/SRPakpahanSST/nusantara-nkhm/main/assets/pmd_logo.jpg"
+            logo_url = "https://github.com/Cerdas-Bangsa-Ubelasy-NKHM-Nusantara/Aplikasi-Ubelasy-NKHM-Nusantara/blob/fe55392b6f600c353b40436a6d02a4e98e3769c6/assets/pmd_logo.jpg"
             st.markdown(
     f'<div style="display: flex; justify-content: center;"><img src="{logo_url}" width="180"></div>',
     unsafe_allow_html=True
