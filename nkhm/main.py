@@ -3,11 +3,12 @@ import streamlit as st
 import pandas as pd
 import random
 import os
+from pathlib import Path
 from datetime import datetime
 from nkhm.questions import load_all_questions
 from nkhm.utils import calculate_nkhm, get_nkhm_level
 from nkhm.ai_assistant import get_ai_response
-from nkhm.leaderboard import show_leaderboard, save_score   # <-- tambah import save_score
+from nkhm.leaderboard import show_leaderboard, save_score
 
 def init_session_state():
     if "nkhm_user" not in st.session_state:
@@ -25,13 +26,41 @@ def main():
     init_session_state()
     
     if not st.session_state.nkhm_user:
-        col1, col2, col3 = st.columns([1,2,1])
-        with col2:
-            logo_path = "assets/human.jpg"
-            if os.path.exists(logo_path):
-                st.image(logo_path, width=150)
-            st.title("🇮🇩 NKHM NUSANTARA")
-            name = st.text_input("Masukkan namamu", placeholder="contoh: Budi Santoso")
+        # ========== LOGIN PAGE DENGAN KONTEN DI TENGAH ==========
+        st.empty()
+        col_outer1, col_outer2, col_outer3 = st.columns([1, 2, 1])
+        with col_outer2:
+            # Gunakan kolom untuk memusatkan gambar
+            col_img1, col_img2, col_img3 = st.columns([1, 2, 1])
+            with col_img2:
+                script_dir = Path(__file__).parent.parent  # naik ke root
+                image_path = script_dir / "assets" / "human.jpg"
+                if image_path.exists():
+                    st.image(str(image_path), width=150)
+                else:
+                    st.warning("Gambar human.jpg tidak ditemukan di folder assets/")
+            
+            # Judul di tengah
+            st.markdown(
+                "<h1 style='text-align: center;'>🇮🇩 NKHM NUSANTARA</h1>",
+                unsafe_allow_html=True
+            )
+            
+            # Input nama (rata tengah dengan CSS)
+            st.markdown(
+                """
+                <style>
+                div[data-testid="stTextInput"] > div > div > input {
+                    text-align: center;
+                }
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+            
+            name = st.text_input("Masukkan namamu", placeholder="contoh: Budi Santoso", label_visibility="collapsed")
+            
+            # Tombol MULAI BELAJAR
             if st.button("🚀 MULAI BELAJAR", use_container_width=True):
                 if name and name.strip():
                     st.session_state.nkhm_user = name.strip()
