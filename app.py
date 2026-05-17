@@ -12,20 +12,57 @@ if "splash_two_in_one_done" not in st.session_state:
 if not st.session_state.splash_two_in_one_done:
     st.empty()
     
-    col_outer1, col_outer2, col_outer3 = st.columns([1, 2, 1])
-    with col_outer2:
-        # Gunakan kolom lagi untuk memusatkan gambar
-        col_img1, col_img2, col_img3 = st.columns([1, 2, 1])
-        with col_img2:
-            if logo_path.exists():
+    # Gunakan layout kolom untuk memusatkan konten
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        # CSS untuk memusatkan gambar
+        st.markdown(
+            """
+            <style>
+            .stImage {
+                display: flex;
+                justify-content: center;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+        
+        # Tampilkan gambar di tengah
+        if logo_path.exists():
+            col_img1, col_img2, col_img3 = st.columns([1, 2, 1])
+            with col_img2:
                 st.image(str(logo_path), width=180)
-            else:
+        else:
+            col_img1, col_img2, col_img3 = st.columns([1, 2, 1])
+            with col_img2:
                 st.image("https://raw.githubusercontent.com/SRPakpahanSST/Ubelasy-NKHM-Nusantara/main/assets/pmd_logo.jpg", width=180)
         
         st.markdown("<h1 style='text-align: center;'>Ubelasy + NKHM Nusantara</h1>", unsafe_allow_html=True)
         st.markdown(
             "<p style='text-align: center;'>Aplikasi Sistem Keuangan (Pinjaman) Ubelasy Berbasis Pembebasan Sisa Hutang (PSH),<br>"
             "dan gaming 4 Kecerdasan (IQ, EQ, SQ, AQ) + Nasionalisme Berbasis Data Personal</p>",
+            unsafe_allow_html=True
+        )
+        
+        # CSS untuk tombol
+        st.markdown(
+            """
+            <style>
+            div.stButton > button {
+                background-color: #4CAF50;
+                color: white;
+                font-size: 18px;
+                font-weight: bold;
+                border-radius: 12px;
+                padding: 10px 20px;
+                width: 100%;
+            }
+            div.stButton > button:hover {
+                background-color: #45a049;
+            }
+            </style>
+            """,
             unsafe_allow_html=True
         )
         
@@ -56,3 +93,4 @@ if app_mode == "🌾 Ubelasy (Loan Aggregator)":
     ubelasy_main()
 else:
     nkhm_main()
+    
