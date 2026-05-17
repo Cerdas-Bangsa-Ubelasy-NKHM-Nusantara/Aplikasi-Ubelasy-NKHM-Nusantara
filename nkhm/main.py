@@ -146,63 +146,98 @@ def main():
     tab1, tab2, tab3 = st.tabs(["🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI"])
     
     with tab1:
-        st.markdown("### Pilih Kuis")
-        kategori = st.radio("Kategori", ["✨ Semua", "🇮🇩 Nasionalisme", "📚 Umum"], horizontal=True)
-        kecerdasan = st.selectbox("Fokus", ["Semua", "IQ", "EQ", "SQ", "AQ"])
+    st.markdown("### Pilih Kuis")
+    kategori = st.radio("Kategori", ["✨ Semua", "🇮🇩 Nasionalisme", "📚 Umum"], horizontal=True)
+    kecerdasan = st.selectbox("Fokus", ["Semua", "IQ", "EQ", "SQ", "AQ"])
+    
+    # Filter soal berdasarkan pilihan
+    filtered = [q for q in QUESTION_BANK 
+                if (kategori == "✨ Semua" or 
+                    (kategori == "🇮🇩 Nasionalisme" and q.get("national", False)) or
+                    (kategori == "📚 Umum" and not q.get("national", False))) and
+                (kecerdasan == "Semua" or q.get("type") == kecerdasan)]
+    
+    if not filtered:
+        st.warning("Tidak ada soal dengan filter ini. Coba pilih filter lain!")
+    else:
+        # Inisialisasi session state untuk kuis
+        if "nkhm_current_q" not in st.session_state:
+            st.session_state.nkhm_current_q = random.choice(filtered)
+            st.session_state.nkhm_answered = False
+            st.session_state.nkhm_selected_answer = None
         
-        filtered = [q for q in QUESTION_BANK 
-                    if (kategori == "✨ Semua" or 
-                        (kategori == "🇮🇩 Nasionalisme" and q.get("national", False)) or
-                        (kategori == "📚 Umum" and not q.get("national", False))) and
-                    (kecerdasan == "Semua" or q.get("type") == kecerdasan)]
-        if not filtered:
-            st.warning("Tidak ada soal.")
+        # Ambil soal saat ini
+        q = st.session_state.nkhm_current_q
+        
+        # Tampilkan soal
+        st.markdown(f"### 📝 {q['text']}")
+        col_tag1, col_tag2 = st.columns(2)
+        col_tag1.info(f"🧠 {q['type']}")
+        if q.get('national'):
+            col_tag2.success("🇮🇩 Nasional")
         else:
-            if "nkhm_current_q" not in st.session_state:
-                st.session_state.nkhm_current_q = random.choice(filtered)
-                st.session_state.nkhm_answered = False
-            q = st.session_state.nkhm_current_q
-            st.markdown(f"### 📝 {q['text']}")
-            col_tag1, col_tag2 = st.columns(2)
-            col_tag1.info(f"🧠 {q['type']}")
-            col_tag2.success("🇮🇩 Nasional") if q.get('national') else col_tag2.info("📚 Umum")
-            selected = st.radio("Pilih jawaban:", q['options'], key=f"q_{q['text']}", disabled=st.session_state.nkhm_answered)
-            if st.button("✅ JAWAB", disabled=st.session_state.nkhm_answered):
-                st.session_state.nkhm_answered = True
-                st.session_state.nkhm_total_questions += 1
-                if selected == q['correct']:
-                    st.session_state.nkhm_scores[q['type']] = min(100, st.session_state.nkhm_scores[q['type']] + 10)
-                    st.success(f"✅ BENAR! +10 poin untuk {q['type']}")
-                    
-                    nkhm_baru = calculate_nkhm(
-                        st.session_state.nkhm_scores["IQ"],
-                        st.session_state.nkhm_scores["EQ"],
-                        st.session_state.nkhm_scores["SQ"],
-                        st.session_state.nkhm_scores["AQ"]
-                    )
-                    save_score(st.session_state.nkhm_user, nkhm_baru)
-                else:
-                    st.error(f"❌ SALAH! Jawaban: {q['correct']}")
-                st.session_state.nkhm_history.append({
-                    "timestamp": datetime.now().strftime("%H:%M:%S"),
-                    "question": q['text'][:50],
-                    "type": q['type'],
-                    "correct": selected == q['correct'],
-                    "nkhm": calculate_nkhm(
-                        st.session_state.nkhm_scores["IQ"],
-                        st.session_state.nkhm_scores["EQ"],
-                        st.session_state.nkhm_scores["SQ"],
-                        st.session_state.nkhm_scores["AQ"]
-                    )
-                })
-                if st.button("⏩ SOAL SELANJUTNYA"):
+            col_tag2.info("📚 Umum")
+        
+        # Tampilkan pilihan jawaban (tanpa default selection)
+        selected = st.radio(
+            "Pilih jawabanmu:", 
+            q['options'], 
+            key=f"radio_{q['text']}",
+            index=None,  # ← TIDAK ADA DEFAULT SELECTION
+            disabled=st.session_state.nkhm_answered
+        )
+        
+        # Tombol JAWAB
+        if st.button("✅ JAWAB", disabled=st.session_state.nkhm_answered or selected is None, use_container_width=True):
+            st.session_state.nkhm_answered = True
+            st.session_state.nkhm_total_questions += 1
+            
+            if selected == q['correct']:
+                st.session_state.nkhm_scores[q['type']] = min(100, st.session_state.nkhm_scores[q['type']] + 10)
+                st.success(f"✅ BENAR! +10 poin untuk {q['type']}")
+                
+                # Hitung ulang NKHM dan simpan ke leaderboard
+                nkhm_baru = calculate_nkhm(
+                    st.session_state.nkhm_scores["IQ"],
+                    st.session_state.nkhm_scores["EQ"],
+                    st.session_state.nkhm_scores["SQ"],
+                    st.session_state.nkhm_scores["AQ"]
+                )
+                save_score(st.session_state.nkhm_user, nkhm_baru)
+            else:
+                st.error(f"❌ SALAH! Jawaban benar: **{q['correct']}**")
+            
+            # Simpan riwayat
+            st.session_state.nkhm_history.append({
+                "timestamp": datetime.now().strftime("%H:%M:%S"),
+                "question": q['text'][:50],
+                "type": q['type'],
+                "correct": selected == q['correct'],
+                "nkhm": calculate_nkhm(
+                    st.session_state.nkhm_scores["IQ"],
+                    st.session_state.nkhm_scores["EQ"],
+                    st.session_state.nkhm_scores["SQ"],
+                    st.session_state.nkhm_scores["AQ"]
+                )
+            })
+            st.rerun()
+        
+        # Tombol navigasi (muncul setelah menjawab)
+        if st.session_state.nkhm_answered:
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("⏩ SOAL SELANJUTNYA", use_container_width=True):
+                    # Pilih soal baru secara acak dari filtered
                     st.session_state.nkhm_current_q = random.choice(filtered)
                     st.session_state.nkhm_answered = False
+                    st.session_state.nkhm_selected_answer = None
                     st.rerun()
-            if st.session_state.nkhm_answered:
-                if st.button("🎮 Kuis Baru"):
+            with col2:
+                if st.button("🎮 KUIS BARU", use_container_width=True):
+                    # Reset semua state kuis
                     st.session_state.nkhm_current_q = random.choice(filtered)
                     st.session_state.nkhm_answered = False
+                    st.session_state.nkhm_selected_answer = None
                     st.rerun()
     
     with tab2:
