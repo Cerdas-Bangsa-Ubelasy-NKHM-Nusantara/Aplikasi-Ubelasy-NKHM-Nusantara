@@ -1,7 +1,5 @@
-‎# app.py (bagian splash screen)
-‎import streamlit as st
-‎import os
-‎from pathlib import Path
+import streamlit as st
+from pathlib import Path
 ‎
 ‎# Dapatkan path absolut ke direktori root
 ‎script_dir = Path(__file__).parent
