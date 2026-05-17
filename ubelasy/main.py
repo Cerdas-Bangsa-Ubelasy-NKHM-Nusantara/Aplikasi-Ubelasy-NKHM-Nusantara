@@ -1,14 +1,26 @@
 # ubelasy/main.py
+# ubelasy/main.py
 import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
+import os
 from ubelasy.calculator import calculate_loan
 from ubelasy.aggregator import get_recommendations, submit_application, get_all_applications_for_user
 
 def main():
+    # ========== TAMPILAN HEADER DENGAN GAMBAR ==========
+    # Tampilkan gambar dari folder assets jika ada
+    image_path = os.path.join("assets", "ubelasy.jpg")
+    if os.path.exists(image_path):
+        st.image(image_path, use_container_width=True)
+    else:
+        # Fallback jika gambar tidak ditemukan
+        st.warning("Gambar ubelasy.jpg tidak ditemukan di folder assets/")
+    
     st.title("🌾 Ubelasy – Agregator Pinjaman Berkelanjutan")
     st.markdown("**Skema PSH & Penurunan Suku Bunga 0,5% per Periode**")
     st.markdown("---")
+    
     
     # ========== SIDEBAR UNTUK SIMULASI ==========
     with st.sidebar:
