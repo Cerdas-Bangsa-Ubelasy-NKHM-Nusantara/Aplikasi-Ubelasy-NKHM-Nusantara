@@ -19,15 +19,15 @@ if not st.session_state.get("splash_selesai", False):
     f'<div style="display: flex; justify-content: center;"><img src="{logo_url}" width="180"></div>',
     unsafe_allow_html=True
 )
-            # 2. Judul "NKHM Nusantara"
+            # 2. Judul "Ubelasy + NKHM Nusantara"
             st.markdown(
-                "<h1 style='text-align: center;'>NKHM Nusantara</h1>",
+                "<h1 style='text-align: center;'>Ubelasy + NKHM Nusantara</h1>",
                 unsafe_allow_html=True,
             )
 
             # 3. Deskripsi tambahan (baris kedua)
             st.markdown(
-                "<p style='text-align: center; font-size: 18px;'>Aplikasi gaming 4 Kecerdasan (IQ, EQ, SQ, AQ) + Nasionalisme<br>Berbasis Perkembangan Data Personal</p>",
+                "<p style='text-align: center; font-size: 18px;'>Aplikasi Sistem Pinjaman Model Ubelasy + Aplikasi gaming 4 Kecerdasan (IQ, EQ, SQ, AQ) + Nasionalisme<br>Berbasis Perkembangan Data Personal</p>",
                 unsafe_allow_html=True,
             )
 
