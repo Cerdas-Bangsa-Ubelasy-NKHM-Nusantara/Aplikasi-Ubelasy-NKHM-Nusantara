@@ -1,6 +1,6 @@
 import streamlit as st
 from pathlib import Path
-‎
+
 ‎# Dapatkan path absolut ke direktori root
 ‎script_dir = Path(__file__).parent
 ‎logo_path = script_dir / "assets" / "pmd_logo.jpg"
