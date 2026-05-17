@@ -4,7 +4,7 @@ from pathlib import Path
 # ========== SPLASH SCREEN ==========𝐪𝐩𝐚𝐦𝐲𝐦 𝐥
 
 if not st.session_state.get("splash_selesai", False):
-    st.set_page_config(page_title="NKHM Nusantara", page_icon="🇮🇩", layout="wide")
+    st.set_page_config(page_title="Ubelasy + NKHM Nusantara", page_icon="🇮🇩", layout="wide")
 
     # Kosongkan area utama
     splash_holder = st.empty()
