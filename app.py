@@ -1,6 +1,5 @@
-# app.py (bagian splash screen)
+# app.py
 import streamlit as st
-import os
 from pathlib import Path
 
 # Dapatkan path absolut ke direktori root
@@ -17,7 +16,13 @@ if not st.session_state.splash_two_in_one_done:
     st.empty()
     col1, col2, col3 = st.columns([1,2,1])
     with col2:
-        st.image("https://raw.githubusercontent.com/SRPakpahanSST/Ubelasy-NKHM-Nusantara/main/assets/pmd_logo.jpg", width=200)
+        # Coba tampilkan dari file lokal, fallback ke URL raw jika gagal
+        if logo_path.exists():
+            st.image(str(logo_path), width=200)
+        else:
+            # Fallback ke URL raw GitHub
+            st.image("https://raw.githubusercontent.com/SRPakpahanSST/Ubelasy-NKHM-Nusantara/main/assets/pmd_logo.jpg", width=200)
+        
         st.markdown("<h1 style='text-align: center;'>Ubelasy + NKHM Nusantara</h1>", unsafe_allow_html=True)
         st.markdown(
             "<p style='text-align: center;'>Aplikasi Sistem Keuangan (Pinjaman) Ubelasy Berbasis Pembebasan Sisa Hutang (PSH),<br>"
@@ -32,12 +37,12 @@ if not st.session_state.splash_two_in_one_done:
 # ========== SIDEBAR UTAMA ==========
 st.sidebar.title("🚀 Pilih Aplikasi")
 app_mode = st.sidebar.radio(
-    "Pilih Aplikasi",  # ← beri label yang bermakna
+    "Pilih Aplikasi",
     ["🌾 Ubelasy (Loan Aggregator)", "🌿 NKHM Nusantara (Gamifikasi)"],
     index=0,
-    label_visibility="collapsed"  # opsional: sembunyikan label tapi tetap ada nilainya
+    label_visibility="collapsed"
 )
-st.sidebar.markdown("---")   # Pemisah agar radio tetap terlihat
+st.sidebar.markdown("---")
 
 # Import modul
 try:
@@ -51,3 +56,4 @@ if app_mode == "🌾 Ubelasy (Loan Aggregator)":
     ubelasy_main()
 else:
     nkhm_main()
+    
