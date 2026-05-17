@@ -6,5 +6,75 @@
     "type": "IQ",
     "national": false
   }
+  {
+    "text": "Siapa presiden pertama Indonesia?",
+    "options": ["Soekarno", "Soeharto", "Habibie", "Megawati"],
+    "correct": "Soekarno",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "text": "Apa ibu kota Jawa Barat?",
+    "options": ["Bandung", "Surabaya", "Semarang", "Medan"],
+    "correct": "Bandung",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "text": "Siapa pencipta lagu Indonesia Raya?",
+    "options": ["WR Supratman", "Ibu Sud", "Ismail Marzuki", "AT Mahmud"],
+    "correct": "WR Supratman",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "text": "Apa lambang negara Indonesia?",
+    "options": ["Garuda Pancasila", "Banteng", "Padi Kapas", "Bintang"],
+    "correct": "Garuda Pancasila",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "text": "Gunung tertinggi di Indonesia?",
+    "options": ["Puncak Jaya", "Kerinci", "Rinjani", "Semeru"],
+    "correct": "Puncak Jaya",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "text": "Apa mata uang Indonesia?",
+    "options": ["Rupiah", "Dollar", "Ringgit", "Baht"],
+    "correct": "Rupiah",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "text": "Berapa jumlah provinsi di Indonesia saat ini?",
+    "options": ["34", "35", "36", "37"],
+    "correct": "38",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "text": "Siapa pahlawan yang dijuluk 'Singa dari Timur'?",
+    "options": ["Pattimura", "Diponegoro", "Imam Bonjol", "Hasanuddin"],
+    "correct": "Pattimura",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "text": "Apa ibu kota Indonesia?",
+    "options": ["Jakarta", "Surabaya", "Bandung", "Medan"],
+    "correct": "Jakarta",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "text": "Siapa penemu bola lampu?",
+    "options": ["Thomas Alva Edison", "Nikola Tesla", "Albert Einstein", "Alexander Graham Bell"],
+    "correct": "Thomas Alva Edison",
+    "type": "IQ",
+    "national": false
+  }
 ]
 
