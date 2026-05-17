@@ -124,7 +124,9 @@ def main():
             resp = get_ai_response(user_msg, st.session_state.nkhm_ai_conversation, st.session_state.nkhm_user, nkhm, nkhm_level)
             st.session_state.nkhm_ai_conversation.append({"role": "assistant", "content": resp})
             st.rerun()
-        
+            
+        st.markdown("---")
+                    
         if st.button("🚪 Logout", use_container_width=True):
             st.session_state.nkhm_user = ""
             st.session_state.nkhm_scores = {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0}
