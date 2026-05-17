@@ -1,9 +1,72 @@
 [
   {
-    "text": "Siapa presiden pertama Indonesia?",
-    "options": ["Soekarno", "Soeharto", "Habibie", "Megawati"],
-    "correct": "Soekarno",
-    "type": "IQ",
+    "text": "Temanmu gagal ujian dan menangis. Apa yang kamu lakukan?",
+    "options": ["Biarkan saja", "Menghibur dan memberi semangat", "Membandingkan nilaimu", "Tegur dia"],
+    "correct": "Menghibur dan memberi semangat",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "text": "Kamu tidak sengaja menyinggung perasaan teman. Tindakan terbaik?",
+    "options": ["Diam saja", "Meminta maaf", "Berpura-pura tidak tahu", "Menyalahkan dia"],
+    "correct": "Meminta maaf",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "text": "Melihat orang tua kesulitan menyeberang, sebaiknya?",
+    "options": ["Pura tidak lihat", "Membantunya", "Merekam video", "Tertawa"],
+    "correct": "Membantunya",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "text": "Temanmu sedang berduka karena orang tua meninggal. Sikapmu?",
+    "options": ["Ikut berduka dan mendampingi", "Bilang 'ikhlas'", "Bilang 'sudah takdir'", "Diam saja"],
+    "correct": "Ikut berduka dan mendampingi",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "text": "Kamu melihat teman di-bully. Tindakanmu?",
+    "options": ["Diam saja", "Membela teman", "Ikut membully", "Merekam video"],
+    "correct": "Membela teman",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "text": "Teman berprestasi mendapat hadiah. Sikapmu?",
+    "options": ["Iri", "Acuh tak acuh", "Memberi selamat", "Meremehkan"],
+    "correct": "Memberi selamat",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "text": "Orangtua sedang marah. Sebaiknya kamu?",
+    "options": ["Membantah", "Diam dan mendengar", "Kabur dari rumah", "Menangis"],
+    "correct": "Diam dan mendengar",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "text": "Kamu salah memahami instruksi guru. Sebaiknya?",
+    "options": ["Diam saja", "Menyalahkan teman", "Meminta maaf dan klarifikasi", "Keluar kelas"],
+    "correct": "Meminta maaf dan klarifikasi",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "text": "Temanmu kehilangan uang jajan. Sikapmu?",
+    "options": ["Diam saja", "Meminjamkan uang", "Mengolok-olok", "Pura tidak tahu"],
+    "correct": "Meminjamkan uang",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "text": "Kamu diminta tolong saat sibuk. Sebaiknya?",
+    "options": ["Menolak kasar", "Membantu jika bisa", "Pura tidak dengar", "Menyuruh orang lain"],
+    "correct": "Membantu jika bisa",
+    "type": "EQ",
     "national": false
   }
 ]
