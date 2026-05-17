@@ -27,7 +27,7 @@ def main():
     if not st.session_state.nkhm_user:
         col1, col2, col3 = st.columns([1,2,1])
         with col2:
-            logo_path = "assets/pmd_logo.jpg"
+            logo_path = "assets/human.jpg"
             if os.path.exists(logo_path):
                 st.image(logo_path, width=150)
             st.title("🇮🇩 NKHM NUSANTARA")
