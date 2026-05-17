@@ -1,9 +1,72 @@
 [
   {
-    "text": "Siapa presiden pertama Indonesia?",
-    "options": ["Soekarno", "Soeharto", "Habibie", "Megawati"],
-    "correct": "Soekarno",
-    "type": "IQ",
+    "text": "Sila pertama Pancasila adalah?",
+    "options": ["Ketuhanan Yang Maha Esa", "Kemanusiaan", "Persatuan", "Kerakyatan"],
+    "correct": "Ketuhanan Yang Maha Esa",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Bhinneka Tunggal Ika berarti?",
+    "options": ["Berbeda-beda tetap satu", "Satu untuk semua", "Bersatu kita teguh", "Damai sejahtera"],
+    "correct": "Berbeda-beda tetap satu",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Sikap terhadap teman yang berbeda agama adalah?",
+    "options": ["Menghormati", "Memaksa", "Menghina", "Menjauhi"],
+    "correct": "Menghormati",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Apa inti dari toleransi beragama?",
+    "options": ["Memeluk semua agama", "Menghormati perbedaan", "Mengganti agama", "Mengabaikan keyakinan lain"],
+    "correct": "Menghormati perbedaan",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Sikap terbaik saat melihat orang beribadah berbeda keyakinan?",
+    "options": ["Mengganggu", "Menghormati", "Mengajak pindah agama", "Mengolok-olok"],
+    "correct": "Menghormati",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Nilai-nilai ketuhanan dalam Pancasila mencerminkan?",
+    "options": ["Ateisme", "Sekularisme", "Ketuhanan yang berkebudayaan", "Komunisme"],
+    "correct": "Ketuhanan yang berkebudayaan",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Sikap yang sesuai dengan sila Kemanusiaan yang Adil dan Beradab?",
+    "options": ["Membeda-bedakan suku", "Menghormati hak asasi manusia", "Menindas yang lemah", "Acuh tak acuh"],
+    "correct": "Menghormati hak asasi manusia",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Apa makna 'Ketuhanan Yang Maha Esa' dalam kehidupan sehari-hari?",
+    "options": ["Memaksakan keyakinan", "Bertakwa dan toleran", "Meninggalkan ibadah", "Mengabaikan Tuhan"],
+    "correct": "Bertakwa dan toleran",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Sikap terbaik dalam keberagaman budaya Indonesia?",
+    "options": ["Menghargai dan melestarikan", "Menghapus budaya lain", "Menganggap budaya sendiri terbaik", "Acuh"],
+    "correct": "Menghargai dan melestarikan",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Apa makna 'Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan'?",
+    "options": ["Kekuasaan rakyat dengan bijak", "Kekuasaan presiden mutlak", "Kekuasaan militer", "Anarki"],
+    "correct": "Kekuasaan rakyat dengan bijak",
+    "type": "SQ",
     "national": false
   }
 ]
