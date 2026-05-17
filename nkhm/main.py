@@ -25,31 +25,49 @@ def init_session_state():
 def main():
     init_session_state()
     
+    # ========== SPLASH SCREEN / LOGIN ==========
     if not st.session_state.nkhm_user:
-        # ========== LOGIN PAGE DENGAN KONTEN DI TENGAH ==========
+        # Kosongkan area utama
         st.empty()
-        col_outer1, col_outer2, col_outer3 = st.columns([1, 2, 1])
-        with col_outer2:
-            # Gunakan kolom untuk memusatkan gambar
-            col_img1, col_img2, col_img3 = st.columns([1, 2, 1])
-            with col_img2:
-                script_dir = Path(__file__).parent.parent  # naik ke root
-                image_path = script_dir / "assets" / "human.jpg"
-                if image_path.exists():
-                    st.image(str(image_path), width=150)
-                else:
-                    st.warning("Gambar human.jpg tidak ditemukan di folder assets/")
-            
-            # Judul di tengah
+        
+        # Layout 3 kolom untuk center
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            # Gambar logo (pakai raw URL dari GitHub sebagai fallback)
+            logo_url = "https://raw.githubusercontent.com/SRPakpahanSST/nusantara-nkhm/main/assets/pmd_logo.jpg"
             st.markdown(
-                "<h1 style='text-align: center;'>🇮🇩 NKHM Nusantara</h1>",
+                f'<div style="display: flex; justify-content: center;"><img src="{logo_url}" width="180"></div>',
                 unsafe_allow_html=True
             )
             
-            # Input nama (rata tengah dengan CSS)
+            # Judul
+            st.markdown(
+                "<h1 style='text-align: center;'>NKHM Nusantara</h1>",
+                unsafe_allow_html=True
+            )
+            
+            # Deskripsi
+            st.markdown(
+                "<p style='text-align: center; font-size: 18px;'>Aplikasi gaming 4 Kecerdasan (IQ, EQ, SQ, AQ) + Nasionalisme<br>Berbasis Perkembangan Data Personal</p>",
+                unsafe_allow_html=True
+            )
+            
+            # CSS untuk tombol hijau & besar
             st.markdown(
                 """
                 <style>
+                div.stButton > button {
+                    background-color: #4CAF50;
+                    color: white;
+                    font-size: 22px;
+                    font-weight: bold;
+                    border-radius: 12px;
+                    padding: 12px 24px;
+                    width: 100%;
+                }
+                div.stButton > button:hover {
+                    background-color: #45a049;
+                }
                 div[data-testid="stTextInput"] > div > div > input {
                     text-align: center;
                 }
@@ -58,6 +76,7 @@ def main():
                 unsafe_allow_html=True
             )
             
+            # Input nama
             name = st.text_input("Masukkan namamu", placeholder="contoh: Budi Santoso", label_visibility="collapsed")
             
             # Tombol MULAI BELAJAR
@@ -69,6 +88,7 @@ def main():
                     st.error("Masukkan nama dulu!")
         return
     
+    # ========== SETELAH LOGIN ==========
     QUESTION_BANK = load_all_questions()
     if not QUESTION_BANK:
         st.error("Bank soal kosong. Pastikan folder 'soal' berisi JSON.")
@@ -215,3 +235,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
