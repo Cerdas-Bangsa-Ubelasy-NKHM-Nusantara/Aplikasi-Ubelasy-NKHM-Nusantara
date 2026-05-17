@@ -1,59 +1,55 @@
-# app.py
 import streamlit as st
-from pathlib import Path
+import traceback
+import sys
 
-# Dapatkan path absolut ke direktori root
-script_dir = Path(__file__).parent
-logo_path = script_dir / "assets" / "pmd_logo.jpg"
-
-st.set_page_config(page_title="Sistem Keuangan Nusantara", layout="wide")
-
-# Splash screen (dengan session state baru)
-if "splash_two_in_one_done" not in st.session_state:
-    st.session_state.splash_two_in_one_done = False
-
-if not st.session_state.splash_two_in_one_done:
-    st.empty()
-    col1, col2, col3 = st.columns([1,2,1])
-    with col2:
-        # Coba tampilkan dari file lokal, fallback ke URL raw jika gagal
-        if logo_path.exists():
-            st.image(str(logo_path), width=200)
-        else:
-            # Fallback ke URL raw GitHub
-            st.image("https://raw.githubusercontent.com/SRPakpahanSST/Ubelasy-NKHM-Nusantara/main/assets/pmd_logo.jpg", width=200)
-        
-        st.markdown("<h1 style='text-align: center;'>Ubelasy + NKHM Nusantara</h1>", unsafe_allow_html=True)
-        st.markdown(
-            "<p style='text-align: center;'>Aplikasi Sistem Keuangan (Pinjaman) Ubelasy Berbasis Pembebasan Sisa Hutang (PSH),<br>"
-            "dan gaming 4 Kecerdasan (IQ, EQ, SQ, AQ) + Nasionalisme Berbasis Data Personal</p>",
-            unsafe_allow_html=True
-        )
-        if st.button("🚀 Mulai", use_container_width=True):
-            st.session_state.splash_two_in_one_done = True
-            st.rerun()
-    st.stop()
-
-# ========== SIDEBAR UTAMA ==========
-st.sidebar.title("🚀 Pilih Aplikasi")
-app_mode = st.sidebar.radio(
-    "Pilih Aplikasi",
-    ["🌾 Ubelasy (Loan Aggregator)", "🌿 NKHM Nusantara (Gamifikasi)"],
-    index=0,
-    label_visibility="collapsed"
-)
-st.sidebar.markdown("---")
-
-# Import modul
 try:
+    # === KODE ASLI ANDA DIMULAI DARI SINI ===
+    from pathlib import Path
+
+    st.set_page_config(page_title="Sistem Keuangan Nusantara", layout="wide")
+
+    # Splash screen
+    if "splash_two_in_one_done" not in st.session_state:
+        st.session_state.splash_two_in_one_done = False
+
+    if not st.session_state.splash_two_in_one_done:
+        st.empty()
+        col1, col2, col3 = st.columns([1,2,1])
+        with col2:
+            st.image("https://raw.githubusercontent.com/SRPakpahanSST/Ubelasy-NKHM-Nusantara/main/assets/pmd_logo.jpg", width=200)
+            st.markdown("<h1 style='text-align: center;'>Ubelasy + NKHM Nusantara</h1>", unsafe_allow_html=True)
+            st.markdown(
+                "<p style='text-align: center;'>Aplikasi Sistem Keuangan (Pinjaman) Ubelasy Berbasis Pembebasan Sisa Hutang (PSH),<br>"
+                "dan gaming 4 Kecerdasan (IQ, EQ, SQ, AQ) + Nasionalisme Berbasis Data Personal</p>",
+                unsafe_allow_html=True
+            )
+            if st.button("🚀 Mulai", use_container_width=True):
+                st.session_state.splash_two_in_one_done = True
+                st.rerun()
+        st.stop()
+
+    # Sidebar
+    st.sidebar.title("🚀 Pilih Aplikasi")
+    app_mode = st.sidebar.radio(
+        "Pilih Aplikasi",
+        ["🌾 Ubelasy (Loan Aggregator)", "🌿 NKHM Nusantara (Gamifikasi)"],
+        index=0,
+        label_visibility="collapsed"
+    )
+    st.sidebar.markdown("---")
+
+    # Import modul
     from ubelasy.main import main as ubelasy_main
     from nkhm.main import main as nkhm_main
-except Exception as e:
-    st.error(f"Gagal memuat modul: {e}")
-    st.stop()
 
-if app_mode == "🌾 Ubelasy (Loan Aggregator)":
-    ubelasy_main()
-else:
-    nkhm_main()
-    
+    if app_mode == "🌾 Ubelasy (Loan Aggregator)":
+        ubelasy_main()
+    else:
+        nkhm_main()
+
+    # === KODE ASLI ANDA BERAKHIR DI SINI ===
+
+except Exception as e:
+    st.error(f"❌ Error: {str(e)}")
+    st.code(traceback.format_exc())
+    st.stop()
