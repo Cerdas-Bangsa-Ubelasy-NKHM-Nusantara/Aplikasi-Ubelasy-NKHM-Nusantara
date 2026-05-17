@@ -27,32 +27,26 @@ def main():
     
     # ========== SPLASH SCREEN / LOGIN ==========
     if not st.session_state.nkhm_user:
-        # Kosongkan area utama
         st.empty()
         
-        # Layout 3 kolom untuk center
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            # Gambar logo (pakai raw URL dari GitHub sebagai fallback)
             logo_url = "https://raw.githubusercontent.com/Cerdas-Bangsa-Ubelasy-NKHM-Nusantara/Aplikasi-Ubelasy-NKHM-Nusantara/fe55392b6f600c353b40436a6d02a4e98e3769c6/assets/human.jpg"
             st.markdown(
                 f'<div style="display: flex; justify-content: center;"><img src="{logo_url}" width="180"></div>',
                 unsafe_allow_html=True
             )
             
-            # Judul
             st.markdown(
                 "<h1 style='text-align: center;'>NKHM Nusantara</h1>",
                 unsafe_allow_html=True
             )
             
-            # Deskripsi
             st.markdown(
                 "<p style='text-align: center; font-size: 18px;'>Aplikasi gaming 4 Kecerdasan (IQ, EQ, SQ, AQ) + Nasionalisme<br>Berbasis Perkembangan Data Personal</p>",
                 unsafe_allow_html=True
             )
             
-            # CSS untuk tombol hijau & besar
             st.markdown(
                 """
                 <style>
@@ -76,10 +70,8 @@ def main():
                 unsafe_allow_html=True
             )
             
-            # Input nama
             name = st.text_input("Masukkan namamu", placeholder="contoh: Budi Santoso", label_visibility="collapsed")
             
-            # Tombol MULAI BELAJAR
             if st.button("🚀 MULAI BELAJAR", use_container_width=True):
                 if name and name.strip():
                     st.session_state.nkhm_user = name.strip()
@@ -132,7 +124,16 @@ def main():
             resp = get_ai_response(user_msg, st.session_state.nkhm_ai_conversation, st.session_state.nkhm_user, nkhm, nkhm_level)
             st.session_state.nkhm_ai_conversation.append({"role": "assistant", "content": resp})
             st.rerun()
+        
+        if st.button("🚪 Logout", use_container_width=True):
+            st.session_state.nkhm_user = ""
+            st.session_state.nkhm_scores = {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0}
+            st.session_state.nkhm_history = []
+            st.session_state.nkhm_total_questions = 0
+            st.session_state.nkhm_ai_conversation = []
+            st.rerun()
     
+    # ========== TAB UTAMA ==========
     tab1, tab2, tab3 = st.tabs(["🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI"])
     
     with tab1:
@@ -164,14 +165,12 @@ def main():
                     st.session_state.nkhm_scores[q['type']] = min(100, st.session_state.nkhm_scores[q['type']] + 10)
                     st.success(f"✅ BENAR! +10 poin untuk {q['type']}")
                     
-                    # Hitung ulang NKHM setelah skor berubah
                     nkhm_baru = calculate_nkhm(
                         st.session_state.nkhm_scores["IQ"],
                         st.session_state.nkhm_scores["EQ"],
                         st.session_state.nkhm_scores["SQ"],
                         st.session_state.nkhm_scores["AQ"]
                     )
-                    # Simpan ke leaderboard
                     save_score(st.session_state.nkhm_user, nkhm_baru)
                 else:
                     st.error(f"❌ SALAH! Jawaban: {q['correct']}")
