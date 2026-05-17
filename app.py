@@ -1,4 +1,4 @@
-
+‎# app.py (bagian splash screen)
 ‎import streamlit as st
 ‎import os
 ‎from pathlib import Path
@@ -51,7 +51,4 @@
 ‎    ubelasy_main()
 ‎else:
 ‎    nkhm_main()
-‎
-‎
-‎
 ‎
