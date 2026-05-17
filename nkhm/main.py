@@ -34,7 +34,7 @@ def main():
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             # Gambar logo (pakai raw URL dari GitHub sebagai fallback)
-            logo_url = "https://raw.githubusercontent.com/SRPakpahanSST/nusantara-nkhm/main/assets/pmd_logo.jpg"
+            logo_url = "https://raw.githubusercontent.com/Cerdas-Bangsa-Ubelasy-NKHM-Nusantara/Aplikasi-Ubelasy-NKHM-Nusantara/fe55392b6f600c353b40436a6d02a4e98e3769c6/assets/human.jpg"
             st.markdown(
                 f'<div style="display: flex; justify-content: center;"><img src="{logo_url}" width="180"></div>',
                 unsafe_allow_html=True
