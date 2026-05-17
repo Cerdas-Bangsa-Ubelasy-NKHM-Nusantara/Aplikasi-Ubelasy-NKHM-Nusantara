@@ -1,10 +1,72 @@
-
 [
   {
-    "text": "Siapa presiden pertama Indonesia?",
-    "options": ["Soekarno", "Soeharto", "Habibie", "Megawati"],
-    "correct": "Soekarno",
-    "type": "IQ",
+    "text": "Kamu gagal dalam ujian. Sikap terbaik?",
+    "options": ["Menyerah", "Belajar lebih giat", "Menyalahkan guru", "Tidak mau ujian lagi"],
+    "correct": "Belajar lebih giat",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "text": "Proyek kelompok macet, sebaiknya?",
+    "options": ["Keluar kelompok", "Diskusi cari solusi", "Diam saja", "Menyalahkan teman"],
+    "correct": "Diskusi cari solusi",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "text": "Kamu ditolak dalam seleksi organisasi. Sikapmu?",
+    "options": ["Menyerah", "Mencoba lagi", "Menyalahkan panitia", "Iri pada yang lolos"],
+    "correct": "Mencoba lagi",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "text": "Bisnis yang dijalankan merugi. Sikap terbaik?",
+    "options": ["Menutup usaha", "Mencari penyebab dan memperbaiki", "Menyalahkan karyawan", "Berhutang besar"],
+    "correct": "Mencari penyebab dan memperbaiki",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "text": "Target kerja tidak tercapai. Sebaiknya?",
+    "options": ["Menyalahkan rekan", "Evaluasi dan perbaiki strategi", "Menyerah", "Mencari kambing hitam"],
+    "correct": "Evaluasi dan perbaiki strategi",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "text": "Kamu tidak diterima di universitas impian. Sikapmu?",
+    "options": ["Putus asa", "Mencari universitas lain atau coba lagi", "Menyalahkan sistem", "Berhenti sekolah"],
+    "correct": "Mencari universitas lain atau coba lagi",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "text": "Tim olahraga kalah terus. Sikapmu sebagai kapten?",
+    "options": ["Menyalahkan pemain", "Latihan lebih keras dan evaluasi", "Mundur dari tim", "Menyerah"],
+    "correct": "Latihan lebih keras dan evaluasi",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "text": "Ide bisnismu ditolak investor. Sikapmu?",
+    "options": ["Menyerah", "Perbaiki proposal dan cari investor lain", "Menyalahkan investor", "Mengubah ide seenaknya"],
+    "correct": "Perbaiki proposal dan cari investor lain",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "text": "Kamu mengalami musibah banjir. Sikap terbaik?",
+    "options": ["Putus asa", "Bangkit dan perbaiki kehidupan", "Menyalahkan pemerintah", "Menunggu bantuan"],
+    "correct": "Bangkit dan perbaiki kehidupan",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "text": "Aplikasi yang kamu buat jarang diunduh. Sebaiknya?",
+    "options": ["Menghapus aplikasi", "Menerima kritik dan update fitur", "Menyalahkan pengguna", "Memaksa orang mengunduh"],
+    "correct": "Menerima kritik dan update fitur",
+    "type": "AQ",
     "national": false
   }
 ]
