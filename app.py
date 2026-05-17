@@ -1,74 +1,96 @@
 import streamlit as st
 from pathlib import Path
 
-script_dir = Path(__file__).parent
-logo_path = script_dir / "assets" / "pmd_logo.jpg"
+# ========== SPLASH SCREEN ==========𝐪𝐩𝐚𝐦𝐲𝐦 𝐥
 
-st.set_page_config(page_title="Sistem Keuangan Nusantara", layout="wide")
+if not st.session_state.get("splash_selesai", False):
+    st.set_page_config(page_title="NKHM Nusantara", page_icon="🇮🇩", layout="wide")
 
-if "splash_two_in_one_done" not in st.session_state:
-    st.session_state.splash_two_in_one_done = False
+    # Kosongkan area utama
+    splash_holder = st.empty()
 
-if not st.session_state.splash_two_in_one_done:
-    st.empty()
+    with splash_holder.container():
+        # ----- Layout 3 kolom untuk center -----
+        col_kiri, col_tengah, col_kanan = st.columns([1, 2, 1])
+        with col_tengah:
+            # 1. Gambar logo (pakai raw URL dari GitHub)
+            logo_url = "https://raw.githubusercontent.com/SRPakpahanSST/nusantara-nkhm/main/assets/pmd_logo.jpg"
+            st.markdown(
+    f'<div style="display: flex; justify-content: center;"><img src="{logo_url}" width="180"></div>',
+    unsafe_allow_html=True
+)
+            # 2. Judul "NKHM Nusantara"
+            st.markdown(
+                "<h1 style='text-align: center;'>NKHM Nusantara</h1>",
+                unsafe_allow_html=True,
+            )
+
+            # 3. Deskripsi tambahan (baris kedua)
+            st.markdown(
+                "<p style='text-align: center; font-size: 18px;'>Aplikasi gaming 4 Kecerdasan (IQ, EQ, SQ, AQ) + Nasionalisme<br>Berbasis Perkembangan Data Personal</p>",
+                unsafe_allow_html=True,
+            )
+
+            # 4. CSS untuk tombol hijau & besar
+            st.markdown(
+                """
+                <style>
+                div.stButton > button {
+                    background-color: #4CAF50;
+                    color: white;
+                    font-size: 22px;
+                    font-weight: bold;
+                    border-radius: 12px;
+                    padding: 12px 24px;
+                    width: 100%;
+                }
+                div.stButton > button:hover {
+                    background-color: #45a049;
+                }
+                </style>
+                """,
+                unsafe_allow_html=True,
+            )
+
+            # 5. Tombol "Mulai"
+            if st.button("🚀 Mulai", use_container_width=True):
+                st.session_state.splash_selesai = True
+                st.rerun()
+
+    # Hentikan eksekusi aplikasi utama sampai tombol ditekan
+    st.stop()
     
-    # Gunakan layout kolom untuk memusatkan konten
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        # CSS untuk memusatkan gambar
-        st.markdown(
-            """
-            <style>
-            .stImage {
-                display: flex;
-                justify-content: center;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
-        
-        # Tampilkan gambar di tengah
-        if logo_path.exists():
-            col_img1, col_img2, col_img3 = st.columns([1, 2, 1])
-            with col_img2:
-                st.image(str(logo_path), width=180)
-        else:
-            col_img1, col_img2, col_img3 = st.columns([1, 2, 1])
-            with col_img2:
-                st.image("https://raw.githubusercontent.com/SRPakpahanSST/Ubelasy-NKHM-Nusantara/main/assets/pmd_logo.jpg", width=180)
-        
-        st.markdown("<h1 style='text-align: center;'>Ubelasy + NKHM Nusantara</h1>", unsafe_allow_html=True)
-        st.markdown(
-            "<p style='text-align: center;'>Aplikasi Sistem Keuangan (Pinjaman) Ubelasy Berbasis Pembebasan Sisa Hutang (PSH),<br>"
-            "dan gaming 4 Kecerdasan (IQ, EQ, SQ, AQ) + Nasionalisme Berbasis Data Personal</p>",
-            unsafe_allow_html=True
-        )
-        
-        # CSS untuk tombol
-        st.markdown(
-            """
-            <style>
-            div.stButton > button {
-                background-color: #4CAF50;
-                color: white;
-                font-size: 18px;
-                font-weight: bold;
-                border-radius: 12px;
-                padding: 10px 20px;
-                width: 100%;
-            }
-            div.stButton > button:hover {
-                background-color: #45a049;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
-        
-        if st.button("🚀 Mulai", use_container_width=True):
-            st.session_state.splash_two_in_one_done = True
-            st.rerun()
+    # Tempat untuk splash
+    splash_holder = st.empty()
+    with splash_holder.container():
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            # Tampilkan logo PMD Pakpahan Ministry (jika file ada)
+            logo_path = "assets/pmd_logo.jpg"  # Ganti dengan nama file gambar Anda
+            if os.path.exists(logo_path):
+                st.image(logo_path, width=200)
+            else:
+                # Fallback teks jika gambar belum diupload
+                st.markdown("<h1 style='text-align: center;'>PMD</h1>", unsafe_allow_html=True)
+                st.markdown("<h3 style='text-align: center;'>Pakpahan Ministry</h3>", unsafe_allow_html=True)
+            
+            st.markdown("<h1 style='text-align: center;'>🇮🇩 NKHM Nusantara</h1>", unsafe_allow_html=True)
+            st.markdown("<h3 style='text-align: center;'>Asah 4 Kecerdasan + Nasionalisme</h3>", unsafe_allow_html=True)
+            st.markdown("---")
+            st.markdown("""
+            <div style='text-align: center;'>
+                <p>🧠 <b>IQ</b> – Kecerdasan Intelektual<br>
+                ❤️ <b>EQ</b> – Kecerdasan Emosi<br>
+                🙏 <b>SQ</b> – Kecerdasan Spiritual<br>
+                💪 <b>AQ</b> – Kecerdasan Daya Juang</p>
+                <p>Berbasis nilai kebangsaan dan sejarah Indonesia.</p>
+                <p><b>Rumus NKHM:</b> ((IQ+EQ)×(SQ+AQ)) / ((IQ+EQ)+(SQ+AQ))</p>
+            </div>
+            """, unsafe_allow_html=True)
+            st.markdown("---")
+            if st.button("🚀 Mulai Sekarang", use_container_width=True):
+                st.session_state.splash_selesai = True
+                st.rerun()
     st.stop()
 
 # ========== SIDEBAR UTAMA ==========
