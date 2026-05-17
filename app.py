@@ -4,9 +4,9 @@ from pathlib import Path
 ‎# Dapatkan path absolut ke direktori root
 ‎script_dir = Path(__file__).parent
 ‎logo_path = script_dir / "assets" / "pmd_logo.jpg"
-‎
+
 ‎st.set_page_config(page_title="Sistem Keuangan Nusantara", layout="wide")
-‎
+
 ‎# Splash screen (dengan session state baru)
 ‎if "splash_two_in_one_done" not in st.session_state:
 ‎    st.session_state.splash_two_in_one_done = False
