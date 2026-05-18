@@ -16,7 +16,7 @@ if not st.session_state.get("splash_selesai", False):
             # 1. Gambar logo (pakai raw URL dari GitHub)
             logo_url = "https://raw.githubusercontent.com/Cerdas-Bangsa-Ubelasy-NKHM-Nusantara/Aplikasi-Ubelasy-NKHM-Nusantara/refs/heads/main/assets/ubelasy+nkhm.jpg"
             st.markdown(
-    f'<div style="display: flex; justify-content: center;"><img src="{logo_url}" width="280"></div>',
+    f'<div style="display: flex; justify-content: center;"><img src="{logo_url}" width="300"></div>',
     unsafe_allow_html=True
 )
             # 2. Judul "Ubelasy + NKHM Nusantara"
