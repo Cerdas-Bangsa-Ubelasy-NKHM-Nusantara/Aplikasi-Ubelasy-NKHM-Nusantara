@@ -216,6 +216,9 @@ def main():
             
             if fokus_ok:
                 filtered.append(q)
+                        
+        # DEBUG: Tampilkan hasil filter (opsional, bisa dihapus nanti)
+        st.write(f"📊 Debug: Kategori={kategori}, Fokus={kecerdasan}, Soal ditemukan={len(filtered)}")
         
         if not filtered:
             st.warning("Tidak ada soal dengan filter ini. Coba pilih filter lain!")
