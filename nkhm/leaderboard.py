@@ -12,14 +12,31 @@ def init_leaderboard():
         with open(LEADERBOARD_FILE, "w") as f:
             json.dump([], f)
 
-def save_score(name, nkhm_score):
+# nkhm/leaderboard.py (bagian save_score)
+
+def save_score(name, nkhm_total):
+    """Menyimpan skor NKHM_Total ke leaderboard"""
     init_leaderboard()
     with open(LEADERBOARD_FILE, "r") as f:
         scores = json.load(f)
-    scores.append({"name": name, "score": nkhm_score, "timestamp": datetime.now().isoformat()})
-    # Urutkan dan simpan top 100
+    
+    # Cek apakah nama sudah ada
+    found = False
+    for item in scores:
+        if item["name"] == name:
+            if nkhm_total > item["score"]:
+                item["score"] = nkhm_total
+                item["timestamp"] = datetime.now().isoformat()
+            found = True
+            break
+    
+    if not found:
+        scores.append({"name": name, "score": nkhm_total, "timestamp": datetime.now().isoformat()})
+    
+    # Urutkan berdasarkan skor tertinggi
     scores.sort(key=lambda x: x["score"], reverse=True)
     scores = scores[:100]
+    
     with open(LEADERBOARD_FILE, "w") as f:
         json.dump(scores, f)
 
