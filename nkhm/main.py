@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 from datetime import datetime
 from nkhm.questions import load_all_questions
-from nkhm.utils import calculate_nkhm, get_nkhm_level
+from nkhm.utils import calculate_nkhm_q, calculate_nkhm_total, get_nkhm_level
 from nkhm.ai_assistant import get_ai_response
 from nkhm.leaderboard import show_leaderboard, save_score
 
@@ -14,7 +14,8 @@ def init_session_state():
     if "nkhm_user" not in st.session_state:
         st.session_state.nkhm_user = ""
     if "nkhm_scores" not in st.session_state:
-        st.session_state.nkhm_scores = {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0}
+        # Skor untuk 4 kecerdasan (IQ, EQ, SQ, AQ) dan Nasionalisme
+        st.session_state.nkhm_scores = {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0, "Nasionalisme": 0}
     if "nkhm_history" not in st.session_state:
         st.session_state.nkhm_history = []
     if "nkhm_total_questions" not in st.session_state:
@@ -34,6 +35,13 @@ def init_session_state():
         st.session_state.nkhm_current_kecerdasan = "Semua"
     if "nkhm_feedback" not in st.session_state:
         st.session_state.nkhm_feedback = None
+
+def get_current_nkhm():
+    """Menghitung NKHM_Q dan NKHM_Total berdasarkan skor saat ini"""
+    scores = st.session_state.nkhm_scores
+    nkhm_q = calculate_nkhm_q(scores["IQ"], scores["EQ"], scores["SQ"], scores["AQ"])
+    nkhm_total = calculate_nkhm_total(nkhm_q, scores["Nasionalisme"])
+    return nkhm_q, nkhm_total
 
 def main():
     init_session_state()
@@ -99,31 +107,28 @@ def main():
         st.error("Bank soal kosong. Pastikan folder 'soal' berisi JSON.")
         return
     
-    nkhm = calculate_nkhm(
-        st.session_state.nkhm_scores["IQ"],
-        st.session_state.nkhm_scores["EQ"],
-        st.session_state.nkhm_scores["SQ"],
-        st.session_state.nkhm_scores["AQ"]
-    )
-    nkhm_level, _ = get_nkhm_level(nkhm)
+    # Hitung NKHM saat ini
+    nkhm_q, nkhm_total = get_current_nkhm()
+    nkhm_level, _ = get_nkhm_level(nkhm_total)
     
     # ========== SIDEBAR ==========
     with st.sidebar:
         st.markdown(f"## 👤 {st.session_state.nkhm_user}")
-        st.markdown(f"### 🎯 NKHM: **{nkhm}**")
+        st.markdown(f"### 🎯 NKHM Total: **{nkhm_total}**")
+        st.markdown(f"### 📊 NKHM_Q: {nkhm_q}")
         st.markdown(f"*Level: {nkhm_level}*")
-        st.progress(min(nkhm/100, 1.0))
+        st.progress(min(nkhm_total/100, 1.0))
         st.markdown("### 📊 Skor")
-        for t in ["IQ", "EQ", "SQ", "AQ"]:
+        for t in ["IQ", "EQ", "SQ", "AQ", "Nasionalisme"]:
             st.progress(st.session_state.nkhm_scores[t]/100, text=f"{t}: {st.session_state.nkhm_scores[t]}")
         
         col1, col2 = st.columns(2)
         col1.metric("📖 Total Soal", st.session_state.nkhm_total_questions)
-        best = max([h.get("nkhm", 0) for h in st.session_state.nkhm_history] + [nkhm])
+        best = max([h.get("nkhm_total", 0) for h in st.session_state.nkhm_history] + [nkhm_total])
         col2.metric("🏆 Best NKHM", best)
         
         if st.button("🔄 Reset Skor", use_container_width=True):
-            st.session_state.nkhm_scores = {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0}
+            st.session_state.nkhm_scores = {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0, "Nasionalisme": 0}
             st.session_state.nkhm_history = []
             st.session_state.nkhm_total_questions = 0
             st.rerun()
@@ -140,7 +145,7 @@ def main():
         user_msg = st.chat_input("Tanya Ki Hajar...")
         if user_msg:
             st.session_state.nkhm_ai_conversation.append({"role": "user", "content": user_msg})
-            resp = get_ai_response(user_msg, st.session_state.nkhm_ai_conversation, st.session_state.nkhm_user, nkhm, nkhm_level)
+            resp = get_ai_response(user_msg, st.session_state.nkhm_ai_conversation, st.session_state.nkhm_user, nkhm_total, nkhm_level)
             st.session_state.nkhm_ai_conversation.append({"role": "assistant", "content": resp})
             st.rerun()
         
@@ -178,7 +183,7 @@ def main():
         # Filter soal berdasarkan pilihan
         filtered = []
         for q in QUESTION_BANK:
-            # Filter berdasarkan Kategori (Semua / Nasionalisme / Umum)
+            # Filter berdasarkan Kategori
             if kategori == "✨ Semua":
                 kategori_ok = True
             elif kategori == "🇮🇩 Nasionalisme":
@@ -189,14 +194,12 @@ def main():
             if not kategori_ok:
                 continue
             
-            # Filter berdasarkan Fokus (Semua / IQ / EQ / SQ / AQ / Nasionalisme)
+            # Filter berdasarkan Fokus
             if kecerdasan == "Semua":
                 fokus_ok = True
             elif kecerdasan == "Nasionalisme":
-                # Untuk opsi Nasionalisme, cari soal dengan national = True
-                fokus_ok = q.get("national", False)
+                fokus_ok = q.get("type") == "Nasionalisme"
             else:
-                # Untuk IQ, EQ, SQ, AQ, cari berdasarkan type
                 fokus_ok = q.get("type") == kecerdasan
             
             if fokus_ok:
@@ -226,7 +229,14 @@ def main():
             # Tampilkan soal
             st.markdown(f"### 📝 {q['text']}")
             col_tag1, col_tag2 = st.columns(2)
-            col_tag1.info(f"🧠 {q['type']}")
+            
+            # Tentukan tipe soal untuk ditampilkan
+            if q.get('type') == "Nasionalisme":
+                display_type = "🇮🇩 Nasionalisme"
+            else:
+                display_type = f"🧠 {q['type']}"
+            col_tag1.info(display_type)
+            
             if q.get('national'):
                 col_tag2.success("🇮🇩 Nasional")
             else:
@@ -246,18 +256,16 @@ def main():
                 st.session_state.nkhm_answered = True
                 st.session_state.nkhm_total_questions += 1
                 
+                # Tentukan tipe skor yang akan ditambah
+                score_type = q['type'] if q['type'] == "Nasionalisme" else q['type']
+                
                 if selected == q['correct']:
-                    st.session_state.nkhm_scores[q['type']] = min(100, st.session_state.nkhm_scores[q['type']] + 10)
+                    st.session_state.nkhm_scores[score_type] = min(100, st.session_state.nkhm_scores[score_type] + 10)
                     st.session_state.nkhm_feedback = "benar"
                     
-                    # Simpan ke leaderboard
-                    nkhm_baru = calculate_nkhm(
-                        st.session_state.nkhm_scores["IQ"],
-                        st.session_state.nkhm_scores["EQ"],
-                        st.session_state.nkhm_scores["SQ"],
-                        st.session_state.nkhm_scores["AQ"]
-                    )
-                    save_score(st.session_state.nkhm_user, nkhm_baru)
+                    # Hitung ulang NKHM_Total untuk leaderboard
+                    _, nkhm_total_baru = get_current_nkhm()
+                    save_score(st.session_state.nkhm_user, nkhm_total_baru)
                 else:
                     st.session_state.nkhm_feedback = "salah"
                 
@@ -265,20 +273,16 @@ def main():
                 st.session_state.nkhm_history.append({
                     "timestamp": datetime.now().strftime("%H:%M:%S"),
                     "question": q['text'][:50],
-                    "type": q['type'],
+                    "type": score_type,
                     "correct": selected == q['correct'],
-                    "nkhm": calculate_nkhm(
-                        st.session_state.nkhm_scores["IQ"],
-                        st.session_state.nkhm_scores["EQ"],
-                        st.session_state.nkhm_scores["SQ"],
-                        st.session_state.nkhm_scores["AQ"]
-                    )
+                    "nkhm_q": get_current_nkhm()[0],
+                    "nkhm_total": get_current_nkhm()[1]
                 })
                 st.rerun()
             
             # Tampilkan feedback (setelah dijawab)
             if st.session_state.nkhm_feedback == "benar":
-                st.success(f"✅ BENAR! +10 poin untuk {q['type']}")
+                st.success(f"✅ BENAR! +10 poin untuk {score_type}")
             elif st.session_state.nkhm_feedback == "salah":
                 st.error(f"❌ SALAH! Jawaban benar: **{q['correct']}**")
             
@@ -287,14 +291,12 @@ def main():
                 col_nav1, col_nav2 = st.columns(2)
                 with col_nav1:
                     if st.button("⏩ SOAL SELANJUTNYA", use_container_width=True):
-                        # Pilih soal baru dari filtered yang sama
                         st.session_state.nkhm_current_q = random.choice(st.session_state.nkhm_current_filtered)
                         st.session_state.nkhm_answered = False
                         st.session_state.nkhm_feedback = None
                         st.rerun()
                 with col_nav2:
                     if st.button("🎮 KUIS BARU", use_container_width=True):
-                        # Reset filter dan pilih soal acak baru
                         st.session_state.nkhm_current_q = random.choice(filtered)
                         st.session_state.nkhm_answered = False
                         st.session_state.nkhm_feedback = None
@@ -304,31 +306,54 @@ def main():
     with tab2:
         st.markdown("### Dashboard")
         df_chart = pd.DataFrame({
-            "Kecerdasan": ["IQ", "EQ", "SQ", "AQ"],
+            "Kecerdasan": ["IQ", "EQ", "SQ", "AQ", "Nasionalisme"],
             "Skor": [st.session_state.nkhm_scores["IQ"], st.session_state.nkhm_scores["EQ"],
-                     st.session_state.nkhm_scores["SQ"], st.session_state.nkhm_scores["AQ"]]
+                     st.session_state.nkhm_scores["SQ"], st.session_state.nkhm_scores["AQ"],
+                     st.session_state.nkhm_scores["Nasionalisme"]]
         })
-        st.bar_chart(df_chart.set_index("Kecerdasan"), height=300)
+        st.bar_chart(df_chart.set_index("Kecerdasan"), height=400)
+        
+        # Tampilkan rumus NKHM
+        with st.expander("📖 Tentang Rumus NKHM"):
+            st.markdown("""
+            **NKHM_Q** = ((IQ + EQ) × (SQ + AQ)) / ((IQ + EQ) + (SQ + AQ))
+            
+            **NKHM_Total** = (NKHM_Q + Nasionalisme) / 2
+            
+            Dimana:
+            - IQ, EQ, SQ, AQ, Nasionalisme memiliki rentang skor 0-100
+            - NKHM_Q dan NKHM_Total juga memiliki rentang 0-100
+            """)
+        
         if st.session_state.nkhm_history:
             st.markdown("### Riwayat Kuis")
             history_df = pd.DataFrame(st.session_state.nkhm_history[-10:])
-            history_df = history_df[["timestamp", "type", "question", "correct"]]
+            history_df = history_df[["timestamp", "type", "question", "correct", "nkhm_total"]]
             history_df["correct"] = history_df["correct"].map({True: "✅", False: "❌"})
+            history_df.columns = ["Waktu", "Tipe", "Soal", "Hasil", "NKHM Total"]
             st.dataframe(history_df, use_container_width=True, hide_index=True)
     
     # ========== TAB 3: PRESTASI ==========
     with tab3:
         st.markdown("### Pencapaian")
-        cols = st.columns(4)
-        badges = {"IQ": "🧠 Cendekia", "EQ": "❤️ Empati", "SQ": "🙏 Bhinneka", "AQ": "💪 Tangguh"}
+        cols = st.columns(5)
+        badges = {
+            "IQ": "🧠 Cendekia", 
+            "EQ": "❤️ Empati", 
+            "SQ": "🙏 Bhinneka", 
+            "AQ": "💪 Tangguh",
+            "Nasionalisme": "🇮🇩 Patriot"
+        }
         for i, (t, label) in enumerate(badges.items()):
             if st.session_state.nkhm_scores[t] >= 50:
                 cols[i].success(f"✅ **{label}**")
             else:
                 cols[i].info(f"🔒 {label} (50+)")
-        if all(st.session_state.nkhm_scores[t] >= 50 for t in ["IQ", "EQ", "SQ", "AQ"]):
+        
+        if all(st.session_state.nkhm_scores[t] >= 50 for t in ["IQ", "EQ", "SQ", "AQ", "Nasionalisme"]):
             st.balloons()
             st.success("🎉 **GELAR: PAHLAWAN CERDAS NUSANTARA!** 🎉")
+        
         answered = len(st.session_state.nkhm_history)
         correct = sum(1 for h in st.session_state.nkhm_history if h["correct"])
         accuracy = (correct / answered * 100) if answered > 0 else 0
