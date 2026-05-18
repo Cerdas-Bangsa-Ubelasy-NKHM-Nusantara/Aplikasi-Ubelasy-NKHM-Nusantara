@@ -252,7 +252,47 @@ def main():
             )
             
             # Tombol JAWAB
-            if st.button("✅ JAWAB", disabled=st.session_state.nkhm_answered or selected is None, use_container_width=True):
+            # Tombol JAWAB
+
+# Tombol JAWAB
+if st.button("✅ JAWAB", disabled=st.session_state.nkhm_answered or selected is None, use_container_width=True):
+    st.session_state.nkhm_answered = True
+    st.session_state.nkhm_total_questions += 1
+    
+    # Tentukan tipe skor yang akan ditambah (definisikan di awal)
+    score_type = q['type'] if q['type'] == "Nasionalisme" else q['type']
+    
+    if selected == q['correct']:
+        # Pastikan skor tidak melebihi 100
+        new_score = min(100, st.session_state.nkhm_scores[score_type] + 10)
+        st.session_state.nkhm_scores[score_type] = new_score
+        st.session_state.nkhm_feedback = "benar"
+        
+        # Hitung ulang NKHM_Total untuk leaderboard
+        _, nkhm_total_baru = get_current_nkhm()
+        save_score(st.session_state.nkhm_user, nkhm_total_baru)
+    else:
+        st.session_state.nkhm_feedback = "salah"
+    
+    # Simpan riwayat (nkhm_total sudah dihitung)
+    nkhm_q_now, nkhm_total_now = get_current_nkhm()
+    st.session_state.nkhm_history.append({
+        "timestamp": datetime.now().strftime("%H:%M:%S"),
+        "question": q['text'][:50],
+        "type": score_type,
+        "correct": selected == q['correct'],
+        "nkhm_q": nkhm_q_now,
+        "nkhm_total": nkhm_total_now
+    })
+    st.rerun()
+
+# Tampilkan feedback (setelah dijawab)
+if st.session_state.nkhm_feedback == "benar":
+    # Gunakan score_type dari session state atau hitung ulang
+    fb_type = st.session_state.get("last_score_type", "kecerdasan")
+    st.success(f"✅ BENAR! +10 poin untuk {fb_type}")
+elif st.session_state.nkhm_feedback == "salah":
+    st.error(f"❌ SALAH! Jawaban benar: **{q['correct']}**")
                 st.session_state.nkhm_answered = True
                 st.session_state.nkhm_total_questions += 1
                 
