@@ -108,6 +108,16 @@ def main():
     if not QUESTION_BANK:
         st.error("Bank soal kosong. Pastikan folder 'soal' berisi JSON.")
         return
+
+    # DEBUG: Tampilkan statistik soal
+    st.write("=== DEBUG INFO ===")
+    st.write(f"Total soal: {len(QUESTION_BANK)}")
+    type_counts = {}
+    for q in QUESTION_BANK:
+        t = q.get("type", "TIDAK ADA TYPE")
+        type_counts[t] = type_counts.get(t, 0) + 1
+    st.write(f"Distribusi type: {type_counts}")
+    st.write("================")
     
     # Hitung NKHM saat ini
     nkhm_q, nkhm_total = get_current_nkhm()
