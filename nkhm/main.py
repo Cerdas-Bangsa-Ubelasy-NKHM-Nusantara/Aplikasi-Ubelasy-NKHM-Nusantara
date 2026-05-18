@@ -176,11 +176,31 @@ def main():
             )
         
         # Filter soal berdasarkan pilihan
-        filtered = [q for q in QUESTION_BANK 
-                    if (kategori == "✨ Semua" or 
-                        (kategori == "🇮🇩 Nasionalisme" and q.get("national", False)) or
-                        (kategori == "📚 Umum" and not q.get("national", False))) and
-                    (kecerdasan == "Semua" or q.get("type") == kecerdasan)]
+        filtered = []
+        for q in QUESTION_BANK:
+            # Filter berdasarkan Kategori (Semua / Nasionalisme / Umum)
+            if kategori == "✨ Semua":
+                kategori_ok = True
+            elif kategori == "🇮🇩 Nasionalisme":
+                kategori_ok = q.get("national", False)
+            else:  # "📚 Umum"
+                kategori_ok = not q.get("national", False)
+            
+            if not kategori_ok:
+                continue
+            
+            # Filter berdasarkan Fokus (Semua / IQ / EQ / SQ / AQ / Nasionalisme)
+            if kecerdasan == "Semua":
+                fokus_ok = True
+            elif kecerdasan == "Nasionalisme":
+                # Untuk opsi Nasionalisme, cari soal dengan national = True
+                fokus_ok = q.get("national", False)
+            else:
+                # Untuk IQ, EQ, SQ, AQ, cari berdasarkan type
+                fokus_ok = q.get("type") == kecerdasan
+            
+            if fokus_ok:
+                filtered.append(q)
         
         if not filtered:
             st.warning("Tidak ada soal dengan filter ini. Coba pilih filter lain!")
