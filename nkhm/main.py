@@ -22,8 +22,8 @@ def init_session_state():
     if "nkhm_ai_conversation" not in st.session_state:
         st.session_state.nkhm_ai_conversation = []
     # State untuk kuis
-    if "nkhm_current_q_index" not in st.session_state:
-        st.session_state.nkhm_current_q_index = None
+    if "nkhm_current_q" not in st.session_state:
+        st.session_state.nkhm_current_q = None
     if "nkhm_answered" not in st.session_state:
         st.session_state.nkhm_answered = False
     if "nkhm_current_filtered" not in st.session_state:
@@ -32,6 +32,8 @@ def init_session_state():
         st.session_state.nkhm_current_kategori = "✨ Semua"
     if "nkhm_current_kecerdasan" not in st.session_state:
         st.session_state.nkhm_current_kecerdasan = "Semua"
+    if "nkhm_feedback" not in st.session_state:
+        st.session_state.nkhm_feedback = None
 
 def main():
     init_session_state()
@@ -145,11 +147,9 @@ def main():
         st.markdown("---")
         
         if st.button("🚪 Keluar / Ganti Pengguna", use_container_width=True):
-            st.session_state.nkhm_user = ""
-            st.session_state.nkhm_scores = {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0}
-            st.session_state.nkhm_history = []
-            st.session_state.nkhm_total_questions = 0
-            st.session_state.nkhm_ai_conversation = []
+            for key in list(st.session_state.keys()):
+                if key.startswith("nkhm_"):
+                    del st.session_state[key]
             st.rerun()
     
     # ========== TAB UTAMA ==========
@@ -166,16 +166,16 @@ def main():
                 "Kategori", 
                 ["✨ Semua", "🇮🇩 Nasionalisme", "📚 Umum"], 
                 horizontal=True,
-                key="kategori_filter"
+                key="kategori_filter_kuis"
             )
         with col_f2:
             kecerdasan = st.selectbox(
                 "Fokus", 
                 ["Semua", "IQ", "EQ", "SQ", "AQ"],
-                key="kecerdasan_filter"
+                key="kecerdasan_filter_kuis"
             )
         
-        # Filter soal
+        # Filter soal berdasarkan pilihan
         filtered = [q for q in QUESTION_BANK 
                     if (kategori == "✨ Semua" or 
                         (kategori == "🇮🇩 Nasionalisme" and q.get("national", False)) or
@@ -185,25 +185,23 @@ def main():
         if not filtered:
             st.warning("Tidak ada soal dengan filter ini. Coba pilih filter lain!")
         else:
-            # Reset index jika filter berubah
+            # Reset jika filter berubah
             if (st.session_state.nkhm_current_kategori != kategori or 
                 st.session_state.nkhm_current_kecerdasan != kecerdasan):
-                st.session_state.nkhm_current_q_index = None
-                st.session_state.nkhm_answered = False
                 st.session_state.nkhm_current_kategori = kategori
                 st.session_state.nkhm_current_kecerdasan = kecerdasan
                 st.session_state.nkhm_current_filtered = filtered
+                st.session_state.nkhm_current_q = random.choice(filtered)
+                st.session_state.nkhm_answered = False
+                st.session_state.nkhm_feedback = None
             
-            # Simpan filtered ke session state
-            st.session_state.nkhm_current_filtered = filtered
-            
-            # Pilih soal acak jika belum ada
-            if st.session_state.nkhm_current_q_index is None:
-                st.session_state.nkhm_current_q_index = random.randint(0, len(filtered) - 1)
+            # Inisialisasi soal pertama jika belum ada
+            if st.session_state.nkhm_current_q is None:
+                st.session_state.nkhm_current_q = random.choice(filtered)
+                st.session_state.nkhm_current_filtered = filtered
             
             # Ambil soal saat ini
-            current_idx = st.session_state.nkhm_current_q_index
-            q = filtered[current_idx]
+            q = st.session_state.nkhm_current_q
             
             # Tampilkan soal
             st.markdown(f"### 📝 {q['text']}")
@@ -214,11 +212,11 @@ def main():
             else:
                 col_tag2.info("📚 Umum")
             
-            # Tampilkan pilihan jawaban
+            # Tampilkan pilihan jawaban (tanpa default)
             selected = st.radio(
                 "Pilih jawabanmu:", 
                 q['options'], 
-                key=f"radio_{current_idx}_{q['text']}",
+                key=f"radio_{q['text']}",
                 index=None,
                 disabled=st.session_state.nkhm_answered
             )
@@ -230,7 +228,7 @@ def main():
                 
                 if selected == q['correct']:
                     st.session_state.nkhm_scores[q['type']] = min(100, st.session_state.nkhm_scores[q['type']] + 10)
-                    st.success(f"✅ BENAR! +10 poin untuk {q['type']}")
+                    st.session_state.nkhm_feedback = "benar"
                     
                     # Simpan ke leaderboard
                     nkhm_baru = calculate_nkhm(
@@ -241,7 +239,7 @@ def main():
                     )
                     save_score(st.session_state.nkhm_user, nkhm_baru)
                 else:
-                    st.error(f"❌ SALAH! Jawaban benar: **{q['correct']}**")
+                    st.session_state.nkhm_feedback = "salah"
                 
                 # Simpan riwayat
                 st.session_state.nkhm_history.append({
@@ -258,22 +256,28 @@ def main():
                 })
                 st.rerun()
             
+            # Tampilkan feedback (setelah dijawab)
+            if st.session_state.nkhm_feedback == "benar":
+                st.success(f"✅ BENAR! +10 poin untuk {q['type']}")
+            elif st.session_state.nkhm_feedback == "salah":
+                st.error(f"❌ SALAH! Jawaban benar: **{q['correct']}**")
+            
             # Tombol navigasi setelah menjawab
             if st.session_state.nkhm_answered:
                 col_nav1, col_nav2 = st.columns(2)
                 with col_nav1:
                     if st.button("⏩ SOAL SELANJUTNYA", use_container_width=True):
-                        # Pilih index soal baru secara acak (bisa berbeda dari sebelumnya)
-                        new_idx = random.randint(0, len(filtered) - 1)
-                        st.session_state.nkhm_current_q_index = new_idx
+                        # Pilih soal baru dari filtered yang sama
+                        st.session_state.nkhm_current_q = random.choice(st.session_state.nkhm_current_filtered)
                         st.session_state.nkhm_answered = False
+                        st.session_state.nkhm_feedback = None
                         st.rerun()
                 with col_nav2:
                     if st.button("🎮 KUIS BARU", use_container_width=True):
-                        # Reset ke soal acak baru
-                        new_idx = random.randint(0, len(filtered) - 1)
-                        st.session_state.nkhm_current_q_index = new_idx
+                        # Reset filter dan pilih soal acak baru
+                        st.session_state.nkhm_current_q = random.choice(filtered)
                         st.session_state.nkhm_answered = False
+                        st.session_state.nkhm_feedback = None
                         st.rerun()
     
     # ========== TAB 2: DASHBOARD ==========
