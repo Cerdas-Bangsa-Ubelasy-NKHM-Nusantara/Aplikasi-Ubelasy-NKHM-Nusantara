@@ -171,7 +171,7 @@ def main():
         with col_f2:
             kecerdasan = st.selectbox(
                 "Fokus", 
-                ["Semua", "IQ", "EQ", "SQ", "AQ"],
+                ["Semua", "IQ", "EQ", "SQ", "AQ", "Nasionalisme"],
                 key="kecerdasan_filter_kuis"
             )
         
