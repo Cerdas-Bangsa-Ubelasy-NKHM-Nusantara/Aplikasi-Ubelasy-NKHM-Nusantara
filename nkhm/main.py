@@ -216,7 +216,22 @@ def main():
             
             if fokus_ok:
                 filtered.append(q)
-                        
+        
+        # ========== RESET STATE JIKA FILTER BERUBAH ==========
+        # Selalu reset ketika filter berubah (bukan hanya ketika berbeda)
+        if (st.session_state.nkhm_current_kategori != kategori or 
+            st.session_state.nkhm_current_kecerdasan != kecerdasan):
+            st.session_state.nkhm_current_kategori = kategori
+            st.session_state.nkhm_current_kecerdasan = kecerdasan
+            st.session_state.nkhm_current_filtered = filtered
+            # Pilih soal acak dari filtered yang baru
+            if filtered:
+                st.session_state.nkhm_current_q = random.choice(filtered)
+            else:
+                st.session_state.nkhm_current_q = None
+            st.session_state.nkhm_answered = False
+            st.session_state.nkhm_feedback = None
+            
         # DEBUG: Tampilkan hasil filter (opsional, bisa dihapus nanti)
         st.write(f"📊 Debug: Kategori={kategori}, Fokus={kecerdasan}, Soal ditemukan={len(filtered)}")
         
