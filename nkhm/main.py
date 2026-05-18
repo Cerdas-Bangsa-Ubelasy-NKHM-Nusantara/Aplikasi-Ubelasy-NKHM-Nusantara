@@ -238,18 +238,8 @@ def main():
         if not filtered:
             st.warning("Tidak ada soal dengan filter ini. Coba pilih filter lain!")
         else:
-            # Reset jika filter berubah
-            if (st.session_state.nkhm_current_kategori != kategori or 
-                st.session_state.nkhm_current_kecerdasan != kecerdasan):
-                st.session_state.nkhm_current_kategori = kategori
-                st.session_state.nkhm_current_kecerdasan = kecerdasan
-                st.session_state.nkhm_current_filtered = filtered
-                st.session_state.nkhm_current_q = random.choice(filtered)
-                st.session_state.nkhm_answered = False
-                st.session_state.nkhm_feedback = None
-            
-            # Inisialisasi soal pertama jika belum ada
-            if st.session_state.nkhm_current_q is None:
+            # Inisialisasi soal pertama jika belum ada atau current_q tidak valid
+            if st.session_state.nkhm_current_q is None or st.session_state.nkhm_current_q not in filtered:
                 st.session_state.nkhm_current_q = random.choice(filtered)
                 st.session_state.nkhm_current_filtered = filtered
             
