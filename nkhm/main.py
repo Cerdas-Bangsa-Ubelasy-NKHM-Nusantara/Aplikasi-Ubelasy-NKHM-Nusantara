@@ -82,6 +82,12 @@ def main():
     
     # ========== SETELAH LOGIN ==========
     QUESTION_BANK = load_all_questions()
+    # Inisialisasi state kuis (jika belum ada)
+    if "nkhm_current_q" not in st.session_state:
+    st.session_state.nkhm_current_q = None
+    if "nkhm_answered" not in st.session_state:
+    st.session_state.nkhm_answered = False
+
     if not QUESTION_BANK:
         st.error("Bank soal kosong. Pastikan folder 'soal' berisi JSON.")
         return
