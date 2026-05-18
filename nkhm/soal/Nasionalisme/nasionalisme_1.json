@@ -3,70 +3,70 @@
     "text": "Siapa yang membacakan teks proklamasi kemerdekaan Indonesia?",
     "options": ["Soekarno", "Moh Hatta", "Soekarno-Hatta", "Ahmad Soebarjo"],
     "correct": "Soekarno-Hatta",
-    "type": "IQ",
+    "type": "Nasionalisme",
     "national": true
   },
   {
     "text": "Hari Pahlawan diperingati setiap tanggal?",
     "options": ["10 November", "17 Agustus", "28 Oktober", "1 Juni"],
     "correct": "10 November",
-    "type": "IQ",
+    "type": "Nasionalisme",
     "national": true
   },
   {
     "text": "Sumpah Pemuda diikrarkan pada tahun?",
     "options": ["1928", "1945", "1908", "1930"],
     "correct": "1928",
-    "type": "IQ",
+    "type": "Nasionalisme",
     "national": true
   },
   {
     "text": "Lagu 'Indonesia Raya' pertama kali dikumandangkan pada?",
     "options": ["28 Oktober 1928", "17 Agustus 1945", "1 Juni 1945", "10 November 1945"],
     "correct": "28 Oktober 1928",
-    "type": "IQ",
+    "type": "Nasionalisme",
     "national": true
   },
   {
     "text": "Apa makna warna merah pada bendera Indonesia?",
     "options": ["Keberanian", "Kesucian", "Kemakmuran", "Persatuan"],
     "correct": "Keberanian",
-    "type": "SQ",
+    "type": "Nasionalisme",
     "national": true
   },
   {
     "text": "Apa makna warna putih pada bendera Indonesia?",
     "options": ["Kesucian", "Keberanian", "Kekuatan", "Kekayaan"],
     "correct": "Kesucian",
-    "type": "SQ",
+    "type": "Nasionalisme",
     "national": true
   },
   {
     "text": "Siapa tokoh yang dijuluk 'Bapak Proklamator'?",
     "options": ["Soekarno", "Moh Hatta", "Soekarno-Hatta", "Ahmad Soebarjo"],
     "correct": "Soekarno-Hatta",
-    "type": "IQ",
+    "type": "Nasionalisme",
     "national": true
   },
   {
     "text": "Organisasi pemuda yang melahirkan Sumpah Pemuda adalah?",
     "options": ["Budi Utomo", "Jong Java", "PPPKI", "Indische Partij"],
     "correct": "PPPKI",
-    "type": "IQ",
+    "type": "Nasionalisme",
     "national": true
   },
   {
     "text": "Siapa yang menciptakan lagu 'Indonesia Raya'?",
     "options": ["WR Supratman", "Ibu Sud", "Ismail Marzuki", "AT Mahmud"],
     "correct": "WR Supratman",
-    "type": "IQ",
+    "type": "Nasionalisme",
     "national": true
   },
   {
     "text": "Peristiwa apa yang terjadi pada 1 Juni 1945?",
     "options": ["Lahirnya Pancasila", "Proklamasi", "Sumpah Pemuda", "Hari Pahlawan"],
     "correct": "Lahirnya Pancasila",
-    "type": "IQ",
+    "type": "Nasionalisme",
     "national": true
   }
 ]
