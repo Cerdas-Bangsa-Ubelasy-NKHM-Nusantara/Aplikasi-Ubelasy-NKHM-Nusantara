@@ -156,10 +156,10 @@ def main():
             if fokus_ok:
                 filtered.append(q)
         
-        filter_berubah = (st.session_state.nkhm_current_kategori != kategori or 
+        filtered = (st.session_state.nkhm_current_kategori != kategori or 
                           st.session_state.nkhm_current_kecerdasan != kecerdasan)
         
-        if filter_berubah:
+        if filtered:
             st.session_state.nkhm_current_kategori = kategori
             st.session_state.nkhm_current_kecerdasan = kecerdasan
             st.session_state.nkhm_answered = False
@@ -176,10 +176,7 @@ def main():
                     st.session_state.nkhm_feedback = None
             elif filtered and st.session_state.nkhm_current_q is None:
                 st.session_state.nkhm_current_q = random.choice(filtered)
-        
-        # DEBUG (opsional)
-        st.write(f"📊 Debug: Kategori={kategori}, Fokus={kecerdasan}, Soal ditemukan={len(filtered)}, current_q valid={st.session_state.nkhm_current_q is not None and st.session_state.nkhm_current_q in filtered if st.session_state.nkhm_current_q else False}")
-        
+                
         if not filtered:
             st.warning("Tidak ada soal dengan filter ini. Coba pilih filter lain!")
         else:
