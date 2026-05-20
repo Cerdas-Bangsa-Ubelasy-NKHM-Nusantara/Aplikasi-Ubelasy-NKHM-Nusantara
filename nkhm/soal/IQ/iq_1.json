@@ -1,28 +1,23 @@
 [
-‎    {"text": "Siapa yang membacakan teks proklamasi kemerdekaan Indonesia?", 
-‎     "options": ["Soekarno", "Moh Hatta", "Soekarno-Hatta", "Ahmad Soebarjo"], 
-‎     "correct": "Soekarno-Hatta", "type": "IQ", "national": false},
-‎    {"text": "Siapa pencipta lagu 'Indonesia Raya'?", 
-‎     "options": ["WR Supratman", "Ibu Sud", "Ismail Marzuki", "AT Mahmud"], 
-‎     "correct": "WR Supratman", "type": "IQ", "national": false},
-‎    {"text": "Apa lambang negara Indonesia?", 
-‎     "options": ["Garuda Pancasila", "Banteng", "Padi dan Kapas", "Bintang"], 
-‎     "correct": "Garuda Pancasila", "type": "IQ", "national": false},
-‎    {"text": "Siapa presiden pertama Indonesia?", 
-‎     "options": ["Soeharto", "Soekarno", "BJ Habibie", "Megawati"], 
-‎     "correct": "Soekarno", "type": "IQ", "national": false},
-‎    {"text": "Pulau terbesar di Indonesia adalah?", 
-‎     "options": ["Jawa", "Sumatra", "Kalimantan", "Papua"], 
-‎     "correct": "Kalimantan", "type": "IQ", "national": false},
-‎    {"text": "Berapa hasil 15 x 6 + 30?", 
-‎     "options": ["100", "110", "120", "130"], 
-‎     "correct": "120", "type": "IQ", "national": False},
-‎    {"text": "Planet terdekat dengan Matahari adalah?", 
-‎     "options": ["Venus", "Merkurius", "Bumi", "Mars"], 
-‎     "correct": "Merkurius", "type": "IQ", "national": false},
-‎    {"text": "Hewan tercepat di darat adalah?", 
-‎     "options": ["Singa", "Cheetah", "Macan", "Kuda"], 
-‎     "correct": "Cheetah", "type": "IQ", "national": False},
+  {
+    "text": "Siapa presiden pertama Indonesia?",
+    "options": ["Soekarno", "Soeharto", "Habibie", "Megawati"],
+    "correct": "Soekarno",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "text": "Apa ibu kota Jawa Barat?",
+    "options": ["Bandung", "Surabaya", "Semarang", "Medan"],
+    "correct": "Bandung",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "text": "Soal IQ baru 1",
+    "options": ["Jawaban A", "Jawaban B", "Jawaban C", "Jawaban D"],
+    "correct": "Jawaban A",
+    "type": "IQ",
+    "national": false
   }
-  ]
-‎
+]
