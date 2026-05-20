@@ -168,6 +168,7 @@ def main():
                 st.session_state.nkhm_current_q = random.choice(filtered)
             else:
                 st.session_state.nkhm_current_q = None
+                st.warning("Tidak ada soal yang sesuai dengan filter ini. Silakan ubah filter.")
         else:
             if st.session_state.nkhm_current_q is not None and filtered:
                 if st.session_state.nkhm_current_q not in filtered:
