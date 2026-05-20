@@ -136,8 +136,8 @@ def main():
         with col_f2:
             kecerdasan = st.selectbox("Fokus", ["Semua", "IQ", "EQ", "SQ", "AQ", "Nasionalisme"], key="kecerdasan_filter_kuis")
         
-        # ========== FILTER SOAL DAN RESET STATE ==========
-        filtered = []
+        # ========== FILTER SOAL ==========
+        filtered_questions = []
         for q in QUESTION_BANK:
             if kategori == "✨ Semua":
                 kategori_ok = True
@@ -154,35 +154,37 @@ def main():
             else:
                 fokus_ok = q.get("type") == kecerdasan
             if fokus_ok:
-                filtered.append(q)
+                filtered_questions.append(q)
         
-        filtered = (st.session_state.nkhm_current_kategori != kategori or 
+        # ========== DETEKSI PERUBAHAN FILTER ==========
+        filter_berubah = (st.session_state.nkhm_current_kategori != kategori or 
                           st.session_state.nkhm_current_kecerdasan != kecerdasan)
         
-        if filtered:
+        if filter_berubah:
             st.session_state.nkhm_current_kategori = kategori
             st.session_state.nkhm_current_kecerdasan = kecerdasan
+            st.session_state.nkhm_current_filtered = filtered_questions
             st.session_state.nkhm_answered = False
             st.session_state.nkhm_feedback = None
-            if filtered:
-                st.session_state.nkhm_current_q = random.choice(filtered)
+            if filtered_questions:
+                st.session_state.nkhm_current_q = random.choice(filtered_questions)
             else:
                 st.session_state.nkhm_current_q = None
-                st.warning("Tidak ada soal yang sesuai dengan filter ini. Silakan ubah filter.")
         else:
-            if st.session_state.nkhm_current_q is not None and filtered:
-                if st.session_state.nkhm_current_q not in filtered:
-                    st.session_state.nkhm_current_q = random.choice(filtered)
-                    st.session_state.nkhm_answered = False
-                    st.session_state.nkhm_feedback = None
-            elif filtered and st.session_state.nkhm_current_q is None:
-                st.session_state.nkhm_current_q = random.choice(filtered)
-                
-        if not filtered:
+            if filtered_questions and (st.session_state.nkhm_current_q is None or 
+                                        st.session_state.nkhm_current_q not in filtered_questions):
+                st.session_state.nkhm_current_q = random.choice(filtered_questions)
+                st.session_state.nkhm_answered = False
+                st.session_state.nkhm_feedback = None
+            elif not filtered_questions:
+                st.session_state.nkhm_current_q = None
+        
+        # ========== TAMPILKAN SOAL ATAU PERINGATAN ==========
+        if not filtered_questions:
             st.warning("Tidak ada soal dengan filter ini. Coba pilih filter lain!")
         else:
             if st.session_state.nkhm_current_q is None:
-                st.session_state.nkhm_current_q = random.choice(filtered)
+                st.session_state.nkhm_current_q = random.choice(filtered_questions)
             q = st.session_state.nkhm_current_q
             
             st.markdown(f"### 📝 {q['text']}")
@@ -230,13 +232,19 @@ def main():
                 col_nav1, col_nav2 = st.columns(2)
                 with col_nav1:
                     if st.button("⏩ SOAL SELANJUTNYA", use_container_width=True):
-                        st.session_state.nkhm_current_q = random.choice(st.session_state.nkhm_current_filtered if st.session_state.nkhm_current_filtered else filtered)
+                        if st.session_state.nkhm_current_filtered:
+                            st.session_state.nkhm_current_q = random.choice(st.session_state.nkhm_current_filtered)
+                        else:
+                            st.session_state.nkhm_current_q = None
                         st.session_state.nkhm_answered = False
                         st.session_state.nkhm_feedback = None
                         st.rerun()
                 with col_nav2:
                     if st.button("🎮 KUIS BARU", use_container_width=True):
-                        st.session_state.nkhm_current_q = random.choice(filtered)
+                        if filtered_questions:
+                            st.session_state.nkhm_current_q = random.choice(filtered_questions)
+                        else:
+                            st.session_state.nkhm_current_q = None
                         st.session_state.nkhm_answered = False
                         st.session_state.nkhm_feedback = None
                         st.rerun()
