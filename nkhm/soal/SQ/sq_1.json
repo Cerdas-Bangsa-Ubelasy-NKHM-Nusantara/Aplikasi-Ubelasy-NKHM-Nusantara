@@ -1,71 +1,194 @@
 [
   {
-    "text": "Sila pertama Pancasila adalah?",
-    "options": ["Ketuhanan Yang Maha Esa", "Kemanusiaan", "Persatuan", "Kerakyatan"],
-    "correct": "Ketuhanan Yang Maha Esa",
+    "text": "Semua agama tujuannya adalah baik, agama artinya:",
+    "options": ["Kacau balau", "Tidak kacau balau", "Keyakinan", "Semangat Roh"],
+    "correct": "Keyakinan",
     "type": "SQ",
     "national": false
   },
   {
-    "text": "Bhinneka Tunggal Ika berarti?",
-    "options": ["Berbeda-beda tetap satu", "Satu untuk semua", "Bersatu kita teguh", "Damai sejahtera"],
-    "correct": "Berbeda-beda tetap satu",
+    "text": "Agama dan aliran kepercayaan yang dianut bangsa Indonesia ada berapa jenisnya?",
+    "options": ["5 agama dan 1 aliran kepercayaan", "4 agama dan 1 aliran kepercayaan", "3 agama dan 1 aliran kepercayaan", "6 agama dan 1 aliran kepercayaan"],
+    "correct": "6 agama dan 1 aliran kepercayaan",
     "type": "SQ",
     "national": false
   },
   {
-    "text": "Sikap terhadap teman yang berbeda agama adalah?",
-    "options": ["Menghormati", "Memaksa", "Menghina", "Menjauhi"],
-    "correct": "Menghormati",
+    "text": "Jumlah Nabi dari jaman dulu hingga jaman sekarang ada berapa jumlahnya?",
+    "options": ["22", "24", "23", "25"],
+    "correct": "25",
     "type": "SQ",
     "national": false
   },
   {
-    "text": "Apa inti dari toleransi beragama?",
-    "options": ["Memeluk semua agama", "Menghormati perbedaan", "Mengganti agama", "Mengabaikan keyakinan lain"],
-    "correct": "Menghormati perbedaan",
+    "text": "Hukum Tuhan yang utama dan terutama adalah:",
+    "options": ["Tidak ada Tuhan selain Allah", "Mengasihi Tuhan Allah dan mencintai sesama manusia", "Memperlakukan seperti sesama memperlakukan diri sendiri", "Berbelas kasihan kepada orang lain"],
+    "correct": "Mengasihi Tuhan Allah dan mencintai sesama manusia",
     "type": "SQ",
     "national": false
   },
   {
-    "text": "Sikap terbaik saat melihat orang beribadah berbeda keyakinan?",
-    "options": ["Mengganggu", "Menghormati", "Mengajak pindah agama", "Mengolok-olok"],
-    "correct": "Menghormati",
+    "text": "Isi semua jenis kitab suci pada masing-masing agama pada hakikatnya adalah sama yaitu mengajarkan tentang:",
+    "options": ["Tidak ada Tuhan selain Allah", "Mengasihi Tuhan Allah dan sesama manusia", "Memperlakukan seperti sesama memperlakukan diri sendiri", "Berbelas kasihan kepada orang lain"],
+    "correct": "Mengasihi Tuhan Allah dan sesama manusia",
     "type": "SQ",
     "national": false
   },
   {
-    "text": "Nilai-nilai ketuhanan dalam Pancasila mencerminkan?",
-    "options": ["Ateisme", "Sekularisme", "Ketuhanan yang berkebudayaan", "Komunisme"],
-    "correct": "Ketuhanan yang berkebudayaan",
+    "text": "Manusia pertama kali diciptakan Allah di taman Eden yaitu pada hari penciptaan hari yang ke:",
+    "options": ["Terakhir (tujuh)", "enam", "Pertama (satu)", "Lima"],
+    "correct": "enam",
     "type": "SQ",
     "national": false
   },
   {
-    "text": "Sikap yang sesuai dengan sila Kemanusiaan yang Adil dan Beradab?",
-    "options": ["Membeda-bedakan suku", "Menghormati hak asasi manusia", "Menindas yang lemah", "Acuh tak acuh"],
-    "correct": "Menghormati hak asasi manusia",
+    "text": "Hawa (perempuan) yang diciptakan Tuhan menjadi penolong yang sepadan bagi pasangannya Adam (laki-laki) diciptakan dari:",
+    "options": ["Tanah", "Mani udara", "Tulang rusuk Adam (laki-laki)", "daging Adam (laki-laki)"],
+    "correct": "Tulang rusuk Adam (laki-laki)",
     "type": "SQ",
     "national": false
   },
   {
-    "text": "Apa makna 'Ketuhanan Yang Maha Esa' dalam kehidupan sehari-hari?",
-    "options": ["Memaksakan keyakinan", "Bertakwa dan toleran", "Meninggalkan ibadah", "Mengabaikan Tuhan"],
-    "correct": "Bertakwa dan toleran",
+    "text": "Manusia pertama Adam dan Hawa, sejak jatuh ke dalam dosa mereka baru menyadari bahwa mereka telanjang, lalu mereka menutupi auratnya dengan dedaunan. Penyebab mereka terjerumus ke dalam dosa tersebut adalah karena:",
+    "options": ["Godaan Iblis", "Terjerat Nafsu keinginan hati", "memakan buah terlarang", "Melanggar perintah Tuhan"],
+    "correct": "Melanggar perintah Tuhan",
     "type": "SQ",
     "national": false
   },
   {
-    "text": "Sikap terbaik dalam keberagaman budaya Indonesia?",
-    "options": ["Menghargai dan melestarikan", "Menghapus budaya lain", "Menganggap budaya sendiri terbaik", "Acuh"],
-    "correct": "Menghargai dan melestarikan",
+    "text": "Untuk pemulihan manusia yang berdosa, harus ada atau melalui korban penebusan salah dan dosa, pertobatan dan memaafkan dosa dan kesalahan serta taat total pada kuasa perintah Allah, bagaimana menurut saudara:",
+    "options": ["Setuju", "benar", "Tidak setuju", "Salah"],
+    "correct": "Setuju",
     "type": "SQ",
     "national": false
   },
   {
-    "text": "Apa makna 'Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan'?",
-    "options": ["Kekuasaan rakyat dengan bijak", "Kekuasaan presiden mutlak", "Kekuasaan militer", "Anarki"],
-    "correct": "Kekuasaan rakyat dengan bijak",
+    "text": "Untuk mencapai tujuan Sorga kepada Allah harus ada atau melalui suatu jalan, hidup dan kebenaran, bagaimana pendapat saudara:",
+    "options": ["benar", "Setuju", "Salah", "Tidak setuju"],
+    "correct": "Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Dengan tingkat/radius kepercayaan dan keyakinan yang Saudara miliki apakah Saudara merasa sudah dekat atau paling dekat kepada Allah:",
+    "options": ["Ya", "Ya dan Tidak", "Tidak", "Tidak ada jawaban"],
+    "correct": "Ya",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Siapakah manusia pertama di muka bumi ini yang disebut sebagai 'Pemimpin pertama di bumi'?",
+    "options": ["Musa", "Abraham", "Yakub (Israel)", "Isa (Yesus)"],
+    "correct": "Abraham",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Semua perbuatan dosa di bawah ini menyebabkan akibat dosa terjadi di luar tubuh orang yang melakukannya, kecuali:",
+    "options": ["membunuh", "Berzinah", "Mencuri", "Berdusta"],
+    "correct": "Berdusta",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Bila memandang seseorang perempuan (wanita) cantik oleh seorang pria (laki-laki) lalu ingin memilikinya atau bila memandang seseorang laki-laki (pria) tampan oleh seorang wanita (perempuan) lalu ingin memilikinya, bagaimana menurut Anda pernyataan tersebut:",
+    "options": ["belum berdosa", "Sudah berdosa", "Berdosa", "Tidak apa-apa"],
+    "correct": "Sudah berdosa",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Bagaimana pendapat anda tentang 'orang yang bodoh' bila dilihat dari sudut pandang agama (pandangan Allah):",
+    "options": [
+      "Orang bodoh tetap tidak pintar",
+      "Orang bodoh yang dari Allah lebih besar hikmatnya dari manusia",
+      "Orang bodoh yang dari Allah adalah lemah",
+      "Orang bodoh adalah orang lemah"
+    ],
+    "correct": "Orang bodoh yang dari Allah lebih besar hikmatnya dari manusia",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Sebagai orang dalam memilih makanan dari segala jenis makanan yang ada, ada yang memakan makanan yang dipandang haram. Bagaimana menurut Anda:",
+    "options": [
+      "melarang orang tersebut untuk tidak memakan",
+      "Semua pohon-pohonan, hewan dan binatang yang diciptakan Tuhan ada yang haram dan yang halal",
+      "Semua ciptaan Tuhan adalah baik",
+      "Kalau mau makan harus memeriksa makanannya terlebih dahulu"
+    ],
+    "correct": "Semua ciptaan Tuhan adalah baik",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Bila Saudara mengetahui seorang teman anda telah melakukan sesuatu kesalahan yang dapat mendatangkan dosa, hal pertama yang harus Saudara lakukan adalah:",
+    "options": ["Membiarkannya", "Membawanya ke pihak yang berwajib", "Menegor dan menasehatinya secara 4 mata", "Menghardik dan memukulnya"],
+    "correct": "Menegor dan menasehatinya secara 4 mata",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Dari 10 perintah (hukum) Allah, perintah yang mengatur tentang hak dan milik seseorang yang menjadi dasar dari pembentukan undang-undang dan peraturan yang mengatur hubungan antar sesama mengenai hak dan milik adalah perintah (hukum) yang ke berapa dan mempunyai hubungan seri dengan perintah (hukum) yang ke berapa:",
+    "options": ["9 dan 7", "10 dan 7", "9 dan 6", "10 dan 6"],
+    "correct": "10 dan 6",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Tanda-tanda akhir jaman adalah seperti di bawah ini, kecuali:",
+    "options": ["Huru hara dan perang disana sini", "penting diri sendiri", "Bintang bintang dan bulan berguguran", "kawin dan mengawinkan"],
+    "correct": "kawin dan mengawinkan",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Bila hari terhenti terjadi, apakah kehidupan selanjutnya?",
+    "options": [
+      "Hidup seperti biasanya",
+      "Akan ada langit yang baru dan orang mati akan bangkit dan orang hidup akan terangkat ke angkasa",
+      "tetap langit seperti dulu, tetapi orang mati akan bangkit dan orang hidup akan terangkat ke angkasa",
+      "Kehidupan yang berbeda di langit yang baru"
+    ],
+    "correct": "Akan ada langit yang baru dan orang mati akan bangkit dan orang hidup akan terangkat ke angkasa",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Percayakah Saudara bila pasti akan ada hari pemberhentian, dan apa maksud rencana hari pemberhentian tersebut:",
+    "options": [
+      "Percayalah, untuk kehidupan yang lebih sejahtera hanya bagi umat beragama yang mayoritas.",
+      "Percayalah, untuk kehidupan yang lebih sejahtera bagi seluruh umat manusia.",
+      "Tidak percaya, karena mendatangkan bahaya dan kesusahan",
+      "Tidak percaya, karena tak ada manfaatnya"
+    ],
+    "correct": "Percayalah, untuk kehidupan yang lebih sejahtera bagi seluruh umat manusia.",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Setiap manusia tidak luput dari pencobaan, mengapa ada pencobaan yang dialami dalam hidup, disebabkan oleh karena apa?",
+    "options": ["Pencobaan datangnya dari Tuhan", "Pencobaan dari Iblis", "karena ulah perbuatan manusia itu sendiri", "Karena hukum karma"],
+    "correct": "karena ulah perbuatan manusia itu sendiri",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Di dunia ini ada beberapa aliran kepahaman keTuhanan, paham yang menyebutkan adanya satu Tuhan disebut:",
+    "options": ["Atheis", "Politheis", "Monoteis", "Teolog"],
+    "correct": "Monoteis",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "text": "Pada sebagian orang yang mengalami spiritualnya ada begitu banyak hal yang terjadi dalam kehidupannya, mengapa hal demikian terjadi:",
+    "options": [
+      "Orang tersebut orang saleh",
+      "Adanya bimbingan Roh yang Kudus",
+      "Orang tersebut suka berhayal dan berilusi",
+      "Sudah bawaan dari lahir"
+    ],
+    "correct": "Adanya bimbingan Roh yang Kudus",
     "type": "SQ",
     "national": false
   }
