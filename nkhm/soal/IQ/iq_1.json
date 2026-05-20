@@ -1,4 +1,4 @@
-‎QUESTION_BANK = [
+[
 ‎    {"text": "Siapa yang membacakan teks proklamasi kemerdekaan Indonesia?", 
 ‎     "options": ["Soekarno", "Moh Hatta", "Soekarno-Hatta", "Ahmad Soebarjo"], 
 ‎     "correct": "Soekarno-Hatta", "type": "IQ", "national": false},
