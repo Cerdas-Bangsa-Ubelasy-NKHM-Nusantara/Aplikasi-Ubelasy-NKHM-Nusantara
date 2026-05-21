@@ -1,0 +1,74 @@
+[
+  {
+    "text": "Saya telah banyak belajar tentang diri saya sendiri dengan mendengarkan perasaan saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran diri emosi"
+  },
+  {
+    "text": "Saya bisa mengatakan kapan saya menjadi marah.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran diri emosi"
+  },
+  {
+    "text": "Bila saya sedih, saya tahu preferensi.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran diri emosi"
+  },
+  {
+    "text": "Saya cenderung menghakimi diri sendiri dengan pola pikir orang lain tentang saya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran diri emosi"
+  },
+  {
+    "text": "Saya menikmati kehidupan emosi saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Ekspresi emosi"
+  },
+  {
+    "text": "Orang yang sering menunjukkan emosi yang kuat membuatku takut.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Ekspresi emosi"
+  },
+  {
+    "text": "Saya sering ingin menjadi orang lain.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Ekspresi emosi"
+  },
+  {
+    "text": "Saya memperhatikan keadaan fisik saya untuk memahami perasaan saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran emosi terhadap orang lain"
+  },
+  {
+    "text": "Saya menerima perasaan saya sebagaimana adanya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran emosi terhadap orang lain"
+  }
+]
