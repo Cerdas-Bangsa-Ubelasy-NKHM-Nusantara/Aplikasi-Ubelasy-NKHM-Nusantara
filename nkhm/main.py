@@ -198,35 +198,76 @@ def main():
             
             selected = st.radio("Pilih jawabanmu:", q['options'], key=f"radio_{q['text']}", index=None, disabled=st.session_state.nkhm_answered)
             
-            if st.button("✅ JAWAB", disabled=st.session_state.nkhm_answered or selected is None, use_container_width=True):
-                st.session_state.nkhm_answered = True
-                st.session_state.nkhm_total_questions += 1
-                score_type = q['type'] if q['type'] == "Nasionalisme" else q['type']
-                st.session_state.last_score_type = score_type
-                if selected == q['correct']:
-                    new_score = min(100, st.session_state.nkhm_scores[score_type] + 10)
-                    st.session_state.nkhm_scores[score_type] = new_score
-                    st.session_state.nkhm_feedback = "benar"
-                    _, nkhm_total_baru = get_current_nkhm()
-                    save_score(st.session_state.nkhm_user, nkhm_total_baru)
-                else:
-                    st.session_state.nkhm_feedback = "salah"
-                nkhm_q_now, nkhm_total_now = get_current_nkhm()
-                st.session_state.nkhm_history.append({
-                    "timestamp": datetime.now().strftime("%H:%M:%S"),
-                    "question": q['text'][:50],
-                    "type": score_type,
-                    "correct": selected == q['correct'],
-                    "nkhm_q": nkhm_q_now,
-                    "nkhm_total": nkhm_total_now
-                })
-                st.rerun()
+            # Tombol JAWAB
+if st.button("✅ JAWAB", disabled=st.session_state.nkhm_answered or selected is None, use_container_width=True):
+    st.session_state.nkhm_answered = True
+    st.session_state.nkhm_total_questions += 1
+    
+    # ========== PENANGANAN KHUSUS UNTUK SOAL EQ SKALA ==========
+    if q.get("type") == "EQ_scale":
+        # Soal skor tanggapan: nilai langsung dari pilihan (0-3)
+        skor_tambahan = int(selected)
+        skor_baru = st.session_state.nkhm_scores["EQ"] + skor_tambahan
+        st.session_state.nkhm_scores["EQ"] = min(100, skor_baru)
+        st.session_state.nkhm_feedback = "scale_answered"
+        st.session_state.last_score_type = "EQ (skala)"
+        # Simpan riwayat (opsional)
+        st.session_state.nkhm_history.append({
+            "timestamp": datetime.now().strftime("%H:%M:%S"),
+            "question": q['text'][:50],
+            "type": "EQ_scale",
+            "correct": f"Skor {skor_tambahan}",
+            "nkhm_total": get_current_nkhm()[1]
+        })
+    else:
+        # ========== PENANGANAN SOAL PILIHAN GANDA (IQ, EQ biasa, SQ, AQ, Nasionalisme) ==========
+        # Tentukan tipe skor yang akan ditambah
+        if q['type'] == "Nasionalisme":
+            score_type = "Nasionalisme"
+        elif q['type'] == "EQ":
+            score_type = "EQ"
+        else:
+            score_type = q['type']
+        
+        st.session_state.last_score_type = score_type
+        
+        if selected == q['correct']:
+            new_score = min(100, st.session_state.nkhm_scores[score_type] + 10)
+            st.session_state.nkhm_scores[score_type] = new_score
+            st.session_state.nkhm_feedback = "benar"
             
-            if st.session_state.nkhm_feedback == "benar":
-                fb_type = st.session_state.get("last_score_type", "kecerdasan")
-                st.success(f"✅ BENAR! +10 poin untuk {fb_type}")
-            elif st.session_state.nkhm_feedback == "salah":
-                st.error(f"❌ SALAH! Jawaban benar: **{q['correct']}**")
+            # Hitung ulang NKHM_Total untuk leaderboard
+            _, nkhm_total_baru = get_current_nkhm()
+            save_score(st.session_state.nkhm_user, nkhm_total_baru)
+        else:
+            st.session_state.nkhm_feedback = "salah"
+        
+        # Simpan riwayat
+        nkhm_q_now, nkhm_total_now = get_current_nkhm()
+        st.session_state.nkhm_history.append({
+            "timestamp": datetime.now().strftime("%H:%M:%S"),
+            "question": q['text'][:50],
+            "type": score_type,
+            "correct": selected == q['correct'],
+            "nkhm_q": nkhm_q_now,
+            "nkhm_total": nkhm_total_now
+            
+    
+    st.rerun()
+
+# Tampilkan feedback (setelah dijawab)
+if st.session_state.nkhm_feedback == "benar":
+    fb_type = st.session_state.get("last_score_type", "kecerdasan")
+    st.success(f"✅ BENAR! +10 poin untuk {fb_type}")
+elif st.session_state.nkhm_feedback == "salah":
+    # Ambil jawaban benar dari soal (hanya untuk tipe biasa)
+    if q.get('correct'):
+        st.error(f"❌ SALAH! Jawaban benar: **{q['correct']}**")
+    else:
+        st.error(f"❌ Jawaban salah.")
+elif st.session_state.nkhm_feedback == "scale_answered":
+    st.success(f"✅ Skor {selected} ditambahkan ke EQ (skala)")
+        })
             
             if st.session_state.nkhm_answered:
                 col_nav1, col_nav2 = st.columns(2)
