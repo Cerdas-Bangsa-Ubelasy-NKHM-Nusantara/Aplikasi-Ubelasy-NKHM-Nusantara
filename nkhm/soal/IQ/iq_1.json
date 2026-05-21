@@ -154,7 +154,7 @@
     "national": false
   },
   {
-    "text": "Jika suatu susunan angka yang diberikan 2, 2, 6, 3, 5 dan 7, jika terjadi keanehan pada susunan angka tersebut maka keduanya akan naik 1 angka (bertambah 1), maka susunan angka yang baru urutan ke tiga berikutnya adalah:",
+    "text": "Jika suatu susunan angka yang diberikan 2, 2, 6, 3, 5 dan 7, jika terjadi keanehan pada susunan angka tersebut maka urutan angka keduanya akan naik 1 angka (bertambah 1), maka susunan angka yang baru urutan ke tiga berikutnya adalah:",
     "options": ["5, 3, 9, 6 dan 10", "2, 3, 9, 6 dan 10", "5, 5, 9, 6 dan 10", "5, 3, 9, 3 dan 7"],
     "correct": "5, 3, 9, 6 dan 10",
     "type": "IQ",
