@@ -1,0 +1,42 @@
+[
+  {
+    "text": "Saya menyelesaikan tugas yang saya mulai sampai tuntas.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Intensionalitas"
+  },
+  {
+    "text": "Saya sering mencari ide-ide baru untuk memecahkan masalah.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Kreativitas"
+  },
+  {
+    "text": "Saya tetap tegar meskipun menghadapi kegagalan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketangguhan"
+  },
+  {
+    "text": "Saya mudah beradaptasi dengan orang baru di lingkungan saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Hubungan antar pribadi"
+  },
+  {
+    "text": "Saya mampu menyampaikan ketidakpuasan dengan cara yang membangun.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketidakpuasan konstruktif"
+  }
+]
