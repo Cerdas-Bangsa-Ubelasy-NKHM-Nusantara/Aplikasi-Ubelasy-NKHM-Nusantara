@@ -1,1 +1,50 @@
-
+[
+  {
+    "text": "Saya tergerak untuk membantu orang yang sedang kesulitan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Belas kasihan"
+  },
+  {
+    "text": "Saya selalu berusaha melihat masalah dari sudut pandang positif.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Sudut pandang"
+  },
+  {
+    "text": "Saya sering bisa menebak apa yang akan terjadi sebelum orang lain menyadarinya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Intuisi"
+  },
+  {
+    "text": "Orang-orang percaya bahwa saya dapat diandalkan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Radius kepercayaan"
+  },
+  {
+    "text": "Saya bertanggung jawab atas tindakan saya sendiri.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Daya pribadi"
+  },
+  {
+    "text": "Saya konsisten antara ucapan dan perbuatan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Integritas"
+  }
+]
