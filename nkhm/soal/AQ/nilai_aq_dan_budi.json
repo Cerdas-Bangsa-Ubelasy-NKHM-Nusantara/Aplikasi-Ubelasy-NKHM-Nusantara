@@ -1,5 +1,85 @@
 [
   {
+    "text": "Saya bertindak sesuka hati dalam bergaul dengan orang lain.",
+    "options": ["0", "1", "2", "3"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Nilai-nilai AQ dan Budi"
+  },
+  {
+    "text": "Saya akan segera meninggalkan kesibukan saya guna membantu orang lain yang membutuhkan bantuan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Nilai-nilai AQ dan Budi"
+  },
+  {
+    "text": "Ketika berhasil mengerjakan sesuatu, saya sering merasa hasilnya kurang baik lalu mengerjakannya kembali.",
+    "options": ["0", "1", "2", "3"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Nilai-nilai AQ dan Budi"
+  },
+  {
+    "text": "Saya menyukai perilaku saya yang ada.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Nilai-nilai AQ dan Budi"
+  },
+  {
+    "text": "Bila tekad sudah bulat, saya langsung melaksanakannya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Nilai-nilai AQ dan Budi"
+  },
+  {
+    "text": "Saya ingin teman-teman saya menghormati saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Nilai-nilai AQ dan Budi"
+  },
+  {
+    "text": "Saya dapat membuat sesuatu terjadi dengan segala macam cara.",
+    "options": ["0", "1", "2", "3"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Nilai-nilai AQ dan Budi"
+  },
+  {
+    "text": "Kalau saya memikirkan hidup saya, saya mungkin menemukan bahwa saya adalah seorang yang berperilaku jahat.",
+    "options": ["0", "1", "2", "3"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Nilai-nilai AQ dan Budi"
+  },
+  {
+    "text": "Saya seorang yang jujur.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Nilai-nilai AQ dan Budi"
+  },
+  {
+    "text": "Saya tahu kemampuan saya terbatas untuk memperoleh kesempatan yang lebih.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Nilai-nilai AQ dan Budi"
+  },
+  {
     "text": "Saya memiliki prinsip hidup yang kuat dalam menghadapi kesulitan.",
     "options": ["3", "2", "1", "0"],
     "type": "AQ_scale",
