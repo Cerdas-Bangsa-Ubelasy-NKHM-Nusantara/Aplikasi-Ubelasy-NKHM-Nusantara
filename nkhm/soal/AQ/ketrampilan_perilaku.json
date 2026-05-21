@@ -1,0 +1,66 @@
+[
+  {
+    "text": "Saya mengharapkan ketidakseimbangan dari pekerjaan bila setelahnya pekerjaan itu selesai saya kerjakan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Ketrampilan Perilaku"
+  },
+  {
+    "text": "Saya tidak mau menunda pekerjaan itu, tugas itu harus selesai, bila saya harus demikian.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Ketrampilan Perilaku"
+  },
+  {
+    "text": "Saya menerima tanggung jawab atas pekerjaan yang diemban.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Ketrampilan Perilaku"
+  },
+  {
+    "text": "Saya suka menjadi problem solver, bila ada masalah saya suka mengurusinya selekas mungkin.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Ketrampilan Perilaku"
+  },
+  {
+    "text": "Saya berperan serta dalam berbagai pekerjaan di lingkungan bidang pekerjaan saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Ketrampilan Perilaku"
+  },
+  {
+    "text": "Saya tidak kerasan menunggu antrian dengan sabar bila harus demikian.",
+    "options": ["0", "1", "2", "3"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Ketrampilan Perilaku"
+  },
+  {
+    "text": "Saya mengandalkan diri sendiri dibanding mengandalkan teman-teman dalam masa-masa sulit.",
+    "options": ["0", "1", "2", "3"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Ketrampilan Perilaku"
+  },
+  {
+    "text": "Bila melontarkan komentar yang kritis, saya fokus perhatian pada orangnya, bukan pada perilakunya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Ketrampilan Perilaku"
+  }
+]
