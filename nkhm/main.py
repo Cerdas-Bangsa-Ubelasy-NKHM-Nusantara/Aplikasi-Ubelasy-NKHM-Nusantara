@@ -139,39 +139,35 @@ def main():
         # ========== FILTER SOAL ==========
         filtered_questions = []
         for q in QUESTION_BANK:
-            # ========== LOGIKA KHUSUS UNTUK FOKUS NASIONALISME ==========
-            # Jika fokus adalah "Nasionalisme", abaikan filter kategori (tampilkan semua soal nasional)
+            # Logika khusus untuk fokus Nasionalisme: abaikan filter kategori
             if kecerdasan == "Nasionalisme":
-                # Hanya tampilkan soal yang memiliki national = True
                 if q.get("national", False):
                     filtered_questions.append(q)
-                continue  # Lewati filter kategori dan fokus lainnya
-    
-            # ========== FILTER BERDASARKAN KATEGORI (untuk fokus selain Nasionalisme) ==========
+                continue
+            
+            # Filter berdasarkan Kategori
             if kategori == "✨ Semua":
                 kategori_ok = True
             elif kategori == "🇮🇩 Nasionalisme":
                 kategori_ok = q.get("national", False)
             else:  # "📚 Umum"
                 kategori_ok = not q.get("national", False)
-    
+            
             if not kategori_ok:
                 continue
-    
-            # ========== FILTER BERDASARKAN FOKUS ==========
+            
+            # Filter berdasarkan Fokus
             if kecerdasan == "Semua":
                 fokus_ok = True
             elif kecerdasan == "Nasionalisme":
-                # Sudah ditangani di atas, tapi untuk jaga-jaga
                 fokus_ok = q.get("national", False)
             elif kecerdasan == "EQ":
-                # Untuk EQ, sertakan baik type "EQ" maupun "EQ_scale"
                 fokus_ok = q.get("type") in ["EQ", "EQ_scale"]
             elif kecerdasan == "AQ":
                 fokus_ok = q.get("type") in ["AQ", "AQ_scale"]
             else:
                 fokus_ok = q.get("type") == kecerdasan
-    
+            
             if fokus_ok:
                 filtered_questions.append(q)
         
@@ -215,8 +211,8 @@ def main():
             else:
                 col_tag2.info("📚 Umum")
             
-            # Tampilkan bagian dan skala untuk soal EQ_scale
-            if q.get("type") == "EQ_scale":
+            # Tampilkan bagian dan skala untuk soal EQ_scale atau AQ_scale
+            if q.get("type") in ["EQ_scale", "AQ_scale"]:
                 if q.get("section") and q.get("scale"):
                     st.caption(f"📂 **{q['section']}** — *{q['scale']}*")
                 st.info(
@@ -225,17 +221,11 @@ def main():
                     "- **3** = Setuju sekali\n"
                     "- **2** = Setuju\n"
                     "- **1** = Kurang setuju\n"
-                    "- **0** = Tidak setuju sekali",
-            elif q.get("type") == "AQ_scale":
-                skor_tambahan = int(selected)
-                skor_baru = st.session_state.nkhm_scores["AQ"] + skor_tambahan
-                st.session_state.nkhm_scores["AQ"] = min(100, skor_baru)
-                st.session_state.nkhm_feedback = "scale_answered"
-                st.session_state.last_score_type = "AQ (skala)"
+                    "- **0** = Tidak setuju sekali"
                 )
             
             # Tentukan label radio
-            radio_label = "Pilih jawabanmu:" if q.get("type") != "EQ_scale" else "Pilih skor tanggapan:"
+            radio_label = "Pilih jawabanmu:" if q.get("type") not in ["EQ_scale", "AQ_scale"] else "Pilih skor tanggapan:"
             
             selected = st.radio(radio_label, q['options'], key=f"radio_{q['text']}", index=None, disabled=st.session_state.nkhm_answered)
             
@@ -244,26 +234,34 @@ def main():
                 st.session_state.nkhm_answered = True
                 st.session_state.nkhm_total_questions += 1
                 
-                if q.get("type") == "EQ_scale":
-                    # Soal skor tanggapan: nilai langsung dari pilihan (0-3)
+                if q.get("type") in ["EQ_scale", "AQ_scale"]:
+                    # Soal skor tanggapan
                     skor_tambahan = int(selected)
-                    skor_baru = st.session_state.nkhm_scores["EQ"] + skor_tambahan
-                    st.session_state.nkhm_scores["EQ"] = min(100, skor_baru)
+                    if q.get("type") == "EQ_scale":
+                        skor_baru = st.session_state.nkhm_scores["EQ"] + skor_tambahan
+                        st.session_state.nkhm_scores["EQ"] = min(100, skor_baru)
+                        st.session_state.last_score_type = "EQ (skala)"
+                    else:  # AQ_scale
+                        skor_baru = st.session_state.nkhm_scores["AQ"] + skor_tambahan
+                        st.session_state.nkhm_scores["AQ"] = min(100, skor_baru)
+                        st.session_state.last_score_type = "AQ (skala)"
+                    
                     st.session_state.nkhm_feedback = "scale_answered"
-                    st.session_state.last_score_type = "EQ (skala)"
                     st.session_state.nkhm_history.append({
                         "timestamp": datetime.now().strftime("%H:%M:%S"),
                         "question": q['text'][:50],
-                        "type": "EQ_scale",
+                        "type": q.get("type"),
                         "correct": f"Skor {skor_tambahan}",
                         "nkhm_total": get_current_nkhm()[1]
                     })
                 else:
-                    # Soal pilihan ganda (IQ, EQ biasa, SQ, AQ, Nasionalisme)
+                    # Soal pilihan ganda (IQ, EQ biasa, SQ, AQ biasa, Nasionalisme)
                     if q['type'] == "Nasionalisme":
                         score_type = "Nasionalisme"
                     elif q['type'] == "EQ":
                         score_type = "EQ"
+                    elif q['type'] == "AQ":
+                        score_type = "AQ"
                     else:
                         score_type = q['type']
                     
@@ -300,7 +298,7 @@ def main():
                 else:
                     st.error("❌ Jawaban salah.")
             elif st.session_state.nkhm_feedback == "scale_answered":
-                st.success(f"✅ Skor {selected} ditambahkan ke EQ (skala)")
+                st.success(f"✅ Skor {selected} ditambahkan ke {st.session_state.last_score_type}")
             
             # Tombol navigasi setelah menjawab
             if st.session_state.nkhm_answered:
