@@ -1,0 +1,42 @@
+[
+  {
+    "text": "Saya dapat mengelola stres dengan baik dalam situasi tekanan tinggi.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Kecakapan Perilaku"
+  },
+  {
+    "text": "Saya tetap optimis meskipun menghadapi kegagalan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Kecakapan Perilaku"
+  },
+  {
+    "text": "Saya mencari solusi kreatif ketika menghadapi hambatan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Kecakapan Perilaku"
+  },
+  {
+    "text": "Saya mudah beradaptasi dengan perubahan yang tidak terduga.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Kecakapan Perilaku"
+  },
+  {
+    "text": "Saya belajar dari kesalahan masa lalu untuk memperbaiki masa depan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "AQ_scale",
+    "national": false,
+    "section": "Kecerdasan AQ",
+    "scale": "Kecakapan Perilaku"
+  }
+]
