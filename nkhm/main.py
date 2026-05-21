@@ -167,6 +167,8 @@ def main():
             elif kecerdasan == "EQ":
                 # Untuk EQ, sertakan baik type "EQ" maupun "EQ_scale"
                 fokus_ok = q.get("type") in ["EQ", "EQ_scale"]
+            elif kecerdasan == "AQ":
+                fokus_ok = q.get("type") in ["AQ", "AQ_scale"]
             else:
                 fokus_ok = q.get("type") == kecerdasan
     
@@ -223,7 +225,13 @@ def main():
                     "- **3** = Setuju sekali\n"
                     "- **2** = Setuju\n"
                     "- **1** = Kurang setuju\n"
-                    "- **0** = Tidak setuju sekali"
+                    "- **0** = Tidak setuju sekali",
+            elif q.get("type") == "AQ_scale":
+                skor_tambahan = int(selected)
+                skor_baru = st.session_state.nkhm_scores["AQ"] + skor_tambahan
+                st.session_state.nkhm_scores["AQ"] = min(100, skor_baru)
+                st.session_state.nkhm_feedback = "scale_answered"
+                st.session_state.last_score_type = "AQ (skala)"
                 )
             
             # Tentukan label radio
