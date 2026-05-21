@@ -5,7 +5,7 @@
     "type": "EQ_scale",
     "national": false,
     "section": "Ketrampilan Emosi",
-    "scale": "Kesadaran diri emosi"
+    "scale": "Kesadaran emosi diri"
   },
   {
     "text": "Saya bisa mengatakan kapan saya menjadi marah.",
@@ -13,7 +13,7 @@
     "type": "EQ_scale",
     "national": false,
     "section": "Ketrampilan Emosi",
-    "scale": "Kesadaran diri emosi"
+    "scale": "Kesadaran emosi diri"
   },
   {
     "text": "Bila saya sedih, saya tahu preferensi.",
@@ -21,7 +21,7 @@
     "type": "EQ_scale",
     "national": false,
     "section": "Ketrampilan Emosi",
-    "scale": "Kesadaran diri emosi"
+    "scale": "Kesadaran emosi diri"
   },
   {
     "text": "Saya cenderung menghakimi diri sendiri dengan pola pikir orang lain tentang saya.",
@@ -29,7 +29,7 @@
     "type": "EQ_scale",
     "national": false,
     "section": "Ketrampilan Emosi",
-    "scale": "Kesadaran diri emosi"
+    "scale": "Kesadaran emosi diri"
   },
   {
     "text": "Saya menikmati kehidupan emosi saya.",
@@ -37,7 +37,7 @@
     "type": "EQ_scale",
     "national": false,
     "section": "Ketrampilan Emosi",
-    "scale": "Ekspresi emosi"
+    "scale": "Kesadaran emosi diri"
   },
   {
     "text": "Orang yang sering menunjukkan emosi yang kuat membuatku takut.",
@@ -45,7 +45,7 @@
     "type": "EQ_scale",
     "national": false,
     "section": "Ketrampilan Emosi",
-    "scale": "Ekspresi emosi"
+    "scale": "Kesadaran emosi diri"
   },
   {
     "text": "Saya sering ingin menjadi orang lain.",
@@ -53,7 +53,7 @@
     "type": "EQ_scale",
     "national": false,
     "section": "Ketrampilan Emosi",
-    "scale": "Ekspresi emosi"
+    "scale": "Kesadaran emosi diri"
   },
   {
     "text": "Saya memperhatikan keadaan fisik saya untuk memahami perasaan saya.",
@@ -61,10 +61,154 @@
     "type": "EQ_scale",
     "national": false,
     "section": "Ketrampilan Emosi",
-    "scale": "Kesadaran emosi terhadap orang lain"
+    "scale": "Kesadaran emosi diri"
   },
   {
     "text": "Saya menerima perasaan saya sebagaimana adanya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran emosi diri"
+  },
+  {
+    "text": "Saya mengungkapkan emosi saya meskipun emosi itu negatif.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Ekspresi emosi"
+  },
+  {
+    "text": "Teman dekat saya akan mengatakan bahwa saya mengungkapkan penghargaan terhadap mereka.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Ekspresi emosi"
+  },
+  {
+    "text": "Saya menyimpan perasaan bagi saya sendiri.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Ekspresi emosi"
+  },
+  {
+    "text": "Saya membiarkan orang lain mengetahui bila ada perasaan tidak enak yang mengganggu pekerjaan kami.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Ekspresi emosi"
+  },
+  {
+    "text": "Saya sulit meminta bantuan kepada orang lain saat saya memerlukan bantuan.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Ekspresi emosi"
+  },
+  {
+    "text": "Dalam berinteraksi dengan orang lain, saya dapat merasakan perasaan mereka.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Ekspresi emosi"
+  },
+  {
+    "text": "Saya akan melakukan apa saja agar tidak terlihat bodoh di depan teman-teman saya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Ekspresi emosi"
+  },
+  {
+    "text": "Saya merasa sulit berbicara dengan orang yang tidak satu sudut pandang dengan saya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran emosi terhadap orang lain"
+  },
+  {
+    "text": "Saya jarang terdorong untuk menghibur orang lain.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran emosi terhadap orang lain"
+  },
+  {
+    "text": "Saya berpikir tentang perasaan orang lain sebelum mengungkapkan pandangan saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran emosi terhadap orang lain"
+  },
+  {
+    "text": "Saya tidak peduli dengan siapa saya berbincang, saya selalu menjadi pendengar yang baik.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran emosi terhadap orang lain"
+  },
+  {
+    "text": "Saya dapat merasakan suasana hati suatu kelompok ketika saya masuk ruangan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran emosi terhadap orang lain"
+  },
+  {
+    "text": "Saya dapat membuat orang yang baru saya kenal berbicara tentang mereka sendiri.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran emosi terhadap orang lain"
+  },
+  {
+    "text": "Saya ahli membaca yang tersirat ketika seseorang berbicara.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran emosi terhadap orang lain"
+  },
+  {
+    "text": "Saya biasanya dapat mengetahui bagaimana perasaan orang lain terhadap saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran emosi terhadap orang lain"
+  },
+  {
+    "text": "Saya dapat mengetahui perasaan seseorang meskipun ia tidak berbicara.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran emosi terhadap orang lain"
+  },
+  {
+    "text": "Saya mengubah ekspresi emosi saya tergantung dengan siapa saya menghadap.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Ketrampilan Emosi",
+    "scale": "Kesadaran emosi terhadap orang lain"
+  },
+  {
+    "text": "Saya dapat mengetahui bila orang yang dekat dengan saya sedang kesal.",
     "options": ["3", "2", "1", "0"],
     "type": "EQ_scale",
     "national": false,
