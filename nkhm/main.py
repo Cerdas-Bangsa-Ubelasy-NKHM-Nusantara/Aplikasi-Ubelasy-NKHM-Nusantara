@@ -35,6 +35,11 @@ def init_session_state():
         st.session_state.nkhm_feedback = None
     if "last_score_type" not in st.session_state:
         st.session_state.last_score_type = ""
+        # Inisialisasi ulang jika belum ada (untuk menghindari error)
+    if "nkhm_current_kategori" not in st.session_state:
+        st.session_state.nkhm_current_kategori = "✨ Semua"
+    if "nkhm_current_kecerdasan" not in st.session_state:
+        st.session_state.nkhm_current_kecerdasan = "Semua"
 
 def get_current_nkhm():
     scores = st.session_state.nkhm_scores
@@ -138,23 +143,32 @@ def main():
         
         # ========== FILTER SOAL ==========
         filtered_questions = []
-        for q in QUESTION_BANK:
-            if kategori == "✨ Semua":
-                kategori_ok = True
-            elif kategori == "🇮🇩 Nasionalisme":
-                kategori_ok = q.get("national", False)
-            else:
-                kategori_ok = not q.get("national", False)
-            if not kategori_ok:
-                continue
-            if kecerdasan == "Semua":
-                fokus_ok = True
-            elif kecerdasan == "Nasionalisme":
-                fokus_ok = q.get("type") == "Nasionalisme"
-            else:
-                fokus_ok = q.get("type") == kecerdasan
-            if fokus_ok:
-                filtered_questions.append(q)
+        # ========== FILTER SOAL ==========
+filtered_questions = []
+for q in QUESTION_BANK:
+    # Filter berdasarkan Kategori
+    if kategori == "✨ Semua":
+        kategori_ok = True
+    elif kategori == "🇮🇩 Nasionalisme":
+        kategori_ok = q.get("national", False)
+    else:  # "📚 Umum"
+        kategori_ok = not q.get("national", False)
+    if not kategori_ok:
+        continue
+    
+    # Filter berdasarkan Fokus
+    if kecerdasan == "Semua":
+        fokus_ok = True
+    elif kecerdasan == "Nasionalisme":
+        fokus_ok = q.get("type") == "Nasionalisme"
+    elif kecerdasan == "EQ":
+        # Soal EQ bisa bertipe "EQ" (pilihan ganda) atau "EQ_scale" (skor tanggapan)
+        fokus_ok = q.get("type") in ["EQ", "EQ_scale"]
+    else:
+        fokus_ok = q.get("type") == kecerdasan
+    
+    if fokus_ok:
+        filtered_questions.append(q)
         
         # ========== DETEKSI PERUBAHAN FILTER ==========
         filter_berubah = (st.session_state.nkhm_current_kategori != kategori or 
