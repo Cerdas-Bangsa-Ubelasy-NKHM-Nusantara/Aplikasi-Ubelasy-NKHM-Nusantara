@@ -72,7 +72,7 @@
   {
     "text": "Dengan tingkat/radius kepercayaan dan keyakinan yang Saudara miliki apakah Saudara merasa sudah dekat atau paling dekat kepada Allah:",
     "options": ["Ya", "Ya dan Tidak", "Tidak", "Tidak ada jawaban"],
-    "correct": "Ya",
+    "correct": "Tidak ada jawaban",
     "type": "SQ",
     "national": false
   },
