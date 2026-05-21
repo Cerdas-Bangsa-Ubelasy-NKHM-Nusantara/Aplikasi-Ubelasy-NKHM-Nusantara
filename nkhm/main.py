@@ -158,11 +158,11 @@ for q in QUESTION_BANK:
     
     # Filter berdasarkan Fokus
     if kecerdasan == "Semua":
-        fokus_ok = True
+    fokus_ok = True
     elif kecerdasan == "Nasionalisme":
         fokus_ok = q.get("type") == "Nasionalisme"
     elif kecerdasan == "EQ":
-        # Soal EQ bisa bertipe "EQ" (pilihan ganda) atau "EQ_scale" (skor tanggapan)
+        # Untuk EQ, sertakan baik type "EQ" maupun "EQ_scale"
         fokus_ok = q.get("type") in ["EQ", "EQ_scale"]
     else:
         fokus_ok = q.get("type") == kecerdasan
