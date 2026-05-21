@@ -142,7 +142,7 @@
   {
     "text": "Jika susunan angka yang diberikan 1, 2, 3 dan 4, susunan angka yang baru adalah melewati satu angka dari angka terakhir susunan sebelumnya dan semua susunan angka disusun berurut, maka angka pada susunan ketiga urutan kedua adalah angka:",
     "options": ["14", "12", "11", "13"],
-    "correct": "13",
+    "correct": "14",
     "type": "IQ",
     "national": false
   },
