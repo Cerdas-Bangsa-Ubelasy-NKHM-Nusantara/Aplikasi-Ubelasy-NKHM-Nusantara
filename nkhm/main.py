@@ -139,27 +139,37 @@ def main():
         # ========== FILTER SOAL ==========
         filtered_questions = []
         for q in QUESTION_BANK:
-            # Filter berdasarkan Kategori
+            # ========== LOGIKA KHUSUS UNTUK FOKUS NASIONALISME ==========
+            # Jika fokus adalah "Nasionalisme", abaikan filter kategori (tampilkan semua soal nasional)
+            if kecerdasan == "Nasionalisme":
+                # Hanya tampilkan soal yang memiliki national = True
+                if q.get("national", False):
+                    filtered_questions.append(q)
+                continue  # Lewati filter kategori dan fokus lainnya
+    
+            # ========== FILTER BERDASARKAN KATEGORI (untuk fokus selain Nasionalisme) ==========
             if kategori == "✨ Semua":
                 kategori_ok = True
             elif kategori == "🇮🇩 Nasionalisme":
                 kategori_ok = q.get("national", False)
             else:  # "📚 Umum"
                 kategori_ok = not q.get("national", False)
+    
             if not kategori_ok:
                 continue
-            
-            # Filter berdasarkan Fokus
+    
+            # ========== FILTER BERDASARKAN FOKUS ==========
             if kecerdasan == "Semua":
                 fokus_ok = True
             elif kecerdasan == "Nasionalisme":
-                fokus_ok = q.get("type") == "Nasionalisme"
+                # Sudah ditangani di atas, tapi untuk jaga-jaga
+                fokus_ok = q.get("national", False)
             elif kecerdasan == "EQ":
                 # Untuk EQ, sertakan baik type "EQ" maupun "EQ_scale"
                 fokus_ok = q.get("type") in ["EQ", "EQ_scale"]
             else:
                 fokus_ok = q.get("type") == kecerdasan
-            
+    
             if fokus_ok:
                 filtered_questions.append(q)
         
