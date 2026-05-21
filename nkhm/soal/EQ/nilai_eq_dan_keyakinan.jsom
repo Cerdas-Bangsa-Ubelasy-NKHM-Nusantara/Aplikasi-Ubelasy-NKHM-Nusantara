@@ -1,6 +1,6 @@
 [
   {
-    "text": "Saya tergerak untuk membantu orang yang sedang kesulitan.",
+    "text": "Saya dapat membaca emosi orang lain dari bahasa tubuh mereka.",
     "options": ["3", "2", "1", "0"],
     "type": "EQ_scale",
     "national": false,
@@ -8,7 +8,79 @@
     "scale": "Belas kasihan"
   },
   {
-    "text": "Saya selalu berusaha melihat masalah dari sudut pandang positif.",
+    "text": "Saya tidak akan ragu meninggalkan kesibukan saya guna membantu orang yang kesulitan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Belas kasihan"
+  },
+  {
+    "text": "Saya menjelaskan perasaan orang lain dalam berinteraksi dengan mereka.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Belas kasihan"
+  },
+  {
+    "text": "Saya dapat menempatkan diri dalam kedudukan orang lain.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Belas kasihan"
+  },
+  {
+    "text": "Ada beberapa orang yang tidak akan pernah saya maafkan.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Belas kasihan"
+  },
+  {
+    "text": "Saya dapat memaafkan diri sendiri karena tidak sempurna.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Belas kasihan"
+  },
+  {
+    "text": "Ketika berhasil mengerjakan sesuatu, saya sering merasa sebenarnya bisa lebih baik.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Belas kasihan"
+  },
+  {
+    "text": "Saya membantu orang lain menjaga harga dirinya di dalam suatu situasi sulit.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Belas kasihan"
+  },
+  {
+    "text": "Saya terus mencemaskan kekurangan-kekurangan saya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Belas kasihan"
+  },
+  {
+    "text": "Saya iri kepada orang lain yang lebih mampu daripada saya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Belas kasihan"
+  },
+  {
+    "text": "Saya mencintai hidup saya.",
     "options": ["3", "2", "1", "0"],
     "type": "EQ_scale",
     "national": false,
@@ -16,7 +88,39 @@
     "scale": "Sudut pandang"
   },
   {
-    "text": "Saya sering bisa menebak apa yang akan terjadi sebelum orang lain menyadarinya.",
+    "text": "Saya percaya segala sesuatu akan membaik dengan sendirinya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Sudut pandang"
+  },
+  {
+    "text": "Saya terus merasa frustasi dalam hidup ini karena banyak orang yang ingkar janji.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Sudut pandang"
+  },
+  {
+    "text": "Saya melihat tantangan sebagai peluang untuk belajar.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Sudut pandang"
+  },
+  {
+    "text": "Di bawah tekanan, saya percaya akan mendapatkan sebuah pemecahan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Sudut pandang"
+  },
+  {
+    "text": "Firasat saya biasanya benar.",
     "options": ["3", "2", "1", "0"],
     "type": "EQ_scale",
     "national": false,
@@ -24,7 +128,63 @@
     "scale": "Intuisi"
   },
   {
-    "text": "Orang-orang percaya bahwa saya dapat diandalkan.",
+    "text": "Saya dapat melihat produk atau gambaran akhir meskipun saat ini belum selesai.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Intuisi"
+  },
+  {
+    "text": "Saya percaya dengan mimpi saya meskipun orang lain tidak dapat melihat atau memahaminya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Intuisi"
+  },
+  {
+    "text": "Ketika dihadapkan dengan pilihan yang sulit, saya ikuti kata hati saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Intuisi"
+  },
+  {
+    "text": "Begitu telah membulatkan tekad, saya jarang memodifikasinya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Intuisi"
+  },
+  {
+    "text": "Orang mengatakan bahwa saya dapat meramal.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Intuisi"
+  },
+  {
+    "text": "Ketika seseorang menyampaikan pandangan yang berbeda dari saya, saya sulit menerimanya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Intuisi"
+  },
+  {
+    "text": "Saya menyalurkan dorongan hati ketika mengambil keputusan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Intuisi"
+  },
+  {
+    "text": "Saya percaya sampai saya mempunyai alasan untuk tidak demikian.",
     "options": ["3", "2", "1", "0"],
     "type": "EQ_scale",
     "national": false,
@@ -32,7 +192,87 @@
     "scale": "Radius kepercayaan"
   },
   {
-    "text": "Saya bertanggung jawab atas tindakan saya sendiri.",
+    "text": "Saya menghormati teman-teman saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Radius kepercayaan"
+  },
+  {
+    "text": "Orang yang setara dengan saya di perusahaan saya mendapatkan yang lebih baik (misalnya kenaikan gaji, promosi, peluang) dari pada saya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Radius kepercayaan"
+  },
+  {
+    "text": "Orang-orang yang menjadi rekan kerja saya dapat dipercaya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Radius kepercayaan"
+  },
+  {
+    "text": "Rasanya saya tidak dapat berbuat banyak.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Radius kepercayaan"
+  },
+  {
+    "text": "Sedikit sekali dalam hidup ini yang adil atau layak.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Radius kepercayaan"
+  },
+  {
+    "text": "Ketika ada sesuatu yang tidak beres, saya mencoba mengatasinya dengan rencana alternatif.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Radius kepercayaan"
+  },
+  {
+    "text": "Ketika bertemu dengan orang baru, sedikit sekali informasi pribadi yang saya ungkapkan kepada mereka.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Radius kepercayaan"
+  },
+  {
+    "text": "Nasib memainkan peranan yang penting dalam hidup saya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Daya pribadi"
+  },
+  {
+    "text": "Keadaan sudah di luar kendali saya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Daya pribadi"
+  },
+  {
+    "text": "Saya membutuhkan pengakuan dari orang lain untuk menjadikan karya saya terasa berharga.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Daya pribadi"
+  },
+  {
+    "text": "Saya mudah menyukai sesuatu.",
     "options": ["3", "2", "1", "0"],
     "type": "EQ_scale",
     "national": false,
@@ -40,8 +280,112 @@
     "scale": "Daya pribadi"
   },
   {
-    "text": "Saya konsisten antara ucapan dan perbuatan.",
+    "text": "Saya sulit menerima pujian.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Daya pribadi"
+  },
+  {
+    "text": "Saya mempunyai kemampuan mendapatkan apa yang saya inginkan.",
     "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Daya pribadi"
+  },
+  {
+    "text": "Saya merasa dapat mengendalikan hidup saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Daya pribadi"
+  },
+  {
+    "text": "Kalau saya mempertimbangkan hidup saya, saya mungkin menemukan bahwa pada dasarnya saya tidak berbahagia.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Daya pribadi"
+  },
+  {
+    "text": "Saya merasa takut dan lepas kendali jika segala sesuatunya terjadi berubah dengan cepat.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Daya pribadi"
+  },
+  {
+    "text": "Saya senang dan bertanggung jawab atas sesuatu.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Daya pribadi"
+  },
+  {
+    "text": "Saya tahu apa yang saya inginkan setelah ini.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Daya pribadi"
+  },
+  {
+    "text": "Saya merasa seperti seorang penipu.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Integritas"
+  },
+  {
+    "text": "Pekerjaan saya adalah perpanjangan dari sistem nilai pribadi saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Integritas"
+  },
+  {
+    "text": "Saya tidak pernah berbohong.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Integritas"
+  },
+  {
+    "text": "Saya dapat menerima meskipun situasi tidak terpercaya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Integritas"
+  },
+  {
+    "text": "Saya memperluas kemampuan saya agar dapat memperoleh kesempatan yang lebih baik.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Integritas"
+  },
+  {
+    "text": "Saya berterus terang meskipun saya menghadapi kesulitan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Nilai EQ dan Keyakinan",
+    "scale": "Integritas"
+  },
+  {
+    "text": "Saya telah mengerjakan sesuatu dalam pekerjaan saya yang berbeda dengan keyakinan saya.",
+    "options": ["0", "1", "2", "3"],
     "type": "EQ_scale",
     "national": false,
     "section": "Nilai EQ dan Keyakinan",
