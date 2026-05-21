@@ -184,12 +184,12 @@
   {
     "text": "Bila dua buah angka 4 dan 2 dihubungkan secara seri dan dua buah angka lainnya 3 dan 1 dihubungkan secara seri juga, maka total penjumlahan dari hubungan seri kedua bagian elemen (angka) tersebut akan sama dengan:",
     "options": ["2", "10/24", "10", "24/10"],
-    "correct": "10/24",
+    "correct": "10",
     "type": "IQ",
     "national": false
   },
   {
-    "text": "Pada soal sebelumnya (27), bila dihubungkan secara paralel, maka jumlah total dari hubungan paralel kedua bagian elemen (angka) tersebut akan sama dengan:",
+    "text": "Pada soal sebelumnya (), Dua buah angka 4 dan 2 dihubungkan secara seri, dan dua buah angka lainnya 3 dan 1 dihubungkan secara seri juga, bila keduanya dihubungkan secara paralel, maka jumlah total dari hubungan paralel kedua bagian elemen (angka) tersebut akan sama dengan:",
     "options": ["2", "10/24", "10", "24/10"],
     "correct": "24/10",
     "type": "IQ",
