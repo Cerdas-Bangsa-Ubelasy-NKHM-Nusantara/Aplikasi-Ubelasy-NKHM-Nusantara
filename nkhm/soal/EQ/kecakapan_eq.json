@@ -1,6 +1,6 @@
 [
   {
-    "text": "Saya menyelesaikan tugas yang saya mulai sampai tuntas.",
+    "text": "Saya menyelesaikan hampir semua yang saya mulai.",
     "options": ["3", "2", "1", "0"],
     "type": "EQ_scale",
     "national": false,
@@ -8,7 +8,87 @@
     "scale": "Intensionalitas"
   },
   {
-    "text": "Saya sering mencari ide-ide baru untuk memecahkan masalah.",
+    "text": "Saya tahu cara menghargai diri sendiri setelah meraih suatu sasaran.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Intensionalitas"
+  },
+  {
+    "text": "Saya dapat mengorbankan kedamaian jangka pendek demi sasaran jangka panjang.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Intensionalitas"
+  },
+  {
+    "text": "Saya dapat memusatkan perhatian saya pada suatu tugas sampai selesai bila saya harus demikian.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Intensionalitas"
+  },
+  {
+    "text": "Saya mengerjakan hal-hal yang belakangan saya sesali.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Intensionalitas"
+  },
+  {
+    "text": "Saya menerima tanggung jawab atas pengelolaan emosi saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Intensionalitas"
+  },
+  {
+    "text": "Ketika dihadapkan dengan suatu masalah, saya suka mengurusinya selekas mungkin.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Intensionalitas"
+  },
+  {
+    "text": "Saya berpikir tentang apa yang saya inginkan sebelum bertindak.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Intensionalitas"
+  },
+  {
+    "text": "Bila suasana hati saya sedang jelek, saya dapat berdialog dengan diri sendiri.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Intensionalitas"
+  },
+  {
+    "text": "Saya marah jika dikritik.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Intensionalitas"
+  },
+  {
+    "text": "Saya sering tidak mengetahui penyebab kemarahan saya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Intensionalitas"
+  },
+  {
+    "text": "Saya ikut serta dalam berbagai informasi dan gagasan.",
     "options": ["3", "2", "1", "0"],
     "type": "EQ_scale",
     "national": false,
@@ -16,7 +96,63 @@
     "scale": "Kreativitas"
   },
   {
-    "text": "Saya tetap tegar meskipun menghadapi kegagalan.",
+    "text": "Gagasan terbaik saya muncul ketika saya tidak sedang memikirkannya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Kreativitas"
+  },
+  {
+    "text": "Saya mempunyai gagasan cemerlang baik yang berupa kilasan maupun yang tampak secara utuh.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Kreativitas"
+  },
+  {
+    "text": "Saya memiliki penginderaan yang baik mengenai kapan suatu gagasan akan berhasil atau gagal.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Kreativitas"
+  },
+  {
+    "text": "Saya tergerak oleh konsep-konsep yang baru dan tidak lazim.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Kreativitas"
+  },
+  {
+    "text": "Saya telah menerapkan proyek-proyek inovatif di perusahaan saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Kreativitas"
+  },
+  {
+    "text": "Saya tergerak oleh gagasan-gagasan dan solusi-solusi baru.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Kreativitas"
+  },
+  {
+    "text": "Saya ahli dalam menggodok pemecahan masalah sampai menghasilkan sejumlah pilihan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Kreativitas"
+  },
+  {
+    "text": "Selalu ada lebih dari satu jawaban yang benar.",
     "options": ["3", "2", "1", "0"],
     "type": "EQ_scale",
     "national": false,
@@ -24,7 +160,79 @@
     "scale": "Ketangguhan"
   },
   {
-    "text": "Saya mudah beradaptasi dengan orang baru di lingkungan saya.",
+    "text": "Saya tahu cara memuaskan seluruh bagian dalam diri saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketangguhan"
+  },
+  {
+    "text": "Saya bukan orang yang suka menangguhkan suatu pekerjaan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketangguhan"
+  },
+  {
+    "text": "Saya takut mencoba lagi bila sudah gagal dalam pekerjaan yang sama.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketangguhan"
+  },
+  {
+    "text": "Saya memutuskan bahwa masalah tertentu tidak berharga untuk dicemaskan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketangguhan"
+  },
+  {
+    "text": "Saya menyantaikan diri bila mulai tegang.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketangguhan"
+  },
+  {
+    "text": "Saya dapat melihat sisi humor suatu situasi.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketangguhan"
+  },
+  {
+    "text": "Saya sering menyampaikan terlebih dahulu suatu masalah untuk mendapatkan perspektif yang lebih baik.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketangguhan"
+  },
+  {
+    "text": "Saat menghadapi suatu masalah, saya memusatkan perhatian pada yang dapat saya buat untuk memecahkannya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketangguhan"
+  },
+  {
+    "text": "Saya merasa tidak nyaman bila seseorang terlalu dekat secara emosional dengan saya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Hubungan antar pribadi"
+  },
+  {
+    "text": "Saya banyak menumbuhkan rasa sayang kepada teman-temanku.",
     "options": ["3", "2", "1", "0"],
     "type": "EQ_scale",
     "national": false,
@@ -32,11 +240,139 @@
     "scale": "Hubungan antar pribadi"
   },
   {
-    "text": "Saya mampu menyampaikan ketidakpuasan dengan cara yang membangun.",
+    "text": "Jika ada masalah, saya tahu harus pergi kemana dan harus berbuat apa untuk memecahkannya.",
     "options": ["3", "2", "1", "0"],
     "type": "EQ_scale",
     "national": false,
     "section": "Kecakapan EQ",
-    "scale": "Ketidakpuasan konstruktif"
+    "scale": "Hubungan antar pribadi"
+  },
+  {
+    "text": "Keyakinan dan nilai-nilai yang saya anut menuntun tindakan saya sehari-hari.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Hubungan antar pribadi"
+  },
+  {
+    "text": "Keluarga saya selalu siap bila saya membutuhkan mereka.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Hubungan antar pribadi"
+  },
+  {
+    "text": "Saya ragu tentang apakah teman-teman sungguh peduli kepada saya sebagai pribadi.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Hubungan antar pribadi"
+  },
+  {
+    "text": "Saya sulit mendapatkan teman.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Hubungan antar pribadi"
+  },
+  {
+    "text": "Saya hampir tidak pernah menangis.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Hubungan antar pribadi"
+  },
+  {
+    "text": "Saya tidak akan mengungkapkan perasaan saya jika saya yakin bahwa itu akan menimbulkan perbedaan pendapat.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketidakpuasan Konstruktif"
+  },
+  {
+    "text": "Saya tetap tenang bahkan dalam situasi yang membuat orang lain marah.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketidakpuasan Konstruktif"
+  },
+  {
+    "text": "Lebih baik tidak membuat masalah bila saya dapat menghindarinya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketidakpuasan Konstruktif"
+  },
+  {
+    "text": "Saya merasa sulit mencapai kata sepakat dengan rekan-rekan pekerjaan saya.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketidakpuasan Konstruktif"
+  },
+  {
+    "text": "Saya mencari umpan balik dari rekan kerja saya mengenai kinerja saya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketidakpuasan Konstruktif"
+  },
+  {
+    "text": "Saya ahli dalam mengorganisasi dan memotivasi seluruh kelompok.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketidakpuasan Konstruktif"
+  },
+  {
+    "text": "Saya senang menghadapi tantangan dan pemecahan masalah dalam pekerjaan.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketidakpuasan Konstruktif"
+  },
+  {
+    "text": "Saya mendengarkan kritik dengan pikiran terbuka dan menerima bila dapat diterima.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketidakpuasan Konstruktif"
+  },
+  {
+    "text": "Saya membiarkan masalah mencapai titik kritis sebelum mengambil tindakan.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketidakpuasan Konstruktif"
+  },
+  {
+    "text": "Bila melontarkan komentar yang kritis, saya fokus perhatian pada perilaku bukan pada orangnya.",
+    "options": ["3", "2", "1", "0"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketidakpuasan Konstruktif"
+  },
+  {
+    "text": "Saya menghindari konfrontasi.",
+    "options": ["0", "1", "2", "3"],
+    "type": "EQ_scale",
+    "national": false,
+    "section": "Kecakapan EQ",
+    "scale": "Ketidakpuasan Konstruktif"
   }
 ]
