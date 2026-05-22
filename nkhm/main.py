@@ -16,6 +16,8 @@ from nkhm.ai_assistant import get_ai_response
 from nkhm.leaderboard import show_leaderboard, save_score
 from nkhm.tutorial import show_tutorial
 from nkhm.battle import show_battle
+from nkhm.tournament import show_tournament
+# import show_tournament_simple jika kamu membuat fallback
 
 # ========== INISIALISASI SESSION STATE ==========
 def init_session_state():
@@ -460,11 +462,24 @@ def main():
     
     # ========== TAB 4: TANDING ==========
     with tab4:
-        show_battle()
-    
+        # Opsi untuk memilih mode tanding
+        tanding_mode = st.radio(
+            "Pilih Mode Tanding:",
+            ["⚔️ Mode 1v1 (Hot Seat)", "🏆 Mode Turnamen Kelas"],
+            horizontal=True,
+            key="tanding_mode"
+        )
+        if tanding_mode == "⚔️ Mode 1v1 (Hot Seat)":
+            show_battle()  # Mode hot seat yang sudah ada
+        else:
+            show_tournament()  # Mode turnamen baru
+
     # ========== TAB 5: TUTORIAL ==========
     with tab5:
+        # Panggil fungsi tutorial interaktif yang sudah kita buat
+        from nkhm.tutorial import show_tutorial
         show_tutorial()
+        # Jika belum selesai, bisa menggunakan show_tutorial_simple() sebagai placeholder
 
 if __name__ == "__main__":
     main()
