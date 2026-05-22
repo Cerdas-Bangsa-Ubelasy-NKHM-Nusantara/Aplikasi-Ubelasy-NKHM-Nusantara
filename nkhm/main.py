@@ -8,7 +8,9 @@ from datetime import datetime
 from nkhm.questions import load_all_questions
 from nkhm.scoring import (
     MAX_SCORE, get_increment, get_column_index, calculate_section_value,
-    calculate_nkhm_q, calculate_nkhm_total, get_nkhm_level
+    calculate_nkhm_q, calculate_nkhm_total, get_nkhm_level,
+    get_normalized_score,
+    MAX_POIN_IQ, MAX_POIN_EQ, MAX_POIN_SQ, MAX_POIN_AQ, MAX_POIN_NASIONALISME
 )
 from nkhm.ai_assistant import get_ai_response
 from nkhm.leaderboard import show_leaderboard, save_score
@@ -25,7 +27,6 @@ def init_session_state():
         st.session_state.nkhm_total_questions = 0
     if "nkhm_ai_conversation" not in st.session_state:
         st.session_state.nkhm_ai_conversation = []
-    # State untuk kuis
     if "nkhm_current_q" not in st.session_state:
         st.session_state.nkhm_current_q = None
     if "nkhm_answered" not in st.session_state:
@@ -40,7 +41,7 @@ def init_session_state():
         st.session_state.nkhm_feedback = None
     if "last_score_type" not in st.session_state:
         st.session_state.last_score_type = ""
-    # State untuk skor tanggapan (EQ dan AQ)
+    # State untuk skor tanggapan (EQ dan AQ) dalam poin mentah
     if "eq_scale_total" not in st.session_state:
         st.session_state.eq_scale_total = 0
     if "aq_scale_total" not in st.session_state:
@@ -54,26 +55,25 @@ def init_session_state():
     if "current_scale_type" not in st.session_state:
         st.session_state.current_scale_type = None
 
-# ========== FUNGSI UNTUK MENDAPATKAN NILAI FINAL EQ/AQ ==========
-def get_final_eq_score():
-    eq_pg = st.session_state.nkhm_scores.get("EQ", 0)
-    eq_scale = st.session_state.eq_scale_total
-    final = (eq_pg + eq_scale) / 2
-    return min(MAX_SCORE, final)
-
-def get_final_aq_score():
-    aq_pg = st.session_state.nkhm_scores.get("AQ", 0)
-    aq_scale = st.session_state.aq_scale_total
-    final = (aq_pg + aq_scale) / 2
-    return min(MAX_SCORE, final)
-
+# ========== FUNGSI UNTUK MENDAPATKAN NILAI PERSENTASE FINAL ==========
 def get_current_nkhm():
-    scores = st.session_state.nkhm_scores
-    eq_final = get_final_eq_score()
-    aq_final = get_final_aq_score()
-    nkhm_q = calculate_nkhm_q(scores["IQ"], eq_final, scores["SQ"], aq_final)
-    nkhm_total = calculate_nkhm_total(nkhm_q, scores["Nasionalisme"])
-    return nkhm_q, nkhm_total, eq_final, aq_final
+    """Menghitung NKHM_Q, NKHM_Total, dan nilai persentase semua kecerdasan"""
+    raw = st.session_state.nkhm_scores
+    
+    # Hitung total raw points untuk EQ dan AQ (PG + skala)
+    eq_raw_total = raw["EQ"] + st.session_state.eq_scale_total
+    aq_raw_total = raw["AQ"] + st.session_state.aq_scale_total
+    
+    # Konversi ke persentase (0-100)
+    iq_pct = get_normalized_score(raw["IQ"], MAX_POIN_IQ)
+    eq_pct = get_normalized_score(eq_raw_total, MAX_POIN_EQ)
+    sq_pct = get_normalized_score(raw["SQ"], MAX_POIN_SQ)
+    aq_pct = get_normalized_score(aq_raw_total, MAX_POIN_AQ)
+    nas_pct = get_normalized_score(raw["Nasionalisme"], MAX_POIN_NASIONALISME)
+    
+    nkhm_q = calculate_nkhm_q(iq_pct, eq_pct, sq_pct, aq_pct)
+    nkhm_total = calculate_nkhm_total(nkhm_q, nas_pct)
+    return nkhm_q, nkhm_total, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct
 
 # ========== MAIN ==========
 def main():
@@ -109,7 +109,7 @@ def main():
         st.error("Bank soal kosong. Pastikan folder 'soal' berisi JSON.")
         return
     
-    # DEBUG (bisa dihapus setelah semua beres)
+    # DEBUG (bisa dihapus nanti)
     with st.expander("🔧 Debug Info (klik untuk lihat)"):
         st.write(f"Total soal: {len(QUESTION_BANK)}")
         type_counts = {}
@@ -118,7 +118,7 @@ def main():
             type_counts[t] = type_counts.get(t, 0) + 1
         st.write(f"Distribusi type: {type_counts}")
     
-    nkhm_q, nkhm_total, eq_final, aq_final = get_current_nkhm()
+    nkhm_q, nkhm_total, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct = get_current_nkhm()
     nkhm_level, _ = get_nkhm_level(nkhm_total)
     
     # ========== SIDEBAR ==========
@@ -128,12 +128,12 @@ def main():
         st.markdown(f"### 📊 NKHM_Q: {nkhm_q:.2f}")
         st.markdown(f"*Level: {nkhm_level}*")
         st.progress(min(nkhm_total/100, 1.0))
-        st.markdown("### 📊 Skor")
-        st.progress(st.session_state.nkhm_scores["IQ"]/100, text=f"IQ: {st.session_state.nkhm_scores['IQ']:.1f}")
-        st.progress(eq_final/100, text=f"EQ: {eq_final:.1f}")
-        st.progress(st.session_state.nkhm_scores["SQ"]/100, text=f"SQ: {st.session_state.nkhm_scores['SQ']:.1f}")
-        st.progress(aq_final/100, text=f"AQ: {aq_final:.1f}")
-        st.progress(st.session_state.nkhm_scores["Nasionalisme"]/100, text=f"Nasionalisme: {st.session_state.nkhm_scores['Nasionalisme']:.1f}")
+        st.markdown("### 📊 Skor (0-100)")
+        st.progress(iq_pct/100, text=f"IQ: {iq_pct:.1f}")
+        st.progress(eq_pct/100, text=f"EQ: {eq_pct:.1f}")
+        st.progress(sq_pct/100, text=f"SQ: {sq_pct:.1f}")
+        st.progress(aq_pct/100, text=f"AQ: {aq_pct:.1f}")
+        st.progress(nas_pct/100, text=f"Nasionalisme: {nas_pct:.1f}")
         
         col1, col2 = st.columns(2)
         col1.metric("📖 Total Soal", st.session_state.nkhm_total_questions)
@@ -216,7 +216,6 @@ def main():
         # Deteksi perubahan filter
         filter_berubah = (st.session_state.nkhm_current_kategori != kategori or 
                           st.session_state.nkhm_current_kecerdasan != kecerdasan)
-        
         if filter_berubah:
             st.session_state.nkhm_current_kategori = kategori
             st.session_state.nkhm_current_kecerdasan = kecerdasan
@@ -238,7 +237,6 @@ def main():
             elif not filtered_questions:
                 st.session_state.nkhm_current_q = None
         
-        # Tampilkan soal atau peringatan
         if not filtered_questions:
             st.warning("Tidak ada soal dengan filter ini. Coba pilih filter lain!")
         else:
@@ -255,7 +253,7 @@ def main():
             else:
                 col_tag2.info("📚 Umum")
             
-            # Tampilkan bagian dan skala untuk soal EQ_scale / AQ_scale
+            # Petunjuk untuk soal skor tanggapan
             if q.get("type") in ["EQ_scale", "AQ_scale"]:
                 if q.get("section") and q.get("scale"):
                     st.caption(f"📂 **{q['section']}** — *{q['scale']}*")
@@ -267,19 +265,18 @@ def main():
                     "- **1** = Kurang setuju\n"
                     "- **0** = Tidak setuju sekali"
                 )
-                # Tampilkan informasi bagian yang sedang dikerjakan
                 if st.session_state.current_section:
                     st.info(f"📌 Sedang mengerjakan bagian: **{st.session_state.current_section}**")
             
             radio_label = "Pilih jawabanmu:" if q.get("type") not in ["EQ_scale", "AQ_scale"] else "Pilih skor tanggapan:"
             selected = st.radio(radio_label, q['options'], key=f"radio_{q['text']}", index=None, disabled=st.session_state.nkhm_answered)
             
-            # ========== TOMBOL JAWAB ==========
+            # Tombol JAWAB
             if st.button("✅ JAWAB", disabled=st.session_state.nkhm_answered or selected is None, use_container_width=True):
                 st.session_state.nkhm_answered = True
                 st.session_state.nkhm_total_questions += 1
                 
-                # Penanganan EQ_scale / AQ_scale
+                # ========== SOAL SKOR TANGGAPAN ==========
                 if q.get("type") in ["EQ_scale", "AQ_scale"]:
                     section = q.get("section", "Unknown")
                     q_type = q.get("type")
@@ -301,7 +298,6 @@ def main():
                     
                     st.session_state.nkhm_feedback = "scale_answered"
                     st.session_state.last_score_type = f"{q_type} (skala)"
-                    
                     st.session_state.nkhm_history.append({
                         "timestamp": datetime.now().strftime("%H:%M:%S"),
                         "question": q['text'][:50],
@@ -310,7 +306,7 @@ def main():
                         "nkhm_total": get_current_nkhm()[1]
                     })
                 else:
-                    # Penanganan pilihan ganda (IQ, EQ, SQ, AQ, Nasionalisme)
+                    # ========== SOAL PILIHAN GANDA ==========
                     if q['type'] == "Nasionalisme":
                         score_type = "Nasionalisme"
                     elif q['type'] in ["EQ", "IQ", "SQ", "AQ"]:
@@ -321,16 +317,25 @@ def main():
                     st.session_state.last_score_type = score_type
                     
                     if selected == q['correct']:
-                        increment = get_increment(score_type)
-                        new_score = min(MAX_SCORE, st.session_state.nkhm_scores[score_type] + increment)
-                        st.session_state.nkhm_scores[score_type] = new_score
+                        raw_increment = get_increment(score_type)
+                        # Tentukan batas maks raw points untuk tipe
+                        max_raw_map = {
+                            "IQ": MAX_POIN_IQ,
+                            "EQ": MAX_POIN_EQ,
+                            "SQ": MAX_POIN_SQ,
+                            "AQ": MAX_POIN_AQ,
+                            "Nasionalisme": MAX_POIN_NASIONALISME
+                        }
+                        max_raw = max_raw_map.get(score_type, 100)
+                        new_raw = min(max_raw, st.session_state.nkhm_scores[score_type] + raw_increment)
+                        st.session_state.nkhm_scores[score_type] = new_raw
                         st.session_state.nkhm_feedback = "benar"
-                        _, nkhm_total_baru, _, _ = get_current_nkhm()
+                        _, nkhm_total_baru, _, _, _, _, _ = get_current_nkhm()
                         save_score(st.session_state.nkhm_user, nkhm_total_baru)
                     else:
                         st.session_state.nkhm_feedback = "salah"
                     
-                    _, nkhm_total_now, _, _ = get_current_nkhm()
+                    _, nkhm_total_now, _, _, _, _, _ = get_current_nkhm()
                     st.session_state.nkhm_history.append({
                         "timestamp": datetime.now().strftime("%H:%M:%S"),
                         "question": q['text'][:50],
@@ -338,13 +343,11 @@ def main():
                         "correct": selected == q['correct'],
                         "nkhm_total": nkhm_total_now
                     })
-                
                 st.rerun()
             
             # Tampilkan feedback
             if st.session_state.nkhm_feedback == "benar":
-                fb_type = st.session_state.get("last_score_type", "kecerdasan")
-                st.success(f"✅ BENAR! + poin untuk {fb_type}")
+                st.success(f"✅ BENAR! + poin untuk {st.session_state.last_score_type}")
             elif st.session_state.nkhm_feedback == "salah":
                 if q.get('correct'):
                     st.error(f"❌ SALAH! Jawaban benar: **{q['correct']}**")
@@ -353,7 +356,7 @@ def main():
             elif st.session_state.nkhm_feedback == "scale_answered":
                 st.success(f"✅ Jawaban tercatat untuk {st.session_state.last_score_type}")
             
-            # Tombol selesai bagian (khusus untuk EQ_scale/AQ_scale)
+            # Tombol selesai bagian (khusus skor tanggapan)
             if q.get("type") in ["EQ_scale", "AQ_scale"] and st.session_state.current_section:
                 if st.button("✅ Selesai Bagian Ini", use_container_width=True):
                     section = st.session_state.current_section
@@ -362,30 +365,27 @@ def main():
                     if q_type == "EQ_scale":
                         section_answers = st.session_state.eq_section_answers.get(section, [0,0,0,0])
                         section_value = calculate_section_value(section_answers)
-                        new_total = min(MAX_SCORE, st.session_state.eq_scale_total + section_value)
+                        new_total = min(MAX_POIN_EQ, st.session_state.eq_scale_total + section_value)
                         st.session_state.eq_scale_total = new_total
                         del st.session_state.eq_section_answers[section]
                         st.success(f"✅ Bagian '{section}' selesai! +{section_value} poin. Total EQ Skor Tanggapan: {st.session_state.eq_scale_total}")
                     else:
                         section_answers = st.session_state.aq_section_answers.get(section, [0,0,0,0])
                         section_value = calculate_section_value(section_answers)
-                        new_total = min(MAX_SCORE, st.session_state.aq_scale_total + section_value)
+                        new_total = min(MAX_POIN_AQ, st.session_state.aq_scale_total + section_value)
                         st.session_state.aq_scale_total = new_total
                         del st.session_state.aq_section_answers[section]
                         st.success(f"✅ Bagian '{section}' selesai! +{section_value} poin. Total AQ Skor Tanggapan: {st.session_state.aq_scale_total}")
                     
-                    # Reset current section
                     st.session_state.current_section = None
                     st.session_state.current_scale_type = None
-                    
-                    # Pilih soal baru dari filtered_questions yang tersisa (atau acak)
                     if filtered_questions:
                         st.session_state.nkhm_current_q = random.choice(filtered_questions)
                         st.session_state.nkhm_answered = False
                         st.session_state.nkhm_feedback = None
                         st.rerun()
             
-            # Tombol navigasi (untuk soal biasa / setelah selesai)
+            # Tombol navigasi untuk soal pilihan ganda
             if st.session_state.nkhm_answered and q.get("type") not in ["EQ_scale", "AQ_scale"]:
                 col_nav1, col_nav2 = st.columns(2)
                 with col_nav1:
@@ -406,19 +406,17 @@ def main():
     # ========== TAB 2: DASHBOARD ==========
     with tab2:
         st.markdown("### Dashboard")
-        eq_final, aq_final = get_final_eq_score(), get_final_aq_score()
+        _, _, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct = get_current_nkhm()
         df_chart = pd.DataFrame({
             "Kecerdasan": ["IQ", "EQ", "SQ", "AQ", "Nasionalisme"],
-            "Skor": [st.session_state.nkhm_scores["IQ"], eq_final,
-                     st.session_state.nkhm_scores["SQ"], aq_final,
-                     st.session_state.nkhm_scores["Nasionalisme"]]
+            "Skor": [iq_pct, eq_pct, sq_pct, aq_pct, nas_pct]
         })
         st.bar_chart(df_chart.set_index("Kecerdasan"), height=400)
         with st.expander("📖 Tentang Rumus NKHM"):
             st.markdown("""
             **NKHM_Q** = ((IQ + EQ) × (SQ + AQ)) / ((IQ + EQ) + (SQ + AQ))
             **NKHM_Total** = (NKHM_Q + Nasionalisme) / 2
-            Dimana: IQ, EQ, SQ, AQ, Nasionalisme 0-100
+            Dimana: IQ, EQ, SQ, AQ, Nasionalisme dalam skala 0-100
             """)
         if st.session_state.nkhm_history:
             st.markdown("### Riwayat Kuis")
@@ -433,20 +431,20 @@ def main():
         st.markdown("### Pencapaian")
         cols = st.columns(5)
         badges = {"IQ": "🧠 Cendekia", "EQ": "❤️ Empati", "SQ": "🙏 Bhinneka", "AQ": "💪 Tangguh", "Nasionalisme": "🇮🇩 Patriot"}
-        eq_final, aq_final = get_final_eq_score(), get_final_aq_score()
-        scores_display = {
-            "IQ": st.session_state.nkhm_scores["IQ"],
-            "EQ": eq_final,
-            "SQ": st.session_state.nkhm_scores["SQ"],
-            "AQ": aq_final,
-            "Nasionalisme": st.session_state.nkhm_scores["Nasionalisme"]
+        _, _, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct = get_current_nkhm()
+        scores_pct = {
+            "IQ": iq_pct,
+            "EQ": eq_pct,
+            "SQ": sq_pct,
+            "AQ": aq_pct,
+            "Nasionalisme": nas_pct
         }
         for i, (t, label) in enumerate(badges.items()):
-            if scores_display[t] >= 50:
+            if scores_pct[t] >= 50:
                 cols[i].success(f"✅ **{label}**")
             else:
                 cols[i].info(f"🔒 {label} (50+)")
-        if all(scores_display[t] >= 50 for t in ["IQ", "EQ", "SQ", "AQ", "Nasionalisme"]):
+        if all(scores_pct[t] >= 50 for t in ["IQ", "EQ", "SQ", "AQ", "Nasionalisme"]):
             st.balloons()
             st.success("🎉 **GELAR: PAHLAWAN CERDAS NUSANTARA!** 🎉")
         answered = len(st.session_state.nkhm_history)
