@@ -456,6 +456,10 @@ def main():
         col2.metric("✅ Benar", correct)
         col3.metric("📊 Akurasi", f"{accuracy:.1f}%")
         show_leaderboard()
+    
+    # ========== TAB 4: TUTORIAL ==========
+    with tab4:
+        show_tutorial()
 
 if __name__ == "__main__":
     main()
