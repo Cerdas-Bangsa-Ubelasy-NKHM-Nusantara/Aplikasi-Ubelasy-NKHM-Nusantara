@@ -16,15 +16,15 @@
 ‎
 ‎# ========== INCREMENT PER JAWABAN BENAR ==========
 ‎# IQ: biasa
-‎INCREMENT_IQ = 320 / STANDAR_IQ                                    # 3.125
+‎INCREMENT_IQ = 100 / STANDAR_IQ                                    # 3.125
 ‎# EQ: biasa
-‎INCREMENT_EQ = 380 / STANDAR_EQ                                    # ≈ 2.6316
+‎INCREMENT_EQ = 100 / STANDAR_EQ                                    # ≈ 2.6316
 ‎# SQ: strategis (2× standar)
-‎INCREMENT_SQ = 140 / (2 * STANDAR_SQ)                              # ≈ 3.5714
+‎INCREMENT_SQ = 100 / (2 * STANDAR_SQ)                              # ≈ 3.5714
 ‎# AQ: strategis (2× standar)
-‎INCREMENT_AQ = 140 / (2 * STANDAR_AQ)                              # ≈ 3.5714
+‎INCREMENT_AQ = 100 / (2 * STANDAR_AQ)                              # ≈ 3.5714
 ‎# Nasionalisme: strategis (2× standar)
-‎INCREMENT_NASIONALISME = 200 / (2 * STANDAR_NASIONALISME)          # 2.5
+‎INCREMENT_NASIONALISME = 100 / (2 * STANDAR_NASIONALISME)          # 2.5
 ‎
 ‎MAX_SCORE = 100
 ‎
