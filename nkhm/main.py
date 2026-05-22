@@ -15,7 +15,6 @@ from nkhm.scoring import (
 from nkhm.ai_assistant import get_ai_response
 from nkhm.leaderboard import show_leaderboard, save_score
 from nkhm.tutorial import show_tutorial
-from nkhm.tutorial import show_tutorial
 from nkhm.battle import show_battle
 
 # ========== INISIALISASI SESSION STATE ==========
@@ -462,7 +461,7 @@ def main():
     # ========== TAB 4: TANDING ==========
     with tab4:
         show_battle()
-
+    
     # ========== TAB 5: TUTORIAL ==========
     with tab5:
         show_tutorial()
