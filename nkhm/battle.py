@@ -1,4 +1,4 @@
-# nkhm/battle.py, untuk Hot Seat (tanpa undangan antar perangkat)
+# nkhm/battle.py
 import streamlit as st
 import random
 import time
@@ -69,30 +69,29 @@ def show_battle():
         
         col1, col2 = st.columns(2)
         with col1:
-            player1 = st.text_input("👤 Nama Pemain 1", value=st.session_state.battle_players[0], placeholder="Contoh: Budi")
+            player1 = st.text_input("👤 Nama Pemain 1", value=st.session_state.battle_players[0], placeholder="Contoh: Budi", key="player1_input")
         with col2:
-            player2 = st.text_input("👤 Nama Pemain 2", value=st.session_state.battle_players[1], placeholder="Contoh: Ani")
+            player2 = st.text_input("👤 Nama Pemain 2", value=st.session_state.battle_players[1], placeholder="Contoh: Ani", key="player2_input")
         
         col3, col4 = st.columns(2)
         with col3:
-            num_questions = st.selectbox("📊 Jumlah Soal", [3, 5, 7, 10], index=1)
+            num_questions = st.selectbox("📊 Jumlah Soal", [3, 5, 7, 10], index=1, key="num_q_select")
         with col4:
-            time_limit = st.selectbox("⏱️ Waktu per Giliran", [15, 30, 45, 60], index=1)
+            time_limit = st.selectbox("⏱️ Waktu per Giliran", [15, 30, 45, 60], index=1, key="time_limit_select")
         
         st.markdown("---")
         st.markdown("### 🎯 Filter Soal (opsional)")
         col_f1, col_f2 = st.columns(2)
         with col_f1:
-            kategori_filter = st.selectbox("Kategori", ["✨ Semua", "🇮🇩 Nasionalisme", "📚 Umum"])
+            kategori_filter = st.selectbox("Kategori", ["✨ Semua", "🇮🇩 Nasionalisme", "📚 Umum"], key="battle_kategori")
         with col_f2:
-            fokus_filter = st.selectbox("Fokus", ["Semua", "IQ", "EQ", "SQ", "AQ", "Nasionalisme"])
+            fokus_filter = st.selectbox("Fokus", ["Semua", "IQ", "EQ", "SQ", "AQ", "Nasionalisme"], key="battle_fokus")
         
-        if st.button("🚀 MULAI PERTANDINGAN", use_container_width=True):
+        if st.button("🚀 MULAI PERTANDINGAN", key="start_battle_btn", use_container_width=True):
             if not player1 or not player2:
                 st.error("Masukkan nama kedua pemain!")
                 return
             
-            # Load bank soal
             QUESTION_BANK = load_all_questions()
             if not QUESTION_BANK:
                 st.error("Bank soal kosong.")
@@ -133,10 +132,8 @@ def show_battle():
                 st.error(f"Soal hanya {len(filtered)}. Kurangi jumlah soal atau ubah filter.")
                 return
             
-            # Pilih soal acak
             selected_questions = random.sample(filtered, num_questions)
             
-            # Inisialisasi battle
             st.session_state.battle_players = [player1, player2]
             st.session_state.battle_questions = selected_questions
             st.session_state.battle_scores = [0, 0]
@@ -155,44 +152,43 @@ def show_battle():
     elif st.session_state.battle_active and not st.session_state.battle_finished:
         update_timer()
         
-        # Tampilkan status
+        current_player = st.session_state.battle_players[st.session_state.battle_current_player]
         col1, col2, col3 = st.columns(3)
         with col1:
             st.metric(f"👤 {st.session_state.battle_players[0]}", f"{st.session_state.battle_scores[0]} poin")
         with col2:
-            current_player = st.session_state.battle_players[st.session_state.battle_current_player]
             st.metric("🎯 Giliran", current_player)
         with col3:
             progress = f"{st.session_state.battle_current_q_index + 1} / {len(st.session_state.battle_questions)}"
             st.metric("📊 Soal", progress)
         
-        # Timer
         timer_progress = st.session_state.battle_time_left / st.session_state.battle_total_time
         st.progress(timer_progress, text=f"⏱️ Sisa waktu: {st.session_state.battle_time_left} detik")
         
         if st.session_state.battle_time_left <= 0:
             st.error(f"⏰ Waktu habis! {current_player} kehilangan giliran.")
-            # Pindah giliran ke lawan
             st.session_state.battle_current_player = 1 - st.session_state.battle_current_player
             st.session_state.battle_time_left = st.session_state.battle_total_time
             st.session_state.battle_last_update = time.time()
             st.session_state.battle_timer_running = True
             st.rerun()
         
-        # Tampilkan soal
         current_q = st.session_state.battle_questions[st.session_state.battle_current_q_index]
         
         st.markdown(f"### 📝 {current_q['text']}")
         display_type = "🇮🇩 Nasionalisme" if current_q.get('type') == "Nasionalisme" else f"🧠 {current_q.get('type', 'Unknown')}"
         st.info(display_type)
         
-        selected = st.radio("Pilih jawabanmu:", current_q['options'], key=f"battle_ans", index=None)
+        # UNIQUE KEY untuk radio button
+        radio_key = f"battle_radio_{st.session_state.battle_current_q_index}_{st.session_state.battle_current_player}"
+        selected = st.radio("Pilih jawabanmu:", current_q['options'], key=radio_key, index=None)
         
-        if st.button("✅ JAWAB", use_container_width=True):
+        # UNIQUE KEY untuk button Jawab
+        button_key = f"battle_ans_btn_{st.session_state.battle_current_q_index}_{st.session_state.battle_current_player}"
+        if st.button("✅ JAWAB", key=button_key, use_container_width=True):
             if selected is None:
                 st.warning("Pilih jawaban terlebih dahulu!")
             else:
-                # Hitung poin
                 points = 0
                 if current_q.get("type") in ["EQ_scale", "AQ_scale"]:
                     points = int(selected)
@@ -212,7 +208,6 @@ def show_battle():
                         else:
                             points = 10
                 
-                # Simpan jawaban
                 st.session_state.battle_answers.append({
                     "player": st.session_state.battle_current_player,
                     "question": current_q['text'][:50],
@@ -221,10 +216,8 @@ def show_battle():
                     "points": points
                 })
                 
-                # Tambah skor
                 st.session_state.battle_scores[st.session_state.battle_current_player] += points
                 
-                # Cek apakah pertandingan selesai
                 if st.session_state.battle_current_q_index + 1 >= len(st.session_state.battle_questions):
                     st.session_state.battle_active = False
                     st.session_state.battle_finished = True
@@ -260,6 +253,6 @@ def show_battle():
                 status = "✅" if ans['correct'] else "❌"
                 st.write(f"{i+1}. {status} **{player_name}**: {ans['question']} → {ans['answer']} (+{ans['points']} poin)")
         
-        if st.button("🔄 PERTANDINGAN BARU", use_container_width=True):
+        if st.button("🔄 PERTANDINGAN BARU", key="new_battle_btn", use_container_width=True):
             reset_battle()
             st.rerun()
