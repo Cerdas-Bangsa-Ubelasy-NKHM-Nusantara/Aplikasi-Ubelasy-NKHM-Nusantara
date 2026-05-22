@@ -14,6 +14,7 @@ from nkhm.scoring import (
 )
 from nkhm.ai_assistant import get_ai_response
 from nkhm.leaderboard import show_leaderboard, save_score
+from nkhm.tutorial import show_tutorial
 
 # ========== INISIALISASI SESSION STATE ==========
 def init_session_state():
