@@ -1,80 +1,102 @@
 # nkhm/tutorial.py
 import streamlit as st
+from PIL import Image
+import requests
+from io import BytesIO
 
 def show_tutorial():
     st.markdown("## 📘 Tutorial NKHM Nusantara")
-    
-    with st.expander("📖 Panduan Penggunaan"):
+    st.markdown("Selamat datang di NKHM Nusantara! Tutorial ini akan memandu Anda.")
+
+    # Gunakan tabs untuk mengorganisir konten
+    tab_intro, tab_kuis, tab_skor, tab_tips = st.tabs([
+        "🌟 Pengantar", "🎮 Panduan Kuis", "📊 Memahami Skor", "💡 Tips & Trik"
+    ])
+
+    with tab_intro:
         st.markdown("""
-        ### 1. Login
-        Masukkan nama Anda pada halaman awal, lalu klik **🚀 MULAI BELAJAR**.
-        
-        ### 2. Memilih Kuis
-        - **Kategori**: Pilih ✨ Semua, 🇮🇩 Nasionalisme, atau 📚 Umum.  
-        - **Fokus**: Pilih Semua, IQ, EQ, SQ, AQ, atau Nasionalisme.  
-        
-        ### 3. Menjawab Soal
-        - **Pilihan ganda** (IQ, SQ, Nasionalisme, sebagian EQ/AQ):  
-          Pilih satu jawaban, klik **✅ JAWAB**. Jawaban benar akan menambah skor kecerdasan terkait.  
-        - **Skor tanggapan** (EQ_scale, AQ_scale):  
-          Pilih angka 0–3 sesuai tingkat persetujuan (3=Setuju sekali, 0=Tidak setuju sekali).  
-          Setelah menyelesaikan semua soal dalam satu **bagian** (misal "Ketrampilan Emosi"), klik **✅ Selesai Bagian Ini** untuk menambahkan skor.
-        
-        ### 4. Melihat Hasil
-        - Tab **📊 DASHBOARD**: Grafik skor per kecerdasan dan riwayat kuis.  
-        - Tab **🏆 PRESTASI**: Badge pencapaian (skor ≥50 per kecerdasan) dan leaderboard nasional.  
-        
-        ### 5. Reset Skor
-        Klik **🔄 Reset Skor** di sidebar untuk memulai dari awal (skor diatur ulang ke 0).  
-        
-        ### 6. Keluar / Ganti Pengguna
-        Klik **🚪 Keluar / Ganti Pengguna** di sidebar untuk kembali ke halaman login.
+        **Apa itu NKHM Nusantara?**
+        NKHM Nusantara adalah aplikasi gamifikasi yang dirancang untuk mengasah 4 kecerdasan Anda (IQ, EQ, SQ, AQ) sekaligus menumbuhkan rasa nasionalisme.
         """)
-    
-    with st.expander("📄 Dokumentasi Penilaian NKHM"):
-        st.markdown("""
-        ### Rumus NKHM
-        - **NKHM_Q** = ((IQ + EQ) × (SQ + AQ)) / ((IQ + EQ) + (SQ + AQ))  
-        - **NKHM_Total** = (NKHM_Q + Nasionalisme) / 2  
-        Semua skor dalam rentang **0–100**.
-        
-        ### Standar Soal & Penilaian
-        | Kategori | Jenis Soal | Standar Soal | Skor Mentah Maks | Konversi ke 100% |
-        |----------|------------|--------------|------------------|------------------|
-        | IQ | Pilihan ganda | 32 soal | 320 | (raw / 320) × 100 |
-        | EQ | Pilihan ganda | 38 soal | 380 | (raw / 380) × 100 |
-        | EQ | Skor tanggapan | (tidak tetap) | 380 | (akumulasi per bagian) dibatasi 380 |
-        | **EQ Total** | - | - | - | **(PG + SkorTanggapan) / 2** |
-        | SQ | Pilihan ganda (strategis) | 14 soal (2×) | 140 | (raw / 140) × 100 |
-        | AQ | Pilihan ganda (strategis) | 14 soal (2×) | 140 | (raw / 140) × 100 |
-        | AQ | Skor tanggapan | (tidak tetap) | 140 | (akumulasi per bagian) dibatasi 140 |
-        | **AQ Total** | - | - | - | **(PG + SkorTanggapan) / 2** |
-        | Nasionalisme | Pilihan ganda (strategis) | 20 soal (2×) | 200 | (raw / 200) × 100 |
-        
-        > **Strategis** berarti nilai 100% dicapai setelah menjawab **2× standar** soal (misal 28 soal SQ untuk mendapat 100).  
-        
-        ### Skor Tanggapan (EQ_scale / AQ_scale)
-        Setiap soal bernilai 0–3 (pilihan 3,2,1,0 atau 0,1,2,3).  
-        Untuk setiap **bagian** (contoh: Ketrampilan Emosi), jawaban dikelompokkan per kolom (posisi pilihan), lalu dijumlahkan per kolom.  
-        **Nilai bagian** = jumlah semua kolom.  
-        Nilai tersebut langsung ditambahkan ke total skor tanggapan (dibatasi maks 380 untuk EQ, 140 untuk AQ).  
-        
-        **Contoh perhitungan bagian dengan 4 soal:**  
-        - Soal1 jawab 3 → kolom1 +1  
-        - Soal2 jawab 2 → kolom3 +1  
-        - Soal3 jawab 1 → kolom2 +1  
-        - Soal4 jawab 0 → (tidak menambah)  
-        Kolom1=1, kolom2=1, kolom3=1, kolom4=0 → nilai bagian = 3.
-        
-        ### Level NKHM
-        | Nilai NKHM_Total | Level |
-        |------------------|-------|
-        | ≥ 80 | 🌟 Pahlawan Cerdas |
-        | 60 – 79 | 📚 Cendekia Muda |
-        | 40 – 59 | 🌱 Penjelajah Ilmu |
-        | < 40 | 🌿 Perintis Jalan |
-        
-        ### Badge Pencapaian
-        Setiap kecerdasan (IQ, EQ, SQ, AQ, Nasionalisme) memiliki badge yang didapat jika skor ≥ 50.  
-        Gelar **PAHLAWAN CERDAS NUSANTARA** diberikan jika semua skor ≥ 50.
+        try:
+            response = requests.get("https://raw.githubusercontent.com/SRPakpahanSST/nusantara-nkhm/main/assets/human.jpg")
+            img = Image.open(BytesIO(response.content))
+            st.image(img, caption="Logo NKHM Nusantara", width=200)
+        except:
+            st.info("Logo NKHM Nusantara")
+
+    with tab_kuis:
+        st.markdown("### 🎮 Panduan Menjawab Kuis")
+        with st.expander("📝 Soal Pilihan Ganda"):
+            st.markdown("""
+            1. Bacalah pertanyaan dengan saksama.
+            2. Pilih satu jawaban yang menurut Anda paling benar.
+            3. Klik tombol **✅ JAWAB**.
+            """)
+        with st.expander("📊 Soal Skor Tanggapan (EQ/AQ)"):
+            st.markdown("""
+            1. Soal ini mengukur tingkat persetujuan Anda.
+            2. Berikan skor 0-3 sesuai perasaan Anda:
+                - **3** = Setuju sekali
+                - **2** = Setuju
+                - **1** = Kurang setuju
+                - **0** = Tidak setuju sekali
+            3. Klik **✅ JAWAB**.
+            4. **Selesaikan seluruh soal dalam satu bagian, lalu klik tombol ✅ Selesai Bagian Ini.**
+            """)
+        with st.expander("🏆 Mode Tanding"):
+            st.markdown("""
+            1. Pada tab **⚔️ TANDING**, masukkan nama kedua pemain.
+            2. Tentukan jumlah soal dan batas waktu.
+            3. Pemain akan bergiliran menjawab soal.
+            4. Pemain dengan poin tertinggi di akhir pertandingan adalah pemenang!
+            """)
+        with st.expander("🎯 Filter Soal"):
+            st.markdown("""
+            - **Kategori**: Pilih '✨ Semua', '🇮🇩 Nasionalisme', atau '📚 Umum'.
+            - **Fokus**: Pilih jenis kecerdasan yang ingin diasah (IQ, EQ, SQ, AQ, Nasionalisme).
+            """)
+        with st.expander("🤖 Asisten AI Ki Hajar"):
+            st.markdown("""
+            Ki Hajar siap membantu menjawab pertanyaan Anda! Cukup tanyakan di *chat input* yang tersedia di *sidebar*.
+            """)
+
+    with tab_skor:
+        st.markdown("### 📊 Memahami Skor dan NKHM")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric("NKHM_Q", "0-100", help="Nilai Kemampuan Hidup Manusia (4 Kecerdasan)")
+            st.caption("Rumus: **((IQ+EQ) × (SQ+AQ)) / ((IQ+EQ)+(SQ+AQ))**")
+        with col2:
+            st.metric("NKHM_Total", "0-100", help="Nilai Akhir setelah digabung dengan Nasionalisme")
+            st.caption("Rumus: **(NKHM_Q + Nasionalisme) / 2**")
+        st.markdown("---")
+        st.markdown("#### Level NKHM Total:")
+        st.progress(0, text="🌿 Perintis Jalan (0 - 39)")
+        st.progress(0.4, text="🌱 Penjelajah Ilmu (40 - 59)")
+        st.progress(0.6, text="📚 Cendekia Muda (60 - 79)")
+        st.progress(0.8, text="🌟 Pahlawan Cerdas (80 - 100)")
+
+    with tab_tips:
+        st.markdown("### 💡 Tips & Trik")
+        st.info("""
+        **✨ Tips Menjawab Soal:**
+        - Bacalah setiap pertanyaan dengan saksama sebelum menjawab.
+        - Jangan terburu-buru, manfaatkan waktu yang tersedia.
+        - Untuk soal skor tanggapan, jawablah dengan **jujur** sesuai perasaan Anda.
+        - Ikuti terus *progress* Anda di tab **📊 DASHBOARD**.
+
+        **✨ Meningkatkan Skor NKHM:**
+        - Kerjakan lebih banyak soal.
+        - Perhatikan area kecerdasan mana yang masih rendah, lalu fokuslah pada kategori itu.
+        - Capai semua *badge* untuk mendapatkan gelar **PAHLAWAN CERDAS NUSANTARA**.
+
+        **✨ Fitur Lainnya:**
+        - Gunakan filter untuk fokus pada soal tertentu.
+        - Ajak teman bertanding di tab **⚔️ TANDING** untuk menguji kemampuan Anda!
         """)
+
+def show_tutorial_simple():
+    """Fungsi fallback jika konten interaktif tidak diperlukan."""
+    st.markdown("## 📘 Tutorial NKHM Nusantara")
+    st.info("Tutorial akan segera hadir dalam versi yang lebih interaktif!")
