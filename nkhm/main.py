@@ -174,7 +174,7 @@ def main():
             st.rerun()
     
     # ========== TAB UTAMA ==========
-    tab1, tab2, tab3 = st.tabs(["🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI"])
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "⚔️ TANDING", "📘 TUTORIAL"])
     
     # ========== TAB 1: KUIS ==========
     with tab1:
@@ -459,8 +459,12 @@ def main():
         col3.metric("📊 Akurasi", f"{accuracy:.1f}%")
         show_leaderboard()
     
-    # ========== TAB 4: TUTORIAL ==========
+    # ========== TAB 4: TANDING ==========
     with tab4:
+        show_battle()
+
+    # ========== TAB 5: TUTORIAL ==========
+    with tab5:
         show_tutorial()
 
 if __name__ == "__main__":
