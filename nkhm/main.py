@@ -18,6 +18,7 @@ from nkhm.tutorial import show_tutorial
 from nkhm.battle import show_battle
 from nkhm.tournament import show_tournament
 # import show_tournament_simple jika kamu membuat fallback
+from nkhm.karunia import show_karunia
 
 # ========== INISIALISASI SESSION STATE ==========
 def init_session_state():
@@ -175,7 +176,7 @@ def main():
             st.rerun()
     
     # ========== TAB UTAMA ==========
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "⚔️ TANDING", "📘 TUTORIAL"])
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "⚔️ TANDING", "🎁 KARUNIA", "📘 TUTORIAL"])
     
     # ========== TAB 1: KUIS ==========
     with tab1:
@@ -473,9 +474,13 @@ def main():
             show_battle()  # Mode hot seat yang sudah ada
         else:
             show_tournament()  # Mode turnamen baru
-
-    # ========== TAB 5: TUTORIAL ==========
+            
+    # ========== TAB 5: KARUNIA MOTIVASI ==========
     with tab5:
+        show_karunia()
+
+    # ========== TAB 6: TUTORIAL ==========
+    with tab6:
         # Panggil fungsi tutorial interaktif yang sudah kita buat
         from nkhm.tutorial import show_tutorial
         show_tutorial()
