@@ -90,7 +90,6 @@ KARUNIA_NAMES = [
 def init_karunia_state():
     """Inisialisasi session state untuk jawaban karunia"""
     if "karunia_answers" not in st.session_state:
-        # Inisialisasi array 70 nilai default 0
         st.session_state.karunia_answers = [0] * 70
     if "karunia_submitted" not in st.session_state:
         st.session_state.karunia_submitted = False
@@ -116,43 +115,32 @@ def show_karunia():
     Jawablah dengan **jujur** dan tidak perlu takut terhadap penilaian orang lain.
     """)
     
-    # Tampilkan dalam grid 10 baris x 7 kolom (10*7 = 70)
-    # Agar lebih rapi, kita buat tabel dengan 7 kolom, masing-masing kolom mewakili nomor soal yang berurutan.
-    # Misal baris 1: soal 1-7, baris 2: soal 8-14, dst.
-    
     st.markdown("### 📋 Kuesioner (70 pernyataan)")
     
-    # Gunakan container untuk scroll jika perlu
-    with st.container():
-        for row in range(10):
-            cols = st.columns(7)
-            for col_idx in range(7):
-                soal_index = row * 7 + col_idx
-                if soal_index < 70:
-                    with cols[col_idx]:
-                        # Tampilkan nomor soal dan pilihan
-                        st.markdown(f"**{soal_index+1}.**")
-                        # Gunakan selectbox untuk nilai 0-5
-                        current_val = st.session_state.karunia_answers[soal_index]
-                        selected = st.selectbox(
-                            "Nilai",
-                            options=[0,1,2,3,4,5],
-                            index=current_val,
-                            key=f"karunia_{soal_index}",
-                            label_visibility="collapsed"
-                        )
-                        st.session_state.karunia_answers[soal_index] = selected
-                        # Tampilkan teks pernyataan singkat (opsional, bisa tooltip)
-                        # Agar tidak terlalu panjang, kita tampilkan tooltip saat hover
-                        st.caption(QUESTIONS[soal_index][:50] + "...")
+    # Tampilkan pernyataan dalam bentuk list vertikal dengan teks lengkap
+    # Setiap baris menampilkan 1 pernyataan
+    for i, question in enumerate(QUESTIONS):
+        col1, col2 = st.columns([8, 1])
+        with col1:
+            st.markdown(f"**{i+1}. {question}**")
+        with col2:
+            current_val = st.session_state.karunia_answers[i]
+            selected = st.selectbox(
+                "Nilai",
+                options=[0, 1, 2, 3, 4, 5],
+                index=current_val,
+                key=f"karunia_{i}",
+                label_visibility="collapsed"
+            )
+            st.session_state.karunia_answers[i] = selected
     
     st.markdown("---")
     
     col1, col2 = st.columns(2)
     with col1:
         if st.button("📊 Hitung Skor Karunia", use_container_width=True):
-            # Hitung total per kolom
-            totals = [0]*7
+            # Hitung total per kolom (setiap 7 soal membentuk 1 kolom karunia)
+            totals = [0] * 7
             for i, val in enumerate(st.session_state.karunia_answers):
                 col_idx = i % 7
                 totals[col_idx] += val
@@ -188,13 +176,18 @@ def show_karunia():
         with st.expander("📖 Penjelasan Karunia"):
             st.markdown("""
             **A. Karunia Bernubuat (Perceiver)** – Kemampuan melihat kebenaran, membedakan yang baik dan jahat, serta menyatakan kebenaran dengan tegas.
+            
             **B. Karunia Melayani (Doer)** – Kemampuan menolong, memenuhi kebutuhan praktis orang lain, dan bekerja dengan rajin.
+            
             **C. Karunia Mengajar (Teacher)** – Kemampuan menyampaikan kebenaran secara logis, sistematis, dan mengajar orang lain.
+            
             **D. Karunia Menasihati (Encourager)** – Kemampuan mendorong, memotivasi, dan menasihati orang lain untuk bertumbuh.
+            
             **E. Karunia Memberi (Giver)** – Kemampuan memberi dengan sukacita, mengelola sumber daya untuk memberkati.
+            
             **F. Karunia Memimpin (Leader)** – Kemampuan memimpin, mengatur, dan mengarahkan orang lain.
+            
             **G. Karunia Kemurahan hati (Compassion)** – Kemampuan mengasihi, berbelas kasihan, dan menolong yang menderita.
             """)
         
-        # Simpan ke session user? Bisa disimpan sebagai data tambahan untuk profil
         st.info("Hasil tes ini dapat membantu Anda memahami potensi diri dan area pengembangan.")
