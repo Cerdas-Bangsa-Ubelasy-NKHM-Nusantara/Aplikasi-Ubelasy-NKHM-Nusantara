@@ -16,9 +16,21 @@ from nkhm.ai_assistant import get_ai_response
 from nkhm.leaderboard import show_leaderboard, save_score
 from nkhm.tutorial import show_tutorial
 from nkhm.battle import show_battle
-from nkhm.tournament import show_tournament
-# import show_tournament_simple jika kamu membuat fallback
-from nkhm.karunia import show_karunia
+
+# Import opsional (komentari jika file belum ada)
+try:
+    from nkhm.tournament import show_tournament
+    TOURNAMENT_AVAILABLE = True
+except ImportError:
+    TOURNAMENT_AVAILABLE = False
+    show_tournament = None
+
+try:
+    from nkhm.karunia import show_karunia
+    KARUNIA_AVAILABLE = True
+except ImportError:
+    KARUNIA_AVAILABLE = False
+    show_karunia = None
 
 # ========== INISIALISASI SESSION STATE ==========
 def init_session_state():
@@ -176,7 +188,9 @@ def main():
             st.rerun()
     
     # ========== TAB UTAMA ==========
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "⚔️ TANDING", "🎁 KARUNIA", "📘 TUTORIAL"])
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+        "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "⚔️ TANDING", "🎁 KARUNIA", "📘 TUTORIAL"
+    ])
     
     # ========== TAB 1: KUIS ==========
     with tab1:
@@ -359,7 +373,7 @@ def main():
                 else:
                     st.error("❌ Jawaban salah.")
             elif st.session_state.nkhm_feedback == "scale_answered":
-                st.success(f"✅ Jawaban tercatat untuk {st.session_state.last_score_type}")
+                st.success(f"✅ Jawaban tercatat für {st.session_state.last_score_type}")
             
             # Tombol selesai bagian (khusus skor tanggapan)
             if q.get("type") in ["EQ_scale", "AQ_scale"] and st.session_state.current_section:
@@ -463,28 +477,31 @@ def main():
     
     # ========== TAB 4: TANDING ==========
     with tab4:
-        # Opsi untuk memilih mode tanding
-        tanding_mode = st.radio(
-            "Pilih Mode Tanding:",
-            ["⚔️ Mode 1v1 (Hot Seat)", "🏆 Mode Turnamen Kelas"],
-            horizontal=True,
-            key="tanding_mode"
-        )
-        if tanding_mode == "⚔️ Mode 1v1 (Hot Seat)":
-            show_battle()  # Mode hot seat yang sudah ada
+        if TOURNAMENT_AVAILABLE and show_tournament is not None:
+            tanding_mode = st.radio(
+                "Pilih Mode Tanding:",
+                ["⚔️ Mode 1v1 (Hot Seat)", "🏆 Mode Turnamen Kelas"],
+                horizontal=True,
+                key="tanding_mode"
+            )
+            if tanding_mode == "⚔️ Mode 1v1 (Hot Seat)":
+                show_battle()
+            else:
+                show_tournament()
         else:
-            show_tournament()  # Mode turnamen baru
-            
+            show_battle()
+            st.info("🏆 Mode Turnamen Kelas akan segera hadir!")
+    
     # ========== TAB 5: KARUNIA MOTIVASI ==========
     with tab5:
-        show_karunia()
-
+        if KARUNIA_AVAILABLE and show_karunia is not None:
+            show_karunia()
+        else:
+            st.info("🎁 Fitur Karunia Motivasi akan segera hadir!")
+    
     # ========== TAB 6: TUTORIAL ==========
     with tab6:
-        # Panggil fungsi tutorial interaktif yang sudah kita buat
-        from nkhm.tutorial import show_tutorial
         show_tutorial()
-        # Jika belum selesai, bisa menggunakan show_tutorial_simple() sebagai placeholder
 
 if __name__ == "__main__":
     main()
