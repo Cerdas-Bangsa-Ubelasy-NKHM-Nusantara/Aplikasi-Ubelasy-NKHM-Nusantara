@@ -3,6 +3,7 @@ import streamlit as st
 from PIL import Image
 import requests
 from io import BytesIO
+from pathlib import Path
 
 def show_tutorial():
     st.markdown("## 📘 Tutorial NKHM Nusantara")
@@ -170,7 +171,13 @@ def show_tutorial():
 
             **Hasil:** Posisi Stomata Hati berada di **sisi 9 – Berbuat kasih**.
             """)
-
+        
+        img_path = Path(__file__.parent.parent/"assets"/"stomata_hati_contoh.jpg"
+        if img_path.exists():
+            st.image(str(img_path), caption="Contoh Ilustradi Stomata Hati", use_containet_width= True)
+        else:
+            st.warning("Gambar contoh Stomata Hati belum tetsedia.")
+                      
         with st.expander("💡 Bagaimana Aplikasi Membantu Anda?"):
             st.markdown("""
             - Aplikasi secara otomatis menghitung persentase IKP setelah Anda menjawab 30 soal.
