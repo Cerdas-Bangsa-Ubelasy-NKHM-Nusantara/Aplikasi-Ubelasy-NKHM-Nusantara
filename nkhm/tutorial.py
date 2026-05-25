@@ -172,11 +172,12 @@ def show_tutorial():
             **Hasil:** Posisi Stomata Hati berada di **sisi 9 – Berbuat kasih**.
             """)
         
-        img_path = Path(__file__.parent.parent/"assets"/"stomata_hati_contoh.jpg"
+        # Perbaikan path gambar
+        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati_contoh.jpg"
         if img_path.exists():
-            st.image(str(img_path), caption="Contoh Ilustradi Stomata Hati", use_containet_width= True)
+            st.image(str(img_path), caption="Contoh Ilustrasi Stomata Hati", use_container_width=True)
         else:
-            st.warning("Gambar contoh Stomata Hati belum tetsedia.")
+            st.warning("Gambar contoh Stomata Hati belum tersedia.")
                       
         with st.expander("💡 Bagaimana Aplikasi Membantu Anda?"):
             st.markdown("""
