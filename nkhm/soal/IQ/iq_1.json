@@ -203,18 +203,16 @@
     "national": false
   },
   {
-    "text": "Pada soal sebelumnya (Suatu perusahaan membayar gaji 4 karyawannya si A sebesar rp 10 juta, si B sebesar rp 9 juta, si C sebesar rp 8 juta, dan si D sebesar rp 7 juta, Jika bobot memberikan tunjangan kinerja ke-4 karyawan tersebut adalah:
-Bobot TK  = [{( A + C ) * ( B + D )} / {( A + C ) + ( B + D )}] ,        
-Maka besarnya ketidakseimbangan TK yang diterima masing-masing karyawan adalah : TK = 0,02% Bobot TK dikali (Gaji / 4000). 
-Sehingga karyawan yang memperoleh penghasilan terbesar adalah:), jika berubah posisi si B menjadi si C, dan si C menjadi si B, maka akan terjadi:",
-    "options": [
-      "Bobot TK mengalami gangguan/kesenjangan pendapatan, menjauh dari garis rata-rata pendapatan.",
-      "Bobot TK mengalami pemerataan pendapatan mendekati garis rata-rata pendapatan.",
-      "Bobot TK tidak mengalami perubahan.",
-      "Si C memperoleh penghasilan terbesar dari ke-4 karyawan tersebut."
-    ],
-    "correct": "Bobot TK mengalami pemerataan pendapatan mendekati garis rata-rata pendapatan.",
-    "type": "IQ",
-    "national": false
-  }
+  "text": "Pada soal sebelumnya (Suatu perusahaan membayar gaji 4 karyawannya, si A sebesar rp 10 juta, si B sebesar rp 9 juta, si C sebesar rp 8 juta, dan si D sebesar rp 7 juta, Jika bobot memberikan tunjangan kinerja ke-4 karyawan tersebut adalah: Bobot TK = [{( A + C ) * ( B + D )} / {( A + C ) + ( B + D )}] , Maka besarnya ketidakseimbangan TK yang diterima masing-masing karyawan adalah : TK = 0,02% Bobot TK dikali (Gaji / 4000). Sehingga karyawan yang memperoleh penghasilan terbesar adalah:), jika berubah posisi si B menjadi si C, dan si C menjadi si B, maka akan terjadi:",
+  "options": [
+    "Bobot TK mengalami gangguan/kesenjangan pendapatan, menjauh dari garis rata-rata pendapatan.",
+    "Bobot TK mengalami pemerataan pendapatan mendekati garis rata-rata pendapatan.",
+    "Bobot TK tidak mengalami perubahan.",
+    "Si C memperoleh penghasilan terbesar dari ke-4 karyawan tersebut."
+  ],
+  "correct": "Bobot TK mengalami pemerataan pendapatan mendekati garis rata-rata pendapatan.",
+  "type": "IQ",
+  "national": false
+}
+
 ]
