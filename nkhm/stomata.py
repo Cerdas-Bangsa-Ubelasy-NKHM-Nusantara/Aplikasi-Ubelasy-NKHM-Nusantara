@@ -1,6 +1,5 @@
 # nkhm/stomata.py
 import streamlit as st
-import pandas as pd
 import random
 
 # ========== BANK SOAL ==========
@@ -49,7 +48,6 @@ SEMUA_SOAL = (
     [("Pengharapan", text, jawaban) for text, jawaban in SOAL_PENGHARAPAN]
 )
 
-# Nama 12 sisi sesuai usulan
 SISI_NAMES = {
     1: "Kasih",
     2: "Iman",
@@ -81,54 +79,41 @@ def reset_stomata():
     st.session_state.stomata_answers = {}
     st.session_state.stomata_submitted = False
     st.session_state.stomata_results = None
-    # jangan hapus shuffled agar urutan tetap konsisten per sesi
 
 def hitung_persentase(jawaban_benar, total_soal=10):
     return (jawaban_benar / total_soal) * 100
 
 def tentukan_sisi(persen_kasih, persen_iman, persen_pengharapan):
-    """
-    Menentukan sisi stomata berdasarkan persentase relatif.
-    Logika di bawah ini contoh; Anda dapat mengubah sesuai preferensi.
-    """
-    # Normalisasi ke total 100% untuk perbandingan
     total = persen_kasih + persen_iman + persen_pengharapan
     if total == 0:
-        return 10  # default
+        return 10
     rel_k = (persen_kasih / total) * 100
     rel_i = (persen_iman / total) * 100
     rel_p = (persen_pengharapan / total) * 100
-    
-    # Tentukan dominasi
     max_val = max(rel_k, rel_i, rel_p)
     if max_val >= 60:
-        # Dominasi tunggal
         if rel_k == max_val:
-            return 1  # Kasih
+            return 1
         elif rel_i == max_val:
-            return 2  # Iman
+            return 2
         else:
-            return 3  # Pengharapan
+            return 3
     elif max_val >= 40 and (rel_k + rel_i >= 70 or rel_i + rel_p >= 70 or rel_p + rel_k >= 70):
-        # Kombinasi dua dominan
         if rel_k >= 40 and rel_i >= 40:
-            return 5  # Kasih-Iman
+            return 5
         elif rel_i >= 40 and rel_p >= 40:
-            return 4  # Iman-Pengharapan
+            return 4
         elif rel_p >= 40 and rel_k >= 40:
-            return 6  # Pengharapan-Kasih
+            return 6
         else:
-            return 10  # Kasih-Iman-Pengharapan (keseimbangan)
+            return 10
     else:
-        # Nilai rendah atau seimbang – masuk ke tindakan
-        # Berdasarkan nilai tertinggi untuk menentukan tindakan yang dominan
         if rel_k == max_val:
-            return 9  # Berbuat kasih
+            return 9
         elif rel_i == max_val:
-            return 7  # Berbuat iman
+            return 7
         else:
-            return 8  # Berbuat pengharapan
-    # Fallback
+            return 8
     return 10
 
 def show_stomata():
@@ -148,7 +133,7 @@ def show_stomata():
     with st.container(height=500):
         for idx, (kategori, text, _) in enumerate(soal_list):
             st.markdown(f"**{idx+1}. [{kategori}]** {text}")
-            key = f"stomata_{idx}"
+            key = f"stomata_radio_{idx}"
             current = st.session_state.stomata_answers.get(idx, None)
             selected = st.radio(
                 "Jawaban:",
@@ -161,8 +146,7 @@ def show_stomata():
     
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("📊 Hitung Hasil Stomata", use_container_width=True):
-            # Hitung skor per kategori
+        if st.button("📊 Hitung Hasil Stomata", key="stomata_hitung_btn", use_container_width=True):
             skor_kasih = skor_iman = skor_pengharapan = 0
             for idx, (kategori, _, jawaban_benar) in enumerate(soal_list):
                 if st.session_state.stomata_answers.get(idx, False) == jawaban_benar:
@@ -172,7 +156,6 @@ def show_stomata():
                         skor_iman += 1
                     else:
                         skor_pengharapan += 1
-            # Pastikan semua soal telah dijawab
             if len(st.session_state.stomata_answers) < len(soal_list):
                 st.error(f"Anda baru menjawab {len(st.session_state.stomata_answers)} dari {len(soal_list)} soal. Selesaikan semua!")
                 return
@@ -180,7 +163,6 @@ def show_stomata():
             persen_iman = hitung_persentase(skor_iman, 10)
             persen_pengharapan = hitung_persentase(skor_pengharapan, 10)
             sisi = tentukan_sisi(persen_kasih, persen_iman, persen_pengharapan)
-            
             st.session_state.stomata_results = {
                 "kasih": persen_kasih,
                 "iman": persen_iman,
@@ -192,7 +174,7 @@ def show_stomata():
             st.rerun()
     
     with col2:
-        if st.button("🔄 Reset", use_container_width=True):
+        if st.button("🔄 Reset", key="stomata_reset_btn", use_container_width=True):
             reset_stomata()
             st.rerun()
     
@@ -204,10 +186,7 @@ def show_stomata():
         col_a.metric("Kasih", f"{res['kasih']:.1f}%")
         col_b.metric("Iman", f"{res['iman']:.1f}%")
         col_c.metric("Pengharapan", f"{res['pengharapan']:.1f}%")
-        
         st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **Sisi {res['sisi']} – {res['nama_sisi']}**")
-        
-        # Diagram sederhana (simbolik segitiga)
         st.markdown("""
         ```
               Kasih
@@ -217,13 +196,7 @@ def show_stomata():
         Iman /______\\ Pengharapan
         ```
         """)
-        
         with st.expander("📖 Penjelasan 12 Sisi Stomata Hati"):
             for no, nama in SISI_NAMES.items():
                 st.markdown(f"**{no}. {nama}**")
-        
         st.info("Hasil ini membantu Anda memahami keseimbangan Iman, Kasih, dan Pengharapan dalam hidup serta panggilan untuk berbuat.")
-
-if __name__ == "__main__":
-    # Untuk testing
-    show_stomata()
