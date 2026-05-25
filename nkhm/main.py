@@ -16,6 +16,7 @@ from nkhm.ai_assistant import get_ai_response
 from nkhm.leaderboard import show_leaderboard, save_score
 from nkhm.tutorial import show_tutorial
 from nkhm.battle import show_battle
+from nkhm.stomata import show_stomata
 
 # Import opsional (komentari jika file belum ada)
 try:
@@ -492,13 +493,17 @@ def main():
             show_battle()
             st.info("🏆 Mode Turnamen Kelas akan segera hadir!")
     
-    # ========== TAB 5: KARUNIA MOTIVASI ==========
+    # ========== TAB 5: KARUNIA & STOMATA =========
     with tab5:
-        if KARUNIA_AVAILABLE and show_karunia is not None:
-            show_karunia()
-        else:
-            st.info("🎁 Fitur Karunia Motivasi akan segera hadir!")
-    
+        sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Stomata Hati"])
+        with sub_tab1:
+            if KARUNIA_AVAILABLE and show_karunia is not None:
+                show_karunia()
+            else:
+                st.info("🎁 Fitur Karunia Motivasi akan segera hadir!")
+        with sub_tab2:
+            show_stomata()
+        
     # ========== TAB 6: TUTORIAL ==========
     with tab6:
         show_tutorial()
