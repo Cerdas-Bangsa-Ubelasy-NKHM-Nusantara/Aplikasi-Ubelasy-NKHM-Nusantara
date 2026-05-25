@@ -1,10 +1,9 @@
 # nkhm/stomata.py
 import streamlit as st
 import random
-import os
 from pathlib import Path
 
-# ========== BANK SOAL ==========
+# ========== BANK SOAL (tetap, tidak diubah) ==========
 SOAL_KASIH = [
     ("Kasih itu sabar dan murah hati.", True),
     ("Kasih itu cemburu dan sombong.", False),
@@ -85,38 +84,52 @@ def reset_stomata():
 def hitung_persentase(jawaban_benar, total_soal=10):
     return (jawaban_benar / total_soal) * 100
 
-def tentukan_sisi(persen_kasih, persen_iman, persen_pengharapan):
+def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
+    """
+    Mengembalikan daftar nomor sisi (1-12) berdasarkan persentase.
+    Untuk kasus seimbang (selisih kecil) -> [1, 8, 9] (contoh dari Anda)
+    Untuk kasus lain, aturan masih sederhana (bisa diperbaiki nanti).
+    """
     total = persen_kasih + persen_iman + persen_pengharapan
     if total == 0:
-        return 10
-    rel_k = (persen_kasih / total) * 100
-    rel_i = (persen_iman / total) * 100
-    rel_p = (persen_pengharapan / total) * 100
-    max_val = max(rel_k, rel_i, rel_p)
+        return [10]
+    # Normalisasi ke 100
+    rk = (persen_kasih / total) * 100
+    ri = (persen_iman / total) * 100
+    rp = (persen_pengharapan / total) * 100
+
+    # Jika ketiga nilai relatif seimbang (selisih maks < 5%)
+    if max(rk, ri, rp) - min(rk, ri, rp) < 5:
+        # Menurut Anda, untuk kasus seimbang (33,33% masing-masing) menghasilkan sisi 1, 8, 9
+        return [1, 8, 9]
+
+    max_val = max(rk, ri, rp)
     if max_val >= 60:
-        if rel_k == max_val:
-            return 1
-        elif rel_i == max_val:
-            return 2
+        # Dominasi tunggal -> satu sisi sudut
+        if rk == max_val:
+            return [1]
+        elif ri == max_val:
+            return [2]
         else:
-            return 3
-    elif max_val >= 40 and (rel_k + rel_i >= 70 or rel_i + rel_p >= 70 or rel_p + rel_k >= 70):
-        if rel_k >= 40 and rel_i >= 40:
-            return 5
-        elif rel_i >= 40 and rel_p >= 40:
-            return 4
-        elif rel_p >= 40 and rel_k >= 40:
-            return 6
+            return [3]
+    elif (rk >= 40 and ri >= 40) or (ri >= 40 and rp >= 40) or (rp >= 40 and rk >= 40):
+        # Kombinasi dua -> satu sisi kombinasi
+        if rk >= 40 and ri >= 40:
+            return [5]
+        elif ri >= 40 and rp >= 40:
+            return [4]
+        elif rp >= 40 and rk >= 40:
+            return [6]
         else:
-            return 10
+            return [10]
     else:
-        if rel_k == max_val:
-            return 9
-        elif rel_i == max_val:
-            return 7
+        # Nilai sedang -> satu sisi tindakan berdasarkan tertinggi
+        if rk == max_val:
+            return [9]   # Berbuat kasih
+        elif ri == max_val:
+            return [7]   # Berbuat iman
         else:
-            return 8
-    return 10
+            return [8]   # Berbuat pengharapan
 
 def show_stomata():
     init_stomata_state()
@@ -127,7 +140,7 @@ def show_stomata():
     Berdasarkan 1 Korintus 13:13.
     
     Jawablah 30 pernyataan berikut dengan **Benar** atau **Salah**.  
-    Setiap jawaban benar bernilai 1 poin. Setelah selesai, sistem akan menghitung persentase masing‑masing kriteria dan menentukan posisi Anda pada 12 sisi Stomata Hati.
+    Setiap jawaban benar bernilai 1 poin. Setelah selesai, sistem akan menghitung persentase masing‑masing kriteria dan menentukan posisi Anda pada 12 sisi Stomata Hati (bisa satu, dua, atau tiga posisi).
     """)
 
     soal_list = st.session_state.stomata_shuffled
@@ -173,13 +186,12 @@ def show_stomata():
             persen_kasih = hitung_persentase(skor_kasih, 10)
             persen_iman = hitung_persentase(skor_iman, 10)
             persen_pengharapan = hitung_persentase(skor_pengharapan, 10)
-            sisi = tentukan_sisi(persen_kasih, persen_iman, persen_pengharapan)
+            sisi_list = tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan)
             st.session_state.stomata_results = {
                 "kasih": persen_kasih,
                 "iman": persen_iman,
                 "pengharapan": persen_pengharapan,
-                "sisi": sisi,
-                "nama_sisi": SISI_NAMES.get(sisi, "Tidak terdefinisi")
+                "sisi_list": sisi_list,
             }
             st.session_state.stomata_submitted = True
             st.rerun()
@@ -194,13 +206,18 @@ def show_stomata():
         col_c.metric("Pengharapan", f"{res['pengharapan']:.1f}%")
         
         # Tampilkan gambar stomata hati
-        image_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
-        if image_path.exists():
-            st.image(str(image_path), caption="Stomata Hati - Segitiga IKP", use_container_width=True)
+        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
+        if img_path.exists():
+            st.image(str(img_path), caption="Stomata Hati - Segitiga IKP", use_container_width=True)
         else:
-            st.warning(f"⚠️ Gambar Stomata Hati tidak ditemukan di path: {image_path}. Silakan upload file gambar ke folder `assets/` dengan nama `stomata_hati.jpg`.")
+            st.warning("⚠️ Gambar Stomata Hati belum tersedia. Harap upload file 'stomata_hati.jpg' ke folder 'assets'.")
         
-        st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **Sisi {res['sisi']} – {res['nama_sisi']}**")
+        sisi_list = res['sisi_list']
+        nama_list = [SISI_NAMES[s] for s in sisi_list]
+        if len(sisi_list) == 1:
+            st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **{nama_list[0]}** (Sisi {sisi_list[0]})")
+        else:
+            st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **{', '.join(nama_list)}** (Sisi {', '.join(map(str, sisi_list))})")
         
         with st.expander("📖 Penjelasan 12 Sisi Stomata Hati"):
             for no, nama in SISI_NAMES.items():
