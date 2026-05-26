@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 from ubelasy.calculator import calculate_loan
 from ubelasy.aggregator import get_recommendations, submit_application, get_all_applications_for_user
+from ubelasy.pdf_export import export_simulation_to_pdf
 
 def main():
     # ========== TAMPILAN HEADER DENGAN GAMBAR DI TENGAH ==========
@@ -86,25 +87,25 @@ def main():
         ax.set_title("Penurunan Suku Bunga 0.5% per Periode")
         ax.grid(True, linestyle='--', alpha=0.5)
         st.pyplot(fig)
-        
+          
     # Tombol ekspor PDF
-    from ubelasy.pdf_export import export_simulation_to_pdf
-    if st.button("📄 Ekspor Laporan ke PDF", key="export_pdf", use_container_width=True):
-        # Ambil rekomendasi yang ada di session state (jika ada)
+    try:
+        from ubelasy.pdf_export import export_simulation_to_pdf
         rekom = st.session_state.get("rekomendasi", None)
         pdf_path = export_simulation_to_pdf(hasil, rekom)
         with open(pdf_path, "rb") as f:
             st.download_button(
-                label="⬇️ Download PDF",
+                label="📄 Download Laporan PDF",
                 data=f,
                 file_name=f"ubelasy_simulasi_{hasil['T']}tahun.pdf",
                 mime="application/pdf",
-                use_container_width=True
+                use_container_width=True,
+                key="download_pdf_btn"
             )
-        # Hapus file sementara
-        import os
         os.unlink(pdf_path)
-    
+    except Exception as e:
+        st.error(f"Gagal membuat PDF: {e}")
+            
     # ========== AGREGATOR: Cari Pinjaman ==========
     st.markdown("---")
     st.subheader("🏦 Cari Pinjaman dari Bank Mitra")
