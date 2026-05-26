@@ -45,12 +45,27 @@ def save_applications(apps):
         json.dump(apps, f, indent=2)
 
 def get_recommendations(profil):
-    """
-    Mencari bank yang sesuai berdasarkan profil debitur.
-    Mengembalikan tuple: (cocok, credit_score, credit_grade)
-    """
     banks = load_banks()
     cocok = []
+    
+    # Hitung skor kredit sederhana berdasarkan NKHM
+    nkhm_score = profil.get("nkhm_score", 0)
+    if nkhm_score >= 320:
+        credit_score = 100
+        credit_grade = "A (Sangat Baik)"
+    elif nkhm_score >= 240:
+        credit_score = 75
+        credit_grade = "B (Baik)"
+    elif nkhm_score >= 160:
+        credit_score = 50
+        credit_grade = "C (Cukup)"
+    elif nkhm_score >= 80:
+        credit_score = 25
+        credit_grade = "D (Kurang)"
+    else:
+        credit_score = 10
+        credit_grade = "E (Sangat Kurang)"
+    
     for bank in banks:
         if not bank.get("aktif", True):
             continue
@@ -58,34 +73,27 @@ def get_recommendations(profil):
             continue
         if profil["tenor"] < bank["tenor_min"] or profil["tenor"] > bank["tenor_max"]:
             continue
-        bunga = bank["bunga_min"]  # default minimal
+        bunga = bank["bunga_min"]
+        # Penyesuaian bunga berdasarkan skor kredit
+        if credit_score >= 80:
+            bunga = max(bank["bunga_min"], bunga - 1.5)
+        elif credit_score <= 30:
+            bunga = min(bank["bunga_max"], bunga + 2.0)
         estimasi_angsuran = (profil["jumlah_pinjaman"] * (bunga/100)) / 12
         cocok.append({
             "id": bank["id"],
             "bank": bank["nama"],
-            "bunga": bunga,
+            "bunga": round(bunga, 2),
             "estimasi_angsuran": estimasi_angsuran,
             "biaya_admin": bank["biaya_admin"],
-            "komisi": bank["komisi_persen"]
+            "komisi": bank["komisi_persen"],
+            "credit_score": credit_score,
+            "credit_grade": credit_grade
         })
     
-    # Hitung skor kredit sederhana berdasarkan NKHM (jika ada)
-    nkhm_score = profil.get("nkhm_score", 0)
-    if nkhm_score >= 80:
-        credit_score = 85
-        credit_grade = "A (Sangat Baik)"
-    elif nkhm_score >= 60:
-        credit_score = 70
-        credit_grade = "B (Baik)"
-    elif nkhm_score >= 40:
-        credit_score = 55
-        credit_grade = "C (Cukup)"
-    else:
-        credit_score = 30
-        credit_grade = "D (Kurang)"
-    
+    # Urutkan berdasarkan credit_score tertinggi dan bunga terendah
+    cocok.sort(key=lambda x: (-x["credit_score"], x["bunga"]))
     return cocok, credit_score, credit_grade
-
 def submit_application(profil, bank_id):
     apps = load_applications()
     app_id = str(uuid.uuid4())[:8]
