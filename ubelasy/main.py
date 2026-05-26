@@ -10,12 +10,12 @@ from ubelasy.pdf_export import export_simulation_to_pdf
 from shared.notifications import show_toast
 
 def main():
-    # Inisialisasi session state untuk menyimpan hasil simulasi
+    # Inisialisasi session state
     if "simulasi_hasil" not in st.session_state:
         st.session_state.simulasi_hasil = None
 
-    # ========== TAMPILAN HEADER DENGAN GAMBAR DI TENGAH ==========
-    script_dir = Path(__file__).parent.parent  # naik ke root karena ubelasy/ di dalam folder
+    # ========== HEADER ==========
+    script_dir = Path(__file__).parent.parent
     image_path = script_dir / "assets" / "ubelasy.jpg"
     
     col1, col2, col3 = st.columns([1, 2, 1])
@@ -34,7 +34,7 @@ def main():
         )
     st.markdown("---")
     
-    # ========== SIDEBAR UNTUK SIMULASI ==========
+    # ========== SIDEBAR ==========
     with st.sidebar:
         if "nkhm_scores" in st.session_state:
             nkhm_total = sum(st.session_state.nkhm_scores.values())
@@ -63,13 +63,11 @@ def main():
             return
         hasil = calculate_loan(K, r1, delta, n, tp, m, bank_type, biaya_dana)
         st.session_state.simulasi_hasil = hasil
+        show_toast("📊 Simulasi pinjaman berhasil dihitung!", type="success")
     
-    # ========== TAMPILKAN HASIL SIMULASI (jika ada) ==========
+    # ========== TAMPILKAN HASIL SIMULASI ==========
     if st.session_state.simulasi_hasil is not None:
-        st.toast("📊 Simulasi pinjaman berhasil dihitung!", icon="✅")
-        
         hasil = st.session_state.simulasi_hasil
-        
         st.markdown("## 📊 Ubelasy - Simulasi Hitungan Pinjaman")
         
         col1, col2, col3, col4 = st.columns(4)
@@ -97,16 +95,12 @@ def main():
         ax.grid(True, linestyle='--', alpha=0.5)
         st.pyplot(fig)
     
-        # ========== TOMBOL EKSPOR PDF ==========
-        rekom = st.session_state.get("rekomendasi", None)        
+        # ========== EKSPOR PDF ==========
+        rekom = st.session_state.get("rekomendasi", None)
         try:
             pdf_path = export_simulation_to_pdf(hasil, rekom)
             with open(pdf_path, "rb") as f:
                 if st.download_button(
-                    st.toast("📄 Laporan PDF sedang disiapkan...", icon="⏳")
-                    # ... kode download
-                    st.toast("✅ Laporan berhasil diunduh!", icon="✅")
-                    
                     label="📄 Download Laporan PDF",
                     data=f,
                     file_name=f"ubelasy_simulasi_{hasil['T']}tahun.pdf",
@@ -114,12 +108,12 @@ def main():
                     use_container_width=True,
                     key="download_pdf_btn"
                 ):
-                    st.success("✅ File laporan simulasi pinjaman berhasil diunduh!")
+                    show_toast("✅ Laporan berhasil diunduh!", type="success")
             os.unlink(pdf_path)
         except Exception as e:
             st.error(f"Gagal membuat PDF: {e}")
     
-    # ========== AGREGATOR: Cari Pinjaman ==========
+    # ========== AGREGATOR: CARI PINJAMAN ==========
     st.markdown("---")
     st.subheader("🏦 Cari Pinjaman dari Bank Mitra")
     
@@ -135,8 +129,6 @@ def main():
         submitted = st.form_submit_button("🔍 Cari Rekomendasi")
     
     if submitted:
-        st.toast(f"🏦 Ditemukan {len(rekom)} bank mitra yang cocok!", icon="🔍")
-        
         nkhm_total = 0
         if "nkhm_scores" in st.session_state:
             nkhm_total = sum(st.session_state.nkhm_scores.values())
@@ -154,6 +146,7 @@ def main():
         st.session_state.profil_terakhir = profil
         st.session_state.credit_score = credit_score
         st.session_state.credit_grade = credit_grade
+        show_toast(f"🏦 Ditemukan {len(rekom)} bank mitra yang cocok!", type="success")
         st.rerun()
     
     if "credit_score" in st.session_state:
@@ -170,12 +163,13 @@ def main():
                 st.caption(f"📈 Skor kredit Anda: {r.get('credit_score', 'N/A')} ({r.get('credit_grade', 'N/A')}) → bunga disesuaikan")
                 if st.button(f"Ajukan ke {r['bank']}", key=r['id']):
                     app_id = submit_application(st.session_state.profil_terakhir, r['id'])
-                    st.toast(f"✅ Pengajuan ke {r['bank']} terkirim! ID: {app_id}", icon="📨")
+                    show_toast(f"✅ Pengajuan ke {r['bank']} terkirim! ID: {app_id}", type="success", duration=5000)
                     st.success(f"Pengajuan berhasil dikirim! ID: {app_id}")
                     st.info("Bank akan menghubungi Anda dalam 1x24 jam.")
     elif "rekomendasi" in st.session_state:
         st.warning("Belum ada bank yang cocok. Coba ubah kriteria pinjaman.")
     
+    # ========== STATUS PENGAJUAN ==========
     st.markdown("---")
     st.subheader("📋 Status Pengajuan Anda")
     apps = get_all_applications_for_user()
@@ -189,6 +183,9 @@ def main():
                 "Disetujui": "✅",
                 "Ditolak": "❌"
             }.get(app["status"], "⚪")
+            # NOTIFIKASI HANYA JIKA STATUS BERUBAH (disimpan di session)
+            # Untuk demo, kita tidak perlu notifikasi di sini karena setiap render akan muncul
+            # Notifikasi status update hanya dikirim dari admin panel (aggregator.update_application_status)
             with st.expander(f"{status_color} {app['id']} - {app['tanggal']} - {app['status']}"):
                 st.write(f"**Bank:** {app['bank_id']}")
                 st.write(f"**Jumlah pinjaman:** Rp {app['profil']['jumlah_pinjaman']:,.0f}".replace(",", "."))
