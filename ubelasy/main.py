@@ -95,7 +95,7 @@ def main():
         try:
             pdf_path = export_simulation_to_pdf(hasil, rekom)
             with open(pdf_path, "rb") as f:
-                st.download_button(
+                if st.download_button(
                     label="📄 Download Laporan PDF",
                     data=f,
                     file_name=f"ubelasy_simulasi_{hasil['T']}tahun.pdf",
@@ -103,6 +103,7 @@ def main():
                     use_container_width=True,
                     key="download_pdf_btn"
                 )
+                    st.success("✅ File laporan simulasi pinjaman berhasil diunduh!")
             os.unlink(pdf_path)
         except Exception as e:
             st.error(f"Gagal membuat PDF: {e}")
