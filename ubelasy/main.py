@@ -72,13 +72,13 @@ def main():
         col3.metric("📈 Return Tahunan", f"{hasil['return_tahunan']:.2f}% p.a")
         col4.metric("📉 Rata-rata Bunga", f"{hasil['rata_bunga']:.2f}%")
         col4.metric("📊 Spread", f"{hasil['spread']:.2f}%")
-        
+    
         st.subheader("📋 Detail per Periode")
         st.dataframe(pd.DataFrame(hasil['detail']), use_container_width=True, hide_index=True)
-        
+    
         st.subheader("📌 Status Debitur")
         st.info(f"**{hasil['status']}** (dPSH = {hasil['dPSH']:.4f})")
-        
+    
         bunga = [hasil['detail'][i]['Suku Bunga (%)'] for i in range(n)]
         fig, ax = plt.subplots()
         ax.plot(range(1, n+1), bunga, marker='o', color='#2e7d32')
@@ -87,11 +87,12 @@ def main():
         ax.set_title("Penurunan Suku Bunga 0.5% per Periode")
         ax.grid(True, linestyle='--', alpha=0.5)
         st.pyplot(fig)
-          
-        # Tombol ekspor PDF
+    
+        # ========== TOMBOL EKSPOR PDF ==========
+        from ubelasy.pdf_export import export_simulation_to_pdf
+        import os
+        rekom = st.session_state.get("rekomendasi", None)        
         try:
-            from ubelasy.pdf_export import export_simulation_to_pdf
-            rekom = st.session_state.get("rekomendasi", None)
             pdf_path = export_simulation_to_pdf(hasil, rekom)
             with open(pdf_path, "rb") as f:
                 st.download_button(
@@ -105,7 +106,7 @@ def main():
             os.unlink(pdf_path)
         except Exception as e:
             st.error(f"Gagal membuat PDF: {e}")
-            
+               
     # ========== AGREGATOR: Cari Pinjaman ==========
     st.markdown("---")
     st.subheader("🏦 Cari Pinjaman dari Bank Mitra")
