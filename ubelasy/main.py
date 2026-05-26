@@ -88,23 +88,23 @@ def main():
         ax.grid(True, linestyle='--', alpha=0.5)
         st.pyplot(fig)
           
-    # Tombol ekspor PDF
-    try:
-        from ubelasy.pdf_export import export_simulation_to_pdf
-        rekom = st.session_state.get("rekomendasi", None)
-        pdf_path = export_simulation_to_pdf(hasil, rekom)
-        with open(pdf_path, "rb") as f:
-            st.download_button(
-                label="📄 Download Laporan PDF",
-                data=f,
-                file_name=f"ubelasy_simulasi_{hasil['T']}tahun.pdf",
-                mime="application/pdf",
-                use_container_width=True,
-                key="download_pdf_btn"
-            )
-        os.unlink(pdf_path)
-    except Exception as e:
-        st.error(f"Gagal membuat PDF: {e}")
+        # Tombol ekspor PDF
+        try:
+            from ubelasy.pdf_export import export_simulation_to_pdf
+            rekom = st.session_state.get("rekomendasi", None)
+            pdf_path = export_simulation_to_pdf(hasil, rekom)
+            with open(pdf_path, "rb") as f:
+                st.download_button(
+                    label="📄 Download Laporan PDF",
+                    data=f,
+                    file_name=f"ubelasy_simulasi_{hasil['T']}tahun.pdf",
+                    mime="application/pdf",
+                    use_container_width=True,
+                    key="download_pdf_btn"
+                )
+            os.unlink(pdf_path)
+        except Exception as e:
+            st.error(f"Gagal membuat PDF: {e}")
             
     # ========== AGREGATOR: Cari Pinjaman ==========
     st.markdown("---")
