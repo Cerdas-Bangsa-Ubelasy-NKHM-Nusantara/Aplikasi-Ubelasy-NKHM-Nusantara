@@ -92,6 +92,29 @@ if not st.session_state.get("splash_selesai", False):
                 st.session_state.splash_selesai = True
                 st.rerun()
     st.stop()
+    
+    
+# Mode gelap toggle
+if "dark_mode" not in st.session_state:
+    st.session_state.dark_mode = False
+
+dark_mode_toggle = st.sidebar.toggle("🌙 Mode Gelap", value=st.session_state.dark_mode)
+if dark_mode_toggle != st.session_state.dark_mode:
+    st.session_state.dark_mode = dark_mode_toggle
+    st.rerun()
+
+if st.session_state.dark_mode:
+    st.markdown("""
+    <style>
+    .stApp {
+        background-color: #0e1117;
+        color: #ffffff;
+    }
+    .stSidebar {
+        background-color: #1e1e2f;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 # ========== SIDEBAR UTAMA ==========
 st.sidebar.title("🚀 Pilih Aplikasi")
