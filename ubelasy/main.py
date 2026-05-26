@@ -65,6 +65,8 @@ def main():
     
     # ========== TAMPILKAN HASIL SIMULASI (jika ada) ==========
     if st.session_state.simulasi_hasil is not None:
+        st.toast("📊 Simulasi pinjaman berhasil dihitung!", icon="✅")
+        
         hasil = st.session_state.simulasi_hasil
         
         st.markdown("## 📊 Ubelasy - Simulasi Hitungan Pinjaman")
@@ -100,6 +102,10 @@ def main():
             pdf_path = export_simulation_to_pdf(hasil, rekom)
             with open(pdf_path, "rb") as f:
                 if st.download_button(
+                    st.toast("📄 Laporan PDF sedang disiapkan...", icon="⏳")
+                    # ... kode download
+                    st.toast("✅ Laporan berhasil diunduh!", icon="✅")
+                    
                     label="📄 Download Laporan PDF",
                     data=f,
                     file_name=f"ubelasy_simulasi_{hasil['T']}tahun.pdf",
@@ -128,6 +134,8 @@ def main():
         submitted = st.form_submit_button("🔍 Cari Rekomendasi")
     
     if submitted:
+        st.toast(f"🏦 Ditemukan {len(rekom)} bank mitra yang cocok!", icon="🔍")
+        
         nkhm_total = 0
         if "nkhm_scores" in st.session_state:
             nkhm_total = sum(st.session_state.nkhm_scores.values())
@@ -161,6 +169,7 @@ def main():
                 st.caption(f"📈 Skor kredit Anda: {r.get('credit_score', 'N/A')} ({r.get('credit_grade', 'N/A')}) → bunga disesuaikan")
                 if st.button(f"Ajukan ke {r['bank']}", key=r['id']):
                     app_id = submit_application(st.session_state.profil_terakhir, r['id'])
+                    st.toast(f"✅ Pengajuan ke {r['bank']} terkirim! ID: {app_id}", icon="📨")
                     st.success(f"Pengajuan berhasil dikirim! ID: {app_id}")
                     st.info("Bank akan menghubungi Anda dalam 1x24 jam.")
     elif "rekomendasi" in st.session_state:
