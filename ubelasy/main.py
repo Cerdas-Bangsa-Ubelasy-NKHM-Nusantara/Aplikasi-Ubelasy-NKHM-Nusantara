@@ -7,6 +7,7 @@ from pathlib import Path
 from ubelasy.calculator import calculate_loan
 from ubelasy.aggregator import get_recommendations, submit_application, get_all_applications_for_user
 from ubelasy.pdf_export import export_simulation_to_pdf
+from shared.notifications import show_toast
 
 def main():
     # Inisialisasi session state untuk menyimpan hasil simulasi
