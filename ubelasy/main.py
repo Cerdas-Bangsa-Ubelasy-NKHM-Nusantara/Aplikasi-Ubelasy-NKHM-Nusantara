@@ -86,6 +86,24 @@ def main():
         ax.set_title("Penurunan Suku Bunga 0.5% per Periode")
         ax.grid(True, linestyle='--', alpha=0.5)
         st.pyplot(fig)
+        
+    # Tombol ekspor PDF
+    from ubelasy.pdf_export import export_simulation_to_pdf
+    if st.button("📄 Ekspor Laporan ke PDF", key="export_pdf", use_container_width=True):
+        # Ambil rekomendasi yang ada di session state (jika ada)
+        rekom = st.session_state.get("rekomendasi", None)
+        pdf_path = export_simulation_to_pdf(hasil, rekom)
+        with open(pdf_path, "rb") as f:
+            st.download_button(
+                label="⬇️ Download PDF",
+                data=f,
+                file_name=f"ubelasy_simulasi_{hasil['T']}tahun.pdf",
+                mime="application/pdf",
+                use_container_width=True
+            )
+        # Hapus file sementara
+        import os
+        os.unlink(pdf_path)
     
     # ========== AGREGATOR: Cari Pinjaman ==========
     st.markdown("---")
@@ -125,6 +143,7 @@ def main():
         st.session_state.credit_score = credit_score
         st.session_state.credit_grade = credit_grade
         st.rerun()
+        st.session_state.rekomendasi
     
     # ========== TAMPILAN SKOR KREDIT DEBITUR ==========
     if "credit_score" in st.session_state:
