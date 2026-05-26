@@ -45,6 +45,10 @@ def save_applications(apps):
         json.dump(apps, f, indent=2)
 
 def get_recommendations(profil):
+    """
+    Mencari bank yang sesuai berdasarkan profil debitur.
+    Mengembalikan tuple: (cocok, credit_score, credit_grade)
+    """
     banks = load_banks()
     cocok = []
     for bank in banks:
@@ -54,7 +58,7 @@ def get_recommendations(profil):
             continue
         if profil["tenor"] < bank["tenor_min"] or profil["tenor"] > bank["tenor_max"]:
             continue
-        bunga = bank["bunga_min"]
+        bunga = bank["bunga_min"]  # default minimal
         estimasi_angsuran = (profil["jumlah_pinjaman"] * (bunga/100)) / 12
         cocok.append({
             "id": bank["id"],
@@ -64,7 +68,23 @@ def get_recommendations(profil):
             "biaya_admin": bank["biaya_admin"],
             "komisi": bank["komisi_persen"]
         })
-    return cocok
+    
+    # Hitung skor kredit sederhana berdasarkan NKHM (jika ada)
+    nkhm_score = profil.get("nkhm_score", 0)
+    if nkhm_score >= 80:
+        credit_score = 85
+        credit_grade = "A (Sangat Baik)"
+    elif nkhm_score >= 60:
+        credit_score = 70
+        credit_grade = "B (Baik)"
+    elif nkhm_score >= 40:
+        credit_score = 55
+        credit_grade = "C (Cukup)"
+    else:
+        credit_score = 30
+        credit_grade = "D (Kurang)"
+    
+    return cocok, credit_score, credit_grade
 
 def submit_application(profil, bank_id):
     apps = load_applications()
