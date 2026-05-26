@@ -93,7 +93,7 @@ if not st.session_state.get("splash_selesai", False):
                 st.rerun()
     st.stop()
     
-    
+st.set_page_config(page_title="Ubelasy + NKHM Nusantara", page_icon="🇮🇩", layout="wide")  
 # Mode gelap toggle
 if "dark_mode" not in st.session_state:
     st.session_state.dark_mode = False
