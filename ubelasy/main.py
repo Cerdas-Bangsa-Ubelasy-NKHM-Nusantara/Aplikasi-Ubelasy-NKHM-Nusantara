@@ -102,12 +102,12 @@ def main():
                     mime="application/pdf",
                     use_container_width=True,
                     key="download_pdf_btn"
-                )
+                ):
                     st.success("✅ File laporan simulasi pinjaman berhasil diunduh!")
             os.unlink(pdf_path)
         except Exception as e:
             st.error(f"Gagal membuat PDF: {e}")
-               
+            
     # ========== AGREGATOR: Cari Pinjaman ==========
     st.markdown("---")
     st.subheader("🏦 Cari Pinjaman dari Bank Mitra")
@@ -146,8 +146,7 @@ def main():
         st.session_state.credit_score = credit_score
         st.session_state.credit_grade = credit_grade
         st.rerun()
-        st.session_state.rekomendasi
-    
+            
     # ========== TAMPILAN SKOR KREDIT DEBITUR ==========
     if "credit_score" in st.session_state:
         st.info(f"📊 **Skor Kredit Anda: {st.session_state.credit_score}** ({st.session_state.credit_grade}) - Semakin tinggi skor, semakin rendah bunga yang ditawarkan.")
