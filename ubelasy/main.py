@@ -9,20 +9,20 @@ from ubelasy.aggregator import get_recommendations, submit_application, get_all_
 from ubelasy.pdf_export import export_simulation_to_pdf
 
 def main():
+    # Inisialisasi session state untuk menyimpan hasil simulasi
+    if "simulasi_hasil" not in st.session_state:
+        st.session_state.simulasi_hasil = None
+
     # ========== TAMPILAN HEADER DENGAN GAMBAR DI TENGAH ==========
     script_dir = Path(__file__).parent.parent  # naik ke root karena ubelasy/ di dalam folder
     image_path = script_dir / "assets" / "ubelasy.jpg"
     
-    # Gunakan kolom untuk memusatkan konten header
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        # Tampilkan gambar di tengah
         if image_path.exists():
             st.image(str(image_path), use_container_width=True)
         else:
             st.warning("Gambar ubelasy.jpg tidak ditemukan di folder assets/")
-        
-        # Judul di tengah
         st.markdown(
             "<h1 style='text-align: center;'>🌾 Ubelasy – Agregator Pinjaman Berkelanjutan</h1>",
             unsafe_allow_html=True
@@ -35,7 +35,6 @@ def main():
     
     # ========== SIDEBAR UNTUK SIMULASI ==========
     with st.sidebar:
-        # Tampilkan skor NKHM jika tersedia dari session state
         if "nkhm_scores" in st.session_state:
             nkhm_total = sum(st.session_state.nkhm_scores.values())
             st.metric("🧠 Skor NKHM", nkhm_total)
@@ -56,12 +55,19 @@ def main():
         biaya_dana = st.number_input("Biaya Dana+Overhead (%)", value=9.0, step=0.5)
         hitung = st.button("🚀 Hitung Simulasi", type="primary", use_container_width=True)
     
-    # Simulasi (kalkulator)
+    # ========== PROSES SIMULASI ==========
     if hitung:
         if m > tp:
             st.error(f"⚠️ m ({m}) tidak boleh > tp ({tp})")
             return
         hasil = calculate_loan(K, r1, delta, n, tp, m, bank_type, biaya_dana)
+        st.session_state.simulasi_hasil = hasil
+    
+    # ========== TAMPILKAN HASIL SIMULASI (jika ada) ==========
+    if st.session_state.simulasi_hasil is not None:
+        hasil = st.session_state.simulasi_hasil
+        
+        st.markdown("## 📊 Ubelasy - Simulasi Hitungan Pinjaman")
         
         col1, col2, col3, col4 = st.columns(4)
         col1.metric("📅 Total Tenor", f"{hasil['T']} tahun")
@@ -89,8 +95,6 @@ def main():
         st.pyplot(fig)
     
         # ========== TOMBOL EKSPOR PDF ==========
-        from ubelasy.pdf_export import export_simulation_to_pdf
-        import os
         rekom = st.session_state.get("rekomendasi", None)        
         try:
             pdf_path = export_simulation_to_pdf(hasil, rekom)
@@ -107,12 +111,11 @@ def main():
             os.unlink(pdf_path)
         except Exception as e:
             st.error(f"Gagal membuat PDF: {e}")
-            
+    
     # ========== AGREGATOR: Cari Pinjaman ==========
     st.markdown("---")
     st.subheader("🏦 Cari Pinjaman dari Bank Mitra")
     
-    # Form untuk input kriteria (termasuk email dan phone)
     with st.form("form_cari_pinjaman"):
         col_a, col_b = st.columns(2)
         with col_a:
@@ -124,13 +127,10 @@ def main():
             phone = st.text_input("Nomor WhatsApp (untuk notifikasi)", placeholder="08123456789")
         submitted = st.form_submit_button("🔍 Cari Rekomendasi")
     
-    # Simpan hasil pencarian di session state agar tidak hilang
     if submitted:
-        # Hitung total NKHM jika ada (untuk skor kredit)
         nkhm_total = 0
         if "nkhm_scores" in st.session_state:
             nkhm_total = sum(st.session_state.nkhm_scores.values())
-        
         profil = {
             "jumlah_pinjaman": jumlah_pinjaman,
             "sektor": sektor_usaha,
@@ -146,12 +146,10 @@ def main():
         st.session_state.credit_score = credit_score
         st.session_state.credit_grade = credit_grade
         st.rerun()
-            
-    # ========== TAMPILAN SKOR KREDIT DEBITUR ==========
+    
     if "credit_score" in st.session_state:
         st.info(f"📊 **Skor Kredit Anda: {st.session_state.credit_score}** ({st.session_state.credit_grade}) - Semakin tinggi skor, semakin rendah bunga yang ditawarkan.")
     
-    # Tampilkan rekomendasi jika ada
     if "rekomendasi" in st.session_state and st.session_state.rekomendasi:
         rekom = st.session_state.rekomendasi
         st.success(f"Ditemukan {len(rekom)} bank yang cocok:")
@@ -168,7 +166,6 @@ def main():
     elif "rekomendasi" in st.session_state:
         st.warning("Belum ada bank yang cocok. Coba ubah kriteria pinjaman.")
     
-    # ========== STATUS PENGAJUAN ==========
     st.markdown("---")
     st.subheader("📋 Status Pengajuan Anda")
     apps = get_all_applications_for_user()
@@ -189,13 +186,12 @@ def main():
                 if app.get('catatan'):
                     st.write(f"**Catatan:** {app['catatan']}")
                     
-    # ========== ADMIN PANEL GLOBAL ==========
+    # ========== ADMIN PANEL ==========
     if st.query_params.get("admin") == "1":
         from ubelasy.admin import admin_page
         admin_page()
         st.stop()
         
-    # ========== BANK ADMIN PANEL (per bank) ==========
     if st.query_params.get("bank"):
         bank_id = st.query_params.get("bank")
         from ubelasy.bank_admin import bank_admin_page
