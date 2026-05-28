@@ -127,12 +127,12 @@ def show_dasbor():
                         st.rerun()
     
     # ========== SUB-TAB 2: CATATAN PRIBADI ==========
+    # ========== SUB-TAB 2: CATATAN PRIBADI ==========
     with sub_tab2:
         try:
-            from nkhm.catatan_pribadi.main import show_catatan_pribadi
-            show_catatan_pribadi()
-        except ImportError as e:
-            st.error(f"Modul catatan pribadi tidak ditemukan: {e}")
-            st.info("Pastikan folder `nkhm/catatan_pribadi/` sudah di-upload ke repository.")
-        except Exception as e:
-            st.error(f"Terjadi kesalahan saat memuat catatan pribadi: {e}")
+        from nkhm.catatan_pribadi.loader import show_catatan_pribadi
+        show_catatan_pribadi()
+    except ImportError as e:
+        st.error(f"Modul catatan pribadi tidak ditemukan: {e}")
+    except Exception as e:
+        st.error(f"Terjadi kesalahan: {e}")
