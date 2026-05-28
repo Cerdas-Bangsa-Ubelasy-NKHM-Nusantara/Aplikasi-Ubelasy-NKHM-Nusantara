@@ -2,10 +2,18 @@
 import streamlit as st
 from pathlib import Path
 
-    """Menampilkan aplikasi React Catatan Pribadi"""
 def show_catatan_pribadi():
+    """Menampilkan aplikasi React Catatan Pribadi"""
     st.markdown("### 📝 Catatan Pribadi")
-    st.components.v1.iframe("https://your-react-app.vercel.app", height=600, scrolling=True)
+    
+    # Path ke folder dist
+    dist_path = Path(__file__).parent / "dist"
+    index_path = dist_path / "index.html"
+    
+    if not index_path.exists():
+        st.error(f"❌ Aplikasi catatan pribadi belum di-build. Pastikan folder `dist` ada di {dist_path}")
+        st.info("Jalankan `npm run build` di folder `nkhm/catatan_pribadi`, lalu upload folder `dist` ke GitHub.")
+        return
     
     # Baca file index.html
     with open(index_path, "r", encoding="utf-8") as f:
