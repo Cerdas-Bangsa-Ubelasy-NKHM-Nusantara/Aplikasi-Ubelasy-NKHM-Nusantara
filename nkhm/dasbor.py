@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
+from nkhm.scoring import calculate_nkhm_q, calculate_nkhm_total
 
 def show_dasbor():
     st.markdown("## 👤 Dasbor Saya")
@@ -13,8 +14,7 @@ def show_dasbor():
     total_questions = st.session_state.nkhm_total_questions
     user_name = st.session_state.nkhm_user
     
-    # Hitung NKHM_Q dan NKHM_Total (gunakan fungsi yang sudah ada)
-    from nkhm.scoring import calculate_nkhm_q, calculate_nkhm_total
+    # Hitung NKHM_Q dan NKHM_Total
     nkhm_q = calculate_nkhm_q(scores["IQ"], scores["EQ"], scores["SQ"], scores["AQ"])
     nkhm_total = calculate_nkhm_total(nkhm_q, scores["Nasionalisme"])
     
@@ -33,14 +33,10 @@ def show_dasbor():
     st.subheader("📈 Perkembangan Skor Kecerdasan")
     
     if history:
-        # Konversi riwayat ke DataFrame
         df_history = pd.DataFrame(history)
         if "nkhm_total" in df_history.columns:
-            # Ambil 15 data terakhir
             df_recent = df_history.tail(15).copy()
             df_recent["urutan"] = range(1, len(df_recent) + 1)
-            
-            # Plot garis perkembangan
             st.line_chart(df_recent.set_index("urutan")["nkhm_total"], height=300)
             st.caption("Grafik menunjukkan perkembangan NKHM Total dari 15 kuis terakhir.")
         else:
@@ -53,7 +49,6 @@ def show_dasbor():
     # ========== 3. ANALISIS KEKUATAN & KELEMAHAN ==========
     st.subheader("📊 Analisis Kekuatan & Kelemahan")
     
-    # Urutkan skor dari tertinggi ke terendah
     sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
     
     col_weak, col_strong = st.columns(2)
@@ -72,7 +67,6 @@ def show_dasbor():
     # ========== 4. REKOMENDASI PERSONAL ==========
     st.subheader("💡 Rekomendasi untuk Anda")
     
-    # Cari area terendah
     lowest_category = min(scores, key=scores.get)
     lowest_score = scores[lowest_category]
     
@@ -92,7 +86,6 @@ def show_dasbor():
         Skor {lowest_category} Anda sudah sangat baik. Pertahankan dan bantu teman yang masih kesulitan.
         """)
     
-    # Rekomendasi berdasarkan NKHM total
     if nkhm_total < 40:
         st.info("💪 **NKHM Total masih di bawah 40.** Jangan menyerah! Konsistensi adalah kunci. Kerjakan minimal 5 soal setiap hari.")
     elif nkhm_total < 60:
@@ -109,9 +102,8 @@ def show_dasbor():
     st.subheader("📜 Riwayat Kuis Terbaru")
     
     if history:
-        # Tampilkan 5 riwayat terakhir
-        recent_history = history[-5:][::-1]  # balik urutan agar yang terbaru di atas
-        for i, item in enumerate(recent_history):
+        recent_history = history[-5:][::-1]
+        for item in recent_history:
             status = "✅" if item.get("correct", False) else "❌"
             st.write(f"{status} **{item.get('type', '?')}** – {item.get('question', '')[:60]}...")
         if len(history) > 5:
@@ -124,18 +116,13 @@ def show_dasbor():
     # ========== 6. TARGET MINGGUAN ==========
     st.subheader("🎯 Target Mingguan Anda")
     
-    # Ambil data 7 hari terakhir dari history
     if history:
-        # Hitung jumlah soal yang dikerjakan dalam 7 hari terakhir
         now = datetime.now()
         week_ago = now - timedelta(days=7)
         questions_last_week = sum(1 for h in history if h.get("timestamp") and datetime.strptime(h["timestamp"], "%H:%M:%S") > week_ago)
-        
         target = 20
         progress = min(questions_last_week / target, 1.0)
-        
         st.progress(progress, text=f"Soal minggu ini: {questions_last_week} / {target}")
-        
         if questions_last_week >= target:
             st.success("✅ Target mingguan tercapai! Pertahankan konsistensi Anda.")
         else:
@@ -143,8 +130,9 @@ def show_dasbor():
     else:
         st.info("Kerjakan soal untuk memulai target mingguan Anda (20 soal/minggu).")
     
-    # ========== 7. TOMBOL RESET (peringatan) ==========
     st.markdown("---")
+    
+    # ========== 7. TOMBOL RESET ==========
     with st.expander("⚠️ Pengaturan Lanjutan"):
         if st.button("Reset Semua Data Saya", use_container_width=True):
             st.warning("Apakah Anda yakin? Tindakan ini akan menghapus semua skor dan riwayat Anda.")
