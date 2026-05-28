@@ -17,6 +17,7 @@ from nkhm.leaderboard import show_leaderboard, save_score
 from nkhm.tutorial import show_tutorial
 from nkhm.battle import show_battle
 from nkhm.stomata import show_stomata
+from nkhm.dasbor import show_dasbor
 
 # Import opsional (komentari jika file belum ada)
 try:
@@ -189,9 +190,9 @@ def main():
             st.rerun()
     
     # ========== TAB UTAMA ==========
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
-        "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "⚔️ TANDING", "🎁 KARUNIA", "📘 TUTORIAL"
-    ])
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
+    "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", "⚔️ TANDING", "🎁 KARUNIA", "💖 STOMATA"
+])
     
     # ========== TAB 1: KUIS ==========
     with tab1:
@@ -475,9 +476,13 @@ def main():
         col2.metric("✅ Benar", correct)
         col3.metric("📊 Akurasi", f"{accuracy:.1f}%")
         show_leaderboard()
-    
-    # ========== TAB 4: TANDING ==========
+
+    # ========== TAB 4: DASBOR SAYA ==========
     with tab4:
+        show_dasbor()
+    
+    # ========== TAB 5: TANDING ==========
+    with tab5:
         if TOURNAMENT_AVAILABLE and show_tournament is not None:
             tanding_mode = st.radio(
                 "Pilih Mode Tanding:",
@@ -493,8 +498,8 @@ def main():
             show_battle()
             st.info("🏆 Mode Turnamen Kelas akan segera hadir!")
     
-    # ========== TAB 5: KARUNIA & STOMATA =========
-    with tab5:
+    # ========== TAB 6: KARUNIA & STOMATA =========
+    with tab6:
         sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Stomata Hati"])
         with sub_tab1:
             if KARUNIA_AVAILABLE and show_karunia is not None:
@@ -504,8 +509,8 @@ def main():
         with sub_tab2:
             show_stomata()
         
-    # ========== TAB 6: TUTORIAL ==========
-    with tab6:
+    # ========== TAB 7: TUTORIAL ==========
+    with tab7:
         show_tutorial()
 
 if __name__ == "__main__":
