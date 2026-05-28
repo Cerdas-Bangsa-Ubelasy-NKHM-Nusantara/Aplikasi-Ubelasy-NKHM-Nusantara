@@ -14,7 +14,7 @@ def show_dasbor():
     user_name = st.session_state.nkhm_user
     
     # Hitung NKHM_Q dan NKHM_Total (gunakan fungsi yang sudah ada)
-    from nkhm.utils import calculate_nkhm_q, calculate_nkhm_total
+    from nkhm.scoring import calculate_nkhm_q, calculate_nkhm_total
     nkhm_q = calculate_nkhm_q(scores["IQ"], scores["EQ"], scores["SQ"], scores["AQ"])
     nkhm_total = calculate_nkhm_total(nkhm_q, scores["Nasionalisme"])
     
