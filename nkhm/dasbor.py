@@ -8,22 +8,19 @@ def show_dasbor():
     st.markdown("## 👤 Dasbor Saya")
     st.markdown("Ringkasan perkembangan dan rekomendasi personal Anda.")
     
-    # Buat sub-tab di dalam Dasbor Saya
+    # Sub-tab
     sub_tab1, sub_tab2 = st.tabs(["📊 Ringkasan & Progres", "📝 Catatan Pribadi"])
     
     # ========== SUB-TAB 1: RINGKASAN & PROGRES ==========
     with sub_tab1:
-        # Ambil data dari session state
         scores = st.session_state.nkhm_scores
         history = st.session_state.nkhm_history
         total_questions = st.session_state.nkhm_total_questions
         user_name = st.session_state.nkhm_user
         
-        # Hitung NKHM_Q dan NKHM_Total
         nkhm_q = calculate_nkhm_q(scores["IQ"], scores["EQ"], scores["SQ"], scores["AQ"])
         nkhm_total = calculate_nkhm_total(nkhm_q, scores["Nasionalisme"])
         
-        # 1. KARTU PROFIL SINGKAT
         col1, col2, col3 = st.columns(3)
         with col1:
             st.metric("👤 Nama Pengguna", user_name)
@@ -34,7 +31,6 @@ def show_dasbor():
         
         st.markdown("---")
         
-        # 2. GRAFIK PERKEMBANGAN SKOR
         st.subheader("📈 Perkembangan Skor Kecerdasan")
         if history:
             df_history = pd.DataFrame(history)
@@ -42,15 +38,14 @@ def show_dasbor():
                 df_recent = df_history.tail(15).copy()
                 df_recent["urutan"] = range(1, len(df_recent) + 1)
                 st.line_chart(df_recent.set_index("urutan")["nkhm_total"], height=300)
-                st.caption("Grafik menunjukkan perkembangan NKHM Total dari 15 kuis terakhir.")
+                st.caption("Perkembangan NKHM Total dari 15 kuis terakhir.")
             else:
-                st.info("Belum cukup data untuk menampilkan grafik perkembangan. Kerjakan lebih banyak kuis!")
+                st.info("Belum cukup data untuk grafik perkembangan.")
         else:
-            st.info("Belum ada riwayat kuis. Mulai kerjakan kuis untuk melihat perkembangan Anda!")
+            st.info("Belum ada riwayat kuis. Mulai kerjakan kuis!")
         
         st.markdown("---")
         
-        # 3. ANALISIS KEKUATAN & KELEMAHAN
         st.subheader("📊 Analisis Kekuatan & Kelemahan")
         sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
         col_weak, col_strong = st.columns(2)
@@ -65,44 +60,40 @@ def show_dasbor():
         
         st.markdown("---")
         
-        # 4. REKOMENDASI PERSONAL
         st.subheader("💡 Rekomendasi untuk Anda")
         lowest_category = min(scores, key=scores.get)
         lowest_score = scores[lowest_category]
         if lowest_score < 50:
-            st.warning(f"**🎯 Fokus pada {lowest_category}** – Skor Anda masih di bawah 50. Coba lebih banyak mengerjakan soal dengan filter **Fokus = {lowest_category}**.")
+            st.warning(f"**🎯 Fokus pada {lowest_category}** – Skor Anda masih di bawah 50.")
         elif lowest_score < 75:
-            st.info(f"**📚 Tingkatkan {lowest_category}** – Skor Anda sudah cukup baik, tetapi masih bisa ditingkatkan. Kerjakan 5-10 soal tambahan di kategori ini.")
+            st.info(f"**📚 Tingkatkan {lowest_category}** – Skor Anda sudah cukup baik, masih bisa ditingkatkan.")
         else:
-            st.success(f"**🌟 Luar Biasa!** – Skor {lowest_category} Anda sudah sangat baik. Pertahankan dan bantu teman yang masih kesulitan.")
+            st.success(f"**🌟 Luar Biasa!** – Skor {lowest_category} Anda sudah sangat baik.")
         
         if nkhm_total < 40:
-            st.info("💪 **NKHM Total masih di bawah 40.** Jangan menyerah! Konsistensi adalah kunci. Kerjakan minimal 5 soal setiap hari.")
+            st.info("💪 **NKHM Total masih di bawah 40.** Jangan menyerah!")
         elif nkhm_total < 60:
-            st.info("📈 **NKHM Total Anda sudah di jalur yang baik.** Terus tingkatkan dengan fokus pada area yang masih lemah.")
+            st.info("📈 **NKHM Total Anda sudah di jalur yang baik.** Terus tingkatkan.")
         elif nkhm_total < 80:
-            st.success("🎯 **NKHM Total Anda bagus!** Pertahankan dan targetkan level Pahlawan Cerdas (80+).")
+            st.success("🎯 **NKHM Total Anda bagus!** Targetkan level Pahlawan Cerdas (80+).")
         else:
             st.balloons()
-            st.success("🏆 **SELAMAT! Anda telah mencapai level Pahlawan Cerdas!** Terus asah kemampuan Anda.")
+            st.success("🏆 **SELAMAT! Anda telah mencapai level Pahlawan Cerdas!**")
         
         st.markdown("---")
         
-        # 5. RIWAYAT KUIS TERBARU
         st.subheader("📜 Riwayat Kuis Terbaru")
         if history:
-            recent_history = history[-5:][::-1]
-            for item in recent_history:
+            for item in history[-5:][::-1]:
                 status = "✅" if item.get("correct", False) else "❌"
                 st.write(f"{status} **{item.get('type', '?')}** – {item.get('question', '')[:60]}...")
             if len(history) > 5:
                 st.caption(f"Menampilkan 5 dari {len(history)} riwayat.")
         else:
-            st.info("Belum ada riwayat kuis. Mulai kerjakan kuis sekarang!")
+            st.info("Belum ada riwayat kuis.")
         
         st.markdown("---")
         
-        # 6. TARGET MINGGUAN
         st.subheader("🎯 Target Mingguan Anda")
         if history:
             now = datetime.now()
@@ -112,15 +103,14 @@ def show_dasbor():
             progress = min(questions_last_week / target, 1.0)
             st.progress(progress, text=f"Soal minggu ini: {questions_last_week} / {target}")
             if questions_last_week >= target:
-                st.success("✅ Target mingguan tercapai! Pertahankan konsistensi Anda.")
+                st.success("✅ Target mingguan tercapai!")
             else:
-                st.info(f"Masih {target - questions_last_week} soal lagi untuk mencapai target mingguan. Semangat!")
+                st.info(f"Masih {target - questions_last_week} soal lagi.")
         else:
-            st.info("Kerjakan soal untuk memulai target mingguan Anda (20 soal/minggu).")
+            st.info("Kerjakan soal untuk memulai target mingguan (20 soal/minggu).")
         
         st.markdown("---")
         
-        # 7. TOMBOL RESET
         with st.expander("⚠️ Pengaturan Lanjutan"):
             if st.button("Reset Semua Data Saya", use_container_width=True):
                 st.warning("Apakah Anda yakin? Tindakan ini akan menghapus semua skor dan riwayat Anda.")
@@ -138,11 +128,11 @@ def show_dasbor():
     
     # ========== SUB-TAB 2: CATATAN PRIBADI ==========
     with sub_tab2:
-        st.markdown("### 📝 Catatan Pribadi")
-        st.markdown("Gunakan aplikasi catatan pribadi di bawah untuk menulis jurnal belajar atau ide-ide Anda.")
-        
-        # Tampilkan iframe dari Vercel
-        notes_url = "https://my-personal-notes-app-187q.vercel.app"
-        st.components.v1.iframe(notes_url, height=600, scrolling=True)
-        
-        st.caption("Catatan disimpan secara terpisah oleh aplikasi catatan pribadi Anda.")
+        try:
+            from nkhm.catatan_pribadi.main import show_catatan_pribadi
+            show_catatan_pribadi()
+        except ImportError as e:
+            st.error(f"Modul catatan pribadi tidak ditemukan: {e}")
+            st.info("Pastikan folder `nkhm/catatan_pribadi/` sudah di-upload ke repository.")
+        except Exception as e:
+            st.error(f"Terjadi kesalahan saat memuat catatan pribadi: {e}")
