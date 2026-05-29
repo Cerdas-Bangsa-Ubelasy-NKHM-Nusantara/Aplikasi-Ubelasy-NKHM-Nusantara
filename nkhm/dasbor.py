@@ -9,7 +9,7 @@ def show_dasbor():
     st.markdown("Ringkasan perkembangan dan rekomendasi personal Anda.")
     
     # Sub-tab
-    sub_tab1, sub_tab2 = st.tabs(["📊 Ringkasan & Progres", "📝 Catatan Pribadi"])
+    sub_tab1, sub_tab2 = st.tabs(["📊 Ringkasan & Progres", "📝 Catatan Pribadi"]), sub_tab3
     
     # ========== SUB-TAB 1: RINGKASAN & PROGRES ==========
     with sub_tab1:
@@ -125,9 +125,15 @@ def show_dasbor():
                 with col_no:
                     if st.button("❌ Batal"):
                         st.rerun()
-    
-    # ========== SUB-TAB 2: CATATAN PRIBADI ==========
+
+
+    # ========== SUB-TAB 2: CATATAN RINGKAS ==========
     with sub_tab2:
+
+
+    
+    # ========== SUB-TAB 3: CATATAN PRIBADI ==========
+    with sub_tab3:
         try:
             from nkhm.catatan_pribadi.loader import show_catatan_pribadi
             show_catatan_pribadi()
