@@ -9,7 +9,7 @@ def show_dasbor():
     st.markdown("Ringkasan perkembangan dan rekomendasi personal Anda.")
     
     # Sub-tab
-    sub_tab1, sub_tab2 = st.tabs(["📊 Ringkasan & Progres", "📝 Catatan Pribadi"]), sub_tab3
+    sub_tab1, sub_tab2 = st.tabs(["📊 Ringkasan & Progres", "📝 Catatan"])
     
     # ========== SUB-TAB 1: RINGKASAN & PROGRES ==========
     with sub_tab1:
@@ -125,17 +125,50 @@ def show_dasbor():
                 with col_no:
                     if st.button("❌ Batal"):
                         st.rerun()
-
-
-    # ========== SUB-TAB 2: CATATAN RINGKAS ==========
-    with sub_tab2:
-
-
     
-    # ========== SUB-TAB 3: CATATAN PRIBADI ==========
-    with sub_tab3:
-        try:
-            from nkhm.catatan_pribadi.loader import show_catatan_pribadi
-            show_catatan_pribadi()
-        except Exception as e:
-            st.error(f"Gagal memuat catatan pribadi: {e}")
+    # ========== SUB-TAB 2: CATATAN (GABUNGAN) ==========
+    with sub_tab2:
+        st.markdown("### 📝 Catatan Saya")
+        st.markdown("Gunakan bagian di bawah untuk menulis catatan harian, ide, atau jurnal belajar.")
+        
+        # Dua kolom: kiri catatan biasa, kanan catatan pribadi React
+        col_left, col_right = st.columns(2)
+        
+        with col_left:
+            st.markdown("#### ✏️ Catatan Cepat")
+            # Inisialisasi session state untuk catatan biasa (jika belum ada)
+            if "simple_note" not in st.session_state:
+                st.session_state.simple_note = ""
+            
+            note_text = st.text_area(
+                "Tulis catatan di sini (teks biasa):",
+                value=st.session_state.simple_note,
+                height=250,
+                key="simple_note_area",
+                placeholder="Contoh: Hari ini belajar tentang NKHM..."
+            )
+            st.session_state.simple_note = note_text
+            
+            # Tombol simpan ke file (opsional)
+            if st.button("💾 Simpan Catatan Cepat", use_container_width=True):
+                try:
+                    with open(f"notes_{st.session_state.nkhm_user}.txt", "w") as f:
+                        f.write(note_text)
+                    st.success(f"Catatan disimpan ke file notes_{st.session_state.nkhm_user}.txt")
+                except Exception as e:
+                    st.error(f"Gagal menyimpan: {e}")
+        
+        with col_right:
+            st.markdown("#### 📱 Catatan Pribadi (React)")
+            st.markdown("Aplikasi catatan interaktif dengan fitur lengkap.")
+            # Jika Anda ingin menggunakan iframe ke Vercel (direkomendasikan)
+            vercel_url = "https://my-personal-notes-app-187q.vercel.app"
+            st.components.v1.iframe(vercel_url, height=400, scrolling=True)
+            st.caption("[🔗 Buka di tab baru]({})".format(vercel_url))
+            
+            # Atau jika ingin menggunakan file lokal (dist) – beri komentar baris di atas dan aktifkan di bawah
+            # try:
+            #     from nkhm.catatan_pribadi.loader import show_catatan_pribadi
+            #     show_catatan_pribadi()
+            # except Exception as e:
+            #     st.error(f"Gagal memuat catatan pribadi: {e}")
