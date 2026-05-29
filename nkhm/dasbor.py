@@ -127,12 +127,11 @@ def show_dasbor():
                         st.rerun()
     
     # ========== SUB-TAB 2: CATATAN PRIBADI ==========
-    # ========== SUB-TAB 2: CATATAN PRIBADI ==========
     with sub_tab2:
         try:
-        from nkhm.catatan_pribadi.loader import show_catatan_pribadi
-        show_catatan_pribadi()
-    except ImportError as e:
-        st.error(f"Modul catatan pribadi tidak ditemukan: {e}")
-    except Exception as e:
-        st.error(f"Terjadi kesalahan: {e}")
+            from nkhm.catatan_pribadi.loader import show_catatan_pribadi
+            show_catatan_pribadi()
+        except ImportError as e:
+            st.error(f"Modul catatan pribadi tidak ditemukan: {e}")
+        except Exception as e:
+            st.error(f"Terjadi kesalahan: {e}")
