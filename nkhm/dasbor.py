@@ -210,6 +210,6 @@ def show_dasbor():
             with col_link1:
                 st.link_button("🔗 Buka di tab baru", vercel_url, use_container_width=True)
             with col_link2:
-                st.link_button("⬅️ Kembali ke NKHM", "https://ubelasy-nkhm-nusantara.streamlit.app", use_container_width=True)
+                st.link_button("⬅️ Kembali ke NKHM", "https://tim-cerdas-bangsa-ubelasy-nkhm-nusantara.streamlit.app", use_container_width=True)
             
             st.caption("💡 Tips: Gunakan tombol 'Kembali ke NKHM' untuk kembali ke aplikasi utama.")
