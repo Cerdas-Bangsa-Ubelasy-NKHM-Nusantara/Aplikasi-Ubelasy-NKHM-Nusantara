@@ -135,28 +135,48 @@ def show_dasbor():
         col_left, col_right = st.columns(2)
         
         with col_left:
-            st.markdown("#### ✏️ Catatan Cepat")
-            # Inisialisasi session state untuk catatan biasa (jika belum ada)
-            if "simple_note" not in st.session_state:
-                st.session_state.simple_note = ""
-            
-            note_text = st.text_area(
-                "Tulis catatan di sini (teks biasa):",
-                value=st.session_state.simple_note,
-                height=250,
-                key="simple_note_area",
-                placeholder="Contoh: Hari ini belajar tentang NKHM..."
-            )
-            st.session_state.simple_note = note_text
-            
-            # Tombol simpan ke file (opsional)
-            if st.button("💾 Simpan Catatan Cepat", use_container_width=True):
-                try:
-                    with open(f"notes_{st.session_state.nkhm_user}.txt", "w") as f:
-                        f.write(note_text)
-                    st.success(f"Catatan disimpan ke file notes_{st.session_state.nkhm_user}.txt")
-                except Exception as e:
-                    st.error(f"Gagal menyimpan: {e}")
+    st.markdown("#### ✏️ Catatan Cepat")
+    
+    # Tentukan nama file berdasarkan user
+    note_filename = f"notes_{st.session_state.nkhm_user}.txt"
+    
+    # Inisialisasi session state dengan membaca file jika ada
+    if "simple_note" not in st.session_state:
+        try:
+            with open(note_filename, "r") as f:
+                st.session_state.simple_note = f.read()
+        except FileNotFoundError:
+            st.session_state.simple_note = ""
+    
+    note_text = st.text_area(
+        "Tulis catatan di sini (teks biasa):",
+        value=st.session_state.simple_note,
+        height=250,
+        key="simple_note_area",
+        placeholder="Contoh: Hari ini belajar tentang NKHM..."
+    )
+    st.session_state.simple_note = note_text
+    
+    # Tombol simpan
+    if st.button("💾 Simpan Catatan Cepat", use_container_width=True):
+        try:
+            with open(note_filename, "w") as f:
+                f.write(note_text)
+            st.success(f"Catatan disimpan! File: {note_filename}")
+        except Exception as e:
+            st.error(f"Gagal menyimpan: {e}")
+    
+    # Tombol hapus catatan (opsional)
+    if st.button("🗑️ Hapus Catatan Cepat", use_container_width=True):
+        try:
+            os.remove(note_filename)
+            st.session_state.simple_note = ""
+            st.success("Catatan dihapus!")
+            st.rerun()
+        except FileNotFoundError:
+            st.warning("Belum ada catatan yang disimpan.")
+        except Exception as e:
+            st.error(f"Gagal menghapus: {e}")
         
         with col_right:
             st.markdown("#### 📱 Catatan Pribadi (React)")
