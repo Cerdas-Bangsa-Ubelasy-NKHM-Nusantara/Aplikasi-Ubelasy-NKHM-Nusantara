@@ -99,20 +99,16 @@ def show_dasbor():
         if history:
             now = datetime.now()
             week_ago = now - timedelta(days=7)
-            # Filter history 7 hari terakhir berdasarkan timestamp
             questions_last_week = 0
             for h in history:
                 if h.get("timestamp"):
                     try:
-                        t = datetime.strptime(h["timestamp"], "%H:%M:%S")
-                        # Asumsikan timestamp hanya jam, bandingkan dengan now (abaikan tanggal)
-                        # Untuk demo, kita hitung semua soal dalam session
+                        datetime.strptime(h["timestamp"], "%H:%M:%S")
                         questions_last_week += 1
                     except:
                         questions_last_week += 1
                 else:
                     questions_last_week += 1
-            # Sederhanakan: gunakan total soal dalam session sebagai progres
             target = 20
             progress = min(questions_last_week / target, 1.0)
             st.progress(progress, text=f"Soal minggu ini: {questions_last_week} / {target}")
@@ -151,7 +147,7 @@ def show_dasbor():
         # ========== KOLOM KIRI: CATATAN CEPAT ==========
         with col_left:
             st.markdown("#### ✏️ Catatan Cepat")
-            st.caption("Catatan disimpan di server dan akan muncul kembali saat login.")
+            st.caption("Catatan disimpan di server dan dapat dibuka kembali.")
             
             # Tentukan nama file berdasarkan user
             note_filename = f"notes_{st.session_state.nkhm_user}.txt"
@@ -171,28 +167,41 @@ def show_dasbor():
                 key="simple_note_area",
                 placeholder="Contoh: Hari ini belajar tentang NKHM..."
             )
-            st.session_state.simple_note = note_text
             
             col_btn1, col_btn2 = st.columns(2)
             with col_btn1:
-                if st.button("💾 Simpan Catatan", use_container_width=True):
-                    try:
-                        with open(note_filename, "w") as f:
-                            f.write(note_text)
-                        st.success(f"✅ Catatan disimpan! File: {note_filename}")
-                    except Exception as e:
-                        st.error(f"Gagal menyimpan: {e}")
+                if st.button("💾 Simpan Catatan", use_container_width=True, key="save_note_btn"):
+                    if note_text.strip():
+                        try:
+                            with open(note_filename, "w") as f:
+                                f.write(note_text)
+                            # Kosongkan text area setelah simpan
+                            st.session_state.simple_note = ""
+                            st.success(f"✅ Catatan disimpan! File: {note_filename}")
+                            st.rerun()
+                        except Exception as e:
+                            st.error(f"Gagal menyimpan: {e}")
+                    else:
+                        st.warning("Catatan kosong, tidak disimpan.")
             
             with col_btn2:
-                if st.button("🗑️ Hapus Catatan", use_container_width=True):
+                if st.button("📂 Buka Catatan", use_container_width=True, key="open_note_btn"):
                     try:
                         if os.path.exists(note_filename):
-                            os.remove(note_filename)
-                        st.session_state.simple_note = ""
-                        st.success("🗑️ Catatan dihapus!")
-                        st.rerun()
+                            with open(note_filename, "r") as f:
+                                saved_note = f.read()
+                            st.session_state.simple_note = saved_note
+                            st.success("📂 Catatan berhasil dimuat!")
+                            st.rerun()
+                        else:
+                            st.warning("Belum ada catatan yang tersimpan.")
                     except Exception as e:
-                        st.error(f"Gagal menghapus: {e}")
+                        st.error(f"Gagal membuka catatan: {e}")
+            
+            # Tampilkan catatan yang sedang aktif
+            if st.session_state.simple_note:
+                st.caption("📌 Catatan aktif saat ini:")
+                st.info(st.session_state.simple_note[:200] + ("..." if len(st.session_state.simple_note) > 200 else ""))
         
         # ========== KOLOM KANAN: CATATAN PRIBADI REACT ==========
         with col_right:
@@ -203,7 +212,7 @@ def show_dasbor():
             vercel_url = "https://my-personal-notes-app-187q.vercel.app"
             
             # Tampilkan dalam iframe
-            st.components.v1.iframe(vercel_url, height=400, scrolling=True)
+            st.components.v1.iframe(vercel_url, height=450, scrolling=True)
             
             # Tombol untuk membuka di tab baru dan kembali
             col_link1, col_link2 = st.columns(2)
@@ -213,3 +222,6 @@ def show_dasbor():
                 st.link_button("⬅️ Kembali ke NKHM", "https://tim-cerdas-bangsa-ubelasy-nkhm-nusantara.streamlit.app", use_container_width=True)
             
             st.caption("💡 Tips: Gunakan tombol 'Kembali ke NKHM' untuk kembali ke aplikasi utama.")
+
+if __name__ == "__main__":
+    show_dasbor()
