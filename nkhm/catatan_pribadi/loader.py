@@ -3,12 +3,13 @@ import streamlit as st
 
 def show_catatan_pribadi():
     st.markdown("### 📝 Catatan Pribadi")
-    st.markdown("Catatan Anda disimpan secara online. Buka di tab baru jika perlu.")
+    st.markdown("Gunakan aplikasi catatan di bawah untuk menulis jurnal, ide, atau catatan belajar Anda.")
     
-    # Ganti dengan URL Vercel milik Anda
+    # URL aplikasi React yang sudah dideploy di Vercel
     vercel_url = "https://my-personal-notes-app-187q.vercel.app"
     
+    # Tampilkan dalam iframe
     st.components.v1.iframe(vercel_url, height=600, scrolling=True)
     
-    # Opsional: tautan langsung
-    st.markdown(f"[🔗 Buka di tab baru]({vercel_url})")
+    # Opsional: tautan langsung jika iframe bermasalah
+    st.markdown(f"[🔗 Buka Catatan Pribadi di tab baru]({vercel_url})")
