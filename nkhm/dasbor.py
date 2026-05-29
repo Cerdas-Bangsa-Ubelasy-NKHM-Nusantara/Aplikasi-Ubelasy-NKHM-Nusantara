@@ -131,7 +131,5 @@ def show_dasbor():
         try:
             from nkhm.catatan_pribadi.loader import show_catatan_pribadi
             show_catatan_pribadi()
-        except ImportError as e:
-            st.error(f"Modul catatan pribadi tidak ditemukan: {e}")
         except Exception as e:
-            st.error(f"Terjadi kesalahan: {e}")
+            st.error(f"Gagal memuat catatan pribadi: {e}")
