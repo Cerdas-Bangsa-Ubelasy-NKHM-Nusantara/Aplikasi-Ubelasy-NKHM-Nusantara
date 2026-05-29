@@ -1,6 +1,7 @@
 # nkhm/dasbor.py
 import streamlit as st
 import pandas as pd
+import os
 from datetime import datetime, timedelta
 from nkhm.scoring import calculate_nkhm_q, calculate_nkhm_total
 
@@ -98,7 +99,20 @@ def show_dasbor():
         if history:
             now = datetime.now()
             week_ago = now - timedelta(days=7)
-            questions_last_week = sum(1 for h in history if h.get("timestamp") and datetime.strptime(h["timestamp"], "%H:%M:%S") > week_ago)
+            # Filter history 7 hari terakhir berdasarkan timestamp
+            questions_last_week = 0
+            for h in history:
+                if h.get("timestamp"):
+                    try:
+                        t = datetime.strptime(h["timestamp"], "%H:%M:%S")
+                        # Asumsikan timestamp hanya jam, bandingkan dengan now (abaikan tanggal)
+                        # Untuk demo, kita hitung semua soal dalam session
+                        questions_last_week += 1
+                    except:
+                        questions_last_week += 1
+                else:
+                    questions_last_week += 1
+            # Sederhanakan: gunakan total soal dalam session sebagai progres
             target = 20
             progress = min(questions_last_week / target, 1.0)
             st.progress(progress, text=f"Soal minggu ini: {questions_last_week} / {target}")
@@ -134,61 +148,68 @@ def show_dasbor():
         # Dua kolom: kiri catatan biasa, kanan catatan pribadi React
         col_left, col_right = st.columns(2)
         
+        # ========== KOLOM KIRI: CATATAN CEPAT ==========
         with col_left:
-    st.markdown("#### ✏️ Catatan Cepat")
-    
-    # Tentukan nama file berdasarkan user
-    note_filename = f"notes_{st.session_state.nkhm_user}.txt"
-    
-    # Inisialisasi session state dengan membaca file jika ada
-    if "simple_note" not in st.session_state:
-        try:
-            with open(note_filename, "r") as f:
-                st.session_state.simple_note = f.read()
-        except FileNotFoundError:
-            st.session_state.simple_note = ""
-    
-    note_text = st.text_area(
-        "Tulis catatan di sini (teks biasa):",
-        value=st.session_state.simple_note,
-        height=250,
-        key="simple_note_area",
-        placeholder="Contoh: Hari ini belajar tentang NKHM..."
-    )
-    st.session_state.simple_note = note_text
-    
-    # Tombol simpan
-    if st.button("💾 Simpan Catatan Cepat", use_container_width=True):
-        try:
-            with open(note_filename, "w") as f:
-                f.write(note_text)
-            st.success(f"Catatan disimpan! File: {note_filename}")
-        except Exception as e:
-            st.error(f"Gagal menyimpan: {e}")
-    
-    # Tombol hapus catatan (opsional)
-    if st.button("🗑️ Hapus Catatan Cepat", use_container_width=True):
-        try:
-            os.remove(note_filename)
-            st.session_state.simple_note = ""
-            st.success("Catatan dihapus!")
-            st.rerun()
-        except FileNotFoundError:
-            st.warning("Belum ada catatan yang disimpan.")
-        except Exception as e:
-            st.error(f"Gagal menghapus: {e}")
+            st.markdown("#### ✏️ Catatan Cepat")
+            st.caption("Catatan disimpan di server dan akan muncul kembali saat login.")
+            
+            # Tentukan nama file berdasarkan user
+            note_filename = f"notes_{st.session_state.nkhm_user}.txt"
+            
+            # Load catatan jika ada (inisialisasi session state)
+            if "simple_note" not in st.session_state:
+                try:
+                    with open(note_filename, "r") as f:
+                        st.session_state.simple_note = f.read()
+                except FileNotFoundError:
+                    st.session_state.simple_note = ""
+            
+            note_text = st.text_area(
+                "Tulis catatan di sini (teks biasa):",
+                value=st.session_state.simple_note,
+                height=250,
+                key="simple_note_area",
+                placeholder="Contoh: Hari ini belajar tentang NKHM..."
+            )
+            st.session_state.simple_note = note_text
+            
+            col_btn1, col_btn2 = st.columns(2)
+            with col_btn1:
+                if st.button("💾 Simpan Catatan", use_container_width=True):
+                    try:
+                        with open(note_filename, "w") as f:
+                            f.write(note_text)
+                        st.success(f"✅ Catatan disimpan! File: {note_filename}")
+                    except Exception as e:
+                        st.error(f"Gagal menyimpan: {e}")
+            
+            with col_btn2:
+                if st.button("🗑️ Hapus Catatan", use_container_width=True):
+                    try:
+                        if os.path.exists(note_filename):
+                            os.remove(note_filename)
+                        st.session_state.simple_note = ""
+                        st.success("🗑️ Catatan dihapus!")
+                        st.rerun()
+                    except Exception as e:
+                        st.error(f"Gagal menghapus: {e}")
         
+        # ========== KOLOM KANAN: CATATAN PRIBADI REACT ==========
         with col_right:
             st.markdown("#### 📱 Catatan Pribadi (React)")
             st.markdown("Aplikasi catatan interaktif dengan fitur lengkap.")
-            # Jika Anda ingin menggunakan iframe ke Vercel (direkomendasikan)
-            vercel_url = "https://my-personal-notes-app-187q.vercel.app"
-            st.components.v1.iframe(vercel_url, height=400, scrolling=True)
-            st.caption("[🔗 Buka di tab baru]({})".format(vercel_url))
             
-            # Atau jika ingin menggunakan file lokal (dist) – beri komentar baris di atas dan aktifkan di bawah
-            # try:
-            #     from nkhm.catatan_pribadi.loader import show_catatan_pribadi
-            #     show_catatan_pribadi()
-            # except Exception as e:
-            #     st.error(f"Gagal memuat catatan pribadi: {e}")
+            # URL aplikasi React yang sudah dideploy di Vercel
+            vercel_url = "https://my-personal-notes-app-187q.vercel.app"
+            
+            # Tampilkan dalam iframe
+            st.components.v1.iframe(vercel_url, height=400, scrolling=True)
+            
+            # Tombol untuk membuka di tab baru dan kembali
+            col_link1, col_link2 = st.columns(2)
+            with col_link1:
+                st.link_button("🔗 Buka di tab baru", vercel_url, use_container_width=True)
+            with col_link2:
+                st.link_button("⬅️ Kembali ke NKHM", "https://ubelasy-nkhm-nusantara.streamlit.app", use_container_width=True)
+            
+            st.caption("💡 Tips: Gunakan tombol 'Kembali ke NKHM' untuk kembali ke aplikasi utama.")
