@@ -97,25 +97,14 @@ def show_dasbor():
         
         st.subheader("🎯 Target Mingguan Anda")
         if history:
-            now = datetime.now()
-            week_ago = now - timedelta(days=7)
-            questions_last_week = 0
-            for h in history:
-                if h.get("timestamp"):
-                    try:
-                        datetime.strptime(h["timestamp"], "%H:%M:%S")
-                        questions_last_week += 1
-                    except:
-                        questions_last_week += 1
-                else:
-                    questions_last_week += 1
             target = 20
-            progress = min(questions_last_week / target, 1.0)
-            st.progress(progress, text=f"Soal minggu ini: {questions_last_week} / {target}")
-            if questions_last_week >= target:
+            # Sederhana: hitung total soal dalam sesi sebagai progres
+            progress = min(len(history) / target, 1.0)
+            st.progress(progress, text=f"Soal minggu ini: {len(history)} / {target}")
+            if len(history) >= target:
                 st.success("✅ Target mingguan tercapai!")
             else:
-                st.info(f"Masih {target - questions_last_week} soal lagi.")
+                st.info(f"Masih {target - len(history)} soal lagi.")
         else:
             st.info("Kerjakan soal untuk memulai target mingguan (20 soal/minggu).")
         
@@ -141,25 +130,25 @@ def show_dasbor():
         st.markdown("### 📝 Catatan Saya")
         st.markdown("Gunakan bagian di bawah untuk menulis catatan harian, ide, atau jurnal belajar.")
         
-        # Dua kolom: kiri catatan biasa, kanan catatan pribadi React
         col_left, col_right = st.columns(2)
         
-        # ========== KOLOM KIRI: CATATAN CEPAT ==========
+        # ========== KOLOM KIRI: CATATAN CEPAT (SINGLE FILE) ==========
         with col_left:
             st.markdown("#### ✏️ Catatan Cepat")
-            st.caption("Catatan disimpan di server dan dapat dibuka kembali.")
+            st.caption("Catatan disimpan di server. Simpan akan membersihkan kotak, buka untuk memuat catatan yang tersimpan.")
             
-            # Tentukan nama file berdasarkan user
             note_filename = f"notes_{st.session_state.nkhm_user}.txt"
             
-            # Load catatan jika ada (inisialisasi session state)
+            # Inisialisasi session state untuk menyimpan teks catatan
             if "simple_note" not in st.session_state:
+                # Coba baca file jika ada
                 try:
                     with open(note_filename, "r") as f:
                         st.session_state.simple_note = f.read()
                 except FileNotFoundError:
                     st.session_state.simple_note = ""
             
+            # Text area menggunakan value dari session state
             note_text = st.text_area(
                 "Tulis catatan di sini (teks biasa):",
                 value=st.session_state.simple_note,
@@ -168,16 +157,20 @@ def show_dasbor():
                 placeholder="Contoh: Hari ini belajar tentang NKHM..."
             )
             
+            # Update session state saat user mengetik (agar sinkron)
+            if note_text != st.session_state.simple_note:
+                st.session_state.simple_note = note_text
+            
             col_btn1, col_btn2 = st.columns(2)
             with col_btn1:
-                if st.button("💾 Simpan Catatan", use_container_width=True, key="save_note_btn"):
-                    if note_text.strip():
+                if st.button("💾 Simpan Catatan", use_container_width=True):
+                    if st.session_state.simple_note.strip():
                         try:
                             with open(note_filename, "w") as f:
-                                f.write(note_text)
-                            # Kosongkan text area setelah simpan
+                                f.write(st.session_state.simple_note)
+                            # Kosongkan session state dan text area
                             st.session_state.simple_note = ""
-                            st.success(f"✅ Catatan disimpan! File: {note_filename}")
+                            st.success("✅ Catatan disimpan! Kotak teks sudah dibersihkan.")
                             st.rerun()
                         except Exception as e:
                             st.error(f"Gagal menyimpan: {e}")
@@ -185,20 +178,20 @@ def show_dasbor():
                         st.warning("Catatan kosong, tidak disimpan.")
             
             with col_btn2:
-                if st.button("📂 Buka Catatan", use_container_width=True, key="open_note_btn"):
+                if st.button("📂 Buka Catatan", use_container_width=True):
                     try:
                         if os.path.exists(note_filename):
                             with open(note_filename, "r") as f:
                                 saved_note = f.read()
                             st.session_state.simple_note = saved_note
-                            st.success("📂 Catatan berhasil dimuat!")
+                            st.success("📂 Catatan berhasil dimuat! Silakan edit dan simpan lagi jika perlu.")
                             st.rerun()
                         else:
                             st.warning("Belum ada catatan yang tersimpan.")
                     except Exception as e:
                         st.error(f"Gagal membuka catatan: {e}")
             
-            # Tampilkan catatan yang sedang aktif
+            # Tampilkan pratinjau catatan aktif (opsional)
             if st.session_state.simple_note:
                 st.caption("📌 Catatan aktif saat ini:")
                 st.info(st.session_state.simple_note[:200] + ("..." if len(st.session_state.simple_note) > 200 else ""))
@@ -208,13 +201,9 @@ def show_dasbor():
             st.markdown("#### 📱 Catatan Pribadi (React)")
             st.markdown("Aplikasi catatan interaktif dengan fitur lengkap.")
             
-            # URL aplikasi React yang sudah dideploy di Vercel
             vercel_url = "https://my-personal-notes-app-187q.vercel.app"
-            
-            # Tampilkan dalam iframe
             st.components.v1.iframe(vercel_url, height=450, scrolling=True)
             
-            # Tombol untuk membuka di tab baru dan kembali
             col_link1, col_link2 = st.columns(2)
             with col_link1:
                 st.link_button("🔗 Buka di tab baru", vercel_url, use_container_width=True)
