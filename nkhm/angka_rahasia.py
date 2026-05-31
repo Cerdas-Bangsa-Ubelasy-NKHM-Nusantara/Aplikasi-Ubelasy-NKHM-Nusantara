@@ -39,7 +39,7 @@ def show_angka_rahasia():
     
     col1, col2 = st.columns(2)
     with col1:
-        baris1 = st.text_input("Baris 1 (angka bebas, minimal 2 digit):", value=st.session_state.baris1, key="input_baris1")
+        baris1 = st.text_input("Baris 1 (Tuliskan angka bebas, minimal 2 digit):", value=st.session_state.baris1, key="input_baris1")
     if baris1:
         if not baris1.isdigit():
             st.error("Baris 1 harus berisi angka saja.")
@@ -71,7 +71,7 @@ def show_angka_rahasia():
     st.markdown("---")
     
     # Baris 2 (user)
-    baris2 = st.text_input(f"Baris 2 (angka dengan {panjang} digit):", value=st.session_state.baris2, key="input_baris2")
+    baris2 = st.text_input(f"Baris 2 (Tuliskan angka dengan {panjang} digit):", value=st.session_state.baris2, key="input_baris2")
     valid2 = False
     if baris2:
         if not baris2.isdigit():
@@ -90,7 +90,7 @@ def show_angka_rahasia():
         st.text_input("Baris 3 (otomatis)", value="", disabled=True)
     
     # Baris 4 (user)
-    baris4 = st.text_input(f"Baris 4 (angka dengan {panjang} digit):", value=st.session_state.baris4, key="input_baris4")
+    baris4 = st.text_input(f"Baris 4 (Tuiskan angka dengan {panjang} digit):", value=st.session_state.baris4, key="input_baris4")
     valid4 = False
     if baris4:
         if not baris4.isdigit():
@@ -110,7 +110,7 @@ def show_angka_rahasia():
     
     # Baris 6 (hasil penjumlahan user)
     st.markdown("---")
-    hasil_user = st.text_input("Baris 6 (Jumlah kelima baris):", key="hasil_user")
+    hasil_user = st.text_input("Baris 6 (Jumlahkan kelima baris):", key="hasil_user")
     if st.button("✅ Cocokkan dengan Jawaban", key="cocokkan"):
         if not hasil_user.isdigit():
             st.error("Masukkan angka hasil penjumlahan.")
@@ -122,7 +122,7 @@ def show_angka_rahasia():
             else:
                 st.error(f"❌ SALAH. Jawaban rahasia adalah {st.session_state.angka_jawaban}. Coba periksa kembali penjumlahan Anda.")
     
-    st.caption("Catatan: Baris 3 dan Baris 5 diisi otomatis oleh sistem berdasarkan aturan angka Rahasia (Angka - Menguak Rahasia).")
+    st.caption("Catatan: Baris 3 dan Baris 5 diisi otomatis oleh sistem berdasarkan aturan Angka Rahasia (Angka - Menguak Rahasia).")
 
 if __name__ == "__main__":
     show_angka_rahasia()
