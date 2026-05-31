@@ -19,6 +19,7 @@ from nkhm.battle import show_battle
 from nkhm.stomata import show_stomata
 from nkhm.dasbor import show_dasbor
 from nkhm.tebak_pahlawan import show_tebak_pahlawan
+from nkhm.angka_rahasia import show_angka_rahasia
 
 # Import opsional (komentari jika file belum ada)
 try:
@@ -513,14 +514,16 @@ def main():
     # ========== TAB 7: HADIAH ==========
     with tab7:
         # Subtab di dalam HADIAH
-        sub_tab1, sub_tab2 = st.tabs(["🦅 Tebak Pahlawan", "🎲 Lainnya (Coming Soon)"])
+        sub_tab1, sub_tab2 = st.tabs(["🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🎲 Lainnya (Coming Soon)"])
     
         with sub_tab1:
             # Panggil fungsi game tebak pahlawan
             from nkhm.tebak_pahlawan import show_tebak_pahlawan
             show_tebak_pahlawan()
-    
         with sub_tab2:
+            show_angka_rahasia()
+    
+        with sub_tab3:
             st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
         
     # ========== TAB 8: TUTORIAL ==========
