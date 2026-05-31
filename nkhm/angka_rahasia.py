@@ -85,7 +85,7 @@ def show_angka_rahasia():
     # Baris 3 (otomatis)
     if valid2:
         baris3 = hitung_pelengkap(baris2)
-        st.text_input("Baris 3 (otomatis, pelengkap 9)", value=baris3, disabled=True, key="baris3")
+        st.text_input("Baris 3 (otomatis, pelengkap angka)", value=baris3, disabled=True, key="baris3")
     else:
         st.text_input("Baris 3 (otomatis)", value="", disabled=True)
     
@@ -104,7 +104,7 @@ def show_angka_rahasia():
     # Baris 5 (otomatis)
     if valid4:
         baris5 = hitung_pelengkap(baris4)
-        st.text_input("Baris 5 (otomatis, pelengkap 9)", value=baris5, disabled=True, key="baris5")
+        st.text_input("Baris 5 (otomatis, pelengkap angka)", value=baris5, disabled=True, key="baris5")
     else:
         st.text_input("Baris 5 (otomatis)", value="", disabled=True)
     
