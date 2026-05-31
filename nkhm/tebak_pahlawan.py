@@ -52,17 +52,20 @@ def show_tebak_pahlawan():
     with col1:
         st.metric("🏆 Skor", st.session_state.pahlawan_score)
     with col2:
-        st.metric("🎯 Kesempatan Tersisa", max(0, 5 - st.session_state.pahlawan_attempts))
+        sisa = max(0, 5 - st.session_state.pahlawan_attempts)
+        st.metric("🎯 Kesempatan Tersisa", sisa)
     with col3:
         st.metric("📊 Tebakan Dilakukan", f"{st.session_state.pahlawan_attempts}/5")
     
     st.markdown("---")
     
-    if not st.session_state.pahlawan_game_over:
+    # Tampilkan tombol hanya jika game belum berakhir dan kesempatan masih ada
+    if not st.session_state.pahlawan_game_over and st.session_state.pahlawan_attempts < 5:
         st.markdown("### Pilih Pahlawan (tekan tombol):")
         col_a, col_b, col_c = st.columns(3)
         
         def proses_tebakan(tebakan_angka, tebakan_nama):
+            # Cegah jika game sudah berakhir atau melebihi batas
             if st.session_state.pahlawan_game_over or st.session_state.pahlawan_attempts >= 5:
                 return
             rahasia = random.randint(1, 3)
@@ -101,15 +104,17 @@ def show_tebak_pahlawan():
             if st.button("3️⃣\nKapten Pattimura", use_container_width=True):
                 proses_tebakan(3, PAHLAWAN[3]["nama"])
     
-    else:
+    elif st.session_state.pahlawan_game_over or st.session_state.pahlawan_attempts >= 5:
         st.warning("🏁 Game telah berakhir! Anda sudah menggunakan 5 kesempatan.")
         st.info(f"Skor akhir Anda: {st.session_state.pahlawan_score} dari maksimal 50.")
         if st.button("🔄 Mulai Game Baru", use_container_width=True):
             reset_game()
             st.rerun()
+    else:
+        st.warning("Game belum dimulai? Silakan refresh atau reset.")
     
     st.markdown("---")
-    st.subheader("📜 Riwayat Tebakan (5 terakhir)")
+    st.subheader("📜 Riwayat Tebakan (Anda Hanya Bisa Menebak Sebanyak 5 Kali)")
     if st.session_state.pahlawan_history:
         history_data = []
         for h in st.session_state.pahlawan_history:
@@ -124,6 +129,7 @@ def show_tebak_pahlawan():
     else:
         st.info("Belum ada tebakan. Mulai tebak pahlawan!")
     
+    # Tombol reset manual (opsional)
     if st.button("🔄 Reset Game (Mulai dari awal)", use_container_width=True):
         reset_game()
         st.rerun()
