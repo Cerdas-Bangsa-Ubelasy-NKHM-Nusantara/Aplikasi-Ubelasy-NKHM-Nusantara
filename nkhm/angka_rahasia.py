@@ -34,9 +34,9 @@ def show_angka_rahasia():
     4. Aplikasi akan menuliskan **Baris 3** secara otomatis (pelengkap angka dari Baris 2).  
     5. Anda menuliskan deretan angka lain di **Baris 4** (jumlah digit harus sama).  
     6. Aplikasi akan menuliskan **Baris 5** secara otomatis (pelengkap angka dari Baris 4).  
-    7. Anda jumlahkan kelima baris tersebut, tulis hasilnya di **Baris 6**, lalu cocokkan dengan jawaban rahasia.
-    """
-    **Ayo, mulai:**)  
+    7. Anda jumlahkan kelima baris tersebut, tulis hasilnya di **Baris 6**, lalu cocokkan dengan jawaban rahasia.    
+    **Ayo, mulai:**
+    """)
     
     col1, col2 = st.columns(2)
     with col1:
