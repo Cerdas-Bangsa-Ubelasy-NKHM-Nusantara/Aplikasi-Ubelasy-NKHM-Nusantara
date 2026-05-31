@@ -514,7 +514,7 @@ def main():
     # ========== TAB 7: HADIAH ==========
     with tab7:
         # Subtab di dalam HADIAH
-        sub_tab1, sub_tab2 = st.tabs(["🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🎲 Lainnya (Coming Soon)"])
+        sub_tab1, sub_tab2, sub_tab3 = st.tabs(["🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🎲 Lainnya (Coming Soon)"])
     
         with sub_tab1:
             # Panggil fungsi game tebak pahlawan
