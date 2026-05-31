@@ -34,7 +34,7 @@ def show_angka_rahasia():
     4. Aplikasi akan menuliskan **Baris 3** secara otomatis (pelengkap angka dari Baris 2).  
     5. Anda menuliskan deretan angka lain di **Baris 4** (jumlah digit harus sama).  
     6. Aplikasi akan menuliskan **Baris 5** secara otomatis (pelengkap angka dari Baris 4).  
-    7. Jumlahkan kelima baris tersebut, tulis hasilnya di **Baris 6**, lalu cocokkan dengan jawaban rahasia.
+    7. Anda jumlahkan kelima baris tersebut, tulis hasilnya di **Baris 6**, lalu cocokkan dengan jawaban rahasia.
     """)
     
     col1, col2 = st.columns(2)
@@ -122,7 +122,7 @@ def show_angka_rahasia():
             else:
                 st.error(f"❌ SALAH. Jawaban rahasia adalah {st.session_state.angka_jawaban}. Coba periksa kembali penjumlahan Anda.")
     
-    st.caption("Catatan: Baris 3 dan Baris 5 diisi otomatis oleh sistem berdasarkan aturan angka Rahasia (Angka 9 - Menguak Rahasia).")
+    st.caption("Catatan: Baris 3 dan Baris 5 diisi otomatis oleh sistem berdasarkan aturan angka Rahasia (Angka - Menguak Rahasia).")
 
 if __name__ == "__main__":
     show_angka_rahasia()
