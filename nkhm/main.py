@@ -18,6 +18,7 @@ from nkhm.tutorial import show_tutorial
 from nkhm.battle import show_battle
 from nkhm.stomata import show_stomata
 from nkhm.dasbor import show_dasbor
+from nkhm.tebak_pahlawan import show_tebak_pahlawan
 
 # Import opsional (komentari jika file belum ada)
 try:
