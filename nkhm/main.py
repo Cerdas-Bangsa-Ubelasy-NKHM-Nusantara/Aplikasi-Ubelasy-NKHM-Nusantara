@@ -191,8 +191,8 @@ def main():
             st.rerun()
     
     # ========== TAB UTAMA ==========
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
-    "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", "⚔️ TANDING", "🎁 KARUNIA", "💖 STOMATA"
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
+    "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "💖 STOMATA"
 ])
     
     # ========== TAB 1: KUIS ==========
@@ -509,6 +509,19 @@ def main():
                 st.info("🎁 Fitur Karunia Motivasi akan segera hadir!")
         with sub_tab2:
             show_stomata()
+            
+    # ========== TAB 7: HADIAH ==========
+    with tab7:
+        # Subtab di dalam HADIAH
+        sub_tab1, sub_tab2 = st.tabs(["🦅 Tebak Pahlawan", "🎲 Lainnya (Coming Soon)"])
+    
+        with sub_tab1:
+            # Panggil fungsi game tebak pahlawan
+            from nkhm.tebak_pahlawan import show_tebak_pahlawan
+            show_tebak_pahlawan()
+    
+        with sub_tab2:
+            st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
         
     # ========== TAB 7: TUTORIAL ==========
     with tab7:
