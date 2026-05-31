@@ -25,15 +25,15 @@ def hitung_jawaban(angka_awal):
 
 def show_angka_rahasia():
     init_game_state()
-    st.markdown("### 🔢 Angka 9 - Menguak Rahasia")
+    st.markdown("### 🔢 Angka - Menguak Rahasia")
     st.markdown("""
     **Aturan permainan:**  
     1. Anda menuliskan deretan angka di **Baris 1** (minimal 2 digit).  
     2. Aplikasi akan menyiapkan **jawaban rahasia** (tidak terlihat sampai Anda menekan tombol 'Buka Rahasia').  
     3. Anda menuliskan deretan angka lain di **Baris 2** (jumlah digit harus sama dengan Baris 1).  
-    4. Aplikasi akan menuliskan **Baris 3** secara otomatis (pelengkap 9 dari Baris 2).  
+    4. Aplikasi akan menuliskan **Baris 3** secara otomatis (pelengkap angka dari Baris 2).  
     5. Anda menuliskan deretan angka lain di **Baris 4** (jumlah digit harus sama).  
-    6. Aplikasi akan menuliskan **Baris 5** secara otomatis (pelengkap 9 dari Baris 4).  
+    6. Aplikasi akan menuliskan **Baris 5** secara otomatis (pelengkap angka dari Baris 4).  
     7. Jumlahkan kelima baris tersebut, tulis hasilnya di **Baris 6**, lalu cocokkan dengan jawaban rahasia.
     """)
     
