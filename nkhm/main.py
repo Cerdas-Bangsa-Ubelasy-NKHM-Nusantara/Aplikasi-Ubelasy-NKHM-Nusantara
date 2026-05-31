@@ -523,8 +523,8 @@ def main():
         with sub_tab2:
             st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
         
-    # ========== TAB 7: TUTORIAL ==========
-    with tab7:
+    # ========== TAB 8: TUTORIAL ==========
+    with tab8:
         show_tutorial()
 
 if __name__ == "__main__":
