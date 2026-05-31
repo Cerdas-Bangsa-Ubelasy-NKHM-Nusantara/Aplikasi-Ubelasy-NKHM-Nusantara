@@ -110,8 +110,8 @@ def show_angka_rahasia():
     
     # Baris 6 (hasil penjumlahan user)
     st.markdown("---")
-    hasil_user = st.text_input("Baris 6 (Jumlahkan kelima baris):", key="hasil_user")
-    if st.button("✅ Cocokkan dengan Jawaban", key="cocokkan"):
+    hasil_user = st.text_input("Baris 6 (Anda jumlahkan kelima baris):", key="hasil_user")
+    if st.button("✅ Cocokkan dengan Jawaban Rahasia", key="cocokkan"):
         if not hasil_user.isdigit():
             st.error("Masukkan angka hasil penjumlahan.")
         else:
