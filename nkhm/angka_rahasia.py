@@ -122,7 +122,7 @@ def show_angka_rahasia():
             else:
                 st.error(f"❌ SALAH. Jawaban rahasia adalah {st.session_state.angka_jawaban}. Coba periksa kembali penjumlahan Anda.")
     
-    st.caption("Catatan: Baris 3 dan Baris 5 diisi otomatis oleh sistem berdasarkan aturan angka 9 (setiap digit berjumlah 9).")
+    st.caption("Catatan: Baris 3 dan Baris 5 diisi otomatis oleh sistem berdasarkan aturan angka Rahasia (Angka 9 - Menguak Rahasia).")
 
 if __name__ == "__main__":
     show_angka_rahasia()
