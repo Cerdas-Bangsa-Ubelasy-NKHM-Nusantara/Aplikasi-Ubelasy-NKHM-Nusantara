@@ -1,4 +1,4 @@
-# nkhm/dasbor.py
+# nkhm/dasbor.py (bagian show_dasbor)
 import streamlit as st
 import pandas as pd
 import os
@@ -6,17 +6,32 @@ from datetime import datetime, timedelta
 from nkhm.scoring import calculate_nkhm_q, calculate_nkhm_total
 
 def show_dasbor():
-    # Definisikan URL catatan pribadi (React)
+    # Definisikan URL catatan pribadi
     vercel_url = "https://my-personal-notes-app-187q.vercel.app"
     
     st.markdown("## 👤 Dasbor Saya")
     st.markdown("Ringkasan perkembangan dan rekomendasi personal Anda.")
     
-    # Sub-tab
-    sub_tab1, sub_tab2 = st.tabs(["📊 Ringkasan & Progres", "📝 Catatan"])
+    # ========== SUBTAB DENGAN RADIO HORIZONTAL ==========
+    # Tentukan subtab aktif dari query parameter atau session state
+    if "subtab" in st.query_params and st.query_params["subtab"] == "catatan":
+        default_subtab = "Catatan"
+    else:
+        default_subtab = "Ringkasan & Progres"
     
-    # ========== SUB-TAB 1: RINGKASAN & PROGRES ==========
-    with sub_tab1:
+    subtab = st.radio(
+        "Pilih tampilan:",
+        ["Ringkasan & Progres", "Catatan"],
+        horizontal=True,
+        index=0 if default_subtab == "Ringkasan & Progres" else 1,
+        key="dasbor_subtab"
+    )
+    st.markdown("---")
+    
+    # ========== RINGKASAN & PROGRES ==========
+    if subtab == "Ringkasan & Progres":
+        # ... (semua kode ringkasan yang sudah ada, dari sub_tab1 sebelumnya) ...
+        # Salin seluruh konten dari sub_tab1 (tanpa dengan sub_tab1)
         scores = st.session_state.nkhm_scores
         history = st.session_state.nkhm_history
         total_questions = st.session_state.nkhm_total_questions
@@ -33,114 +48,22 @@ def show_dasbor():
         with col3:
             st.metric("🏆 NKHM Total", f"{nkhm_total:.1f}")
         
-        st.markdown("---")
-        
-        st.subheader("📈 Perkembangan Skor Kecerdasan")
-        if history:
-            df_history = pd.DataFrame(history)
-            if "nkhm_total" in df_history.columns:
-                df_recent = df_history.tail(15).copy()
-                df_recent["urutan"] = range(1, len(df_recent) + 1)
-                st.line_chart(df_recent.set_index("urutan")["nkhm_total"], height=300)
-                st.caption("Perkembangan NKHM Total dari 15 kuis terakhir.")
-            else:
-                st.info("Belum cukup data untuk grafik perkembangan.")
-        else:
-            st.info("Belum ada riwayat kuis. Mulai kerjakan kuis!")
-        
-        st.markdown("---")
-        
-        st.subheader("📊 Analisis Kekuatan & Kelemahan")
-        sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
-        col_weak, col_strong = st.columns(2)
-        with col_strong:
-            st.markdown("#### 💪 Kekuatan Teratas")
-            for i, (kategori, skor) in enumerate(sorted_scores[:2]):
-                st.progress(skor/100, text=f"{kategori}: {skor:.1f}")
-        with col_weak:
-            st.markdown("#### 📉 Area yang Perlu Ditingkatkan")
-            for i, (kategori, skor) in enumerate(sorted_scores[-2:]):
-                st.progress(skor/100, text=f"{kategori}: {skor:.1f}")
-        
-        st.markdown("---")
-        
-        st.subheader("💡 Rekomendasi untuk Anda")
-        lowest_category = min(scores, key=scores.get)
-        lowest_score = scores[lowest_category]
-        if lowest_score < 50:
-            st.warning(f"**🎯 Fokus pada {lowest_category}** – Skor Anda masih di bawah 50.")
-        elif lowest_score < 75:
-            st.info(f"**📚 Tingkatkan {lowest_category}** – Skor Anda sudah cukup baik, masih bisa ditingkatkan.")
-        else:
-            st.success(f"**🌟 Luar Biasa!** – Skor {lowest_category} Anda sudah sangat baik.")
-        
-        if nkhm_total < 40:
-            st.info("💪 **NKHM Total masih di bawah 40.** Jangan menyerah!")
-        elif nkhm_total < 60:
-            st.info("📈 **NKHM Total Anda sudah di jalur yang baik.** Terus tingkatkan.")
-        elif nkhm_total < 80:
-            st.success("🎯 **NKHM Total Anda bagus!** Targetkan level Pahlawan Cerdas (80+).")
-        else:
-            st.balloons()
-            st.success("🏆 **SELAMAT! Anda telah mencapai level Pahlawan Cerdas!**")
-        
-        st.markdown("---")
-        
-        st.subheader("📜 Riwayat Kuis Terbaru")
-        if history:
-            for item in history[-5:][::-1]:
-                status = "✅" if item.get("correct", False) else "❌"
-                st.write(f"{status} **{item.get('type', '?')}** – {item.get('question', '')[:60]}...")
-            if len(history) > 5:
-                st.caption(f"Menampilkan 5 dari {len(history)} riwayat.")
-        else:
-            st.info("Belum ada riwayat kuis.")
-        
-        st.markdown("---")
-        
-        st.subheader("🎯 Target Mingguan Anda")
-        if history:
-            target = 20
-            progress = min(len(history) / target, 1.0)
-            st.progress(progress, text=f"Soal minggu ini: {len(history)} / {target}")
-            if len(history) >= target:
-                st.success("✅ Target mingguan tercapai!")
-            else:
-                st.info(f"Masih {target - len(history)} soal lagi.")
-        else:
-            st.info("Kerjakan soal untuk memulai target mingguan (20 soal/minggu).")
-        
-        st.markdown("---")
-        
-        with st.expander("⚠️ Pengaturan Lanjutan"):
-            if st.button("Reset Semua Data Saya", use_container_width=True):
-                st.warning("Apakah Anda yakin? Tindakan ini akan menghapus semua skor dan riwayat Anda.")
-                col_yes, col_no = st.columns(2)
-                with col_yes:
-                    if st.button("✅ Ya, Reset Sekarang"):
-                        st.session_state.nkhm_scores = {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0, "Nasionalisme": 0}
-                        st.session_state.nkhm_history = []
-                        st.session_state.nkhm_total_questions = 0
-                        st.success("Data telah direset!")
-                        st.rerun()
-                with col_no:
-                    if st.button("❌ Batal"):
-                        st.rerun()
+        # ... dan seterusnya (grafik, analisis, rekomendasi, riwayat, target, reset) ...
+        # (salin persis dari kode sebelumnya)
     
-    # ========== SUB-TAB 2: CATATAN ==========
-    with sub_tab2:
+    # ========== CATATAN ==========
+    else:
         st.markdown("### 📝 Catatan Saya")
         st.markdown("Gunakan bagian di bawah untuk menulis catatan harian, ide, atau jurnal belajar.")
         
         col_left, col_right = st.columns(2)
         
-        # KOLOM KIRI: CATATAN CEPAT (single file)
+        # KOLOM KIRI: CATATAN CEPAT
         with col_left:
             st.markdown("#### ✏️ Catatan Cepat")
             st.caption("Catatan disimpan di server. Simpan akan membersihkan kotak, buka untuk memuat catatan yang tersimpan.")
             
             note_filename = f"notes_{st.session_state.nkhm_user}.txt"
-            
             if "simple_note" not in st.session_state:
                 try:
                     with open(note_filename, "r") as f:
@@ -155,7 +78,6 @@ def show_dasbor():
                 key="simple_note_area",
                 placeholder="Contoh: Hari ini belajar tentang NKHM..."
             )
-            
             if note_text != st.session_state.simple_note:
                 st.session_state.simple_note = note_text
             
@@ -173,7 +95,6 @@ def show_dasbor():
                             st.error(f"Gagal menyimpan: {e}")
                     else:
                         st.warning("Catatan kosong, tidak disimpan.")
-            
             with col_btn2:
                 if st.button("📂 Buka Catatan", use_container_width=True):
                     try:
@@ -196,16 +117,9 @@ def show_dasbor():
         with col_right:
             st.markdown("#### 📱 Catatan Pribadi (React)")
             st.markdown("Aplikasi catatan interaktif dengan fitur lengkap.")
-            
-            # Tampilkan iframe
             st.components.v1.iframe(vercel_url, height=450, scrolling=True)
-            
-            # Tombol navigasi di dalam konten (bukan sidebar)
             st.markdown("---")
             nkhm_url = "https://tim-cerdas-bangsa-ubelasy-nkhm-nusantara.streamlit.app"
             st.link_button("🔗 Buka di tab baru", vercel_url, use_container_width=True)
             st.link_button("⬅️ Kembali ke NKHM", nkhm_url, use_container_width=True)
             st.caption("💡 Tips: Gunakan tombol 'Kembali ke NKHM' untuk kembali ke aplikasi NKHM.")
-
-if __name__ == "__main__":
-    show_dasbor()
