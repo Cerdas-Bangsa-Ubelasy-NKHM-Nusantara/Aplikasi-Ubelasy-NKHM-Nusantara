@@ -107,15 +107,6 @@ if app_mode == "🌿 NKHM Nusantara (Gamifikasi)":
     # Tombol Catatan Pribadi (membuka di tab baru)
     st.sidebar.link_button("📝 Catatan Pribadi", vercel_url, use_container_width=True)
     
-    # Tombol Buka di tab baru (sama seperti catatan pribadi, tapi eksplisit)
-    st.sidebar.link_button("🔗 Buka di tab baru", vercel_url, use_container_width=True)
-    
-    # Tombol Kembali ke NKHM (membuka aplikasi NKHM di tab yang sama)
-    st.sidebar.link_button("⬅️ Kembali ke NKHM", nkhm_url, use_container_width=True)
-    
-    # Label tips
-    st.sidebar.caption("💡 Tips: Gunakan tombol 'Kembali ke NKHM' untuk kembali ke aplikasi NKHM.")
-    
     st.sidebar.markdown("---")   # separator setelah tombol
     
 # ========== IMPORT MODUL ==========
