@@ -6,6 +6,9 @@ from datetime import datetime, timedelta
 from nkhm.scoring import calculate_nkhm_q, calculate_nkhm_total
 
 def show_dasbor():
+    # Definisikan URL catatan pribadi (React)
+    vercel_url = "https://my-personal-notes-app-187q.vercel.app"
+    
     st.markdown("## 👤 Dasbor Saya")
     st.markdown("Ringkasan perkembangan dan rekomendasi personal Anda.")
     
@@ -98,7 +101,6 @@ def show_dasbor():
         st.subheader("🎯 Target Mingguan Anda")
         if history:
             target = 20
-            # Sederhana: hitung total soal dalam sesi sebagai progres
             progress = min(len(history) / target, 1.0)
             st.progress(progress, text=f"Soal minggu ini: {len(history)} / {target}")
             if len(history) >= target:
@@ -125,30 +127,27 @@ def show_dasbor():
                     if st.button("❌ Batal"):
                         st.rerun()
     
-    # ========== SUB-TAB 2: CATATAN (GABUNGAN) ==========
+    # ========== SUB-TAB 2: CATATAN ==========
     with sub_tab2:
         st.markdown("### 📝 Catatan Saya")
         st.markdown("Gunakan bagian di bawah untuk menulis catatan harian, ide, atau jurnal belajar.")
         
         col_left, col_right = st.columns(2)
         
-        # ========== KOLOM KIRI: CATATAN CEPAT (SINGLE FILE) ==========
+        # KOLOM KIRI: CATATAN CEPAT (single file)
         with col_left:
             st.markdown("#### ✏️ Catatan Cepat")
             st.caption("Catatan disimpan di server. Simpan akan membersihkan kotak, buka untuk memuat catatan yang tersimpan.")
             
             note_filename = f"notes_{st.session_state.nkhm_user}.txt"
             
-            # Inisialisasi session state untuk menyimpan teks catatan
             if "simple_note" not in st.session_state:
-                # Coba baca file jika ada
                 try:
                     with open(note_filename, "r") as f:
                         st.session_state.simple_note = f.read()
                 except FileNotFoundError:
                     st.session_state.simple_note = ""
             
-            # Text area menggunakan value dari session state
             note_text = st.text_area(
                 "Tulis catatan di sini (teks biasa):",
                 value=st.session_state.simple_note,
@@ -157,7 +156,6 @@ def show_dasbor():
                 placeholder="Contoh: Hari ini belajar tentang NKHM..."
             )
             
-            # Update session state saat user mengetik (agar sinkron)
             if note_text != st.session_state.simple_note:
                 st.session_state.simple_note = note_text
             
@@ -168,7 +166,6 @@ def show_dasbor():
                         try:
                             with open(note_filename, "w") as f:
                                 f.write(st.session_state.simple_note)
-                            # Kosongkan session state dan text area
                             st.session_state.simple_note = ""
                             st.success("✅ Catatan disimpan! Kotak teks sudah dibersihkan.")
                             st.rerun()
@@ -191,26 +188,24 @@ def show_dasbor():
                     except Exception as e:
                         st.error(f"Gagal membuka catatan: {e}")
             
-            # Tampilkan pratinjau catatan aktif (opsional)
             if st.session_state.simple_note:
                 st.caption("📌 Catatan aktif saat ini:")
                 st.info(st.session_state.simple_note[:200] + ("..." if len(st.session_state.simple_note) > 200 else ""))
         
-        # ========== KOLOM KANAN: CATATAN PRIBADI REACT ==========
+        # KOLOM KANAN: CATATAN PRIBADI REACT
         with col_right:
             st.markdown("#### 📱 Catatan Pribadi (React)")
             st.markdown("Aplikasi catatan interaktif dengan fitur lengkap.")
             
-            vercel_url = "https://my-personal-notes-app-187q.vercel.app"
+            # Tampilkan iframe
             st.components.v1.iframe(vercel_url, height=450, scrolling=True)
             
-            col_link1, col_link2 = st.columns(2)
-            with col_link1:
-                st.link_button("🔗 Buka di tab baru", vercel_url, use_container_width=True)
-            with col_link2:
-                st.link_button("⬅️ Kembali ke NKHM", "https://tim-cerdas-bangsa-ubelasy-nkhm-nusantara.streamlit.app", use_container_width=True)
-            
-            st.caption("💡 Tips: Gunakan tombol 'Kembali ke NKHM' untuk kembali ke aplikasi utama.")
+            # Tombol navigasi di dalam konten (bukan sidebar)
+            st.markdown("---")
+            nkhm_url = "https://tim-cerdas-bangsa-ubelasy-nkhm-nusantara.streamlit.app"
+            st.link_button("🔗 Buka di tab baru", vercel_url, use_container_width=True)
+            st.link_button("⬅️ Kembali ke NKHM", nkhm_url, use_container_width=True)
+            st.caption("💡 Tips: Gunakan tombol 'Kembali ke NKHM' untuk kembali ke aplikasi NKHM.")
 
 if __name__ == "__main__":
     show_dasbor()
