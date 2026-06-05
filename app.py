@@ -99,12 +99,25 @@ app_mode = st.sidebar.radio(
 )
 st.sidebar.markdown("---")
 
-# ========== TOMBOL CATATAN PRIBADI (HANYA SAAT NKHM AKTIF) ==========
+# ========== TOMBOL CATATAN PRIBADI DAN NAVIGASI (HANYA SAAT NKHM AKTIF) ==========
 if app_mode == "🌿 NKHM Nusantara (Gamifikasi)":
     vercel_url = "https://my-personal-notes-app-187q.vercel.app"
+    nkhm_url = "https://tim-cerdas-bangsa-ubelasy-nkhm-nusantara.streamlit.app"
+    
+    # Tombol Catatan Pribadi (membuka di tab baru)
     st.sidebar.link_button("📝 Catatan Pribadi", vercel_url, use_container_width=True)
+    
+    # Tombol Buka di tab baru (sama seperti catatan pribadi, tapi eksplisit)
+    st.sidebar.link_button("🔗 Buka di tab baru", vercel_url, use_container_width=True)
+    
+    # Tombol Kembali ke NKHM (membuka aplikasi NKHM di tab yang sama)
+    st.sidebar.link_button("⬅️ Kembali ke NKHM", nkhm_url, use_container_width=True)
+    
+    # Label tips
+    st.sidebar.caption("💡 Tips: Gunakan tombol 'Kembali ke NKHM' untuk kembali ke aplikasi NKHM.")
+    
     st.sidebar.markdown("---")   # separator setelah tombol
-
+    
 # ========== IMPORT MODUL ==========
 try:
     from ubelasy.main import main as ubelasy_main
