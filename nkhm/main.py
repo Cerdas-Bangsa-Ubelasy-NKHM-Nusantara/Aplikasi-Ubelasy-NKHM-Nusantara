@@ -193,7 +193,7 @@ def main():
     
     # ========== TAB UTAMA ==========
     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
-    "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "💖 STOMATA"
+    "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "💖 TUTORIAL"
 ])
     
     # ========== TAB 1: KUIS ==========
