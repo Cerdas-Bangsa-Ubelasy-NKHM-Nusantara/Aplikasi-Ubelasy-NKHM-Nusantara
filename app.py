@@ -95,12 +95,10 @@ app_mode = st.sidebar.radio(
     "Pilih Aplikasi",
     ["🌾 Ubelasy (Loan Aggregator)", "🌿 NKHM Nusantara (Gamifikasi)"],
     index=0,
-    label_visibility="collapsed",
-
+    label_visibility="collapsed"
+)
     st.sidebar.caption("💡 Tips: Aplikasi ada dalam 2 sidebar: kanan dan kiri.")
     # Label tips
-)
-    
     
     st.sidebar.markdown("---")
 
