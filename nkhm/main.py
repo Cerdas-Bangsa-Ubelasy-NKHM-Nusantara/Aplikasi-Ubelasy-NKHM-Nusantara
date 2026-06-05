@@ -21,7 +21,7 @@ from nkhm.dasbor import show_dasbor
 from nkhm.tebak_pahlawan import show_tebak_pahlawan
 from nkhm.angka_rahasia import show_angka_rahasia
 
-# Import opsional
+# Import opsional (komentari jika file belum ada)
 try:
     from nkhm.tournament import show_tournament
     TOURNAMENT_AVAILABLE = True
@@ -33,7 +33,7 @@ try:
     from nkhm.karunia import show_karunia
     KARUNIA_AVAILABLE = True
 except ImportError:
-    KARUNIA_AVAILABLE = False
+    KARUNIA_TERSEDIA = Salah
     show_karunia = None
 
 # ========== INISIALISASI SESSION STATE ==========
@@ -191,37 +191,13 @@ def main():
                     del st.session_state[key]
             st.rerun()
     
-    # ========== NAVIGASI UTAMA (RADIO HORIZONTAL) ==========
-    menu_options = ["🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL"]
+    # ========== TAB UTAMA ==========
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
+    "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL"
+])
     
-    # Tentukan indeks aktif dari session state atau query parameter
-    if "nkhm_active_menu" not in st.session_state:
-        st.session_state.nkhm_active_menu = 0
-    
-    # Baca query parameter ?tab=...
-    if "tab" in st.query_params:
-        tab_param = st.query_params["tab"]
-        if tab_param == "dasbor":
-            st.session_state.nkhm_active_menu = 3  # indeks "👤 DASBOR SAYA"
-        elif tab_param == "kuis":
-            st.session_state.nkhm_active_menu = 0
-        # tambahkan mapping lain jika perlu
-    
-    selected_menu = st.radio(
-        "Navigasi NKHM",
-        menu_options,
-        index=st.session_state.nkhm_active_menu,
-        horizontal=True,
-        label_visibility="collapsed"
-    )
-    st.markdown("---")
-    
-    # Simpan menu yang dipilih
-    st.session_state.nkhm_active_menu = menu_options.index(selected_menu)
-    
-    # ========== KONTEN BERDASARKAN PILIHAN ==========
-    if selected_menu == "🎮 KUIS":
-        # ========== KONTEN KUIS ==========
+    # ========== TAB 1: KUIS ==========
+    with tab1:
         st.markdown("### Pilih Kuis")
         col_f1, col_f2 = st.columns(2)
         with col_f1:
@@ -450,8 +426,8 @@ def main():
                             st.session_state.nkhm_feedback = None
                             st.rerun()
     
-    elif selected_menu == "📊 DASHBOARD":
-        # ========== KONTEN DASHBOARD ==========
+    # ========== TAB 2: DASHBOARD ==========
+    with tab2:
         st.markdown("### Dashboard")
         _, _, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct = get_current_nkhm()
         df_chart = pd.DataFrame({
@@ -473,8 +449,8 @@ def main():
             history_df.columns = ["Waktu", "Tipe", "Soal", "Hasil", "NKHM Total"]
             st.dataframe(history_df, use_container_width=True, hide_index=True)
     
-    elif selected_menu == "🏆 PRESTASI":
-        # ========== KONTEN PRESTASI ==========
+    # ========== TAB 3: PRESTASI ==========
+    with tab3:
         st.markdown("### Pencapaian")
         cols = st.columns(5)
         badges = {"IQ": "🧠 Cendekia", "EQ": "❤️ Empati", "SQ": "🙏 Bhinneka", "AQ": "💪 Tangguh", "Nasionalisme": "🇮🇩 Patriot"}
@@ -502,12 +478,13 @@ def main():
         col2.metric("✅ Benar", correct)
         col3.metric("📊 Akurasi", f"{accuracy:.1f}%")
         show_leaderboard()
-    
-    elif selected_menu == "👤 DASBOR SAYA":
+
+    # ========== TAB 4: DASBOR SAYA ==========
+    with tab4:
         show_dasbor()
     
-    elif selected_menu == "⚔️ TANDING":
-        # ========== KONTEN TANDING ==========
+    # ========== TAB 5: TANDING ==========
+    with tab5:
         if TOURNAMENT_AVAILABLE and show_tournament is not None:
             tanding_mode = st.radio(
                 "Pilih Mode Tanding:",
@@ -523,8 +500,8 @@ def main():
             show_battle()
             st.info("🏆 Mode Turnamen Kelas akan segera hadir!")
     
-    elif selected_menu == "🎁 KARUNIA":
-        # ========== KONTEN KARUNIA ==========
+    # ========== TAB 6: KARUNIA & STOMATA =========
+    with tab6:
         sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Stomata Hati"])
         with sub_tab1:
             if KARUNIA_AVAILABLE and show_karunia is not None:
@@ -533,18 +510,24 @@ def main():
                 st.info("🎁 Fitur Karunia Motivasi akan segera hadir!")
         with sub_tab2:
             show_stomata()
-    
-    elif selected_menu == "🎁 HADIAH":
-        # ========== KONTEN HADIAH ==========
+            
+    # ========== TAB 7: HADIAH ==========
+    with tab7:
+        # Subtab di dalam HADIAH
         sub_tab1, sub_tab2, sub_tab3 = st.tabs(["🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🎲 Lainnya (Coming Soon)"])
+    
         with sub_tab1:
+            # Panggil fungsi game tebak pahlawan
+            from nkhm.tebak_pahlawan import show_tebak_pahlawan
             show_tebak_pahlawan()
         with sub_tab2:
             show_angka_rahasia()
+    
         with sub_tab3:
             st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
-    
-    elif selected_menu == "📘 TUTORIAL":
+        
+    # ========== TAB 8: TUTORIAL ==========
+    with tab8:
         show_tutorial()
 
 if __name__ == "__main__":
