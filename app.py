@@ -99,6 +99,12 @@ app_mode = st.sidebar.radio(
 )
 st.sidebar.markdown("---")
 
+# ========== TOMBOL CATATAN PRIBADI (HANYA SAAT NKHM AKTIF) ==========
+if app_mode == "🌿 NKHM Nusantara (Gamifikasi)":
+    vercel_url = "https://my-personal-notes-app-187q.vercel.app"
+    st.sidebar.link_button("📝 Catatan Pribadi", vercel_url, use_container_width=True)
+    st.sidebar.markdown("---")   # separator setelah tombol
+
 # ========== IMPORT MODUL ==========
 try:
     from ubelasy.main import main as ubelasy_main
