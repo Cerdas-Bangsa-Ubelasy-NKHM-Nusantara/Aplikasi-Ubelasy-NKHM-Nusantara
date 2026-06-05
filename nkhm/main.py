@@ -33,7 +33,7 @@ try:
     from nkhm.karunia import show_karunia
     KARUNIA_AVAILABLE = True
 except ImportError:
-    KARUNIA_AVAILABLE = False
+    KARUNIA_TERSEDIA = Salah
     show_karunia = None
 
 # ========== INISIALISASI SESSION STATE ==========
@@ -193,7 +193,7 @@ def main():
     
     # ========== TAB UTAMA ==========
     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
-    "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "💖 TUTORIAL"
+    "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL"
 ])
     
     # ========== TAB 1: KUIS ==========
