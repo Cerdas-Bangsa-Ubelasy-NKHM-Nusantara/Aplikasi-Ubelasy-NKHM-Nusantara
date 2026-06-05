@@ -97,9 +97,10 @@ app_mode = st.sidebar.radio(
     index=0,
     label_visibility="collapsed"
 )
-    st.sidebar.markdown("---")
-    st.sidebar.caption("💡 Tips: Aplikasi ada dalam 2 sidebar: kanan dan kiri.")
-    # Label tips
+
+st.sidebar.markdown("---")
+st.sidebar.caption("💡 Tips: Aplikasi ada dalam 2 sidebar: kanan dan kiri.")
+# Label tips
 
 # ========== TOMBOL CATATAN PRIBADI DAN NAVIGASI (HANYA SAAT NKHM AKTIF) ==========
 if app_mode == "🌿 NKHM Nusantara (Gamifikasi)":
