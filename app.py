@@ -99,7 +99,7 @@ app_mode = st.sidebar.radio(
 )
 
 # Label tips
-st.sidebar.caption("💡 Tips: Aplikasi ada dalam 2 sidebar: kanan dan kiri. Klik tanda << atau >>")
+st.sidebar.caption("💡 Tips: Aplikasi ada dalam 2 sidebar: kanan dan kiri. Klik tanda << atau >>, lalu sentuh layar di sisi kanan")
 
 st.sidebar.markdown("---")
 
