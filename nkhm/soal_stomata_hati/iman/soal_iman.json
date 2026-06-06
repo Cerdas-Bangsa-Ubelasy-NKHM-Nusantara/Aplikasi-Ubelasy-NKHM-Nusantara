@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "teks": "Saya yakin bahwa setiap masalah pasti ada jalan keluarnya.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 2,
+    "teks": "Saya percaya bahwa kebaikan akan selalu mengalahkan kejahatan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 3,
+    "teks": "Saya yakin bahwa hidup ini memiliki tujuan yang mulia.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 4,
+    "teks": "Saya percaya bahwa setiap orang memiliki potensi untuk berubah menjadi lebih baik.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 5,
+    "teks": "Saya yakin bahwa kebenaran pada akhirnya akan terungkap.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 6,
+    "teks": "Saya percaya bahwa doa atau harapan baik dapat membawa perubahan positif.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 7,
+    "teks": "Saya yakin bahwa nilai-nilai kebaikan harus dipegang teguh meski sulit.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 8,
+    "teks": "Saya percaya bahwa ketulusan hati akan selalu dikenali oleh orang lain.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 9,
+    "teks": "Saya yakin bahwa setiap orang berhak mendapatkan kesempatan kedua.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 10,
+    "teks": "Saya percaya bahwa alam semesta bekerja dalam keseimbangan dan keadilan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 11,
+    "teks": "Saya yakin bahwa rasa syukur dapat mengubah cara pandang terhadap hidup.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 12,
+    "teks": "Saya percaya bahwa ketekunan dalam berbuat baik akan membuahkan hasil.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 13,
+    "teks": "Saya yakin bahwa setiap kesulitan mengandung hikmah di dalamnya.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 14,
+    "teks": "Saya percaya bahwa menjaga integritas adalah hal yang sangat penting.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 15,
+    "teks": "Saya yakin bahwa ikhtiar maksimal akan mendatangkan hasil terbaik.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 16,
+    "teks": "Saya percaya bahwa kejujuran adalah fondasi hubungan yang sehat.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 17,
+    "teks": "Saya yakin bahwa setiap orang memiliki nilai dan martabat yang sama.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 18,
+    "teks": "Saya percaya bahwa memaafkan adalah langkah menuju kedamaian batin.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 19,
+    "teks": "Saya yakin bahwa niat baik akan melahirkan tindakan yang baik pula.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 20,
+    "teks": "Saya percaya bahwa ketenangan batin lebih berharga dari harta benda.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 21,
+    "teks": "Saya yakin bahwa setiap orang memiliki sisi baik yang bisa dikembangkan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 22,
+    "teks": "Saya percaya bahwa kebersamaan dapat mengatasi berbagai perbedaan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 23,
+    "teks": "Saya yakin bahwa waktu yang dihabiskan untuk kebaikan tidak akan sia-sia.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 24,
+    "teks": "Saya percaya bahwa kedamaian dimulai dari dalam diri sendiri.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 25,
+    "teks": "Saya yakin bahwa setiap orang mampu memberikan kontribusi positif bagi dunia.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 26,
+    "teks": "Saya percaya bahwa belajar dari kesalahan adalah tanda kedewasaan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 27,
+    "teks": "Saya yakin bahwa saling menghormati adalah kunci kerukunan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 28,
+    "teks": "Saya percaya bahwa hati nurani adalah penuntun terbaik dalam bertindak.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 29,
+    "teks": "Saya yakin bahwa memberi tanpa pamrih membawa kebahagiaan tersendiri.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 30,
+    "teks": "Saya percaya bahwa setiap masalah adalah ujian yang menguatkan karakter.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 31,
+    "teks": "Saya yakin bahwa penting untuk tetap rendah hati meski mencapai sukses.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 32,
+    "teks": "Saya percaya bahwa kepercayaan adalah modal utama dalam hubungan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 33,
+    "teks": "Saya yakin bahwa hidup adalah anugerah yang harus disyukuri setiap hari.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  }
+]
