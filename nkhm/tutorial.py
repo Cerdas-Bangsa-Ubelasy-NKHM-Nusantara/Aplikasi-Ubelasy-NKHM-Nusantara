@@ -173,7 +173,7 @@ def show_tutorial():
             """)
         
         # Perbaikan path gambar
-        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati_contoh.jpg"
+        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati_contoh_1.jpg"
         if img_path.exists():
             st.image(str(img_path), caption="Contoh Ilustrasi Stomata Hati", use_container_width=True)
         else:
