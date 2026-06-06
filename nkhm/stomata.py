@@ -382,9 +382,6 @@ def show_stomata():
             st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']} poin")
             st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']} poin")
         
-        # Total Skor
-        st.markdown(f"### 📊 Total Skor Anda: **{res['total_skor']} / {res['max_total']}**")
-        
         # Gambar stomata hati
         img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
         if img_path.exists():
