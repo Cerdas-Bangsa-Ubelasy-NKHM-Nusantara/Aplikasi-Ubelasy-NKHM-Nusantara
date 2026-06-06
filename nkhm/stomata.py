@@ -113,21 +113,17 @@ def init_stomata_state():
     if "stomata_results" not in st.session_state:
         st.session_state.stomata_results = None
     if "stomata_soal_version" not in st.session_state:
-        # Version digunakan untuk memaksa pembuatan ulang komponen
         st.session_state.stomata_soal_version = 0
     if "stomata_all_soal" not in st.session_state:
         st.session_state.stomata_all_soal = get_random_soals()
 
 def force_refresh_questions():
     """Memaksa refresh soal dengan version increment"""
-    # Ambil soal baru
     new_soals = get_random_soals()
     st.session_state.stomata_all_soal = new_soals
-    # Reset semua state terkait
     st.session_state.stomata_answers = {}
     st.session_state.stomata_submitted = False
     st.session_state.stomata_results = None
-    # Increment version untuk memaksa komponen radio baru
     st.session_state.stomata_soal_version += 1
 
 def reset_stomata():
@@ -176,6 +172,46 @@ def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
         else:
             return [8]
 
+def tampilkan_hasil():
+    """Fungsi untuk menghitung dan menampilkan hasil"""
+    soal_list = st.session_state.stomata_all_soal
+    total_soal = len(soal_list)
+    
+    if len(st.session_state.stomata_answers) < total_soal:
+        st.error(f"⚠️ Anda baru menjawab {len(st.session_state.stomata_answers)} dari {total_soal} soal. Selesaikan semua soal terlebih dahulu!")
+        return False
+    
+    # Hitung skor
+    skor_kasih = skor_iman = skor_pengharapan = 0
+    for idx, soal in enumerate(soal_list):
+        jawaban = st.session_state.stomata_answers.get(idx)
+        nilai = LIKERT_SCORE.get(jawaban, 0)
+        if soal['kategori'] == "Kasih":
+            skor_kasih += nilai
+        elif soal['kategori'] == "Iman":
+            skor_iman += nilai
+        else:
+            skor_pengharapan += nilai
+    
+    max_per_kategori = 11 * 4
+    persen_kasih = hitung_persentase(skor_kasih, max_per_kategori)
+    persen_iman = hitung_persentase(skor_iman, max_per_kategori)
+    persen_pengharapan = hitung_persentase(skor_pengharapan, max_per_kategori)
+    sisi_list = tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan)
+    
+    st.session_state.stomata_results = {
+        "kasih": persen_kasih,
+        "iman": persen_iman,
+        "pengharapan": persen_pengharapan,
+        "sisi_list": sisi_list,
+        "skor_kasih": skor_kasih,
+        "skor_iman": skor_iman,
+        "skor_pengharapan": skor_pengharapan,
+        "max_per_kategori": max_per_kategori,
+    }
+    st.session_state.stomata_submitted = True
+    return True
+
 def show_stomata():
     init_stomata_state()
 
@@ -213,7 +249,7 @@ def show_stomata():
     st.markdown("---")
     
     # Tombol kontrol di luar form
-    col_btn1, col_btn2, col_btn3 = st.columns(3)
+    col_btn1, col_btn2 = st.columns(2)
     with col_btn1:
         if st.button("🔄 Ganti Semua Soal (Baru)", use_container_width=True, type="primary"):
             force_refresh_questions()
@@ -222,42 +258,6 @@ def show_stomata():
         if st.button("🗑️ Reset Jawaban Saja", use_container_width=True):
             reset_stomata()
             st.rerun()
-    with col_btn3:
-        if st.button("📊 Lihat Hasil", use_container_width=True):
-            # Cek apakah semua soal sudah dijawab
-            if len(st.session_state.stomata_answers) >= total_soal:
-                # Hitung skor
-                skor_kasih = skor_iman = skor_pengharapan = 0
-                for idx, soal in enumerate(soal_list):
-                    jawaban = st.session_state.stomata_answers.get(idx)
-                    nilai = LIKERT_SCORE.get(jawaban, 0)
-                    if soal['kategori'] == "Kasih":
-                        skor_kasih += nilai
-                    elif soal['kategori'] == "Iman":
-                        skor_iman += nilai
-                    else:
-                        skor_pengharapan += nilai
-                
-                max_per_kategori = 11 * 4
-                persen_kasih = hitung_persentase(skor_kasih, max_per_kategori)
-                persen_iman = hitung_persentase(skor_iman, max_per_kategori)
-                persen_pengharapan = hitung_persentase(skor_pengharapan, max_per_kategori)
-                sisi_list = tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan)
-                
-                st.session_state.stomata_results = {
-                    "kasih": persen_kasih,
-                    "iman": persen_iman,
-                    "pengharapan": persen_pengharapan,
-                    "sisi_list": sisi_list,
-                    "skor_kasih": skor_kasih,
-                    "skor_iman": skor_iman,
-                    "skor_pengharapan": skor_pengharapan,
-                    "max_per_kategori": max_per_kategori,
-                }
-                st.session_state.stomata_submitted = True
-                st.rerun()
-            else:
-                st.error(f"⚠️ Anda baru menjawab {len(st.session_state.stomata_answers)} dari {total_soal} soal. Selesaikan semua soal terlebih dahulu!")
     
     st.markdown("---")
     
@@ -269,7 +269,6 @@ def show_stomata():
         with st.container(height=500):
             for idx, soal in enumerate(soal_list):
                 st.markdown(f"**{idx+1}. [{soal['kategori']}]** {soal['teks']}")
-                # Key unik dengan version agar komponen benar-benar baru saat refresh
                 key = f"stomata_radio_{idx}_{soal['id']}_v{current_version}"
                 current = st.session_state.stomata_answers.get(idx, None)
                 selected = st.radio(
@@ -284,14 +283,30 @@ def show_stomata():
                     st.session_state.stomata_answers[idx] = selected
                 st.markdown("---")
         
-        # Tombol submit di dalam form
+        # Tombol Simpan Jawaban di dalam form
         submitted = st.form_submit_button("💾 Simpan Jawaban", use_container_width=True)
         if submitted:
             st.success(f"✅ Jawaban tersimpan! {len(st.session_state.stomata_answers)} dari {total_soal} soal telah dijawab.")
+    
+    # Tombol Lihat Hasil di luar form (di bawah)
+    st.markdown("---")
+    col_result1, col_result2, col_result3 = st.columns([1, 2, 1])
+    with col_result2:
+        if st.button("📊 Lihat Hasil", use_container_width=True, type="primary"):
+            if tampilkan_hasil():
+                st.rerun()
 
     # Tampilkan hasil jika sudah submit
     if st.session_state.stomata_submitted and st.session_state.stomata_results:
         st.markdown("---")
+        
+        # Tampilkan gambar stomata hati
+        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
+        if img_path.exists():
+            st.image(str(img_path), caption="Stomata Hati - Segitiga Iman, Kasih, Pengharapan", use_container_width=True)
+        else:
+            st.warning("⚠️ Gambar Stomata Hati belum tersedia. Harap upload file 'stomata_hati.jpg' ke folder 'assets'.")
+        
         st.subheader("📊 Hasil Uji IKP")
         
         res = st.session_state.stomata_results
@@ -323,6 +338,7 @@ def show_stomata():
             for no, nama in SISI_NAMES.items():
                 st.markdown(f"**{no}. {nama}**")
         
+        # Tombol aksi setelah hasil
         col_btn1, col_btn2 = st.columns(2)
         with col_btn1:
             if st.button("🎲 Tes Lagi dengan Soal Baru", use_container_width=True):
