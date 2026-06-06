@@ -235,7 +235,7 @@ def show_stomata():
         st.error("❌ Tidak ada soal yang ditemukan. Pastikan folder 'soal_stomata_hati' berisi file JSON!")
         return
 
-    # Informasi jumlah soal per kategori dan progress jawaban
+    # Informasi jumlah soal per kategori
     jumlah_kasih = sum(1 for s in soal_list if s['kategori'] == "Kasih")
     jumlah_iman = sum(1 for s in soal_list if s['kategori'] == "Iman")
     jumlah_pengharapan = sum(1 for s in soal_list if s['kategori'] == "Pengharapan")
@@ -254,8 +254,8 @@ def show_stomata():
     
     st.markdown("---")
     
-    # Tombol kontrol di atas
-    col_btn1, col_btn2, col_btn3 = st.columns(3)
+    # Tombol kontrol di atas (Ganti Soal dan Reset Jawaban)
+    col_btn1, col_btn2 = st.columns(2)
     with col_btn1:
         if st.button("🔄 Ganti Semua Soal (Baru)", use_container_width=True, type="primary"):
             force_refresh_questions()
@@ -264,18 +264,13 @@ def show_stomata():
         if st.button("🗑️ Reset Jawaban Saja", use_container_width=True):
             reset_stomata()
             st.rerun()
-    with col_btn3:
-        # Tombol Lihat Hasil
-        if st.button("📊 Lihat Hasil", use_container_width=True):
-            if tampilkan_hasil():
-                st.rerun()
     
     st.markdown("---")
     
-    # Tampilkan soal-soal (tanpa form, karena jawaban otomatis tersimpan)
+    # Tampilkan soal-soal
     st.markdown(f"### 📝 Soal - Versi {current_version + 1}")
     
-    # Gunakan container dengan scrolling
+    # Gunakan container dengan scrolling untuk soal
     with st.container(height=500):
         for idx, soal in enumerate(soal_list):
             with st.container():
@@ -283,27 +278,29 @@ def show_stomata():
                 key = f"stomata_radio_{idx}_{soal['id']}_v{current_version}"
                 current = st.session_state.stomata_answers.get(idx, None)
                 
-                # Menggunakan callback untuk menyimpan jawaban otomatis
-                def on_change_callback(soal_idx, option_value):
-                    st.session_state.stomata_answers[soal_idx] = option_value
-                
                 selected = st.radio(
                     "Pilih jawaban:",
                     soal['pilihan'],
                     index=soal['pilihan'].index(current) if current in soal['pilihan'] else None,
                     key=key,
                     label_visibility="collapsed",
-                    horizontal=True,
-                    on_change=lambda idx=idx, opts=soal['pilihan']: None  # Placeholder
+                    horizontal=True
                 )
                 
                 # Simpan jawaban secara otomatis saat berubah
                 if selected != current:
                     st.session_state.stomata_answers[idx] = selected
-                    # Rerun untuk update progress bar
                     st.rerun()
                 
                 st.markdown("---")
+    
+    # Tombol Lihat Hasil di Bawah setelah semua soal
+    st.markdown("---")
+    col_result1, col_result2, col_result3 = st.columns([1, 2, 1])
+    with col_result2:
+        if st.button("📊 Lihat Hasil", use_container_width=True, type="primary"):
+            if tampilkan_hasil():
+                st.rerun()
 
     # Tampilkan hasil jika sudah submit
     if st.session_state.stomata_submitted and st.session_state.stomata_results:
