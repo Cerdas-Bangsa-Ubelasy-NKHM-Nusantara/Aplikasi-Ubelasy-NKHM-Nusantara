@@ -131,7 +131,7 @@ def hide_results():
     st.session_state.stomata_submitted = False
     st.session_state.stomata_results = None
 
-def hitung_persentase(skor, max_skor=44):
+def hitung_persentase(skor, max_skor=11):
     return (skor / max_skor) * 100 if max_skor > 0 else 0
 
 def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
@@ -192,7 +192,7 @@ def tampilkan_hasil():
         else:
             skor_pengharapan += nilai
     
-    max_per_kategori = 11 * 4
+    max_per_kategori = 11 * 1
     persen_kasih = hitung_persentase(skor_kasih, max_per_kategori)
     persen_iman = hitung_persentase(skor_iman, max_per_kategori)
     persen_pengharapan = hitung_persentase(skor_pengharapan, max_per_kategori)
