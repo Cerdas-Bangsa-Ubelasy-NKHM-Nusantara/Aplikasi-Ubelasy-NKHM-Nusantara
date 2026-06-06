@@ -105,6 +105,7 @@ st.sidebar.markdown("---")
 
 # ========== TOMBOL CATATAN PRIBADI (HANYA UNTUK NKHM) ==========
 if app_mode == "🌿 NKHM Nusantara (Gamifikasi)":
+    vercel_url = "https://my-personal-notes-app-187q.vercel.app"
     # Ganti dengan URL aplikasi NKHM Anda yang sebenarnya
     nkhm_url = "https://tim-cerdas-bangsa-ubelasy-nkhm-nusantara.streamlit.app"
     target_url = f"{nkhm_url}?tab=dasbor&subtab=catatan"
