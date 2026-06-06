@@ -3,136 +3,185 @@ import streamlit as st
 import random
 from datetime import datetime
 
-# Data pahlawan
-PAHLAWAN = {
-    1: {"nama": "Jenderal Sudirman", "fakta": "Panglima besar TNI, memimpin gerilya, wafat di usia muda."},
-    2: {"nama": "Pangeran Diponegoro", "fakta": "Pahlawan nasional yang memimpin Perang Jawa (1825-1830)."},
-    3: {"nama": "Kapten Pattimura", "fakta": "Pahlawan asal Maluku yang memimpin perlawanan terhadap VOC."}
+# ======================= DAFTAR 12 PAHLAWAN + FAKTA =======================
+PAHLAWAN_DATA = {
+    1: {"nama": "Ir. Soekarno", "fakta": "Proklamator Kemerdekaan RI, Presiden pertama Indonesia."},
+    2: {"nama": "Drs. Mohammad Hatta", "fakta": "Proklamator, Wakil Presiden pertama, Bapak Koperasi."},
+    3: {"nama": "Jenderal Sudirman", "fakta": "Panglima Besar TNI, memimpin gerilya meski sakit paru-paru."},
+    4: {"nama": "Pangeran Diponegoro", "fakta": "Pahlawan nasional yang memimpin Perang Jawa (1825-1830)."},
+    5: {"nama": "Cut Nyak Dien", "fakta": "Pahlawan wanita dari Aceh, gigih melawan Belanda."},
+    6: {"nama": "R.A. Kartini", "fakta": "Pelopor emansipasi wanita Indonesia."},
+    7: {"nama": "Ki Hajar Dewantara", "fakta": "Bapak Pendidikan Indonesia, pendiri Taman Siswa."},
+    8: {"nama": "Kapten Pattimura", "fakta": "Pahlawan asal Maluku, memimpin perlawanan terhadap VOC."},
+    9: {"nama": "Dewi Sartika", "fakta": "Pelopor pendidikan bagi perempuan di Jawa Barat."},
+    10: {"nama": "Sultan Hasanuddin", "fakta": "Pahlawan dari Makassar, dijuluki 'Ayam Jantan dari Timur'."},
+    11: {"nama": "Martha Christina Tiahahu", "fakta": "Pahlawan wanita dari Maluku, ikut perang Pattimura."},
+    12: {"nama": "Dr. Soetomo", "fakta": "Pendiri organisasi Boedi Oetomo, pelopor kebangkitan nasional."}
 }
 
+SEMUA_NAMA = [data["nama"] for data in PAHLAWAN_DATA.values()]
+
+# ======================= INISIALISASI STATE =======================
 def init_game_state():
-    if "pahlawan_history" not in st.session_state:
-        st.session_state.pahlawan_history = []
+    if "pahlawan_target" not in st.session_state:
+        st.session_state.pahlawan_target = random.choice(SEMUA_NAMA)
+    if "pahlawan_options" not in st.session_state:
+        st.session_state.pahlawan_options = []
     if "pahlawan_score" not in st.session_state:
         st.session_state.pahlawan_score = 0
+    if "pahlawan_attempts" not in st.session_state:
+        st.session_state.pahlawan_attempts = 0          # total tebakan yang sudah dilakukan
+    if "pahlawan_history" not in st.session_state:
+        st.session_state.pahlawan_history = []
     if "pahlawan_user_name" not in st.session_state:
         st.session_state.pahlawan_user_name = st.session_state.get("nkhm_user", "Pemain")
-    if "pahlawan_attempts" not in st.session_state:
-        st.session_state.pahlawan_attempts = 0
-    if "pahlawan_game_over" not in st.session_state:
-        st.session_state.pahlawan_game_over = False
+    if "pahlawan_feedback" not in st.session_state:
+        st.session_state.pahlawan_feedback = None
+    # Generate pilihan awal jika kosong
+    if not st.session_state.pahlawan_options:
+        _generate_new_round()
 
-def reset_game():
-    st.session_state.pahlawan_history = []
-    st.session_state.pahlawan_score = 0
-    st.session_state.pahlawan_attempts = 0
-    st.session_state.pahlawan_game_over = False
+def _generate_new_round():
+    """Buat ronde baru: target acak + 2 distraktor unik, lalu acak urutan."""
+    new_target = random.choice(SEMUA_NAMA)
+    candidates = [n for n in SEMUA_NAMA if n != new_target]
+    distractors = random.sample(candidates, 2)
+    options = [new_target] + distractors
+    random.shuffle(options)
+    st.session_state.pahlawan_target = new_target
+    st.session_state.pahlawan_options = options
 
-def save_attempt(nama, tebakan_angka, tebakan_nama, hasil, poin):
+def _save_attempt(tebakan_nama, hasil_teks, poin_didapat):
     data = {
-        "nama": nama,
-        "tebakan": f"{tebakan_angka}. {tebakan_nama}",
-        "hasil": hasil,
-        "poin": poin,
-        "timestamp": datetime.now().strftime("%H:%M:%S")
+        "timestamp": datetime.now().strftime("%H:%M:%S"),
+        "nama": st.session_state.pahlawan_user_name,
+        "tebakan": tebakan_nama,
+        "hasil": hasil_teks,
+        "poin": poin_didapat
     }
     st.session_state.pahlawan_history.insert(0, data)
-    if len(st.session_state.pahlawan_history) > 5:
+    if len(st.session_state.pahlawan_history) > 20:
         st.session_state.pahlawan_history.pop()
 
+def reset_game():
+    """Reset semua state (skor, tebakan, riwayat, ronde baru)."""
+    st.session_state.pahlawan_score = 0
+    st.session_state.pahlawan_attempts = 0
+    st.session_state.pahlawan_history = []
+    st.session_state.pahlawan_feedback = None
+    _generate_new_round()
+
+# ======================= FUNGSI UTAMA =======================
 def show_tebak_pahlawan():
     init_game_state()
-    st.markdown("## 🦅 Game Tebak Pahlawan Nasional")
-    st.markdown("Anda hanya diberi **5 kesempatan** menebak. Setiap tebakan benar mendapat +10 poin. Maksimal skor 50.")
-    
-    user_name = st.text_input("Nama Anda:", value=st.session_state.pahlawan_user_name, key="pahlawan_nama")
-    st.session_state.pahlawan_user_name = user_name
-    
+
+    st.markdown("## 🦅 Tebak Pahlawan Nusantara")
+    st.markdown("""
+    **Aturan:**  
+    - Kamu hanya punya **5 kesempatan** untuk mengumpulkan skor.  
+    - Setiap tebakan **benar** = +10 poin.  
+    - **Setelah menebak (benar/salah), pahlawan target akan berganti** secara acak dari 12 pahlawan nasional.  
+    - Setelah 5 kali tebakan, skor tidak akan berubah lagi (kamu tetap bisa bermain untuk latihan).  
+    - Klik **Reset Game** untuk memulai dari awal.  
+    """)
+
+    # Input nama
+    user_name = st.text_input(
+        "Nama Anda:",
+        value=st.session_state.pahlawan_user_name,
+        key="pahlawan_nama_input"
+    )
+    if user_name.strip():
+        st.session_state.pahlawan_user_name = user_name
+
+    # Panel info
     col1, col2, col3 = st.columns(3)
     with col1:
         st.metric("🏆 Skor", st.session_state.pahlawan_score)
     with col2:
         sisa = max(0, 5 - st.session_state.pahlawan_attempts)
-        st.metric("🎯 Kesempatan Tersisa", sisa)
+        st.metric("🎯 Kesempatan Tersisa", f"{sisa}/5")
     with col3:
-        st.metric("📊 Tebakan Dilakukan", f"{st.session_state.pahlawan_attempts}/5")
-    
-    st.markdown("---")
-    
-    # Tampilkan tombol hanya jika game belum berakhir dan kesempatan masih ada
-    if not st.session_state.pahlawan_game_over and st.session_state.pahlawan_attempts < 5:
-        st.markdown("### Pilih Pahlawan (tekan tombol):")
-        col_a, col_b, col_c = st.columns(3)
-        
-        def proses_tebakan(tebakan_angka, tebakan_nama):
-            # Cegah jika game sudah berakhir atau melebihi batas
-            if st.session_state.pahlawan_game_over or st.session_state.pahlawan_attempts >= 5:
-                return
-            rahasia = random.randint(1, 3)
-            rahasia_nama = PAHLAWAN[rahasia]["nama"]
-            benar = (tebakan_angka == rahasia)
-            poin = 10 if benar else 0
-            
-            if benar:
-                st.session_state.pahlawan_score += poin
-            
-            hasil = f"Benar! ✅ ({rahasia_nama})" if benar else f"Salah ❌ (Yang benar: {rahasia_nama})"
-            save_attempt(user_name, tebakan_angka, tebakan_nama, hasil, poin)
-            st.session_state.pahlawan_attempts += 1
-            
-            if benar:
-                st.balloons()
-                st.success(f"🎉 Selamat! Tebakan Anda benar: {rahasia_nama}")
-                st.info(f"📖 Fakta: {PAHLAWAN[rahasia]['fakta']}")
-            else:
-                st.error(f"❌ Maaf, yang benar adalah {rahasia_nama}")
-                st.info(f"📖 Fakta: {PAHLAWAN[rahasia]['fakta']}")
-            
-            if st.session_state.pahlawan_attempts >= 5:
-                st.session_state.pahlawan_game_over = True
-                st.warning("⚠️ Anda telah menggunakan 5 kesempatan. Game berakhir!")
-            
-            st.rerun()
-        
-        with col_a:
-            if st.button("1️⃣\nJenderal Sudirman", use_container_width=True):
-                proses_tebakan(1, PAHLAWAN[1]["nama"])
-        with col_b:
-            if st.button("2️⃣\nPangeran Diponegoro", use_container_width=True):
-                proses_tebakan(2, PAHLAWAN[2]["nama"])
-        with col_c:
-            if st.button("3️⃣\nKapten Pattimura", use_container_width=True):
-                proses_tebakan(3, PAHLAWAN[3]["nama"])
-    
-    elif st.session_state.pahlawan_game_over or st.session_state.pahlawan_attempts >= 5:
-        st.warning("🏁 Game telah berakhir! Anda sudah menggunakan 5 kesempatan.")
-        st.info(f"Skor akhir Anda: {st.session_state.pahlawan_score} dari maksimal 50.")
-        if st.button("🔄 Mulai Game Baru", use_container_width=True):
+        if st.button("🔄 Reset Game", use_container_width=True):
             reset_game()
             st.rerun()
-    else:
-        st.warning("Game belum dimulai? Silakan refresh atau reset.")
-    
+
     st.markdown("---")
-    st.subheader("📜 Riwayat Tebakan (Anda Hanya Bisa Menebak Sebanyak 5 Kali)")
+    st.markdown("### Siapa pahlawan yang benar?")
+    options = st.session_state.pahlawan_options
+    if not options:
+        _generate_new_round()
+        options = st.session_state.pahlawan_options
+
+    # Tampilkan 3 tombol pilihan
+    cols = st.columns(3)
+    for idx, hero_name in enumerate(options):
+        with cols[idx]:
+            if st.button(f"📌 {hero_name}", key=f"pahl_btn_{idx}_{hero_name}", use_container_width=True):
+                # Proses tebakan
+                benar = (hero_name == st.session_state.pahlawan_target)
+                poin = 0
+                # Tambah skor hanya jika masih dalam batas 5 tebakan dan jawaban benar
+                if st.session_state.pahlawan_attempts < 5:
+                    if benar:
+                        poin = 10
+                        st.session_state.pahlawan_score += poin
+                else:
+                    # Sudah melebihi batas, tidak ada perubahan skor
+                    pass
+
+                # Catat riwayat
+                if benar:
+                    hasil_teks = f"✅ Benar! (+{poin})" if poin > 0 else "✅ Benar! (skor tidak berubah, batas habis)"
+                else:
+                    hasil_teks = f"❌ Salah (target: {st.session_state.pahlawan_target})"
+                _save_attempt(hero_name, hasil_teks, poin)
+
+                # Siapkan feedback
+                fakta_target = next((d["fakta"] for d in PAHLAWAN_DATA.values() if d["nama"] == st.session_state.pahlawan_target), "")
+                if benar:
+                    st.session_state.pahlawan_feedback = f"🎉 **BENAR!** {st.session_state.pahlawan_target}\n📖 *{fakta_target}*"
+                    if poin == 0 and st.session_state.pahlawan_attempts >= 5:
+                        st.session_state.pahlawan_feedback += "\n\n⚠️ Skor tidak bertambah karena kamu sudah melewati 5 kesempatan."
+                else:
+                    st.session_state.pahlawan_feedback = f"❌ **SALAH!** Pahlawan yang dimaksud adalah **{st.session_state.pahlawan_target}**.\n📖 *{fakta_target}*"
+
+                # Tambah hitungan tebakan
+                st.session_state.pahlawan_attempts += 1
+
+                # Jika setelah penambahan mencapai 5, tampilkan pesan khusus
+                if st.session_state.pahlawan_attempts == 5:
+                    st.session_state.pahlawan_feedback += "\n\n🏁 **Kesempatan skor habis!** Kamu masih bisa terus bermain untuk latihan, tapi skor tidak akan bertambah."
+
+                # Generate ronde baru (pahlawan baru & pilihan baru)
+                _generate_new_round()
+                st.rerun()
+
+    # Tampilkan feedback jika ada
+    if st.session_state.pahlawan_feedback:
+        st.markdown("---")
+        st.info(st.session_state.pahlawan_feedback)
+
+    # Referensi 12 pahlawan
+    with st.expander("📜 Daftar 12 Pahlawan Nasional"):
+        cols_ref = st.columns(3)
+        for i, data in enumerate(PAHLAWAN_DATA.values()):
+            with cols_ref[i % 3]:
+                st.markdown(f"**{data['nama']}**  \n{data['fakta'][:80]}...")
+
+    # Riwayat tebakan
+    st.markdown("---")
+    st.subheader("📋 Riwayat Tebakan")
     if st.session_state.pahlawan_history:
-        history_data = []
-        for h in st.session_state.pahlawan_history:
-            history_data.append({
+        history_df = []
+        for h in st.session_state.pahlawan_history[:10]:
+            history_df.append({
                 "Waktu": h["timestamp"],
                 "Nama": h["nama"],
                 "Tebakan": h["tebakan"],
                 "Hasil": h["hasil"],
                 "Poin": h["poin"]
             })
-        st.dataframe(history_data, use_container_width=True, hide_index=True)
+        st.dataframe(history_df, use_container_width=True, hide_index=True)
     else:
-        st.info("Belum ada tebakan. Mulai tebak pahlawan!")
-    
-    # Tombol reset manual (opsional)
-    if st.button("🔄 Reset Game (Mulai dari awal)", use_container_width=True):
-        reset_game()
-        st.rerun()
-
-if __name__ == "__main__":
-    show_tebak_pahlawan()
+        st.info("Belum ada tebakan. Mulai tebak pahlawan di atas!")
