@@ -178,7 +178,7 @@ def tampilkan_hasil():
     total_soal = len(soal_list)
     
     if len(st.session_state.stomata_answers) < total_soal:
-        st.error(f"⚠️ Anda baru menjawab {len(st.session_state.stomata_answers)} dari {total_soal} soal. Selesaikan semua soal terlebih dahulu, lalu tekan tombol Simpan Jawaban!")
+        st.error(f"⚠️ Anda baru menjawab {len(st.session_state.stomata_answers)} dari {total_soal} soal. Selesaikan semua soal terlebih dahulu!")
         return False
     
     # Hitung skor
@@ -223,6 +223,8 @@ def show_stomata():
     
     **Skala Jawaban (0-4):**  
     - Sangat Tidak Setuju = 0 | Tidak Setuju = 1 | Netral = 2 | Setuju = 3 | Sangat Setuju = 4
+    
+    **Jawaban akan otomatis tersimpan** setiap kali Anda memilih opsi.
     """)
 
     soal_list = st.session_state.stomata_all_soal
@@ -233,7 +235,7 @@ def show_stomata():
         st.error("❌ Tidak ada soal yang ditemukan. Pastikan folder 'soal_stomata_hati' berisi file JSON!")
         return
 
-    # Informasi jumlah soal per kategori
+    # Informasi jumlah soal per kategori dan progress jawaban
     jumlah_kasih = sum(1 for s in soal_list if s['kategori'] == "Kasih")
     jumlah_iman = sum(1 for s in soal_list if s['kategori'] == "Iman")
     jumlah_pengharapan = sum(1 for s in soal_list if s['kategori'] == "Pengharapan")
@@ -246,42 +248,62 @@ def show_stomata():
     with col_info3:
         st.info(f"✨ **Pengharapan:** {jumlah_pengharapan} soal")
     
+    # Progress jawaban
+    jawaban_terjawab = len(st.session_state.stomata_answers)
+    st.progress(jawaban_terjawab / total_soal, text=f"📊 Progress: {jawaban_terjawab} dari {total_soal} soal terjawab")
+    
     st.markdown("---")
     
-    # Tampilkan soal-soal
-    st.markdown(f"### 📝 Soal (Silakan dijawab semua) - Versi {current_version + 1}")
+    # Tombol kontrol di atas
+    col_btn1, col_btn2, col_btn3 = st.columns(3)
+    with col_btn1:
+        if st.button("🔄 Ganti Semua Soal (Baru)", use_container_width=True, type="primary"):
+            force_refresh_questions()
+            st.rerun()
+    with col_btn2:
+        if st.button("🗑️ Reset Jawaban Saja", use_container_width=True):
+            reset_stomata()
+            st.rerun()
+    with col_btn3:
+        # Tombol Lihat Hasil
+        if st.button("📊 Lihat Hasil", use_container_width=True):
+            if tampilkan_hasil():
+                st.rerun()
     
-    # Gunakan form untuk soal
-    with st.form(key=f"stomata_form_{current_version}"):
-        with st.container(height=500):
-            for idx, soal in enumerate(soal_list):
+    st.markdown("---")
+    
+    # Tampilkan soal-soal (tanpa form, karena jawaban otomatis tersimpan)
+    st.markdown(f"### 📝 Soal - Versi {current_version + 1}")
+    
+    # Gunakan container dengan scrolling
+    with st.container(height=500):
+        for idx, soal in enumerate(soal_list):
+            with st.container():
                 st.markdown(f"**{idx+1}. [{soal['kategori']}]** {soal['teks']}")
                 key = f"stomata_radio_{idx}_{soal['id']}_v{current_version}"
                 current = st.session_state.stomata_answers.get(idx, None)
+                
+                # Menggunakan callback untuk menyimpan jawaban otomatis
+                def on_change_callback(soal_idx, option_value):
+                    st.session_state.stomata_answers[soal_idx] = option_value
+                
                 selected = st.radio(
                     "Pilih jawaban:",
                     soal['pilihan'],
                     index=soal['pilihan'].index(current) if current in soal['pilihan'] else None,
                     key=key,
                     label_visibility="collapsed",
-                    horizontal=True
+                    horizontal=True,
+                    on_change=lambda idx=idx, opts=soal['pilihan']: None  # Placeholder
                 )
-                if selected:
+                
+                # Simpan jawaban secara otomatis saat berubah
+                if selected != current:
                     st.session_state.stomata_answers[idx] = selected
+                    # Rerun untuk update progress bar
+                    st.rerun()
+                
                 st.markdown("---")
-        
-        # Tombol Simpan Jawaban di dalam form
-        submitted = st.form_submit_button("💾 Simpan Jawaban", use_container_width=True)
-        if submitted:
-            st.success(f"✅ Jawaban tersimpan! {len(st.session_state.stomata_answers)} dari {total_soal} soal telah dijawab.")
-    
-    # Tombol Lihat Hasil di luar form (di bawah)
-    st.markdown("---")
-    col_result1, col_result2, col_result3 = st.columns([1, 2, 1])
-    with col_result2:
-        if st.button("📊 Lihat Hasil", use_container_width=True, type="primary"):
-            if tampilkan_hasil():
-                st.rerun()
 
     # Tampilkan hasil jika sudah submit
     if st.session_state.stomata_submitted and st.session_state.stomata_results:
@@ -302,13 +324,13 @@ def show_stomata():
             st.metric("✨ Pengharapan", f"{res['pengharapan']:.1f}%")
             st.progress(res['pengharapan']/100)
         
-        # Detail Skor Anda (dalam expander - ditaruh di sini, sebelum tombol Ganti Soal)
-        with st.expander("📈 Detail Skor Anda"):
+        # Detail Skor Mentah (dalam expander)
+        with st.expander("📈 Detail Skor Mentah"):
             st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']}")
             st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']}")
             st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']}")
         
-        # Gambar stomata hati ditaruh di bawah Detail Skor Mentah (setelah expander)
+        # Gambar stomata hati
         img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
         if img_path.exists():
             st.image(str(img_path), caption="Stomata Hati - Segitiga Iman, Kasih, Pengharapan", use_container_width=True)
@@ -328,7 +350,7 @@ def show_stomata():
             for no, nama in SISI_NAMES.items():
                 st.markdown(f"**{no}. {nama}**")
         
-        # Tombol aksi setelah hasil (Ganti Soal Baru & Reset)
+        # Tombol aksi setelah hasil
         st.markdown("---")
         col_btn1, col_btn2 = st.columns(2)
         with col_btn1:
