@@ -114,7 +114,6 @@ def konversi_ke_skor_0_1(nilai_likert):
 
 def init_stomata_state():
     """Inisialisasi state"""
-    # State untuk jawaban sementara (latihan)
     if "stomata_answers" not in st.session_state:
         st.session_state.stomata_answers = {}
     if "stomata_submitted" not in st.session_state:
@@ -125,32 +124,9 @@ def init_stomata_state():
         st.session_state.stomata_soal_version = 0
     if "stomata_all_soal" not in st.session_state:
         st.session_state.stomata_all_soal = get_random_soals()
-    
-    # State untuk skor resmi (hanya dihitung sekali)
-    if "stomata_official_score" not in st.session_state:
-        st.session_state.stomata_official_score = None
-    if "stomata_official_results" not in st.session_state:
-        st.session_state.stomata_official_results = None
-    if "stomata_has_played" not in st.session_state:
-        st.session_state.stomata_has_played = False
-
-def save_official_score(skor_kasih, skor_iman, skor_pengharapan, total_skor, 
-                         persen_kasih, persen_iman, persen_pengharapan, sisi_list):
-    """Menyimpan skor resmi (hanya dipanggil sekali pada permainan pertama)"""
-    st.session_state.stomata_official_score = {
-        "skor_kasih": skor_kasih,
-        "skor_iman": skor_iman,
-        "skor_pengharapan": skor_pengharapan,
-        "total_skor": total_skor,
-        "persen_kasih": persen_kasih,
-        "persen_iman": persen_iman,
-        "persen_pengharapan": persen_pengharapan,
-        "sisi_list": sisi_list,
-    }
-    st.session_state.stomata_has_played = True
 
 def force_refresh_questions():
-    """Memaksa refresh soal dengan version increment (untuk latihan)"""
+    """Memaksa refresh soal dengan version increment"""
     new_soals = get_random_soals()
     st.session_state.stomata_all_soal = new_soals
     st.session_state.stomata_answers = {}
@@ -159,7 +135,7 @@ def force_refresh_questions():
     st.session_state.stomata_soal_version += 1
 
 def hide_results():
-    """Sembunyikan hasil latihan (tanpa menghapus jawaban yang sudah diisi)"""
+    """Reset jawaban dan sembunyikan hasil (tanpa menghapus jawaban yang sudah diisi)"""
     st.session_state.stomata_submitted = False
     st.session_state.stomata_results = None
 
@@ -205,7 +181,7 @@ def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
             return [8]
 
 def hitung_total_skor_saat_ini():
-    """Menghitung total skor sementara (Iman + Kasih + Pengharapan) dari jawaban latihan"""
+    """Menghitung total skor sementara (Iman + Kasih + Pengharapan) dari jawaban yang sudah ada"""
     soal_list = st.session_state.stomata_all_soal
     skor_kasih = 0
     skor_iman = 0
@@ -227,7 +203,7 @@ def hitung_total_skor_saat_ini():
     return skor_kasih + skor_iman + skor_pengharapan
 
 def tampilkan_hasil():
-    """Fungsi untuk menghitung dan menampilkan hasil latihan"""
+    """Fungsi untuk menghitung dan menampilkan hasil"""
     soal_list = st.session_state.stomata_all_soal
     total_soal = len(soal_list)
     
@@ -252,17 +228,12 @@ def tampilkan_hasil():
         else:  # Pengharapan
             skor_pengharapan += nilai_0_1
     
-    max_per_kategori = 11
+    max_per_kategori = 11  # Maksimal 11 soal × 1 poin
     persen_kasih = hitung_persentase(skor_kasih, max_per_kategori)
     persen_iman = hitung_persentase(skor_iman, max_per_kategori)
     persen_pengharapan = hitung_persentase(skor_pengharapan, max_per_kategori)
     sisi_list = tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan)
     total_skor = skor_kasih + skor_iman + skor_pengharapan
-    
-    # Jika belum pernah bermain (belum ada skor resmi), simpan skor ini sebagai skor resmi
-    if not st.session_state.stomata_has_played:
-        save_official_score(skor_kasih, skor_iman, skor_pengharapan, total_skor,
-                           persen_kasih, persen_iman, persen_pengharapan, sisi_list)
     
     st.session_state.stomata_results = {
         "kasih": persen_kasih,
@@ -274,8 +245,7 @@ def tampilkan_hasil():
         "skor_pengharapan": skor_pengharapan,
         "total_skor": total_skor,
         "max_per_kategori": max_per_kategori,
-        "max_total": 33,
-        "is_practice": st.session_state.stomata_has_played  # True jika ini latihan
+        "max_total": 33,  # 11 + 11 + 11
     }
     st.session_state.stomata_submitted = True
     return True
@@ -294,34 +264,9 @@ def show_stomata():
     
     **Penilaian:** Jawaban dengan skala **Setuju (3)** atau **Sangat Setuju (4)** dihitung sebagai **1 poin**.  
     Maksimal skor per kategori adalah **11 poin** (dari 11 soal), dan total maksimal **33 poin**.
-    """)
     
-    # Tampilkan skor resmi jika sudah ada
-    if st.session_state.stomata_has_played and st.session_state.stomata_official_score:
-        official = st.session_state.stomata_official_score
-        st.markdown("---")
-        st.markdown("### 🏆 SKOR RESMI ANDA (Hanya dari permainan pertama) 🏆")
-        col_o1, col_o2, col_o3 = st.columns(3)
-        with col_o1:
-            st.metric("💖 Kasih", f"{official['skor_kasih']} / 11")
-        with col_o2:
-            st.metric("🙏 Iman", f"{official['skor_iman']} / 11")
-        with col_o3:
-            st.metric("✨ Pengharapan", f"{official['pengharapan']} / 11")
-        st.markdown(f"### 📊 **Total Skor Resmi: {official['total_skor']} / 33**")
-        
-        # Tampilkan posisi resmi
-        sisi_list = official['sisi_list']
-        nama_list = [SISI_NAMES[s] for s in sisi_list]
-        if len(sisi_list) == 1:
-            st.info(f"🌿 **Posisi Stomata Hati Resmi Anda: {nama_list[0]} (Sisi {sisi_list[0]})**")
-        else:
-            st.info(f"🌿 **Posisi Stomata Hati Resmi Anda: {', '.join(nama_list)} (Sisi {', '.join(map(str, sisi_list))})**")
-        
-        st.markdown("---")
-        st.markdown("### ✨ MODE LATIHAN ✨")
-        st.caption("Permainan selanjutnya hanya untuk latihan dan tidak akan mengubah skor resmi Anda di atas.")
-        st.markdown("---")
+    **Jawaban akan otomatis tersimpan** setiap kali Anda memilih opsi.
+    """)
 
     soal_list = st.session_state.stomata_all_soal
     total_soal = len(soal_list)
@@ -346,25 +291,25 @@ def show_stomata():
     
     st.markdown("---")
     
-    # Total Skor Latihan Saat Ini
-    total_skor_latihan = hitung_total_skor_saat_ini()
-    st.markdown(f"### 📊 Skor Latihan Saat Ini = **{total_skor_latihan} / 33**")
+    # Total Skor Anda (sebelum tombol Ganti Soal)
+    total_skor_saat_ini = hitung_total_skor_saat_ini()
+    st.markdown(f"### 📊 Total Skor Anda = **{total_skor_saat_ini} / 33**")
     
-    # Tombol kontrol
+    # Tombol kontrol di atas
     col_btn1, col_btn2 = st.columns(2)
     with col_btn1:
-        if st.button("🔄 Ganti Soal Latihan (Baru)", use_container_width=True, type="primary"):
+        if st.button("🔄 Ganti Semua Soal (Baru)", use_container_width=True, type="primary"):
             force_refresh_questions()
             st.rerun()
     with col_btn2:
-        if st.button("🗑️ Reset Jawaban Latihan", use_container_width=True, help="Reset jawaban latihan (tidak mempengaruhi skor resmi)"):
+        if st.button("🗑️ Reset Jawaban Saya (Sembunyikan Hasil)", use_container_width=True, help="Sembunyikan hasil yang sudah ditampilkan (jawaban tetap tersimpan)"):
             hide_results()
             st.rerun()
     
     st.markdown("---")
     
     # Tampilkan soal-soal
-    st.markdown(f"### 📝 Soal Latihan - Versi {current_version + 1}")
+    st.markdown(f"### 📝 Soal - Versi {current_version + 1}")
     
     # Gunakan container dengan scrolling untuk soal
     with st.container(height=500):
@@ -391,37 +336,31 @@ def show_stomata():
                 # Simpan jawaban secara otomatis saat berubah
                 if selected != current:
                     st.session_state.stomata_answers[idx] = selected
-                    # Jika jawaban berubah, sembunyikan hasil yang lama
+                    # Jika jawaban berubah, sembunyikan hasil yang lama karena sudah tidak valid
                     if st.session_state.stomata_submitted:
                         hide_results()
                     st.rerun()
                 
                 st.markdown("---")
     
-    # Progress bar
+    # Progress bar diletakkan di bawah setelah semua soal (sebelum tombol Lihat Hasil)
     st.markdown("---")
     jawaban_terjawab = len(st.session_state.stomata_answers)
-    st.progress(jawaban_terjawab / total_soal, text=f"📊 Progress Latihan: {jawaban_terjawab} dari {total_soal} soal terjawab")
+    st.progress(jawaban_terjawab / total_soal, text=f"📊 Progress: {jawaban_terjawab} dari {total_soal} soal terjawab")
     
-    # Tombol Lihat Hasil Latihan
+    # Tombol Lihat Hasil di bawah progress bar
     st.markdown("---")
     col_result1, col_result2, col_result3 = st.columns([1, 2, 1])
     with col_result2:
-        if st.button("📊 Lihat Hasil Latihan", use_container_width=True, type="primary"):
+        if st.button("📊 Lihat Hasil", use_container_width=True, type="primary"):
             if tampilkan_hasil():
                 st.rerun()
 
-    # Tampilkan hasil latihan jika sudah submit
+    # Tampilkan hasil jika sudah submit
     if st.session_state.stomata_submitted and st.session_state.stomata_results:
         st.markdown("---")
         
         res = st.session_state.stomata_results
-        
-        # Tampilkan status (Latihan atau Skor Resmi Baru)
-        if res.get('is_practice', False):
-            st.info("📝 **INI ADALAH HASIL LATIHAN** (tidak mengubah skor resmi Anda)")
-        else:
-            st.success("🎉 **SELAMAT! Ini adalah skor resmi pertama Anda!** Skor ini akan disimpan dan tidak berubah pada permainan selanjutnya. 🎉")
         
         # Tampilkan 3 metrik persentase
         st.subheader("📊 Hasil Uji IKP")
@@ -436,12 +375,12 @@ def show_stomata():
             st.metric("✨ Pengharapan", f"{res['pengharapan']:.1f}%")
             st.progress(res['pengharapan']/100)
         
-        # Detail Skor
-        with st.expander("📈 Detail Skor"):
+        # Detail Skor Mentah (dalam expander) - Bagian ini TIDAK dihapus
+        with st.expander("📈 Detail Skor Mentah"):
             st.markdown("**Skor berdasarkan jawaban Setuju/Sangat Setuju (1 poin per soal):**")
             st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']} poin")
             st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']} poin")
-            st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']} poin")        
+            st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']} poin")
         
         # Gambar stomata hati
         img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
@@ -467,11 +406,11 @@ def show_stomata():
         st.markdown("---")
         col_btn1, col_btn2 = st.columns(2)
         with col_btn1:
-            if st.button("🎲 Latihan Lagi dengan Soal Baru", use_container_width=True):
+            if st.button("🎲 Tes Lagi dengan Soal Baru", use_container_width=True):
                 force_refresh_questions()
                 st.rerun()
         with col_btn2:
-            if st.button("📝 Lanjutkan Latihan (Soal Sama)", use_container_width=True):
+            if st.button("📝 Mulai Lagi (Soal Sama)", use_container_width=True):
                 hide_results()
                 st.rerun()
 
