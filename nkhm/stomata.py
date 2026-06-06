@@ -349,7 +349,7 @@ def show_stomata():
     
     # Total Skor Anda (sebelum tombol Ganti Soal)
     total_skor_saat_ini = hitung_total_skor_saat_ini()
-    st.markdown(f"### 📊 Skor Latihan Saat Ini = **{total_skor_saat_ini} / 33**")
+    st.markdown(f"### 📊 Skor Anda Saat Ini = **{total_skor_saat_ini} / 33**")
     
     # Tombol kontrol di atas
     col_btn1, col_btn2 = st.columns(2)
@@ -368,7 +368,7 @@ def show_stomata():
     if st.session_state.stomata_has_official_score:
         st.markdown(f"### 📝 Soal Latihan - Versi {current_version + 1}")
     else:
-        st.markdown(f"### 📝 Soal (Permainan Pertama) - Versi {current_version + 1}")
+        st.markdown(f"### 📝 Soal (IKP) - Versi {current_version + 1}")
     
     # Gunakan container dengan scrolling untuk soal
     with st.container(height=500):
