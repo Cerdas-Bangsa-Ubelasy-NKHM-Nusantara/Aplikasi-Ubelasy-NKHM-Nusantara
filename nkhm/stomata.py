@@ -1,229 +1,491 @@
-‎# nkhm/stomata.py
-‎import streamlit as st
-‎import random
-‎from pathlib import Path
-‎
-‎# ========== BANK SOAL (tetap, tidak diubah) ==========
-‎SOAL_KASIH = [
-‎    ("Kasih itu sabar dan murah hati.", True),
-‎    ("Kasih itu cemburu dan sombong.", False),
-‎    ("Kasih tidak melakukan yang tidak sopan dan tidak mencari keuntungan diri sendiri.", True),
-‎    ("Kasih itu pemarah dan suka menyimpan kesalahan orang lain.", False),
-‎    ("Kasih bersukacita karena ketidakadilan.", False),
-‎    ("Kasih menutupi segala sesuatu, percaya segala sesuatu, mengharapkan segala sesuatu.", True),
-‎    ("Sekalipun ada karunia bernubuat, tanpa kasih kita berguna.", False),
-‎    ("Sekalipun memiliki iman yang sempurna, tanpa kasih kita tidak berguna.", True),
-‎    ("Sekalipun membagi-bagikan harta, tanpa kasih ada faedahnya.", False),
-‎    ("Kasih adalah yang terbesar di antara iman, pengharapan, dan kasih.", True),
-‎]
-‎
-‎SOAL_IMAN = [
-‎    ("Iman adalah dasar dari segala sesuatu yang kita harapkan dan bukti dari segala sesuatu yang tidak kita lihat.", True),
-‎    ("Iman sebesar biji sesawi dapat memindahkan gunung.", True),
-‎    ("Iman tanpa perbuatan adalah hidup.", False),
-‎    ("Iman timbul dari pendengaran akan firman Allah.", True),
-‎    ("Iman adalah anugerah Allah, bukan hasil usaha manusia.", True),
-‎    ("Allah memberikan iman kepada setiap orang dengan ukuran yang sama.", False),
-‎    ("Dengan iman kita menerima janji-janji Allah.", True),
-‎    ("Iman hanya diperlukan untuk keselamatan, bukan untuk kehidupan sehari-hari.", False),
-‎    ("Iman dapat ditingkatkan dengan membenamkan diri dalam firman Allah.", True),
-‎    ("Iman yang dihasilkan oleh kasih adalah yang terpenting.", True),
-‎]
-‎
-‎SOAL_PENGHARAPAN = [
-‎    ("Pengharapan akan kebangkitan orang mati adalah bagian dari iman Kristen.", True),
-‎    ("Pengharapan yang dilihat bukanlah pengharapan lagi.", True),
-‎    ("Pengharapan mengecewakan karena sering tidak terwujud.", False),
-‎    ("Kita diselamatkan dalam pengharapan.", True),
-‎    ("Pengharapan adalah sauh yang kuat dan aman bagi jiwa kita.", True),
-‎    ("Pengharapan hanya untuk hidup di dunia ini.", False),
-‎    ("Kristus adalah pengharapan akan kemuliaan.", True),
-‎    ("Pengharapan membuat kita bertekun dalam doa.", True),
-‎    ("Orang yang tidak mempunyai pengharapan akan berdukacita seperti orang lain.", False),
-‎    ("Pengharapan kita tertuju kepada Allah melalui kebangkitan Yesus.", True),
-‎]
-‎
-‎SEMUA_SOAL = (
-‎    [("Kasih", text, jawaban) for text, jawaban in SOAL_KASIH] +
-‎    [("Iman", text, jawaban) for text, jawaban in SOAL_IMAN] +
-‎    [("Pengharapan", text, jawaban) for text, jawaban in SOAL_PENGHARAPAN]
-‎)
-‎
-‎SISI_NAMES = {
-‎    1: "Kasih",
-‎    2: "Iman",
-‎    3: "Pengharapan",
-‎    4: "Iman-Pengharapan",
-‎    5: "Kasih-Iman",
-‎    6: "Pengharapan-Kasih",
-‎    7: "Berbuat iman",
-‎    8: "Berbuat pengharapan",
-‎    9: "Berbuat kasih",
-‎    10: "Kasih-Iman-Pengharapan",
-‎    11: "Berbuat kasih-beriman",
-‎    12: "Berbuat kasih-berpengharapan",
-‎}
-‎
-‎def init_stomata_state():
-‎    if "stomata_answers" not in st.session_state:
-‎        st.session_state.stomata_answers = {}
-‎    if "stomata_submitted" not in st.session_state:
-‎        st.session_state.stomata_submitted = False
-‎    if "stomata_results" not in st.session_state:
-‎        st.session_state.stomata_results = None
-‎    if "stomata_shuffled" not in st.session_state:
-‎        shuffled = SEMUA_SOAL.copy()
-‎        random.shuffle(shuffled)
-‎        st.session_state.stomata_shuffled = shuffled
-‎
-‎def reset_stomata():
-‎    st.session_state.stomata_answers = {}
-‎    st.session_state.stomata_submitted = False
-‎    st.session_state.stomata_results = None
-‎
-‎def hitung_persentase(jawaban_benar, total_soal=10):
-‎    return (jawaban_benar / total_soal) * 100
-‎
-‎def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
-‎    """
-‎    Mengembalikan daftar nomor sisi (1-12) berdasarkan persentase.
-‎    Untuk kasus seimbang (selisih kecil) -> [1, 8, 9] (contoh dari Anda)
-‎    Untuk kasus lain, aturan masih sederhana (bisa diperbaiki nanti).
-‎    """
-‎    total = persen_kasih + persen_iman + persen_pengharapan
-‎    if total == 0:
-‎        return [10]
-‎    # Normalisasi ke 100
-‎    rk = (persen_kasih / total) * 100
-‎    ri = (persen_iman / total) * 100
-‎    rp = (persen_pengharapan / total) * 100
-‎
-‎    # Jika ketiga nilai relatif seimbang (selisih maks < 5%)
-‎    if max(rk, ri, rp) - min(rk, ri, rp) < 5:
-‎        # Menurut Anda, untuk kasus seimbang (33,33% masing-masing) menghasilkan sisi 1, 8, 9
-‎        return [1, 8, 9]
-‎
-‎    max_val = max(rk, ri, rp)
-‎    if max_val >= 60:
-‎        # Dominasi tunggal -> satu sisi sudut
-‎        if rk == max_val:
-‎            return [1]
-‎        elif ri == max_val:
-‎            return [2]
-‎        else:
-‎            return [3]
-‎    elif (rk >= 40 and ri >= 40) or (ri >= 40 and rp >= 40) or (rp >= 40 and rk >= 40):
-‎        # Kombinasi dua -> satu sisi kombinasi
-‎        if rk >= 40 and ri >= 40:
-‎            return [5]
-‎        elif ri >= 40 and rp >= 40:
-‎            return [4]
-‎        elif rp >= 40 and rk >= 40:
-‎            return [6]
-‎        else:
-‎            return [10]
-‎    else:
-‎        # Nilai sedang -> satu sisi tindakan berdasarkan tertinggi
-‎        if rk == max_val:
-‎            return [9]   # Berbuat kasih
-‎        elif ri == max_val:
-‎            return [7]   # Berbuat iman
-‎        else:
-‎            return [8]   # Berbuat pengharapan
-‎
-‎def show_stomata():
-‎    init_stomata_state()
-‎
-‎    st.markdown("## 💖 Sto-mata Hati")
-‎    st.markdown("""
-‎    **Alat Uji Tingkat Iman, Kasih, dan Pengharapan (IKP)**  
-‎    Berdasarkan 1 Korintus 13:13.
-‎    
-‎    Jawablah 30 pernyataan berikut dengan **Benar** atau **Salah**.  
-‎    Setiap jawaban benar bernilai 1 poin. Setelah selesai, sistem akan menghitung persentase masing‑masing kriteria dan menentukan posisi Anda pada 12 sisi Stomata Hati (bisa satu, dua, atau tiga posisi).
-‎    """)
-‎
-‎    soal_list = st.session_state.stomata_shuffled
-‎
-‎    with st.form(key="stomata_form"):
-‎        with st.container(height=500):
-‎            for idx, (kategori, text, _) in enumerate(soal_list):
-‎                st.markdown(f"**{idx+1}. [{kategori}]** {text}")
-‎                key = f"stomata_radio_{idx}"
-‎                current = st.session_state.stomata_answers.get(idx, None)
-‎                selected = st.radio(
-‎                    "Jawaban:",
-‎                    ("Benar", "Salah"),
-‎                    index=0 if current == True else (1 if current == False else None),
-‎                    key=key,
-‎                    label_visibility="collapsed"
-‎                )
-‎                st.session_state.stomata_answers[idx] = (selected == "Benar")
-‎        
-‎        col1, col2 = st.columns(2)
-‎        with col1:
-‎            submitted = st.form_submit_button("📊 Hitung Hasil Sto-mata", use_container_width=True)
-‎        with col2:
-‎            reset_clicked = st.form_submit_button("🔄 Reset", use_container_width=True)
-‎    
-‎    if reset_clicked:
-‎        reset_stomata()
-‎        st.rerun()
-‎    
-‎    if submitted:
-‎        skor_kasih = skor_iman = skor_pengharapan = 0
-‎        for idx, (kategori, _, jawaban_benar) in enumerate(soal_list):
-‎            if st.session_state.stomata_answers.get(idx, False) == jawaban_benar:
-‎                if kategori == "Kasih":
-‎                    skor_kasih += 1
-‎                elif kategori == "Iman":
-‎                    skor_iman += 1
-‎                else:
-‎                    skor_pengharapan += 1
-‎        if len(st.session_state.stomata_answers) < len(soal_list):
-‎            st.error(f"Anda baru menjawab {len(st.session_state.stomata_answers)} dari {len(soal_list)} soal. Selesaikan semua!")
-‎        else:
-‎            persen_kasih = hitung_persentase(skor_kasih, 10)
-‎            persen_iman = hitung_persentase(skor_iman, 10)
-‎            persen_pengharapan = hitung_persentase(skor_pengharapan, 10)
-‎            sisi_list = tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan)
-‎            st.session_state.stomata_results = {
-‎                "kasih": persen_kasih,
-‎                "iman": persen_iman,
-‎                "pengharapan": persen_pengharapan,
-‎                "sisi_list": sisi_list,
-‎            }
-‎            st.session_state.stomata_submitted = True
-‎            st.rerun()
-‎
-‎    if st.session_state.stomata_submitted and st.session_state.stomata_results:
-‎        res = st.session_state.stomata_results
-‎        st.markdown("---")
-‎        st.subheader("📊 Hasil Uji IKP")
-‎        col_a, col_b, col_c = st.columns(3)
-‎        col_a.metric("Kasih", f"{res['kasih']:.1f}%")
-‎        col_b.metric("Iman", f"{res['iman']:.1f}%")
-‎        col_c.metric("Pengharapan", f"{res['pengharapan']:.1f}%")
-‎        
-‎        # Tampilkan gambar stomata hati
-‎        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
-‎        if img_path.exists():
-‎            st.image(str(img_path), caption="Stomata Hati - Segitiga IKP", use_container_width=True)
-‎        else:
-‎            st.warning("⚠️ Gambar Stomata Hati belum tersedia. Harap upload file 'stomata_hati.jpg' ke folder 'assets'.")
-‎        
-‎        sisi_list = res['sisi_list']
-‎        nama_list = [SISI_NAMES[s] for s in sisi_list]
-‎        if len(sisi_list) == 1:
-‎            st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **{nama_list[0]}** (Sisi {sisi_list[0]})")
-‎        else:
-‎            st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **{', '.join(nama_list)}** (Sisi {', '.join(map(str, sisi_list))})")
-‎        
-‎        with st.expander("📖 Penjelasan 12 Sisi Stomata Hati"):
-‎            for no, nama in SISI_NAMES.items():
-‎                st.markdown(f"**{no}. {nama}**")
-‎        st.info("Hasil ini membantu Anda memahami keseimbangan Iman, Kasih, dan Pengharapan dalam hidup serta panggilan untuk berbuat.")
-‎
-‎if __name__ == "__main__":
-‎    show_stomata()
-‎
+# nkhm/stomata.py
+import streamlit as st
+import random
+import json
+from pathlib import Path
+
+# ========== MEMBACA SOAL DARI FILE JSON ==========
+def load_soal_from_json(folder_name):
+    """Membaca soal dari file JSON berdasarkan folder"""
+    base_path = Path(__file__).parent / "soal_stomata_hati" / folder_name
+    json_path = base_path / f"soal_{folder_name}.json"
+    
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return data
+    except FileNotFoundError:
+        st.warning(f"⚠️ File soal {folder_name} tidak ditemukan di {json_path}")
+        return []
+    except json.JSONDecodeError:
+        st.warning(f"⚠️ File {json_path} format JSON tidak valid")
+        return []
+
+def get_random_soals():
+    """
+    Mengambil 11 soal acak dari setiap kategori
+    Fungsi ini dipanggil ULANG setiap kali diperlukan
+    """
+    # Muat semua soal dari file JSON
+    soal_kasih = load_soal_from_json("kasih")
+    soal_iman = load_soal_from_json("iman")
+    soal_pengharapan = load_soal_from_json("pengharapan")
+    
+    # Validasi jumlah soal
+    if len(soal_kasih) < 11:
+        st.warning(f"⚠️ Soal Kasih hanya {len(soal_kasih)} tersedia")
+        sample_kasih = soal_kasih
+    else:
+        sample_kasih = random.sample(soal_kasih, 11)
+    
+    if len(soal_iman) < 11:
+        st.warning(f"⚠️ Soal Iman hanya {len(soal_iman)} tersedia")
+        sample_iman = soal_iman
+    else:
+        sample_iman = random.sample(soal_iman, 11)
+    
+    if len(soal_pengharapan) < 11:
+        st.warning(f"⚠️ Soal Pengharapan hanya {len(soal_pengharapan)} tersedia")
+        sample_pengharapan = soal_pengharapan
+    else:
+        sample_pengharapan = random.sample(soal_pengharapan, 11)
+    
+    # Konversi ke format yang seragam
+    all_soal = []
+    for soal in sample_kasih:
+        all_soal.append({
+            "kategori": "Kasih",
+            "id": soal.get("id", 0),
+            "teks": soal.get("teks", ""),
+            "pilihan": soal.get("pilihan", ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"])
+        })
+    for soal in sample_iman:
+        all_soal.append({
+            "kategori": "Iman",
+            "id": soal.get("id", 0),
+            "teks": soal.get("teks", ""),
+            "pilihan": soal.get("pilihan", ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"])
+        })
+    for soal in sample_pengharapan:
+        all_soal.append({
+            "kategori": "Pengharapan",
+            "id": soal.get("id", 0),
+            "teks": soal.get("teks", ""),
+            "pilihan": soal.get("pilihan", ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"])
+        })
+    
+    # Acak urutan semua soal
+    random.shuffle(all_soal)
+    
+    return all_soal
+
+# ========== SISI NAMES ==========
+SISI_NAMES = {
+    1: "Kasih",
+    2: "Iman",
+    3: "Pengharapan",
+    4: "Iman-Pengharapan",
+    5: "Kasih-Iman",
+    6: "Pengharapan-Kasih",
+    7: "Berbuat iman",
+    8: "Berbuat pengharapan",
+    9: "Berbuat kasih",
+    10: "Kasih-Iman-Pengharapan",
+    11: "Berbuat kasih-beriman",
+    12: "Berbuat kasih-berpengharapan",
+}
+
+# ========== SKOR LIKERT (0-4) dan KONVERSI KE SKOR 0-1 ==========
+LIKERT_SCORE = {
+    "Sangat Tidak Setuju": 0,
+    "Tidak Setuju": 1,
+    "Netral": 2,
+    "Setuju": 3,
+    "Sangat Setuju": 4
+}
+
+def konversi_ke_skor_0_1(nilai_likert):
+    """
+    Mengkonversi nilai Likert 0-4 menjadi skor 0-1
+    Nilai 3 atau 4 dianggap positif (skor 1)
+    Nilai 0,1,2 dianggap negatif/netral (skor 0)
+    """
+    return 1 if nilai_likert >= 3 else 0
+
+def init_stomata_state():
+    """Inisialisasi state"""
+    if "stomata_answers" not in st.session_state:
+        st.session_state.stomata_answers = {}
+    if "stomata_submitted" not in st.session_state:
+        st.session_state.stomata_submitted = False
+    if "stomata_results" not in st.session_state:
+        st.session_state.stomata_results = None
+    if "stomata_soal_version" not in st.session_state:
+        st.session_state.stomata_soal_version = 0
+    if "stomata_all_soal" not in st.session_state:
+        st.session_state.stomata_all_soal = get_random_soals()
+    
+    # State untuk skor resmi (hanya disimpan sekali)
+    if "stomata_official_score" not in st.session_state:
+        st.session_state.stomata_official_score = None
+    if "stomata_has_official_score" not in st.session_state:
+        st.session_state.stomata_has_official_score = False
+
+def force_refresh_questions():
+    """Memaksa refresh soal dengan version increment (untuk latihan)"""
+    new_soals = get_random_soals()
+    st.session_state.stomata_all_soal = new_soals
+    st.session_state.stomata_answers = {}
+    st.session_state.stomata_submitted = False
+    st.session_state.stomata_results = None
+    st.session_state.stomata_soal_version += 1
+
+def hide_results():
+    """Reset jawaban dan sembunyikan hasil (tanpa menghapus jawaban yang sudah diisi)"""
+    st.session_state.stomata_submitted = False
+    st.session_state.stomata_results = None
+
+def hitung_persentase(skor, max_skor=11):
+    """Menghitung persentase dari skor (maksimal 11 per kategori)"""
+    return (skor / max_skor) * 100 if max_skor > 0 else 0
+
+def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
+    total = persen_kasih + persen_iman + persen_pengharapan
+    if total == 0:
+        return [10]
+    
+    rk = (persen_kasih / total) * 100
+    ri = (persen_iman / total) * 100
+    rp = (persen_pengharapan / total) * 100
+
+    if max(rk, ri, rp) - min(rk, ri, rp) < 5:
+        return [1, 8, 9]
+
+    max_val = max(rk, ri, rp)
+    if max_val >= 60:
+        if rk == max_val:
+            return [1]
+        elif ri == max_val:
+            return [2]
+        else:
+            return [3]
+    elif (rk >= 40 and ri >= 40) or (ri >= 40 and rp >= 40) or (rp >= 40 and rk >= 40):
+        if rk >= 40 and ri >= 40:
+            return [5]
+        elif ri >= 40 and rp >= 40:
+            return [4]
+        elif rp >= 40 and rk >= 40:
+            return [6]
+        else:
+            return [10]
+    else:
+        if rk == max_val:
+            return [9]
+        elif ri == max_val:
+            return [7]
+        else:
+            return [8]
+
+def hitung_total_skor_saat_ini():
+    """Menghitung total skor sementara (Iman + Kasih + Pengharapan) dari jawaban yang sudah ada"""
+    soal_list = st.session_state.stomata_all_soal
+    skor_kasih = 0
+    skor_iman = 0
+    skor_pengharapan = 0
+    
+    for idx, soal in enumerate(soal_list):
+        jawaban = st.session_state.stomata_answers.get(idx)
+        if jawaban:
+            nilai_likert = LIKERT_SCORE.get(jawaban, 0)
+            nilai_0_1 = konversi_ke_skor_0_1(nilai_likert)
+            
+            if soal['kategori'] == "Kasih":
+                skor_kasih += nilai_0_1
+            elif soal['kategori'] == "Iman":
+                skor_iman += nilai_0_1
+            else:
+                skor_pengharapan += nilai_0_1
+    
+    return skor_kasih + skor_iman + skor_pengharapan
+
+def tampilkan_hasil():
+    """Fungsi untuk menghitung dan menampilkan hasil (hanya untuk latihan jika sudah ada skor resmi)"""
+    soal_list = st.session_state.stomata_all_soal
+    total_soal = len(soal_list)
+    
+    if len(st.session_state.stomata_answers) < total_soal:
+        st.error(f"⚠️ Anda baru menjawab {len(st.session_state.stomata_answers)} dari {total_soal} soal. Selesaikan semua soal terlebih dahulu!")
+        return False
+    
+    # Hitung skor (konversi ke 0-1 per soal)
+    skor_kasih = 0
+    skor_iman = 0
+    skor_pengharapan = 0
+    
+    for idx, soal in enumerate(soal_list):
+        jawaban = st.session_state.stomata_answers.get(idx)
+        nilai_likert = LIKERT_SCORE.get(jawaban, 0)
+        nilai_0_1 = konversi_ke_skor_0_1(nilai_likert)
+        
+        if soal['kategori'] == "Kasih":
+            skor_kasih += nilai_0_1
+        elif soal['kategori'] == "Iman":
+            skor_iman += nilai_0_1
+        else:  # Pengharapan
+            skor_pengharapan += nilai_0_1
+    
+    max_per_kategori = 11
+    persen_kasih = hitung_persentase(skor_kasih, max_per_kategori)
+    persen_iman = hitung_persentase(skor_iman, max_per_kategori)
+    persen_pengharapan = hitung_persentase(skor_pengharapan, max_per_kategori)
+    sisi_list = tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan)
+    total_skor = skor_kasih + skor_iman + skor_pengharapan
+    
+    # JIKA BELUM ADA SKOR RESMI, SIMPAN SKOR INI SEBAGAI SKOR RESMI
+    if not st.session_state.stomata_has_official_score:
+        st.session_state.stomata_official_score = {
+            "kasih": persen_kasih,
+            "iman": persen_iman,
+            "pengharapan": persen_pengharapan,
+            "sisi_list": sisi_list,
+            "skor_kasih": skor_kasih,
+            "skor_iman": skor_iman,
+            "skor_pengharapan": skor_pengharapan,
+            "total_skor": total_skor,
+            "max_per_kategori": max_per_kategori,
+            "max_total": 33,
+        }
+        st.session_state.stomata_has_official_score = True
+        st.session_state.stomata_results = st.session_state.stomata_official_score.copy()
+        st.session_state.stomata_results["is_official"] = True
+    else:
+        # Sudah ada skor resmi, tampilkan hasil latihan
+        st.session_state.stomata_results = {
+            "kasih": persen_kasih,
+            "iman": persen_iman,
+            "pengharapan": persen_pengharapan,
+            "sisi_list": sisi_list,
+            "skor_kasih": skor_kasih,
+            "skor_iman": skor_iman,
+            "skor_pengharapan": skor_pengharapan,
+            "total_skor": total_skor,
+            "max_per_kategori": max_per_kategori,
+            "max_total": 33,
+            "is_official": False,
+        }
+    
+    st.session_state.stomata_submitted = True
+    return True
+
+def show_stomata():
+    init_stomata_state()
+
+    st.markdown("## 💖 Sto-mata Hati")
+    st.markdown("""
+    **Alat Uji Tingkat Iman, Kasih, dan Pengharapan (IKP)**  
+    
+    Anda akan menjawab **33 pernyataan** (11 Iman + 11 Kasih + 11 Pengharapan) yang dipilih secara acak dari total soal.  
+    
+    **Skala Jawaban (0-4):**  
+    - Sangat Tidak Setuju = 0 | Tidak Setuju = 1 | Netral = 2 | Setuju = 3 | Sangat Setuju = 4
+    
+    **Penilaian:** Jawaban dengan skala **Setuju (3)** atau **Sangat Setuju (4)** dihitung sebagai **1 poin**.  
+    Maksimal skor per kategori adalah **11 poin** (dari 11 soal), dan total maksimal **33 poin**.
+    
+    **Jawaban akan otomatis tersimpan** setiap kali Anda memilih opsi.
+    """)
+
+    # TAMPILKAN SKOR RESMI (jika sudah ada)
+    if st.session_state.stomata_has_official_score and st.session_state.stomata_official_score:
+        official = st.session_state.stomata_official_score
+        st.markdown("---")
+        st.markdown("### 🏆 SKOR RESMI ANDA (Hanya dari permainan pertama) 🏆")
+        col_o1, col_o2, col_o3 = st.columns(3)
+        with col_o1:
+            st.metric("💖 Kasih", f"{official['skor_kasih']} / 11")
+        with col_o2:
+            st.metric("🙏 Iman", f"{official['skor_iman']} / 11")
+        with col_o3:
+            st.metric("✨ Pengharapan", f"{official['skor_pengharapan']} / 11")
+        st.markdown(f"### 📊 **Total Skor Resmi: {official['total_skor']} / 33**")
+        
+        # Tampilkan posisi resmi
+        sisi_list = official['sisi_list']
+        nama_list = [SISI_NAMES[s] for s in sisi_list]
+        if len(sisi_list) == 1:
+            st.info(f"🌿 **Posisi Stomata Hati Resmi Anda: {nama_list[0]} (Sisi {sisi_list[0]})**")
+        else:
+            st.info(f"🌿 **Posisi Stomata Hati Resmi Anda: {', '.join(nama_list)} (Sisi {', '.join(map(str, sisi_list))})**")
+        
+        st.markdown("---")
+        st.markdown("### ✨ MODE LATIHAN ✨")
+        st.caption("Permainan selanjutnya hanya untuk latihan dan TIDAK akan mengubah skor resmi Anda di atas.")
+        st.markdown("---")
+    else:
+        st.info("🎯 **Ini adalah permainan pertamamu!** Jawab semua 33 soal dengan jujur untuk mendapatkan skor resmi. Setelah ini, kamu bisa bermain lagi untuk latihan tanpa mengubah skor.")
+
+    soal_list = st.session_state.stomata_all_soal
+    total_soal = len(soal_list)
+    current_version = st.session_state.stomata_soal_version
+
+    if total_soal == 0:
+        st.error("❌ Tidak ada soal yang ditemukan. Pastikan folder 'soal_stomata_hati' berisi file JSON!")
+        return
+
+    # Informasi jumlah soal per kategori
+    jumlah_kasih = sum(1 for s in soal_list if s['kategori'] == "Kasih")
+    jumlah_iman = sum(1 for s in soal_list if s['kategori'] == "Iman")
+    jumlah_pengharapan = sum(1 for s in soal_list if s['kategori'] == "Pengharapan")
+    
+    col_info1, col_info2, col_info3 = st.columns(3)
+    with col_info1:
+        st.info(f"💖 **Kasih:** {jumlah_kasih} soal")
+    with col_info2:
+        st.info(f"🙏 **Iman:** {jumlah_iman} soal")
+    with col_info3:
+        st.info(f"✨ **Pengharapan:** {jumlah_pengharapan} soal")
+    
+    st.markdown("---")
+    
+    # Total Skor Anda (sebelum tombol Ganti Soal)
+    total_skor_saat_ini = hitung_total_skor_saat_ini()
+    st.markdown(f"### 📊 Skor Latihan Saat Ini = **{total_skor_saat_ini} / 33**")
+    
+    # Tombol kontrol di atas
+    col_btn1, col_btn2 = st.columns(2)
+    with col_btn1:
+        if st.button("🔄 Ganti Semua Soal (Baru)", use_container_width=True, type="primary"):
+            force_refresh_questions()
+            st.rerun()
+    with col_btn2:
+        if st.button("🗑️ Reset Jawaban Saya (Sembunyikan Hasil)", use_container_width=True, help="Sembunyikan hasil yang sudah ditampilkan (jawaban tetap tersimpan)"):
+            hide_results()
+            st.rerun()
+    
+    st.markdown("---")
+    
+    # Tampilkan soal-soal
+    if st.session_state.stomata_has_official_score:
+        st.markdown(f"### 📝 Soal Latihan - Versi {current_version + 1}")
+    else:
+        st.markdown(f"### 📝 Soal (Permainan Pertama) - Versi {current_version + 1}")
+    
+    # Gunakan container dengan scrolling untuk soal
+    with st.container(height=500):
+        for idx, soal in enumerate(soal_list):
+            with st.container():
+                st.markdown(f"**{idx+1}. [{soal['kategori']}]** {soal['teks']}")
+                key = f"stomata_radio_{idx}_{soal['id']}_v{current_version}"
+                current = st.session_state.stomata_answers.get(idx, None)
+                
+                # Cari index dari current value
+                current_index = None
+                if current in soal['pilihan']:
+                    current_index = soal['pilihan'].index(current)
+                
+                selected = st.radio(
+                    "Pilih jawaban:",
+                    soal['pilihan'],
+                    index=current_index,
+                    key=key,
+                    label_visibility="collapsed",
+                    horizontal=True
+                )
+                
+                # Simpan jawaban secara otomatis saat berubah
+                if selected != current:
+                    st.session_state.stomata_answers[idx] = selected
+                    # Jika jawaban berubah, sembunyikan hasil yang lama karena sudah tidak valid
+                    if st.session_state.stomata_submitted:
+                        hide_results()
+                    st.rerun()
+                
+                st.markdown("---")
+    
+    # Progress bar diletakkan di bawah setelah semua soal (sebelum tombol Lihat Hasil)
+    st.markdown("---")
+    jawaban_terjawab = len(st.session_state.stomata_answers)
+    st.progress(jawaban_terjawab / total_soal, text=f"📊 Progress: {jawaban_terjawab} dari {total_soal} soal terjawab")
+    
+    # Tombol Lihat Hasil di bawah progress bar
+    st.markdown("---")
+    col_result1, col_result2, col_result3 = st.columns([1, 2, 1])
+    with col_result2:
+        if st.session_state.stomata_has_official_score:
+            button_label = "📊 Lihat Hasil Latihan"
+        else:
+            button_label = "📊 Lihat Hasil & Simpan Skor Resmi"
+        
+        if st.button(button_label, use_container_width=True, type="primary"):
+            if tampilkan_hasil():
+                st.rerun()
+
+    # Tampilkan hasil jika sudah submit
+    if st.session_state.stomata_submitted and st.session_state.stomata_results:
+        st.markdown("---")
+        
+        res = st.session_state.stomata_results
+        
+        # Tampilkan status
+        if res.get('is_official', False):
+            st.success("🎉 **SELAMAT! Ini adalah skor resmi pertama Anda!** 🎉\n\nSkor ini telah disimpan dan tidak akan berubah pada permainan selanjutnya.")
+        else:
+            st.info("📝 **INI ADALAH HASIL LATIHAN** (tidak mengubah skor resmi Anda)")
+        
+        # Tampilkan 3 metrik persentase
+        st.subheader("📊 Hasil Uji IKP")
+        col_a, col_b, col_c = st.columns(3)
+        with col_a:
+            st.metric("💖 Kasih", f"{res['kasih']:.1f}%")
+            st.progress(res['kasih']/100)
+        with col_b:
+            st.metric("🙏 Iman", f"{res['iman']:.1f}%")
+            st.progress(res['iman']/100)
+        with col_c:
+            st.metric("✨ Pengharapan", f"{res['pengharapan']:.1f}%")
+            st.progress(res['pengharapan']/100)
+        
+        # Detail Skor Mentah (dalam expander)
+        with st.expander("📈 Detail Skor Mentah"):
+            st.markdown("**Skor berdasarkan jawaban Setuju/Sangat Setuju (1 poin per soal):**")
+            st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']} poin")
+            st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']} poin")
+            st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']} poin")
+        
+        # Total Skor
+        st.markdown(f"### 📊 Total Skor: **{res['total_skor']} / {res['max_total']}**")
+        
+        # Gambar stomata hati
+        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
+        if img_path.exists():
+            st.image(str(img_path), caption="Stomata Hati - Segitiga Iman, Kasih, Pengharapan", use_container_width=True)
+        else:
+            st.warning("⚠️ Gambar Stomata Hati belum tersedia. Harap upload file 'stomata_hati.jpg' ke folder 'assets'.")
+        
+        # Posisi Stomata Hati
+        sisi_list = res['sisi_list']
+        nama_list = [SISI_NAMES[s] for s in sisi_list]
+        if len(sisi_list) == 1:
+            st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **{nama_list[0]}** (Sisi {sisi_list[0]})")
+        else:
+            st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **{', '.join(nama_list)}** (Sisi {', '.join(map(str, sisi_list))})")
+        
+        # Penjelasan 12 sisi
+        with st.expander("📖 Penjelasan 12 Sisi Stomata Hati"):
+            for no, nama in SISI_NAMES.items():
+                st.markdown(f"**{no}. {nama}**")
+        
+        # Tombol aksi setelah hasil
+        st.markdown("---")
+        col_btn1, col_btn2 = st.columns(2)
+        with col_btn1:
+            if st.button("🎲 Tes Lagi dengan Soal Baru", use_container_width=True):
+                force_refresh_questions()
+                st.rerun()
+        with col_btn2:
+            if st.button("📝 Mulai Lagi (Soal Sama)", use_container_width=True):
+                hide_results()
+                st.rerun()
+
+if __name__ == "__main__":
+    show_stomata()
