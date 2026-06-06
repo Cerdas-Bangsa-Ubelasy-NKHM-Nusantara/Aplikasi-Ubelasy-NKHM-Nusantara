@@ -502,7 +502,7 @@ def main():
     
     # ========== TAB 6: KARUNIA & STOMATA =========
     with tab6:
-        sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Stomata Hati"])
+        sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Sto-mata Hati"])
         with sub_tab1:
             if KARUNIA_AVAILABLE and show_karunia is not None:
                 show_karunia()
