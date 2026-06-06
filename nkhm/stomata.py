@@ -248,19 +248,6 @@ def show_stomata():
     
     st.markdown("---")
     
-    # Tombol kontrol di luar form
-    col_btn1, col_btn2 = st.columns(2)
-    with col_btn1:
-        if st.button("🔄 Ganti Semua Soal (Baru)", use_container_width=True, type="primary"):
-            force_refresh_questions()
-            st.rerun()
-    with col_btn2:
-        if st.button("🗑️ Reset Jawaban Saja", use_container_width=True):
-            reset_stomata()
-            st.rerun()
-    
-    st.markdown("---")
-    
     # Tampilkan soal-soal
     st.markdown(f"### 📝 Soal (Silakan dijawab semua) - Versi {current_version + 1}")
     
@@ -300,17 +287,10 @@ def show_stomata():
     if st.session_state.stomata_submitted and st.session_state.stomata_results:
         st.markdown("---")
         
-        # Tampilkan gambar stomata hati
-        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
-        if img_path.exists():
-            st.image(str(img_path), caption="Stomata Hati - Segitiga Iman, Kasih, Pengharapan", use_container_width=True)
-        else:
-            st.warning("⚠️ Gambar Stomata Hati belum tersedia. Harap upload file 'stomata_hati.jpg' ke folder 'assets'.")
-        
-        st.subheader("📊 Hasil Uji IKP")
-        
         res = st.session_state.stomata_results
         
+        # Tampilkan 3 metrik persentase
+        st.subheader("📊 Hasil Uji IKP")
         col_a, col_b, col_c = st.columns(3)
         with col_a:
             st.metric("💖 Kasih", f"{res['kasih']:.1f}%")
@@ -322,11 +302,20 @@ def show_stomata():
             st.metric("✨ Pengharapan", f"{res['pengharapan']:.1f}%")
             st.progress(res['pengharapan']/100)
         
+        # Detail Skor Mentah (dalam expander - ditaruh di sini, sebelum tombol Ganti Soal)
         with st.expander("📈 Detail Skor Mentah"):
             st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']}")
             st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']}")
             st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']}")
         
+        # Gambar stomata hati ditaruh di bawah Detail Skor Mentah (setelah expander)
+        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
+        if img_path.exists():
+            st.image(str(img_path), caption="Stomata Hati - Segitiga Iman, Kasih, Pengharapan", use_container_width=True)
+        else:
+            st.warning("⚠️ Gambar Stomata Hati belum tersedia. Harap upload file 'stomata_hati.jpg' ke folder 'assets'.")
+        
+        # Posisi Stomata Hati
         sisi_list = res['sisi_list']
         nama_list = [SISI_NAMES[s] for s in sisi_list]
         if len(sisi_list) == 1:
@@ -334,11 +323,13 @@ def show_stomata():
         else:
             st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **{', '.join(nama_list)}** (Sisi {', '.join(map(str, sisi_list))})")
         
+        # Penjelasan 12 sisi
         with st.expander("📖 Penjelasan 12 Sisi Stomata Hati"):
             for no, nama in SISI_NAMES.items():
                 st.markdown(f"**{no}. {nama}**")
         
-        # Tombol aksi setelah hasil
+        # Tombol aksi setelah hasil (Ganti Soal Baru & Reset)
+        st.markdown("---")
         col_btn1, col_btn2 = st.columns(2)
         with col_btn1:
             if st.button("🎲 Tes Lagi dengan Soal Baru", use_container_width=True):
