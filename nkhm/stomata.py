@@ -431,7 +431,14 @@ def show_stomata():
             st.success("🎉 **SELAMAT! Ini adalah skor resmi Anda!** 🎉\n\nSkor ini telah disimpan dan tidak akan berubah pada permainan selanjutnya.")
         else:
             st.info("📝 **INI ADALAH HASIL LATIHAN** (tidak mengubah skor resmi Anda)")
-        
+
+        # Detail Skor Mentah (dalam expander)
+        with st.expander("📈 Detail Skor Mentah"):
+            st.markdown("**Skor berdasarkan jawaban:**")
+            st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']} poin")
+            st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']} poin")
+            st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']} poin")
+
         # Tampilkan 3 metrik persentase
         st.subheader("📊 Hasil Uji IKP")
         col_a, col_b, col_c = st.columns(3)
@@ -444,14 +451,7 @@ def show_stomata():
         with col_c:
             st.metric("✨ Pengharapan", f"{res['pengharapan']:.1f}%")
             st.progress(res['pengharapan']/100)
-        
-        # Detail Skor Mentah (dalam expander)
-        with st.expander("📈 Detail Skor Mentah"):
-            st.markdown("**Skor berdasarkan jawaban:**")
-            st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']} poin")
-            st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']} poin")
-            st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']} poin")
-               
+                     
         # Gambar stomata hati
         img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
         if img_path.exists():
