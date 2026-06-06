@@ -180,6 +180,28 @@ def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
         else:
             return [8]
 
+def hitung_total_skor_saat_ini():
+    """Menghitung total skor sementara (Iman + Kasih + Pengharapan) dari jawaban yang sudah ada"""
+    soal_list = st.session_state.stomata_all_soal
+    skor_kasih = 0
+    skor_iman = 0
+    skor_pengharapan = 0
+    
+    for idx, soal in enumerate(soal_list):
+        jawaban = st.session_state.stomata_answers.get(idx)
+        if jawaban:
+            nilai_likert = LIKERT_SCORE.get(jawaban, 0)
+            nilai_0_1 = konversi_ke_skor_0_1(nilai_likert)
+            
+            if soal['kategori'] == "Kasih":
+                skor_kasih += nilai_0_1
+            elif soal['kategori'] == "Iman":
+                skor_iman += nilai_0_1
+            else:
+                skor_pengharapan += nilai_0_1
+    
+    return skor_kasih + skor_iman + skor_pengharapan
+
 def tampilkan_hasil():
     """Fungsi untuk menghitung dan menampilkan hasil"""
     soal_list = st.session_state.stomata_all_soal
@@ -194,24 +216,16 @@ def tampilkan_hasil():
     skor_iman = 0
     skor_pengharapan = 0
     
-    # Hitung juga skor mentah Likert untuk informasi tambahan
-    skor_mentah_kasih = 0
-    skor_mentah_iman = 0
-    skor_mentah_pengharapan = 0
-    
     for idx, soal in enumerate(soal_list):
         jawaban = st.session_state.stomata_answers.get(idx)
         nilai_likert = LIKERT_SCORE.get(jawaban, 0)
         nilai_0_1 = konversi_ke_skor_0_1(nilai_likert)
         
         if soal['kategori'] == "Kasih":
-            skor_mentah_kasih += nilai_likert
             skor_kasih += nilai_0_1
         elif soal['kategori'] == "Iman":
-            skor_mentah_iman += nilai_likert
             skor_iman += nilai_0_1
         else:  # Pengharapan
-            skor_mentah_pengharapan += nilai_likert
             skor_pengharapan += nilai_0_1
     
     max_per_kategori = 11  # Maksimal 11 soal × 1 poin
@@ -219,6 +233,7 @@ def tampilkan_hasil():
     persen_iman = hitung_persentase(skor_iman, max_per_kategori)
     persen_pengharapan = hitung_persentase(skor_pengharapan, max_per_kategori)
     sisi_list = tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan)
+    total_skor = skor_kasih + skor_iman + skor_pengharapan
     
     st.session_state.stomata_results = {
         "kasih": persen_kasih,
@@ -228,11 +243,9 @@ def tampilkan_hasil():
         "skor_kasih": skor_kasih,
         "skor_iman": skor_iman,
         "skor_pengharapan": skor_pengharapan,
-        "skor_mentah_kasih": skor_mentah_kasih,
-        "skor_mentah_iman": skor_mentah_iman,
-        "skor_mentah_pengharapan": skor_mentah_pengharapan,
+        "total_skor": total_skor,
         "max_per_kategori": max_per_kategori,
-        "max_mentah_per_kategori": 44,  # 11 soal × 4
+        "max_total": 33,  # 11 + 11 + 11
     }
     st.session_state.stomata_submitted = True
     return True
@@ -250,7 +263,7 @@ def show_stomata():
     - Sangat Tidak Setuju = 0 | Tidak Setuju = 1 | Netral = 2 | Setuju = 3 | Sangat Setuju = 4
     
     **Penilaian:** Jawaban dengan skala **Setuju (3)** atau **Sangat Setuju (4)** dihitung sebagai **1 poin**.  
-    Maksimal skor per kategori adalah **11 poin** (dari 11 soal).
+    Maksimal skor per kategori adalah **11 poin** (dari 11 soal), dan total maksimal **33 poin**.
     
     **Jawaban akan otomatis tersimpan** setiap kali Anda memilih opsi.
     """)
@@ -277,6 +290,10 @@ def show_stomata():
         st.info(f"✨ **Pengharapan:** {jumlah_pengharapan} soal")
     
     st.markdown("---")
+    
+    # Total Skor Anda (sebelum tombol Ganti Soal)
+    total_skor_saat_ini = hitung_total_skor_saat_ini()
+    st.markdown(f"### 📊 Total Skor Anda = **{total_skor_saat_ini} / 33**")
     
     # Tombol kontrol di atas
     col_btn1, col_btn2 = st.columns(2)
@@ -358,18 +375,15 @@ def show_stomata():
             st.metric("✨ Pengharapan", f"{res['pengharapan']:.1f}%")
             st.progress(res['pengharapan']/100)
         
-        # Detail Skor Mentah (dalam expander)
+        # Detail Skor Mentah (dalam expander) - Bagian ini TIDAK dihapus
         with st.expander("📈 Detail Skor Mentah"):
             st.markdown("**Skor berdasarkan jawaban Setuju/Sangat Setuju (1 poin per soal):**")
             st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']} poin")
             st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']} poin")
             st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']} poin")
-            
-            st.markdown("---")
-            st.markdown("**Skor Likert mentah (0-4 per soal):**")
-            st.metric("Skor Mentah Kasih", f"{res['skor_mentah_kasih']} / {res['max_mentah_per_kategori']}")
-            st.metric("Skor Mentah Iman", f"{res['skor_mentah_iman']} / {res['max_mentah_per_kategori']}")
-            st.metric("Skor Mentah Pengharapan", f"{res['skor_mentah_pengharapan']} / {res['max_mentah_per_kategori']}")
+        
+        # Total Skor
+        st.markdown(f"### 📊 Total Skor Anda: **{res['total_skor']} / {res['max_total']}**")
         
         # Gambar stomata hati
         img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
