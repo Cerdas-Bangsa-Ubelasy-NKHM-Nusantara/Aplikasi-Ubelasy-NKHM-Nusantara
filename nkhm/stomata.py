@@ -318,6 +318,52 @@ def tampilkan_hasil_latihan():
     st.session_state.stomata_submitted = True
     return True
 
+def tampilkan_hasil_dari_res(res):
+    """Fungsi untuk menampilkan hasil dari dictionary res"""
+    if res is None:
+        st.warning("Belum ada hasil. Silakan selesaikan soal terlebih dahulu.")
+        return
+    
+    # Tampilkan 3 metrik persentase
+    st.subheader("📊 Hasil Uji IKP")
+    col_a, col_b, col_c = st.columns(3)
+    with col_a:
+        st.metric("💖 Kasih", f"{res.get('kasih', 0):.1f}%")
+        st.progress(res.get('kasih', 0)/100)
+    with col_b:
+        st.metric("🙏 Iman", f"{res.get('iman', 0):.1f}%")
+        st.progress(res.get('iman', 0)/100)
+    with col_c:
+        st.metric("✨ Pengharapan", f"{res.get('pengharapan', 0):.1f}%")
+        st.progress(res.get('pengharapan', 0)/100)
+    
+    # Detail Skor
+    with st.expander("📈 Detail Skor"):
+        st.markdown("**Skor berdasarkan jawaban Setuju/Sangat Setuju (1 poin per soal):**")
+        st.metric("Skor Kasih", f"{res.get('skor_kasih', 0)} / {res.get('max_per_kategori', 11)} poin")
+        st.metric("Skor Iman", f"{res.get('skor_iman', 0)} / {res.get('max_per_kategori', 11)} poin")
+        st.metric("Skor Pengharapan", f"{res.get('skor_pengharapan', 0)} / {res.get('max_per_kategori', 11)} poin")
+    
+    # Gambar stomata hati
+    img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
+    if img_path.exists():
+        st.image(str(img_path), caption="Stomata Hati - Segitiga Iman, Kasih, Pengharapan", use_container_width=True)
+    else:
+        st.warning("⚠️ Gambar Stomata Hati belum tersedia. Harap upload file 'stomata_hati.jpg' ke folder 'assets'.")
+    
+    # Posisi Stomata Hati
+    sisi_list = res.get('sisi_list', [10])
+    nama_list = [SISI_NAMES.get(s, f"Sisi {s}") for s in sisi_list]
+    if len(sisi_list) == 1:
+        st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **{nama_list[0]}** (Sisi {sisi_list[0]})")
+    else:
+        st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **{', '.join(nama_list)}** (Sisi {', '.join(map(str, sisi_list))})")
+    
+    # Penjelasan 12 sisi
+    with st.expander("📖 Penjelasan 12 Sisi Stomata Hati"):
+        for no, nama in SISI_NAMES.items():
+            st.markdown(f"**{no}. {nama}**")
+
 def show_stomata():
     init_stomata_state()
 
@@ -476,45 +522,8 @@ def show_stomata():
         else:
             st.info("📝 **INI ADALAH HASIL LATIHAN** (tidak mengubah skor resmi Anda)")
         
-        # Tampilkan 3 metrik persentase
-        st.subheader("📊 Hasil Uji IKP")
-        col_a, col_b, col_c = st.columns(3)
-        with col_a:
-            st.metric("💖 Kasih", f"{res['kasih']:.1f}%")
-            st.progress(res['kasih']/100)
-        with col_b:
-            st.metric("🙏 Iman", f"{res['iman']:.1f}%")
-            st.progress(res['iman']/100)
-        with col_c:
-            st.metric("✨ Pengharapan", f"{res['pengharapan']:.1f}%")
-            st.progress(res['pengharapan']/100)
-        
-        # Detail Skor
-        with st.expander("📈 Detail Skor"):
-            st.markdown("**Skor berdasarkan jawaban Setuju/Sangat Setuju (1 poin per soal):**")
-            st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']} poin")
-            st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']} poin")
-            st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']} poin")
-        
-        # Gambar stomata hati
-        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
-        if img_path.exists():
-            st.image(str(img_path), caption="Stomata Hati - Segitiga Iman, Kasih, Pengharapan", use_container_width=True)
-        else:
-            st.warning("⚠️ Gambar Stomata Hati belum tersedia. Harap upload file 'stomata_hati.jpg' ke folder 'assets'.")
-        
-        # Posisi Stomata Hati
-        sisi_list = res['sisi_list']
-        nama_list = [SISI_NAMES[s] for s in sisi_list]
-        if len(sisi_list) == 1:
-            st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **{nama_list[0]}** (Sisi {sisi_list[0]})")
-        else:
-            st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **{', '.join(nama_list)}** (Sisi {', '.join(map(str, sisi_list))})")
-        
-        # Penjelasan 12 sisi
-        with st.expander("📖 Penjelasan 12 Sisi Stomata Hati"):
-            for no, nama in SISI_NAMES.items():
-                st.markdown(f"**{no}. {nama}**")
+        # Tampilkan hasil menggunakan fungsi terpisah
+        tampilkan_hasil_dari_res(res)
         
         # Tombol aksi setelah hasil
         st.markdown("---")
