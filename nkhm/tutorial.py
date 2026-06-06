@@ -99,9 +99,9 @@ def show_tutorial():
 
     # ========== TAB STOMATA HATI ==========
     with tab_stomata:
-        st.markdown("### 💖 Stomata Hati – Alat Uji Iman, Kasih, Pengharapan")
+        st.markdown("### 💖 Sto-mata Hati – Alat Uji Iman, Kasih, Pengharapan")
         st.markdown("""
-        **Apa Itu Stomata Hati?**  
+        **Apa Itu Sto-mata Hati?**  
         Stomata Hati adalah alat uji berbentuk seperti celah‑celah stomata daun yang berfungsi mengukur tingkat kesatuan **Iman**, **Kasih**, dan **Pengharapan** (IKP) seseorang berdasarkan 1 Korintus 13:13.
 
         > *"Demikianlah tinggal ketiga hal ini, yaitu iman, pengharapan dan kasih, dan yang paling besar di antaranya ialah kasih."*
@@ -109,7 +109,7 @@ def show_tutorial():
         Terdapat **12 sisi (celah)** stomata hati, masing‑masing mewakili kombinasi sikap dan tindakan.
         """)
 
-        with st.expander("📌 12 Sisi Stomata Hati"):
+        with st.expander("📌 12 Sisi Sto-mata Hati"):
             col1, col2 = st.columns(2)
             with col1:
                 st.markdown("""
@@ -169,7 +169,7 @@ def show_tutorial():
             - Kasih = 12 → garis sejajar Pengharapan → potong di sisi yang sama (sisi 9).  
             - Pengharapan = 27 → garis sejajar Iman → juga menuju sisi 9.  
 
-            **Hasil:** Posisi Stomata Hati berada di **sisi 9 – Berbuat kasih**.
+            **Hasil:** Posisi Sto-mata Hati berada di **sisi 9 – Berbuat kasih**.
             """)
         
         # Perbaikan path gambar
@@ -182,7 +182,7 @@ def show_tutorial():
         with st.expander("💡 Bagaimana Aplikasi Membantu Anda?"):
             st.markdown("""
             - Aplikasi secara otomatis menghitung persentase IKP setelah Anda menjawab 30 soal.
-            - Menentukan posisi Anda pada 12 sisi Stomata Hati.
+            - Menentukan posisi Anda pada 12 sisi Sto-mata Hati.
             - Menampilkan hasil beserta gambar segitiga IKP.
 
             > Gunakan hasil ini untuk merenungkan keseimbangan iman, kasih, dan pengharapan dalam hidup Anda, serta panggilan untuk **berbuat** sesuai dengan sisi yang Anda peroleh.
