@@ -178,7 +178,7 @@ def tampilkan_hasil():
     total_soal = len(soal_list)
     
     if len(st.session_state.stomata_answers) < total_soal:
-        st.error(f"⚠️ Anda baru menjawab {len(st.session_state.stomata_answers)} dari {total_soal} soal. Selesaikan semua soal terlebih dahulu, lalu tekan tombol "Simpan Jawaban"!")
+        st.error(f"⚠️ Anda baru menjawab {len(st.session_state.stomata_answers)} dari {total_soal} soal. Selesaikan semua soal terlebih dahulu, lalu tekan tombol Simpan Jawaban!")
         return False
     
     # Hitung skor
