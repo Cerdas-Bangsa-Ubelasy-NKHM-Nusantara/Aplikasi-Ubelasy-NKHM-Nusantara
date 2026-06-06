@@ -248,10 +248,6 @@ def show_stomata():
     with col_info3:
         st.info(f"✨ **Pengharapan:** {jumlah_pengharapan} soal")
     
-    # Progress jawaban
-    jawaban_terjawab = len(st.session_state.stomata_answers)
-    st.progress(jawaban_terjawab / total_soal, text=f"📊 Progress: {jawaban_terjawab} dari {total_soal} soal terjawab")
-    
     st.markdown("---")
     
     # Tombol kontrol di atas (Ganti Soal dan Reset Jawaban)
@@ -294,7 +290,12 @@ def show_stomata():
                 
                 st.markdown("---")
     
-    # Tombol Lihat Hasil di Bawah setelah semua soal
+    # Progress bar diletakkan di bawah setelah semua soal (sebelum tombol Lihat Hasil)
+    st.markdown("---")
+    jawaban_terjawab = len(st.session_state.stomata_answers)
+    st.progress(jawaban_terjawab / total_soal, text=f"📊 Progress: {jawaban_terjawab} dari {total_soal} soal terjawab")
+    
+    # Tombol Lihat Hasil di bawah progress bar
     st.markdown("---")
     col_result1, col_result2, col_result3 = st.columns([1, 2, 1])
     with col_result2:
