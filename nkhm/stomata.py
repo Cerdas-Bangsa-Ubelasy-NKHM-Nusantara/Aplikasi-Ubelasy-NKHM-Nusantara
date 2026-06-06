@@ -289,7 +289,7 @@ def show_stomata():
     **Skala Jawaban (0-4):**  
     - Sangat Tidak Setuju = 0 | Tidak Setuju = 1 | Netral = 2 | Setuju = 3 | Sangat Setuju = 4
     
-    **Penilaian:** Jawaban dengan skala **Setuju (3)** atau **Sangat Setuju (4)** dihitung sebagai **1 poin**.  
+    **Penilaian:**  
     Maksimal skor per kategori adalah **11 poin** (dari 11 soal), dan total maksimal **33 poin**.
     
     **Jawaban akan otomatis tersimpan** setiap kali Anda memilih opsi.
@@ -451,10 +451,7 @@ def show_stomata():
             st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']} poin")
             st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']} poin")
             st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']} poin")
-        
-        # Total Skor
-        st.markdown(f"### 📊 Total Skor: **{res['total_skor']} / {res['max_total']}**")
-        
+               
         # Gambar stomata hati
         img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
         if img_path.exists():
