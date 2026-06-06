@@ -134,7 +134,7 @@ def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
 def show_stomata():
     init_stomata_state()
 
-    st.markdown("## 💖 Stomata Hati")
+    st.markdown("## 💖 Sto-mata Hati")
     st.markdown("""
     **Alat Uji Tingkat Iman, Kasih, dan Pengharapan (IKP)**  
     Berdasarkan 1 Korintus 13:13.
@@ -162,7 +162,7 @@ def show_stomata():
         
         col1, col2 = st.columns(2)
         with col1:
-            submitted = st.form_submit_button("📊 Hitung Hasil Stomata", use_container_width=True)
+            submitted = st.form_submit_button("📊 Hitung Hasil Sto-mata", use_container_width=True)
         with col2:
             reset_clicked = st.form_submit_button("🔄 Reset", use_container_width=True)
     
