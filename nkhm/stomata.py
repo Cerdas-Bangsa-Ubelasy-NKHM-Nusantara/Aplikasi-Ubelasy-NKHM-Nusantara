@@ -453,7 +453,7 @@ def show_stomata():
             st.progress(res['pengharapan']/100)
                      
         # Gambar stomata hati
-        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati.jpg"
+        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati_1.jpg"
         if img_path.exists():
             st.image(str(img_path), caption="Stomata Hati - Segitiga Iman, Kasih, Pengharapan", use_container_width=True)
         else:
