@@ -105,7 +105,7 @@ LIKERT_SCORE = {
 }
 
 def init_stomata_state():
-    """Inisialisasi state dengan timestamp unik untuk memaksa refresh"""
+    """Inisialisasi state"""
     if "stomata_answers" not in st.session_state:
         st.session_state.stomata_answers = {}
     if "stomata_submitted" not in st.session_state:
@@ -126,9 +126,8 @@ def force_refresh_questions():
     st.session_state.stomata_results = None
     st.session_state.stomata_soal_version += 1
 
-def reset_stomata():
-    """Reset jawaban tapi tetap dengan soal yang sama"""
-    st.session_state.stomata_answers = {}
+def hide_results():
+    """Sembunyikan hasil yang sudah ditampilkan (tanpa menghapus jawaban)"""
     st.session_state.stomata_submitted = False
     st.session_state.stomata_results = None
 
@@ -250,15 +249,15 @@ def show_stomata():
     
     st.markdown("---")
     
-    # Tombol kontrol di atas (Ganti Soal dan Reset Jawaban)
+    # Tombol kontrol di atas (Ganti Soal dan Sembunyikan Hasil)
     col_btn1, col_btn2 = st.columns(2)
     with col_btn1:
         if st.button("🔄 Ganti Semua Soal (Baru)", use_container_width=True, type="primary"):
             force_refresh_questions()
             st.rerun()
     with col_btn2:
-        if st.button("🗑️ Reset Jawaban Saja", use_container_width=True):
-            reset_stomata()
+        if st.button("👁️ Sembunyikan Hasil", use_container_width=True, help="Sembunyikan hasil yang sudah ditampilkan (jawaban tetap tersimpan)"):
+            hide_results()
             st.rerun()
     
     st.markdown("---")
@@ -274,10 +273,15 @@ def show_stomata():
                 key = f"stomata_radio_{idx}_{soal['id']}_v{current_version}"
                 current = st.session_state.stomata_answers.get(idx, None)
                 
+                # Cari index dari current value
+                current_index = None
+                if current in soal['pilihan']:
+                    current_index = soal['pilihan'].index(current)
+                
                 selected = st.radio(
                     "Pilih jawaban:",
                     soal['pilihan'],
-                    index=soal['pilihan'].index(current) if current in soal['pilihan'] else None,
+                    index=current_index,
                     key=key,
                     label_visibility="collapsed",
                     horizontal=True
@@ -286,6 +290,9 @@ def show_stomata():
                 # Simpan jawaban secara otomatis saat berubah
                 if selected != current:
                     st.session_state.stomata_answers[idx] = selected
+                    # Jika jawaban berubah, sembunyikan hasil yang lama karena sudah tidak valid
+                    if st.session_state.stomata_submitted:
+                        hide_results()
                     st.rerun()
                 
                 st.markdown("---")
@@ -322,8 +329,8 @@ def show_stomata():
             st.metric("✨ Pengharapan", f"{res['pengharapan']:.1f}%")
             st.progress(res['pengharapan']/100)
         
-        # Detail Skor Anda (dalam expander)
-        with st.expander("📈 Detail Skor Anda"):
+        # Detail Skor Mentah (dalam expander)
+        with st.expander("📈 Detail Skor Mentah"):
             st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']}")
             st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']}")
             st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']}")
@@ -356,8 +363,8 @@ def show_stomata():
                 force_refresh_questions()
                 st.rerun()
         with col_btn2:
-            if st.button("📝 Reset & Mulai Lagi", use_container_width=True):
-                reset_stomata()
+            if st.button("📝 Mulai Lagi (Soal Sama)", use_container_width=True):
+                hide_results()
                 st.rerun()
 
 if __name__ == "__main__":
