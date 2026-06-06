@@ -302,8 +302,8 @@ def show_stomata():
             st.metric("✨ Pengharapan", f"{res['pengharapan']:.1f}%")
             st.progress(res['pengharapan']/100)
         
-        # Detail Skor Mentah (dalam expander - ditaruh di sini, sebelum tombol Ganti Soal)
-        with st.expander("📈 Detail Skor Mentah"):
+        # Detail Skor Anda (dalam expander - ditaruh di sini, sebelum tombol Ganti Soal)
+        with st.expander("📈 Detail Skor Anda"):
             st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']}")
             st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']}")
             st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']}")
