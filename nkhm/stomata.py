@@ -307,7 +307,7 @@ def show_stomata():
             st.metric("🙏 Iman", f"{official['skor_iman']} / 11")
         with col_o3:
             st.metric("✨ Pengharapan", f"{official['skor_pengharapan']} / 11")
-        st.markdown(f"### 📊 **Total Skor Resmi: {official['total_skor']} / 33**")
+        st.markdown(📊 **Total Skor Resmi Anda: {official['total_skor']} / 33**")
         
         # Tampilkan posisi resmi
         sisi_list = official['sisi_list']
@@ -428,7 +428,7 @@ def show_stomata():
         
         # Tampilkan status
         if res.get('is_official', False):
-            st.success("🎉 **SELAMAT! Ini adalah skor resmi pertama Anda!** 🎉\n\nSkor ini telah disimpan dan tidak akan berubah pada permainan selanjutnya.")
+            st.success("🎉 **SELAMAT! Ini adalah skor resmi Anda!** 🎉\n\nSkor ini telah disimpan dan tidak akan berubah pada permainan selanjutnya.")
         else:
             st.info("📝 **INI ADALAH HASIL LATIHAN** (tidak mengubah skor resmi Anda)")
         
