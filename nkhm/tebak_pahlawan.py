@@ -82,7 +82,7 @@ def show_tebak_pahlawan():
     - Setiap tebakan **benar** = +10 poin.  
     - **Setelah menebak (benar/salah), pahlawan target akan berganti** secara acak dari 12 pahlawan nasional.  
     - Setelah 5 kali tebakan, skor tidak akan berubah lagi (kamu tetap bisa bermain untuk latihan).  
-    - Klik **Reset Game** untuk memulai dari awal.  
+    - **Tombol Reset Game akan muncul setelah kamu menyelesaikan 5 tebakan.** Klik reset untuk memulai dari awal.  
     """)
 
     # Input nama
@@ -95,16 +95,12 @@ def show_tebak_pahlawan():
         st.session_state.pahlawan_user_name = user_name
 
     # Panel info
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)
     with col1:
         st.metric("🏆 Skor", st.session_state.pahlawan_score)
     with col2:
         sisa = max(0, 5 - st.session_state.pahlawan_attempts)
         st.metric("🎯 Kesempatan Tersisa", f"{sisa}/5")
-    with col3:
-        if st.button("🔄 Reset Game", use_container_width=True):
-            reset_game()
-            st.rerun()
 
     st.markdown("---")
     st.markdown("### Siapa pahlawan yang benar?")
@@ -151,7 +147,7 @@ def show_tebak_pahlawan():
 
                 # Jika setelah penambahan mencapai 5, tampilkan pesan khusus
                 if st.session_state.pahlawan_attempts == 5:
-                    st.session_state.pahlawan_feedback += "\n\n🏁 **Kesempatan skor habis!** Kamu masih bisa terus bermain untuk latihan, tapi skor tidak akan bertambah."
+                    st.session_state.pahlawan_feedback += "\n\n🏁 **Kesempatan skor habis!** Kamu masih bisa terus bermain untuk latihan. Tekan tombol 'Reset Game' di bawah untuk mulai baru."
 
                 # Generate ronde baru (pahlawan baru & pilihan baru)
                 _generate_new_round()
@@ -161,6 +157,15 @@ def show_tebak_pahlawan():
     if st.session_state.pahlawan_feedback:
         st.markdown("---")
         st.info(st.session_state.pahlawan_feedback)
+
+    # ========== TOMBOL RESET HANYA MUNCUL SETELAH 5 TEBAKAN ==========
+    if st.session_state.pahlawan_attempts >= 5:
+        st.markdown("---")
+        col_reset = st.columns([1, 2, 1])[1]  # tengah
+        with col_reset:
+            if st.button("🔄 Reset Game (Mulai dari awal)", use_container_width=True):
+                reset_game()
+                st.rerun()
 
     # Referensi 12 pahlawan
     with st.expander("📜 Daftar 12 Pahlawan Nasional"):
