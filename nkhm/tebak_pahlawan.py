@@ -30,13 +30,15 @@ def init_game_state():
     if "pahlawan_score" not in st.session_state:
         st.session_state.pahlawan_score = 0
     if "pahlawan_attempts" not in st.session_state:
-        st.session_state.pahlawan_attempts = 0          # total tebakan yang sudah dilakukan
+        st.session_state.pahlawan_attempts = 0
     if "pahlawan_history" not in st.session_state:
         st.session_state.pahlawan_history = []
     if "pahlawan_user_name" not in st.session_state:
         st.session_state.pahlawan_user_name = st.session_state.get("nkhm_user", "Pemain")
     if "pahlawan_feedback" not in st.session_state:
         st.session_state.pahlawan_feedback = None
+    if "pahlawan_last_tebakan" not in st.session_state:
+        st.session_state.pahlawan_last_tebakan = None
     # Generate pilihan awal jika kosong
     if not st.session_state.pahlawan_options:
         _generate_new_round()
@@ -69,6 +71,7 @@ def reset_game():
     st.session_state.pahlawan_attempts = 0
     st.session_state.pahlawan_history = []
     st.session_state.pahlawan_feedback = None
+    st.session_state.pahlawan_last_tebakan = None
     _generate_new_round()
 
 # ======================= FUNGSI UTAMA =======================
@@ -109,49 +112,58 @@ def show_tebak_pahlawan():
         _generate_new_round()
         options = st.session_state.pahlawan_options
 
-    # Tampilkan 3 tombol pilihan
-    cols = st.columns(3)
-    for idx, hero_name in enumerate(options):
-        with cols[idx]:
-            if st.button(f"📌 {hero_name}", key=f"pahl_btn_{idx}_{hero_name}", use_container_width=True):
-                # Proses tebakan
-                benar = (hero_name == st.session_state.pahlawan_target)
-                poin = 0
-                # Tambah skor hanya jika masih dalam batas 5 tebakan dan jawaban benar
-                if st.session_state.pahlawan_attempts < 5:
-                    if benar:
-                        poin = 10
-                        st.session_state.pahlawan_score += poin
-                else:
-                    # Sudah melebihi batas, tidak ada perubahan skor
-                    pass
-
-                # Catat riwayat
+    # ========== FORM UNTUK MENANGANI TEBAKAN (menghindari rerun conflict) ==========
+    with st.form(key="tebak_pahlawan_form"):
+        cols = st.columns(3)
+        submit_btn = None
+        selected_hero = None
+        
+        for idx, hero_name in enumerate(options):
+            with cols[idx]:
+                btn_key = f"btn_{idx}_{hero_name.replace(' ', '_')}"
+                if st.form_submit_button(f"📌 {hero_name}", use_container_width=True):
+                    selected_hero = hero_name
+                    submit_btn = True
+        
+        if submit_btn and selected_hero:
+            # Proses tebakan
+            benar = (selected_hero == st.session_state.pahlawan_target)
+            poin = 0
+            
+            # Tambah skor hanya jika masih dalam batas 5 tebakan dan jawaban benar
+            if st.session_state.pahlawan_attempts < 5:
                 if benar:
-                    hasil_teks = f"✅ Benar! (+{poin})" if poin > 0 else "✅ Benar! (skor tidak berubah, batas habis)"
-                else:
-                    hasil_teks = f"❌ Salah (target: {st.session_state.pahlawan_target})"
-                _save_attempt(hero_name, hasil_teks, poin)
-
-                # Siapkan feedback
-                fakta_target = next((d["fakta"] for d in PAHLAWAN_DATA.values() if d["nama"] == st.session_state.pahlawan_target), "")
-                if benar:
-                    st.session_state.pahlawan_feedback = f"🎉 **BENAR!** {st.session_state.pahlawan_target}\n📖 *{fakta_target}*"
-                    if poin == 0 and st.session_state.pahlawan_attempts >= 5:
-                        st.session_state.pahlawan_feedback += "\n\n⚠️ Skor tidak bertambah karena kamu sudah melewati 5 kesempatan."
-                else:
-                    st.session_state.pahlawan_feedback = f"❌ **SALAH!** Pahlawan yang dimaksud adalah **{st.session_state.pahlawan_target}**.\n📖 *{fakta_target}*"
-
-                # Tambah hitungan tebakan
-                st.session_state.pahlawan_attempts += 1
-
-                # Jika setelah penambahan mencapai 5, tampilkan pesan khusus
-                if st.session_state.pahlawan_attempts == 5:
-                    st.session_state.pahlawan_feedback += "\n\n🏁 **Kesempatan skor habis!** Kamu masih bisa terus bermain untuk latihan. Tekan tombol 'Reset Game' di bawah untuk mulai baru."
-
-                # Generate ronde baru (pahlawan baru & pilihan baru)
-                _generate_new_round()
-                st.rerun()
+                    poin = 10
+                    st.session_state.pahlawan_score += poin
+            
+            # Catat riwayat
+            if benar:
+                hasil_teks = f"✅ Benar! (+{poin})" if poin > 0 else "✅ Benar! (skor tidak berubah, batas habis)"
+            else:
+                hasil_teks = f"❌ Salah (target: {st.session_state.pahlawan_target})"
+            _save_attempt(selected_hero, hasil_teks, poin)
+            
+            # Siapkan feedback
+            fakta_target = next((d["fakta"] for d in PAHLAWAN_DATA.values() if d["nama"] == st.session_state.pahlawan_target), "")
+            if benar:
+                st.session_state.pahlawan_feedback = f"🎉 **BENAR!** {st.session_state.pahlawan_target}\n📖 *{fakta_target}*"
+                if poin == 0 and st.session_state.pahlawan_attempts >= 5:
+                    st.session_state.pahlawan_feedback += "\n\n⚠️ Skor tidak bertambah karena kamu sudah melewati 5 kesempatan."
+            else:
+                st.session_state.pahlawan_feedback = f"❌ **SALAH!** Pahlawan yang dimaksud adalah **{st.session_state.pahlawan_target}**.\n📖 *{fakta_target}*"
+            
+            # Tambah hitungan tebakan
+            st.session_state.pahlawan_attempts += 1
+            
+            # Jika setelah penambahan mencapai 5, tampilkan pesan khusus
+            if st.session_state.pahlawan_attempts == 5:
+                st.session_state.pahlawan_feedback += "\n\n🏁 **Kesempatan skor habis!** Kamu masih bisa terus bermain untuk latihan. Tekan tombol 'Reset Game' di bawah untuk mulai baru."
+            
+            # Generate ronde baru (pahlawan baru & pilihan baru)
+            _generate_new_round()
+            
+            # Trigger rerun
+            st.rerun()
 
     # Tampilkan feedback jika ada
     if st.session_state.pahlawan_feedback:
@@ -161,9 +173,9 @@ def show_tebak_pahlawan():
     # ========== TOMBOL RESET HANYA MUNCUL SETELAH 5 TEBAKAN ==========
     if st.session_state.pahlawan_attempts >= 5:
         st.markdown("---")
-        col_reset = st.columns([1, 2, 1])[1]  # tengah
+        col_reset = st.columns([1, 2, 1])[1]
         with col_reset:
-            if st.button("🔄 Reset Game (Mulai dari awal)", use_container_width=True):
+            if st.button("🔄 Reset Game (Mulai dari awal)", use_container_width=True, key="reset_btn_pahlawan"):
                 reset_game()
                 st.rerun()
 
