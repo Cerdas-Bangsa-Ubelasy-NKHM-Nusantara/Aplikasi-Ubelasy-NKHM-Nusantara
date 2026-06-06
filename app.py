@@ -103,10 +103,13 @@ st.sidebar.caption("💡 Tips: Aplikasi ada dalam 2 sidebar: kanan dan kiri. Kli
 
 st.sidebar.markdown("---")
 
-# ========== TOMBOL CATATAN PRIBADI DAN NAVIGASI (HANYA SAAT NKHM AKTIF) ==========
+# ========== TOMBOL CATATAN PRIBADI (HANYA UNTUK NKHM) ==========
 if app_mode == "🌿 NKHM Nusantara (Gamifikasi)":
-    vercel_url = "https://my-personal-notes-app-187q.vercel.app"
+    # Ganti dengan URL aplikasi NKHM Anda yang sebenarnya
     nkhm_url = "https://tim-cerdas-bangsa-ubelasy-nkhm-nusantara.streamlit.app"
+    target_url = f"{nkhm_url}?tab=dasbor&subtab=catatan"
+    st.sidebar.link_button("📝 Catatan Pribadi", target_url, use_container_width=True)
+    st.sidebar.markdown("---")
     
     # Tombol Catatan Pribadi (membuka di tab baru)
     st.sidebar.link_button("📝 Catatan Pribadi", vercel_url, use_container_width=True)
