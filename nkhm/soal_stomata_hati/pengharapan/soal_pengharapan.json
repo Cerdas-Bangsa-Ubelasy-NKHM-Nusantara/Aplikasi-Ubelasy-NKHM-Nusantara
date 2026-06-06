@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "teks": "Saya yakin masa depan akan lebih baik dari hari ini.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 2,
+    "teks": "Saya optimis bisa mencapai tujuan hidup saya.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 3,
+    "teks": "Saya percaya bahwa setelah kesulitan pasti ada kemudahan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 4,
+    "teks": "Saya tetap semangat meski menghadapi kegagalan berulang kali.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 5,
+    "teks": "Saya percaya bahwa kerja keras akan membuahkan hasil yang baik.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 6,
+    "teks": "Saya memiliki cita-cita yang ingin saya wujudkan dalam hidup.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 7,
+    "teks": "Saya yakin bahwa pendidikan adalah kunci masa depan yang cerah.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 8,
+    "teks": "Saya percaya bahwa setiap mimpi bisa terwujud dengan usaha dan doa.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 9,
+    "teks": "Saya tidak mudah menyerah ketika menghadapi tantangan hidup.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 10,
+    "teks": "Saya yakin bahwa generasi muda bisa membawa perubahan positif.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 11,
+    "teks": "Saya percaya bahwa perdamaian dunia suatu saat akan terwujud.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 12,
+    "teks": "Saya tetap berusaha meski hasilnya belum terlihat sekarang.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 13,
+    "teks": "Saya yakin bahwa kebaikan akan selalu dibalas dengan kebaikan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 14,
+    "teks": "Saya percaya bahwa setiap orang memiliki kesempatan untuk sukses.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 15,
+    "teks": "Saya optimis bisa mengatasi masalah ekonomi yang saya hadapi.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 16,
+    "teks": "Saya percaya bahwa Indonesia akan menjadi negara yang lebih maju.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 17,
+    "teks": "Saya yakin bahwa setiap masalah ada solusinya.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 18,
+    "teks": "Saya percaya bahwa belajar sepanjang hayat akan membuat hidup lebih bermakna.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 19,
+    "teks": "Saya tetap bersyukur meski dalam keterbatasan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 20,
+    "teks": "Saya yakin bahwa hubungan yang retak bisa diperbaiki.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 21,
+    "teks": "Saya percaya bahwa kejujuran akan membawa keberkahan dalam hidup.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 22,
+    "teks": "Saya optimis bisa menjadi pribadi yang lebih baik setiap harinya.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 23,
+    "teks": "Saya percaya bahwa persahabatan sejati akan bertahan lama.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 24,
+    "teks": "Saya yakin bahwa setiap usaha tidak akan mengkhianati hasil.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 25,
+    "teks": "Saya percaya bahwa dengan kesehatan yang baik, saya bisa meraih impian.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 26,
+    "teks": "Saya optimis bisa memberikan yang terbaik bagi keluarga saya.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 27,
+    "teks": "Saya percaya bahwa wabah atau bencana akan berlalu dan kehidupan pulih.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 28,
+    "teks": "Saya yakin bahwa kebaikan hati akan selalu dikenang orang lain.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 29,
+    "teks": "Saya percaya bahwa kebersamaan keluarga adalah sumber kekuatan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 30,
+    "teks": "Saya optimis bisa meninggalkan kebiasaan buruk menjadi lebih baik.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 31,
+    "teks": "Saya yakin bahwa impian saya akan terwujud di waktu yang tepat.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 32,
+    "teks": "Saya percaya bahwa setiap pagi membawa harapan baru.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 33,
+    "teks": "Saya yakin bahwa hidup ini indah dan patut disyukuri.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  }
+]
