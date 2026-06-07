@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "teks": "Saya ragu bahwa setiap masalah pasti ada jalan keluarnya.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 2,
+    "teks": "Saya tidak percaya bahwa kebaikan akan selalu mengalahkan kejahatan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 3,
+    "teks": "Hidup ini terasa sia-sia dan tanpa tujuan yang jelas.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 4,
+    "teks": "Saya percaya bahwa setiap orang memiliki potensi untuk berubah menjadi lebih baik.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 5,
+    "teks": "Saya yakin bahwa kebenaran pada akhirnya akan terungkap.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 6,
+    "teks": "Doa atau harapan baik tidak akan pernah membawa perubahan nyata.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 7,
+    "teks": "Saya sering merasa pesimis menghadapi masa depan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 8,
+    "teks": "Ketulusan hati sering dimanfaatkan oleh orang lain.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 9,
+    "teks": "Saya yakin bahwa setiap orang berhak mendapatkan kesempatan kedua.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 10,
+    "teks": "Alam semesta tidak peduli dengan keseimbangan dan keadilan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 11,
+    "teks": "Rasa syukur tidak akan mengubah cara pandang terhadap hidup.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 12,
+    "teks": "Saya percaya bahwa ketekunan dalam berbuat baik akan membuahkan hasil.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 13,
+    "teks": "Setiap kesulitan tidak pernah mengandung hikmah apapun.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 14,
+    "teks": "Saya sering ragu dengan kemampuan diri sendiri.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 15,
+    "teks": "Ikhtiar maksimal tidak akan pernah mendatangkan hasil terbaik.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 16,
+    "teks": "Saya percaya bahwa kejujuran adalah fondasi hubungan yang sehat.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 17,
+    "teks": "Tidak semua orang memiliki nilai dan martabat yang sama.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 18,
+    "teks": "Saya yakin bahwa memaafkan adalah langkah menuju kedamaian batin.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 19,
+    "teks": "Niat baik sering berakhir dengan kekecewaan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 20,
+    "teks": "Ketenangan batin tidak lebih berharga dari harta benda.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 21,
+    "teks": "Saya percaya bahwa setiap orang memiliki sisi baik yang bisa dikembangkan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 22,
+    "teks": "Perbedaan pendapat hanya akan menyebabkan perpecahan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 23,
+    "teks": "Waktu yang dihabiskan untuk kebaikan tidak akan pernah sia-sia.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 24,
+    "teks": "Kedamaian dunia hanyalah mimpi yang tidak mungkin terwujud.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 25,
+    "teks": "Saya yakin bahwa setiap orang mampu memberikan kontribusi positif bagi dunia.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 26,
+    "teks": "Belajar dari kesalahan adalah tanda kelemahan, bukan kedewasaan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 27,
+    "teks": "Saya percaya bahwa saling menghormati adalah kunci kerukunan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 28,
+    "teks": "Hati nurani sering menyesatkan dalam bertindak.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 29,
+    "teks": "Memberi tanpa pamrih hanya akan merugikan diri sendiri.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 30,
+    "teks": "Saya yakin bahwa setiap masalah adalah ujian yang menguatkan karakter.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 31,
+    "teks": "Kesuksesan membuat seseorang berhak menjadi sombong.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 32,
+    "teks": "Saya percaya bahwa kepercayaan adalah modal utama dalam hubungan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 33,
+    "teks": "Hidup ini tidak pantas disyukuri karena penuh penderitaan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  }
+]
