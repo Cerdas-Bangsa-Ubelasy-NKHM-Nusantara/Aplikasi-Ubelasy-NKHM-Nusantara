@@ -136,7 +136,7 @@ def show_tutorial():
 
         with st.expander("📐 Cara Menentukan Tingkat Persentase IKP"):
             st.markdown("""
-            1. **Jawab 30 soal** (masing‑masing 10 soal tentang Kasih, Iman, Pengharapan).  
+            1. **Jawab 33 soal** (masing‑masing 11 soal tentang Kasih, Iman, Pengharapan).  
                Setiap jawaban benar = 1 poin, salah = 0. Maksimal nilai per kriteria = 10.
 
             2. **Hitung persentase setiap kriteria**  
@@ -149,11 +149,11 @@ def show_tutorial():
                `IKP Kasih = (Persen Kasih / Total) × 100` (lakukan juga untuk Iman dan Pengharapan).
 
             5. **Terapkan pada segitiga IKP** – tarik tiga garis lurus:
-               - **Garis Iman**: dari titik nilai Iman → sejajar sisi Kasih → menuju sisi Pengharapan.
-               - **Garis Kasih**: dari titik nilai Kasih → sejajar sisi Pengharapan → menuju sisi Iman.
-               - **Garis Pengharapan**: dari titik nilai Pengharapan → sejajar sisi Iman → menuju sisi Kasih.
+               - **Garis Iman**: dari titik nilai Iman → sejajar sisi Kasih → menuju sisi Pengharapan. Dengan jiwa nasionalisme dan patriotis, arahkan bambu runcing dari nilai % Iman yang sejajar dengan nilai % Kasih, menuju Pengharapan Indonesia Emas 2045.
+               - **Garis Kasih**: dari titik nilai Kasih → sejajar sisi Pengharapan → menuju sisi Iman. Dengan jiwa nasionalisme dan patriotis, arahkan bambu runcing dari nilai % Kasih yang sejajar dengan nilai % Pengharapan, menuju Iman bangsa yang dikaruniai oleh Tuhan Yang Maha Kuasa.
+               - **Garis Pengharapan**: dari titik nilai Pengharapan → sejajar sisi Iman → menuju sisi Kasih. Dengan jiwa nasionalisme dan patriotis, arahkan bambu runcing dari nilai % Penhaharpan yang sejajar dengan nilai % Iman, menuju Kasih terhadap Tuhan dan terhadap sesama bangsa Indonesia, hindari perang saudara dan pertumpahan darah.
 
-            6. **Titik potong** ketiga garis pada sisi‑sisi segitiga menentukan **satu, dua, atau tiga posisi** dari 12 sisi Stomata Hati.
+            6. **Titik potong** ketiga garis pada sisi‑sisi segitiga menentukan **satu, dua, atau tiga posisi** dari 12 sisi Stomata Hati. Dengan jiwa nasionalisme dan patriotis, kita dapatkan  satu, dua, atau tiga kemajuan hidup dalam kehidupan berbangsa dan bernegara.
             """)
 
         with st.expander("📊 Contoh Perhitungan"):
