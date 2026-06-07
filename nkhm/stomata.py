@@ -186,15 +186,14 @@ def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
         else:
             return [8]
 
-def hitung_total_skor_saat_ini():
-    """Menghitung total skor sementara (Iman + Kasih + Pengharapan) dari jawaban yang sudah ada"""
-    soal_list = st.session_state.stomata_all_soal
+def hitung_total_skor_dari_jawaban(answers, soal_list):
+    """Menghitung total skor dari answers yang diberikan"""
     skor_kasih = 0
     skor_iman = 0
     skor_pengharapan = 0
     
     for idx, soal in enumerate(soal_list):
-        jawaban = st.session_state.stomata_answers.get(idx)
+        jawaban = answers.get(idx)
         if jawaban:
             nilai_likert = LIKERT_SCORE.get(jawaban, 0)
             nilai_0_1 = konversi_ke_skor_0_1(nilai_likert)
@@ -347,9 +346,9 @@ def show_stomata():
     
     st.markdown("---")
     
-    # Total Skor Anda saat ini
-    total_skor_saat_ini = hitung_total_skor_saat_ini()
-    st.markdown(f"### 📊 Skor Anda Saat Ini = **{total_skor_saat_ini} / 33**")
+    # HANYA TAMPILKAN JUMLAH SOAL TERJAWAB (bukan skor)
+    jawaban_terjawab = len(st.session_state.stomata_answers)
+    st.markdown(f"### 📝 Soal Terjawab: **{jawaban_terjawab} / {total_soal}**")
     
     # Tombol kontrol di atas
     col_btn1, col_btn2 = st.columns(2)
@@ -402,9 +401,8 @@ def show_stomata():
                 
                 st.markdown("---")
     
-    # Progress bar di bawah setelah semua soal
+    # Progress bar di bawah setelah semua soal (hanya jumlah terjawab)
     st.markdown("---")
-    jawaban_terjawab = len(st.session_state.stomata_answers)
     st.progress(jawaban_terjawab / total_soal, text=f"📊 Progress: {jawaban_terjawab} dari {total_soal} soal terjawab")
     
     # Tombol Lihat Hasil di bawah progress bar
@@ -454,7 +452,7 @@ def show_stomata():
             st.metric("✨ Pengharapan", f"{res['pengharapan']:.1f}%")
             st.progress(res['pengharapan']/100)
         
-        # Gambar stomata hati (PATH DIGANTI)
+        # Gambar stomata hati
         img_path = Path(__file__).parent.parent / "assets" / "stomata_hati_1.jpg"
         if img_path.exists():
             st.image(str(img_path), caption="Stomata Hati - Segitiga Iman, Kasih, Pengharapan", use_container_width=True)
