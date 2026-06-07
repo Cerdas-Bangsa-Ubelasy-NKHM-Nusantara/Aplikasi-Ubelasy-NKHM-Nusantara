@@ -34,97 +34,74 @@ def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
     else:
         return [9] if rk == max_val else [7] if ri == max_val else [8]
 
-def baca_semua_soal(kategori):
-    # Path ke file ini: nkhm/stomata_pilihan_benar_salah.py
-    current_dir = Path(__file__).resolve().parent  # nkhm/
-    base_path = current_dir / "soal_stomata_hati" / "pilihan_benar_salah" / kategori
-    st.write(f"🔍 DEBUG: Mencari folder `{base_path}`")
-    if not base_path.exists():
-        st.error(f"❌ Folder tidak ditemukan: {base_path}")
-        st.info("Pastikan struktur folder: `nkhm/soal_stomata_hati/pilihan_benar_salah/iman/`, `kasih/`, `pengharapan/`")
+def load_questions(kategori):
+    base = Path(__file__).parent / "soal_stomata_hati" / "pilihan_benar_salah" / kategori
+    if not base.exists():
         return []
-    files = list(base_path.glob("*.json"))
-    if not files:
-        st.warning(f"⚠️ Tidak ada file .json di {base_path}")
-        return []
-    semua = []
-    for f in files:
+    all_q = []
+    for f in base.glob("*.json"):
         try:
             with open(f, 'r', encoding='utf-8') as fp:
                 data = json.load(fp)
                 if isinstance(data, list):
                     for item in data:
                         if "teks" in item and "jawaban" in item:
-                            semua.append(item)
-                        else:
-                            st.warning(f"⚠️ Item di {f.name} tidak punya 'teks' atau 'jawaban'")
-                else:
-                    st.warning(f"⚠️ {f.name} bukan list JSON")
-        except Exception as e:
-            st.error(f"❌ Gagal baca {f.name}: {e}")
-    return semua
+                            all_q.append(item)
+        except Exception:
+            pass
+    return all_q
 
-def siapkan_33_soal():
-    st.write("🔍 DEBUG: Memuat soal...")
-    soal_kasih = baca_semua_soal("kasih")
-    soal_iman = baca_semua_soal("iman")
-    soal_pengharapan = baca_semua_soal("pengharapan")
-    
-    st.write(f"Jumlah soal: Kasih={len(soal_kasih)}, Iman={len(soal_iman)}, Pengharapan={len(soal_pengharapan)}")
-    
-    if len(soal_kasih) < 11 or len(soal_iman) < 11 or len(soal_pengharapan) < 11:
-        st.error(f"❌ Jumlah soal tidak mencukupi (minimal 11 per kategori)")
+def get_random_33():
+    kasih = load_questions("kasih")
+    iman = load_questions("iman")
+    pengharapan = load_questions("pengharapan")
+    if len(kasih) < 11 or len(iman) < 11 or len(pengharapan) < 11:
         return []
-    
-    sampel_kasih = random.sample(soal_kasih, 11)
-    sampel_iman = random.sample(soal_iman, 11)
-    sampel_pengharapan = random.sample(soal_pengharapan, 11)
-    
-    semua = []
-    for s in sampel_kasih:
-        semua.append({"kategori": "Kasih", "id": s.get("id",0), "teks": s["teks"], "jawaban_benar": s["jawaban"]})
-    for s in sampel_iman:
-        semua.append({"kategori": "Iman", "id": s.get("id",0), "teks": s["teks"], "jawaban_benar": s["jawaban"]})
-    for s in sampel_pengharapan:
-        semua.append({"kategori": "Pengharapan", "id": s.get("id",0), "teks": s["teks"], "jawaban_benar": s["jawaban"]})
-    random.shuffle(semua)
-    st.success(f"✅ Berhasil memuat {len(semua)} soal (11 per kategori)")
-    return semua
+    sample_kasih = random.sample(kasih, 11)
+    sample_iman = random.sample(iman, 11)
+    sample_pengharapan = random.sample(pengharapan, 11)
+    result = []
+    for q in sample_kasih:
+        result.append({"kategori": "Kasih", "id": q.get("id",0), "teks": q["teks"], "jawaban_benar": q["jawaban"]})
+    for q in sample_iman:
+        result.append({"kategori": "Iman", "id": q.get("id",0), "teks": q["teks"], "jawaban_benar": q["jawaban"]})
+    for q in sample_pengharapan:
+        result.append({"kategori": "Pengharapan", "id": q.get("id",0), "teks": q["teks"], "jawaban_benar": q["jawaban"]})
+    random.shuffle(result)
+    return result
 
-def init():
+def init_state():
+    if "pbs_questions" not in st.session_state:
+        st.session_state.pbs_questions = get_random_33()
     if "pbs_answers" not in st.session_state:
         st.session_state.pbs_answers = {}
     if "pbs_submitted" not in st.session_state:
         st.session_state.pbs_submitted = False
     if "pbs_results" not in st.session_state:
         st.session_state.pbs_results = None
-    if "pbs_soal" not in st.session_state:
-        st.session_state.pbs_soal = siapkan_33_soal()
     if "pbs_official" not in st.session_state:
         st.session_state.pbs_official = None
     if "pbs_has_official" not in st.session_state:
         st.session_state.pbs_has_official = False
 
-def reset_jawaban():
+def reset():
     st.session_state.pbs_answers = {}
     st.session_state.pbs_submitted = False
     st.session_state.pbs_results = None
 
-def ganti_soal():
-    st.session_state.pbs_soal = siapkan_33_soal()
-    reset_jawaban()
+def refresh_questions():
+    st.session_state.pbs_questions = get_random_33()
+    reset()
 
-def hitung_hasil():
-    soal = st.session_state.pbs_soal
-    if not soal:
-        return False
-    if len(st.session_state.pbs_answers) < len(soal):
-        st.error(f"Jawab dulu {len(soal)} soal")
+def calculate_result():
+    qlist = st.session_state.pbs_questions
+    if not qlist or len(st.session_state.pbs_answers) < len(qlist):
+        st.error(f"Jawab semua {len(qlist)} soal")
         return False
     skor = {"Kasih":0, "Iman":0, "Pengharapan":0}
-    for i, s in enumerate(soal):
-        if st.session_state.pbs_answers.get(i) == s["jawaban_benar"]:
-            skor[s["kategori"]] += 1
+    for i, q in enumerate(qlist):
+        if st.session_state.pbs_answers.get(i) == q["jawaban_benar"]:
+            skor[q["kategori"]] += 1
     max_kat = 11
     persen = {k: hitung_persentase(v, max_kat) for k,v in skor.items()}
     sisi = tentukan_posisi(persen["Kasih"], persen["Iman"], persen["Pengharapan"])
@@ -146,11 +123,10 @@ def hitung_hasil():
     return True
 
 def show_pilihan_benar_salah():
-    init()
+    init_state()
     st.markdown("## ✅ Mode Pilihan Benar/Salah")
     st.markdown("Jawab 33 pernyataan dengan **Benar** atau **Salah**.")
     
-    # Tampilkan skor resmi jika sudah ada
     if st.session_state.pbs_has_official and st.session_state.pbs_official:
         off = st.session_state.pbs_official
         st.markdown("---")
@@ -166,43 +142,49 @@ def show_pilihan_benar_salah():
     else:
         st.info("🎯 Permainan pertama. Jawab semua dengan jujur.")
     
-    soal_list = st.session_state.pbs_soal
-    if not soal_list:
-        st.error("❌ Gagal memuat soal. Periksa debug di atas.")
+    qlist = st.session_state.pbs_questions
+    st.write(f"**DEBUG: Jumlah soal = {len(qlist)}**")  # Verifikasi jumlah soal
+    if not qlist:
+        st.error("❌ Gagal memuat soal. Periksa folder 'soal_stomata_hati/pilihan_benar_salah/...'")
         return
     
     terjawab = len(st.session_state.pbs_answers)
-    total = len(soal_list)
+    total = len(qlist)
     st.markdown(f"📝 **Soal terjawab: {terjawab}/{total}**")
     
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("🔄 Ganti Soal (Baru)"):
-            ganti_soal()
+        if st.button("🔄 Ganti Soal (Baru)", use_container_width=True, type="primary"):
+            refresh_questions()
             st.rerun()
     with col2:
-        if st.button("🗑️ Reset Jawaban"):
-            reset_jawaban()
+        if st.button("🗑️ Reset Jawaban", use_container_width=True):
+            reset()
             st.rerun()
     
-    with st.container(height=500):
-        for i, soal in enumerate(soal_list):
-            key = f"pbs_{i}_{soal['id']}"
-            curr = st.session_state.pbs_answers.get(i)
-            pilih = st.radio(
-                f"**{i+1}. [{soal['kategori']}]** {soal['teks']}",
-                ["Benar", "Salah"],
-                index=0 if curr=="Benar" else (1 if curr=="Salah" else None),
-                key=key, horizontal=True, label_visibility="collapsed"
-            )
-            if pilih != curr:
-                st.session_state.pbs_answers[i] = pilih
+    st.markdown("---")
+    # Tampilkan soal satu per satu (tanpa container)
+    for i, q in enumerate(qlist):
+        key = f"pbs_{i}_{q['id']}"
+        curr = st.session_state.pbs_answers.get(i)
+        selected = st.radio(
+            f"**{i+1}. [{q['kategori']}]** {q['teks']}",
+            ["Benar", "Salah"],
+            index=0 if curr == "Benar" else (1 if curr == "Salah" else None),
+            key=key,
+            horizontal=True,
+            label_visibility="collapsed"
+        )
+        if selected != curr:
+            st.session_state.pbs_answers[i] = selected
+            if st.session_state.pbs_submitted:
                 st.session_state.pbs_submitted = False
-                st.rerun()
+            st.rerun()
+        st.markdown("---")
     
-    st.progress(terjawab/total, text=f"Progress: {terjawab}/{total}")
+    st.progress(terjawab / total, text=f"Progress: {terjawab}/{total}")
     if st.button("📊 Lihat Hasil", use_container_width=True, type="primary"):
-        if hitung_hasil():
+        if calculate_result():
             st.rerun()
     
     if st.session_state.pbs_submitted and st.session_state.pbs_results:
@@ -216,29 +198,23 @@ def show_pilihan_benar_salah():
             st.metric("Iman", f"{r['skor_iman']}/{r['max_kat']}")
             st.metric("Pengharapan", f"{r['skor_pengharapan']}/{r['max_kat']}")
         st.markdown(f"### **Total Skor: {r['total_skor']}/{r['max_total']}**")
-        
         col_a, col_b, col_c = st.columns(3)
         col_a.metric("Kasih %", f"{r['kasih']:.1f}%")
         col_b.metric("Iman %", f"{r['iman']:.1f}%")
         col_c.metric("Pengharapan %", f"{r['pengharapan']:.1f}%")
-        
         img_path = Path(__file__).parent.parent / "assets" / "stomata_hati_1.jpg"
         if img_path.exists():
             st.image(str(img_path), use_container_width=True)
-        else:
-            st.warning("Gambar stomata_hati_1.jpg belum tersedia.")
-        
         sisi = r['sisi_list']
         nama_sisi = [SISI_NAMES[s] for s in sisi]
         st.markdown(f"### 🌿 Posisi Stomata Hati: **{', '.join(nama_sisi)}**")
         with st.expander("📖 12 Sisi Stomata Hati"):
             for no, nama in SISI_NAMES.items():
                 st.markdown(f"{no}. {nama}")
-        
         col1, col2 = st.columns(2)
         with col1:
             if st.button("🎲 Latihan Lagi (Soal Baru)"):
-                ganti_soal()
+                refresh_questions()
                 st.rerun()
         with col2:
             if st.button("📝 Lanjut (Soal Sama)"):
