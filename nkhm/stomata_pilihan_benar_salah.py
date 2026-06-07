@@ -35,23 +35,18 @@ def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
         return [9] if rk == max_val else [7] if ri == max_val else [8]
 
 def baca_semua_soal(kategori):
-    # Mencari folder dengan beberapa kemungkinan lokasi
-    current_file = Path(__file__).resolve()
-    kemungkinan = [
-        current_file.parent / "soal_stomata_hati" / "pilihan_benar_salah" / kategori,   # nkhm/soal_stomata_hati/...
-        current_file.parent.parent / "soal_stomata_hati" / "pilihan_benar_salah" / kategori,  # di luar nkhm
-        Path("soal_stomata_hati") / "pilihan_benar_salah" / kategori,  # root proyek
-    ]
-    found = None
-    for p in kemungkinan:
-        if p.exists():
-            found = p
-            break
-    if found is None:
-        st.error(f"❌ Folder tidak ditemukan untuk {kategori}. Pastikan ada folder: `nkhm/soal_stomata_hati/pilihan_benar_salah/{kategori}/`")
+    # Path ke file ini: nkhm/stomata_pilihan_benar_salah.py
+    current_dir = Path(__file__).resolve().parent  # nkhm/
+    base_path = current_dir / "soal_stomata_hati" / "pilihan_benar_salah" / kategori
+    st.write(f"🔍 DEBUG: Mencari folder `{base_path}`")
+    if not base_path.exists():
+        st.error(f"❌ Folder tidak ditemukan: {base_path}")
+        st.info("Pastikan struktur folder: `nkhm/soal_stomata_hati/pilihan_benar_salah/iman/`, `kasih/`, `pengharapan/`")
         return []
-    
-    files = list(found.glob("*.json"))
+    files = list(base_path.glob("*.json"))
+    if not files:
+        st.warning(f"⚠️ Tidak ada file .json di {base_path}")
+        return []
     semua = []
     for f in files:
         try:
@@ -70,12 +65,15 @@ def baca_semua_soal(kategori):
     return semua
 
 def siapkan_33_soal():
+    st.write("🔍 DEBUG: Memuat soal...")
     soal_kasih = baca_semua_soal("kasih")
     soal_iman = baca_semua_soal("iman")
     soal_pengharapan = baca_semua_soal("pengharapan")
     
+    st.write(f"Jumlah soal: Kasih={len(soal_kasih)}, Iman={len(soal_iman)}, Pengharapan={len(soal_pengharapan)}")
+    
     if len(soal_kasih) < 11 or len(soal_iman) < 11 or len(soal_pengharapan) < 11:
-        st.error(f"❌ Jumlah soal tidak mencukupi: Kasih={len(soal_kasih)}, Iman={len(soal_iman)}, Pengharapan={len(soal_pengharapan)} (minimal 11)")
+        st.error(f"❌ Jumlah soal tidak mencukupi (minimal 11 per kategori)")
         return []
     
     sampel_kasih = random.sample(soal_kasih, 11)
@@ -90,6 +88,7 @@ def siapkan_33_soal():
     for s in sampel_pengharapan:
         semua.append({"kategori": "Pengharapan", "id": s.get("id",0), "teks": s["teks"], "jawaban_benar": s["jawaban"]})
     random.shuffle(semua)
+    st.success(f"✅ Berhasil memuat {len(semua)} soal (11 per kategori)")
     return semua
 
 def init():
@@ -151,6 +150,7 @@ def show_pilihan_benar_salah():
     st.markdown("## ✅ Mode Pilihan Benar/Salah")
     st.markdown("Jawab 33 pernyataan dengan **Benar** atau **Salah**.")
     
+    # Tampilkan skor resmi jika sudah ada
     if st.session_state.pbs_has_official and st.session_state.pbs_official:
         off = st.session_state.pbs_official
         st.markdown("---")
@@ -168,7 +168,7 @@ def show_pilihan_benar_salah():
     
     soal_list = st.session_state.pbs_soal
     if not soal_list:
-        st.error("❌ Gagal memuat soal. Periksa folder 'soal_stomata_hati/pilihan_benar_salah/...'")
+        st.error("❌ Gagal memuat soal. Periksa debug di atas.")
         return
     
     terjawab = len(st.session_state.pbs_answers)
