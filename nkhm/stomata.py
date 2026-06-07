@@ -6,46 +6,67 @@ from pathlib import Path
 
 # ========== MEMBACA SOAL DARI FILE JSON ==========
 def load_soal_from_json(folder_name):
-    """Membaca soal dari file JSON berdasarkan folder"""
+    """
+    Membaca semua file JSON dari folder tertentu dan menggabungkannya.
+    Mencari file dengan pola: soal_{folder_name}.json dan soal_{folder_name}_1.json
+    """
     base_path = Path(__file__).parent / "soal_stomata_hati" / folder_name
-    json_path = base_path / f"soal_{folder_name}.json"
+    all_soal = []
     
-    try:
-        with open(json_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        return data
-    except FileNotFoundError:
-        st.warning(f"⚠️ File soal {folder_name} tidak ditemukan di {json_path}")
+    # Cari semua file JSON di folder
+    json_files = list(base_path.glob("*.json"))
+    
+    if not json_files:
+        st.warning(f"⚠️ Tidak ada file JSON ditemukan di folder {base_path}")
         return []
-    except json.JSONDecodeError:
-        st.warning(f"⚠️ File {json_path} format JSON tidak valid")
-        return []
+    
+    # Baca setiap file JSON dan gabungkan
+    for json_file in json_files:
+        try:
+            with open(json_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                if isinstance(data, list):
+                    all_soal.extend(data)
+                    st.success(f"✅ Berhasil memuat {len(data)} soal dari {json_file.name}")
+                else:
+                    st.warning(f"⚠️ Format file {json_file.name} tidak valid (bukan list)")
+        except FileNotFoundError:
+            st.warning(f"⚠️ File {json_file.name} tidak ditemukan")
+        except json.JSONDecodeError:
+            st.warning(f"⚠️ File {json_file.name} format JSON tidak valid")
+    
+    return all_soal
 
 def get_random_soals():
     """
     Mengambil 11 soal acak dari setiap kategori
     Fungsi ini dipanggil ULANG setiap kali diperlukan
     """
-    # Muat semua soal dari file JSON
+    # Muat SEMUA soal dari semua file JSON di setiap kategori
     soal_kasih = load_soal_from_json("kasih")
     soal_iman = load_soal_from_json("iman")
     soal_pengharapan = load_soal_from_json("pengharapan")
     
-    # Validasi jumlah soal
+    # Tampilkan informasi jumlah soal di masing-masing kategori
+    st.info(f"📚 Total soal Kasih: {len(soal_kasih)} soal")
+    st.info(f"📚 Total soal Iman: {len(soal_iman)} soal")
+    st.info(f"📚 Total soal Pengharapan: {len(soal_pengharapan)} soal")
+    
+    # Validasi jumlah soal minimal 11 per kategori
     if len(soal_kasih) < 11:
-        st.warning(f"⚠️ Soal Kasih hanya {len(soal_kasih)} tersedia")
+        st.warning(f"⚠️ Soal Kasih hanya {len(soal_kasih)} tersedia (minimal 11 untuk game)")
         sample_kasih = soal_kasih
     else:
         sample_kasih = random.sample(soal_kasih, 11)
     
     if len(soal_iman) < 11:
-        st.warning(f"⚠️ Soal Iman hanya {len(soal_iman)} tersedia")
+        st.warning(f"⚠️ Soal Iman hanya {len(soal_iman)} tersedia (minimal 11 untuk game)")
         sample_iman = soal_iman
     else:
         sample_iman = random.sample(soal_iman, 11)
     
     if len(soal_pengharapan) < 11:
-        st.warning(f"⚠️ Soal Pengharapan hanya {len(soal_pengharapan)} tersedia")
+        st.warning(f"⚠️ Soal Pengharapan hanya {len(soal_pengharapan)} tersedia (minimal 11 untuk game)")
         sample_pengharapan = soal_pengharapan
     else:
         sample_pengharapan = random.sample(soal_pengharapan, 11)
@@ -401,7 +422,7 @@ def show_stomata():
                 
                 st.markdown("---")
     
-    # Progress bar di bawah setelah semua soal (hanya jumlah terjawab)
+    # Progress bar di bawah setelah semua soal
     st.markdown("---")
     st.progress(jawaban_terjawab / total_soal, text=f"📊 Progress: {jawaban_terjawab} dari {total_soal} soal terjawab")
     
@@ -432,7 +453,7 @@ def show_stomata():
 
         # Detail Skor Mentah (dalam expander)
         with st.expander("📈 Detail Skor"):
-            st.markdown("**Skor berdasarkan jawaban benar (1 poin per soal):**")
+            st.markdown("**Skor berdasarkan jawaban Setuju/Sangat Setuju (1 poin per soal):**")
             st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']} poin")
             st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']} poin")
             st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']} poin")
