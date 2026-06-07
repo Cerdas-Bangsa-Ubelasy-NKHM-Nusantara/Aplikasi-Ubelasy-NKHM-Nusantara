@@ -45,7 +45,7 @@ def baca_soal_dari_folder(kategori):
     # Maka soal_stomata_hati berada di folder yang sama dengan nkhm? TIDAK.
     # Struktur Anda: nkhm/soal_stomata_hati/... 
     # Jadi path = nkhm/soal_stomata_hati/pilihan_benar_salah/{kategori}
-    base_path = Path(__file__).parent.parent / "soal_stomata_hati" / "pilihan_benar_salah" / kategori
+    base_path = Path(__file__).parent.parent /nkhm/ "soal_stomata_hati" / "pilihan_benar_salah" / kategori
     semua_soal = []
     
     if not base_path.exists():
