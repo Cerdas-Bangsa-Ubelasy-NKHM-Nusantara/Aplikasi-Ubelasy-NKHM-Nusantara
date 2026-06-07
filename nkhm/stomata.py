@@ -10,4 +10,4 @@ def show_stomata():
     with tab1:
         show_tanggapan()
     with tab2:
-        show_pilihan_ganda()
+        show_pilihan_benar_salah()
