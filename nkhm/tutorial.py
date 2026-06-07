@@ -149,9 +149,9 @@ def show_tutorial():
                `IKP Kasih = (Persen Kasih / Total) × 100` (lakukan juga untuk Iman dan Pengharapan).
 
             5. **Terapkan pada segitiga IKP** – tarik tiga garis lurus:
-               - **Garis Iman**: dari titik nilai Iman → sejajar sisi Kasih → menuju sisi Pengharapan. Dengan jiwa nasionalisme dan patriotis, arahkan bambu runcing dari nilai % Iman yang sejajar dengan sisi nilai Kasih, menuju Pengharapan Indonesia Emas 2045.
-               - **Garis Kasih**: dari titik nilai Kasih → sejajar sisi Pengharapan → menuju sisi Iman. Dengan jiwa nasionalisme dan patriotis, arahkan bambu runcing dari nilai % Kasih yang sejajar dengan sisi nilai Pengharapan, menuju Iman besar bangsa yang dikaruniai oleh Tuhan Yang Maha Kuasa.
-               - **Garis Pengharapan**: dari titik nilai Pengharapan → sejajar sisi Iman → menuju sisi Kasih. Dengan jiwa nasionalisme dan patriotis, arahkan bambu runcing dari nilai % Pengharapan yang sejajar dengan sisi nilai Iman, menuju Kasih terhadap Tuhan dan terhadap sesama bangsa Indonesia, hindari perang saudara dan pertumpahan darah.
+               - **Garis Iman**: dari titik nilai Iman → sejajar sisi Kasih → menuju sisi Pengharapan. Dengan jiwa nasionalisme dan patriotis, arahkan bambu runcing digital dari nilai % Iman yang sejajar dengan sisi nilai Kasih, menuju Pengharapan Indonesia Emas 2045.
+               - **Garis Kasih**: dari titik nilai Kasih → sejajar sisi Pengharapan → menuju sisi Iman. Dengan jiwa nasionalisme dan patriotis, arahkan bambu runcing digital dari nilai % Kasih yang sejajar dengan sisi nilai Pengharapan, menuju Iman besar bangsa yang dikaruniai oleh Tuhan Yang Maha Kuasa.
+               - **Garis Pengharapan**: dari titik nilai Pengharapan → sejajar sisi Iman → menuju sisi Kasih. Dengan jiwa nasionalisme dan patriotis, arahkan bambu runcing digital dari nilai % Pengharapan yang sejajar dengan sisi nilai Iman, menuju Kasih terhadap Tuhan dan terhadap sesama bangsa Indonesia, hindari perang saudara dan pertumpahan darah.
 
             6. **Titik potong** ketiga garis pada sisi‑sisi segitiga menentukan **satu, dua, atau tiga posisi** dari 12 sisi Stomata Hati. Dengan jiwa nasionalisme dan patriotis, kita dapatkan  satu, dua, atau tiga kemajuan hidup dalam kehidupan berbangsa dan bernegara.
             """)
