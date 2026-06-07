@@ -141,7 +141,7 @@ def force_refresh_questions():
     st.session_state.stomata_soal_version += 1
 
 def hide_results():
-    """Reset jawaban dan sembunyikan hasil (tanpa menghapus jawaban yang sudah diisi)"""
+    """Sembunyikan hasil yang sudah ditampilkan (tanpa menghapus jawaban)"""
     st.session_state.stomata_submitted = False
     st.session_state.stomata_results = None
 
@@ -347,7 +347,7 @@ def show_stomata():
     
     st.markdown("---")
     
-    # Total Skor Anda (sebelum tombol Ganti Soal)
+    # Total Skor Anda saat ini
     total_skor_saat_ini = hitung_total_skor_saat_ini()
     st.markdown(f"### 📊 Skor Anda Saat Ini = **{total_skor_saat_ini} / 33**")
     
@@ -402,7 +402,7 @@ def show_stomata():
                 
                 st.markdown("---")
     
-    # Progress bar diletakkan di bawah setelah semua soal (sebelum tombol Lihat Hasil)
+    # Progress bar di bawah setelah semua soal
     st.markdown("---")
     jawaban_terjawab = len(st.session_state.stomata_answers)
     st.progress(jawaban_terjawab / total_soal, text=f"📊 Progress: {jawaban_terjawab} dari {total_soal} soal terjawab")
@@ -433,11 +433,13 @@ def show_stomata():
             st.info("📝 **INI ADALAH HASIL LATIHAN** (tidak mengubah skor resmi Anda)")
 
         # Detail Skor Mentah (dalam expander)
-        with st.expander("📈 Detail Skor Mentah"):
-            st.markdown("**Skor berdasarkan jawaban:**")
+        with st.expander("📈 Detail Skor"):
+            st.markdown("**Skor berdasarkan jawaban Setuju/Sangat Setuju (1 poin per soal):**")
             st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']} poin")
             st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']} poin")
             st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']} poin")
+        
+        st.markdown(f"### 📊 **Total Skor: {res['total_skor']} / {res['max_total']}**")
 
         # Tampilkan 3 metrik persentase
         st.subheader("📊 Hasil Uji IKP")
@@ -451,13 +453,13 @@ def show_stomata():
         with col_c:
             st.metric("✨ Pengharapan", f"{res['pengharapan']:.1f}%")
             st.progress(res['pengharapan']/100)
-                     
-        # Gambar stomata hati
+        
+        # Gambar stomata hati (PATH DIGANTI)
         img_path = Path(__file__).parent.parent / "assets" / "stomata_hati_1.jpg"
         if img_path.exists():
             st.image(str(img_path), caption="Stomata Hati - Segitiga Iman, Kasih, Pengharapan", use_container_width=True)
         else:
-            st.warning("⚠️ Gambar Stomata Hati belum tersedia. Harap upload file 'stomata_hati.jpg' ke folder 'assets'.")
+            st.warning("⚠️ Gambar Stomata Hati belum tersedia. Harap upload file 'stomata_hati_1.jpg' ke folder 'assets'.")
         
         # Posisi Stomata Hati
         sisi_list = res['sisi_list']
