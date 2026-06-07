@@ -306,7 +306,7 @@ def show_stomata():
             st.metric("🙏 Iman", f"{official['skor_iman']} / 11")
         with col_o3:
             st.metric("✨ Pengharapan", f"{official['skor_pengharapan']} / 11")
-        st.markdown(f"### 📊 **Total Skor Resmi: {official['total_skor']} / 33**")
+        st.markdown(f"### 📊 **Total Skor Resmi Anda: {official['total_skor']} / 33**")
         
         # Tampilkan posisi resmi
         sisi_list = official['sisi_list']
