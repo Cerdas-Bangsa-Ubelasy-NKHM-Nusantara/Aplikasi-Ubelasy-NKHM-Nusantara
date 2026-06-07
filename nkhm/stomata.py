@@ -306,7 +306,7 @@ def show_stomata():
             st.metric("🙏 Iman", f"{official['skor_iman']} / 11")
         with col_o3:
             st.metric("✨ Pengharapan", f"{official['skor_pengharapan']} / 11")
-        st.markdown(f"### 📊 **Total Skor Resmi Anda: {official['total_skor']} / 33**")
+        st.markdown(f"### 📊 **Total Skor Resmi: {official['total_skor']} / 33**")
         
         # Tampilkan posisi resmi
         sisi_list = official['sisi_list']
@@ -432,7 +432,7 @@ def show_stomata():
 
         # Detail Skor Mentah (dalam expander)
         with st.expander("📈 Detail Skor"):
-            st.markdown("**Skor berdasarkan jawaban (1 poin per soal yang dijawab dengan benar):**")
+            st.markdown("**Skor berdasarkan jawaban benar (1 poin per soal):**")
             st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']} poin")
             st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']} poin")
             st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']} poin")
