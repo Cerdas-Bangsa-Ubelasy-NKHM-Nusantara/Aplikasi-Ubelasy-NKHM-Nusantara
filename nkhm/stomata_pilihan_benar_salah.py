@@ -5,20 +5,19 @@ import json
 from pathlib import Path
 
 # ========== MEMBACA SOAL DARI FILE JSON ==========
-def load_soal_from_json(folder_name):
+def load_soal_dari_folder(kategori):
     """
-    Membaca SEMUA file JSON dari folder tertentu.
-    Struktur: soal_stomata_hati/pilihan_benar_salah/{folder_name}/
-    Setiap soal harus memiliki field 'teks' dan 'jawaban' (Benar/Salah)
+    Membaca semua file JSON dari folder:
+    nkhm/soal_stomata_hati/pilihan_benar_salah/{kategori}/
     """
-    base_path = Path(__file__).parent / "soal_stomata_hati" / "pilihan_benar_salah" / folder_name
+    base_path = Path(__file__).parent / "soal_stomata_hati" / "pilihan_benar_salah" / kategori
     all_soal = []
     
     if not base_path.exists():
-        st.warning(f"⚠️ Folder {base_path} tidak ditemukan")
+        st.error(f"❌ Folder tidak ditemukan: {base_path}")
         return []
     
-    json_files = sorted(base_path.glob("*.json"))
+    json_files = list(base_path.glob("*.json"))
     if not json_files:
         st.warning(f"⚠️ Tidak ada file JSON di {base_path}")
         return []
@@ -32,28 +31,36 @@ def load_soal_from_json(folder_name):
                         if "teks" in item and "jawaban" in item:
                             all_soal.append(item)
                         else:
-                            st.warning(f"⚠️ Soal di {json_file.name} tidak valid (missing 'teks' or 'jawaban')")
+                            st.warning(f"⚠️ Soal di {json_file.name} tidak memiliki 'teks' atau 'jawaban'")
                 else:
                     st.warning(f"⚠️ Format {json_file.name} bukan list")
         except Exception as e:
-            st.warning(f"⚠️ Error baca {json_file.name}: {e}")
+            st.error(f"❌ Error membaca {json_file.name}: {e}")
     
     return all_soal
 
 def get_random_soals():
     """Mengambil 11 soal acak per kategori untuk mode benar/salah"""
     try:
-        soal_kasih = load_soal_from_json("kasih")
-        soal_iman = load_soal_from_json("iman")
-        soal_pengharapan = load_soal_from_json("pengharapan")
+        soal_kasih = load_soal_dari_folder("kasih")
+        soal_iman = load_soal_dari_folder("iman")
+        soal_pengharapan = load_soal_dari_folder("pengharapan")
         
-        with st.expander("📊 Bank Soal (Benar/Salah)", expanded=False):
+        # Tampilkan info bank soal
+        with st.expander("📊 Informasi Bank Soal (Benar/Salah)"):
             st.markdown(f"**Kasih:** {len(soal_kasih)} soal")
             st.markdown(f"**Iman:** {len(soal_iman)} soal")
             st.markdown(f"**Pengharapan:** {len(soal_pengharapan)} soal")
         
-        if len(soal_kasih) < 11 or len(soal_iman) < 11 or len(soal_pengharapan) < 11:
-            st.error(f"Jumlah soal tidak cukup (min 11 per kategori). Kasih={len(soal_kasih)}, Iman={len(soal_iman)}, Pengharapan={len(soal_pengharapan)}")
+        # Validasi minimal 11 soal per kategori
+        if len(soal_kasih) < 11:
+            st.error(f"❌ Soal Kasih hanya {len(soal_kasih)} (minimal 11)")
+            return []
+        if len(soal_iman) < 11:
+            st.error(f"❌ Soal Iman hanya {len(soal_iman)} (minimal 11)")
+            return []
+        if len(soal_pengharapan) < 11:
+            st.error(f"❌ Soal Pengharapan hanya {len(soal_pengharapan)} (minimal 11)")
             return []
         
         sample_kasih = random.sample(soal_kasih, 11)
@@ -88,7 +95,7 @@ def get_random_soals():
         random.shuffle(all_soal)
         return all_soal
     except Exception as e:
-        st.error(f"❌ Error: {e}")
+        st.error(f"❌ Error dalam get_random_soals: {e}")
         return []
 
 # ========== SISI NAMES dan FUNGSI PENDUKUNG ==========
@@ -146,7 +153,7 @@ def force_refresh_questions():
     if new_soals:
         st.session_state[f"{prefix}all_soal"] = new_soals
     else:
-        st.error("Gagal memuat soal baru.")
+        st.error("Gagal memuat soal baru. Periksa folder dan file JSON.")
     st.session_state[f"{prefix}answers"] = {}
     st.session_state[f"{prefix}submitted"] = False
     st.session_state[f"{prefix}results"] = None
@@ -164,16 +171,19 @@ def tampilkan_hasil():
         return False
     total_soal = len(soal_list)
     if len(st.session_state[f"{prefix}answers"]) < total_soal:
-        st.error(f"⚠️ Anda baru menjawab {len(st.session_state[f'{prefix}answers'])} dari {total_soal} soal.")
+        st.error(f"⚠️ Anda baru menjawab {len(st.session_state[f'{prefix}answers'])} dari {total_soal} soal. Selesaikan semua!")
         return False
     
     skor_kasih = skor_iman = skor_pengharapan = 0
     for idx, soal in enumerate(soal_list):
         jawaban = st.session_state[f"{prefix}answers"].get(idx)
         if jawaban and jawaban == soal["jawaban"]:
-            if soal['kategori'] == "Kasih": skor_kasih += 1
-            elif soal['kategori'] == "Iman": skor_iman += 1
-            else: skor_pengharapan += 1
+            if soal['kategori'] == "Kasih":
+                skor_kasih += 1
+            elif soal['kategori'] == "Iman":
+                skor_iman += 1
+            else:
+                skor_pengharapan += 1
     
     max_kat = 11
     persen_kasih = hitung_persentase(skor_kasih, max_kat)
@@ -181,18 +191,27 @@ def tampilkan_hasil():
     persen_pengharapan = hitung_persentase(skor_pengharapan, max_kat)
     sisi = tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan)
     total = skor_kasih + skor_iman + skor_pengharapan
+    
     hasil = {
-        "kasih": persen_kasih, "iman": persen_iman, "pengharapan": persen_pengharapan,
-        "sisi_list": sisi, "skor_kasih": skor_kasih, "skor_iman": skor_iman,
-        "skor_pengharapan": skor_pengharapan, "total_skor": total,
-        "max_per_kategori": max_kat, "max_total": 33
+        "kasih": persen_kasih,
+        "iman": persen_iman,
+        "pengharapan": persen_pengharapan,
+        "sisi_list": sisi,
+        "skor_kasih": skor_kasih,
+        "skor_iman": skor_iman,
+        "skor_pengharapan": skor_pengharapan,
+        "total_skor": total,
+        "max_per_kategori": max_kat,
+        "max_total": 33,
     }
+    
     if not st.session_state[f"{prefix}has_official_score"]:
         st.session_state[f"{prefix}official_score"] = hasil
         st.session_state[f"{prefix}has_official_score"] = True
         hasil["is_official"] = True
     else:
         hasil["is_official"] = False
+    
     st.session_state[f"{prefix}results"] = hasil
     st.session_state[f"{prefix}submitted"] = True
     return True
@@ -201,51 +220,53 @@ def tampilkan_hasil():
 def show_pilihan_benar_salah():
     init_pilihan_state()
     prefix = "pilihan_bs_"
-
+    
     st.markdown("## ✅ Sto-mata Hati - Mode Pilihan Benar/Salah")
     st.markdown("""
-    **Alat Uji Tingkat Iman, Kasih, dan Pengharapan (IKP)**  
-    Anda akan menjawab **33 pernyataan** (11 per kategori) dengan memilih **Benar** atau **Salah**.  
-    Setiap jawaban benar bernilai **1 poin**. Maksimal skor per kategori 11, total 33.
+    Anda akan menjawab **33 pernyataan** (11 Iman, 11 Kasih, 11 Pengharapan) dengan memilih **Benar** atau **Salah**.  
+    Setiap jawaban benar bernilai **1 poin**. Maksimal skor per kategori 11, total 33 poin.
     """)
-
+    
     # Tampilkan skor resmi jika sudah ada
     if st.session_state[f"{prefix}has_official_score"] and st.session_state[f"{prefix}official_score"]:
         off = st.session_state[f"{prefix}official_score"]
         st.markdown("---")
         st.markdown("### 🏆 SKOR RESMI ANDA (Benar/Salah) 🏆")
         col1, col2, col3 = st.columns(3)
-        col1.metric("Kasih", f"{off['skor_kasih']}/11")
-        col2.metric("Iman", f"{off['skor_iman']}/11")
-        col3.metric("Pengharapan", f"{off['skor_pengharapan']}/11")
-        st.markdown(f"**Total: {off['total_skor']}/33**")
-        st.info(f"Posisi: {', '.join([SISI_NAMES[s] for s in off['sisi_list']])}")
+        col1.metric("💖 Kasih", f"{off['skor_kasih']} / 11")
+        col2.metric("🙏 Iman", f"{off['skor_iman']} / 11")
+        col3.metric("✨ Pengharapan", f"{off['skor_pengharapan']} / 11")
+        st.markdown(f"### 📊 **Total Skor Resmi: {off['total_skor']} / 33**")
+        st.info(f"🌿 Posisi: {', '.join([SISI_NAMES[s] for s in off['sisi_list']])}")
         st.markdown("---")
         st.markdown("### ✨ MODE LATIHAN ✨")
         st.caption("Permainan selanjutnya hanya latihan, tidak mengubah skor resmi.")
         st.markdown("---")
     else:
-        st.info("🎯 Permainan pertama (Benar/Salah). Jawab semua soal dengan jujur.")
-
+        st.info("🎯 **Ini adalah permainan pertamamu (Benar/Salah)!** Jawab semua 33 soal dengan jujur untuk mendapatkan skor resmi.")
+    
     soal_list = st.session_state[f"{prefix}all_soal"]
     if not soal_list:
-        st.error("❌ Gagal memuat soal. Pastikan folder 'soal_stomata_hati/pilihan_benar_salah/...' berisi file JSON.")
+        st.error("❌ Gagal memuat soal. Pastikan folder `nkhm/soal_stomata_hati/pilihan_benar_salah/` berisi subfolder `iman`, `kasih`, `pengharapan` dengan file JSON yang valid.")
         return
-
+    
     total_soal = len(soal_list)
     jawaban_terjawab = len(st.session_state[f"{prefix}answers"])
-    st.markdown(f"**📝 Soal terjawab: {jawaban_terjawab}/{total_soal}**")
-
+    st.markdown(f"### 📝 Soal Terjawab: **{jawaban_terjawab} / {total_soal}**")
+    
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("🔄 Ganti Soal (Baru)", use_container_width=True):
+        if st.button("🔄 Ganti Soal (Baru)", use_container_width=True, type="primary"):
             force_refresh_questions()
             st.rerun()
     with col2:
         if st.button("🗑️ Reset Jawaban", use_container_width=True):
             hide_results()
             st.rerun()
-
+    
+    st.markdown("---")
+    
+    # Tampilkan soal
     with st.container(height=500):
         for idx, soal in enumerate(soal_list):
             key = f"pilihan_bs_{idx}_{soal['id']}_v{st.session_state[f'{prefix}soal_version']}"
@@ -254,53 +275,67 @@ def show_pilihan_benar_salah():
                 f"**{idx+1}. [{soal['kategori']}]** {soal['teks']}",
                 soal['pilihan'],
                 index=soal['pilihan'].index(current) if current in soal['pilihan'] else None,
-                key=key, label_visibility="collapsed", horizontal=True
+                key=key,
+                label_visibility="collapsed",
+                horizontal=True
             )
             if selected != current:
                 st.session_state[f"{prefix}answers"][idx] = selected
                 if st.session_state[f"{prefix}submitted"]:
                     hide_results()
                 st.rerun()
-
+            st.markdown("---")
+    
     st.progress(jawaban_terjawab / total_soal, text=f"Progress: {jawaban_terjawab}/{total_soal}")
-
-    if st.button("📊 Lihat Hasil", type="primary"):
+    
+    # Tombol lihat hasil
+    if st.button("📊 Lihat Hasil", use_container_width=True, type="primary"):
         if tampilkan_hasil():
             st.rerun()
-
+    
     # Tampilkan hasil jika sudah submit
     if st.session_state[f"{prefix}submitted"] and st.session_state[f"{prefix}results"]:
         res = st.session_state[f"{prefix}results"]
+        st.markdown("---")
         if res.get("is_official"):
-            st.success("🎉 Skor resmi tersimpan!")
+            st.success("🎉 **SELAMAT! Skor resmi Anda telah disimpan.** 🎉")
         else:
-            st.info("📝 Hasil latihan (tidak mengubah skor resmi)")
-
+            st.info("📝 **INI ADALAH HASIL LATIHAN** (tidak mengubah skor resmi)")
+        
         with st.expander("📈 Detail Skor"):
-            st.metric("Kasih", f"{res['skor_kasih']}/{res['max_per_kategori']}")
-            st.metric("Iman", f"{res['skor_iman']}/{res['max_per_kategori']}")
-            st.metric("Pengharapan", f"{res['skor_pengharapan']}/{res['max_per_kategori']}")
-        st.markdown(f"**Total Skor: {res['total_skor']}/{res['max_total']}**")
-
+            st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']}")
+            st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']}")
+            st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']}")
+        st.markdown(f"### 📊 Total Skor: **{res['total_skor']} / {res['max_total']}**")
+        
         col_a, col_b, col_c = st.columns(3)
         col_a.metric("Kasih %", f"{res['kasih']:.1f}%")
         col_b.metric("Iman %", f"{res['iman']:.1f}%")
         col_c.metric("Pengharapan %", f"{res['pengharapan']:.1f}%")
-
+        
         img_path = Path(__file__).parent.parent / "assets" / "stomata_hati_1.jpg"
         if img_path.exists():
-            st.image(str(img_path), use_container_width=True)
+            st.image(str(img_path), caption="Stomata Hati - Segitiga Iman, Kasih, Pengharapan", use_container_width=True)
         else:
-            st.warning("⚠️ Gambar belum tersedia")
-
+            st.warning("⚠️ Gambar Stomata Hati belum tersedia.")
+        
         sisi = res['sisi_list']
-        st.markdown(f"**Posisi Stomata Hati:** {', '.join([SISI_NAMES[s] for s in sisi])}")
-        with st.expander("📖 12 Sisi Stomata Hati"):
+        nama_sisi = [SISI_NAMES[s] for s in sisi]
+        st.markdown(f"### 🌿 Posisi Stomata Hati Anda: **{', '.join(nama_sisi)}** (Sisi {', '.join(map(str, sisi))})")
+        
+        with st.expander("📖 Penjelasan 12 Sisi Stomata Hati"):
             for no, nama in SISI_NAMES.items():
-                st.markdown(f"{no}. {nama}")
-        if st.button("Mulai Lagi (Soal Sama)"):
-            st.session_state[f"{prefix}submitted"] = False
-            st.rerun()
+                st.markdown(f"**{no}. {nama}**")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("🎲 Tes Lagi dengan Soal Baru", use_container_width=True):
+                force_refresh_questions()
+                st.rerun()
+        with col2:
+            if st.button("📝 Mulai Lagi (Soal Sama)", use_container_width=True):
+                hide_results()
+                st.rerun()
 
 if __name__ == "__main__":
     show_pilihan_benar_salah()
