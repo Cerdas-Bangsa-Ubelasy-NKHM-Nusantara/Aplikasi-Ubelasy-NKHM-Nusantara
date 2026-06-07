@@ -1,7 +1,7 @@
 # nkhm/stomata.py
 import streamlit as st
 from .stomata_tanggapan import show_tanggapan
-from .stomata_pilihan_ganda import show_pilihan_ganda
+from .stomata_pilihan_benar_salah import show_pilihan_benar_salah
 
 def show_stomata():
     st.markdown("## 💖 Sto-mata Hati")
