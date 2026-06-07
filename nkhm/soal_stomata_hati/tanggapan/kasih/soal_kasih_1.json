@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "teks": "Saya merasa terganggu ketika diminta membantu orang lain.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 2,
+    "teks": "Saya berusaha mendengarkan dengan penuh perhatian ketika orang lain berbicara.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 3,
+    "teks": "Saya sulit memaafkan orang yang telah menyakiti hati saya.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 4,
+    "teks": "Saya berbagi makanan atau barang dengan mereka yang membutuhkan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 5,
+    "teks": "Saya tidak peduli dengan perbedaan keyakinan orang lain.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 6,
+    "teks": "Saya bersedia mengorbankan waktu saya untuk menolong sesama.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 7,
+    "teks": "Saya cenderung membeda-bedakan orang berdasarkan latar belakangnya.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 8,
+    "teks": "Saya berusaha menenangkan teman yang sedang bersedih.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 9,
+    "teks": "Saya merasa iri ketika melihat orang lain berprestasi.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 10,
+    "teks": "Saya menjaga hubungan baik dengan keluarga dan kerabat.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 11,
+    "teks": "Keberhasilan orang lain membuat saya tidak nyaman.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 12,
+    "teks": "Saya peduli dengan lingkungan dan makhluk hidup di sekitar saya.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 13,
+    "teks": "Saya bersikap dingin kepada orang yang baru saya kenal.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 14,
+    "teks": "Saya berusaha tidak menyakiti perasaan orang lain dengan perkataan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 15,
+    "teks": "Memberikan donasi adalah pemborosan uang.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 16,
+    "teks": "Saya menghargai jasa dan pengorbanan orang tua.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 17,
+    "teks": "Saya tidak peduli jika teman sedang dirundung masalah.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 18,
+    "teks": "Saya berterima kasih atas kebaikan kecil yang dilakukan orang lain.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 19,
+    "teks": "Saya sulit melupakan kesalahan orang lain terhadap saya.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 20,
+    "teks": "Saya bersedia menjadi sukarelawan untuk kegiatan sosial.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 21,
+    "teks": "Saya lebih mementingkan kepentingan pribadi daripada bersama.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 22,
+    "teks": "Saya menjaga sikap sabar ketika menghadapi orang yang menjengkelkan.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 23,
+    "teks": "Saya enggan memberikan semangat kepada orang yang sedang putus asa.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 24,
+    "teks": "Saya tidak mengambil keuntungan dari kelemahan orang lain.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 25,
+    "teks": "Anak-anak dan orang tua sering menyebalkan dan mengganggu.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 26,
+    "teks": "Saya berusaha menciptakan suasana yang harmonis di lingkungan sekitar.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 27,
+    "teks": "Berbagi ilmu secara gratis hanya akan merugikan diri sendiri.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 28,
+    "teks": "Saya turut bahagia ketika melihat orang lain sukses.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 29,
+    "teks": "Saya sulit mengakui kesalahan dan meminta maaf.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 30,
+    "teks": "Saya merawat hewan peliharaan atau tanaman dengan penuh tanggung jawab.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 31,
+    "teks": "Berbohong kadang diperlukan untuk kepentingan diri sendiri.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 32,
+    "teks": "Saya berusaha memahami perasaan orang lain sebelum menilai.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  },
+  {
+    "id": 33,
+    "teks": "Saya tidak peduli dengan suku, agama, atau status sosial orang lain.",
+    "pilihan": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"]
+  }
+]
