@@ -8,9 +8,9 @@ from pathlib import Path
 def load_soal_from_json(folder_name):
     """
     Membaca SEMUA file JSON dari folder tertentu dan menggabungkannya.
-    Mencari semua file dengan pola: *.json (soal_{folder_name}.json, *_1.json, *_2.json, dll)
+    Struktur: soal_stomata_hati/tanggapan/{folder_name}/
     """
-    base_path = Path(__file__).parent / "soal_stomata_hati" / folder_name
+    base_path = Path(__file__).parent / "soal_stomata_hati" / "tanggapan" / folder_name
     all_soal = []
     
     # Cek apakah folder ada
@@ -25,22 +25,26 @@ def load_soal_from_json(folder_name):
         st.warning(f"⚠️ Tidak ada file JSON ditemukan di folder {base_path}")
         return []
     
-    # Tampilkan informasi file yang ditemukan (hanya di mode debug, bisa dihapus)
-    file_info = ", ".join([f.name for f in json_files])
-    
     # Baca setiap file JSON dan gabungkan
     for json_file in json_files:
         try:
             with open(json_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 if isinstance(data, list):
-                    all_soal.extend(data)
+                    # Validasi setiap soal memiliki field yang diperlukan
+                    valid_soal = []
+                    for idx, item in enumerate(data):
+                        if "teks" in item and "pilihan" in item:
+                            valid_soal.append(item)
+                        else:
+                            st.warning(f"⚠️ Soal ke-{idx+1} di {json_file.name} tidak valid (missing 'teks' or 'pilihan')")
+                    all_soal.extend(valid_soal)
                 else:
                     st.warning(f"⚠️ Format file {json_file.name} tidak valid (bukan list)")
-        except FileNotFoundError:
-            st.warning(f"⚠️ File {json_file.name} tidak ditemukan")
-        except json.JSONDecodeError:
-            st.warning(f"⚠️ File {json_file.name} format JSON tidak valid")
+        except json.JSONDecodeError as e:
+            st.warning(f"⚠️ File {json_file.name} format JSON tidak valid: {e}")
+        except Exception as e:
+            st.warning(f"⚠️ Error membaca {json_file.name}: {e}")
     
     return all_soal
 
@@ -49,65 +53,67 @@ def get_random_soals():
     Mengambil 11 soal acak dari setiap kategori
     Fungsi ini dipanggil ULANG setiap kali diperlukan
     """
-    # Muat SEMUA soal dari semua file JSON di setiap kategori
-    soal_kasih = load_soal_from_json("kasih")
-    soal_iman = load_soal_from_json("iman")
-    soal_pengharapan = load_soal_from_json("pengharapan")
-    
-    # Tampilkan informasi jumlah soal di masing-masing kategori
-    with st.expander("📊 Informasi Bank Soal", expanded=False):
-        st.markdown(f"**💖 Soal Kasih:** {len(soal_kasih)} soal (dari semua file JSON)")
-        st.markdown(f"**🙏 Soal Iman:** {len(soal_iman)} soal (dari semua file JSON)")
-        st.markdown(f"**✨ Soal Pengharapan:** {len(soal_pengharapan)} soal (dari semua file JSON)")
-        st.markdown(f"**📚 Total Bank Soal:** {len(soal_kasih) + len(soal_iman) + len(soal_pengharapan)} soal")
-    
-    # Validasi jumlah soal minimal 11 per kategori
-    if len(soal_kasih) < 11:
-        st.warning(f"⚠️ Soal Kasih hanya {len(soal_kasih)} tersedia (minimal 11 untuk game)")
-        sample_kasih = soal_kasih
-    else:
-        sample_kasih = random.sample(soal_kasih, 11)
-    
-    if len(soal_iman) < 11:
-        st.warning(f"⚠️ Soal Iman hanya {len(soal_iman)} tersedia (minimal 11 untuk game)")
-        sample_iman = soal_iman
-    else:
-        sample_iman = random.sample(soal_iman, 11)
-    
-    if len(soal_pengharapan) < 11:
-        st.warning(f"⚠️ Soal Pengharapan hanya {len(soal_pengharapan)} tersedia (minimal 11 untuk game)")
-        sample_pengharapan = soal_pengharapan
-    else:
-        sample_pengharapan = random.sample(soal_pengharapan, 11)
-    
-    # Konversi ke format yang seragam
-    all_soal = []
-    for soal in sample_kasih:
-        all_soal.append({
-            "kategori": "Kasih",
-            "id": soal.get("id", 0),
-            "teks": soal.get("teks", ""),
-            "pilihan": soal.get("pilihan", ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"])
-        })
-    for soal in sample_iman:
-        all_soal.append({
-            "kategori": "Iman",
-            "id": soal.get("id", 0),
-            "teks": soal.get("teks", ""),
-            "pilihan": soal.get("pilihan", ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"])
-        })
-    for soal in sample_pengharapan:
-        all_soal.append({
-            "kategori": "Pengharapan",
-            "id": soal.get("id", 0),
-            "teks": soal.get("teks", ""),
-            "pilihan": soal.get("pilihan", ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"])
-        })
-    
-    # Acak urutan semua soal
-    random.shuffle(all_soal)
-    
-    return all_soal
+    try:
+        # Muat SEMUA soal dari semua file JSON di setiap kategori
+        soal_kasih = load_soal_from_json("kasih")
+        soal_iman = load_soal_from_json("iman")
+        soal_pengharapan = load_soal_from_json("pengharapan")
+        
+        # Tampilkan informasi bank soal (dalam expander)
+        with st.expander("📊 Informasi Bank Soal", expanded=False):
+            st.markdown(f"**💖 Soal Kasih:** {len(soal_kasih)} soal (dari semua file JSON)")
+            st.markdown(f"**🙏 Soal Iman:** {len(soal_iman)} soal (dari semua file JSON)")
+            st.markdown(f"**✨ Soal Pengharapan:** {len(soal_pengharapan)} soal (dari semua file JSON)")
+            st.markdown(f"**📚 Total Bank Soal:** {len(soal_kasih) + len(soal_iman) + len(soal_pengharapan)} soal")
+        
+        # Validasi minimal soal
+        if len(soal_kasih) == 0:
+            st.error("❌ Tidak ada soal Kasih yang valid. Periksa file JSON di folder 'kasih'")
+            return []
+        if len(soal_iman) == 0:
+            st.error("❌ Tidak ada soal Iman yang valid. Periksa file JSON di folder 'iman'")
+            return []
+        if len(soal_pengharapan) == 0:
+            st.error("❌ Tidak ada soal Pengharapan yang valid. Periksa file JSON di folder 'pengharapan'")
+            return []
+        
+        # Ambil sample (menggunakan min untuk menghindari error jika soal kurang dari 11)
+        jumlah_sample = min(11, len(soal_kasih))
+        sample_kasih = random.sample(soal_kasih, jumlah_sample)
+        sample_iman = random.sample(soal_iman, min(11, len(soal_iman)))
+        sample_pengharapan = random.sample(soal_pengharapan, min(11, len(soal_pengharapan)))
+        
+        # Konversi ke format yang seragam
+        all_soal = []
+        for soal in sample_kasih:
+            all_soal.append({
+                "kategori": "Kasih",
+                "id": soal.get("id", 0),
+                "teks": soal.get("teks", ""),
+                "pilihan": soal.get("pilihan", ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"])
+            })
+        for soal in sample_iman:
+            all_soal.append({
+                "kategori": "Iman",
+                "id": soal.get("id", 0),
+                "teks": soal.get("teks", ""),
+                "pilihan": soal.get("pilihan", ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"])
+            })
+        for soal in sample_pengharapan:
+            all_soal.append({
+                "kategori": "Pengharapan",
+                "id": soal.get("id", 0),
+                "teks": soal.get("teks", ""),
+                "pilihan": soal.get("pilihan", ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"])
+            })
+        
+        # Acak urutan semua soal
+        random.shuffle(all_soal)
+        return all_soal
+        
+    except Exception as e:
+        st.error(f"❌ Error dalam get_random_soals: {e}")
+        return []
 
 # ========== SISI NAMES ==========
 SISI_NAMES = {
@@ -164,7 +170,10 @@ def init_stomata_state():
 def force_refresh_questions():
     """Memaksa refresh soal dengan version increment (untuk latihan)"""
     new_soals = get_random_soals()
-    st.session_state.stomata_all_soal = new_soals
+    if new_soals:
+        st.session_state.stomata_all_soal = new_soals
+    else:
+        st.error("Gagal memuat soal baru. Periksa folder dan file JSON.")
     st.session_state.stomata_answers = {}
     st.session_state.stomata_submitted = False
     st.session_state.stomata_results = None
@@ -354,12 +363,12 @@ def show_stomata():
         st.info("🎯 **Ini adalah permainan pertamamu!** Jawab semua 33 soal dengan jujur untuk mendapatkan skor resmi. Setelah ini, kamu bisa bermain lagi untuk latihan tanpa mengubah skor.")
 
     soal_list = st.session_state.stomata_all_soal
+    if not soal_list:
+        st.error("❌ Gagal memuat soal. Periksa folder 'soal_stomata_hati/tanggapan/...' dan file JSON di dalamnya.")
+        return
+        
     total_soal = len(soal_list)
     current_version = st.session_state.stomata_soal_version
-
-    if total_soal == 0:
-        st.error("❌ Tidak ada soal yang ditemukan. Pastikan folder 'soal_stomata_hati' berisi file JSON!")
-        return
 
     # Informasi jumlah soal per kategori dalam game saat ini
     jumlah_kasih = sum(1 for s in soal_list if s['kategori'] == "Kasih")
