@@ -432,7 +432,7 @@ def show_stomata():
 
         # Detail Skor Mentah (dalam expander)
         with st.expander("📈 Detail Skor"):
-            st.markdown("**Skor berdasarkan jawaban Setuju/Sangat Setuju (1 poin per soal):**")
+            st.markdown("**Skor berdasarkan jawaban (1 poin per soal yang dijawab dengan benar):**")
             st.metric("Skor Kasih", f"{res['skor_kasih']} / {res['max_per_kategori']} poin")
             st.metric("Skor Iman", f"{res['skor_iman']} / {res['max_per_kategori']} poin")
             st.metric("Skor Pengharapan", f"{res['skor_pengharapan']} / {res['max_per_kategori']} poin")
