@@ -7,18 +7,26 @@ from pathlib import Path
 # ========== MEMBACA SOAL DARI FILE JSON ==========
 def load_soal_from_json(folder_name):
     """
-    Membaca semua file JSON dari folder tertentu dan menggabungkannya.
-    Mencari file dengan pola: soal_{folder_name}.json dan soal_{folder_name}_1.json
+    Membaca SEMUA file JSON dari folder tertentu dan menggabungkannya.
+    Mencari semua file dengan pola: *.json (soal_{folder_name}.json, *_1.json, *_2.json, dll)
     """
     base_path = Path(__file__).parent / "soal_stomata_hati" / folder_name
     all_soal = []
     
+    # Cek apakah folder ada
+    if not base_path.exists():
+        st.warning(f"⚠️ Folder {base_path} tidak ditemukan")
+        return []
+    
     # Cari semua file JSON di folder
-    json_files = list(base_path.glob("*.json"))
+    json_files = sorted(list(base_path.glob("*.json")))
     
     if not json_files:
         st.warning(f"⚠️ Tidak ada file JSON ditemukan di folder {base_path}")
         return []
+    
+    # Tampilkan informasi file yang ditemukan (hanya di mode debug, bisa dihapus)
+    file_info = ", ".join([f.name for f in json_files])
     
     # Baca setiap file JSON dan gabungkan
     for json_file in json_files:
@@ -27,7 +35,6 @@ def load_soal_from_json(folder_name):
                 data = json.load(f)
                 if isinstance(data, list):
                     all_soal.extend(data)
-                    st.success(f"✅ Berhasil memuat {len(data)} soal dari {json_file.name}")
                 else:
                     st.warning(f"⚠️ Format file {json_file.name} tidak valid (bukan list)")
         except FileNotFoundError:
@@ -48,9 +55,11 @@ def get_random_soals():
     soal_pengharapan = load_soal_from_json("pengharapan")
     
     # Tampilkan informasi jumlah soal di masing-masing kategori
-    st.info(f"📚 Total soal Kasih: {len(soal_kasih)} soal")
-    st.info(f"📚 Total soal Iman: {len(soal_iman)} soal")
-    st.info(f"📚 Total soal Pengharapan: {len(soal_pengharapan)} soal")
+    with st.expander("📊 Informasi Bank Soal", expanded=False):
+        st.markdown(f"**💖 Soal Kasih:** {len(soal_kasih)} soal (dari semua file JSON)")
+        st.markdown(f"**🙏 Soal Iman:** {len(soal_iman)} soal (dari semua file JSON)")
+        st.markdown(f"**✨ Soal Pengharapan:** {len(soal_pengharapan)} soal (dari semua file JSON)")
+        st.markdown(f"**📚 Total Bank Soal:** {len(soal_kasih) + len(soal_iman) + len(soal_pengharapan)} soal")
     
     # Validasi jumlah soal minimal 11 per kategori
     if len(soal_kasih) < 11:
@@ -352,7 +361,7 @@ def show_stomata():
         st.error("❌ Tidak ada soal yang ditemukan. Pastikan folder 'soal_stomata_hati' berisi file JSON!")
         return
 
-    # Informasi jumlah soal per kategori
+    # Informasi jumlah soal per kategori dalam game saat ini
     jumlah_kasih = sum(1 for s in soal_list if s['kategori'] == "Kasih")
     jumlah_iman = sum(1 for s in soal_list if s['kategori'] == "Iman")
     jumlah_pengharapan = sum(1 for s in soal_list if s['kategori'] == "Pengharapan")
