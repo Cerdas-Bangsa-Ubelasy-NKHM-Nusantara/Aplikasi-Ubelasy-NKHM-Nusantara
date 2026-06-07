@@ -4,24 +4,28 @@ import random
 import json
 from pathlib import Path
 
-# ========== MEMBACA SOAL DARI FILE JSON ==========
+# ========== MEMBACA SOAL ==========
 def load_soal_dari_folder(kategori):
     """
-    Membaca semua file JSON dari folder:
+    Membaca semua file JSON dari:
     nkhm/soal_stomata_hati/pilihan_benar_salah/{kategori}/
     """
     base_path = Path(__file__).parent / "soal_stomata_hati" / "pilihan_benar_salah" / kategori
     all_soal = []
     
+    # Cek folder
     if not base_path.exists():
-        st.error(f"❌ Folder tidak ditemukan: {base_path}")
+        st.error(f"❌ Folder TIDAK DITEMUKAN: `{base_path}`")
+        st.info("Pastikan struktur folder: `nkhm/soal_stomata_hati/pilihan_benar_salah/iman/` (dan seterusnya)")
         return []
     
+    # Cari file JSON
     json_files = list(base_path.glob("*.json"))
     if not json_files:
-        st.warning(f"⚠️ Tidak ada file JSON di {base_path}")
+        st.warning(f"⚠️ Tidak ada file `.json` di folder: `{base_path}`")
         return []
     
+    # Baca setiap file
     for json_file in json_files:
         try:
             with open(json_file, 'r', encoding='utf-8') as f:
@@ -31,11 +35,11 @@ def load_soal_dari_folder(kategori):
                         if "teks" in item and "jawaban" in item:
                             all_soal.append(item)
                         else:
-                            st.warning(f"⚠️ Soal di {json_file.name} tidak memiliki 'teks' atau 'jawaban'")
+                            st.warning(f"⚠️ Soal di `{json_file.name}` tidak memiliki 'teks' atau 'jawaban'")
                 else:
-                    st.warning(f"⚠️ Format {json_file.name} bukan list")
+                    st.warning(f"⚠️ File `{json_file.name}` bukan list (format salah)")
         except Exception as e:
-            st.error(f"❌ Error membaca {json_file.name}: {e}")
+            st.error(f"❌ Gagal membaca `{json_file.name}`: {e}")
     
     return all_soal
 
@@ -46,23 +50,26 @@ def get_random_soals():
         soal_iman = load_soal_dari_folder("iman")
         soal_pengharapan = load_soal_dari_folder("pengharapan")
         
-        # Tampilkan info bank soal
-        with st.expander("📊 Informasi Bank Soal (Benar/Salah)"):
+        # Informasi bank soal (bisa di-klik untuk lihat detail)
+        with st.expander("📊 Info Bank Soal (Benar/Salah)"):
             st.markdown(f"**Kasih:** {len(soal_kasih)} soal")
             st.markdown(f"**Iman:** {len(soal_iman)} soal")
             st.markdown(f"**Pengharapan:** {len(soal_pengharapan)} soal")
+            if len(soal_kasih) < 11 or len(soal_iman) < 11 or len(soal_pengharapan) < 11:
+                st.warning("Minimal 11 soal per kategori agar game bisa berjalan.")
         
-        # Validasi minimal 11 soal per kategori
+        # Validasi
         if len(soal_kasih) < 11:
-            st.error(f"❌ Soal Kasih hanya {len(soal_kasih)} (minimal 11)")
+            st.error(f"❌ Soal Kasih hanya {len(soal_kasih)} (butuh 11)")
             return []
         if len(soal_iman) < 11:
-            st.error(f"❌ Soal Iman hanya {len(soal_iman)} (minimal 11)")
+            st.error(f"❌ Soal Iman hanya {len(soal_iman)} (butuh 11)")
             return []
         if len(soal_pengharapan) < 11:
-            st.error(f"❌ Soal Pengharapan hanya {len(soal_pengharapan)} (minimal 11)")
+            st.error(f"❌ Soal Pengharapan hanya {len(soal_pengharapan)} (butuh 11)")
             return []
         
+        # Ambil 11 acak dari masing-masing
         sample_kasih = random.sample(soal_kasih, 11)
         sample_iman = random.sample(soal_iman, 11)
         sample_pengharapan = random.sample(soal_pengharapan, 11)
@@ -95,7 +102,7 @@ def get_random_soals():
         random.shuffle(all_soal)
         return all_soal
     except Exception as e:
-        st.error(f"❌ Error dalam get_random_soals: {e}")
+        st.error(f"❌ Error umum: {e}")
         return []
 
 # ========== SISI NAMES dan FUNGSI PENDUKUNG ==========
@@ -247,7 +254,12 @@ def show_pilihan_benar_salah():
     
     soal_list = st.session_state[f"{prefix}all_soal"]
     if not soal_list:
-        st.error("❌ Gagal memuat soal. Pastikan folder `nkhm/soal_stomata_hati/pilihan_benar_salah/` berisi subfolder `iman`, `kasih`, `pengharapan` dengan file JSON yang valid.")
+        st.error("❌ Gagal memuat soal. Periksa folder `nkhm/soal_stomata_hati/pilihan_benar_salah/`.\n\n"
+                 "Pastikan ada subfolder `iman`, `kasih`, `pengharapan` dan masing-masing berisi file JSON dengan minimal 11 soal.\n\n"
+                 "Contoh struktur:\n"
+                 "- nkhm/soal_stomata_hati/pilihan_benar_salah/iman/soal_iman.json\n"
+                 "- nkhm/soal_stomata_hati/pilihan_benar_salah/kasih/soal_kasih.json\n"
+                 "- nkhm/soal_stomata_hati/pilihan_benar_salah/pengharapan/soal_pengharapan.json")
         return
     
     total_soal = len(soal_list)
