@@ -4,13 +4,71 @@ import random
 import json
 from pathlib import Path
 
+# ========== 12 SISI STOMATA HATI ==========
 SISI_NAMES = {
-    1: "Kasih", 2: "Iman", 3: "Pengharapan",
-    4: "Iman-Pengharapan", 5: "Kasih-Iman", 6: "Pengharapan-Kasih",
-    7: "Berbuat iman", 8: "Berbuat pengharapan", 9: "Berbuat kasih",
-    10: "Kasih-Iman-Pengharapan", 11: "Berbuat kasih-beriman", 12: "Berbuat kasih-berpengharapan",
+    1: "Kasih",
+    2: "Iman",
+    3: "Pengharapan",
+    4: "Iman-Pengharapan",
+    5: "Kasih-Iman",
+    6: "Pengharapan-Kasih",
+    7: "Berbuat iman",
+    8: "Berbuat pengharapan",
+    9: "Berbuat kasih",
+    10: "Kasih-Iman-Pengharapan",
+    11: "Berbuat kasih-beriman",
+    12: "Berbuat kasih-berpengharapan",
 }
 
+def hitung_persentase(skor, max_skor=11):
+    return (skor / max_skor) * 100 if max_skor else 0
+
+def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
+    """
+    Menentukan posisi (sisi) Stomata Hati berdasarkan persentase Iman, Kasih, Pengharapan.
+    Mengembalikan list nomor sisi (bisa 1, 2, atau 3 sisi).
+    """
+    total = persen_kasih + persen_iman + persen_pengharapan
+    if total == 0:
+        return [10]
+    # Normalisasi ke 100
+    rk = (persen_kasih / total) * 100
+    ri = (persen_iman / total) * 100
+    rp = (persen_pengharapan / total) * 100
+
+    # Kasus seimbang (selisih maks < 5%) -> sisi 1, 8, 9
+    if max(rk, ri, rp) - min(rk, ri, rp) < 5:
+        return [1, 8, 9]
+
+    max_val = max(rk, ri, rp)
+    if max_val >= 60:
+        # Dominasi tunggal -> sisi sudut
+        if rk == max_val:
+            return [1]
+        elif ri == max_val:
+            return [2]
+        else:
+            return [3]
+    elif (rk >= 40 and ri >= 40) or (ri >= 40 and rp >= 40) or (rp >= 40 and rk >= 40):
+        # Kombinasi dua -> sisi kombinasi
+        if rk >= 40 and ri >= 40:
+            return [5]
+        elif ri >= 40 and rp >= 40:
+            return [4]
+        elif rp >= 40 and rk >= 40:
+            return [6]
+        else:
+            return [10]
+    else:
+        # Nilai sedang -> sisi tindakan berdasarkan tertinggi
+        if rk == max_val:
+            return [9]   # Berbuat kasih
+        elif ri == max_val:
+            return [7]   # Berbuat iman
+        else:
+            return [8]   # Berbuat pengharapan
+
+# ========== MEMBACA SOAL DARI JSON ==========
 def load_questions(kategori):
     base = Path(__file__).parent / "soal_stomata_hati" / "pilihan_benar_salah" / kategori
     if not base.exists():
@@ -47,6 +105,7 @@ def get_random_33():
     random.shuffle(result)
     return result
 
+# ========== STATE ==========
 def init_state():
     if "pbs_questions" not in st.session_state:
         st.session_state.pbs_questions = get_random_33()
@@ -80,14 +139,20 @@ def calculate_result():
         if st.session_state.pbs_answers.get(i) == q["jawaban_benar"]:
             skor[q["kategori"]] += 1
     max_kat = 11
-    persen = {k: (v / max_kat * 100) for k,v in skor.items()}
+    persen = {k: hitung_persentase(v, max_kat) for k,v in skor.items()}
+    sisi = tentukan_posisi(persen["Kasih"], persen["Iman"], persen["Pengharapan"])
     total = sum(skor.values())
-    sisi = [1]  # placeholder, Anda bisa gunakan fungsi tentukan_posisi nanti
     hasil = {
-        "kasih": persen["Kasih"], "iman": persen["Iman"], "pengharapan": persen["Pengharapan"],
+        "kasih": persen["Kasih"],
+        "iman": persen["Iman"],
+        "pengharapan": persen["Pengharapan"],
         "sisi_list": sisi,
-        "skor_kasih": skor["Kasih"], "skor_iman": skor["Iman"], "skor_pengharapan": skor["Pengharapan"],
-        "total_skor": total, "max_kat": max_kat, "max_total": 33
+        "skor_kasih": skor["Kasih"],
+        "skor_iman": skor["Iman"],
+        "skor_pengharapan": skor["Pengharapan"],
+        "total_skor": total,
+        "max_kat": max_kat,
+        "max_total": 33
     }
     if not st.session_state.pbs_has_official:
         st.session_state.pbs_official = hasil
@@ -99,11 +164,13 @@ def calculate_result():
     st.session_state.pbs_submitted = True
     return True
 
+# ========== UI ==========
 def show_pilihan_benar_salah():
     init_state()
     st.markdown("## ✅ Mode Pilihan Benar/Salah")
     st.markdown("Jawab 33 pernyataan dengan **Benar** atau **Salah**.")
     
+    # Tampilkan skor resmi jika sudah ada
     if st.session_state.pbs_has_official and st.session_state.pbs_official:
         off = st.session_state.pbs_official
         st.markdown("---")
@@ -136,35 +203,35 @@ def show_pilihan_benar_salah():
     
     st.markdown("---")
     
-    # Gunakan form untuk menghindari rerun setiap kali memilih radio
-    with st.form(key="pilihan_form"):
-        # Tampilkan semua soal dalam form
-        for i, q in enumerate(qlist):
-            st.markdown(f"**{i+1}. [{q['kategori']}]** {q['teks']}")
-            current = st.session_state.pbs_answers.get(i)
-            selected = st.radio(
-                "Pilih jawaban:",
-                ["Benar", "Salah"],
-                index=0 if current == "Benar" else (1 if current == "Salah" else None),
-                key=f"pbs_{i}_{q['id']}",
-                horizontal=True,
-                label_visibility="collapsed"
-            )
-            # Simpan jawaban sementara ke session state (tanpa rerun)
-            if selected != current:
-                st.session_state.pbs_answers[i] = selected
-            st.markdown("---")
-        
-        # Tombol submit di dalam form
-        submitted = st.form_submit_button("📊 Lihat Hasil", use_container_width=True, type="primary")
-        if submitted:
-            if calculate_result():
-                st.rerun()
+    # Tampilkan semua soal (tanpa form, agar setiap pilihan langsung trigger rerun)
+    for i, q in enumerate(qlist):
+        st.markdown(f"**{i+1}. [{q['kategori']}]** {q['teks']}")
+        current = st.session_state.pbs_answers.get(i)
+        selected = st.radio(
+            "Pilih jawaban:",
+            ["Benar", "Salah"],
+            index=0 if current == "Benar" else (1 if current == "Salah" else None),
+            key=f"pbs_{i}_{q['id']}",
+            horizontal=True,
+            label_visibility="collapsed"
+        )
+        if selected != current:
+            st.session_state.pbs_answers[i] = selected
+            # Jika sudah ada hasil sebelumnya, reset status submit
+            if st.session_state.pbs_submitted:
+                st.session_state.pbs_submitted = False
+            st.rerun()
+        st.markdown("---")
     
-    # Tampilkan progress (di luar form, update setiap kali ada perubahan)
+    # Progress bar (update otomatis karena setiap pilihan trigger rerun)
     terjawab = len(st.session_state.pbs_answers)
     total = len(qlist)
-    st.progress(terjawab / total, text=f"Progress: {terjawab}/{total}")
+    st.progress(terjawab / total, text=f"Progress: {terjawab}/{total} soal terjawab")
+    
+    # Tombol lihat hasil
+    if st.button("📊 Lihat Hasil", use_container_width=True, type="primary"):
+        if calculate_result():
+            st.rerun()
     
     # Tampilkan hasil jika sudah submit
     if st.session_state.pbs_submitted and st.session_state.pbs_results:
@@ -187,7 +254,7 @@ def show_pilihan_benar_salah():
             st.image(str(img_path), use_container_width=True)
         sisi = r['sisi_list']
         nama_sisi = [SISI_NAMES.get(s, f"Sisi {s}") for s in sisi]
-        st.markdown(f"### 🌿 Posisi Stomata Hati: **{', '.join(nama_sisi)}**")
+        st.markdown(f"### 🌿 Posisi Stomata Hati: **{', '.join(nama_sisi)}** (Sisi {', '.join(map(str, sisi))})")
         with st.expander("📖 12 Sisi Stomata Hati"):
             for no, nama in SISI_NAMES.items():
                 st.markdown(f"{no}. {nama}")
