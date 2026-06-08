@@ -487,7 +487,7 @@ def main():
     with tab5:
 
         # Path gambar
-        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati_contoh_1.jpg"
+        img_path = Path(__file__).parent.parent / "assets" / "garuda.jpg"
         if img_path.exists():
             st.image(str(img_path), caption="Bertanding Untuk Menang", use_container_width=True)
         else:
