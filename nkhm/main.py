@@ -486,12 +486,14 @@ def main():
     # ========== TAB 5: TANDING ==========
     with tab5:
 
-        # Path gambar
+        # Tampilkan gambar Garuda
         img_path = Path(__file__).parent.parent / "assets" / "garuda.jpg"
         if img_path.exists():
-            st.image(str(img_path), caption="Bertanding Untuk Menang", use_container_width=True)
+            st.image(str(img_path), caption="Bertanding Untuk Menang 🇮🇩", use_container_width=True)
         else:
-            st.warning("Gambar tanding belum tersedia.")
+            st.warning("⚠️ Gambar 'garuda.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
+        
+        st.markdown("---")  # garis pemisah
 
         if TOURNAMENT_AVAILABLE and show_tournament is not None:
             tanding_mode = st.radio(
