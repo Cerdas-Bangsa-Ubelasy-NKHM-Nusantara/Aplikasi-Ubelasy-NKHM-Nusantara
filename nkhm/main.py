@@ -488,8 +488,6 @@ def main():
 
         # Tampilkan gambar Garuda
         img_path = Path(__file__).parent.parent / "assets" / "garuda.jpg"
-        st.write(f"Debug: path gambar = {img_path.resolve()}")
-        st.write(f"Debug: file exists = {img_path.exists()}")
         if img_path.exists():
             st.image(str(img_path), caption="Bertanding Untuk Menang 🇮🇩", use_container_width=True)
         else:
