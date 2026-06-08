@@ -485,6 +485,14 @@ def main():
     
     # ========== TAB 5: TANDING ==========
     with tab5:
+
+        # Perbaikan path gambar
+        img_path = Path(__file__).parent.parent / "assets" / "stomata_hati_contoh_1.jpg"
+        if img_path.exists():
+            st.image(str(img_path), caption="Contoh Ilustrasi Stomata Hati", use_container_width=True)
+        else:
+            st.warning("Gambar contoh Stomata Hati belum tersedia.")
+
         if TOURNAMENT_AVAILABLE and show_tournament is not None:
             tanding_mode = st.radio(
                 "Pilih Mode Tanding:",
