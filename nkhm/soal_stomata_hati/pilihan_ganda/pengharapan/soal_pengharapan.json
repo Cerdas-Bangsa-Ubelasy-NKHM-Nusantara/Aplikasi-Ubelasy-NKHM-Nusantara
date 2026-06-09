@@ -1,0 +1,200 @@
+[
+  {
+    "id": 1,
+    "teks": "Apa yang paling membantu seseorang tetap optimis di masa sulit?",
+    "pilihan": ["a. Keputusasaan", "b. Pengharapan akan masa depan lebih baik", "c. Menyerah pada keadaan", "d. Mengeluh terus"],
+    "jawaban": "b"
+  },
+  {
+    "id": 2,
+    "teks": "Manakah yang paling mencerminkan pengharapan yang sehat?",
+    "pilihan": ["a. Mengharap keajaiban tanpa usaha", "b. Berharap sambil berusaha maksimal", "c. Berharap pada keberuntungan semata", "d. Mengharap orang lain menyelesaikan masalah"],
+    "jawaban": "b"
+  },
+  {
+    "id": 3,
+    "teks": "Pengharapan yang berlebihan tanpa realitas dapat menyebabkan...",
+    "pilihan": ["a. Motivasi tinggi", "b. Kekecewaan berat", "c. Kedamaian", "d. Kebahagiaan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 4,
+    "teks": "Apa yang paling dapat mempertahankan pengharapan saat menghadapi kegagalan berulang?",
+    "pilihan": ["a. Menyalahkan diri", "b. Keyakinan bahwa kegagalan adalah pelajaran", "c. Berhenti mencoba", "d. Mengabaikan masalah"],
+    "jawaban": "b"
+  },
+  {
+    "id": 5,
+    "teks": "Manakah yang paling menunjukkan pengharapan dalam konteks sosial?",
+    "pilihan": ["a. Percaya bahwa perdamaian dunia tidak mungkin", "b. Percaya bahwa kebaikan akan menang pada akhirnya", "c. Pesimis terhadap perubahan", "d. Tidak peduli pada masa depan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 6,
+    "teks": "Pengharapan dapat membantu seseorang...",
+    "pilihan": ["a. Menjadi pasif", "b. Tetap bertahan dalam penderitaan", "c. Menyerah lebih cepat", "d. Mengabaikan kesehatan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 7,
+    "teks": "Apa yang paling mungkin menghancurkan pengharapan?",
+    "pilihan": ["a. Dukungan sosial", "b. Pengkhianatan berulang", "c. Keberhasilan", "d. Optimisme"],
+    "jawaban": "b"
+  },
+  {
+    "id": 8,
+    "teks": "Manakah yang merupakan bentuk pengharapan dalam pendidikan?",
+    "pilihan": ["a. Berharap lulus tanpa belajar", "b. Belajar keras dengan keyakinan akan masa depan cerah", "c. Tidak peduli nilai", "d. Menyerah jika sulit"],
+    "jawaban": "b"
+  },
+  {
+    "id": 9,
+    "teks": "Pengharapan yang realistis sebaiknya didasari oleh...",
+    "pilihan": ["a. Mimpi tanpa perencanaan", "b. Perencanaan dan usaha", "c. Harapan kosong", "d. Keberuntungan semata"],
+    "jawaban": "b"
+  },
+  {
+    "id": 10,
+    "teks": "Apa yang dapat membangkitkan pengharapan pada seseorang yang putus asa?",
+    "pilihan": ["a. Kritik pedas", "b. Cerita inspiratif tentang orang yang bangkit", "c. Isolasi", "d. Penghinaan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 11,
+    "teks": "Manakah yang paling tepat tentang hubungan antara pengharapan dan tindakan?",
+    "pilihan": ["a. Pengharapan cukup tanpa tindakan", "b. Pengharapan mendorong tindakan nyata", "c. Tindakan tidak perlu jika berharap", "d. Pengharapan menghambat tindakan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 12,
+    "teks": "Pengharapan dalam menghadapi penyakit kronis dapat...",
+    "pilihan": ["a. Memperburuk kondisi", "b. Membantu proses penyembuhan mental dan fisik", "c. Tidak berpengaruh", "d. Membuat pasien menolak pengobatan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 13,
+    "teks": "Apa yang paling sering menjadi sumber pengharapan bagi banyak orang?",
+    "pilihan": ["a. Kekayaan", "b. Keyakinan spiritual atau nilai-nilai kehidupan", "c. Kekuasaan", "d. Popularitas"],
+    "jawaban": "b"
+  },
+  {
+    "id": 14,
+    "teks": "Manakah yang paling mencerminkan pengharapan dalam hubungan asmara?",
+    "pilihan": ["a. Berharap pasangan berubah tanpa usaha", "b. Berusaha memperbaiki hubungan dengan optimisme", "c. Cemburu buta", "d. Mengancam putus"],
+    "jawaban": "b"
+  },
+  {
+    "id": 15,
+    "teks": "Pengharapan yang tidak realistis dapat menyebabkan...",
+    "pilihan": ["a. Motivasi ekstra", "b. Frustrasi dan kekecewaan", "c. Kebahagiaan", "d. Kedamaian"],
+    "jawaban": "b"
+  },
+  {
+    "id": 16,
+    "teks": "Apa yang dapat memupuk pengharapan dalam tim atau organisasi?",
+    "pilihan": ["a. Kepemimpinan yang otoriter", "b. Visi yang jelas dan kerja sama", "c. Persaingan tidak sehat", "d. Tidak ada target"],
+    "jawaban": "b"
+  },
+  {
+    "id": 17,
+    "teks": "Manakah yang merupakan pengharapan terhadap lingkungan?",
+    "pilihan": ["a. Berharap bumi hancur", "b. Berharap generasi menduduk hidup di lingkungan bersih", "c. Acuh pada polusi", "d. Tidak percaya pada perubahan iklim"],
+    "jawaban": "b"
+  },
+  {
+    "id": 18,
+    "teks": "Pengharapan dapat dianggap sebagai...",
+    "pilihan": ["a. Beban psikologis", "b. Sumber kekuatan mental", "c. Hal yang tidak perlu", "d. Tanda kelemahan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 19,
+    "teks": "Apa yang paling mungkin memudarkan pengharapan seseorang?",
+    "pilihan": ["a. Dukungan keluarga", "b. Kegagalan tanpa pembelajaran", "c. Keberhasilan", "d. Optimisme"],
+    "jawaban": "b"
+  },
+  {
+    "id": 20,
+    "teks": "Manakah yang paling menunjukkan pengharapan di masa krisis ekonomi?",
+    "pilihan": ["a. Menyerah pada keadaan", "b. Mencari peluang usaha baru dengan optimisme", "c. Mengeluh terus", "d. Menyalahkan pemerintah"],
+    "jawaban": "b"
+  },
+  {
+    "id": 21,
+    "teks": "Pengharapan yang sehat sebaiknya tidak...",
+    "pilihan": ["a. Disertai usaha", "b. Realistis", "c. Mengabaikan fakta", "d. Fleksibel"],
+    "jawaban": "c"
+  },
+  {
+    "id": 22,
+    "teks": "Apa yang dapat membantu remaja memiliki pengharapan terhadap masa depan?",
+    "pilihan": ["a. Pendidikan dan bimbingan", "b. Larangan bereksplorasi", "c. Hukuman keras", "d. Tidak ada dukungan"],
+    "jawaban": "a"
+  },
+  {
+    "id": 23,
+    "teks": "Manakah yang paling mencerminkan pengharapan dalam konteks keadilan?",
+    "pilihan": ["a. Percaya bahwa kejahatan tidak akan dihukum", "b. Percaya bahwa kebenaran akan terungkap", "c. Tidak peduli", "d. Berharap korban diam"],
+    "jawaban": "b"
+  },
+  {
+    "id": 24,
+    "teks": "Pengharapan dapat membantu mengurangi...",
+    "pilihan": ["a. Stres dan kecemasan", "b. Kreativitas", "c. Motivasi", "d. Energi"],
+    "jawaban": "a"
+  },
+  {
+    "id": 25,
+    "teks": "Apa yang paling mungkin membuat pengharapan menjadi beracun (toxic hope)?",
+    "pilihan": ["a. Pengharapan yang realistis", "b. Pengharapan tanpa tindakan dan mengabaikan bahaya", "c. Pengharapan disertai perencanaan", "d. Pengharapan yang fleksibel"],
+    "jawaban": "b"
+  },
+  {
+    "id": 26,
+    "teks": "Manakah yang merupakan bentuk pengharapan terhadap perubahan sosial?",
+    "pilihan": ["a. Pasrah pada ketidakadilan", "b. Berjuang untuk perbaikan dengan keyakinan", "c. Apatis", "d. Menghindari isu sosial"],
+    "jawaban": "b"
+  },
+  {
+    "id": 27,
+    "teks": "Pengharapan bisa menjadi pendorong inovasi karena...",
+    "pilihan": ["a. Orang berharap solusi muncul dengan sendirinya", "b. Orang percaya bahwa tantangan bisa diatasi dengan kreativitas", "c. Orang menunggu keajaiban", "d. Orang pasrah pada nasib"],
+    "jawaban": "b"
+  },
+  {
+    "id": 28,
+    "teks": "Apa yang dapat memulihkan pengharapan setelah bencana alam?",
+    "pilihan": ["a. Solidaritas dan bantuan", "b. Kepanikan", "c. Menyalahkan korban", "d. Pengabaian"],
+    "jawaban": "a"
+  },
+  {
+    "id": 29,
+    "teks": "Manakah pernyataan yang paling tepat tentang pengharapan dan kepasrahan?",
+    "pilihan": ["a. Pengharapan sama dengan pasrah", "b. Pengharapan berbeda karena disertai usaha", "c. Pasrah lebih baik dari pengharapan", "d. Pengharapan berarti tidak berbuat apa-apa"],
+    "jawaban": "b"
+  },
+  {
+    "id": 30,
+    "teks": "Pengharapan dalam dunia bisnis tercermin dari...",
+    "pilihan": ["a. Berinvestasi tanpa perencanaan", "b. Membangun usaha dengan visi masa depan", "c. Menghindari risiko", "d. Tidak percaya pada pertumbuhan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 31,
+    "teks": "Apa yang paling dapat menguatkan pengharapan pada anak-anak?",
+    "pilihan": ["a. Kritik terus-menerus", "b. Pujian atas usaha dan dorongan", "c. Hukuman fisik", "d. Pengabaian"],
+    "jawaban": "b"
+  },
+  {
+    "id": 32,
+    "teks": "Manakah yang paling tidak mendukung pengharapan?",
+    "pilihan": ["a. Lingkungan positif", "b. Lingkungan yang penuh kekerasan dan pesimisme", "c. Dukungan teman", "d. Tokoh inspiratif"],
+    "jawaban": "b"
+  },
+  {
+    "id": 33,
+    "teks": "Pengharapan terhadap masa depan yang lebih baik dapat mendorong seseorang untuk...",
+    "pilihan": ["a. Bermalas-malasan", "b. Berinvestasi dalam pendidikan dan kesehatan", "c. Menunda-nunda pekerjaan", "d. Mengabaikan tanggung jawab"],
+    "jawaban": "b"
+  }
+]
