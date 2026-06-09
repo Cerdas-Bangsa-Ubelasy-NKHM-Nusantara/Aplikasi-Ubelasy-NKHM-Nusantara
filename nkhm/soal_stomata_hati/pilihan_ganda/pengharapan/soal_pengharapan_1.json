@@ -1,0 +1,200 @@
+[
+  {
+    "id": 34,
+    "teks": "Pengharapan dapat membantu pasien menjalani pengobatan jangka panjang.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak berpengaruh", "d. Tergantung penyakit"],
+    "jawaban": "a"
+  },
+  {
+    "id": 35,
+    "teks": "Pengharapan tidak membantu dalam mencari pekerjaan di masa resesi.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Sedikit", "d. Tidak tahu"],
+    "jawaban": "b"
+  },
+  {
+    "id": 36,
+    "teks": "Optimisme bahwa kesehatan akan membaik adalah bentuk pengharapan.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tidak realistis"],
+    "jawaban": "a"
+  },
+  {
+    "id": 37,
+    "teks": "Pengharapan membuat seseorang lebih ulet dalam menghadapi penolakan kerja.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak pernah"],
+    "jawaban": "a"
+  },
+  {
+    "id": 38,
+    "teks": "Pengharapan tidak ada hubungannya dengan kesembuhan pasien.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Sedikit", "d. Tidak tahu"],
+    "jawaban": "b"
+  },
+  {
+    "id": 39,
+    "teks": "Pengharapan akan promosi memotivasi karyawan bekerja lebih baik.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 40,
+    "teks": "Pengharapan yang berlebihan dapat menyebabkan kekecewaan dalam karir.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak pernah", "d. Tergantung"],
+    "jawaban": "a"
+  },
+  {
+    "id": 41,
+    "teks": "Pengharapan membantu pasien kronis tetap bersemangat menjalani hidup.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak berpengaruh", "d. Hampir tidak pernah"],
+    "jawaban": "a"
+  },
+  {
+    "id": 42,
+    "teks": "Pengharapan tidak diperlukan dalam manajemen krisis perusahaan.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Kadang-kadang"],
+    "jawaban": "b"
+  },
+  {
+    "id": 43,
+    "teks": "Pengharapan akan lingkungan kerja yang lebih baik mendorong perubahan positif.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak selalu", "d. Tergantung"],
+    "jawaban": "a"
+  },
+  {
+    "id": 44,
+    "teks": "Pengharapan tidak mempengaruhi kepatuhan pasien terhadap diet.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Sedikit", "d. Tidak tahu"],
+    "jawaban": "b"
+  },
+  {
+    "id": 45,
+    "teks": "Pengharapan bahwa usaha rintisan akan sukses penting bagi wirausaha.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 46,
+    "teks": "Pengharapan dapat mengurangi stres akibat tuntutan target kerja.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak efektif", "d. Hampir tidak pernah"],
+    "jawaban": "a"
+  },
+  {
+    "id": 47,
+    "teks": "Pengharapan bahwa penyakit bisa disembuhkan membantu pasien tetap optimis.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 48,
+    "teks": "Pengharapan tidak relevan dalam dunia kerja yang kompetitif.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tergantung"],
+    "jawaban": "b"
+  },
+  {
+    "id": 49,
+    "teks": "Pengharapan bahwa kolaborasi tim akan berhasil meningkatkan semangat kerja.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 50,
+    "teks": "Pengharapan tidak membantu dalam rehabilitasi pasien stroke.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Sedikit", "d. Tidak tahu"],
+    "jawaban": "b"
+  },
+  {
+    "id": 51,
+    "teks": "Pengharapan bahwa ekonomi akan membaik mendorong investasi dan ekspansi bisnis.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 52,
+    "teks": "Pengharapan yang tidak realistis dalam karir bisa berbahaya.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak pernah", "d. Tergantung"],
+    "jawaban": "a"
+  },
+  {
+    "id": 53,
+    "teks": "Pengharapan membantu pasien untuk tidak menyerah pada penyakitnya.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 54,
+    "teks": "Pengharapan tidak diperlukan dalam menghadapi PHK massal.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tergantung"],
+    "jawaban": "b"
+  },
+  {
+    "id": 55,
+    "teks": "Pengharapan bahwa inovasi akan membawa kemajuan perusahaan adalah kunci.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 56,
+    "teks": "Pengharapan tidak berpengaruh pada proses penyembuhan luka.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Sedikit", "d. Tidak tahu"],
+    "jawaban": "b"
+  },
+  {
+    "id": 57,
+    "teks": "Pengharapan bahwa pelatihan akan meningkatkan keterampilan memotivasi belajar.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 58,
+    "teks": "Pengharapan dapat mengurangi kecemasan pasien pra-operasi.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak efektif", "d. Hampir tidak pernah"],
+    "jawaban": "a"
+  },
+  {
+    "id": 59,
+    "teks": "Pengharapan bahwa kerja keras akan dihargai meningkatkan loyalitas.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 60,
+    "teks": "Pengharapan tidak penting dalam program kesehatan masyarakat.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tergantung"],
+    "jawaban": "b"
+  },
+  {
+    "id": 61,
+    "teks": "Pengharapan bahwa tim akan mencapai target memacu kolaborasi.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 62,
+    "teks": "Pengharapan dapat membantu pasien dengan penyakit terminal menjalani hari-hari terakhir dengan damai.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 63,
+    "teks": "Pengharapan bahwa perusahaan akan bangkit dari krisis membutuhkan kepemimpinan yang visioner.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 64,
+    "teks": "Pengharapan tidak mempengaruhi tingkat kepuasan pasien.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Sedikit", "d. Tidak tahu"],
+    "jawaban": "b"
+  },
+  {
+    "id": 65,
+    "teks": "Pengharapan bahwa pekerjaan yang lebih baik akan datang membantu mengatasi rasa putus asa.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 66,
+    "teks": "Pengharapan bahwa vaksin akan mengakhiri pandemi adalah contoh iman kolektif.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  }
+]
