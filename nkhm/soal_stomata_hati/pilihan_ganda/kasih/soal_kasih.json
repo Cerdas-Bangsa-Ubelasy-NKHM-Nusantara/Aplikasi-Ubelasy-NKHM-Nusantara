@@ -1,0 +1,179 @@
+[
+  {
+    "id": 1,
+    "teks": "Apa yang paling mendasar dari tindakan kasih?",
+    "pilihan": ["a. Memberi hadiah mahal", "b. Mendengarkan dengan penuh perhatian", "c. Memuji secara berlebihan", "d. Memberi nasihat terus-menerus"],
+    "jawaban": "b"
+  },
+  {
+    "id": 2,
+    "teks": "Manakah yang bukan merupakan wujud kasih?",
+    "pilihan": ["a. Membantu tanpa pamrih", "b. Memaafkan kesalahan", "c. Menghakimi dengan keras", "d. Menghormati perbedaan"],
+    "jawaban": "c"
+  },
+  {
+    "id": 3,
+    "teks": "Kasih yang tulus sebaiknya tidak didasari oleh...",
+    "pilihan": ["a. Empati", "b. Harapan imbalan", "c. Pengertian", "d. Kesabaran"],
+    "jawaban": "b"
+  },
+  {
+    "id": 4,
+    "teks": "Manakah yang paling mencerminkan kasih dalam keluarga?",
+    "pilihan": ["a. Saling mengkritik tanpa henti", "b. Saling mendukung saat sulit", "c. Mengabaikan kebutuhan anggota lain", "d. Menuntut ketaatan mutlak"],
+    "jawaban": "b"
+  },
+  {
+    "id": 5,
+    "teks": "Apa yang paling sering menghambat seseorang untuk mengasihi orang lain?",
+    "pilihan": ["a. Rasa syukur", "b. Rasa egois", "c. Kerendahan hati", "d. Kedermawanan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 6,
+    "teks": "Kasih sejati seharusnya...",
+    "pilihan": ["a. Hanya untuk orang yang baik", "b. Bersyarat", "c. Tidak memandang status atau latar belakang", "d. Diberikan dengan perhitungan"],
+    "jawaban": "c"
+  },
+  {
+    "id": 7,
+    "teks": "Manakah yang merupakan tindakan kasih sederhana dalam kehidupan sehari-hari?",
+    "pilihan": ["a. Menyapa dengan ramah", "b. Mengabaikan orang lain", "c. Bersikap dingin", "d. Menghindari kontak"],
+    "jawaban": "a"
+  },
+  {
+    "id": 8,
+    "teks": "Apa yang bisa merusak hubungan kasih antara dua orang?",
+    "pilihan": ["a. Komunikasi terbuka", "b. Saling memaafkan", "c. Kebohongan dan pengkhianatan", "d. Empati"],
+    "jawaban": "c"
+  },
+  {
+    "id": 9,
+    "teks": "Manakah yang paling tidak termasuk dalam perbuatan kasih?",
+    "pilihan": ["a. Memberi makan orang kelaparan", "b. Memfitnah orang lain", "c. Menjenguk orang sakit", "d. Menyumbang untuk bencana"],
+    "jawaban": "b"
+  },
+  {
+    "id": 10,
+    "teks": "Kasih yang sehat akan membawa...",
+    "pilihan": ["a. Keterikatan beracun", "b. Kebahagiaan bersama", "c. Kecemburuan", "d. Manipulasi"],
+    "jawaban": "b"
+  },
+  {
+    "id": 11,
+    "teks": "Manakah yang paling tepat tentang kasih kepada diri sendiri?",
+    "pilihan": ["a. Mementingkan diri sendiri terus-menerus", "b. Merawat kesehatan fisik dan mental", "c. Mengabaikan kebutuhan orang lain", "d. Menuntuk kesempurnaan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 12,
+    "teks": "Apa yang dapat memperkuat rasa kasih dalam komunitas?",
+    "pilihan": ["a. Persaingan tidak sehat", "b. Gotong royong dan kerjasama", "c. Mengucilkan anggota yang lemah", "d. Diam-diam saling menjatuhkan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 13,
+    "teks": "Manakah pernyataan yang paling menggambarkan kasih universal?",
+    "pilihan": ["a. Kasih hanya untuk orang yang seagama", "b. Kasih melampaui batas suku, agama, dan ras", "c. Kasih hanya untuk keluarga", "d. Kasih diberikan dengan hitungan untung rugi"],
+    "jawaban": "b"
+  },
+  {
+    "id": 14,
+    "teks": "Apa yang paling sering menjadi ujian kasih dalam hubungan?",
+    "pilihan": ["a. Kemudahan", "b. Konflik dan perbedaan", "c. Kesamaan pendapat", "d. Keberlimpahan harta"],
+    "jawaban": "b"
+  },
+  {
+    "id": 15,
+    "teks": "Manakah yang merupakan bentuk kasih kepada lingkungan?",
+    "pilihan": ["a. Membuang sampah sembarangan", "b. Merusak hutan", "c. Menanam pohon dan menjaga kebersihan", "d. Mengabaikan polusi"],
+    "jawaban": "c"
+  },
+  {
+    "id": 16,
+    "teks": "Kasih yang tulus biasanya tidak...",
+    "pilihan": ["a. Ikhlas", "b. Mengharap pujian", "c. Sabar", "d. Pengertian"],
+    "jawaban": "b"
+  },
+  {
+    "id": 17,
+    "teks": "Apa yang paling membantu seseorang untuk terus mengasihi meski disakiti?",
+    "pilihan": ["a. Dendam", "b. Kekerasan hati", "c. Pemaafan dan pengertian", "d. Menghindar selamanya"],
+    "jawaban": "c"
+  },
+  {
+    "id": 18,
+    "teks": "Manakah yang paling mencerminkan kasih dalam persahabatan?",
+    "pilihan": ["a. Saling memanfaatkan", "b. Saling mendukung saat senang dan susah", "c. Bergosip di belakang", "d. Cemburu buta"],
+    "jawaban": "b"
+  },
+  {
+    "id": 19,
+    "teks": "Apa yang bisa membuat kasih menjadi tidak sehat?",
+    "pilihan": ["a. Saling menghormati", "b. Keterbukaan", "c. Kontrol berlebihan", "d. Kepercayaan"],
+    "jawaban": "c"
+  },
+  {
+    "id": 20,
+    "teks": "Manakah yang merupakan perbuatan kasih yang paling sederhana namun berdampak besar?",
+    "pilihan": ["a. Memberi donasi besar", "b. Mendengarkan tanpa menghakimi", "c. Membangun gedung mewah", "d. Mengadakan pesta besar"],
+    "jawaban": "b"
+  },
+  {
+    "id": 21,
+    "teks": "Kasih kepada musuh berarti...",
+    "pilihan": ["a. Membalas kejahatan dengan kejahatan", "b. Mengabaikan mereka", "c. Berusaha tidak membenci dan membalas dengan kebaikan", "d. Menghindari seumur hidup"],
+    "jawaban": "c"
+  },
+  {
+    "id": 22,
+    "teks": "Apa yang paling sering merusak ikatan kasih dalam keluarga?",
+    "pilihan": ["a. Komunikasi yang baik", "b. Saling menghargai", "c. Kurangnya waktu kebersamaan", "d. Dukungan emosional"],
+    "jawaban": "c"
+  },
+  {
+    "id": 23,
+    "teks": "Manakah yang merupakan wujud kasih kepada masyarakat?",
+    "pilihan": ["a. Membayar pajak tepat waktu", "b. Menghindari urusan publik", "c. Korupsi", "d. Tidak peduli lingkungan"],
+    "jawaban": "a"
+  },
+  {
+    "id": 24,
+    "teks": "Kasih yang berlebihan tanpa batas dapat mengakibatkan...",
+    "pilihan": ["a. Hubungan yang sehat", "b. Ketergantungan dan manipulasi", "c. Kemandirian", "d. Kebahagiaan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 25,
+    "teks": "Apa yang paling membantu memulihkan kasih setelah pertengkaran?",
+    "pilihan": ["a. Diam-diam saling menjauhi", "b. Mengakui kesalahan dan meminta maaf", "c. Menyalahkan terus", "d. Mempermalukan lawan bicara"],
+    "jawaban": "b"
+  },
+  {
+    "id": 26,
+    "teks": "Manakah yang termasuk tindakan kasih dalam dunia kerja?",
+    "pilihan": ["a. Menjatuhkan rekan kerja", "b. Membantu rekan yang kewalahan", "c. Mengklaim hasil kerja orang lain", "d. Tidak mau berbagi ilmu"],
+    "jawaban": "b"
+  },
+  {
+    "id": 27,
+    "teks": "Kasih sejati tidak pernah...",
+    "pilihan": ["a. Sabar", "b. Baik hati", "c. Iri hati", "d. Percaya"],
+    "jawaban": "c"
+  },
+  {
+    "id": 28,
+    "teks": "Apa yang paling mungkin membuat seseorang enggan berbuat kasih?",
+    "pilihan": ["a. Pengalaman trauma dikhianati", "b. Rasa syukur", "c. Kepedulian", "d. Empati"],
+    "jawaban": "a"
+  },
+  {
+    "id": 29,
+    "teks": "Manakah yang merupakan contoh kasih tanpa pamrih?",
+    "pilihan": ["a. Memberi dengan harapan mendapat balasan", "b. Menolong teman tanpa mengharap imbalan", "c. Berbuat baik agar dipuji", "d. Memberi karena takut"],
+    "jawaban": "b"
+  },
+  {
+    "id": 30,
+    "teks": "Apa yang dapat memperkuat rasa kasih antarmanusia di tengah perbedaan?",
+    "pilihan": ["a.
