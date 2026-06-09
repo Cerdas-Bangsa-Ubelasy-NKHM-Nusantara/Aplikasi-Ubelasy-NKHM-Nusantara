@@ -176,4 +176,25 @@
   {
     "id": 30,
     "teks": "Apa yang dapat memperkuat rasa kasih antarmanusia di tengah perbedaan?",
-    "pilihan": ["a.
+    "pilihan": ["a. Diskusi yang mengejek", "b. Dialog saling menghormati", "c. Memaksakan kesamaan", "d. Mengisolasi kelompok"],
+    "jawaban": "b"
+  },
+  {
+    "id": 31,
+    "teks": "Manakah yang paling tidak sesuai dengan nilai kasih?",
+    "pilihan": ["a. Menghargai martabat setiap orang", "b. Diskriminasi berdasarkan ras", "c. Memberi maaf", "d. Berbagi dengan yang membutuhkan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 32,
+    "teks": "Kasih dalam kepemimpinan tercermin dari...",
+    "pilihan": ["a. Memerintah dengan keras", "b. Mengutamakan kesejahteraan bawahan", "c. Mementingkan diri sendiri", "d. Menghukum tanpa alasan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 33,
+    "teks": "Apa inti dari mengasihi sesama?",
+    "pilihan": ["a. Memperlakukan orang lain seperti diri sendiri", "b. Lebih mengutamakan diri sendiri", "c. Membiarkan orang lain menderita", "d. Hanya peduli pada orang terdekat"],
+    "jawaban": "a"
+  }
+]
