@@ -1,0 +1,200 @@
+[
+  {
+    "id": 34,
+    "teks": "Mendengarkan keluhan rekan kerja dengan sabar adalah wujud kasih di tempat kerja.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung situasi", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 35,
+    "teks": "Kasih tidak diperlukan dalam memberikan pelayanan kesehatan.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tidak relevan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 36,
+    "teks": "Menolong pasien tanpa pamrih adalah bentuk kasih dalam profesi medis.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Hanya untuk pasien kaya"],
+    "jawaban": "a"
+  },
+  {
+    "id": 37,
+    "teks": "Memaafkan kesalahan kolega di tempat kerja mencerminkan kasih profesional.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak perlu", "d. Tergantung beratnya kesalahan"],
+    "jawaban": "a"
+  },
+  {
+    "id": 38,
+    "teks": "Kasih membuat seseorang rela bekerja lembur tanpa imbalan.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Hanya untuk yang naif"],
+    "jawaban": "a"
+  },
+  {
+    "id": 39,
+    "teks": "Memberikan semangat kepada teman yang sakit adalah tindakan kasih.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 40,
+    "teks": "Kasih tidak ada hubungannya dengan etos kerja.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Sedikit", "d. Tergantung"],
+    "jawaban": "b"
+  },
+  {
+    "id": 41,
+    "teks": "Menjenguk rekan kerja yang sakit adalah wujud kasih kantor.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 42,
+    "teks": "Kasih membuat seseorang lebih mudah stres karena terlalu peduli.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Hampir selalu"],
+    "jawaban": "b"
+  },
+  {
+    "id": 43,
+    "teks": "Memberi makanan kepada pasien yang tidak mampu adalah kasih sosial.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 44,
+    "teks": "Kasih tidak penting dalam hubungan antara supervisor dan bawahan.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tidak relevan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 45,
+    "teks": "Mendukung rekan yang mengalami burnout adalah bentuk kasih.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 46,
+    "teks": "Kasih dapat meningkatkan kepuasan kerja dan produktivitas.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak terbukti", "d. Hampir tidak pernah"],
+    "jawaban": "a"
+  },
+  {
+    "id": 47,
+    "teks": "Menolak membantu rekan karena sibuk adalah wajar, bukan kekurangan kasih.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung situasi", "d. Kadang-kadang"],
+    "jawaban": "b"
+  },
+  {
+    "id": 48,
+    "teks": "Memberi perhatian pada pasien dengan sabar adalah kasih dalam dunia medis.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 49,
+    "teks": "Kasih tidak membantu dalam negosiasi bisnis yang kompetitif.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tergantung"],
+    "jawaban": "b"
+  },
+  {
+    "id": 50,
+    "teks": "Mengakui kesalahan kepada atasan adalah wujud kasih dan integritas.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 51,
+    "teks": "Kasih dapat mengurangi konflik antar tim di tempat kerja.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak berpengaruh", "d. Hampir tidak pernah"],
+    "jawaban": "a"
+  },
+  {
+    "id": 52,
+    "teks": "Memberi pujian tulus kepada rekan kerja adalah ekspresi kasih.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 53,
+    "teks": "Kasih tidak diperlukan saat memberikan kritik membangun di kantor.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tergantung situasi"],
+    "jawaban": "b"
+  },
+  {
+    "id": 54,
+    "teks": "Merawat anggota keluarga yang sakit adalah wujud kasih.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 55,
+    "teks": "Kasih dapat meningkatkan loyalitas karyawan terhadap perusahaan.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak terbukti", "d. Hanya untuk karyawan senior"],
+    "jawaban": "a"
+  },
+  {
+    "id": 56,
+    "teks": "Menolak menjenguk teman sakit karena alasan pribadi adalah hal biasa.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Kadang-kadang"],
+    "jawaban": "b"
+  },
+  {
+    "id": 57,
+    "teks": "Kasih membantu menciptakan lingkungan kerja yang inklusif.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 58,
+    "teks": "Memberi semangat kepada pasien yang depresi adalah kasih.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tidak efektif"],
+    "jawaban": "a"
+  },
+  {
+    "id": 59,
+    "teks": "Kasih tidak penting dalam negosiasi gaji.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak relevan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 60,
+    "teks": "Memaafkan pasien yang marah adalah wujud kasih tenaga kesehatan.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 61,
+    "teks": "Kasih dapat mengurangi angka turnover karyawan.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak terbukti", "d. Hampir tidak pernah"],
+    "jawaban": "a"
+  },
+  {
+    "id": 62,
+    "teks": "Memberi waktu untuk mendengarkan keluhan rekan adalah kasih.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 63,
+    "teks": "Kasih tidak diperlukan saat memberikan instruksi kerja yang tegas.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tergantung"],
+    "jawaban": "b"
+  },
+  {
+    "id": 64,
+    "teks": "Merasa bahagia atas keberhasilan rekan adalah bentuk kasih.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 65,
+    "teks": "Kasih dapat membantu dalam membangun jaringan profesional yang sehat.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak relevan"],
+    "jawaban": "a"
+  },
+  {
+    "id": 66,
+    "teks": "Mendoakan kesembuhan rekan yang sakit adalah kasih yang tidak terlihat.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak perlu", "d. Kadang-kadang"],
+    "jawaban": "a"
+  }
+]
