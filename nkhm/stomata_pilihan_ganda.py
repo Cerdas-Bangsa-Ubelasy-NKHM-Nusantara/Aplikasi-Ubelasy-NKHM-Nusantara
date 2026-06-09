@@ -4,7 +4,6 @@ import random
 import json
 from pathlib import Path
 
-# ========== 12 SISI STOMATA HATI ==========
 SISI_NAMES = {
     1: "Kasih",
     2: "Iman",
@@ -34,39 +33,34 @@ def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
         return [1, 8, 9]
     max_val = max(rk, ri, rp)
     if max_val >= 60:
-        if rk == max_val: return [1]
-        if ri == max_val: return [2]
+        if rk == max_val:
+            return [1]
+        if ri == max_val:
+            return [2]
         return [3]
     elif (rk >= 40 and ri >= 40) or (ri >= 40 and rp >= 40) or (rp >= 40 and rk >= 40):
-        if rk >= 40 and ri >= 40: return [5]
-        if ri >= 40 and rp >= 40: return [4]
-        if rp >= 40 and rk >= 40: return [6]
+        if rk >= 40 and ri >= 40:
+            return [5]
+        if ri >= 40 and rp >= 40:
+            return [4]
+        if rp >= 40 and rk >= 40:
+            return [6]
         return [10]
     else:
-        if rk == max_val: return [9]
-        if ri == max_val: return [7]
+        if rk == max_val:
+            return [9]
+        if ri == max_val:
+            return [7]
         return [8]
 
-# ========== MEMBACA SOAL DARI JSON ==========
 def load_questions(kategori):
-    # Cari folder dengan beberapa kemungkinan path
-    base_paths = [
-        Path(__file__).parent / "soal_stomata_hati" / "pilihan_ganda" / kategori,
-        Path(__file__).parent.parent / "soal_stomata_hati" / "pilihan_ganda" / kategori,
-        Path("soal_stomata_hati") / "pilihan_ganda" / kategori,
-    ]
-    base = None
-    for p in base_paths:
-        if p.exists():
-            base = p
-            break
-    if base is None:
-        st.error(f"Folder tidak ditemukan untuk {kategori}. Coba periksa path.")
+    base = Path(__file__).parent / "soal_stomata_hati" / "pilihan_ganda" / kategori
+    if not base.exists():
         return []
     all_q = []
     for f in base.glob("*.json"):
         try:
-            with open(f, 'r', encoding='utf-8') as fp:
+            with open(f, "r", encoding="utf-8") as fp:
                 data = json.load(fp)
                 if isinstance(data, list):
                     for item in data:
@@ -87,33 +81,38 @@ def get_random_33():
     sample_pengharapan = random.sample(pengharapan, 11)
     result = []
     for q in sample_kasih:
-        result.append({
-            "kategori": "Kasih",
-            "id": q.get("id", 0),
-            "teks": q["teks"],
-            "pilihan": q["pilihan"],
-            "jawaban_benar": q["jawaban"]
-        })
+        result.append(
+            {
+                "kategori": "Kasih",
+                "id": q.get("id", 0),
+                "teks": q["teks"],
+                "pilihan": q["pilihan"],
+                "jawaban_benar": q["jawaban"],
+            }
+        )
     for q in sample_iman:
-        result.append({
-            "kategori": "Iman",
-            "id": q.get("id", 0),
-            "teks": q["teks"],
-            "pilihan": q["pilihan"],
-            "jawaban_benar": q["jawaban"]
-        })
+        result.append(
+            {
+                "kategori": "Iman",
+                "id": q.get("id", 0),
+                "teks": q["teks"],
+                "pilihan": q["pilihan"],
+                "jawaban_benar": q["jawaban"],
+            }
+        )
     for q in sample_pengharapan:
-        result.append({
-            "kategori": "Pengharapan",
-            "id": q.get("id", 0),
-            "teks": q["teks"],
-            "pilihan": q["pilihan"],
-            "jawaban_benar": q["jawaban"]
-        })
+        result.append(
+            {
+                "kategori": "Pengharapan",
+                "id": q.get("id", 0),
+                "teks": q["teks"],
+                "pilihan": q["pilihan"],
+                "jawaban_benar": q["jawaban"],
+            }
+        )
     random.shuffle(result)
     return result
 
-# ========== STATE ==========
 def init_state():
     if "pg_answers" not in st.session_state:
         st.session_state.pg_answers = {}
@@ -127,6 +126,8 @@ def init_state():
         st.session_state.pg_official = None
     if "pg_has_official" not in st.session_state:
         st.session_state.pg_has_official = False
+    if "pg_refresh_counter" not in st.session_state:
+        st.session_state.pg_refresh_counter = 0
 
 def reset():
     st.session_state.pg_answers = {}
@@ -136,18 +137,19 @@ def reset():
 def refresh_questions():
     st.session_state.pg_questions = get_random_33()
     reset()
+    st.session_state.pg_refresh_counter += 1
 
 def calculate_result():
     qlist = st.session_state.pg_questions
     if not qlist or len(st.session_state.pg_answers) < len(qlist):
         st.error(f"Jawab semua {len(qlist)} soal")
         return False
-    skor = {"Kasih":0, "Iman":0, "Pengharapan":0}
+    skor = {"Kasih": 0, "Iman": 0, "Pengharapan": 0}
     for i, q in enumerate(qlist):
         if st.session_state.pg_answers.get(i) == q["jawaban_benar"]:
             skor[q["kategori"]] += 1
     max_kat = 11
-    persen = {k: hitung_persentase(v, max_kat) for k,v in skor.items()}
+    persen = {k: hitung_persentase(v, max_kat) for k, v in skor.items()}
     sisi = tentukan_posisi(persen["Kasih"], persen["Iman"], persen["Pengharapan"])
     total = sum(skor.values())
     hasil = {
@@ -160,7 +162,7 @@ def calculate_result():
         "skor_pengharapan": skor["Pengharapan"],
         "total_skor": total,
         "max_kat": max_kat,
-        "max_total": 33
+        "max_total": 33,
     }
     if not st.session_state.pg_has_official:
         st.session_state.pg_official = hasil
@@ -172,7 +174,6 @@ def calculate_result():
     st.session_state.pg_submitted = True
     return True
 
-# ========== UI ==========
 def show_pilihan_ganda():
     init_state()
     st.markdown("## ✅ Mode Pilihan Ganda (a, b, c, d)")
@@ -193,24 +194,25 @@ def show_pilihan_ganda():
         st.info("🎯 Permainan pertama. Jawab semua dengan jujur.")
 
     qlist = st.session_state.pg_questions
-
-    # Debug: cek path dan file
-    st.write("Debug: Mencari soal...")
-    for kat in ["iman", "kasih", "pengharapan"]:
-        path = Path(__file__).parent / "soal_stomata_hati" / "pilihan_ganda" / kat
-        st.write(f"{kat}: {path.exists()} -> {list(path.glob('*.json'))}")
-
     if not qlist:
         st.error("❌ Gagal memuat soal. Periksa folder 'soal_stomata_hati/pilihan_ganda/...'")
         return
 
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("🔄 Ganti Soal (Baru)", use_container_width=True):
+        if st.button(
+            "🔄 Ganti Soal (Baru)",
+            key=f"ganti_soal_{st.session_state.pg_refresh_counter}",
+            use_container_width=True,
+        ):
             refresh_questions()
             st.rerun()
     with col2:
-        if st.button("🗑️ Reset Jawaban", use_container_width=True):
+        if st.button(
+            "🗑️ Reset Jawaban",
+            key=f"reset_jawaban_{st.session_state.pg_refresh_counter}",
+            use_container_width=True,
+        ):
             reset()
             st.rerun()
 
@@ -219,14 +221,13 @@ def show_pilihan_ganda():
     for i, q in enumerate(qlist):
         st.markdown(f"**{i+1}. [{q['kategori']}]** {q['teks']}")
         current = st.session_state.pg_answers.get(i)
-        # Tampilkan radio button dengan opsi a, b, c, d
         selected = st.radio(
             "Pilih jawaban:",
-            q['pilihan'],
-            index=q['pilihan'].index(current) if current in q['pilihan'] else None,
-            key=f"pg_{i}_{q['id']}",
+            q["pilihan"],
+            index=q["pilihan"].index(current) if current in q["pilihan"] else None,
+            key=f"pg_{i}_{q['id']}_{st.session_state.pg_refresh_counter}",
             horizontal=True,
-            label_visibility="collapsed"
+            label_visibility="collapsed",
         )
         if selected != current:
             st.session_state.pg_answers[i] = selected
@@ -239,7 +240,12 @@ def show_pilihan_ganda():
     total = len(qlist)
     st.progress(terjawab / total, text=f"Progress: {terjawab}/{total} soal terjawab")
 
-    if st.button("📊 Lihat Hasil", use_container_width=True, type="primary"):
+    if st.button(
+        "📊 Lihat Hasil",
+        key=f"lihat_hasil_{st.session_state.pg_refresh_counter}",
+        use_container_width=True,
+        type="primary",
+    ):
         if calculate_result():
             st.rerun()
 
@@ -261,19 +267,29 @@ def show_pilihan_ganda():
         img_path = Path(__file__).parent.parent / "assets" / "stomata_hati_1.jpg"
         if img_path.exists():
             st.image(str(img_path), use_container_width=True)
-        sisi = r['sisi_list']
+        sisi = r["sisi_list"]
         nama_sisi = [SISI_NAMES.get(s, f"Sisi {s}") for s in sisi]
-        st.markdown(f"### 🌿 Posisi Stomata Hati: **{', '.join(nama_sisi)}** (Sisi {', '.join(map(str, sisi))})")
+        st.markdown(
+            f"### 🌿 Posisi Stomata Hati: **{', '.join(nama_sisi)}** (Sisi {', '.join(map(str, sisi))})"
+        )
         with st.expander("📖 12 Sisi Stomata Hati"):
             for no, nama in SISI_NAMES.items():
                 st.markdown(f"{no}. {nama}")
         col1, col2 = st.columns(2)
         with col1:
-            if st.button("🎲 Latihan Lagi (Soal Baru)"):
+            if st.button(
+                "🎲 Latihan Lagi (Soal Baru)",
+                key=f"latihan_baru_{st.session_state.pg_refresh_counter}",
+                use_container_width=True,
+            ):
                 refresh_questions()
                 st.rerun()
         with col2:
-            if st.button("📝 Lanjut (Soal Sama)"):
+            if st.button(
+                "📝 Lanjut (Soal Sama)",
+                key=f"lanjut_sama_{st.session_state.pg_refresh_counter}",
+                use_container_width=True,
+            ):
                 st.session_state.pg_submitted = False
                 st.rerun()
 
