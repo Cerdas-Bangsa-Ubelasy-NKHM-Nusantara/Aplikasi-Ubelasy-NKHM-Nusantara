@@ -49,8 +49,19 @@ def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
 
 # ========== MEMBACA SOAL DARI JSON ==========
 def load_questions(kategori):
-    base = Path(__file__).parent / "soal_stomata_hati" / "pilihan_ganda" / kategori
-    if not base.exists():
+    # Cari folder dengan beberapa kemungkinan path
+    base_paths = [
+        Path(__file__).parent / "soal_stomata_hati" / "pilihan_ganda" / kategori,
+        Path(__file__).parent.parent / "soal_stomata_hati" / "pilihan_ganda" / kategori,
+        Path("soal_stomata_hati") / "pilihan_ganda" / kategori,
+    ]
+    base = None
+    for p in base_paths:
+        if p.exists():
+            base = p
+            break
+    if base is None:
+        st.error(f"Folder tidak ditemukan untuk {kategori}. Coba periksa path.")
         return []
     all_q = []
     for f in base.glob("*.json"):
@@ -61,8 +72,8 @@ def load_questions(kategori):
                     for item in data:
                         if "teks" in item and "pilihan" in item and "jawaban" in item:
                             all_q.append(item)
-        except Exception:
-            pass
+        except Exception as e:
+            st.warning(f"Gagal baca {f.name}: {e}")
     return all_q
 
 def get_random_33():
