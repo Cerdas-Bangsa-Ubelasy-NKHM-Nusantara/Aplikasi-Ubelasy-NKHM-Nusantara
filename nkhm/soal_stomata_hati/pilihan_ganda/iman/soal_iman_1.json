@@ -1,0 +1,200 @@
+[
+  {
+    "id": 34,
+    "teks": "Keyakinan bahwa gaya hidup sehat akan membawa kualitas hidup lebih baik adalah bentuk iman.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak tahu", "d. Mungkin"],
+    "jawaban": "a"
+  },
+  {
+    "id": 35,
+    "teks": "Percaya bahwa usaha keras dalam bekerja akan membuahkan hasil membutuhkan iman.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 36,
+    "teks": "Iman tidak berpengaruh terhadap kesehatan mental seseorang.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Mungkin", "d. Tidak relevan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 37,
+    "teks": "Mempercayai bahwa rezeki sudah diatur dapat mengurangi stres kerja.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tidak ada hubungan"],
+    "jawaban": "a"
+  },
+  {
+    "id": 38,
+    "teks": "Iman yang kuat membuat seseorang mengabaikan kesehatan fisik.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung kondisi", "d. Sering terjadi"],
+    "jawaban": "b"
+  },
+  {
+    "id": 39,
+    "teks": "Optimisme dalam mencari pekerjaan baru adalah wujud iman.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak selalu", "d. Hanya untuk yang beruntung"],
+    "jawaban": "a"
+  },
+  {
+    "id": 40,
+    "teks": "Iman dapat membantu pasien sembuh lebih cepat dari penyakit.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak terbukti", "d. Hanya mitos"],
+    "jawaban": "a"
+  },
+  {
+    "id": 41,
+    "teks": "Percaya bahwa setiap orang punya kesempatan sukses dalam karir adalah iman.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak realistis", "d. Hanya untuk orang tertentu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 42,
+    "teks": "Iman tidak penting dalam menjaga konsistensi pola makan sehat.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Agak penting"],
+    "jawaban": "b"
+  },
+  {
+    "id": 43,
+    "teks": "Keyakinan bahwa keterampilan dapat dipelajari adalah iman pada proses belajar.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak selalu", "d. Hanya untuk muda"],
+    "jawaban": "a"
+  },
+  {
+    "id": 44,
+    "teks": "Iman yang berlebihan dalam pekerjaan bisa menyebabkan kecerobohan.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak mungkin"],
+    "jawaban": "a"
+  },
+  {
+    "id": 45,
+    "teks": "Percaya bahwa olahraga rutin bermanfaat membutuhkan iman pada sains.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak perlu", "d. Hanya untuk atlet"],
+    "jawaban": "a"
+  },
+  {
+    "id": 46,
+    "teks": "Iman tidak ada hubungannya dengan produktivitas kerja.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tidak relevan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 47,
+    "teks": "Keyakinan bahwa tidur cukup meningkatkan kesehatan adalah iman yang rasional.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 48,
+    "teks": "Percaya bahwa rekan kerja bisa dipercaya adalah iman sosial di tempat kerja.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak selalu", "d. Hanya atasan"],
+    "jawaban": "a"
+  },
+  {
+    "id": 49,
+    "teks": "Iman dapat membantu mengatasi kecemasan berlebihan tentang masa depan karir.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak efektif", "d. Hampir tidak pernah"],
+    "jawaban": "a"
+  },
+  {
+    "id": 50,
+    "teks": "Percaya bahwa vaksin itu aman adalah bentuk iman kepada penelitian medis.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 51,
+    "teks": "Iman tidak membantu dalam menghadapi PHK atau kehilangan pekerjaan.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Sedikit membantu", "d. Hanya untuk yang kuat"],
+    "jawaban": "b"
+  },
+  {
+    "id": 52,
+    "teks": "Keyakinan bahwa kerja tim lebih baik dari kerja sendiri adalah iman.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung situasi", "d. Tidak selalu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 53,
+    "teks": "Percaya bahwa kesehatan mental perlu dijaga sama seperti fisik adalah iman holistik.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak penting", "d. Hanya untuk yang sakit"],
+    "jawaban": "a"
+  },
+  {
+    "id": 54,
+    "teks": "Iman dapat memotivasi seseorang untuk terus belajar keterampilan baru.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tidak pernah"],
+    "jawaban": "a"
+  },
+  {
+    "id": 55,
+    "teks": "Percaya bahwa bekerja dengan integritas akan membawa keberkahan adalah iman.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak selalu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 56,
+    "teks": "Iman tidak berpengaruh terhadap kepatuhan minum obat.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Sedikit", "d. Tidak relevan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 57,
+    "teks": "Keyakinan bahwa networking membuka peluang kerja adalah iman.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 58,
+    "teks": "Percaya bahwa tubuh memiliki kemampuan menyembuhkan diri adalah bentuk iman.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Mungkin", "d. Tidak ilmiah"],
+    "jawaban": "a"
+  },
+  {
+    "id": 59,
+    "teks": "Iman membantu seseorang tetap fokus pada tujuan karir jangka panjang.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 60,
+    "teks": "Percaya bahwa bersyukur dalam kesehatan adalah iman yang positif.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Kadang-kadang", "d. Tidak penting"],
+    "jawaban": "a"
+  },
+  {
+    "id": 61,
+    "teks": "Keyakinan bahwa pekerjaan yang baik akan datang pada waktunya adalah iman.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak realistis", "d. Hanya untuk yang beruntung"],
+    "jawaban": "a"
+  },
+  {
+    "id": 62,
+    "teks": "Iman tidak membantu dalam mengelola stres akibat target kerja.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Sedikit", "d. Tidak tahu"],
+    "jawaban": "b"
+  },
+  {
+    "id": 63,
+    "teks": "Percaya bahwa menjaga hubungan baik dengan rekan kerja penting adalah iman sosial.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak selalu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 64,
+    "teks": "Keyakinan bahwa istirahat cukup meningkatkan produktivitas adalah iman.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak terbukti", "d. Hanya mitos"],
+    "jawaban": "a"
+  },
+  {
+    "id": 65,
+    "teks": "Percaya bahwa kegagalan dalam bisnis adalah pelajaran berharga membutuhkan iman.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tergantung", "d. Tidak perlu"],
+    "jawaban": "a"
+  },
+  {
+    "id": 66,
+    "teks": "Iman dapat membantu pasien menjalani terapi dengan lebih sabar.",
+    "pilihan": ["a. Benar", "b. Salah", "c. Tidak berpengaruh", "d. Hampir tidak pernah"],
+    "jawaban": "a"
+  }
+]
