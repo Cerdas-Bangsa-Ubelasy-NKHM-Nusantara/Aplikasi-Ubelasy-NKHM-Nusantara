@@ -1,0 +1,200 @@
+[
+  {
+    "id": 1,
+    "teks": "Apa yang paling membantu seseorang tetap tegar saat menghadapi masalah besar?",
+    "pilihan": ["a. Kekayaan", "b. Keyakinan bahwa ada jalan keluar", "c. Menunggu bantuan orang lain", "d. Mengabaikan masalah"],
+    "jawaban": "b"
+  },
+  {
+    "id": 2,
+    "teks": "Manakah yang merupakan bentuk iman dalam kehidupan sehari-hari?",
+    "pilihan": ["a. Selalu curiga pada orang lain", "b. Pesimis menghadapi masa depan", "c. Optimis bahwa usaha akan membuahkan hasil", "d. Menyerah sebelum mencoba"],
+    "jawaban": "c"
+  },
+  {
+    "id": 3,
+    "teks": "Iman yang sehat sebaiknya disertai dengan...",
+    "pilihan": ["a. Kefanatikan buta", "b. Usaha dan tindakan nyata", "c. Pasrah tanpa berbuat apa-apa", "d. Mengabaikan fakta"],
+    "jawaban": "b"
+  },
+  {
+    "id": 4,
+    "teks": "Manakah pernyataan yang paling tepat tentang iman?",
+    "pilihan": ["a. Iman hanya diperlukan saat krisis", "b. Iman bisa meningkat melalui refleksi dan pengalaman", "c. Iman bersifat tetap dan tidak bisa berubah", "d. Iman tidak ada hubungannya dengan pikiran"],
+    "jawaban": "b"
+  },
+  {
+    "id": 5,
+    "teks": "Apa yang dapat merusak iman seseorang?",
+    "pilihan": ["a. Pengalaman pahit yang terus-menerus", "b. Dukungan sosial yang kuat", "c. Pendidikan yang baik", "d. Lingkungan yang positif"],
+    "jawaban": "a"
+  },
+  {
+    "id": 6,
+    "teks": "Manakah yang paling mencerminkan iman kepada kemanusiaan?",
+    "pilihan": ["a. Percaya bahwa semua orang pada dasarnya jahat", "b. Percaya bahwa setiap orang bisa berubah menjadi lebih baik", "c. Mengasingkan diri dari masyarakat", "d. Hanya peduli pada kepentingan sendiri"],
+    "jawaban": "b"
+  },
+  {
+    "id": 7,
+    "teks": "Iman sebaiknya tidak membuat seseorang menjadi...",
+    "pilihan": ["a. Toleran", "b. Berani", "c. Fanatik dan tertutup", "d. Optimis"],
+    "jawaban": "c"
+  },
+  {
+    "id": 8,
+    "teks": "Manakah yang merupakan tanda iman yang dewasa?",
+    "pilihan": ["a. Memaksakan keyakinan kepada orang lain", "b. Mampu menerima kritik dan berbeda pendapat", "c. Menolak ilmu pengetahuan", "d. Selalu merasa paling benar"],
+    "jawaban": "b"
+  },
+  {
+    "id": 9,
+    "teks": "Apa yang dapat membantu memulihkan iman yang luntur?",
+    "pilihan": ["a. Menyendiri dan tidak berbicara siapapun", "b. Mencari dukungan dari komunitas positif", "c. Menyalahkan orang lain", "d. Berhenti berusaha"],
+    "jawaban": "b"
+  },
+  {
+    "id": 10,
+    "teks": "Iman yang kuat seharusnya membuat seseorang lebih...",
+    "pilihan": ["a. Egois", "b. Peduli pada sesama", "c. Acuh tak acuh", "d. Sombong"],
+    "jawaban": "b"
+  },
+  {
+    "id": 11,
+    "teks": "Manakah yang paling sesuai dengan pernyataan 'iman tanpa perbuatan adalah sia-sia'?",
+    "pilihan": ["a. Iman cukup diucapkan saja", "b. Iman harus diwujudkan dalam tindakan nyata", "c. Iman tidak perlu dibuktikan", "d. Iman hanya untuk diri sendiri"],
+    "jawaban": "b"
+  },
+  {
+    "id": 12,
+    "teks": "Apa yang paling sering menjadi penghalang iman seseorang?",
+    "pilihan": ["a. Rasa takut berlebihan", "b. Rasa syukur", "c. Optimisme", "d. Keberanian"],
+    "jawaban": "a"
+  },
+  {
+    "id": 13,
+    "teks": "Manakah yang termasuk bentuk iman kepada alam semesta?",
+    "pilihan": ["a. Percaya bahwa segala kejadian tidak ada maknanya", "b. Percaya bahwa ada keseimbangan dan keadilan", "c. Percaya hanya pada kekuatan sendiri", "d. Mengabaikan lingkungan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 14,
+    "teks": "Iman dapat diibaratkan sebagai...",
+    "pilihan": ["a. Obor di kegelapan", "b. Beban yang memberatkan", "c. Belenggu kebebasan", "d. Ilusi belaka"],
+    "jawaban": "a"
+  },
+  {
+    "id": 15,
+    "teks": "Manakah yang paling baik untuk memupuk iman dalam diri?",
+    "pilihan": ["a. Membaca dan merenungkan nilai-nilai kehidupan", "b. Mengisolasi diri dari pengaruh luar", "c. Hanya mengandalkan orang lain", "d. Menolak segala perubahan"],
+    "jawaban": "a"
+  },
+  {
+    "id": 16,
+    "teks": "Iman yang berlebihan dapat menyebabkan...",
+    "pilihan": ["a. Kebijaksanaan", "b. Toleransi", "c. Fanatisme berbahaya", "d. Kedamaian"],
+    "jawaban": "c"
+  },
+  {
+    "id": 17,
+    "teks": "Manakah yang paling tidak mencerminkan iman?",
+    "pilihan": ["a. Berdoa atau bermeditasi", "b. Mengharap pertolongan", "c. Pasrah tanpa usaha", "d. Berbuat baik tanpa pamrih"],
+    "jawaban": "c"
+  },
+  {
+    "id": 18,
+    "teks": "Apa yang bisa membuat iman seseorang bertahan dalam situasi sulit?",
+    "pilihan": ["a. Harapan akan masa depan yang lebih baik", "b. Keputusasaan", "c. Menyalahkan keadaan", "d. Lari dari kenyataan"],
+    "jawaban": "a"
+  },
+  {
+    "id": 19,
+    "teks": "Iman yang sehat akan menghasilkan...",
+    "pilihan": ["a. Ketenangan batin", "b. Kecemasan berlebihan", "c. Permusuhan", "d. Keterasingan"],
+    "jawaban": "a"
+  },
+  {
+    "id": 20,
+    "teks": "Manakah yang paling tepat tentang hubungan iman dan logika?",
+    "pilihan": ["a. Iman bertentangan dengan logika", "b. Iman dan logika bisa berjalan seimbang", "c. Logika harus diabaikan demi iman", "d. Iman tidak butuh akal sehat"],
+    "jawaban": "b"
+  },
+  {
+    "id": 21,
+    "teks": "Apa yang sering menjadi ujian terbesar bagi iman seseorang?",
+    "pilihan": ["a. Kesuksesan", "b. Kemudahan hidup", "c. Penderitaan berkepanjangan", "d. Pujian orang lain"],
+    "jawaban": "c"
+  },
+  {
+    "id": 22,
+    "teks": "Manakah yang paling membantu mengembalikan iman setelah kegagalan?",
+    "pilihan": ["a. Menyalahkan diri sendiri", "b. Mencari pelajaran dan bangkit kembali", "c. Berhenti mencoba selamanya", "d. Menghindari tanggung jawab"],
+    "jawaban": "b"
+  },
+  {
+    "id": 23,
+    "teks": "Iman yang tulus biasanya disertai dengan...",
+    "pilihan": ["a. Kesombongan", "b. Kerendahan hati", "c. Keangkuhan", "d. Kebencian"],
+    "jawaban": "b"
+  },
+  {
+    "id": 24,
+    "teks": "Manakah yang paling mencerminkan iman terhadap sesama?",
+    "pilihan": ["a. Percaya bahwa semua orang jahat", "b. Percaya bahwa setiap orang berhak mendapatkan kesempatan kedua", "c. Menjauhi orang yang berbeda", "d. Hanya percaya pada teman dekat"],
+    "jawaban": "b"
+  },
+  {
+    "id": 25,
+    "teks": "Apa yang bisa merusak iman dalam jangka panjang?",
+    "pilihan": ["a. Pengkhianatan berulang", "b. Dukungan keluarga", "c. Pendidikan karakter", "d. Lingkungan yang aman"],
+    "jawaban": "a"
+  },
+  {
+    "id": 26,
+    "teks": "Manakah yang merupakan buah dari iman yang matang?",
+    "pilihan": ["a. Egoisme", "b. Kedamaian dan kebaikan", "c. Kebencian", "d. Kekerasan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 27,
+    "teks": "Iman yang kuat dapat membantu seseorang...",
+    "pilihan": ["a. Menjadi tidak berperasaan", "b. Menghadapi ketidakpastian", "c. Mengisolasi diri", "d. Menolak perubahan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 28,
+    "teks": "Manakah yang bukan merupakan ciri iman yang sehat?",
+    "pilihan": ["a. Fleksibel dan terbuka", "b. Memaksa keyakinan", "c. Disertai tindakan nyata", "d. Membawa ketenangan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 29,
+    "teks": "Apa yang paling sering menjadi sumber iman bagi banyak orang?",
+    "pilihan": ["a. Pengalaman hidup", "b. Kekayaan materi", "c. Kekuasaan", "d. Popularitas"],
+    "jawaban": "a"
+  },
+  {
+    "id": 30,
+    "teks": "Manakah pernyataan yang paling tepat tentang iman dan harapan?",
+    "pilihan": ["a. Iman dan harapan tidak berhubungan", "b. Iman adalah dasar dari harapan", "c. Harapan menghancurkan iman", "d. Iman lebih penting dari harapan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 31,
+    "teks": "Iman dapat diajarkan dan dipelajari melalui...",
+    "pilihan": ["a. Pemaksaan", "b. Keteladanan dan pendidikan", "c. Ancaman", "d. Penghinaan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 32,
+    "teks": "Manakah yang paling mungkin memperkuat iman seseorang?",
+    "pilihan": ["a. Kegagalan yang terus-menerus", "b. Dukungan komunitas positif", "c. Kesendirian total", "d. Menghindari tantangan"],
+    "jawaban": "b"
+  },
+  {
+    "id": 33,
+    "teks": "Iman yang paling bermakna adalah iman yang...",
+    "pilihan": ["a. Diucapkan dengan lantang", "b. Terlihat dari perilaku sehari-hari", "c. Hanya untuk diri sendiri", "d. Dipaksakan kepada orang lain"],
+    "jawaban": "b"
+  }
+]
