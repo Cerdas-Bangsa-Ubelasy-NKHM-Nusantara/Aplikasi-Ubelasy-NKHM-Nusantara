@@ -5,18 +5,10 @@ import json
 from pathlib import Path
 
 SISI_NAMES = {
-    1: "Kasih",
-    2: "Iman",
-    3: "Pengharapan",
-    4: "Iman-Pengharapan",
-    5: "Kasih-Iman",
-    6: "Pengharapan-Kasih",
-    7: "Berbuat iman",
-    8: "Berbuat pengharapan",
-    9: "Berbuat kasih",
-    10: "Kasih-Iman-Pengharapan",
-    11: "Berbuat kasih-beriman",
-    12: "Berbuat kasih-berpengharapan",
+    1: "Kasih", 2: "Iman", 3: "Pengharapan",
+    4: "Iman-Pengharapan", 5: "Kasih-Iman", 6: "Pengharapan-Kasih",
+    7: "Berbuat iman", 8: "Berbuat pengharapan", 9: "Berbuat kasih",
+    10: "Kasih-Iman-Pengharapan", 11: "Berbuat kasih-beriman", 12: "Berbuat kasih-berpengharapan",
 }
 
 def hitung_persentase(skor, max_skor=11):
@@ -33,24 +25,17 @@ def tentukan_posisi(persen_kasih, persen_iman, persen_pengharapan):
         return [1, 8, 9]
     max_val = max(rk, ri, rp)
     if max_val >= 60:
-        if rk == max_val:
-            return [1]
-        if ri == max_val:
-            return [2]
+        if rk == max_val: return [1]
+        if ri == max_val: return [2]
         return [3]
     elif (rk >= 40 and ri >= 40) or (ri >= 40 and rp >= 40) or (rp >= 40 and rk >= 40):
-        if rk >= 40 and ri >= 40:
-            return [5]
-        if ri >= 40 and rp >= 40:
-            return [4]
-        if rp >= 40 and rk >= 40:
-            return [6]
+        if rk >= 40 and ri >= 40: return [5]
+        if ri >= 40 and rp >= 40: return [4]
+        if rp >= 40 and rk >= 40: return [6]
         return [10]
     else:
-        if rk == max_val:
-            return [9]
-        if ri == max_val:
-            return [7]
+        if rk == max_val: return [9]
+        if ri == max_val: return [7]
         return [8]
 
 def load_questions(kategori):
@@ -81,35 +66,29 @@ def get_random_33():
     sample_pengharapan = random.sample(pengharapan, 11)
     result = []
     for q in sample_kasih:
-        result.append(
-            {
-                "kategori": "Kasih",
-                "id": q.get("id", 0),
-                "teks": q["teks"],
-                "pilihan": q["pilihan"],
-                "jawaban_benar": q["jawaban"],
-            }
-        )
+        result.append({
+            "kategori": "Kasih",
+            "id": q.get("id", 0),
+            "teks": q["teks"],
+            "pilihan": q["pilihan"],
+            "jawaban_benar": q["jawaban"]
+        })
     for q in sample_iman:
-        result.append(
-            {
-                "kategori": "Iman",
-                "id": q.get("id", 0),
-                "teks": q["teks"],
-                "pilihan": q["pilihan"],
-                "jawaban_benar": q["jawaban"],
-            }
-        )
+        result.append({
+            "kategori": "Iman",
+            "id": q.get("id", 0),
+            "teks": q["teks"],
+            "pilihan": q["pilihan"],
+            "jawaban_benar": q["jawaban"]
+        })
     for q in sample_pengharapan:
-        result.append(
-            {
-                "kategori": "Pengharapan",
-                "id": q.get("id", 0),
-                "teks": q["teks"],
-                "pilihan": q["pilihan"],
-                "jawaban_benar": q["jawaban"],
-            }
-        )
+        result.append({
+            "kategori": "Pengharapan",
+            "id": q.get("id", 0),
+            "teks": q["teks"],
+            "pilihan": q["pilihan"],
+            "jawaban_benar": q["jawaban"]
+        })
     random.shuffle(result)
     return result
 
@@ -146,7 +125,8 @@ def calculate_result():
         return False
     skor = {"Kasih": 0, "Iman": 0, "Pengharapan": 0}
     for i, q in enumerate(qlist):
-        if st.session_state.pg_answers.get(i) == q["jawaban_benar"]:
+        jawaban_user = st.session_state.pg_answers.get(i)  # huruf a/b/c/d
+        if jawaban_user == q["jawaban_benar"]:
             skor[q["kategori"]] += 1
     max_kat = 11
     persen = {k: hitung_persentase(v, max_kat) for k, v in skor.items()}
@@ -200,19 +180,11 @@ def show_pilihan_ganda():
 
     col1, col2 = st.columns(2)
     with col1:
-        if st.button(
-            "🔄 Ganti Soal (Baru)",
-            key=f"ganti_soal_{st.session_state.pg_refresh_counter}",
-            use_container_width=True,
-        ):
+        if st.button("🔄 Ganti Soal (Baru)", key=f"ganti_{st.session_state.pg_refresh_counter}", use_container_width=True):
             refresh_questions()
             st.rerun()
     with col2:
-        if st.button(
-            "🗑️ Reset Jawaban",
-            key=f"reset_jawaban_{st.session_state.pg_refresh_counter}",
-            use_container_width=True,
-        ):
+        if st.button("🗑️ Reset Jawaban", key=f"reset_{st.session_state.pg_refresh_counter}", use_container_width=True):
             reset()
             st.rerun()
 
@@ -220,32 +192,35 @@ def show_pilihan_ganda():
 
     for i, q in enumerate(qlist):
         st.markdown(f"**{i+1}. [{q['kategori']}]** {q['teks']}")
-        current = st.session_state.pg_answers.get(i)
-        selected = st.radio(
+        current_letter = st.session_state.pg_answers.get(i)  # huruf a/b/c/d atau None
+        default_index = None
+        if current_letter:
+            for idx, opt in enumerate(q['pilihan']):
+                if opt.startswith(current_letter):
+                    default_index = idx
+                    break
+        selected_full = st.radio(
             "Pilih jawaban:",
-            q["pilihan"],
-            index=q["pilihan"].index(current) if current in q["pilihan"] else None,
+            q['pilihan'],
+            index=default_index,
             key=f"pg_{i}_{q['id']}_{st.session_state.pg_refresh_counter}",
             horizontal=True,
-            label_visibility="collapsed",
+            label_visibility="collapsed"
         )
-        if selected != current:
-            st.session_state.pg_answers[i] = selected
-            if st.session_state.pg_submitted:
-                st.session_state.pg_submitted = False
-            st.rerun()
+        if selected_full:
+            selected_letter = selected_full[0]  # ambil huruf pertama (a/b/c/d)
+            if selected_letter != current_letter:
+                st.session_state.pg_answers[i] = selected_letter
+                if st.session_state.pg_submitted:
+                    st.session_state.pg_submitted = False
+                st.rerun()
         st.markdown("---")
 
     terjawab = len(st.session_state.pg_answers)
     total = len(qlist)
     st.progress(terjawab / total, text=f"Progress: {terjawab}/{total} soal terjawab")
 
-    if st.button(
-        "📊 Lihat Hasil",
-        key=f"lihat_hasil_{st.session_state.pg_refresh_counter}",
-        use_container_width=True,
-        type="primary",
-    ):
+    if st.button("📊 Lihat Hasil", key=f"hasil_{st.session_state.pg_refresh_counter}", use_container_width=True, type="primary"):
         if calculate_result():
             st.rerun()
 
@@ -267,29 +242,19 @@ def show_pilihan_ganda():
         img_path = Path(__file__).parent.parent / "assets" / "stomata_hati_1.jpg"
         if img_path.exists():
             st.image(str(img_path), use_container_width=True)
-        sisi = r["sisi_list"]
+        sisi = r['sisi_list']
         nama_sisi = [SISI_NAMES.get(s, f"Sisi {s}") for s in sisi]
-        st.markdown(
-            f"### 🌿 Posisi Stomata Hati: **{', '.join(nama_sisi)}** (Sisi {', '.join(map(str, sisi))})"
-        )
+        st.markdown(f"### 🌿 Posisi Stomata Hati: **{', '.join(nama_sisi)}** (Sisi {', '.join(map(str, sisi))})")
         with st.expander("📖 12 Sisi Stomata Hati"):
             for no, nama in SISI_NAMES.items():
                 st.markdown(f"{no}. {nama}")
         col1, col2 = st.columns(2)
         with col1:
-            if st.button(
-                "🎲 Latihan Lagi (Soal Baru)",
-                key=f"latihan_baru_{st.session_state.pg_refresh_counter}",
-                use_container_width=True,
-            ):
+            if st.button("🎲 Latihan Lagi (Soal Baru)", key=f"latihan_{st.session_state.pg_refresh_counter}", use_container_width=True):
                 refresh_questions()
                 st.rerun()
         with col2:
-            if st.button(
-                "📝 Lanjut (Soal Sama)",
-                key=f"lanjut_sama_{st.session_state.pg_refresh_counter}",
-                use_container_width=True,
-            ):
+            if st.button("📝 Lanjut (Soal Sama)", key=f"lanjut_{st.session_state.pg_refresh_counter}", use_container_width=True):
                 st.session_state.pg_submitted = False
                 st.rerun()
 
