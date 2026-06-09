@@ -193,6 +193,13 @@ def show_pilihan_ganda():
         st.info("🎯 Permainan pertama. Jawab semua dengan jujur.")
 
     qlist = st.session_state.pg_questions
+
+    # Debug: cek path dan file
+    st.write("Debug: Mencari soal...")
+    for kat in ["iman", "kasih", "pengharapan"]:
+        path = Path(__file__).parent / "soal_stomata_hati" / "pilihan_ganda" / kat
+        st.write(f"{kat}: {path.exists()} -> {list(path.glob('*.json'))}")
+
     if not qlist:
         st.error("❌ Gagal memuat soal. Periksa folder 'soal_stomata_hati/pilihan_ganda/...'")
         return
