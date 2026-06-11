@@ -4,6 +4,7 @@ from PIL import Image
 import requests
 from io import BytesIO
 from pathlib import Path
+from nkhm.tutorial_seberang import show_tutorial_seberang
 
 def show_tutorial():
     st.markdown("## 📘 Tutorial NKHM Nusantara")
@@ -187,6 +188,9 @@ def show_tutorial():
 
             > Gunakan hasil ini untuk merenungkan keseimbangan iman, kasih, dan pengharapan dalam hidup Anda, serta panggilan untuk **berbuat** sesuai dengan sisi yang Anda peroleh.
             """)
+    # ========== TAB Pahlawan Menyeberang Sungai ==========
+    with tab_seberang:
+        show_tutorial_seberang()
 
 def show_tutorial_simple():
     """Fungsi fallback jika konten interaktif tidak diperlukan."""
