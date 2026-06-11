@@ -30,7 +30,9 @@ def show_tutorial_seberang():
     
     st.markdown("""
     Tentukan urutan langkah yang **paling aman** dan **pasti berhasil** Untuk Aksi penyeberangan:
-Aksi: Pahlawan membawa apa terlebih dahulu ke Sebetang, lalu Aksi kembali ke Sisi Awal, kemudian Pahlawan membawa apa  kemudian ke Sebetang, lalu Aksi kembali ke Sisi Awal, berikutnya Pahlawan membawa apa ke Sebetang, lalu Aksi kembali ke Sisi Awal,terakhir Pahlawan membawa apa ke Seberang, hingga semuanya selamat sampai di seberang sungai.
+- Pahlawan membawa apa terlebih dahulu ke Sebetang, lalu Aksi kembali ke Sisi Awal, - Kemudian Pahlawan membawa apa  berikutnya ke Sebetang, lalu Aksi kembali ke Sisi Awal, 
+- Berikutnya Pahlawan membawa apa ke Sebetang, lalu Aksi kembali ke Sisi Awal,
+- Terakhir Pahlawan membawa apa ke Seberang, hingga semuanya selamat sampai di seberang sungai.
     
     **SELESAI!** Semua entitas berhasil menyeberang dengan selamat. 🎉
     """)
