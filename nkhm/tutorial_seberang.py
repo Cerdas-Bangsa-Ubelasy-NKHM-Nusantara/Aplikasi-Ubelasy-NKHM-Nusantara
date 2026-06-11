@@ -8,11 +8,11 @@ def show_tutorial_seberang():
     st.markdown("""
     ### 📖 Cerita
     Seorang pahlawan ingin menyeberangi sungai dengan membawa:
-    - **Tawanan Perang** (⛓️)
+    - **Seorang Tawanan Perang** (⛓️)
     - **Perbekalan Pangan** (🍞)
-    - **Anak Buah** (👤)
+    - **Seorang Anak Buah** (👤)
     
-    Ia hanya memiliki sebuah **perahu kecil** yang sangat terbatas kapasitasnya.
+    Ia hanya memiliki sebuah **perahu kecil** yang sangat terbatas kapasitasnya yang hanya bisa dimuati dua entitas.
     """)
     
     # Aturan Dasar
@@ -29,17 +29,8 @@ def show_tutorial_seberang():
     st.markdown("### 🎯 Solusi Langkah demi Langkah")
     
     st.markdown("""
-    Berikut adalah urutan langkah yang **paling aman** dan **pasti berhasil**:
-    
-    | Langkah | Aksi | Penjelasan |
-    |:---:|:---|:---|
-    | **1** | 🦸 + ⛓️ → 🏝️ seberang | Bawa tawanan terlebih dahulu |
-    | **2** | 🦸 sendiri ← 🏝️ awal | Kembali ambil perbekalan |
-    | **3** | 🦸 + 🍞 → 🏝️ seberang | Bawa perbekalan |
-    | **4** | 🦸 + ⛓️ ← 🏝️ awal | Bawa tawanan kembali (agar tidak ditinggal dengan perbekalan) |
-    | **5** | 🦸 + 👤 → 🏝️ seberang | Bawa anak buah |
-    | **6** | 🦸 sendiri ← 🏝️ awal | Kembali ambil tawanan |
-    | **7** | 🦸 + ⛓️ → 🏝️ seberang | Bawa tawanan terakhir |
+    Tentukan urutan langkah yang **paling aman** dan **pasti berhasil**: Untuk Aksi Penyeberangan (Dari Sisi Awal ke Seberang, maupun dari Seberang ke Sisi Awal).
+Aksi: Pahlawan membawa apa terlebih dahulu ke Seberang, Aksi kembali ke Sisi Awal, kemudian berikutnya pahlawan membawa apa ke Seberang, Aksi kembali ke Sisi Awal, berikutnya pahlawan membawa apa ke Seberang dan Aksi kembali ke Sisi Awal, terakhir pahlawan membawa apa ke Seberang, sehingga semuanya selamat sampai di Seberang sungai. 
     
     **SELESAI!** Semua entitas berhasil menyeberang dengan selamat. 🎉
     """)
