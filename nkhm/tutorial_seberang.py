@@ -73,11 +73,10 @@ def show_tutorial_seberang():
     Jangan lupa, ikuti langkah-langkah di atas jika ingin menang dengan mudah!
     """)
     
-    # Tombol untuk langsung menuju permainan (jika diinginkan)
-    if st.button("🚀 Buka Permainan Sekarang", use_container_width=True):
-        st.switch_page("nkhm/main.py")  # Catatan: ini hanya berfungsi di lingkungan Streamlit dengan multi-page apps
-        # Alternatif: beri pesan
-        st.info("Buka tab **HADIAH** dan pilih subtab **Pahlawan Menyeberang Sungai**")
+     # Tombol informasi (tanpa switch_page)
+    if st.button("🎮 Buka Tab HADIAH untuk Bermain", use_container_width=True):
+        st.info("📍 Buka tab **HADIAH** di menu utama, lalu pilih subtab **Pahlawan Menyeberang Sungai**")
+
 
 if __name__ == "__main__":
     show_tutorial_seberang()
