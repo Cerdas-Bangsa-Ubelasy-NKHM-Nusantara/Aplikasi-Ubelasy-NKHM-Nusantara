@@ -533,14 +533,16 @@ def main():
         with sub_tab2:
             show_angka_rahasia()
 
+        with sub_tab3:
+            st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
+
     try:
         from nkhm.seberang_sungai import show_river_game
         st.success("Import berhasil")
 except Exception as e:
         st.error(f"Import gagal: {e}")
     
-        with sub_tab3:
-            st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
+
         
     # ========== TAB 8: TUTORIAL ==========
     with tab8:
