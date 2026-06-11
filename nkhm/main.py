@@ -532,8 +532,11 @@ def main():
             show_tebak_pahlawan()
         with sub_tab2:
             show_angka_rahasia()
-    
         with sub_tab3:
+            from nkhm.seberang_sungai import show_river_game
+            show_river_game()
+    
+        with sub_tab4:
             st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
         
     # ========== TAB 8: TUTORIAL ==========
