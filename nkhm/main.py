@@ -533,7 +533,7 @@ def main():
         with sub_tab2:
             show_angka_rahasia()
     
-        with sub_tab4:
+        with sub_tab3:
             st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
         
     # ========== TAB 8: TUTORIAL ==========
