@@ -20,6 +20,7 @@ from nkhm.stomata import show_stomata
 from nkhm.dasbor import show_dasbor
 from nkhm.tebak_pahlawan import show_tebak_pahlawan
 from nkhm.angka_rahasia import show_angka_rahasia
+from nkhm.seberang_sungai import show_river_game
 
 # Import opsional (komentari jika file belum ada)
 try:
