@@ -11,8 +11,8 @@ def show_tutorial():
     st.markdown("Selamat datang di NKHM Nusantara! Tutorial ini akan memandu Anda.")
 
     # Gunakan tabs untuk mengorganisir konten
-    tab_intro, tab_kuis, tab_skor, tab_tips, tab_stomata = st.tabs([
-        "🌟 Pengantar", "🎮 Panduan Kuis", "📊 Memahami Skor", "💡 Tips & Trik", "💖 Stomata Hati"
+    tab_intro, tab_kuis, tab_skor, tab_tips, tab_stomata, tab_seberang = st.tabs([
+        "🌟 Pengantar", "🎮 Panduan Kuis", "📊 Memahami Skor", "💡 Tips & Trik", "💖 Stomata Hati", "🚣 Pahlawan Seberang"
     ])
 
     with tab_intro:
@@ -154,7 +154,7 @@ def show_tutorial():
                - **Garis Kasih**: dari titik nilai Kasih → sejajar sisi Pengharapan → menuju sisi Iman. Dengan jiwa nasionalisme dan patriotis, arahkan bambu runcing digital dari nilai % Kasih yang sejajar dengan sisi nilai Pengharapan, menuju Iman besar bangsa yang dikaruniai oleh Tuhan Yang Maha Kuasa.
                - **Garis Pengharapan**: dari titik nilai Pengharapan → sejajar sisi Iman → menuju sisi Kasih. Dengan jiwa nasionalisme dan patriotis, arahkan bambu runcing digital dari nilai % Pengharapan yang sejajar dengan sisi nilai Iman, menuju Kasih terhadap Tuhan dan terhadap sesama bangsa Indonesia, hindari perang saudara dan pertumpahan darah.
 
-            6. **Titik potong** ketiga garis pada sisi‑sisi segitiga menentukan **satu, dua, atau tiga posisi** dari 12 sisi Stomata Hati. Dengan jiwa nasionalisme dan patriotis, kita dapatkan  satu, dua, atau tiga kemajuan hidup dalam kehidupan berbangsa dan bernegara.
+            6. **Titik potong** ketiga garis pada sisi‑sisi segitiga menentukan **satu, dua, atau tiga posisi** dari 12 sisi Stomata Hati. Dengan jiwa nasionalisme dan patriotis, kita dapatkan satu, dua, atau tiga kemajuan hidup dalam kehidupan berbangsa dan bernegara.
             """)
 
         with st.expander("📊 Contoh Perhitungan"):
@@ -188,6 +188,7 @@ def show_tutorial():
 
             > Gunakan hasil ini untuk merenungkan keseimbangan iman, kasih, dan pengharapan dalam hidup Anda, serta panggilan untuk **berbuat** sesuai dengan sisi yang Anda peroleh.
             """)
+
     # ========== TAB Pahlawan Menyeberang Sungai ==========
     with tab_seberang:
         show_tutorial_seberang()
