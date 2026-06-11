@@ -12,7 +12,7 @@ def show_tutorial_seberang():
     - **Perbekalan Pangan** (🍞)
     - **Anak Buah** (👤)
     
-    Ia hanya memiliki sebuah **perahu kecil** yang sangat terbatas kapasitasnya.
+    Ia hanya memiliki sebuah **perahu kecil** yang sangat terbatas kapasitasnya, hanya bisa dimuati dua entitas.
     """)
     
     # Aturan Dasar
@@ -29,17 +29,8 @@ def show_tutorial_seberang():
     st.markdown("### 🎯 Solusi Langkah demi Langkah")
     
     st.markdown("""
-    Berikut adalah urutan langkah yang **paling aman** dan **pasti berhasil**:
-    
-    | Langkah | Aksi | Penjelasan |
-    |:---:|:---|:---|
-    | **1** | 🦸 + ⛓️ → 🏝️ seberang | Bawa tawanan terlebih dahulu |
-    | **2** | 🦸 sendiri ← 🏝️ awal | Kembali ambil perbekalan |
-    | **3** | 🦸 + 🍞 → 🏝️ seberang | Bawa perbekalan |
-    | **4** | 🦸 + ⛓️ ← 🏝️ awal | Bawa tawanan kembali (agar tidak ditinggal dengan perbekalan) |
-    | **5** | 🦸 + 👤 → 🏝️ seberang | Bawa anak buah |
-    | **6** | 🦸 sendiri ← 🏝️ awal | Kembali ambil tawanan |
-    | **7** | 🦸 + ⛓️ → 🏝️ seberang | Bawa tawanan terakhir |
+    Tentukan urutan langkah yang **paling aman** dan **pasti berhasil** Untuk Aksi penyeberangan:
+Aksi: Pahlawan membawa apa terlebih dahulu ke Sebetang, lalu Aksi kembali ke Sisi Awal, kemudian Pahlawan membawa apa  kemudian ke Sebetang, lalu Aksi kembali ke Sisi Awal, berikutnya Pahlawan membawa apa ke Sebetang, lalu Aksi kembali ke Sisi Awal,terakhir Pahlawan membawa apa ke Seberang, hingga semuanya selamat sampai di seberang sungai.
     
     **SELESAI!** Semua entitas berhasil menyeberang dengan selamat. 🎉
     """)
