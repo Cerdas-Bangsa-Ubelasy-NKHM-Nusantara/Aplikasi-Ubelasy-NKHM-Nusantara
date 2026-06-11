@@ -8,9 +8,9 @@ def show_tutorial_seberang():
     st.markdown("""
     ### 📖 Cerita
     Seorang pahlawan ingin menyeberangi sungai dengan membawa:
-    - **Tawanan Perang** (⛓️)
+    - **Seorang Tawanan Perang** (⛓️)
     - **Perbekalan Pangan** (🍞)
-    - **Anak Buah** (👤)
+    - **Seorang Anak Buah** (👤)
     
     Ia hanya memiliki sebuah **perahu kecil** yang sangat terbatas kapasitasnya, hanya bisa dimuati dua entitas.
     """)
