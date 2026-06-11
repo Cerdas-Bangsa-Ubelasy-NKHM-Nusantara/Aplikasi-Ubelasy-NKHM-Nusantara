@@ -532,6 +532,12 @@ def main():
             show_tebak_pahlawan()
         with sub_tab2:
             show_angka_rahasia()
+
+    try:
+        from nkhm.seberang_sungai import show_river_game
+        st.success("Import berhasil")
+except Exception as e:
+        st.error(f"Import gagal: {e}")
     
         with sub_tab3:
             st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
