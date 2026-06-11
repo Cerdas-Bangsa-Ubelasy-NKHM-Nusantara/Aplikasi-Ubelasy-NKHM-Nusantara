@@ -233,6 +233,7 @@ def show_river_game():
     **Aturan:**
     - Perahu hanya bisa memuat **maksimal 2 entitas** (termasuk pahlawan).
     - **Tawanan perang dan perbekalan pangan tidak boleh ditinggal berdua tanpa pengawasan pahlawan** (tawanan akan merusak perbekalan).
+.   - **Tawanan dan Anak Buah tidak boleh ditinggal berdua tanpa bersama pahlawan** (tawanan dan anak buah akan bertarung duel).
     - Tujuan: memindahkan semua entitas (pahlawan, tawanan, perbekalan, anak buah) ke seberang.
     
     > **💡 Petunjuk:** Perhatikan arah panah di atas tombol. Itu menunjukkan arah perjalanan yang akan terjadi.
