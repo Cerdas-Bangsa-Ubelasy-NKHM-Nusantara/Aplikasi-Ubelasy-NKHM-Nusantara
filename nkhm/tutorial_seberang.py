@@ -1,80 +1,217 @@
-# nkhm/tutorial_seberang.py
+# nkhm/seberang_sungai.py
 import streamlit as st
 
-def show_tutorial_seberang():
-    st.markdown("## 🚣‍♂️ Tutorial: Pahlawan Menyeberang Sungai")
+# Inisialisasi state permainan
+def init_game_state():
+    if "river_game" not in st.session_state:
+        st.session_state.river_game = {
+            "left": {
+                "pahlawan": True,
+                "tawanan": True,
+                "perbekalan": True,
+                "anak": True
+            },
+            "right": {
+                "pahlawan": False,
+                "tawanan": False,
+                "perbekalan": False,
+                "anak": False
+            },
+            "message": "",
+            "win": False,
+        }
+
+# Cek apakah ada yang melanggar aturan di suatu sisi
+def check_violation(side):
+    if not side["pahlawan"]:
+        if side["tawanan"] and side["perbekalan"]:
+            return True
+    return False
+
+# Cek kondisi di kedua sisi setelah perjalanan
+def check_all_sides():
+    state = st.session_state.river_game
+    if check_violation(state["left"]):
+        state["message"] = "❌ GAGAL! Di sisi awal, tawanan merusak perbekalan!"
+        return False
+    if check_violation(state["right"]):
+        state["message"] = "❌ GAGAL! Di seberang, tawanan merusak perbekalan!"
+        return False
+    state["message"] = "✅ Aman. Silakan lanjutkan."
+    return True
+
+# Cek apakah semua sudah di seberang
+def check_win():
+    state = st.session_state.river_game
+    if (state["right"]["pahlawan"] and state["right"]["tawanan"] and 
+        state["right"]["perbekalan"] and state["right"]["anak"]):
+        state["win"] = True
+        state["message"] = "🎉 SELAMAT! Semua entitas berhasil menyeberang dengan selamat! 🎉"
+        return True
+    return False
+
+# Fungsi untuk melakukan perjalanan
+def travel(entitas):
+    state = st.session_state.river_game
     
-    # Pengantar
-    st.markdown("""
-    ### 📖 Cerita
-    Seorang pahlawan ingin menyeberangi sungai dengan membawa:
-    - **Seorang Tawanan Perang** (⛓️)
-    - **Perbekalan Pangan** (🍞)
-    - **Seorang Anak Buah** (👤)
+    if state["win"]:
+        state["message"] = "Permainan sudah selesai. Klik 'Reset Permainan' untuk bermain lagi."
+        return
     
-    Ia hanya memiliki sebuah **perahu kecil** yang sangat terbatas kapasitasnya yang hanya bisa dimuati dua entitas.
-    """)
+    # Tentukan arah perjalanan
+    if state["left"]["pahlawan"]:
+        from_side = "left"
+        to_side = "right"
+        arah = "Sisi Awal → Seberang"
+    elif state["right"]["pahlawan"]:
+        from_side = "right"
+        to_side = "left"
+        arah = "Seberang → Sisi Awal"
+    else:
+        state["message"] = "❌ ERROR: Pahlawan tidak ditemukan!"
+        return
     
-    # Aturan Dasar
-    st.markdown("""
-    ### ⚠️ Aturan Permainan
-    1. **Perahu hanya bisa memuat maksimal 2 entitas** (termasuk pahlawan).
-       - Contoh: Pahlawan + Tawanan, Pahlawan + Perbekalan, atau Pahlawan sendirian.
-    2. **Tawanan dan perbekalan tidak boleh ditinggal berdua tanpa pengawasan pahlawan**.
-       - Jika terjadi, tawanan akan merusak perbekalan → PERMAINAN GAGAL!
-    3. **Tujuan**: Memindahkan semua entitas (pahlawan, tawanan, perbekalan, anak buah) ke seberang sungai dengan selamat.
-    """)
+    # Kumpulkan entitas yang akan dipindahkan
+    to_move = ["pahlawan"]
+    if entitas:
+        to_move.append(entitas)
     
-    # Solusi Langkah demi Langkah
-    st.markdown("### 🎯 Solusi Langkah demi Langkah")
+    # Perahu maksimal 2 entitas
+    if len(to_move) > 2:
+        state["message"] = f"⚠️ Perahu hanya bisa memuat maksimal 2 entitas!"
+        return
     
-    st.markdown("""
-    Tentukan urutan langkah yang **paling aman** dan **pasti berhasil**: Untuk Aksi Penyeberangan (Dari Sisi Awal ke Seberang, maupun dari Seberang ke Sisi Awal).
-Aksi: Pahlawan membawa apa terlebih dahulu ke Seberang, Aksi kembali ke Sisi Awal, kemudian berikutnya pahlawan membawa apa ke Seberang, Aksi kembali ke Sisi Awal, berikutnya pahlawan membawa apa ke Seberang dan Aksi kembali ke Sisi Awal, terakhir pahlawan membawa apa ke Seberang, sehingga semuanya selamat sampai di Seberang sungai. 
+    # Pastikan entitas ada di sisi asal
+    for e in to_move:
+        if not state[from_side].get(e, False):
+            state["message"] = f"❌ {e.capitalize()} tidak berada di sisi asal!"
+            return
     
-    **SELESAI!** Semua entitas berhasil menyeberang dengan selamat. 🎉
-    """)
+    # Pindahkan entitas
+    for e in to_move:
+        state[from_side][e] = False
+        state[to_side][e] = True
     
-    # Penjelasan Logika
-    st.markdown("### 🧠 Mengapa Harus Begitu?")
+    # Beri pesan sukses
+    if len(to_move) == 1:
+        state["message"] = f"🚣 {arah}: Pahlawan menyeberang sendirian."
+    else:
+        nama = "Tawanan" if entitas == "tawanan" else "Perbekalan" if entitas == "perbekalan" else "Anak Buah"
+        state["message"] = f"🚣 {arah}: Pahlawan membawa {nama}."
     
-    col1, col2 = st.columns(2)
+    # Cek pelanggaran
+    if check_all_sides():
+        check_win()
+    else:
+        # Batalkan perpindahan
+        for e in to_move:
+            state[from_side][e] = True
+            state[to_side][e] = False
+
+# Tombol untuk memilih entitas
+def show_buttons():
+    state = st.session_state.river_game
+    
+    if state["win"]:
+        st.balloons()
+        st.success(state["message"])
+        st.markdown("### 🎈 SELAMAT! ANDA BERHASIL! 🎈")
+        if st.button("🔄 Main Lagi", key="main_lagi"):
+            del st.session_state.river_game
+            st.rerun()
+        return
+    
+    # Tentukan arah dan entitas yang tersedia
+    if state["left"]["pahlawan"]:
+        arah = "🚣 Arah: Sisi Awal → Seberang"
+        tersedia = []
+        if state["left"]["tawanan"]: tersedia.append("tawanan")
+        if state["left"]["perbekalan"]: tersedia.append("perbekalan")
+        if state["left"]["anak"]: tersedia.append("anak")
+    else:
+        arah = "🚣 Arah: Seberang → Sisi Awal"
+        tersedia = []
+        if state["right"]["tawanan"]: tersedia.append("tawanan")
+        if state["right"]["perbekalan"]: tersedia.append("perbekalan")
+        if state["right"]["anak"]: tersedia.append("anak")
+    
+    # Tampilkan arah
+    st.info(arah)
+    
+    # Tombol pilihan
+    col1, col2, col3 = st.columns(3)
     with col1:
-        st.info("""
-        **❌ Jika salah langkah:**
-        - Meninggalkan tawanan dan perbekalan bersama tanpa pahlawan → **GAGAL**
-        - Perahu kelebihan muatan → **Tidak bisa**
-        """)
+        if st.button("⛓️ Tawanan", use_container_width=True, disabled=("tawanan" not in tersedia)):
+            travel("tawanan")
+            st.rerun()
     with col2:
-        st.success("""
-        **✅ Kunci sukses:**
-        - Tawanan harus selalu diawasi
-        - Pahlawan menjadi 'penengah' yang aman
-        - Gunakan pahlawan sebagai 'antar-jemput'
-        """)
+        if st.button("🍞 Perbekalan", use_container_width=True, disabled=("perbekalan" not in tersedia)):
+            travel("perbekalan")
+            st.rerun()
+    with col3:
+        if st.button("👤 Anak Buah", use_container_width=True, disabled=("anak" not in tersedia)):
+            travel("anak")
+            st.rerun()
     
-    # Tips Tambahan
-    st.markdown("### 💡 Tips Tambahan")
+    if st.button("🚣 Sendirian", use_container_width=True):
+        travel(None)
+        st.rerun()
+    
+    st.divider()
+    
+    # Tampilkan peta
+    st.markdown("### 🗺️ Peta Penyeberangan")
+    
+    colA, colRiver, colB = st.columns([2, 1, 2])
+    
+    with colA:
+        st.markdown("**🏝️ SISI AWAL**")
+        if state["left"]["pahlawan"]: st.write("- 🦸 Pahlawan")
+        if state["left"]["tawanan"]: st.write("- ⛓️ Tawanan")
+        if state["left"]["perbekalan"]: st.write("- 🍞 Perbekalan")
+        if state["left"]["anak"]: st.write("- 👤 Anak Buah")
+        if not any(state["left"].values()): st.write("*Kosong*")
+    
+    with colRiver:
+        st.markdown("### 🌊🌊🌊")
+        st.markdown("### 🚣")
+        st.markdown("### 🌊🌊🌊")
+    
+    with colB:
+        st.markdown("**🏝️ SEBERANG**")
+        if state["right"]["pahlawan"]: st.write("- 🦸 Pahlawan")
+        if state["right"]["tawanan"]: st.write("- ⛓️ Tawanan")
+        if state["right"]["perbekalan"]: st.write("- 🍞 Perbekalan")
+        if state["right"]["anak"]: st.write("- 👤 Anak Buah")
+        if not any(state["right"].values()): st.write("*Kosong*")
+    
+    st.divider()
+    
+    # Tampilkan pesan
+    if state["message"]:
+        if "GAGAL" in state["message"]:
+            st.error(state["message"])
+        elif "SELAMAT" in state["message"]:
+            st.success(state["message"])
+        else:
+            st.info(state["message"])
+
+# Fungsi utama
+def show_river_game():
+    st.markdown("## 🚣‍♂️ Pahlawan Menyeberang Sungai")
     st.markdown("""
-    - Jangan terburu-buru. Pikirkan setiap langkah.
-    - Perhatikan siapa yang ada di sisi awal dan seberang sebelum memilih.
-    - Jika gagal, klik **Reset Permainan** dan coba lagi dengan urutan yang benar.
-    - Gunakan tombol **"Sendirian (hanya pahlawan)"** untuk memindahkan pahlawan tanpa entitas lain.
+    **Aturan:**
+    - Perahu hanya muat **2 entitas** (termasuk pahlawan).
+    - **Tawanan dan perbekalan tidak boleh ditinggal berdua tanpa pahlawan.**
+    - Tujuan: Pindahkan semua ke seberang.
     """)
+    init_game_state()
+    show_buttons()
     
-    # Simulasi Interaktif Sederhana
-    st.markdown("### 🎮 Coba Langsung!")
-    st.markdown("""
-    Setelah memahami tutorial ini, buka tab **HADIAH → Pahlawan Menyeberang Sungai** untuk bermain langsung.
-    
-    Jangan lupa, ikuti langkah-langkah di atas jika ingin menang dengan mudah!
-    """)
-    
-    # Tombol untuk langsung menuju permainan (jika diinginkan)
-    if st.button("🚀 Buka Permainan Sekarang", use_container_width=True):
-        st.switch_page("nkhm/main.py")  # Catatan: ini hanya berfungsi di lingkungan Streamlit dengan multi-page apps
-        # Alternatif: beri pesan
-        st.info("Buka tab **HADIAH** dan pilih subtab **Pahlawan Menyeberang Sungai**")
+    if st.button("🔄 Reset Permainan", use_container_width=True):
+        if "river_game" in st.session_state:
+            del st.session_state.river_game
+        st.rerun()
 
 if __name__ == "__main__":
-    show_tutorial_seberang()
+    show_river_game()
