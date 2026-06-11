@@ -12,7 +12,7 @@ def show_tutorial_seberang():
     - **Perbekalan Pangan** (🍞)
     - **Anak Buah** (👤)
     
-    Ia hanya memiliki sebuah **perahu kecil** yang sangat terbatas kapasitasnya.
+    Ia hanya memiliki sebuah **perahu kecil** yang sangat terbatas kapasitasnya hanya bisa dimuat 2 entitas saja.
     """)
     
     # Aturan Dasar
@@ -59,14 +59,14 @@ def show_tutorial_seberang():
         **✅ Kunci sukses:**
         - Tawanan harus selalu diawasi
         - Pahlawan menjadi 'penengah' yang aman
-        - Gunakan pahlawan sebagai 'antar-jemput'
+        - Gunakan pahlawan sebagai agen 'antar-jemput'
         """)
     
     # Tips Tambahan
     st.markdown("### 💡 Tips Tambahan")
     st.markdown("""
     - Jangan terburu-buru. Pikirkan setiap langkah.
-    - Perhatikan siapa yang ada di sisi awal dan seberang sebelum memilih.
+    - Perhatikan siapa yang ada di sisi awal dan di seberang sebelum memilih.
     - Jika gagal, klik **Reset Permainan** dan coba lagi dengan urutan yang benar.
     - Gunakan tombol **"Sendirian (hanya pahlawan)"** untuk memindahkan pahlawan tanpa entitas lain.
     """)
