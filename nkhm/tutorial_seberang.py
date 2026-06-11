@@ -22,7 +22,9 @@ def show_tutorial_seberang():
        - Contoh: Pahlawan + Tawanan, Pahlawan + Perbekalan, atau Pahlawan sendirian.
     2. **Tawanan dan perbekalan tidak boleh ditinggal berdua tanpa pengawasan pahlawan**.
        - Jika terjadi, tawanan akan merusak perbekalan → PERMAINAN GAGAL!
-    3. **Tujuan**: Memindahkan semua entitas (pahlawan, tawanan, perbekalan, anak buah) ke seberang sungai dengan selamat.
+    3. **Tawanan dan Anak Buah tidak boleh ditinggal berdua tanpa bersama pahlawan**
+      - Jika terjadi, tawanan dan anak buah akan bertarung duel → PERMAINAN GAGAL!
+    4. **Tujuan**: Memindahkan semua entitas (pahlawan, tawanan, perbekalan, anak buah) ke seberang sungai dengan selamat.
     """)
     
     # Solusi Langkah demi Langkah
