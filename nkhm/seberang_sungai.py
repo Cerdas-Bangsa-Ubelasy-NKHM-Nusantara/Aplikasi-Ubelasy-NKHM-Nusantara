@@ -20,7 +20,8 @@ def init_game_state():
             "boat": [],
             "message": "",
             "win": False,
-            "last_direction": None,  # Untuk menyimpan arah terakhir
+            "last_direction": None,
+            "celebration_shown": False,  # Untuk mencegah balon muncul berulang
         }
 
 # Cek apakah ada yang melanggar aturan di suatu sisi
@@ -51,6 +52,10 @@ def check_win():
         state["right"]["perbekalan"] and state["right"]["anak"]):
         state["win"] = True
         state["message"] = "🎉 SELAMAT! Semua entitas berhasil menyeberang dengan selamat! 🎉"
+        # Tampilkan balon jika belum ditampilkan
+        if not state.get("celebration_shown", False):
+            st.balloons()
+            state["celebration_shown"] = True
         return True
     return False
 
@@ -127,7 +132,11 @@ def show_buttons():
     state = st.session_state.river_game
     
     if state["win"]:
+        st.balloons()  # Tampilkan balon lagi saat halaman di-render jika sudah menang
         st.success(state["message"])
+        st.markdown("### 🎈 SELAMAT! ANDA BERHASIL! 🎈")
+        st.markdown("Semua entitas telah selamat sampai di seberang!")
+        
         if st.button("🔄 Main Lagi", key="main_lagi_seberang"):
             for key in list(st.session_state.keys()):
                 if key == "river_game":
