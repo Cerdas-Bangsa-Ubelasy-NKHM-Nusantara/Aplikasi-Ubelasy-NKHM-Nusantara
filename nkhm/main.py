@@ -524,7 +524,7 @@ def main():
     # ========== TAB 7: HADIAH ==========
     with tab7:
         # Subtab di dalam HADIAH
-        sub_tab1, sub_tab2, sub_tab3 = st.tabs(["🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🎲 Lainnya (Coming Soon)"])
+        sub_tab1, sub_tab2, sub_tab3, sub_tab4 = st.tabs(["🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🎲 Lainnya (Coming Soon)"])
     
         with sub_tab1:
             # Panggil fungsi game tebak pahlawan
@@ -532,16 +532,12 @@ def main():
             show_tebak_pahlawan()
         with sub_tab2:
             show_angka_rahasia()
-
         with sub_tab3:
-            st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
+            from nkhm.seberang_sungai import show_river_game
+            show_river_game()
 
-    try:
-        from nkhm.seberang_sungai import show_river_game
-        st.success("Import berhasil")
-except Exception as e:
-        st.error(f"Import gagal: {e}")
-    
+        with sub_tab4:
+            st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
 
         
     # ========== TAB 8: TUTORIAL ==========
