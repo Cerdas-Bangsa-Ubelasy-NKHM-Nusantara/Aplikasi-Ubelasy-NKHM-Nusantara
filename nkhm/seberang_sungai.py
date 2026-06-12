@@ -45,14 +45,28 @@ def check_rule2_violation(side):
 def get_failure_rule1_message(location):
     if location == "awal":
         return """
-❌ GAGAL! Di sisi awal, tawanan merusak perbekalan!
+❌ GAGAL! Di sisi awal, tawanan merusak perbekalan, atau tawanan dan anak buah bertarung duel!
 
-😔 **KARAKTER PAHLAWAN YANG CEROBOH** 😔
+😔 **KARAKTER PAHLAWAN YANG CEROBOH DAN EGOIS** 😔
 Pahlawan ini terlalu terburu-buru meninggalkan tawanan bersama perbekalan tanpa pengawasan.
 Akibatnya, tawanan merusak perbekalan yang sangat berharga untuk perjalanan.
 Seorang pahlawan sejati harus memikirkan konsekuensi dari setiap keputusan.
 Jangan tinggalkan situasi berbahaya tanpa pengawasan!
 *"Kecerobohan adalah musuh terbesar seorang pemimpin. Selalu pikirkan risiko sebelum bertindak."*
+
+😔 **KARAKTER PAHLAWAN YANG TIDAK SIAGA** 😔
+Pahlawan ini meninggalkan tawanan bersama anak buahnya tanpa pengawasan.
+Akibatnya, terjadi duel antara tawanan dan anak buah yang berakhir dengan cedera di kedua belah pihak.
+Seorang pemimpin harus selalu hadir untuk mencegah konflik di antara anggota timnya.
+Kehadiran pemimpin adalah perekat yang menjaga keharmonisan tim.
+*"Seorang pemimpin harus selalu hadir untuk mencegah perselisihan di antara anak buahnya."*
+
+**KARAKTER PAHLAWAN YANG **TIDAK STRATEGIS** 😔
+😔 Pahlawan ini juga memilih meninggalkan tawanan bersama perbekalan tanpa pengawasan.
+Tawanan yang tidak diawasi segera merusak perbekalan yang sangat berharga.
+Seorang pemimpin strategis akan memprioritaskan 'ancaman terbesar' terlebih dahulu.
+Tawanan adalah entitas paling berbahaya yang harus selalu diawasi atau dipindahkan pertama kali.
+*"Prioritaskan yang paling berbahaya terlebih dahulu. Jangan biarkan ancaman menguasai situasi."*
 """
     else:
         return """
