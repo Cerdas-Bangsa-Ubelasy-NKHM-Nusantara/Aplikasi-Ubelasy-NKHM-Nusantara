@@ -22,8 +22,8 @@ def init_game_state():
             "win": False,
             "last_direction": None,
             "score": 0,
-            "has_played": False,  # Apakah sudah pernah bermain (mendapat skor)
-            "game_over": False,   # Apakah permainan sudah selesai (menang/kalah)
+            "has_played": False,
+            "game_over": False,
         }
 
 # Cek apakah ada yang melanggar aturan di suatu sisi
@@ -42,12 +42,18 @@ def check_all_sides():
     state = st.session_state.river_game
     violation_left = check_violation(state["left"])
     if violation_left:
-        state["message"] = f"❌ GAGAL! Di sisi awal, {violation_left}"
+        if "tawanan merusak perbekalan" in violation_left:
+            state["message"] = f"❌ GAGAL! Di sisi awal, {violation_left}\n\n{get_failure_rule1_message()}"
+        else:
+            state["message"] = f"❌ GAGAL! Di sisi awal, {violation_left}\n\n{get_failure_rule2_message()}"
         state["game_over"] = True
         return False
     violation_right = check_violation(state["right"])
     if violation_right:
-        state["message"] = f"❌ GAGAL! Di seberang, {violation_right}"
+        if "tawanan merusak perbekalan" in violation_right:
+            state["message"] = f"❌ GAGAL! Di seberang, {violation_right}\n\n{get_failure_rule1_message()}"
+        else:
+            state["message"] = f"❌ GAGAL! Di seberang, {violation_right}\n\n{get_failure_rule2_message()}"
         state["game_over"] = True
         return False
     state["message"] = "✅ Aman. Silakan lanjutkan."
@@ -60,7 +66,6 @@ def check_win():
         state["right"]["perbekalan"] and state["right"]["anak"]):
         state["win"] = True
         state["game_over"] = True
-        # Jika belum pernah bermain (belum dapat skor), beri skor 10
         if not state["has_played"]:
             state["score"] = 10
             state["has_played"] = True
@@ -82,7 +87,7 @@ def get_success_message():
     *"Kebijaksanaan lebih berharga daripada kekuatan. Seorang pemimpin yang baik melindungi semua yang dipimpinnya."*
     """
 
-# Pesan untuk kegagalan karena aturan 1
+# Pesan untuk kegagalan karena aturan 1 (tawanan + perbekalan)
 def get_failure_rule1_message():
     return """
     😔 **KARAKTER PAHLAWAN YANG CEROBOH** 😔
@@ -96,7 +101,7 @@ def get_failure_rule1_message():
     *"Kecerobohan adalah musuh terbesar seorang pemimpin. Selalu pikirkan risiko sebelum bertindak."*
     """
 
-# Pesan untuk kegagalan karena aturan 2
+# Pesan untuk kegagalan karena aturan 2 (tawanan + anak)
 def get_failure_rule2_message():
     return """
     😔 **KARAKTER PAHLAWAN YANG TIDAK SIAGA** 😔
@@ -110,19 +115,12 @@ def get_failure_rule2_message():
     *"Seorang pemimpin harus selalu hadir untuk mencegah perselisihan di antara anak buahnya."*
     """
 
-# Pesan untuk kegagalan karena langkah pertama salah (Anak Buah duluan)
-def get_failure_first_step_message():
-    return """
-    😔 **KARAKTER PAHLAWAN YANG TIDAK STRATEGIS** 😔
-    
-    Pahlawan ini memilih membawa anak buah terlebih dahulu, meninggalkan tawanan bersama perbekalan.
-    Tawanan yang tidak diawasi segera merusak perbekalan yang sangat berharga.
-    
-    Seorang pemimpin strategis akan memprioritaskan 'ancaman terbesar' terlebih dahulu.
-    Tawanan adalah entitas paling berbahaya yang harus selalu diawasi atau dipindahkan pertama kali.
-    
-    *"Prioritaskan yang paling berbahaya terlebih dahulu. Jangan biarkan ancaman menguasai situasi."*
-    """
+# Pesan untuk kegagalan karena langkah pertama salah
+def get_failure_first_step_message(violation_type):
+    if "tawanan merusak perbekalan" in violation_type:
+        return get_failure_rule1_message()
+    else:
+        return get_failure_rule2_message()
 
 # Fungsi untuk melakukan perjalanan (menyeberang)
 def travel(entitas1, entitas2):
@@ -160,15 +158,26 @@ def travel(entitas1, entitas2):
             state["message"] = f"❌ {e.capitalize()} tidak berada di sisi {'asal' if from_side=='left' else 'seberang'}! {arah} dibatalkan."
             return
     
-    # Pengecekan khusus: Apakah ini langkah pertama yang salah (Anak Buah duluan)?
-    # Langkah pertama yang benar adalah membawa Tawanan
+    # Pengecekan: Apakah ini langkah pertama yang salah?
     is_first_step = (state["left"]["pahlawan"] and state["left"]["tawanan"] and 
                      state["left"]["perbekalan"] and state["left"]["anak"] and 
                      not any(state["right"].values()))
     
-    if is_first_step and entitas1 == "anak":
+    # Jika langkah pertama dan tidak membawa Tawanan (termasuk sendirian), maka GAGAL
+    if is_first_step and entitas1 != "tawanan":
+        # Cek pelanggaran yang akan terjadi
+        left_side = state["left"].copy()
+        # Hapus pahlawan dari sisi kiri (karena pahlawan akan pindah)
+        left_side["pahlawan"] = False
+        violation = check_violation(left_side)
+        
         state["game_over"] = True
-        state["message"] = "❌ GAGAL! Anda membawa Anak Buah terlebih dahulu!\n\n" + get_failure_first_step_message()
+        if violation and "tawanan merusak perbekalan" in violation:
+            state["message"] = f"❌ GAGAL! Di sisi awal, {violation}\n\n{get_failure_rule1_message()}"
+        elif violation and "tawanan dan anak buah bertarung duel" in violation:
+            state["message"] = f"❌ GAGAL! Di sisi awal, {violation}\n\n{get_failure_rule2_message()}"
+        else:
+            state["message"] = f"❌ GAGAL! Langkah pertama yang salah!\n\n{get_failure_rule1_message()}"
         return
     
     # Simpan arah untuk ditampilkan
@@ -202,12 +211,6 @@ def travel(entitas1, entitas2):
             state[to_side][e] = False
         state["boat"] = []
         state["last_direction"] = None
-        
-        # Tampilkan pesan berdasarkan jenis pelanggaran
-        if "tawanan merusak perbekalan" in state["message"]:
-            state["message"] += "\n\n" + get_failure_rule1_message()
-        elif "tawanan dan anak buah bertarung duel" in state["message"]:
-            state["message"] += "\n\n" + get_failure_rule2_message()
 
 # Tombol untuk memilih entitas
 def show_buttons():
@@ -224,10 +227,7 @@ def show_buttons():
             st.balloons()
             st.success(state["message"])
         else:
-            if "GAGAL" in state["message"]:
-                st.error(state["message"])
-            else:
-                st.info(state["message"])
+            st.error(state["message"])
         
         if st.button("🔄 Main Lagi", key="main_lagi_seberang"):
             for key in list(st.session_state.keys()):
@@ -319,7 +319,7 @@ def show_buttons():
     st.divider()
     
     # Tampilkan pesan
-    if state["message"]:
+    if state["message"] and not state["game_over"]:
         if "GAGAL" in state["message"]:
             st.error(state["message"])
         elif "SELAMAT" in state["message"]:
@@ -335,6 +335,7 @@ def show_river_game():
     - Perahu hanya bisa memuat **maksimal 2 entitas** (termasuk pahlawan).
     - **Tawanan perang dan perbekalan pangan tidak boleh ditinggal berdua tanpa pengawasan pahlawan** (tawanan akan merusak perbekalan).
     - **Tawanan dan Anak Buah tidak boleh ditinggal berdua tanpa bersama pahlawan** (tawanan dan anak buah akan bertarung duel).
+    - **Langkah pertama HARUS membawa Tawanan** (jika tidak, permainan GAGAL).
     - **Poin:** Berhasil menyelesaikan permainan pada **permainan pertama** mendapat **10 poin**. Permainan berikutnya hanya latihan (skor tetap).
     - Tujuan: memindahkan semua entitas (pahlawan, tawanan, perbekalan, anak buah) ke seberang.
     
