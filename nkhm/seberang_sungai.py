@@ -293,7 +293,7 @@ def show_buttons():
         "perbekalan": "🍞 Perbekalan Pangan",
         "anak": "👤 Anak Buah"
     }
-    st.markdown(f"**Pahlawan siap menyeberang. Pilih siapa yang akan dibawa:**")
+    st.markdown(f"**Pahlawan siap menyeberang. Pilih siapa (entitas) yang akan dibawa:**")
     st.caption("Pilih satu entitas (selain pahlawan) untuk ikut menyeberang. Pahlawan akan selalu ikut.")
     if not available:
         st.info("Tidak ada entitas lain di sisi ini. Pahlawan akan menyeberang sendiri.")
