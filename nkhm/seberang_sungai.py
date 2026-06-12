@@ -301,7 +301,7 @@ def show_buttons():
         arah_yang_akan_datang = "🚣 Arah: Seberang → Sisi Awal"
         available = [e for e in ["tawanan", "perbekalan", "anak"] if state["right"][e]]
     st.info(arah_yang_akan_datang)
-    st.markdown("**Pahlawan siap menyeberang. Pilih siapa yang akan dibawa:**")
+    st.markdown("**Pahlawan siap menyeberang. Pilih siapa (entitas) yang akan dibawa:**")
     st.caption("Pilih satu entitas (selain pahlawan) untuk ikut menyeberang. Pahlawan akan selalu ikut.")
     if not available:
         st.info("Tidak ada entitas lain di sisi ini. Pahlawan akan menyeberang sendiri.")
@@ -371,7 +371,7 @@ def show_river_game():
     - **Tawanan perang dan perbekalan pangan tidak boleh ditinggal berdua tanpa pengawasan pahlawan** (aturan 1) → LANGSUNG GAGAL.
     - **Tawanan dan Anak Buah tidak boleh ditinggal berdua tanpa bersama pahlawan** (aturan 2) → TIDAK GAGAL, tetapi dicatat. Jika aturan 2 dilanggar, Anda TIDAK akan mendapat poin meskipun berhasil menyelesaikan permainan.
     - **Langkah pertama HARUS membawa Tawanan**? Tidak harus. Jika membawa Perbekalan atau Sendirian, Anda melanggar aturan 2 (tidak gagal). Membawa Anak langsung gagal (aturan 1).
-    - **Poin:** Berhasil menyelesaikan permainan pada **permainan pertama** mendapat **10 poin**, **ASALKAN tidak pernah melanggar aturan ke-2**. Jika melanggar aturan ke-2, tetap berhasil tetapi tidak mendapat poin (terkecoh). Permainan berikutnya hanya latihan (skor tetap).
+    - **Poin:** Berhasil menyelesaikan permainan pada **permainan pertama** mendapat **10 poin**, **ASALKAN tidak pernah melanggar aturan ke-2**. Jika melanggar aturan ke-2, tetap berhasil tetapi tidak mendapat poin (berbuat curang). Permainan berikutnya hanya latihan (skor tetap).
     - **Efek kemenangan:** Kemenangan sempurna (tanpa pelanggaran aturan 2) akan menampilkan **balon**. Kemenangan terkecoh (melanggar aturan 2) akan menampilkan **salju**.
     - Tujuan: memindahkan semua entitas (pahlawan, tawanan, perbekalan, anak buah) ke seberang.
     """)
