@@ -30,6 +30,7 @@ def init_game_state():
             "last_direction": None,
             "game_over": False,
             "violated_rule2": False,
+            "show_balloons": False,
         }
 
 def reset_game():
@@ -50,7 +51,7 @@ def check_rule2_violation(side):
             return True
     return False
 
-# ========== PESAN-PESAN ==========
+# ========== PESAN-PESAN (LENGKAP) ==========
 def get_failure_rule1_message(location):
     if location == "awal":
         return """
@@ -133,13 +134,17 @@ pahlawan ini menunjukkan bahwa kepemimpinan sejati adalah tentang menjaga keseim
 *"Kebijaksanaan lebih berharga daripada kekuatan. Seorang pemimpin yang baik melindungi semua yang dipimpinnya."*
 """
     else:
-        return """
+        return f"""
 🎉 SELAMAT! Semua entitas berhasil menyeberang dengan selamat! 🎉
 
-📝 Ini adalah permainan latihan. Skor tetap = {} poin.
+📝 Ini adalah permainan latihan. Skor tetap = {st.session_state.seberang_score} poin.
 
 🌟 **KARAKTER PAHLAWAN YANG BIJAKSANA** 🌟
-...""".format(st.session_state.seberang_score)
+Seorang pahlawan sejati tidak hanya mengandalkan kekuatan fisik, tetapi juga kebijaksanaan dan strategi.
+Dengan merencanakan setiap langkah, mempertimbangkan risiko, dan melindungi semua yang menjadi tanggung jawabnya,
+pahlawan ini menunjukkan bahwa kepemimpinan sejati adalah tentang menjaga keseimbangan dan keselamatan semua pihak.
+*"Kebijaksanaan lebih berharga daripada kekuatan. Seorang pemimpin yang baik melindungi semua yang dipimpinnya."*
+"""
 
 def get_success_tricked_message():
     return """
@@ -188,11 +193,11 @@ def check_win():
                 st.session_state.seberang_score = 10
                 st.session_state.seberang_has_played = True
                 state["message"] = get_success_normal_message(True)
-                state["show_balloons"] = True   # tampilkan balon
+                state["show_balloons"] = True
             else:
                 st.session_state.seberang_has_played = True
                 state["message"] = get_success_tricked_message()
-                state["show_balloons"] = False  # tidak pakai balon, pakai salju
+                state["show_balloons"] = False
         else:
             if state["violated_rule2"]:
                 state["message"] = get_success_tricked_message() + "\n\n📝 (Ini permainan latihan, skor tetap)"
@@ -269,6 +274,7 @@ def travel(entitas1, entitas2):
             state["boat"] = []
             state["last_direction"] = None
 
+# ========== TAMPILAN TOMBOL DAN PETA ==========
 def show_buttons():
     state = st.session_state.river_game
     if st.session_state.seberang_has_played:
@@ -354,6 +360,7 @@ def show_buttons():
         else:
             st.info(state["message"])
 
+# ========== FUNGSI UTAMA ==========
 def show_river_game():
     init_permanent_state()
     init_game_state()
@@ -365,9 +372,8 @@ def show_river_game():
     - **Tawanan dan Anak Buah tidak boleh ditinggal berdua tanpa bersama pahlawan** (aturan 2) → TIDAK GAGAL, tetapi dicatat. Jika aturan 2 dilanggar, Anda TIDAK akan mendapat poin meskipun berhasil menyelesaikan permainan.
     - **Langkah pertama HARUS membawa Tawanan**? Tidak harus. Jika membawa Perbekalan atau Sendirian, Anda melanggar aturan 2 (tidak gagal). Membawa Anak langsung gagal (aturan 1).
     - **Poin:** Berhasil menyelesaikan permainan pada **permainan pertama** mendapat **10 poin**, **ASALKAN tidak pernah melanggar aturan ke-2**. Jika melanggar aturan ke-2, tetap berhasil tetapi tidak mendapat poin (terkecoh). Permainan berikutnya hanya latihan (skor tetap).
+    - **Efek kemenangan:** Kemenangan sempurna (tanpa pelanggaran aturan 2) akan menampilkan **balon**. Kemenangan terkecoh (melanggar aturan 2) akan menampilkan **salju**.
     - Tujuan: memindahkan semua entitas (pahlawan, tawanan, perbekalan, anak buah) ke seberang.
-    
-    > **💡 Petunjuk:** Perhatikan arah panah di atas tombol. Itu menunjukkan arah perjalanan yang akan terjadi.
     """)
     show_buttons()
     if st.button("🔄 Reset Permainan", use_container_width=True, key="reset_seberang"):
@@ -376,4 +382,3 @@ def show_river_game():
 
 if __name__ == "__main__":
     show_river_game()
-
