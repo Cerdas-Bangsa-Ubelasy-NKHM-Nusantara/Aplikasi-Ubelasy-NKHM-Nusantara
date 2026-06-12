@@ -61,8 +61,8 @@ Seorang pemimpin harus selalu hadir untuk mencegah konflik di antara anggota tim
 Kehadiran pemimpin adalah perekat yang menjaga keharmonisan tim.
 *"Seorang pemimpin harus selalu hadir untuk mencegah perselisihan di antara anak buahnya."*
 
-**KARAKTER PAHLAWAN YANG **TIDAK STRATEGIS** 😔
-😔 Pahlawan ini juga memilih meninggalkan tawanan bersama perbekalan tanpa pengawasan.
+😔 **KARAKTER PAHLAWAN YANG **TIDAK STRATEGIS** 😔
+Pahlawan ini juga memilih meninggalkan tawanan bersama perbekalan tanpa pengawasan.
 Tawanan yang tidak diawasi segera merusak perbekalan yang sangat berharga.
 Seorang pemimpin strategis akan memprioritaskan 'ancaman terbesar' terlebih dahulu.
 Tawanan adalah entitas paling berbahaya yang harus selalu diawasi atau dipindahkan pertama kali.
