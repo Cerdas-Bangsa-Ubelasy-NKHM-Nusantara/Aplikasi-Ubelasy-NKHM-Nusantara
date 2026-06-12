@@ -147,7 +147,7 @@ def get_success_tricked_message():
 
 🏆 Anda tidak dapat POIN! 🏆
 
-🌟 **KARAKTER PAHLAWAN YANG TERKECOH** 🌟
+🌟 **KARAKTER PAHLAWAN YANG CURANG** 🌟
 Pahlawan ini memang berhasil mencapai tujuan, tetapi dengan cara yang ceroboh karena meninggalkan tawanan bersama anak buah tanpa pengawasan (meski tidak berakibat fatal kali ini).
 Seorang pemimpin sejati tidak hanya fokus pada hasil akhir, tetapi juga pada proses dan keselamatan semua pihak sepanjang perjalanan.
 Pelanggaran aturan menunjukkan kelemahan dalam strategi dan kewaspadaan. Untuk mendapatkan poin, cobalah lagi dengan mematuhi semua aturan!
