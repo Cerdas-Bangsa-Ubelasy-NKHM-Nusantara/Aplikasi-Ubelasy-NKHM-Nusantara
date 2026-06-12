@@ -188,11 +188,11 @@ def check_win():
                 st.session_state.seberang_score = 10
                 st.session_state.seberang_has_played = True
                 state["message"] = get_success_normal_message(True)
-                state["show_balloons"] = True
+                state["show_balloons"] = True   # tampilkan balon
             else:
                 st.session_state.seberang_has_played = True
                 state["message"] = get_success_tricked_message()
-                state["show_balloons"] = False
+                state["show_balloons"] = False  # tidak pakai balon, pakai salju
         else:
             if state["violated_rule2"]:
                 state["message"] = get_success_tricked_message() + "\n\n📝 (Ini permainan latihan, skor tetap)"
