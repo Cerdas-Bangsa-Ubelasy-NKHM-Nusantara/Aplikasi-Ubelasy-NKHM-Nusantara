@@ -20,10 +20,9 @@ def show_tutorial_seberang():
     ### ⚠️ Aturan Permainan
     1. **Perahu hanya bisa memuat maksimal 2 entitas** (termasuk pahlawan).
        - Contoh: Pahlawan + Tawanan, Pahlawan + Perbekalan, atau Pahlawan sendirian.
-    2. **Tawanan dan perbekalan tidak boleh ditinggal berdua tanpa pengawasan pahlawan**.
+    2. **Aturan pertama: Tawanan dan perbekalan tidak boleh ditinggal berdua tanpa pengawasan pahlawan**.
        - Jika terjadi, tawanan akan merusak perbekalan → PERMAINAN GAGAL!
-    3. **Tawanan dan Anak Buah tidak boleh ditinggal berdua tanpa bersama pahlawan**
-      - Jika terjadi, tawanan dan anak buah akan bertarung duel → PERMAINAN GAGAL!
+    3. Aturan kedua: Tawanan dan Anak Buah tidak boleh ditinggal berdua tanpa bersama pahlawan → TIDAK GAGAL, tetapi dicatat. Jika aturan 2 dilanggar, Anda TIDAK akan mendapat poin meskipun berhasil menyelesaikan permainan.
     4. **Tujuan**: Memindahkan semua entitas (pahlawan, tawanan, perbekalan, anak buah) ke seberang sungai dengan selamat.
     """)
     
