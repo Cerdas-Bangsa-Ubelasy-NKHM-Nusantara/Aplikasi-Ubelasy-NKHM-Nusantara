@@ -134,11 +134,16 @@ pahlawan ini menunjukkan bahwa kepemimpinan sejati adalah tentang menjaga keseim
 """
     else:
         return """
-🎉 SELAMAT! Semua entitas berhasil menyeberang dengan selamat! 🎉
+🎉 SELAMAT! Semua entitas berhasil diseberangkan dengan selamat! 🎉
+
+
+
+🌟 **KARAKTER PAHLAWAN YANG BIJAKSANA** 🌟 Seorang pahlawan sejati tidak hanya mengandalkan kekuatan fisik, tetapi juga kebijaksanaan dan strategi.
+Dengan merencanakan setiap langkah, mempertimbangkan risiko, dan melindungi semua yang menjadi tanggung jawabnya,
+pahlawan ini menunjukkan bahwa kepemimpinan sejati adalah tentang menjaga keseimbangan dan keselamatan semua pihak.
+*"Kebijaksanaan lebih berharga daripada kekuatan. Seorang pemimpin yang baik melindungi semua yang dipimpinnya."*
 
 📝 Ini adalah permainan latihan. Skor tetap = {} poin.
-
-🌟 **KARAKTER PAHLAWAN YANG BIJAKSANA** 🌟
 ...""".format(st.session_state.seberang_score)
 
 def get_success_tricked_message():
