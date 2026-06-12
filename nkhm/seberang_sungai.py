@@ -182,7 +182,7 @@ def check_all_sides():
         # Tidak mengembalikan False
     # Jika tidak ada pesan peringatan, set pesan aman
     if not state["message"] or "Peringatan" not in state["message"]:
-        state["message"] = "✅ Aman. Silakan lanjutkan."
+        state["message"] = "✅ Aman. Silakan lanjut memilih (tekan tombol) entitas."
     return True
 
 # Cek apakah semua sudah di seberang
