@@ -148,14 +148,14 @@ pahlawan ini menunjukkan bahwa kepemimpinan sejati adalah tentang menjaga keseim
 
 def get_success_tricked_message():
     return """
-🎉 Terkecoh! Meski Anda berhasil menyeberangkan semua entitas dengan selamat, namun Anda telah melanggar aturan ke-2! 🎉
+🎉 CURANG! Meski Anda berhasil menyeberangkan semua entitas dengan selamat, namun Anda telah melanggar aturan ke-2! 🎉
 
 🏆 Anda tidak dapat POIN! 🏆
 
-🌟 **KARAKTER PAHLAWAN YANG TERKECOH** 🌟
-Pahlawan ini memang berhasil mencapai tujuan, tetapi dengan cara yang ceroboh karena meninggalkan tawanan bersama anak buah tanpa pengawasan (meski tidak berakibat fatal kali ini).
+🌟 **KARAKTER PAHLAWAN YANG CURANG** 🌟
+Pahlawan ini memang berhasil mencapai tujuan, tetapi dengan cara yang curang dan ceroboh karena meninggalkan tawanan bersama anak buah tanpa pengawasan (meski tidak berakibat fatal kali ini).
 Seorang pemimpin sejati tidak hanya fokus pada hasil akhir, tetapi juga pada proses dan keselamatan semua pihak sepanjang perjalanan.
-Pelanggaran aturan menunjukkan kelemahan dalam strategi dan kewaspadaan. Untuk mendapatkan poin, cobalah lagi dengan mematuhi semua aturan!
+Berbuat curang dengan pelanggaran aturan menunjukkan kelemahan dalam strategi dan kewaspadaan. Untuk mendapatkan poin, cobalah lagi dengan mematuhi semua aturan!
 *"Kemenangan tanpa integritas hanyalah kemenangan semu. Patuhi setiap aturan untuk menjadi pahlawan sejati."*
 """
 
