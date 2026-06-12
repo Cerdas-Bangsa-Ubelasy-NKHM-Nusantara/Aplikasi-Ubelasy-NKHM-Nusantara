@@ -143,7 +143,7 @@ pahlawan ini menunjukkan bahwa kepemimpinan sejati adalah tentang menjaga keseim
 
 def get_success_tricked_message():
     return """
-🎉 Terkecoh! Meski Anda berhasil menyeberangkan semua entitas dengan selamat, namun Anda telah melanggar aturan ke-2! 🎉
+🎉 CURANG! Meski Anda berhasil menyeberangkan semua entitas dengan selamat, namun Anda telah melanggar aturan ke-2! 🎉
 
 🏆 Anda tidak dapat POIN! 🏆
 
