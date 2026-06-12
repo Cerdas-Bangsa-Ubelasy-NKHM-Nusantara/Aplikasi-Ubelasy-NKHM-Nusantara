@@ -370,7 +370,7 @@ def show_river_game():
     - Perahu hanya bisa memuat **maksimal 2 entitas** (termasuk pahlawan).
     - **Tawanan perang dan perbekalan pangan tidak boleh ditinggal berdua tanpa pengawasan pahlawan** (aturan 1) → LANGSUNG GAGAL.
     - **Tawanan dan Anak Buah tidak boleh ditinggal berdua tanpa bersama pahlawan** (aturan 2) → TIDAK GAGAL, tetapi dicatat. Jika aturan 2 dilanggar, Anda TIDAK akan mendapat poin meskipun berhasil menyelesaikan permainan.
-    - **Langkah pertama HARUS membawa Tawanan**? Tidak harus. Jika membawa Perbekalan atau Sendirian, Anda melanggar aturan 2 (tidak gagal). Membawa Anak langsung gagal (aturan 1).
+    - **Langkah pertama HARUS membawa Tawanan**? Tidak harus. Jika membawa Perbekalan atau Sendirian, Anda melanggar aturan 2 (tidak gagal). Membawa Anak Buah langsung gagal (aturan 1).
     - **Poin:** Berhasil menyelesaikan permainan pada **permainan pertama** mendapat **10 poin**, **ASALKAN tidak pernah melanggar aturan ke-2**. Jika melanggar aturan ke-2, tetap berhasil tetapi tidak mendapat poin (berbuat curang). Permainan berikutnya hanya latihan (skor tetap).
     - **Efek kemenangan:** Kemenangan sempurna (tanpa pelanggaran aturan 2) akan menampilkan **balon**. Kemenangan terkecoh (melanggar aturan 2) akan menampilkan **salju**.
     - Tujuan: memindahkan semua entitas (pahlawan, tawanan, perbekalan, anak buah) ke seberang.
