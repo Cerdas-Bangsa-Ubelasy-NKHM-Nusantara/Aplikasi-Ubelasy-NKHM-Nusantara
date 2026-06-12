@@ -177,31 +177,27 @@ def check_all_sides():
         state["message"] = "✅ Aman. Silakan lanjut pilih (tekan tombol) entitas."
     return True
 
-def check_win():
+def check_all_sides():
     state = st.session_state.river_game
-    if (state["right"]["pahlawan"] and state["right"]["tawanan"] and 
-        state["right"]["perbekalan"] and state["right"]["anak"]):
-        state["win"] = True
+    v_left = check_violation_type(state["left"])
+    if v_left:
+        state["message"] = get_failure_rule1_message("awal")
         state["game_over"] = True
-        if not st.session_state.seberang_has_played:
-            if not state["violated_rule2"]:
-                st.session_state.seberang_score = 10
-                st.session_state.seberang_has_played = True
-                state["message"] = get_success_normal_message(True)
-                state["show_balloons"] = True   # tampilkan balon
-            else:
-                st.session_state.seberang_has_played = True
-                state["message"] = get_success_tricked_message()
-                state["show_balloons"] = False  # tidak pakai balon, pakai salju
-        else:
-            if state["violated_rule2"]:
-                state["message"] = get_success_tricked_message() + "\n\n📝 (Ini permainan latihan, skor tetap)"
-                state["show_balloons"] = False
-            else:
-                state["message"] = get_success_normal_message(False)
-                state["show_balloons"] = True
-        return True
-    return False
+        return False
+    if check_rule2_violation(state["left"]):
+        state["violated_rule2"] = True
+        state["message"] = get_rule2_violation_message("awal")
+    v_right = check_violation_type(state["right"])
+    if v_right:
+        state["message"] = get_failure_rule1_message("seberang")
+        state["game_over"] = True
+        return False
+    if check_rule2_violation(state["right"]):
+        state["violated_rule2"] = True
+        state["message"] = get_rule2_violation_message("seberang")
+    if not state["message"] or "Peringatan" not in state["message"]:
+        state["message"] = "✅ Aman. Silakan lanjut pilih (tekan tombol) entitas."
+    return True
 
 def travel(entitas1, entitas2):
     state = st.session_state.river_game
