@@ -516,7 +516,7 @@ def main():
         sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Sto-mata Hati"])
         with sub_tab1:
             # Tampilkan gambar Garuda
-            img_path = Path(__file__).parent.parent / "assets" / "karunia.JPG"
+            img_path = Path(__file__).parent.parent / "assets" / "karunia.jpg"
             if img_path.exists():
                 st.image(str(img_path), caption="Grow in Grace 🇮🇩", use_container_width=True)
             else:
