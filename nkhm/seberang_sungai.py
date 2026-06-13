@@ -1,5 +1,6 @@
 # nkhm/seberang_sungai.py
 import streamlit as st
+from pathlib import Path
 
 # ========== STATE PERMANEN (SKOR HANYA SEKALI) ==========
 def init_permanent_state():
@@ -51,113 +52,68 @@ def check_rule2_violation(side):
             return True
     return False
 
-# ========== PESAN-PESAN (LENGKAP) ==========
+# ========== PESAN-PESAN (disederhanakan namun lengkap) ==========
 def get_failure_rule1_message(location):
     if location == "awal":
-        return """
-❌ GAGAL! Di sisi awal, tawanan merusak perbekalan, atau tawanan dan anak buah bertarung duel!
+        return """❌ GAGAL! Di sisi awal, tawanan merusak perbekalan, atau tawanan dan anak buah bertarung duel!
 
 😔 **KARAKTER PAHLAWAN YANG CEROBOH DAN EGOIS** 😔
-Pahlawan ini terlalu terburu-buru meninggalkan tawanan bersama perbekalan tanpa pengawasan.
-Akibatnya, tawanan merusak perbekalan yang sangat berharga untuk perjalanan.
-Seorang pahlawan sejati harus memikirkan konsekuensi dari setiap keputusan.
-Jangan tinggalkan situasi berbahaya tanpa pengawasan!
-*"Kecerobohan adalah musuh terbesar seorang pemimpin. Selalu pikirkan risiko sebelum bertindak."*
-
+Pahlawan ini terlalu terburu-buru meninggalkan tawanan bersama perbekalan tanpa pengawasan...
+*"Kecerobohan adalah musuh terbesar seorang pemimpin."*
 😔 **KARAKTER PAHLAWAN YANG TIDAK SIAGA** 😔
-Pahlawan ini meninggalkan tawanan bersama anak buahnya tanpa pengawasan.
-Akibatnya, terjadi duel antara tawanan dan anak buah yang berakhir dengan cedera di kedua belah pihak.
-Seorang pemimpin harus selalu hadir untuk mencegah konflik di antara anggota timnya.
-Kehadiran pemimpin adalah perekat yang menjaga keharmonisan tim.
-*"Seorang pemimpin harus selalu hadir untuk mencegah perselisihan di antara anak buahnya."*
-
+Pahlawan ini meninggalkan tawanan bersama anak buahnya tanpa pengawasan, terjadi duel...
+*"Seorang pemimpin harus selalu hadir untuk mencegah perselisihan."*
 😔 **KARAKTER PAHLAWAN YANG TIDAK STRATEGIS** 😔
-Pahlawan ini juga memilih meninggalkan tawanan bersama perbekalan tanpa pengawasan.
-Tawanan yang tidak diawasi segera merusak perbekalan yang sangat berharga.
-Seorang pemimpin strategis akan memprioritaskan 'ancaman terbesar' terlebih dahulu.
-Tawanan adalah entitas paling berbahaya yang harus selalu diawasi atau dipindahkan pertama kali.
-*"Prioritaskan yang paling berbahaya terlebih dahulu. Jangan biarkan ancaman menguasai situasi."*
-"""
+Pahlawan ini juga memilih meninggalkan tawanan bersama perbekalan tanpa pengawasan...
+*"Prioritaskan yang paling berbahaya terlebih dahulu."*"""
     else:
-        return """
-❌ GAGAL! Di seberang, tawanan merusak perbekalan!
+        return """❌ GAGAL! Di seberang, tawanan merusak perbekalan!
 
 😔 **KARAKTER PAHLAWAN YANG CEROBOH** 😔
 Pahlawan ini terlalu terburu-buru meninggalkan tawanan bersama perbekalan tanpa pengawasan.
-Akibatnya, tawanan merusak perbekalan yang sangat berharga untuk perjalanan.
-Seorang pahlawan sejati harus memikirkan konsekuensi dari setiap keputusan.
-Jangan tinggalkan situasi berbahaya tanpa pengawasan!
-*"Kecerobohan adalah musuh terbesar seorang pemimpin. Selalu pikirkan risiko sebelum bertindak."*
-"""
+*"Kecerobohan adalah musuh terbesar seorang pemimpin."*"""
 
 def get_rule2_violation_message(location):
-    if location == "awal":
-        return "⚠️ PERINGATAN: Di sisi awal, tawanan dan anak buah ditinggal berdua! (aturan ke-2 dilanggar, tetapi permainan lanjut)"
-    else:
-        return "⚠️ PERINGATAN: Di seberang, tawanan dan anak buah ditinggal berdua! (aturan ke-2 dilanggar, tetapi permainan lanjut)"
+    return f"⚠️ PERINGATAN: Di {location}, tawanan dan anak buah ditinggal berdua! (aturan ke-2 dilanggar, tetapi permainan lanjut)"
 
 def get_failure_first_step_anak_message():
-    return """
-❌ GAGAL! Anda membawa Anak Buah terlebih dahulu!
+    return """❌ GAGAL! Anda membawa Anak Buah terlebih dahulu!
 
 😔 **KARAKTER PAHLAWAN YANG TIDAK STRATEGIS** 😔
 Pahlawan ini memilih membawa anak buah terlebih dahulu, meninggalkan tawanan bersama perbekalan.
-Tawanan yang tidak diawasi segera merusak perbekalan yang sangat berharga.
-Seorang pemimpin strategis akan memprioritaskan 'ancaman terbesar' terlebih dahulu.
-Tawanan adalah entitas paling berbahaya yang harus selalu diawasi atau dipindahkan pertama kali.
-*"Prioritaskan yang paling berbahaya terlebih dahulu. Jangan biarkan ancaman menguasai situasi."*
-"""
+*"Prioritaskan yang paling berbahaya terlebih dahulu."*"""
 
 def get_first_step_perbekalan_warning():
-    return """
-⚠️ PERINGATAN! Anda membawa Perbekalan terlebih dahulu. Ini melanggar aturan ke-2, tetapi permainan tetap lanjut.
-😔 Namun, Anda telah mencatat pelanggaran. Jika tetap berhasil menyelesaikan, Anda TIDAK akan mendapat poin.
-"""
+    return "⚠️ PERINGATAN! Anda membawa Perbekalan terlebih dahulu. Ini melanggar aturan ke-2, tetapi permainan tetap lanjut.\n😔 Anda telah mencatat pelanggaran, jika tetap berhasil tidak mendapat poin."
 
 def get_first_step_sendiri_warning():
-    return """
-⚠️ PERINGATAN! Anda menyeberang sendirian di langkah pertama. Ini melanggar aturan ke-2, tetapi permainan tetap lanjut.
-😔 Namun, Anda telah mencatat pelanggaran. Jika tetap berhasil menyelesaikan, Anda TIDAK akan mendapat poin.
-"""
+    return "⚠️ PERINGATAN! Anda menyeberang sendirian di langkah pertama. Ini melanggar aturan ke-2, tetapi permainan tetap lanjut.\n😔 Anda telah mencatat pelanggaran, jika tetap berhasil tidak mendapat poin."
 
 def get_success_normal_message(is_first_game):
     if is_first_game:
-        return """
-🎉 SELAMAT! Anda berhasil menyeberangkan semua entitas dengan selamat! 🎉
+        return """🎉 SELAMAT! Anda berhasil menyeberangkan semua entitas dengan selamat! 🎉
 
 🏆 Anda mendapatkan 10 POIN! 🏆
 
 🌟 **KARAKTER PAHLAWAN YANG BIJAKSANA** 🌟
 Seorang pahlawan sejati tidak hanya mengandalkan kekuatan fisik, tetapi juga kebijaksanaan dan strategi.
-Dengan merencanakan setiap langkah, mempertimbangkan risiko, dan melindungi semua yang menjadi tanggung jawabnya,
-pahlawan ini menunjukkan bahwa kepemimpinan sejati adalah tentang menjaga keseimbangan dan keselamatan semua pihak.
-*"Kebijaksanaan lebih berharga daripada kekuatan. Seorang pemimpin yang baik melindungi semua yang dipimpinnya."*
-"""
+*"Kebijaksanaan lebih berharga daripada kekuatan. Seorang pemimpin yang baik melindungi semua yang dipimpinnya."*"""
     else:
-        return f"""
-🎉 SELAMAT! Semua entitas berhasil menyeberang dengan selamat! 🎉
+        return f"""🎉 SELAMAT! Semua entitas berhasil menyeberang mit selamat! 🎉
 
 📝 Ini adalah permainan latihan. Skor tetap = {st.session_state.seberang_score} poin.
 
 🌟 **KARAKTER PAHLAWAN YANG BIJAKSANA** 🌟
-Seorang pahlawan sejati tidak hanya mengandalkan kekuatan fisik, tetapi juga kebijaksanaan dan strategi.
-Dengan merencanakan setiap langkah, mempertimbangkan risiko, dan melindungi semua yang menjadi tanggung jawabnya,
-pahlawan ini menunjukkan bahwa kepemimpinan sejati adalah tentang menjaga keseimbangan dan keselamatan semua pihak.
-*"Kebijaksanaan lebih berharga daripada kekuatan. Seorang pemimpin yang baik melindungi semua yang dipimpinnya."*
-"""
+..."""
 
 def get_success_tricked_message():
-    return """
-🎉 CURANG! Meski Anda berhasil menyeberangkan semua entitas dengan selamat, namun Anda telah melanggar aturan ke-2! 🎉
+    return """🎉 Terkecoh! Meski Anda berhasil menyeberangkan semua entitas dengan selamat, namun Anda telah melanggar aturan ke-2! 🎉
 
 🏆 Anda tidak dapat POIN! 🏆
 
-🌟 **KARAKTER PAHLAWAN YANG CURANG** 🌟
-Pahlawan ini memang berhasil mencapai tujuan, tetapi dengan cara yang curang dan ceroboh karena meninggalkan tawanan bersama anak buah tanpa pengawasan (meski tidak berakibat fatal kali ini).
-Seorang pemimpin sejati tidak hanya fokus pada hasil akhir, tetapi juga pada proses dan keselamatan semua pihak sepanjang perjalanan.
-Berbuat curang dengan pelanggaran aturan menunjukkan kelemahan dalam strategi dan kewaspadaan. Untuk mendapatkan poin, cobalah lagi dengan mematuhi semua aturan!
-*"Kemenangan tanpa integritas hanyalah kemenangan semu. Patuhi setiap aturan untuk menjadi pahlawan sejati."*
-"""
+🌟 **KARAKTER PAHLAWAN YANG TERKECOH** 🌟
+Pahlawan ini memang berhasil mencapai tujuan, tetapi dengan cara yang ceroboh...
+*"Kemenangan tanpa integritas hanyalah kemenangan semu."*"""
 
 # ========== PROSES PERJALANAN ==========
 def check_all_sides():
@@ -169,7 +125,7 @@ def check_all_sides():
         return False
     if check_rule2_violation(state["left"]):
         state["violated_rule2"] = True
-        state["message"] = get_rule2_violation_message("awal")
+        state["message"] = get_rule2_violation_message("sisi awal")
     v_right = check_violation_type(state["right"])
     if v_right:
         state["message"] = get_failure_rule1_message("seberang")
@@ -301,7 +257,7 @@ def show_buttons():
         arah_yang_akan_datang = "🚣 Arah: Seberang → Sisi Awal"
         available = [e for e in ["tawanan", "perbekalan", "anak"] if state["right"][e]]
     st.info(arah_yang_akan_datang)
-    st.markdown("**Pahlawan siap menyeberang. Pilih siapa (entitas) yang akan dibawa:**")
+    st.markdown("**Pahlawan siap menyeberang. Pilih siapa yang akan dibawa:**")
     st.caption("Pilih satu entitas (selain pahlawan) untuk ikut menyeberang. Pahlawan akan selalu ikut.")
     if not available:
         st.info("Tidak ada entitas lain di sisi ini. Pahlawan akan menyeberang sendiri.")
@@ -337,9 +293,19 @@ def show_buttons():
         else:
             st.markdown("*Kosong*")
     with colRiver:
-        st.markdown("### 🌊🌊🌊")
-        st.markdown("### 🚣‍♂️")
-        st.markdown("### 🌊🌊🌊")
+        # ========== GANTI DENGAN VIDEO ==========
+        video_path = Path(__file__).parent.parent / "assets" / "perahu.mp4"
+        if video_path.exists():
+            # Baca file video sebagai bytes
+            with open(video_path, "rb") as f:
+                video_bytes = f.read()
+            st.video(video_bytes, loop=True, autoplay=True)
+        else:
+            # Fallback ke teks jika video tidak ada
+            st.markdown("### 🌊🌊🌊")
+            st.markdown("### 🚣‍♂️")
+            st.markdown("### 🌊🌊🌊")
+            st.warning("Video perahu.mp4 tidak ditemukan di folder assets")
         st.caption("Sungai")
     with colB:
         st.markdown("**🏝️ SEBERANG**")
@@ -360,7 +326,6 @@ def show_buttons():
         else:
             st.info(state["message"])
 
-# ========== FUNGSI UTAMA ==========
 def show_river_game():
     init_permanent_state()
     init_game_state()
@@ -369,11 +334,11 @@ def show_river_game():
     **Aturan:**
     - Perahu hanya bisa memuat **maksimal 2 entitas** (termasuk pahlawan).
     - **Tawanan perang dan perbekalan pangan tidak boleh ditinggal berdua tanpa pengawasan pahlawan** (aturan 1) → LANGSUNG GAGAL.
-    - **Tawanan dan Anak Buah tidak boleh ditinggal berdua tanpa bersama pahlawan** (aturan 2) → TIDAK GAGAL, tetapi dicatat. Jika aturan 2 dilanggar, Anda TIDAK akan mendapat poin meskipun berhasil menyelesaikan permainan.
-    - **Langkah pertama HARUS membawa Tawanan**? Tidak harus. Jika membawa Perbekalan atau Sendirian, Anda melanggar aturan 2 (tidak gagal). Membawa Anak Buah langsung gagal (aturan 1).
-    - **Poin:** Berhasil menyelesaikan permainan pada **permainan pertama** mendapat **10 poin**, **ASALKAN tidak pernah melanggar aturan ke-2**. Jika melanggar aturan ke-2, tetap berhasil tetapi tidak mendapat poin (berbuat curang). Permainan berikutnya hanya latihan (skor tetap).
-    - **Efek kemenangan:** Kemenangan sempurna (tanpa pelanggaran aturan 2) akan menampilkan **balon**. Kemenangan terkecoh (melanggar aturan 2) akan menampilkan **salju**.
-    - Tujuan: memindahkan semua entitas (pahlawan, tawanan, perbekalan, anak buah) ke seberang.
+    - **Tawanan dan Anak Buah tidak boleh ditinggal berdua tanpa bersama pahlawan** (aturan 2) → TIDAK GAGAL, tetapi dicatat. Jika aturan 2 dilanggar, Anda TIDAK akan mendapat poin meskipun berhasil.
+    - **Langkah pertama**: membawa Perbekalan atau Sendirian melanggar aturan 2 (tidak gagal). Membawa Anak langsung gagal (aturan 1).
+    - **Poin:** Hanya pada permainan pertama yang sukses tanpa melanggar aturan 2 mendapat 10 poin. Selanjutnya latihan.
+    - **Efek:** Balon (sempurna) atau Salju (terkecoh).
+    - **Visual:** Video perahu animasi di tengah.
     """)
     show_buttons()
     if st.button("🔄 Reset Permainan", use_container_width=True, key="reset_seberang"):
