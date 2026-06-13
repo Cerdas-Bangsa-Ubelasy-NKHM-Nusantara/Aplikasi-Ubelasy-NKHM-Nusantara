@@ -100,13 +100,6 @@ def reset_karunia():
 
 def show_karunia():
     
-    # Perbaikan path gambar
-    img_path = Path(__file__).parent / "assets" / "karunia.JPG"
-    if img_path.exists():
-        st.image(str(img_path), caption="Gambar Karunia Motivasi", use_container_width=True)
-    else:
-        st.warning("Gambar Karunia Motivasi belum tersedia.")
-
     init_karunia_state()
     
     st.markdown("## 🎁 Tes Karunia Motivasi")
