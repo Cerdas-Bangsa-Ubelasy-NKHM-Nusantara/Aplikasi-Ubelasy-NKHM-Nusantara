@@ -520,7 +520,7 @@ def main():
             if img_path.exists():
                 st.image(str(img_path), caption="Bertanding Untuk Menang 🇮🇩", use_container_width=True)
             else:
-                st.warning("⚠️ Gambar 'garuda.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
+                st.warning("⚠️ Gambar 'karunia.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
         
             st.markdown("---")  # garis pemisah
 
