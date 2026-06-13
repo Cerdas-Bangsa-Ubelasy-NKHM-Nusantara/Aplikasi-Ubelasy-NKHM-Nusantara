@@ -518,7 +518,7 @@ def main():
             # Tampilkan gambar Garuda
             img_path = Path(__file__).parent.parent / "assets" / "karunia.JPG"
             if img_path.exists():
-                st.image(str(img_path), caption="Bertanding Untuk Menang 🇮🇩", use_container_width=True)
+                st.image(str(img_path), caption="Grow in Grace 🇮🇩", use_container_width=True)
             else:
                 st.warning("⚠️ Gambar 'karunia.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
         
