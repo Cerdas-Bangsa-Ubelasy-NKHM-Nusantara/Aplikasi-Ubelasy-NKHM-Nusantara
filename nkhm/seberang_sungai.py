@@ -257,7 +257,7 @@ def show_buttons():
         arah_yang_akan_datang = "🚣 Arah: Seberang → Sisi Awal"
         available = [e for e in ["tawanan", "perbekalan", "anak"] if state["right"][e]]
     st.info(arah_yang_akan_datang)
-    st.markdown("**Pahlawan siap menyeberang. Pilih siapa yang akan dibawa:**")
+    st.markdown("**Pahlawan siap menyeberang. Pilih siapa (entitas) yang akan dibawa:**")
     st.caption("Pilih satu entitas (selain pahlawan) untuk ikut menyeberang. Pahlawan akan selalu ikut.")
     if not available:
         st.info("Tidak ada entitas lain di sisi ini. Pahlawan akan menyeberang sendiri.")
