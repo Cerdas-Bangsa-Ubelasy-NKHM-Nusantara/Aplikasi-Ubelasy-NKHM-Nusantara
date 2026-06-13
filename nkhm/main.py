@@ -515,6 +515,15 @@ def main():
     with tab6:
         sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Sto-mata Hati"])
         with sub_tab1:
+            # Tampilkan gambar Garuda
+            img_path = Path(__file__).parent.parent / "assets" / "garuda.jpg"
+            if img_path.exists():
+                st.image(str(img_path), caption="Bertanding Untuk Menang 🇮🇩", use_container_width=True)
+            else:
+                st.warning("⚠️ Gambar 'garuda.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
+        
+            st.markdown("---")  # garis pemisah
+
             if KARUNIA_AVAILABLE and show_karunia is not None:
                 show_karunia()
             else:
