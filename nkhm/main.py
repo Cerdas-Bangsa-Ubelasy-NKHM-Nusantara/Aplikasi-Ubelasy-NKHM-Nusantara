@@ -515,7 +515,7 @@ def main():
     with tab6:
         sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Sto-mata Hati"])
         with sub_tab1:
-            # Tampilkan gambar Garuda
+            # Tampilkan gambar Karunia
             img_path = Path(__file__).parent.parent / "assets" / "karunia.jpg"
             if img_path.exists():
                 st.image(str(img_path), caption="Grow in Grace 🇮🇩", use_container_width=True)
@@ -533,6 +533,15 @@ def main():
             
     # ========== TAB 7: HADIAH ==========
     with tab7:
+        # Tampilkan gambar Hadiah
+        img_path = Path(__file__).parent.parent / "assets" / "hadiah.gif"
+        if img_path.exists():
+            st.image(str(img_path), caption="A Giveaway 🇮🇩", use_container_width=True)
+        else:
+            st.warning("⚠️ Gambar 'hadiah.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
+        
+        st.markdown("---")  # garis pemisah
+        
         # Subtab di dalam HADIAH
         sub_tab1, sub_tab2, sub_tab3, sub_tab4 = st.tabs(["🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🎲 Lainnya (Coming Soon)"])
     
