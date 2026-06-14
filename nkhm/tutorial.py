@@ -199,13 +199,14 @@ def show_tutorial():
         
     # ========== TAB DOKUMEN dengan 2 Subsubtab ==========
     with tab_dokumen:
-        st.markdown("## 📄 Dokumen Pengembangan Diri")
+        st.markdown("## 📄 Dokumen untuk Tutorial")
         
         # Membuat dua subsubtab
         subsub_tab1, subsub_tab2 = st.tabs(["📘 Pengembangan Diri", "📄 Dokumen Lain (Menyusul)"])
         
         # Subsubtab 1: Pengembangan Diri (baca dari file)
         with subsub_tab1:
+            st.markdown("## 📄 Dokumen Pengembangan Diri")
             doc_path = Path(__file__).parent.parent / "assets" / "dokumen" / "pengembangan_diri.txt"
             if doc_path.exists():
                 try:
