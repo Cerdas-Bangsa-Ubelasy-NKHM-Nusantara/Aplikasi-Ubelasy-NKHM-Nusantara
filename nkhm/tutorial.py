@@ -11,8 +11,8 @@ def show_tutorial():
     st.markdown("Selamat datang di NKHM Nusantara! Tutorial ini akan memandu Anda.")
 
     # Gunakan tabs untuk mengorganisir konten
-    tab_intro, tab_kuis, tab_skor, tab_tips, tab_stomata, tab_seberang = st.tabs([
-        "🌟 Pengantar", "🎮 Panduan Kuis", "📊 Memahami Skor", "💡 Tips & Trik", "💖 Stomata Hati", "🚣 Pahlawan Seberang"
+    tab_intro, tab_kuis, tab_skor, tab_tips, tab_karunia, tab_stomata, tab_seberang = st.tabs([
+        "🌟 Pengantar", "🎮 Panduan Kuis", "📊 Memahami Skor", "💡 Tips & Trik", "🎁 Karunia Motivasi", "💖 Stomata Hati", "🚣 Pahlawan Seberang"
     ])
 
     with tab_intro:
@@ -97,6 +97,11 @@ def show_tutorial():
         - Gunakan filter untuk fokus pada soal tertentu.
         - Ajak teman bertanding di tab **⚔️ TANDING** untuk menguji kemampuan Anda!
         """)
+        
+    # ========== TAB KARUNIA MOTIVASI ==========
+    with tab_karunia:
+        from nkhm.tutorial_karunia import show_tutorial_karunia
+        show_tutorial_karunia()
 
     # ========== TAB STOMATA HATI ==========
     with tab_stomata:
