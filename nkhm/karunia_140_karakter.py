@@ -181,7 +181,7 @@ def show_karunia_140_karakter():
             **F. Karunia Memimpin (Leader)** – Kemampuan memimpin, mengatur, dan mengarahkan.
             **G. Karunia Kemurahan hati (Compassion)** – Kemampuan mengasihi dan berbelas kasihan.
             """)
-        st.info("Hasil tes ini dapat membantu Anda memahami potensi diri.")
+        st.info("Hasil tes ini dapat membantu Anda memahami talenta/potensi diri.")
 
 if __name__ == "__main__":
     show_karunia_140_karakter()
