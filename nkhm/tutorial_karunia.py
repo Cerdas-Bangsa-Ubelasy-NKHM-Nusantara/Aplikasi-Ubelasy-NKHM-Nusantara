@@ -55,7 +55,7 @@ def show_tutorial_karunia():
         Kuesioner ini merupakan versi lebih lengkap dengan **140 pernyataan**. Setiap pernyataan juga dinilai 0–5 dengan skala yang sama.
         
         **Penilaian:**  
-        Sama seperti kuesioner 70 soal, pembagian karunia mengikuti pola 7 kolom berulang. Tapi dengab urutan yang berbeda berikut ini:
+        Sama seperti kuesioner 70 soal, pembagian karunia mengikuti pola 7 kolom berulang. Tapi dengan urutan yang berbeda berikut ini:
         
         - Soal nomor **1, 8, 15, ... , 134** → Karunia Bernubuat
         - Soal nomor **2, 9, 16, ... , 135** → Karunia Memimpin 
