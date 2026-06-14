@@ -55,15 +55,15 @@ def show_tutorial_karunia():
         Kuesioner ini merupakan versi lebih lengkap dengan **140 pernyataan**. Setiap pernyataan juga dinilai 0–5 dengan skala yang sama.
         
         **Penilaian:**  
-        Sama seperti kuesioner 70 soal, pembagian karunia mengikuti pola 7 kolom berulang. Dengan demikian:
+        Sama seperti kuesioner 70 soal, pembagian karunia mengikuti pola 7 kolom berulang. Tapi dengab urutan yang berbeda berikut ini:
         
         - Soal nomor **1, 8, 15, ... , 134** → Karunia Bernubuat
-        - Soal nomor **2, 9, 16, ... , 135** → Karunia Melayani
-        - Soal nomor **3, 10, 17, ... , 136** → Karunia Mengajar
+        - Soal nomor **2, 9, 16, ... , 135** → Karunia Memimpin 
+        - Soal nomor **3, 10, 17, ... , 136** → Karunia Melayani 
         - Soal nomor **4, 11, 18, ... , 137** → Karunia Menasihati
         - Soal nomor **5, 12, 19, ... , 138** → Karunia Memberi
-        - Soal nomor **6, 13, 20, ... , 139** → Karunia Memimpin
-        - Soal nomor **7, 14, 21, ... , 140** → Karunia Kemurahan Hati
+        - Soal nomor **6, 13, 20, ... , 139** → Karunia Mengajar
+        - Soal nomor **7, 14, 21, ... , 140** → Karunia Kemurahan Hati (Berbelas Kasihan)
         
         Setiap kolom berisi 20 soal (karena 140/7 = 20).
         
