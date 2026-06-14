@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 
-# Daftar 70 pernyataan (sesuai urutan)
+# Daftar 70 pernyataan (tetap sama)
 QUESTIONS = [
     "Dapat cepat dan tepat mengenali sesuatu itu baik atau jahat dan membenci kejahatan.",
     "Cepat mengetahui kebutuhan orang lain dan tanggap memenuhi kebutuhan tersebut.",
@@ -76,7 +76,8 @@ QUESTIONS = [
     "Bersuka-cita melihat orang lain diberkati, dan berduka-cita melihat orang lain terluka."
 ]
 
-# Nama karunia per kolom (A-G)
+# Urutan karunia yang benar sesuai pola kolom:
+# Indeks 0 = Bernubuat, 1 = Melayani, 2 = Mengajar, 3 = Menasihati, 4 = Memberi, 5 = Memimpin, 6 = Berbelas Kasihan
 KARUNIA_NAMES = [
     "A. Karunia Bernubuat (Perceiver)",
     "B. Karunia Melayani (Doer)",
@@ -84,11 +85,10 @@ KARUNIA_NAMES = [
     "D. Karunia Menasihati (Encourager)",
     "E. Karunia Memberi (Giver)",
     "F. Karunia Memimpin (Leader)",
-    "G. Karunia Kemurahan hati (Compassion)"
+    "G. Karunia Kemurahan Hati / Berbelas Kasihan (Compassion)"
 ]
 
 def init_karunia_state():
-    """Inisialisasi session state untuk jawaban karunia"""
     if "karunia_answers" not in st.session_state:
         st.session_state.karunia_answers = [0] * 70
     if "karunia_submitted" not in st.session_state:
@@ -99,7 +99,6 @@ def reset_karunia():
     st.session_state.karunia_submitted = False
 
 def show_karunia():
-    
     init_karunia_state()
     
     st.markdown("## 🎁 Tes Karunia Motivasi")
@@ -118,8 +117,6 @@ def show_karunia():
     
     st.markdown("### 📋 Kuesioner (70 pernyataan)")
     
-    # Tampilkan pernyataan dalam bentuk list vertikal dengan teks lengkap
-    # Setiap baris menampilkan 1 pernyataan
     for i, question in enumerate(QUESTIONS):
         col1, col2 = st.columns([8, 1])
         with col1:
@@ -140,10 +137,9 @@ def show_karunia():
     col1, col2 = st.columns(2)
     with col1:
         if st.button("📊 Hitung Skor Karunia", use_container_width=True):
-            # Hitung total per kolom (setiap 7 soal membentuk 1 kolom karunia)
             totals = [0] * 7
             for i, val in enumerate(st.session_state.karunia_answers):
-                col_idx = i % 7
+                col_idx = i % 7   # pola 1-7 berulang
                 totals[col_idx] += val
             st.session_state.karunia_totals = totals
             st.session_state.karunia_submitted = True
@@ -158,14 +154,12 @@ def show_karunia():
         st.markdown("---")
         st.subheader("📊 Hasil Tes Karunia Motivasi")
         
-        # Tampilkan tabel per kolom
         df = pd.DataFrame({
             "Karunia": KARUNIA_NAMES,
             "Total Skor": totals
         })
         st.dataframe(df, use_container_width=True, hide_index=True)
         
-        # Urutkan untuk cari 3 tertinggi
         sorted_idx = sorted(range(7), key=lambda i: totals[i], reverse=True)
         top3 = [(KARUNIA_NAMES[i], totals[i]) for i in sorted_idx[:3]]
         
@@ -173,7 +167,6 @@ def show_karunia():
         for rank, (name, score) in enumerate(top3, 1):
             st.success(f"{rank}. **{name}** – Skor: {score}")
         
-        # Penjelasan singkat (opsional)
         with st.expander("📖 Penjelasan Karunia"):
             st.markdown("""
             **A. Karunia Bernubuat (Perceiver)** – Kemampuan melihat kebenaran, membedakan yang baik dan jahat, serta menyatakan kebenaran dengan tegas.
@@ -188,7 +181,10 @@ def show_karunia():
             
             **F. Karunia Memimpin (Leader)** – Kemampuan memimpin, mengatur, dan mengarahkan orang lain.
             
-            **G. Karunia Kemurahan hati (Compassion)** – Kemampuan mengasihi, berbelas kasihan, dan menolong yang menderita.
+            **G. Karunia Kemurahan Hati / Berbelas Kasihan (Compassion)** – Kemampuan mengasihi, berbelas kasihan, dan menolong yang menderita.
             """)
         
         st.info("Hasil tes ini dapat membantu Anda memahami talenta/potensi diri dan area pengembangan.")
+
+if __name__ == "__main__":
+    show_karunia()
