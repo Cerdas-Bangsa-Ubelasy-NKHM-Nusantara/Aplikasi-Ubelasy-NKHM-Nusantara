@@ -178,7 +178,6 @@ def show_tutorial():
             **Hasil:** Posisi Sto-mata Hati berada di **sisi 9 – Berbuat kasih**.
             """)
         
-        # Perbaikan path gambar
         img_path = Path(__file__).parent.parent / "assets" / "stomata_hati_contoh_1.jpg"
         if img_path.exists():
             st.image(str(img_path), caption="Contoh Ilustrasi Stomata Hati", use_container_width=True)
@@ -198,13 +197,21 @@ def show_tutorial():
     with tab_seberang:
         show_tutorial_seberang()
         
-    # ========== TAB DOKUMEN (Baru) ==========
+    # ========== TAB DOKUMEN ==========
     with tab_dokumen:
         st.markdown("## 📄 Dokumen Pengembangan Diri")
-        # Subsubtab (meski hanya satu, tetap menggunakan tabs untuk konsistensi)
-        subsub_tab1 = st.tabs(["📘 Pengembangan Diri"])
-            show_pengembangan_diri()
-        
+        doc_path = Path(__file__).parent.parent / "assets" / "dokumen" / "pengembangan_diri.txt"
+        if doc_path.exists():
+            try:
+                with open(doc_path, "r", encoding="utf-8") as f:
+                    content = f.read()
+                st.markdown(content)
+            except Exception as e:
+                st.error(f"Gagal membaca file: {e}")
+        else:
+            st.warning(f"File 'pengembangan_diri.txt' tidak ditemukan di: {doc_path}")
+            st.info("Silakan upload file tersebut ke folder 'assets/dokumen/'.")
+
 def show_tutorial_simple():
     """Fungsi fallback jika konten interaktif tidak diperlukan."""
     st.markdown("## 📘 Tutorial NKHM Nusantara")
