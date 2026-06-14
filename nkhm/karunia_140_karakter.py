@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 
-# 140 pertanyaan berdasarkan PDF (urutan 1-140)
+# 140 pertanyaan (tetap sama seperti sebelumnya, urutan 1-140 dari PDF)
 QUESTIONS_140 = [
     "Dengan cepat dan tepat sekali dapat mengetahui sesuatu yang baik atau jahat serta membenci kejahatan",
     "Cepat mengetahui kebutuhan orang lain dan tanggap memenuhi kebutuhan tersebut",
@@ -146,8 +146,7 @@ QUESTIONS_140 = [
     "Berdoa syafaat bagi orang-orang yang terluka"
 ]
 
-# Urutan 7 Karunia Motivasi yang benar (Roma 12:6-8)
-# 1. Bernubuat, 2. Memimpin, 3. Melayani, 4. Menasehati, 5. Memberi, 6. Mengajar, 7. Berbelas Kasihan
+# Urutan karunia sesuai kolom (kolom1 = Bernubuat, kolom2 = Memimpin, ...)
 KARUNIA_NAMES_140 = [
     "1. Karunia Bernubuat (Perceiver)",
     "2. Karunia Memimpin (Leader)",
@@ -184,12 +183,11 @@ def show_karunia_140_karakter():
     - **4** = Kebanyakan
     - **5** = Selalu
     
-    Terdapat **140 pernyataan** (sesuai urutan asli dari PDF). Setelah selesai, klik **Hitung Skor**.
+    Terdapat **140 pernyataan**. Setelah selesai, klik **Hitung Skor**.
     """)
     
     st.markdown("### 📋 Kuesioner (140 pernyataan)")
     
-    # Tampilkan pernyataan dengan selectbox (setiap selectbox punya key unik)
     for i, question in enumerate(QUESTIONS_140):
         col1, col2 = st.columns([8, 1])
         with col1:
@@ -210,12 +208,11 @@ def show_karunia_140_karakter():
     col1, col2 = st.columns(2)
     with col1:
         if st.button("📊 Hitung Skor Karunia 140", key="hitung_karunia_140_button", use_container_width=True):
-            # Hitung total per karunia (setiap 20 soal membentuk 1 karunia, karena 140/7=20)
+            # Hitung total per kolom berdasarkan pola modulo 7
             totals = [0] * 7
             for i, val in enumerate(st.session_state.karunia_140_answers):
-                col_idx = i // 20  # 20 soal per karunia
-                if col_idx < 7:
-                    totals[col_idx] += val
+                col_idx = i % 7   # karena nomor 1 (i=0) -> kolom1, 2->kolom2, ..., 7->kolom7, 8->kolom1, dst.
+                totals[col_idx] += val
             st.session_state.karunia_140_totals = totals
             st.session_state.karunia_140_submitted = True
             st.rerun()
