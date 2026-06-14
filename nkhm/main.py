@@ -196,16 +196,16 @@ def main():
     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
     "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL"
 ])
-    # Tampilkan gambar Kuis
-    img_path = Path(__file__).parent.parent / "assets" / "kuis.gif"
-    if img_path.exists():
-        st.image(str(img_path), caption="Asah 4 Kecerdasan dan Nasionalisme 🇮🇩", use_container_width=True)
-    else:
-        st.warning("⚠️ Gambar 'kuis.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
         
-    
     # ========== TAB 1: KUIS ==========
     with tab1:
+        # Tampilkan gambar Kuis
+        img_path = Path(__file__).parent.parent / "assets" / "kuis.gif"
+        if img_path.exists():
+            st.image(str(img_path), caption="Asah 4 Kecerdasan dan Nasionalisme 🇮🇩", use_container_width=True)
+        else:
+            st.warning("⚠️ Gambar 'kuis.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
+                
         st.markdown("### Pilih Kuis")
         col_f1, col_f2 = st.columns(2)
         with col_f1:
