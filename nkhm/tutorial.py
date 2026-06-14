@@ -11,8 +11,8 @@ def show_tutorial():
     st.markdown("Selamat datang di NKHM Nusantara! Tutorial ini akan memandu Anda.")
 
     # Gunakan tabs untuk mengorganisir konten
-    tab_intro, tab_kuis, tab_skor, tab_tips, tab_karunia, tab_stomata, tab_seberang = st.tabs([
-        "🌟 Pengantar", "🎮 Panduan Kuis", "📊 Memahami Skor", "💡 Tips & Trik", "🎁 Karunia Motivasi", "💖 Stomata Hati", "🚣 Pahlawan Seberang"
+    tab_intro, tab_kuis, tab_skor, tab_tips, tab_karunia, tab_stomata, tab_seberang, tab_dokumen = st.tabs([
+        "🌟 Pengantar", "🎮 Panduan Kuis", "📊 Memahami Skor", "💡 Tips & Trik", "🎁 Karunia Motivasi", "💖 Stomata Hati", "🚣 Pahlawan Seberang", "📄 Dokumen"
     ])
 
     with tab_intro:
@@ -197,7 +197,14 @@ def show_tutorial():
     # ========== TAB Pahlawan Menyeberang Sungai ==========
     with tab_seberang:
         show_tutorial_seberang()
-
+        
+    # ========== TAB DOKUMEN (Baru) ==========
+    with tab_dokumen:
+        st.markdown("## 📄 Dokumen Pengembangan Diri")
+        # Subsubtab (meski hanya satu, tetap menggunakan tabs untuk konsistensi)
+        subsub_tab1 = st.tabs(["📘 Pengembangan Diri"])
+            show_pengembangan_diri()
+        
 def show_tutorial_simple():
     """Fungsi fallback jika konten interaktif tidak diperlukan."""
     st.markdown("## 📘 Tutorial NKHM Nusantara")
