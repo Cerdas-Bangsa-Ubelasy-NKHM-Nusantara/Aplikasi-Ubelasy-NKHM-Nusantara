@@ -197,20 +197,30 @@ def show_tutorial():
     with tab_seberang:
         show_tutorial_seberang()
         
-    # ========== TAB DOKUMEN ==========
+    # ========== TAB DOKUMEN dengan 2 Subsubtab ==========
     with tab_dokumen:
         st.markdown("## 📄 Dokumen Pengembangan Diri")
-        doc_path = Path(__file__).parent.parent / "assets" / "dokumen" / "pengembangan_diri.txt"
-        if doc_path.exists():
-            try:
-                with open(doc_path, "r", encoding="utf-8") as f:
-                    content = f.read()
-                st.markdown(content)
-            except Exception as e:
-                st.error(f"Gagal membaca file: {e}")
-        else:
-            st.warning(f"File 'pengembangan_diri.txt' tidak ditemukan di: {doc_path}")
-            st.info("Silakan upload file tersebut ke folder 'assets/dokumen/'.")
+        
+        # Membuat dua subsubtab
+        subsub_tab1, subsub_tab2 = st.tabs(["📘 Pengembangan Diri", "📄 Dokumen Lain (Menyusul)"])
+        
+        # Subsubtab 1: Pengembangan Diri (baca dari file)
+        with subsub_tab1:
+            doc_path = Path(__file__).parent.parent / "assets" / "dokumen" / "pengembangan_diri.txt"
+            if doc_path.exists():
+                try:
+                    with open(doc_path, "r", encoding="utf-8") as f:
+                        content = f.read()
+                    st.markdown(content)
+                except Exception as e:
+                    st.error(f"Gagal membaca file: {e}")
+            else:
+                st.warning(f"File 'pengembangan_diri.txt' tidak ditemukan di: {doc_path}")
+                st.info("Silakan upload file tersebut ke folder 'assets/dokumen/'.")
+        
+        # Subsubtab 2: Dokumen Lain (placeholder)
+        with subsub_tab2:
+            st.info("📌 Dokumen lain akan segera menyusul. Silakan cek secara berkala.")
 
 def show_tutorial_simple():
     """Fungsi fallback jika konten interaktif tidak diperlukan."""
