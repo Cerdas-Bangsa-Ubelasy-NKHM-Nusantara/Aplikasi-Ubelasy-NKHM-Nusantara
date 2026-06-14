@@ -22,7 +22,7 @@ from nkhm.tebak_pahlawan import show_tebak_pahlawan
 from nkhm.angka_rahasia import show_angka_rahasia
 from nkhm.seberang_sungai import show_river_game
 
-# Import opsional (komentari jika file belum ada)
+# Import opsional
 try:
     from nkhm.tournament import show_tournament
     TOURNAMENT_AVAILABLE = True
@@ -34,7 +34,7 @@ try:
     from nkhm.karunia import show_karunia
     KARUNIA_AVAILABLE = True
 except ImportError:
-    KARUNIA_TERSEDIA = Salah
+    KARUNIA_AVAILABLE = False
     show_karunia = None
 
 # ========== INISIALISASI SESSION STATE ==========
@@ -199,13 +199,12 @@ def main():
         
     # ========== TAB 1: KUIS ==========
     with tab1:
-        # Tampilkan gambar Kuis
         img_path = Path(__file__).parent.parent / "assets" / "kuis.gif"
         if img_path.exists():
             st.image(str(img_path), caption="Asah 4 Kecerdasan dan Nasionalisme 🇮🇩", use_container_width=True)
         else:
-            st.warning("⚠️ Gambar 'kuis.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
-                
+            st.info("💡 Gambar kuis belum tersedia. Silakan upload 'kuis.gif' ke folder assets.")
+        st.markdown("---")
         st.markdown("### Pilih Kuis")
         col_f1, col_f2 = st.columns(2)
         with col_f1:
@@ -213,7 +212,7 @@ def main():
         with col_f2:
             kecerdasan = st.selectbox("Fokus", ["Semua", "IQ", "EQ", "SQ", "AQ", "Nasionalisme"], key="kecerdasan_filter_kuis")
         
-        # Filter soal
+        # Filter soal (sama seperti sebelumnya)
         filtered_questions = []
         for q in QUESTION_BANK:
             if kecerdasan == "Nasionalisme":
@@ -284,7 +283,6 @@ def main():
             else:
                 col_tag2.info("📚 Umum")
             
-            # Petunjuk untuk soal skor tanggapan
             if q.get("type") in ["EQ_scale", "AQ_scale"]:
                 if q.get("section") and q.get("scale"):
                     st.caption(f"📂 **{q['section']}** — *{q['scale']}*")
@@ -302,12 +300,10 @@ def main():
             radio_label = "Pilih jawabanmu:" if q.get("type") not in ["EQ_scale", "AQ_scale"] else "Pilih skor tanggapan:"
             selected = st.radio(radio_label, q['options'], key=f"radio_{q['text']}", index=None, disabled=st.session_state.nkhm_answered)
             
-            # Tombol JAWAB
             if st.button("✅ JAWAB", disabled=st.session_state.nkhm_answered or selected is None, use_container_width=True):
                 st.session_state.nkhm_answered = True
                 st.session_state.nkhm_total_questions += 1
                 
-                # ========== SOAL SKOR TANGGAPAN ==========
                 if q.get("type") in ["EQ_scale", "AQ_scale"]:
                     section = q.get("section", "Unknown")
                     q_type = q.get("type")
@@ -337,7 +333,6 @@ def main():
                         "nkhm_total": get_current_nkhm()[1]
                     })
                 else:
-                    # ========== SOAL PILIHAN GANDA ==========
                     if q['type'] == "Nasionalisme":
                         score_type = "Nasionalisme"
                     elif q['type'] in ["EQ", "IQ", "SQ", "AQ"]:
@@ -349,7 +344,6 @@ def main():
                     
                     if selected == q['correct']:
                         raw_increment = get_increment(score_type)
-                        # Tentukan batas maks raw points untuk tipe
                         max_raw_map = {
                             "IQ": MAX_POIN_IQ,
                             "EQ": MAX_POIN_EQ,
@@ -376,7 +370,6 @@ def main():
                     })
                 st.rerun()
             
-            # Tampilkan feedback
             if st.session_state.nkhm_feedback == "benar":
                 st.success(f"✅ BENAR! + poin untuk {st.session_state.last_score_type}")
             elif st.session_state.nkhm_feedback == "salah":
@@ -387,7 +380,6 @@ def main():
             elif st.session_state.nkhm_feedback == "scale_answered":
                 st.success(f"✅ Jawaban tercatat für {st.session_state.last_score_type}")
             
-            # Tombol selesai bagian (khusus skor tanggapan)
             if q.get("type") in ["EQ_scale", "AQ_scale"] and st.session_state.current_section:
                 if st.button("✅ Selesai Bagian Ini", use_container_width=True):
                     section = st.session_state.current_section
@@ -416,7 +408,6 @@ def main():
                         st.session_state.nkhm_feedback = None
                         st.rerun()
             
-            # Tombol navigasi untuk soal pilihan ganda
             if st.session_state.nkhm_answered and q.get("type") not in ["EQ_scale", "AQ_scale"]:
                 col_nav1, col_nav2 = st.columns(2)
                 with col_nav1:
@@ -493,16 +484,12 @@ def main():
     
     # ========== TAB 5: TANDING ==========
     with tab5:
-
-        # Tampilkan gambar Garuda
         img_path = Path(__file__).parent.parent / "assets" / "garuda.jpg"
         if img_path.exists():
             st.image(str(img_path), caption="Bertanding Untuk Menang 🇮🇩", use_container_width=True)
         else:
-            st.warning("⚠️ Gambar 'garuda.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
-        
-        st.markdown("---")  # garis pemisah
-
+            st.info("💡 Gambar 'garuda.jpg' belum tersedia.")
+        st.markdown("---")
         if TOURNAMENT_AVAILABLE and show_tournament is not None:
             tanding_mode = st.radio(
                 "Pilih Mode Tanding:",
@@ -522,21 +509,13 @@ def main():
     with tab6:
         sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Sto-mata Hati"])
         with sub_tab1:
-            # Tampilkan gambar Karunia
             img_path = Path(__file__).parent.parent / "assets" / "karunia.jpg"
             if img_path.exists():
                 st.image(str(img_path), caption="Grow in Grace 🇮🇩", use_container_width=True)
             else:
-                st.warning("⚠️ Gambar 'karunia.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
-        
-            st.markdown("---")  # garis pemisah
-
-            if KARUNIA_AVAILABLE and show_karunia is not None:
-                show_karunia()
-            else:
-                st.info("🎁 Fitur Karunia Motivasi akan segera hadir!")
-            
-            # Buat subsubtab di dalam Karunia Motivasi
+                st.info("💡 Gambar 'karunia.jpg' belum tersedia.")
+            st.markdown("---")
+            # Dua subsubtab: Karunia Umum dan Karunia 140 Karakter
             subsub_tab1, subsub_tab2 = st.tabs(["📜 Karunia Umum", "✨ Karunia 140 Karakter"])
             with subsub_tab1:
                 if KARUNIA_AVAILABLE and show_karunia is not None:
@@ -552,24 +531,18 @@ def main():
                 except Exception as e:
                     st.error(f"Terjadi error: {e}")
         with sub_tab2:
-            show_stomata() 
+            show_stomata()
       
     # ========== TAB 7: HADIAH ==========
     with tab7:
-        # Tampilkan gambar Hadiah
         img_path = Path(__file__).parent.parent / "assets" / "hadiah.gif"
         if img_path.exists():
             st.image(str(img_path), caption="A Giveaway 🇮🇩", use_container_width=True)
         else:
-            st.warning("⚠️ Gambar 'hadiah.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
-        
-        st.markdown("---")  # garis pemisah
-        
-        # Subtab di dalam HADIAH
+            st.info("💡 Gambar 'hadiah.gif' belum tersedia.")
+        st.markdown("---")
         sub_tab1, sub_tab2, sub_tab3, sub_tab4 = st.tabs(["🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🎲 Lainnya (Coming Soon)"])
-    
         with sub_tab1:
-            # Panggil fungsi game tebak pahlawan
             from nkhm.tebak_pahlawan import show_tebak_pahlawan
             show_tebak_pahlawan()
         with sub_tab2:
@@ -577,16 +550,12 @@ def main():
         with sub_tab3:
             from nkhm.seberang_sungai import show_river_game
             show_river_game()
-
         with sub_tab4:
             st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
-
-        
+    
     # ========== TAB 8: TUTORIAL ==========
     with tab8:
         show_tutorial()
 
 if __name__ == "__main__":
     main()
-
-
