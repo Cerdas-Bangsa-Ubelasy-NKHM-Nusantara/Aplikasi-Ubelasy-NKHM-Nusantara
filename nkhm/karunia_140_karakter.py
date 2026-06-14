@@ -183,7 +183,7 @@ def show_karunia_140_karakter():
     - **4** = Kebanyakan
     - **5** = Selalu
     
-    Terdapat **140 pernyataan**. Setelah selesai, klik **Hitung Skor**.
+    Terdapat **140 pernyataan**. Jawablah dengan jujur dan tidak perlu takut terhadap penilaian orang lain. Setelah selesai, klik **Hitung Skor**.
     """)
     
     st.markdown("### 📋 Kuesioner (140 pernyataan)")
