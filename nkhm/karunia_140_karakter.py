@@ -107,15 +107,17 @@ def show_karunia_140_karakter():
     
     st.markdown("## ✨ Karunia 140 Karakter")
     st.markdown("""
-    **Petunjuk:**: Bacalah setiap pernyataan dengan seksama. Berikan nilai 0–5 sesuai dengan seberapa sering pernyataan tersebut menggambarkan diri Anda:
-
-0 = Tidak pernah
-1 = Jarang
-2 = Kadang-kadang
-3 = Biasanya
-4 = Kebanyakan
-5 = Selalu
-Jawablah dengan jujur dan tidak perlu takut terhadap penilaian orang lain.**. Setelah selesai, klik **Hitung Skor**.
+    **Petunjuk:** Bacalah setiap pernyataan dengan seksama. Berikan nilai 0–5 sesuai dengan seberapa sering pernyataan tersebut menggambarkan diri Anda:
+    
+    - **0** = Tidak pernah
+    - **1** = Jarang
+    - **2** = Kadang-kadang
+    - **3** = Biasanya
+    - **4** = Kebanyakan
+    - **5** = Selalu
+    
+    Jawablah dengan **jujur** dan tidak perlu takut terhadap penilaian orang lain
+**. Setelah selesai, klik **Hitung Skor**.
     """)
     
     st.markdown("### 📋 Kuesioner (140 pernyataan)")
