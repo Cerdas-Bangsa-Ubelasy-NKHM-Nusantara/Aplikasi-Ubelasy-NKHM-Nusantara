@@ -516,7 +516,7 @@ def main():
                 st.info("💡 Gambar 'karunia.jpg' belum tersedia.")
             st.markdown("---")
             # Dua subsubtab: Karunia Umum dan Karunia 140 Karakter
-            subsub_tab1, subsub_tab2 = st.tabs(["📜 Karunia Umum", "✨ Karunia 140 Karakter"])
+            subsub_tab1, subsub_tab2, subsub_tab3 = st.tabs(["📜 Karunia Umum", "✨ Karunia 140 Karakter", "📋 Karakter & Masalah"])
             with subsub_tab1:
                 if KARUNIA_AVAILABLE and show_karunia is not None:
                     show_karunia()
@@ -529,7 +529,16 @@ def main():
                 except ImportError:
                     st.error("❌ Modul 'karunia_140_karakter' tidak ditemukan. Pastikan file sudah ada di folder nkhm.")
                 except Exception as e:
+                    st.error(f"Terjadi error: {e}")      
+            with subsub_tab3:
+                try:
+                    from nkhm.karunia_karakter_masalah import show_karunia_karakter_masalah
+                    show_karunia_karakter_masalah()
+                except ImportError:
+                    st.error("❌ Modul 'karunia_karakter_masalah' tidak ditemukan.")
+                except Exception as e:
                     st.error(f"Terjadi error: {e}")
+  
         with sub_tab2:
             show_stomata()
       
