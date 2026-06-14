@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 
-# 70 pernyataan asli (masing-masing sudah ≤140 karakter)
+# 70 pernyataan asli (sama seperti di karunia.py)
 ORIGINAL_70 = [
     "Dapat cepat dan tepat mengenali sesuatu itu baik atau jahat dan membenci kejahatan.",
     "Cepat mengetahui kebutuhan orang lain dan tanggap memenuhi kebutuhan tersebut.",
@@ -76,12 +76,9 @@ ORIGINAL_70 = [
     "Bersuka-cita melihat orang lain diberkati, dan berduka-cita melihat orang lain terluka."
 ]
 
-# 140 pertanyaan = 70 asli + 70 asli (duplikasi untuk memperbanyak tanpa mengubah makna)
-# Dengan duplikasi, setiap karunia akan memiliki 20 pertanyaan (karena 140/7 = 20)
-# Urutan karunia: 0-19 = A, 20-39 = B, 40-59 = C, 60-79 = D, 80-99 = E, 100-119 = F, 120-139 = G
+# 140 pertanyaan = 70 asli + 70 asli (duplikasi)
 QUESTIONS_140 = ORIGINAL_70 + ORIGINAL_70
 
-# Nama karunia per kolom (A-G) – sama seperti sebelumnya
 KARUNIA_NAMES_140 = [
     "A. Karunia Bernubuat (Perceiver)",
     "B. Karunia Melayani (Doer)",
@@ -110,21 +107,13 @@ def show_karunia_140_karakter():
     
     st.markdown("## ✨ Karunia 140 Karakter")
     st.markdown("""
-    **Petunjuk:** Bacalah setiap pernyataan dengan seksama. Berikan nilai 0–5 sesuai dengan seberapa sering pernyataan tersebut menggambarkan diri Anda:
-    
-    - **0** = Tidak pernah
-    - **1** = Jarang
-    - **2** = Kadang-kadang
-    - **3** = Biasanya
-    - **4** = Kebanyakan
-    - **5** = Selalu
-    
-    Terdapat **140 pernyataan** (setiap pernyataan maksimal 140 karakter). Setelah selesai, klik tombol **Hitung Skor**.
+    **Petunjuk:** Berikan nilai 0–5 (0=Tidak pernah, 5=Selalu) untuk setiap pernyataan.
+    Terdapat **140 pernyataan**. Setelah selesai, klik **Hitung Skor**.
     """)
     
     st.markdown("### 📋 Kuesioner (140 pernyataan)")
     
-    # Tampilkan pernyataan dengan selectbox nilai di samping kanan
+    # Tampilkan pernyataan dengan selectbox (setiap selectbox punya key unik)
     for i, question in enumerate(QUESTIONS_140):
         col1, col2 = st.columns([8, 1])
         with col1:
@@ -135,7 +124,7 @@ def show_karunia_140_karakter():
                 "Nilai",
                 options=[0, 1, 2, 3, 4, 5],
                 index=current_val,
-                key=f"karunia_140_{i}",
+                key=f"karunia_140_select_{i}",
                 label_visibility="collapsed"
             )
             st.session_state.karunia_140_answers[i] = selected
@@ -144,18 +133,17 @@ def show_karunia_140_karakter():
     
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("📊 Hitung Skor Karunia 140", use_container_width=True):
-            # Hitung total per karunia (setiap 20 soal membentuk 1 karunia)
+        if st.button("📊 Hitung Skor Karunia 140", key="hitung_karunia_140_button", use_container_width=True):
             totals = [0] * 7
             for i, val in enumerate(st.session_state.karunia_140_answers):
-                col_idx = i // 20  # 20 soal per karunia (140/7=20)
+                col_idx = i // 20
                 if col_idx < 7:
                     totals[col_idx] += val
             st.session_state.karunia_140_totals = totals
             st.session_state.karunia_140_submitted = True
             st.rerun()
     with col2:
-        if st.button("🔄 Reset", use_container_width=True):
+        if st.button("🔄 Reset", key="reset_karunia_140_button", use_container_width=True):
             reset_karunia_140()
             st.rerun()
     
@@ -169,7 +157,6 @@ def show_karunia_140_karakter():
         })
         st.dataframe(df, use_container_width=True, hide_index=True)
         
-        # Urutkan untuk mencari 3 tertinggi
         sorted_idx = sorted(range(7), key=lambda i: totals[i], reverse=True)
         top3 = [(KARUNIA_NAMES_140[i], totals[i]) for i in sorted_idx[:3]]
         
@@ -177,32 +164,17 @@ def show_karunia_140_karakter():
         for rank, (name, score) in enumerate(top3, 1):
             st.success(f"{rank}. **{name}** – Skor: {score}")
         
-        # Skor maksimal per karunia = 20 * 5 = 100
         with st.expander("📖 Penjelasan Karunia"):
             st.markdown("""
-            **A. Karunia Bernubuat (Perceiver)**  
-            Kemampuan melihat kebenaran, membedakan yang baik dan jahat, serta menyatakan kebenaran dengan tegas.
-            
-            **B. Karunia Melayani (Doer)**  
-            Kemampuan menolong, memenuhi kebutuhan praktis orang lain, dan bekerja dengan rajin.
-            
-            **C. Karunia Mengajar (Teacher)**  
-            Kemampuan menyampaikan kebenaran secara logis, sistematis, dan mengajar orang lain.
-            
-            **D. Karunia Menasihati (Encourager)**  
-            Kemampuan mendorong, memotivasi, dan menasihati orang lain untuk bertumbuh.
-            
-            **E. Karunia Memberi (Giver)**  
-            Kemampuan memberi dengan sukacita, mengelola sumber daya untuk memberkati.
-            
-            **F. Karunia Memimpin (Leader)**  
-            Kemampuan memimpin, mengatur, dan mengarahkan orang lain.
-            
-            **G. Karunia Kemurahan hati (Compassion)**  
-            Kemampuan mengasihi, berbelas kasihan, dan menolong yang menderita.
+            **A. Karunia Bernubuat (Perceiver)** – Kemampuan melihat kebenaran, membedakan yang baik dan jahat.
+            **B. Karunia Melayani (Doer)** – Kemampuan menolong dan memenuhi kebutuhan praktis.
+            **C. Karunia Mengajar (Teacher)** – Kemampuan menyampaikan kebenaran secara logis dan sistematis.
+            **D. Karunia Menasihati (Encourager)** – Kemampuan mendorong dan memotivasi orang lain.
+            **E. Karunia Memberi (Giver)** – Kemampuan memberi dengan sukacita dan mengelola sumber daya.
+            **F. Karunia Memimpin (Leader)** – Kemampuan memimpin, mengatur, dan mengarahkan.
+            **G. Karunia Kemurahan hati (Compassion)** – Kemampuan mengasihi dan berbelas kasihan.
             """)
-        
-        st.info("Hasil tes ini dapat membantu Anda memahami potensi diri dan area pengembangan.")
+        st.info("Hasil tes ini dapat membantu Anda memahami potensi diri.")
 
 if __name__ == "__main__":
     show_karunia_140_karakter()
