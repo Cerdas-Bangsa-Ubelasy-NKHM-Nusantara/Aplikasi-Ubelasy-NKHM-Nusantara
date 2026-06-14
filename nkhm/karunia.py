@@ -191,4 +191,4 @@ def show_karunia():
             **G. Karunia Kemurahan hati (Compassion)** – Kemampuan mengasihi, berbelas kasihan, dan menolong yang menderita.
             """)
         
-        st.info("Hasil tes ini dapat membantu Anda memahami potensi diri dan area pengembangan.")
+        st.info("Hasil tes ini dapat membantu Anda memahami talenta/potensi diri dan area pengembangan.")
