@@ -146,7 +146,8 @@ QUESTIONS_140 = [
     "Berdoa syafaat bagi orang-orang yang terluka"
 ]
 
-# Nama karunia per kolom (A-G) sesuai urutan 7 karunia
+# Urutan 7 Karunia Motivasi yang benar (Roma 12:6-8)
+# 1. Bernubuat, 2. Memimpin, 3. Melayani, 4. Menasehati, 5. Memberi, 6. Mengajar, 7. Berbelas Kasihan
 KARUNIA_NAMES_140 = [
     "1. Karunia Bernubuat (Perceiver)",
     "2. Karunia Memimpin (Leader)",
@@ -183,7 +184,7 @@ def show_karunia_140_karakter():
     - **4** = Kebanyakan
     - **5** = Selalu
     
-    Terdapat **140 pernyataan, **Jawablah dengan **jujur** dan tidak perlu takut terhadap penilaian orang lain. Setelah selesai, klik **Hitung Skor**.
+    Terdapat **140 pernyataan** (sesuai urutan asli dari PDF). Setelah selesai, klik **Hitung Skor**.
     """)
     
     st.markdown("### 📋 Kuesioner (140 pernyataan)")
@@ -242,25 +243,24 @@ def show_karunia_140_karakter():
         for rank, (name, score) in enumerate(top3, 1):
             st.success(f"{rank}. **{name}** – Skor: {score}")
         
-        # Skor maksimal per karunia = 20 * 5 = 100
-        with st.expander("📖 Penjelasan Karunia (Roma 12:6-8)"):
+        with st.expander("📖 Penjelasan Ketujuh Karunia Motivasi"):
             st.markdown("""
-            **1. Karunia Bernubuat (Perceiver)** – Kemampuan melihat kebenaran, membedakan yang baik dan jahat, menyatakan kebenaran dengan tegas.
+            **1. Karunia Bernubuat (Perceiver)** – Kemampuan melihat kebenaran, membedakan yang baik dan jahat, menyatakan kebenaran dengan tegas. *Ciri:* berani, jujur, membenci kejahatan.
             
-            **2. Karunia Memimpin (Leader)** – Kemampuan memimpin, mengatur, mengarahkan, dan mendelegasikan tugas.
+            **2. Karunia Memimpin (Leader)** – Kemampuan memimpin, mengatur, mengarahkan, dan mendelegasikan tugas. *Ciri:* visioner, bertanggung jawab, tegas.
             
-            **3. Karunia Melayani (Doer)** – Kemampuan menolong, memenuhi kebutuhan praktis, bekerja dengan rajin dan tanggap.
+            **3. Karunia Melayani (Doer)** – Kemampuan menolong, memenuhi kebutuhan praktis, bekerja dengan rajin dan tanggap. *Ciri:* praktis, suka membantu, bekerja dengan tangan.
             
-            **4. Karunia Menasihati (Encourager)** – Kemampuan mendorong, memotivasi, dan menasihati untuk pertumbuhan rohani.
+            **4. Karunia Menasihati (Encourager)** – Kemampuan mendorong, memotivasi, dan menasihati untuk pertumbuhan rohani. *Ciri:* sabar, positif, suka konseling.
             
-            **5. Karunia Memberi (Giver)** – Kemampuan memberi dengan sukacita, mengelola sumber daya untuk memberkati.
+            **5. Karunia Memberi (Giver)** – Kemampuan memberi dengan sukacita, mengelola sumber daya untuk memberkati. *Ciri:* dermawan, bijak dalam keuangan.
             
-            **6. Karunia Mengajar (Teacher)** – Kemampuan menyampaikan kebenaran secara logis, sistematis, dan mengajar.
+            **6. Karunia Mengajar (Teacher)** – Kemampuan menyampaikan kebenaran secara logis, sistematis, dan mengajar. *Ciri:* suka menyelidiki, menjelaskan dengan jelas.
             
-            **7. Karunia Berbelas Kasihan (Compassion)** – Kemampuan mengasihi, berbelas kasihan, dan menolong yang menderita.
+            **7. Karunia Berbelas Kasihan (Compassion)** – Kemampuan mengasihi, berbelas kasihan, dan menolong yang menderita. *Ciri:* peduli, sabar, empati.
             """)
         
-        st.info("Hasil tes ini dapat membantu Anda memahami talenta/potensi diri dan area pengembangan dalam pelayanan.")
+        st.info("Hasil tes ini dapat membantu Anda memahami potensi diri dan area pengembangan dalam pelayanan. Tiga karunia tertinggi menunjukkan kecenderungan motivasi utama Anda.")
 
 if __name__ == "__main__":
     show_karunia_140_karakter()
