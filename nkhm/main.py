@@ -517,27 +517,43 @@ def main():
         else:
             show_battle()
             st.info("🏆 Mode Turnamen Kelas akan segera hadir!")
-    
+
     # ========== TAB 6: KARUNIA & STOMATA =========
     with tab6:
-        sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Sto-mata Hati"])
-        with sub_tab1:
-            # Tampilkan gambar Karunia
-            img_path = Path(__file__).parent.parent / "assets" / "karunia.jpg"
-            if img_path.exists():
-                st.image(str(img_path), caption="Grow in Grace 🇮🇩", use_container_width=True)
-            else:
-                st.warning("⚠️ Gambar 'karunia.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
+    sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Sto-mata Hati"])
+    with sub_tab1:
+        # Tampilkan gambar Karunia
+        img_path = Path(__file__).parent.parent / "assets" / "karunia.jpg"
+        if img_path.exists():
+            st.image(str(img_path), caption="Grow in Grace 🇮🇩", use_container_width=True)
+        else:
+            st.warning("⚠️ Gambar 'karunia.jpg' belum tersedia. Mohon upload file tersebut ke folder 'assets'.")
         
-            st.markdown("---")  # garis pemisah
+        st.markdown("---")  # garis pemisah
 
+        if KARUNIA_AVAILABLE and show_karunia is not None:
+            show_karunia()
+        else:
+            st.info("🎁 Fitur Karunia Motivasi akan segera hadir!")
+            
+        # Buat subsubtab di dalam Karunia Motivasi
+        subsub_tab1, subsub_tab2 = st.tabs(["📜 Karunia Umum", "✨ Karunia 140 Karakter"])
+        with subsub_tab1:
             if KARUNIA_AVAILABLE and show_karunia is not None:
                 show_karunia()
             else:
                 st.info("🎁 Fitur Karunia Motivasi akan segera hadir!")
-        with sub_tab2:
-            show_stomata()
-            
+        with subsub_tab2:
+            try:
+                from nkhm.karunia_140_karakter import show_karunia_140_karakter
+                show_karunia_140_karakter()
+            except ImportError:
+                st.error("❌ Modul 'karunia_140_karakter' tidak ditemukan. Pastikan file sudah ada di folder nkhm.")
+            except Exception as e:
+                st.error(f"Terjadi error: {e}")
+    with sub_tab2:
+        show_stomata() 
+      
     # ========== TAB 7: HADIAH ==========
     with tab7:
         # Tampilkan gambar Hadiah
