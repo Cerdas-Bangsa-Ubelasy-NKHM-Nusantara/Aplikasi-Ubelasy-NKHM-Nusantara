@@ -33,17 +33,17 @@ def show_tutorial_karunia():
         3. Setelah semua terisi, klik **"Hitung Skor Karunia"**.
         
         **Penilaian:**  
-        Secara berurutan, setiap **10 pernyataan** mewakili satu jenis karunia (karena 70/7 = 10). Urutan karunia:
+        Soal dibagi ke dalam 7 kolom karunia dengan pola berulang setiap 7 soal:
         
-        | Karunia | Nomor Soal | Nama Karunia |
-        |---------|------------|---------------|
-        | A | 1–10 | Bernubuat (Perceiver) |
-        | B | 11–20 | Melayani (Doer) |
-        | C | 21–30 | Mengajar (Teacher) |
-        | D | 31–40 | Menasihati (Encourager) |
-        | E | 41–50 | Memberi (Giver) |
-        | F | 51–60 | Memimpin (Leader) |
-        | G | 61–70 | Kemurahan Hati (Compassion) |
+        | Kolom | Karunia | Nomor Soal |
+        |-------|---------|-------------|
+        | 1 | Bernubuat | 1, 8, 15, 22, 29, 36, 43, 50, 57, 64 |
+        | 2 | Melayani | 2, 9, 16, 23, 30, 37, 44, 51, 58, 65 |
+        | 3 | Mengajar | 3, 10, 17, 24, 31, 38, 45, 52, 59, 66 |
+        | 4 | Menasihati | 4, 11, 18, 25, 32, 39, 46, 53, 60, 67 |
+        | 5 | Memberi | 5, 12, 19, 26, 33, 40, 47, 54, 61, 68 |
+        | 6 | Memimpin | 6, 13, 20, 27, 34, 41, 48, 55, 62, 69 |
+        | 7 | Kemurahan Hati | 7, 14, 21, 28, 35, 42, 49, 56, 63, 70 |
         
         **Hasil:**  
         Anda akan mendapatkan skor untuk masing-masing karunia. Tiga karunia dengan skor tertinggi menunjukkan kecenderungan motivasi utama Anda.
@@ -55,15 +55,17 @@ def show_tutorial_karunia():
         Kuesioner ini merupakan versi lebih lengkap dengan **140 pernyataan**. Setiap pernyataan juga dinilai 0–5 dengan skala yang sama.
         
         **Penilaian:**  
-        Setiap **20 pernyataan** mewakili satu jenis karunia (karena 140/7 = 20). Urutan karunia tetap sama seperti di atas.
+        Sama seperti kuesioner 70 soal, pembagian karunia mengikuti pola 7 kolom berulang. Dengan demikian:
         
-        - Soal 1–20 → Karunia Bernubuat
-        - Soal 21–40 → Karunia Melayani
-        - Soal 41–60 → Karunia Mengajar
-        - Soal 61–80 → Karunia Menasihati
-        - Soal 81–100 → Karunia Memberi
-        - Soal 101–120 → Karunia Memimpin
-        - Soal 121–140 → Karunia Kemurahan Hati
+        - Soal nomor **1, 8, 15, ... , 134** → Karunia Bernubuat
+        - Soal nomor **2, 9, 16, ... , 135** → Karunia Melayani
+        - Soal nomor **3, 10, 17, ... , 136** → Karunia Mengajar
+        - Soal nomor **4, 11, 18, ... , 137** → Karunia Menasihati
+        - Soal nomor **5, 12, 19, ... , 138** → Karunia Memberi
+        - Soal nomor **6, 13, 20, ... , 139** → Karunia Memimpin
+        - Soal nomor **7, 14, 21, ... , 140** → Karunia Kemurahan Hati
+        
+        Setiap kolom berisi 20 soal (karena 140/7 = 20).
         
         **Interpretasi Skor Maksimal:**  
         Skor maksimal per karunia = 20 × 5 = 100. Semakin tinggi skor, semakin kuat karunia tersebut dalam diri Anda.
