@@ -257,7 +257,7 @@ def show_karunia_140_karakter():
             **7. Karunia Berbelas Kasihan (Compassion)** – Kemampuan mengasihi, berbelas kasihan, dan menolong yang menderita. *Ciri:* peduli, sabar, empati.
             """)
         
-        st.info("Hasil tes ini dapat membantu Anda memahami potensi diri dan area pengembangan dalam pelayanan. Tiga karunia tertinggi menunjukkan kecenderungan motivasi utama Anda.")
+        st.info("Hasil tes ini dapat membantu Anda memahami talenta/potensi diri dan area pengembangan dalam pelayanan. Tiga karunia tertinggi menunjukkan kecenderungan motivasi utama Anda.")
 
 if __name__ == "__main__":
     show_karunia_140_karakter()
