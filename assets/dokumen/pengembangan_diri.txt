@@ -1,0 +1,86 @@
+**Belajar Strategi Pengembangan Diri** yang mencakup *Growth Mindset*, *Time Management*, *Adaptability*, hingga *Personal Development Plan*.
+
+            ---
+
+            #### 1. Growth Mindset
+            - **Growth Mindset**: Keyakinan bahwa kemampuan dapat berkembang melalui usaha dan pembelajaran.
+            - **Fixed Mindset**: Keyakinan bahwa kemampuan bersifat tetap.
+            - Cara menumbuhkan *growth mindset*:
+              1. Akui *fixed mindset* dalam diri.
+              2. Kenali pemicu munculnya *fixed mindset*.
+              3. Beri nama persona pada *fixed mindset*.
+              4. Kendalikan *fixed mindset* dengan berani menghadapi tantangan, bangkit dari kegagalan, dan tumbuh bersama orang lain.
+              5. Refleksikan secara berkelanjutan.
+            - Contoh penerapan: menerima kritik, belajar dari kegagalan, tidak mencari pengakuan eksternal.
+
+            #### 2. Area Pengembangan Diri
+            Ada lima area utama:
+            - **Mental**: meningkatkan kemampuan berpikir, belajar, dan memecahkan masalah.
+            - **Sosial**: membangun hubungan, komunikasi, dan kolaborasi.
+            - **Spiritual**: memperdalam nilai-nilai, kepercayaan, dan *self-care*.
+            - **Emosional**: mengelola emosi, mengurangi stres, memiliki empati.
+            - **Fisik**: menjaga kesehatan, pola makan, olahraga, dan istirahat.
+
+            #### 3. Mengenali Potensi Diri
+            - **Analisis SWOT** (Strengths, Weaknesses, Opportunities, Threats) untuk memetakan kondisi diri.
+            - **Tujuan SMART** (Specific, Measurable, Achievable, Relevant, Time-bound) untuk menetapkan target yang terukur dan realistis.
+
+            #### 4. Manajemen Waktu
+            - Waktu adalah aset berharga; semua orang punya 24 jam.
+            - Manfaat manajemen waktu: hidup lebih teratur, terhindar dari stres.
+            - **Perbedaan Produktif vs Sibuk**:
+              - Sibuk: multitasking, perfeksionis, bekerja keras, ingin serba bisa.
+              - Produktif: monotasking, berorientasi tujuan, bekerja cerdas, andal dalam satu hal.
+            - **Tips manajemen waktu** (Jurus Pamungkas):
+              1. **Prioritisasi** (Kuadran Eisenhower: penting/urgen, penting/tidak urgen, tidak penting/urgen, tidak penting/tidak urgen).
+              2. **Monotasking** (fokus pada satu tugas hingga selesai).
+              3. **Resting** (istirahat makan siang, lepas dari rutinitas, *mini break*, me-time).
+
+            #### 5. Adaptasi (Adaptability)
+            - **Konsep adaptasi**: kemampuan menyesuaikan diri dengan perubahan.
+            - **Tiga tipe adaptasi**:
+              1. Kognitif: fleksibilitas berpikir, melihat berbagai perspektif.
+              2. Emosional: mengelola perasaan, mengekspresikan dan mengendalikan emosi.
+              3. Kepribadian: menyesuaikan perilaku sesuai peran sosial.
+            - **Keuntungan beradaptasi**:
+              - Meningkatkan kualitas diri.
+              - Menjadi pemimpin yang tangguh.
+              - Kesejahteraan batin.
+              - Melancarkan karier.
+              - Bangkit dari titik terendah.
+            - **Tantangan adaptasi**:
+              - Gegar budaya (*culture shock*).
+              - Interaksi dengan beragam karakter.
+              - Perbedaan bahasa dan gaya komunikasi.
+              - Rindu lingkungan lama (*homesick*).
+            - **Lima cara menjadi adaptif**:
+              1. *Interacting* (cara berinteraksi)
+              2. *Achieving* (cara mencapai tujuan bersama)
+              3. *Learning* (cara belajar dengan teknologi)
+              4. *Working* (cara bekerja sesuai budaya perusahaan)
+              5. *Thinking* (cara berpikir fleksibel)
+
+            #### 6. Personal Development Plan (PDP)
+            - **Komponen PDP**:
+              1. *Self-development areas* (area yang perlu dikembangkan)
+              2. *Action plan* (langkah konkret)
+              3. *Timeline* (tenggat waktu)
+              4. *Goals* (tujuan SMART)
+            - **Personal Development Journal** untuk monitoring, pembaruan tujuan, dan evaluasi hasil.
+
+            ---
+
+            ### Kesimpulan
+
+            Pengembangan diri adalah proses berkelanjutan yang membutuhkan **pola pikir berkembang (growth mindset)**, **pengelolaan waktu yang efektif**, **kemampuan beradaptasi**, dan **perencanaan sistematis** melalui PDP.
+
+            1. **Growth mindset** menjadi fondasi utama – yakinkan diri bahwa kemampuan bisa ditingkatkan.
+            2. **Kenali potensi diri** dengan SWOT dan tetapkan tujuan SMART.
+            3. **Kelola waktu** dengan prioritisasi, monotasking, dan istirahat – jadilah produktif, bukan hanya sibuk.
+            4. **Adaptasi** adalah kunci bertahan di tengah perubahan; kuasai tiga tipe adaptasi dan lima cara menerapkannya.
+            5. **Buat PDP** dan jurnal perkembangan untuk memantau kemajuan serta mengevaluasi hasil.
+
+            > *"Sedikit demi sedikit, lama-lama menjadi bukit."* Mulailah dari sekarang, karena perubahan dimulai dari langkah kecil yang konsisten.
+            """)
+            
+            st.info("📌 Sumber materi: Kelas 'Belajar Strategi Pengembangan Diri' – Ringkasan untuk referensi pribadi.")
