@@ -60,6 +60,21 @@ def read_docx_file(file_path):
     except Exception as e:
         return f"Error membaca file .docx: {e}"
 
+def read_odt_file(file_path):
+    """Membaca file .odt (OpenDocument Text)"""
+    try:
+        # Mencoba menggunakan odt2txt (jika tersedia di system)
+        import subprocess
+        result = subprocess.run(['odt2txt', str(file_path)], capture_output=True, text=True)
+        if result.returncode == 0:
+            return result.stdout
+        else:
+            return "⚠️ Gagal membaca file .odt. Pastikan odt2txt terinstal.\nAtau konversi file ke PDF/Markdown."
+    except FileNotFoundError:
+        return "⚠️ Library 'odt2txt' belum terinstal di sistem. Silakan instal: `sudo apt install odt2txt` (Linux) atau konversi file ke PDF."
+    except Exception as e:
+        return f"Error membaca file .odt: {e}"
+
 def display_pdf(file_path):
     """Menampilkan PDF menggunakan iframe (tanpa PyPDF2)"""
     try:
@@ -73,11 +88,11 @@ def display_pdf(file_path):
         return False
 
 def get_document_files(folder_path):
-    """Mengembalikan daftar file dalam folder (pdf, docx, txt, md)"""
+    """Mengembalikan daftar file dalam folder (pdf, docx, odt, txt, md)"""
     if not folder_path.exists():
         return []
     files = []
-    for ext in ['*.pdf', '*.docx', '*.txt', '*.md']:
+    for ext in ['*.pdf', '*.docx', '*.odt', '*.txt', '*.md']:
         files.extend(folder_path.glob(ext))
     return sorted(files, key=lambda f: f.name)
 
@@ -104,6 +119,8 @@ def show_pengembangan_diri():
             icon = "📕"
         elif file.suffix.lower() == '.docx':
             icon = "📘"
+        elif file.suffix.lower() == '.odt':
+            icon = "📙"
         elif file.suffix.lower() == '.txt':
             icon = "📝"
         elif file.suffix.lower() == '.md':
@@ -133,8 +150,15 @@ def show_pengembangan_diri():
             else:
                 st.markdown(content)
         
+        elif ext == '.odt':
+            content = read_odt_file(selected_file)
+            if content.startswith("⚠️") or content.startswith("Error"):
+                st.error(content)
+                st.info("💡 Saran: Konversi file .odt ke .pdf atau .md untuk tampilan yang lebih baik.")
+            else:
+                st.markdown(content)
+        
         elif ext == '.pdf':
-            # Tampilkan PDF langsung dengan iframe (tanpa ekstraksi teks)
             display_pdf(selected_file)
         
         else:
