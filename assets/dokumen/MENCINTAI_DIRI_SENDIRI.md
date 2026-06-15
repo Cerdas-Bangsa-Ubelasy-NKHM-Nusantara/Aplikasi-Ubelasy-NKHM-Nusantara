@@ -2,7 +2,7 @@
 
 *(Oleh: SR. Pakpahan, SST)*
 
-![Ilustrasi](../assets/images/mencintai_diri/image1.png)
+![Ilustrasi](/assets/images/mencintai_diri/image1.png)
 
 ## Apakah yang paling diinginkan oleh Allah dari diri kita sendiri?
 
