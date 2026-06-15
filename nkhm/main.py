@@ -207,12 +207,8 @@ def main():
                 video_bytes = f.read()
             st.video(video_bytes, loop=True, autoplay=True)
         
-        img_path = Path(__file__).parent.parent / "assets" / ".gif"
-        if img_path.exists():
-            st.image(str(img_path), caption="Asah 4 Kecerdasan dan Nasionalisme 🇮🇩", use_container_width=True)
-        else:
-            st.info("💡 Gambar kuis belum tersedia. Silakan upload 'kuis.gif' ke folder assets.")
         st.markdown("---")
+        
         st.markdown("### Pilih Kuis")
         col_f1, col_f2 = st.columns(2)
         with col_f1:
