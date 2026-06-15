@@ -1,9 +1,57 @@
 # nkhm/pengembangan_diri.py
 import streamlit as st
+import re
 from pathlib import Path
 
+def parse_markdown_with_images(md_content, base_path):
+    """
+    Mem-parsing konten Markdown, mengganti sintaks gambar ![alt](path)
+    dengan komponen st.image() yang sesuai.
+    """
+    # Pola regex untuk mencari gambar markdown: ![alt](path)
+    image_pattern = r'!\[(.*?)\]\((.*?)\)'
+    
+    # Split konten berdasarkan gambar
+    parts = re.split(image_pattern, md_content)
+    
+    # parts akan berisi: [teks, alt, path, teks, alt, path, ...]
+    for i in range(0, len(parts), 3):
+        # Tampilkan teks sebelum gambar (jika ada)
+        if i < len(parts) and parts[i].strip():
+            st.markdown(parts[i])
+        
+        # Tampilkan gambar jika ada
+        if i + 2 < len(parts):
+            alt_text = parts[i + 1]
+            img_path_str = parts[i + 2]
+            
+            # Bangun path absolut gambar
+            # Coba beberapa kemungkinan path
+            img_path = None
+            possible_paths = [
+                Path(img_path_str),  # relative dari current working directory
+                base_path / img_path_str,  # relative dari base_path (root proyek)
+                Path(__file__).parent.parent / img_path_str,  # dari root proyek
+                Path(__file__).parent.parent / "assets" / "images" / "mencintai_diri" / Path(img_path_str).name,  # fallback ke folder images
+            ]
+            
+            for p in possible_paths:
+                if p.exists():
+                    img_path = p
+                    break
+            
+            if img_path and img_path.exists():
+                st.image(str(img_path), caption=alt_text if alt_text else None, use_container_width=True)
+            else:
+                # Jika gambar tidak ditemukan, tampilkan teks alternatif
+                st.warning(f"⚠️ Gambar tidak ditemukan: {img_path_str}")
+    
+    # Sisa konten setelah gambar terakhir (jika ada)
+    if len(parts) % 3 == 1 and parts[-1].strip():
+        st.markdown(parts[-1])
+
 def read_text_file(file_path):
-    """Membaca file teks (txt, md)"""
+    """Membaca file teks biasa (txt, md)"""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             return f.read()
@@ -34,13 +82,6 @@ def get_document_files(folder_path):
     return sorted(files, key=lambda f: f.name)
 
 def show_pengembangan_diri():
-    # Di dalam fungsi read_markdown_file atau show_pengembangan_diri
-    import os
-    img_path = Path(__file__).parent.parent / "assets" / "images" / "mencintai_diri" / "image1.png"
-    st.write(f"Debug: gambar ditemukan? {img_path.exists()}")
-    if img_path.exists():
-        st.image(str(img_path))
-    
     st.markdown("## 📚 Pengembangan Diri")
     st.markdown("Klik pada salah satu judul dokumen untuk membaca isinya.")
 
@@ -65,7 +106,14 @@ def show_pengembangan_diri():
         st.markdown("---")
         st.subheader(f"Isi Dokumen: {selected_file.name}")
         ext = selected_file.suffix.lower()
-        if ext in ['.txt', '.md']:
+        
+        if ext == '.md':
+            # Untuk file Markdown, gunakan parser khusus yang menangani gambar
+            content = read_text_file(selected_file)
+            # Base path adalah root proyek (tempat assets berada)
+            base_path = Path(__file__).parent.parent
+            parse_markdown_with_images(content, base_path)
+        elif ext == '.txt':
             content = read_text_file(selected_file)
             st.markdown(content)
         elif ext == '.docx':
@@ -76,4 +124,3 @@ def show_pengembangan_diri():
 
 if __name__ == "__main__":
     show_pengembangan_diri()
-  
