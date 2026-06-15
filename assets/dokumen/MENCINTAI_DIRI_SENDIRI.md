@@ -179,7 +179,7 @@ Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas kar
 
 ![Comfortable but empty](/assets/images/mencintai_diri/image6.jpg)
 
-- Keadaan seperti ini mayoritas dihinggapi pada para pekerja di dunia usaha sekarang ini. Mereka punya cinta (L), mereka dibayar (P), dan produk yang mereka hasilkan dibutuhkan orang banyak (N), tapi mereka bekerja **tidak melakukannya dengan baik**. Mereka bekerja hanya supaya dapat uang saja, tidak mencintai pekerjaannya atau pelayanannya. Mereka mendapat pujian karena berhasil menciptakan suatu produk, tapi tidak ada cinta di sana.
+- Keadaan seperti ini mayoritas dihinggapi pada para pekerja di dunia usaha sekarang ini. Mereka punya cinta (L), mereka dibayar (P), dan produk yang mereka hasilkan dibutuhkan orang banyak (N), tapi mereka bekerja **tidak melakukannya dengan baik**. Mereka bekerja hanya supaya dapat uang saja, tidak melakukan dengan baik pekerjaannya atau pelayanannya. Mereka mendapat pujian karena berhasil menciptakan suatu produk, tapi tidak ada kebaikan di sana.
 
 ### 4. Love but uncertainty (suka tapi dalam ketidakpastian)
 
@@ -189,7 +189,7 @@ Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas kar
 
 Penerapan kombinasi 4 karakter ini pada diri kita, alangkah lebih baiknya hilang satu karakter yang di sisi *outside* (Paid atau Need) daripada hilangnya satu karakter yang di sisi *inside* (Good atau Love), tapi lebih baik lagi bila keempat karakter pelayanan pekerjaan Tuhan itu lengkap semuanya dalam diri kita, tanpa ada yang terhilang.
 
-Tujuan kita beraktivitas/bekerja atau melayani pekerjaan Tuhan adalah untuk memberi buah yang dapat dinikmati orang banyak. Tujuan kita ini harus berhasil agar dapat memperluas Kerajaan Sorga. Kehidupan pekerjaan atau pelayanan pekerjaan Tuhan yang berjalan dengan baik adalah sinkronnya Kecerdasan karakter Good, Love, Paid, dan Need dengan kecerdasan karya IQ, EQ, SQ, dan AQ yang berfungsi dengan baik menurut sistemnya Kecerdasan karakter dan kecerdasan karya.
+Tujuan kita beraktivitas/bekerja atau melayani pekerjaan Tuhan adalah untuk memberi buah yang dapat dinikmati orang banyak. Tujuan kita ini harus berhasil agar dapat memperluas Kerajaan Sorga. Kehidupan pekerjaan atau pelayanan pekerjaan Tuhan yang berjalan dengan baik adalah sinkronnya Kecerdasan karakter Love, Good, Paid, dan Need dengan kecerdasan karya IQ, EQ, SQ, dan AQ yang berfungsi dengan baik menurut sistemnya Kecerdasan karakter dan kecerdasan karya.
 
 Inilah yang Tuhan berikan kepada kita manusia supaya kita berhasil dalam kehidupan di dunia ini.
 
