@@ -34,6 +34,13 @@ def get_document_files(folder_path):
     return sorted(files, key=lambda f: f.name)
 
 def show_pengembangan_diri():
+    # Di dalam fungsi read_markdown_file atau show_pengembangan_diri
+    import os
+    img_path = Path(__file__).parent.parent / "assets" / "images" / "mencintai_diri" / "image1.png"
+    st.write(f"Debug: gambar ditemukan? {img_path.exists()}")
+    if img_path.exists():
+        st.image(str(img_path))
+    
     st.markdown("## 📚 Pengembangan Diri")
     st.markdown("Klik pada salah satu judul dokumen untuk membaca isinya.")
 
