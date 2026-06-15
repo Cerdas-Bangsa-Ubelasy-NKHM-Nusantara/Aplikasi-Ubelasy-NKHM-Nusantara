@@ -164,7 +164,7 @@ Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas kar
 
 ### 1. Satisfy but useless (puas, tapi merasa tidak berguna)
 
-![Satisfy but useless](/assets/images/mencintai_diri/image4.jpg))
+![Satisfy but useless](/assets/images/mencintai_diri/image4.jpg)
 
 - Bila di dalam diri kita hanya memiliki karakter **Love (L), Good (G), dan Paid (P)** saja, tetapi tidak ada karakter **Need (N)**, maka hidup kita akan merasa puas ketika kita melakukan suatu pekerjaan dan menghasilkan suatu produk, tapi itu tidak berguna, karena produk yang kita ciptakan tidak ada orang yang membutuhkannya.
 - Sisi karakter Need (N) tidak boleh kosong dalam kehidupan kita, apalagi ketika kita melakukan pelayanan pekerjaan Tuhan. Kita berbuat baik (G), mencintai pekerjaan itu (L), dan mendapat bayaran di sana (P), tapi bila tanpa Need (N) atau tidak ada orang yang butuh, maka kita akan merasa puas tapi tak berguna.
@@ -179,24 +179,26 @@ Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas kar
 
 ![Comfortable but empty](/assets/images/mencintai_diri/image6.jpg)
 
-- Keadaan seperti ini mayoritas dihinggapi pada para pekerja di dunia usaha sekarang ini. Mereka dengan baik melakukan pekerjaannya (G), mereka dibayar (P), dan produk yang mereka hasilkan dibutuhkan orang banyak (N), tapi mereka bekerja **tidak dengan cinta**. Mereka bekerja hanya supaya dapat uang saja, tidak mencintai pekerjaannya atau pelayanannya. Mereka mendapat pujian karena berhasil menciptakan suatu produk, tapi tidak ada cinta di sana.
+- Keadaan seperti ini mayoritas dihinggapi pada para pekerja di dunia usaha sekarang ini. Mereka punya cinta (L), mereka dibayar (P), dan produk yang mereka hasilkan dibutuhkan orang banyak (N), tapi mereka bekerja **tidak melakukannya dengan baik**. Mereka bekerja hanya supaya dapat uang saja, tidak mencintai pekerjaannya atau pelayanannya. Mereka mendapat pujian karena berhasil menciptakan suatu produk, tapi tidak ada cinta di sana.
 
 ### 4. Love but uncertainty (suka tapi dalam ketidakpastian)
 
 ![Love but uncertainty](/assets/images/mencintai_diri/image7.jpg)
 
-- Karakter seperti ini adalah orang yang tidak mau mencari Tuhan, sebab seseorang yang di dalam dirinya ada **Love (L), Paid (P), dan Need (N)**, tapi tidak punya **Good (G)**, maka ini tandanya hilangnya Roh Kudus dari dalam dirinya. Orang tersebut tidak mau tahu dengan orang lain, ia berbuat untuk perkembangan dirinya sendiri, ia tidak mau mengalah terhadap orang lain.
+- Karakter seperti ini adalah orang yang tidak mau mencari Tuhan, sebab seseorang yang di dalam dirinya ada **Good (G), Paid (P), dan Need (N)**, tapi tidak punya **Love (L)**, maka ini tandanya hilangnya Roh Kudus dari dalam dirinya. Orang tersebut tidak mau tahu dengan orang lain, ia berbuat untuk perkembangan dirinya sendiri, ia tidak mau mengalah terhadap orang lain.
 
 Penerapan kombinasi 4 karakter ini pada diri kita, alangkah lebih baiknya hilang satu karakter yang di sisi *outside* (Paid atau Need) daripada hilangnya satu karakter yang di sisi *inside* (Good atau Love), tapi lebih baik lagi bila keempat karakter pelayanan pekerjaan Tuhan itu lengkap semuanya dalam diri kita, tanpa ada yang terhilang.
 
-Tujuan kita beraktivitas/bekerja atau melayani pekerjaan Tuhan adalah untuk memberi buah yang dapat dinikmati orang banyak. Tujuan kita ini harus berhasil agar dapat memperluas Kerajaan Sorga. Kehidupan pekerjaan atau pelayanan pekerjaan Tuhan yang berjalan dengan baik adalah sinkronnya Kecerdasan karakter Good, Love, Paid, dan Need dengan kecerdasan karya IQ, EQ, SQ, dan VQ yang berfungsi dengan baik menurut sistemnya. Kecerdasan karakter dan kecerdasan karya.
+Tujuan kita beraktivitas/bekerja atau melayani pekerjaan Tuhan adalah untuk memberi buah yang dapat dinikmati orang banyak. Tujuan kita ini harus berhasil agar dapat memperluas Kerajaan Sorga. Kehidupan pekerjaan atau pelayanan pekerjaan Tuhan yang berjalan dengan baik adalah sinkronnya Kecerdasan karakter Good, Love, Paid, dan Need dengan kecerdasan karya IQ, EQ, SQ, dan AQ yang berfungsi dengan baik menurut sistemnya Kecerdasan karakter dan kecerdasan karya.
 
 Inilah yang Tuhan berikan kepada kita manusia supaya kita berhasil dalam kehidupan di dunia ini.
 
-Dari kombinasi Good – Love – Paid – Need di atas, coba Anda temukan yang mana atau di posisi mana terdapat: 
+**
+Dari kombinasi Love – Good - Paid – Need di atas, coba Anda temukan yang mana atau di posisi mana terdapat: 
 "Penyelamatan"
 "Pengorbanan".
 
 
+**
 > Unsur kecerdasan karya selalu ada pada dirimu, tapi unsur kecerdasan karakter tidak mesti selalu ada pada dirimu, oleh karena itu selalu berkarakter baiklah engkau pada semua orang dalam kehidupan ini.
 *(Oleh: SR Pakpahan, SST)*
