@@ -96,15 +96,15 @@ Karakter **Love** bersifat *menginvert* karena Love adalah karakter terawal yang
 
 Pengkombinasian atau gabungan beberapa karakter antara Love, Good, Paid, dan Need dapat dilakukan satu sama lain dengan urutan yang benar melihat sifat dan tujuan pembentukan kombinasi karakter dalam susunan yang teratur **Love – Good – Paid – Need** agar si pelaku dalam hidupnya menghasilkan buah. Buah karakter di dunia kerja itulah yang bermanfaat yang dapat diteladani atau dinikmati semua orang untuk saling melengkapi pertumbuhan diri masing‑masing individu di antara anggota‑anggota suatu organisasi/group sebagai wujud talenta (karunia) oleh Roh Kudus Allah. Sehingga di dunia kerja seorang pekerja yang bekerja di tempat kerja, ia harus bekerja keras, rajin, dan disiplin dengan menggunakan kecerdasan karakter Love – Good - Paid – Need yang harus ia miliki di samping memiliki Kecerdasan Inteligensi (Karya) nya.
 
-Pengkombinasian unsur dasar karakter diri manusia individu dari Good, Love, Paid, dan Need tersebut dalam pelayanan/pekerjaan dapat dilakukan untuk menghasilkan suatu keinginan baik yang diharapkan seperti dari kombinasi 2 karakter, 3 karakter, atau 4 karakter seperti berikut ini:
+Pengkombinasian unsur dasar karakter diri manusia individu dari Love, Good, Paid, dan Need tersebut dalam pelayanan/pekerjaan dapat dilakukan untuk menghasilkan suatu keinginan baik yang diharapkan seperti dari kombinasi 2 karakter, 3 karakter, atau 4 karakter seperti berikut ini:
 
 ![Kombinasi Karakter](/assets/images/mencintai_diri/image3.jpg))
 
-### 1. Penggabungan 2 karakter: Good dan Love – inilah yang disebut dengan **Passion**
+### 1. Penggabungan 2 karakter: Love dan Good – inilah yang disebut dengan **Passion**
 
 *Passion* adalah perbuatan baik, hasrat suka dan cinta seseorang melakukan sesuatu pekerjaan atau karya cipta yang berguna untuk orang banyak.
 
-### 2. Penggabungan 2 karakter: Good dan Paid – inilah yang disebut dengan **Profesi**
+### 2. Penggabungan 2 karakter: Love dan Paid – inilah yang disebut dengan **Profesi**
 
 *Profesi* adalah pekerjaan atau aktivitas rutin dan kontinu yang dilakukan seseorang dengan baik dan dari hasil pekerjaannya itu ia mendapat upah atau bayaran sebagai *reward* dari jerih payahnya.
 
@@ -112,7 +112,7 @@ Hidup ini menuntut pemenuhan kebutuhan‑kebutuhan pokok dan kebutuhan lainnya, 
 
 Kita dipanggil untuk bekerja dalam pelayanan pekerjaan Tuhan dengan memelihara aspek keberadaan (karakter) kita dan aspek karya kita, kedua aspek tersebut keseriusannya adalah sama dan kita harus menjaganya dalam urutan yang benar, **karakter yang diutamakan, baru kemudian karya**. Bila kita serius dan menjaga prioritasnya maka hal ini akan memberi martabat dan nilai yang sangat berarti kepada pekerjaan kita sehari‑hari.
 
-### 3. Penggabungan 2 karakter: Love dan Need – inilah yang disebut dengan **Mission**
+### 3. Penggabungan 2 karakter: Good dan Need – inilah yang disebut dengan **Mission**
 
 *Mission* atau Misi adalah prioritas, metode, atau nilai‑nilai kerja yang menjadi landasan untuk memberi petunjuk garis besar dalam mewujudkan sebuah visi, dan usaha pekerjaan itu dilakukan dengan cinta untuk menghasilkan buah pekerjaan yang baik yang dibutuhkan orang banyak.
 
@@ -122,7 +122,7 @@ Kita dipanggil untuk bekerja dalam pelayanan pekerjaan Tuhan dengan memelihara a
 
 Seseorang dapat bekerja dengan baik dan sukses dalam pelayanan/pekerjaannya dan menghasilkan buah, bila ia memiliki **tekad** dan **hikmat** dalam menekuni pekerjaannya.
 
-### 5. *Unity character* atau penggabungan satu kesatuan dari karakter: Good, Love, Paid, dan Need – inilah yang disebut dengan **Visi**
+### 5. *Unity character* atau penggabungan satu kesatuan dari karakter: Love, Good, Paid, dan Need – inilah yang disebut dengan **Visi**
 
 *Visi* adalah impian, cita‑cita, atau nilai inti dari keinginan sekelompok orang dengan pandangan yang jauh ke masa depan demi mencapai sebuah tujuan yang diinginkan.
 
@@ -148,15 +148,15 @@ Jadi, dapat disimpulkan bahwa **visi** adalah bayangan dan cara kita melihat gam
 - **Misi Pribadi:** Memenangkan banyak jiwa untuk ikut ambil bagian dalam Penyelamatan yang dari Allah melalui penyelesaian Amanat Agung Yesus Kristus.
 - **Lapangan kerja:** Pemberitaan Injil di Ladang‑Nya Tuhan.
 
-Bila dilihat lagi gambar tersebut di atas, bila seorang pekerja (si A) bersama dengan orang lain (si B) maka bagian diri si A pada sisi karakter Love (L) dan Need (N), sedangkan orang lain sesamanya itu (si B) yang di dalam diri si A, si B berada pada sisi karakter Good (G) dan Paid (P). Oleh karena itu si A (seorang) harus berbuat baik kepada sesamanya dan membayar hal‑hal baik dan yang berguna yang telah diperbuat sesamanya itu (si B) bagi orang banyak terlebih bagi diri si A.
+Bila dilihat lagi gambar tersebut di atas, bila seorang pekerja (si A) bersama dengan orang lain (si B) maka bagian diri si A pada sisi karakter Good (G) dan Need (N), sedangkan orang lain sesamanya itu (si B) yang di dalam diri si A, si B berada pada sisi karakter Love (L) dan Paid (P). Oleh karena itu si A (seorang) harus berbuat baik kepada sesamanya dan membayar hal‑hal baik dan yang berguna yang telah diperbuat sesamanya itu (si B) bagi orang banyak, terlebih lagi bagi diri si A.
 
-Dalam kesendiriannya si A (diri sendiri) maka di dalam dirinya memiliki Kecerdasan Karakter yang memuat 4 karakter yaitu Good (G), Love (L), Paid (P), dan Need (N) bersama dengan Kecerdasan Karyanya untuk menghasilkan suatu karya cipta baik berbentuk karya nyata maupun karya abstrak yang berguna bagi orang banyak. Oleh karena itu ia harus mencintai dirinya sendiri.
+Dalam kesendiriannya si A (diri sendiri) maka di dalam dirinya memiliki Kecerdasan Karakter yang memuat 4 karakter yaitu Love (L), Good (G), Paid (P), dan Need (N) bersama dengan Kecerdasan Karyanya untuk menghasilkan suatu karya cipta baik berbentuk karya nyata maupun karya abstrak yang berguna bagi orang banyak. Oleh karena itu ia harus mencintai dirinya sendiri.
 
 Kita sebagai anak Tuhan seharusnya hidup di dalam Tuhan dan Tuhan hidup di dalam kita, sebab kita ini manusia ciptaan Allah. Kita bukan hidup di dalam hawa nafsu kedagingan dan bukan menuruti kehendak daging dan pikiran yang jahat.
 
 Allah yang kaya dengan rahmat‑Nya oleh karena kasih‑Nya yang besar dilimpahkan rahmat‑Nya itu kepada kita yaitu menghidupkan kita bersama‑sama dengan Roh Kudus. Oleh kasih karunia Allah kita diselamatkan oleh iman kita, itu bukan usaha kita sendiri, bukan hasil pekerjaan kita, tetapi itu pemberian Allah.
 
-Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas karya. Dalam menekuni aktivitas atau dalam pelayanan/pekerjaan yang dikenan Tuhan, keempat karakter Good (G), Love (L), Paid (P), dan Need (N) harus kita miliki di dalam diri kita, sebab bila salah satu karakter itu tidak ada maka kehidupan kita akan tergoncang. Keempat karakter di dunia kerja itu harus berkembang secara bersama‑samaan.
+Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas karya. Dalam menekuni aktivitas atau dalam pelayanan/pekerjaan yang dikenan Tuhan, keempat karakter Love (L), Good (G), Paid (P), dan Need (N) harus kita miliki di dalam diri kita, sebab bila salah satu karakter itu tidak ada maka kehidupan kita akan tergoncang. Keempat karakter di dunia kerja itu harus berkembang secara bersama‑samaan.
 
 ---
 
@@ -166,7 +166,7 @@ Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas kar
 
 ![Satisfy but useless](/assets/images/mencintai_diri/image4.jpg))
 
-- Bila di dalam diri kita hanya memiliki karakter **Good (G), Love (L), dan Paid (P)** saja, tetapi tidak ada karakter **Need (N)**, maka hidup kita akan merasa puas ketika kita melakukan suatu pekerjaan dan menghasilkan suatu produk, tapi itu tidak berguna, karena produk yang kita ciptakan tidak ada orang yang membutuhkannya.
+- Bila di dalam diri kita hanya memiliki karakter **Love (L), Good (G), dan Paid (P)** saja, tetapi tidak ada karakter **Need (N)**, maka hidup kita akan merasa puas ketika kita melakukan suatu pekerjaan dan menghasilkan suatu produk, tapi itu tidak berguna, karena produk yang kita ciptakan tidak ada orang yang membutuhkannya.
 - Sisi karakter Need (N) tidak boleh kosong dalam kehidupan kita, apalagi ketika kita melakukan pelayanan pekerjaan Tuhan. Kita berbuat baik (G), mencintai pekerjaan itu (L), dan mendapat bayaran di sana (P), tapi bila tanpa Need (N) atau tidak ada orang yang butuh, maka kita akan merasa puas tapi tak berguna.
 
 ### 2. Fullness but not paid (bersuka cita meski tak dibayar)
