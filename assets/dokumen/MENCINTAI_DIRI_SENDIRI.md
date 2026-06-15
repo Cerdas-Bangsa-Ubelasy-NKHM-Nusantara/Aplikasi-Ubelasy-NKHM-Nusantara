@@ -194,5 +194,9 @@ Tujuan kita beraktivitas/bekerja atau melayani pekerjaan Tuhan adalah untuk memb
 Inilah yang Tuhan berikan kepada kita manusia supaya kita berhasil dalam kehidupan di dunia ini.
 
 > Unsur kecerdasan karya selalu ada pada dirimu, tapi unsur kecerdasan karakter tidak mesti selalu ada pada dirimu, oleh karena itu selalu berkarakter baiklah engkau pada semua orang dalam kehidupan ini.
+>
+> Dari kombinasi Good – Love – Paid – Need di atas, coba Anda temukan yang mana atau di posisi mana terdapat:
+> " Penyelamatan"
+> "Pengorbanan".
 
 *(Oleh: SR Pakpahan, SST)*
