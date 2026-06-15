@@ -200,7 +200,7 @@ def main():
     # ========== TAB 1: KUIS ==========
     with tab1:
         # ========== VIDEO mp4==========
-        video_path = Path(__file__).parent.parent / "assets" / "kuis.mp4"
+        video_path = Path(__file__).parent / "assets" / "kuis.mp4"
         if video_path.exists():
             # Baca file video sebagai bytes
             with open(video_path, "rb") as f:
