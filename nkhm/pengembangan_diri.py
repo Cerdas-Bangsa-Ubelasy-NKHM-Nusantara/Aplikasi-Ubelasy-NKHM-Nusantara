@@ -75,51 +75,24 @@ def read_odt_file(file_path):
         return f"Error membaca file .odt: {e}"
 
 def display_pdf(file_path):
-    """Menampilkan PDF menggunakan iframe dengan beberapa metode"""
     try:
-        # Metode 1: Base64 iframe (paling sederhana)
+        import streamlit.components.v1 as components
         with open(file_path, "rb") as f:
             base64_pdf = base64.b64encode(f.read()).decode('utf-8')
         
-        # Jika file kecil (< 10MB), gunakan embed langsung
-        file_size = file_path.stat().st_size
-        if file_size < 10 * 1024 * 1024:  # 10MB
-            pdf_display = f'''
-            <div style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
-                <iframe 
-                    src="data:application/pdf;base64,{base64_pdf}" 
-                    width="100%" 
-                    height="700" 
-                    style="border: none;"
-                    type="application/pdf">
-                </iframe>
-            </div>
-            '''
-            st.markdown(pdf_display, unsafe_allow_html=True)
-        else:
-            # Metode 2: Simpan sementara dan tampilkan sebagai link download
-            st.warning("⚠️ File PDF berukuran besar. Klik tombol di bawah untuk membuka atau mengunduh.")
-            st.download_button(
-                label="📥 Buka / Unduh PDF",
-                data=open(file_path, "rb").read(),
-                file_name=file_path.name,
-                mime="application/pdf",
-                use_container_width=True
-            )
+        components.html(
+            f'''
+            <embed src="data:application/pdf;base64,{base64_pdf}" 
+                   type="application/pdf" 
+                   width="100%" 
+                   height="700" />
+            ''',
+            height=720,
+            scrolling=True
+        )
         return True
     except Exception as e:
         st.error(f"Gagal menampilkan PDF: {e}")
-        # Fallback: tawarkan download
-        try:
-            st.download_button(
-                label="📥 Unduh PDF",
-                data=open(file_path, "rb").read(),
-                file_name=file_path.name,
-                mime="application/pdf",
-                use_container_width=True
-            )
-        except:
-            pass
         return False
 
 def get_document_files(folder_path):
