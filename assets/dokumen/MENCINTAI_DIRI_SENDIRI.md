@@ -42,7 +42,7 @@ Mencintai diri sendiri berarti kamu bersedia meningkatkan kualitas kecerdasan ka
 - Kecerdasan Otak (IQ)
 - Kecerdasan Emosional (EQ)
 - Kecerdasan Spiritual (SQ)
-- Kecerdasan Perilaku atau Attitude (VQ)
+- Kecerdasan Daya Juang (AQ) atau Attitude (VQ)
 
 > Untuk lebih jelas mengenai Kecerdasan Karya Manusia dapat dilihat dan berkunjung ke situs kami di [link ini](https://contoh.link).
 
