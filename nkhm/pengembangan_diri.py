@@ -60,21 +60,8 @@ def read_docx_file(file_path):
     except Exception as e:
         return f"Error membaca file .docx: {e}"
 
-def read_pdf_file(file_path):
-    """Membaca file PDF dan menampilkannya sebagai embedded viewer"""
-    try:
-        import PyPDF2
-        pdf_reader = PyPDF2.PdfReader(file_path)
-        text = ""
-        for page in pdf_reader.pages:
-            text += page.extract_text() + "\n\n"
-        return text if text.strip() else "PDF tidak memiliki teks yang dapat diekstrak."
-    except ImportError:
-        # Fallback: tampilkan sebagai embed PDF jika PyPDF2 tidak tersedia
-        return None  # Akan ditangani dengan embed PDF
-
-def display_pdf_embed(file_path):
-    """Menampilkan PDF sebagai embedded viewer (iframe)"""
+def display_pdf(file_path):
+    """Menampilkan PDF menggunakan iframe (tanpa PyPDF2)"""
     try:
         with open(file_path, "rb") as f:
             base64_pdf = base64.b64encode(f.read()).decode('utf-8')
@@ -112,7 +99,6 @@ def show_pengembangan_diri():
     # Tampilkan daftar file sebagai tombol
     selected_file = None
     for file in files:
-        # Tampilkan ikon sesuai jenis file
         icon = "📄"
         if file.suffix.lower() == '.pdf':
             icon = "📕"
@@ -148,14 +134,8 @@ def show_pengembangan_diri():
                 st.markdown(content)
         
         elif ext == '.pdf':
-            # Coba ekstrak teks terlebih dahulu
-            text_content = read_pdf_file(selected_file)
-            if text_content and not text_content.startswith("Error") and not text_content.startswith("⚠️"):
-                st.markdown(text_content)
-            else:
-                # Jika ekstraksi teks gagal atau tidak ada teks, tampilkan sebagai embed
-                st.info("PDF ini akan ditampilkan sebagai viewer bawaan.")
-                display_pdf_embed(selected_file)
+            # Tampilkan PDF langsung dengan iframe (tanpa ekstraksi teks)
+            display_pdf(selected_file)
         
         else:
             st.warning(f"Format file {ext} tidak didukung untuk ditampilkan.")
