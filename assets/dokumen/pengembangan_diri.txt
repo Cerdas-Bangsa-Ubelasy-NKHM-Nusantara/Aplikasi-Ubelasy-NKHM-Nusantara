@@ -83,4 +83,11 @@
             > *"Sedikit demi sedikit, lama-lama menjadi bukit."* Mulailah dari sekarang, karena perubahan dimulai dari langkah kecil yang konsisten.
             """)
             
-            st.info("📌 Sumber materi: Kelas 'Belajar Strategi Pengembangan Diri' – Ringkasan untuk referensi pribadi.")
+            st.info("📌 Sumber materi: Kelas 'Belajar Strategi Pengembangan Diri' – Ringkasan untuk referensi pribadi."
+
+URL Link Video:
+1. Berkenalan dengan Pengembangan Dir: https://youtu.be/cmzd0RLEEWI?si=lOnHqCzaNq8EJ76C
+
+
+)
+
