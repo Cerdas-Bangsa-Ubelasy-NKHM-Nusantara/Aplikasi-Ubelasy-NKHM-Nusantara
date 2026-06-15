@@ -63,7 +63,6 @@ def read_docx_file(file_path):
 def read_odt_file(file_path):
     """Membaca file .odt (OpenDocument Text)"""
     try:
-        # Mencoba menggunakan odt2txt (jika tersedia di system)
         import subprocess
         result = subprocess.run(['odt2txt', str(file_path)], capture_output=True, text=True)
         if result.returncode == 0:
@@ -71,20 +70,56 @@ def read_odt_file(file_path):
         else:
             return "⚠️ Gagal membaca file .odt. Pastikan odt2txt terinstal.\nAtau konversi file ke PDF/Markdown."
     except FileNotFoundError:
-        return "⚠️ Library 'odt2txt' belum terinstal di sistem. Silakan instal: `sudo apt install odt2txt` (Linux) atau konversi file ke PDF."
+        return "⚠️ Library 'odt2txt' belum terinstal di sistem. Konversi file .odt ke PDF untuk tampilan yang lebih baik."
     except Exception as e:
         return f"Error membaca file .odt: {e}"
 
 def display_pdf(file_path):
-    """Menampilkan PDF menggunakan iframe (tanpa PyPDF2)"""
+    """Menampilkan PDF menggunakan iframe dengan beberapa metode"""
     try:
+        # Metode 1: Base64 iframe (paling sederhana)
         with open(file_path, "rb") as f:
             base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="600" type="application/pdf"></iframe>'
-        st.markdown(pdf_display, unsafe_allow_html=True)
+        
+        # Jika file kecil (< 10MB), gunakan embed langsung
+        file_size = file_path.stat().st_size
+        if file_size < 10 * 1024 * 1024:  # 10MB
+            pdf_display = f'''
+            <div style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+                <iframe 
+                    src="data:application/pdf;base64,{base64_pdf}" 
+                    width="100%" 
+                    height="700" 
+                    style="border: none;"
+                    type="application/pdf">
+                </iframe>
+            </div>
+            '''
+            st.markdown(pdf_display, unsafe_allow_html=True)
+        else:
+            # Metode 2: Simpan sementara dan tampilkan sebagai link download
+            st.warning("⚠️ File PDF berukuran besar. Klik tombol di bawah untuk membuka atau mengunduh.")
+            st.download_button(
+                label="📥 Buka / Unduh PDF",
+                data=open(file_path, "rb").read(),
+                file_name=file_path.name,
+                mime="application/pdf",
+                use_container_width=True
+            )
         return True
     except Exception as e:
         st.error(f"Gagal menampilkan PDF: {e}")
+        # Fallback: tawarkan download
+        try:
+            st.download_button(
+                label="📥 Unduh PDF",
+                data=open(file_path, "rb").read(),
+                file_name=file_path.name,
+                mime="application/pdf",
+                use_container_width=True
+            )
+        except:
+            pass
         return False
 
 def get_document_files(folder_path):
@@ -111,55 +146,68 @@ def show_pengembangan_diri():
         st.info("Belum ada dokumen. Silakan upload file ke folder `assets/dokumen/`.")
         return
 
-    # Tampilkan daftar file sebagai tombol
-    selected_file = None
-    for file in files:
-        icon = "📄"
-        if file.suffix.lower() == '.pdf':
-            icon = "📕"
-        elif file.suffix.lower() == '.docx':
-            icon = "📘"
-        elif file.suffix.lower() == '.odt':
-            icon = "📙"
-        elif file.suffix.lower() == '.txt':
-            icon = "📝"
-        elif file.suffix.lower() == '.md':
-            icon = "📓"
-        
-        if st.button(f"{icon} {file.name}", key=f"doc_{file.name}", use_container_width=True):
-            selected_file = file
+    # Gunakan session state untuk menyimpan file yang dipilih
+    if "selected_doc" not in st.session_state:
+        st.session_state.selected_doc = None
 
-    if selected_file:
+    # Tampilkan daftar file sebagai tombol
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        for file in files:
+            icon = "📄"
+            if file.suffix.lower() == '.pdf':
+                icon = "📕"
+            elif file.suffix.lower() == '.docx':
+                icon = "📘"
+            elif file.suffix.lower() == '.odt':
+                icon = "📙"
+            elif file.suffix.lower() == '.txt':
+                icon = "📝"
+            elif file.suffix.lower() == '.md':
+                icon = "📓"
+            
+            if st.button(f"{icon} {file.name}", key=f"doc_{file.name}", use_container_width=True):
+                st.session_state.selected_doc = file
+                st.rerun()
+
+    # Tampilkan isi dokumen yang dipilih
+    if st.session_state.selected_doc is not None:
+        selected_file = st.session_state.selected_doc
         st.markdown("---")
         st.subheader(f"Isi Dokumen: {selected_file.name}")
         ext = selected_file.suffix.lower()
         
         if ext == '.md':
-            content = read_text_file(selected_file)
-            base_path = Path(__file__).parent.parent
-            parse_markdown_with_images(content, base_path)
+            with st.spinner("Memuat dokumen..."):
+                content = read_text_file(selected_file)
+                base_path = Path(__file__).parent.parent
+                parse_markdown_with_images(content, base_path)
         
         elif ext == '.txt':
-            content = read_text_file(selected_file)
-            st.markdown(content)
+            with st.spinner("Memuat dokumen..."):
+                content = read_text_file(selected_file)
+                st.markdown(content)
         
         elif ext == '.docx':
-            content = read_docx_file(selected_file)
-            if content.startswith("⚠️") or content.startswith("Error"):
-                st.error(content)
-            else:
-                st.markdown(content)
+            with st.spinner("Memuat dokumen..."):
+                content = read_docx_file(selected_file)
+                if content.startswith("⚠️") or content.startswith("Error"):
+                    st.error(content)
+                else:
+                    st.markdown(content)
         
         elif ext == '.odt':
-            content = read_odt_file(selected_file)
-            if content.startswith("⚠️") or content.startswith("Error"):
-                st.error(content)
-                st.info("💡 Saran: Konversi file .odt ke .pdf atau .md untuk tampilan yang lebih baik.")
-            else:
-                st.markdown(content)
+            with st.spinner("Memuat dokumen..."):
+                content = read_odt_file(selected_file)
+                if content.startswith("⚠️") or content.startswith("Error"):
+                    st.error(content)
+                    st.info("💡 Saran: Konversi file .odt ke .pdf atau .md untuk tampilan yang lebih baik.")
+                else:
+                    st.markdown(content)
         
         elif ext == '.pdf':
-            display_pdf(selected_file)
+            with st.spinner("Memuat PDF..."):
+                display_pdf(selected_file)
         
         else:
             st.warning(f"Format file {ext} tidak didukung untuk ditampilkan.")
