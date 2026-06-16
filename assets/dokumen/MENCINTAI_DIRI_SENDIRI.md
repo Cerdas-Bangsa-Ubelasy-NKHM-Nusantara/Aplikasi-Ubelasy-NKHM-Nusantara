@@ -80,7 +80,7 @@ Ada 4 unsur kecerdasan karakter manusia individu yaitu **Love (L)**, **Good (G)*
 
 ![Bagan 4 Karakter](/assets/images/mencintai_diri/image2.jpg)
 
-Dari gambar tersebut di atas, menjelaskan karakter **Love** dan **Paid** sebagai penentu karakter individu, sedangkan karakter **Love** dan **Need** sebagai pendamping atau bukan penentu, di mana karakter Good mendampingi karakter Love, sedangkan karakter Need mendampingi karakter Paid.
+Dari gambar tersebut di atas, menjelaskan karakter **Love** dan **Paid** sebagai penentu karakter individu, sedangkan karakter **Good** dan **Need** sebagai pendamping atau bukan penentu, di mana karakter Good mendampingi karakter Love, sedangkan karakter Need mendampingi karakter Paid.
 
 - Karakter **Love** dan **Good** inilah sebagai *inside* (sisi dalam) karakter yang dipengaruhi oleh atau membentuk tekad dari si pelakunya.
 - Sedangkan karakter **Paid** dan **Need** sebagai *outside* (sisi luar) karakter yang dipengaruhi atau situasi harus dihadapi dengan hikmat dari si pelakunya.
