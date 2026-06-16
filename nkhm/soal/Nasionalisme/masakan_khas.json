@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "text": "Masakan khas Padang yang terbuat dari daging sapi dengan bumbu santan dan cabai, dimasak hingga kering, disebut...",
+    "options": [
+      "A. Rendang",
+      "B. Gulai",
+      "C. Dendeng Balado",
+      "D. Sate Padang"
+    ],
+    "correct": "A. Rendang",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 2,
+    "text": "Makanan khas Betawi yang terbuat dari ketupat, sayur labu siam, dan kuah santan disebut...",
+    "options": [
+      "A. Ketoprak",
+      "B. Lontong Sayur",
+      "C. Gado-gado",
+      "D. Asinan Betawi"
+    ],
+    "correct": "B. Lontong Sayur",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 3,
+    "text": "Masakan khas Yogyakarta yang terbuat dari nangka muda, santan, dan gula aren, dimasak berjam-jam, disebut...",
+    "options": [
+      "A. Nasi Liwet",
+      "B. Gudeg",
+      "C. Pecel",
+      "D. Ayam Goreng Kalasan"
+    ],
+    "correct": "B. Gudeg",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 4,
+    "text": "Sate yang terbuat dari daging ayam dengan bumbu kacang, berasal dari Madura, disebut...",
+    "options": [
+      "A. Sate Madura",
+      "B. Sate Padang",
+      "C. Sate Klathak",
+      "D. Sate Lilit"
+    ],
+    "correct": "A. Sate Madura",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 5,
+    "text": "Makanan khas Manado yang terbuat dari daging ayam dengan bumbu cabai yang sangat pedas disebut...",
+    "options": [
+      "A. Rica-rica",
+      "B. Cakalang Fufu",
+      "C. Tinutuan",
+      "D. Ikan Bakar"
+    ],
+    "correct": "A. Rica-rica",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 6,
+    "text": "Makanan khas Sunda yang terdiri dari sayuran mentah, lalapan, dan sambal, biasa disajikan dengan nasi, disebut...",
+    "options": [
+      "A. Karedok",
+      "B. Lotek",
+      "C. Gado-gado",
+      "D. Lalapan"
+    ],
+    "correct": "A. Karedok",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 7,
+    "text": "Makanan khas Bali yang terbuat dari daging babi yang dipanggang dengan bumbu rempah disebut...",
+    "options": [
+      "A. Babi Guling",
+      "B. Sata Lilit",
+      "C. Ayam Betutu",
+      "D. Lawar"
+    ],
+    "correct": "A. Babi Guling",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 8,
+    "text": "Makanan khas Makassar yang berupa sup daging sapi dengan kacang tanah dan rempah-rempah disebut...",
+    "options": [
+      "A. Coto Makassar",
+      "B. Konro",
+      "C. Pallubasa",
+      "D. Sop Saudara"
+    ],
+    "correct": "A. Coto Makassar",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 9,
+    "text": "Makanan khas Palembang yang terbuat dari daging ikan yang digiling dan dicampur tepung sagu, lalu digoreng, disebut...",
+    "options": [
+      "A. Pempek",
+      "B. Tekwan",
+      "C. Model",
+      "D. Lakso"
+    ],
+    "correct": "A. Pempek",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 10,
+    "text": "Makanan khas Aceh yang berupa mi kuning dengan kuah kari dan daging sapi/kambing disebut...",
+    "options": [
+      "A. Mie Aceh",
+      "B. Mie Kocok",
+      "C. Mie Goreng",
+      "D. Mie Yamin"
+    ],
+    "correct": "A. Mie Aceh",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 11,
+    "text": "Masakan khas Jawa Timur yang berkuah hitam dari kluwek dan daging sapi disebut...",
+    "options": [
+      "A. Rawon",
+      "B. Soto Madura",
+      "C. Lontong Balap",
+      "D. Rujak Cingur"
+    ],
+    "correct": "A. Rawon",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 12,
+    "text": "Makanan khas Banjarmasin yang berupa sup berkuah kuning dengan ayam atau sapi, dan ditambah soun, disebut...",
+    "options": [
+      "A. Soto Banjar",
+      "B. Ketupat Kandangan",
+      "C. Nasi Kuning",
+      "D. Kue Bingka"
+    ],
+    "correct": "A. Soto Banjar",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 13,
+    "text": "Makanan khas Papua yang berupa bubur sagu yang disajikan dengan kuah ikan kuning disebut...",
+    "options": [
+      "A. Papeda",
+      "B. Kue Sagu",
+      "C. Sagu Bakar",
+      "D. Nasi Sagu"
+    ],
+    "correct": "A. Papeda",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 14,
+    "text": "Makanan khas Maluku yang terbuat dari ikan cakalang, kelapa muda, dan bumbu, disajikan sebagai salad, disebut...",
+    "options": [
+      "A. Kohu-kohu",
+      "B. Ikan Cakalang",
+      "C. Papeda",
+      "D. Ikan Kuah Kuning"
+    ],
+    "correct": "A. Kohu-kohu",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 15,
+    "text": "Makanan khas Nusa Tenggara Timur (NTT) yang berupa daging asap (babi atau sapi) dengan bumbu disebut...",
+    "options": [
+      "A. Se'i",
+      "B. Daging Asap",
+      "C. Babi Guling",
+      "D. Sapi Panggang"
+    ],
+    "correct": "A. Se'i",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 16,
+    "text": "Makanan khas Betawi yang terbuat dari ketan hitam yang dimasak dengan santan dan gula, disebut...",
+    "options": [
+      "A. Bubur Ketan Hitam",
+      "B. Dodol",
+      "C. Kue Bugis",
+      "D. Klepon"
+    ],
+    "correct": "A. Bubur Ketan Hitam",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 17,
+    "text": "Makanan khas Sumatera Utara (Batak) yang terbuat dari daging babi dengan bumbu darah dan rempah disebut...",
+    "options": [
+      "A. Saksang",
+      "B. Babi Panggang",
+      "C. Nasi Goreng",
+      "D. Mie Batak"
+    ],
+    "correct": "A. Saksang",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 18,
+    "text": "Makanan khas Minang yang berupa daging sapi yang diiris tipis, digoreng dengan bumbu balado disebut...",
+    "options": [
+      "A. Dendeng Balado",
+      "B. Rendang",
+      "C. Gulai",
+      "D. Kalio"
+    ],
+    "correct": "A. Dendeng Balado",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 19,
+    "text": "Makanan khas Jawa yang terbuat dari singkong yang direbus, kemudian dicampur gula dan parutan kelapa disebut...",
+    "options": [
+      "A. Getuk",
+      "B. Tiwul",
+      "C. Gaplek",
+      "D. Keripik Singkong"
+    ],
+    "correct": "A. Getuk",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 20,
+    "text": "Makanan khas Bangka Belitung yang berupa mi dengan kuah kaldu, toping daging ayam/sapi, dan sayuran disebut...",
+    "options": [
+      "A. Mie Belitung",
+      "B. Lempok Durian",
+      "C. Nasi Kuning",
+      "D. Otak-otak"
+    ],
+    "correct": "A. Mie Belitung",
+    "type": "Nasionalisme",
+    "national": true
+  }
+]
