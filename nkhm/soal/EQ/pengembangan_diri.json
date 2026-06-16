@@ -1,7 +1,6 @@
 [
   {
     "id": 1,
-    "type": "EQ",
     "text": "Doni tertarik menjadi seorang UI Designer, namun latar belakang pendidikannya tidak sejalan dengan minat kariernya. Doni pun mengikuti berbagai kursus dan pelatihan UI, bahkan menyempatkan diri belajar secara otodidak. Meskipun UI termasuk bidang dalam seni yang biasanya lebih menguntungkan orang-orang dengan bakat alami di bidang itu, Doni tetap percaya bahwa rasa seninya bisa ditumbuhkan dengan latihan dan belajar. Berdasarkan cerita di atas, simpulan apa yang bisa ditarik terkait growth mindset dan self-development?",
     "options": [
       "Growth mindset sama dengan Self-development karena Growth mindset dapat membuat seseorang memiliki rasa kompetitif yang tinggi sehingga selalu tertantang belajar hal baru.",
@@ -10,11 +9,12 @@
       "Growth mindset berbanding lurus dengan Self-development karena Growth mindset menumbuhkan cara berpikir yang positif agar seseorang dapat percaya diri untuk belajar apa saja.",
       "Growth mindset bermanfaat untuk Self-development karena Growth mindset dapat mendorong seseorang untuk terus belajar dan berkembang meskipun menghadapi kesulitan."
     ],
-    "correct": "Growth mindset bermanfaat untuk Self-development karena Growth mindset dapat mendorong seseorang untuk terus belajar dan berkembang meskipun menghadapi kesulitan."
+    "correct": "Growth mindset bermanfaat untuk Self-development karena Growth mindset dapat mendorong seseorang untuk terus belajar dan berkembang meskipun menghadapi kesulitan.",
+    "type": "EQ",
+    "national": false
   },
   {
     "id": 2,
-    "type": "EQ",
     "text": "Perhatikan contoh-contoh perilaku di bawah ini: 1. Mina suka mencari bantuan dan sumber daya untuk belajar hal baru. 2. Momo dapat menerima kritik dan saran dengan lapang dada. 3. Lili seringkali mengganti tujuan ketika menghadapi kegagalan. 4. Jini merasakan kesuksesan kecil dan suka merefleksi diri. 5. Sana suka berada di zona nyaman dan menekuni rutinitas yang sama. Manakah perilaku yang menunjukkan Growth mindset?",
     "options": [
       "1, 2, dan 4",
@@ -23,11 +23,12 @@
       "2 dan 3",
       "3 dan 5"
     ],
-    "correct": "1, 2, dan 4"
+    "correct": "1, 2, dan 4",
+    "type": "EQ",
+    "national": false
   },
   {
     "id": 3,
-    "type": "EQ",
     "text": "Sebuah perusahaan periklanan mewajibkan seluruh karyawannya untuk mengembangkan diri baik secara personal maupun profesional. Sementara itu Pak Andi adalah seorang teknisi yang telah bekerja di perusahaan tersebut selama 7 tahun. Pak Andi telah hidup berkecukupan secara finansial maupun kesehatan. Dia merasa nyaman dengan pekerjaannya dan tidak suka mengambil risiko dengan mencoba hal baru. Jika Anda adalah Pak Andi, apa tujuan yang akan memotivasi Anda untuk melakukan pengembangan diri?",
     "options": [
       "Untuk memenuhi kebutuhan finansial yang selama ini belum terpenuhi.",
@@ -36,12 +37,13 @@
       "Untuk meningkatkan rasa percaya diri karena perusahaan semakin maju.",
       "Untuk mendalami kemampuan teknis yang sudah dimiliki seiring perkembangan zaman."
     ],
-    "correct": "Untuk mendalami kemampuan teknis yang sudah dimiliki seiring perkembangan zaman."
+    "correct": "Untuk mendalami kemampuan teknis yang sudah dimiliki seiring perkembangan zaman.",
+    "type": "EQ",
+    "national": false
   },
   {
     "id": 4,
-    "type": "EQ",
-    "text": "Anda merupakan seorang karyawan baru di sebuah perusahaan. Sebagai karyawan baru, Anda sering kali melakukan beberapa kesalahan ketika pertama kali bekerja. Hingga pada akhirnya Tim Leader memberikan masukan sekaligus peringatan terhadap kinerja Anda. Apa yang akan Anda lakukan (Jawaban lebih dari satu)?",
+    "text": "Anda merupakan seorang karyawan baru di sebuah perusahaan. Sebagai karyawan baru, Anda sering kali melakukan beberapa kesalahan ketika pertama kali bekerja. Hingga pada akhirnya Tim Leader memberikan masukan sekaligus peringatan terhadap kinerja Anda. Apa yang akan Anda lakukan? (Jawaban lebih dari satu, pilih dua yang paling tepat)",
     "options": [
       "Mencari cara untuk memperbaiki kesalahan tersebut dan mencoba lagi.",
       "Melihat ke belakang dan merefleksi diri agar tidak melakukan kesalahan yang sama.",
@@ -49,11 +51,12 @@
       "Melihat ke bawah dan membandingkan diri dengan orang yang bernasib sama.",
       "Menghindari jika menghadapi pekerjaan yang sama di kemudian hari."
     ],
-    "correct": "Mencari cara untuk memperbaiki kesalahan tersebut dan mencoba lagi., Melihat ke belakang dan merefleksi diri agar tidak melakukan kesalahan yang sama."
+    "correct": "Mencari cara untuk memperbaiki kesalahan tersebut dan mencoba lagi., Melihat ke belakang dan merefleksi diri agar tidak melakukan kesalahan yang sama.",
+    "type": "EQ",
+    "national": false
   },
   {
     "id": 5,
-    "type": "EQ",
     "text": "Rudi adalah seorang yang suka bicara, dia bisa mengobrol berjam-jam dengan temannya membahas hal yang ia suka. Suatu kali teman Rudi mengkritik bahwa Rudi hanya suka berbicara tentang dirinya, tapi tidak peduli dengan orang lain. Dari situ, Rudi pun belajar untuk mendengarkan setiap kali temannya berbicara. Usaha yang dilakukan Rudi termasuk dalam pengembangan diri di area?",
     "options": [
       "Emosional",
@@ -62,11 +65,12 @@
       "Fisik",
       "Mental"
     ],
-    "correct": "Sosial"
+    "correct": "Sosial",
+    "type": "EQ",
+    "national": false
   },
   {
     "id": 6,
-    "type": "EQ",
     "text": "Setiap akhir bulan, Juan selalu Hiking. Juan merasa hanya dengan Hiking, dia bisa mengamati tingginya pepohonan, mendengarkan suara burung dan air mengalir, sekaligus merasakan hembusan angin segar pegunungan yang jauh dari hiruk pikuk kehidupan perkotaan. Kegiatan Juan tersebut termasuk dalam usaha pengembangan diri di area?",
     "options": [
       "Spiritual",
@@ -75,11 +79,12 @@
       "Emosional",
       "Mental"
     ],
-    "correct": "Spiritual"
+    "correct": "Spiritual",
+    "type": "EQ",
+    "national": false
   },
   {
     "id": 7,
-    "type": "EQ",
     "text": "Anda adalah seorang mahasiswa jurusan Soshum (Sosial Humaniora). Namun Anda memiliki ketertarikan untuk berkecimpung di bidang IT ketika bekerja nanti. Anda melihat tren kebutuhan tenaga kerja bidang IT semakin naik dari tahun ke tahun. Di sisi lain Anda harus menyiapkan diri bersaing dengan banyaknya lulusan IT. Berdasarkan narasi tersebut, apa kelemahan Anda, dan bagaimana Anda akan menanganinya?",
     "options": [
       "Kebutuhan akan tenaga kerja IT semakin naik dari tahun ke tahun adalah kelemahan, karena hal itu dapat menjadi indikator bahwa tidak semua lulusan IT terserap oleh lapangan kerja.",
@@ -88,11 +93,12 @@
       "Kelemahan saya ada di Soft-skill dan keilmuan sosial. Namun saya akan mencoba lebih banyak berjejaring lebih luas di komunitas-komunitas IT.",
       "Saya tidak memiliki koneksi dan jejaring, dan itu merupakan kelemahan. Padahal koneksi ini dapat menjadi jalur saya untuk mendapatkan pekerjaan dan membuka bisnis di bidang IT."
     ],
-    "correct": "Technical skill saya tentunya tidak sebanding dengan lulusan IT, tapi saya dapat meningkatkannya dengan belajar di komunitas, kursus, proyek, atau mengambil sertifikasi yang dapat memvalidasi kemampuan IT saya."
+    "correct": "Technical skill saya tentunya tidak sebanding dengan lulusan IT, tapi saya dapat meningkatkannya dengan belajar di komunitas, kursus, proyek, atau mengambil sertifikasi yang dapat memvalidasi kemampuan IT saya.",
+    "type": "EQ",
+    "national": false
   },
   {
     "id": 8,
-    "type": "EQ",
     "text": "Anda adalah seorang mahasiswa jurusan Soshum (Sosial Humaniora). Namun Anda memiliki ketertarikan untuk berkecimpung di bidang IT ketika bekerja nanti. Anda melihat tren kebutuhan tenaga kerja bidang IT semakin naik dari tahun ke tahun. Di sisi lain Anda harus menyiapkan diri bersaing dengan banyaknya lulusan IT. Berdasarkan narasi tersebut, apa peluang yang Anda temukan dan bagaimana Anda akan memanfaatkannya?",
     "options": [
       "Peluang saya adalah kompetensi Soft-skill dan keilmuan Sosial yang saya miliki karena berasal dari jurusan Soshum. Saya dapat mengoptimalkannya untuk dapat berjejaring lebih luas.",
@@ -101,11 +107,12 @@
       "Kebutuhan akan tenaga kerja IT semakin naik dari tahun ke tahun adalah peluang karena hal itu dapat menjadi indikator bahwa tidak semua lulusan IT terserap oleh lapangan kerja.",
       "Saya memiliki koneksi dan jejaring yang dapat menjadi peluang. Koneksi ini dapat menjadi jalur saya untuk mendapatkan pekerjaan dan membuka bisnis di bidang IT."
     ],
-    "correct": "Peluang saya adalah memiliki kemampuan IT, saya masih dapat mendalaminya dengan belajar di komunitas, kursus, proyek, atau mengambil sertifikasi global."
+    "correct": "Peluang saya adalah memiliki kemampuan IT, saya masih dapat mendalaminya dengan belajar di komunitas, kursus, proyek, atau mengambil sertifikasi global.",
+    "type": "EQ",
+    "national": false
   },
   {
     "id": 9,
-    "type": "EQ",
     "text": "Berikut adalah faktor-faktor yang mempengaruhi produktivitas, kecuali...? 1. Pengetahuan atau wawasan 2. Keterampilan atau kemampuan 3. Antusiasme pada pekerjaan 4. Usia produktif 5. Kesibukan",
     "options": [
       "1 dan 2",
@@ -114,11 +121,12 @@
       "3 dan 5",
       "4 dan 5"
     ],
-    "correct": "3 dan 5"
+    "correct": "3 dan 5",
+    "type": "EQ",
+    "national": false
   },
   {
     "id": 10,
-    "type": "EQ",
     "text": "Setelah Dika menerapkan Manajemen waktu, dia menjadi lebih pandai memprediksi hal yang akan terjadi lebih akurat. Manfaat utama manajemen waktu yang mendasari hal ini adalah...?",
     "options": [
       "Membuat diri kita menjadi semakin produktif",
@@ -127,6 +135,8 @@
       "Mampu menyelesaikan tugas tepat waktu",
       "Hidup yang lebih teratur"
     ],
-    "correct": "Hidup yang lebih teratur"
+    "correct": "Hidup yang lebih teratur",
+    "type": "EQ",
+    "national": false
   }
 ]
