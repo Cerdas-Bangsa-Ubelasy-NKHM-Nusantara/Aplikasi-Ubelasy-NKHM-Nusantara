@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "text": "Lagu daerah 'Ampar-Ampar Pisang' berasal dari daerah mana?",
+    "options": [
+      "A. Kalimantan Selatan",
+      "B. Kalimantan Timur",
+      "C. Kalimantan Tengah",
+      "D. Kalimantan Barat"
+    ],
+    "correct": "A. Kalimantan Selatan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 2,
+    "text": "Lagu 'Rasa Sayange' merupakan lagu daerah yang berasal dari provinsi mana?",
+    "options": [
+      "A. Maluku",
+      "B. Sulawesi Utara",
+      "C. Nusa Tenggara Timur",
+      "D. Papua"
+    ],
+    "correct": "A. Maluku",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 3,
+    "text": "Lagu 'Gundul-Gundul Pacul' merupakan lagu daerah yang berasal dari daerah mana?",
+    "options": [
+      "A. Jawa Barat",
+      "B. Jawa Tengah",
+      "C. Jawa Timur",
+      "D. Yogyakarta"
+    ],
+    "correct": "B. Jawa Tengah",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 4,
+    "text": "Lagu 'Sajojo' merupakan lagu daerah yang berasal dari daerah mana?",
+    "options": [
+      "A. Papua",
+      "B. Maluku",
+      "C. Nusa Tenggara Timur",
+      "D. Sulawesi"
+    ],
+    "correct": "A. Papua",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 5,
+    "text": "Alat musik tradisional Angklung berasal dari daerah mana?",
+    "options": [
+      "A. Jawa Barat",
+      "B. Jawa Tengah",
+      "C. Jawa Timur",
+      "D. Banten"
+    ],
+    "correct": "A. Jawa Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 6,
+    "text": "Lagu 'Yamko Rambe Yamko' merupakan lagu daerah yang berasal dari daerah mana?",
+    "options": [
+      "A. Papua",
+      "B. Maluku",
+      "C. Nusa Tenggara Timur",
+      "D. Sulawesi"
+    ],
+    "correct": "A. Papua",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 7,
+    "text": "Alat musik tradisional Gamelan berasal dari daerah mana?",
+    "options": [
+      "A. Jawa",
+      "B. Bali",
+      "C. Sumatera",
+      "D. Kalimantan"
+    ],
+    "correct": "A. Jawa",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 8,
+    "text": "Lagu 'Kicir-Kicir' merupakan lagu daerah yang berasal dari daerah mana?",
+    "options": [
+      "A. Betawi (Jakarta)",
+      "B. Jawa Barat",
+      "C. Banten",
+      "D. Sumatera"
+    ],
+    "correct": "A. Betawi (Jakarta)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 9,
+    "text": "Alat musik tradisional Sasando berasal dari daerah mana?",
+    "options": [
+      "A. Nusa Tenggara Timur",
+      "B. Nusa Tenggara Barat",
+      "C. Bali",
+      "D. Maluku"
+    ],
+    "correct": "A. Nusa Tenggara Timur",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 10,
+    "text": "Lagu 'Medley' atau 'Mande-Mande' merupakan lagu daerah yang berasal dari daerah mana?",
+    "options": [
+      "A. Sumatera Barat",
+      "B. Sumatera Utara",
+      "C. Riau",
+      "D. Aceh"
+    ],
+    "correct": "A. Sumatera Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 11,
+    "text": "Alat musik tradisional Kolintang berasal dari daerah mana?",
+    "options": [
+      "A. Sulawesi Utara",
+      "B. Sulawesi Selatan",
+      "C. Sulawesi Tenggara",
+      "D. Maluku"
+    ],
+    "correct": "A. Sulawesi Utara",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 12,
+    "text": "Lagu 'Apuse' merupakan lagu daerah yang berasal dari daerah mana?",
+    "options": [
+      "A. Papua",
+      "B. Maluku",
+      "C. Nusa Tenggara Timur",
+      "D. Sulawesi"
+    ],
+    "correct": "A. Papua",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 13,
+    "text": "Alat musik tradisional Tifa berasal dari daerah mana?",
+    "options": [
+      "A. Maluku dan Papua",
+      "B. Sulawesi",
+      "C. Kalimantan",
+      "D. Sumatera"
+    ],
+    "correct": "A. Maluku dan Papua",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 14,
+    "text": "Lagu 'O Ina Ni Keke' merupakan lagu daerah yang berasal dari daerah mana?",
+    "options": [
+      "A. Sulawesi Utara",
+      "B. Sulawesi Selatan",
+      "C. Maluku",
+      "D. Papua"
+    ],
+    "correct": "A. Sulawesi Utara",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 15,
+    "text": "Lagu 'Es Lilin' merupakan lagu daerah yang berasal dari daerah mana?",
+    "options": [
+      "A. Jawa Barat",
+      "B. Jawa Tengah",
+      "C. Jawa Timur",
+      "D. Banten"
+    ],
+    "correct": "A. Jawa Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 16,
+    "text": "Alat musik tradisional Saluang berasal dari daerah mana?",
+    "options": [
+      "A. Sumatera Barat",
+      "B. Sumatera Utara",
+      "C. Riau",
+      "D. Jambi"
+    ],
+    "correct": "A. Sumatera Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 17,
+    "text": "Lagu 'Cublak-Cublak Suweng' merupakan lagu daerah yang berasal dari daerah mana?",
+    "options": [
+      "A. Jawa Timur",
+      "B. Jawa Tengah",
+      "C. Jawa Barat",
+      "D. Yogyakarta"
+    ],
+    "correct": "B. Jawa Tengah",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 18,
+    "text": "Lagu 'Tari Tandak' merupakan lagu daerah yang berasal dari daerah mana?",
+    "options": [
+      "A. Riau",
+      "B. Sumatera Barat",
+      "C. Jambi",
+      "D. Aceh"
+    ],
+    "correct": "A. Riau",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 19,
+    "text": "Alat musik tradisional Kecapi berasal dari daerah mana?",
+    "options": [
+      "A. Jawa Barat",
+      "B. Jawa Tengah",
+      "C. Jawa Timur",
+      "D. Sumatera"
+    ],
+    "correct": "A. Jawa Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 20,
+    "text": "Lagu 'Anak Kambing Saya' merupakan lagu daerah yang berasal dari daerah mana?",
+    "options": [
+      "A. Nusa Tenggara Timur",
+      "B. Nusa Tenggara Barat",
+      "C. Bali",
+      "D. Maluku"
+    ],
+    "correct": "A. Nusa Tenggara Timur",
+    "type": "Nasionalisme",
+    "national": true
+  }
+]
