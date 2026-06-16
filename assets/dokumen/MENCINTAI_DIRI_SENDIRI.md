@@ -53,7 +53,7 @@ Mencintai diri sendiri berarti kamu bersedia meningkatkan kualitas kecerdasan ka
 1. **Karakter love (LC)** = Mencintai/Dicintai
 2. **Karakter Good (GC)** = Berbuat baik
 3. **Karakter Need (NC)** = Membutuhkan/Dibutuhkan
-4. **Karakter Paid (PC)** = Menghargai/dihargai.
+4. **Karakter Paid (PC)** = Menghargai/Dihargai.
 
 **Kecerdasan Karakter Manusia** adalah suatu kemampuan, kebajikan, dan kematangan moral manusia dengan menggunakan seperangkat budi pekerti seperti karakter baik, cinta, menghargai, butuh, dan tidak tertutup kemungkinan kombinasi satu sama lainnya dalam mempertahankan tujuan yang telah tercapai, dan daya kekuatan memecahkan persoalan atau permasalahan ekspresi hidup yang sedang dihadapi untuk perubahan hidup menjadi hidup baru yang lebih baik dari sebelumnya.
 
@@ -150,7 +150,7 @@ Jadi, dapat disimpulkan bahwa **visi** adalah bayangan dan cara kita melihat gam
 
 Bila dilihat lagi gambar tersebut di atas, bila seorang pekerja (si A) bersama dengan orang lain (si B) maka bagian diri si A ada pada sisi karakter Good (G) dan Paid (P), sedangkan orang lain sesamanya itu (si B) yang di dalam diri si A, si B berada pada sisi karakter Love (L) dan Need (N). Oleh karena itu si A (seorang) harus berbuat baik kepada sesamanya dan membayar hal‑hal baik dan yang berguna yang telah diperbuat sesamanya itu (si B) bagi orang banyak, terlebih lagi bagi diri si A.
 
-Dalam kesendiriannya si A (diri sendiri) maka di dalam dirinya memiliki Kecerdasan Karakter yang memuat 4 karakter yaitu Love (L), Good (G), Paid (P), dan Need (N) bersama dengan Kecerdasan Karyanya untuk menghasilkan suatu karya cipta baik berbentuk karya nyata maupun karya abstrak yang berguna bagi orang banyak. Oleh karena itu ia harus mencintai dirinya sendiri.
+Dalam kesendiriannya si A (diri sendiri) maka di dalam dirinya memiliki Kecerdasan Karakter yang memuat 4 karakter yaitu Love (L), Good (G), Need (N), dan Paid (P) bersama dengan Kecerdasan Karyanya untuk menghasilkan suatu karya cipta baik berbentuk karya nyata maupun karya abstrak yang berguna bagi orang banyak. Oleh karena itu ia harus mencintai dirinya sendiri.
 
 Kita sebagai anak Tuhan seharusnya hidup di dalam Tuhan dan Tuhan hidup di dalam kita, sebab kita ini manusia ciptaan Allah. Kita bukan hidup di dalam hawa nafsu kedagingan dan bukan menuruti kehendak daging dan pikiran yang jahat.
 
