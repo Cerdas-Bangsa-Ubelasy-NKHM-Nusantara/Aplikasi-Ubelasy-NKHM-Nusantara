@@ -80,14 +80,14 @@ Ada 4 unsur kecerdasan karakter manusia individu yaitu **Love (L)**, **Good (G)*
 
 ![Bagan 4 Karakter](/assets/images/mencintai_diri/image2.jpg)
 
-Dari gambar tersebut di atas, menjelaskan karakter **Love** dan **Need** sebagai penentu karakter individu, sedangkan karakter **Good** dan **Paid** sebagai pendamping atau bukan penentu, di mana karakter Good mendampingi karakter Love, sedangkan karakter Need mendampingi karakter Paid.
+Dari gambar tersebut di atas, menjelaskan karakter **Love** dan **Need** sebagai penentu karakter individu, sedangkan karakter **Good** dan **Paid** sebagai pendamping atau bukan penentu, di mana karakter Good mendampingi karakter Love, sedangkan karakter Paid mendampingi karakter Need.
 
 - Karakter **Love** dan **Good** inilah sebagai *inside* (sisi dalam) karakter yang dipengaruhi oleh atau membentuk tekad dari si pelakunya.
 - Sedangkan karakter **Paid** dan **Need** sebagai *outside* (sisi luar) karakter yang dipengaruhi atau situasi harus dihadapi dengan hikmat dari si pelakunya.
 
 **Love** sebagai penentu terbesar dasar karakter, dan **Need** penentu kecil dasar karakter.
 
-Karakter **Love** bersifat *menginvert* karena Love adalah karakter terawal yang dapat dikontrol, keadaannya tetap, dan bergantung kepada respon si pelakunya dalam mempengaruhi lingkungan dunia sekitar si pelaku. Bila karakter Love diaktifkan dari A‑Z dalam dunia kerja, maka karakter Paid aktif dari Z‑A dalam bagian partialnya. Karakter **Paid** adalah karakter yang paling kecil yang bersifat *menginvert* dari Love karena Paid tidak dapat dikontrol, keadaannya tidak tetap (selalu berubah), dan dipengaruhi oleh hikmat dari si pelakunya.
+Karakter **Love** bersifat *menginvert* karena Love adalah karakter terawal/utama yang dapat dikontrol, keadaannya tetap, dan bergantung kepada respon si pelakunya dalam mempengaruhi lingkungan dunia sekitar si pelaku. Bila karakter Love diaktifkan dari A‑Z dalam dunia kerja, maka karakter Paid aktif dari Z‑A dalam bagian partialnya. Karakter **Paid** adalah karakter yang paling kecil yang bersifat *menginvert* dari Love karena Paid tidak dapat dikontrol, keadaannya tidak tetap (selalu berubah), dan dipengaruhi oleh hikmat dari si pelakunya.
 
 - Love cenderung dipengaruhi oleh alat pikir (otak)
 - Good cenderung memakai hati
@@ -122,7 +122,7 @@ Kita dipanggil untuk bekerja dalam pelayanan pekerjaan Tuhan dengan memelihara a
 
 Seseorang dapat bekerja dengan baik dan sukses dalam pelayanan/pekerjaannya dan menghasilkan buah, bila ia memiliki **tekad** dan **hikmat** dalam menekuni pekerjaannya.
 
-### 5. *Unity character* atau penggabungan satu kesatuan dari karakter: Love, Good, Paid, dan Need – inilah yang disebut dengan **Visi**
+### 5. *Unity character* atau penggabungan satu kesatuan dari karakter: Love, Good, Need, dan Paid – inilah yang disebut dengan **Visi**
 
 *Visi* adalah impian, cita‑cita, atau nilai inti dari keinginan sekelompok orang dengan pandangan yang jauh ke masa depan demi mencapai sebuah tujuan yang diinginkan.
 
@@ -148,7 +148,7 @@ Jadi, dapat disimpulkan bahwa **visi** adalah bayangan dan cara kita melihat gam
 - **Misi Pribadi:** Memenangkan banyak jiwa untuk ikut ambil bagian dalam Penyelamatan yang dari Allah melalui penyelesaian Amanat Agung Yesus Kristus.
 - **Lapangan kerja:** Pemberitaan Injil di Ladang‑Nya Tuhan.
 
-Bila dilihat lagi gambar tersebut di atas, bila seorang pekerja (si A) bersama dengan orang lain (si B) maka bagian diri si A pada sisi karakter Good (G) dan Need (N), sedangkan orang lain sesamanya itu (si B) yang di dalam diri si A, si B berada pada sisi karakter Love (L) dan Paid (P). Oleh karena itu si A (seorang) harus berbuat baik kepada sesamanya dan membayar hal‑hal baik dan yang berguna yang telah diperbuat sesamanya itu (si B) bagi orang banyak, terlebih lagi bagi diri si A.
+Bila dilihat lagi gambar tersebut di atas, bila seorang pekerja (si A) bersama dengan orang lain (si B) maka bagian diri si A ada pada sisi karakter Good (G) dan Paid (P), sedangkan orang lain sesamanya itu (si B) yang di dalam diri si A, si B berada pada sisi karakter Love (L) dan Need (N). Oleh karena itu si A (seorang) harus berbuat baik kepada sesamanya dan membayar hal‑hal baik dan yang berguna yang telah diperbuat sesamanya itu (si B) bagi orang banyak, terlebih lagi bagi diri si A.
 
 Dalam kesendiriannya si A (diri sendiri) maka di dalam dirinya memiliki Kecerdasan Karakter yang memuat 4 karakter yaitu Love (L), Good (G), Paid (P), dan Need (N) bersama dengan Kecerdasan Karyanya untuk menghasilkan suatu karya cipta baik berbentuk karya nyata maupun karya abstrak yang berguna bagi orang banyak. Oleh karena itu ia harus mencintai dirinya sendiri.
 
@@ -156,7 +156,7 @@ Kita sebagai anak Tuhan seharusnya hidup di dalam Tuhan dan Tuhan hidup di dalam
 
 Allah yang kaya dengan rahmat‑Nya oleh karena kasih‑Nya yang besar dilimpahkan rahmat‑Nya itu kepada kita yaitu menghidupkan kita bersama‑sama dengan Roh Kudus. Oleh kasih karunia Allah kita diselamatkan oleh iman kita, itu bukan usaha kita sendiri, bukan hasil pekerjaan kita, tetapi itu pemberian Allah.
 
-Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas karya. Dalam menekuni aktivitas atau dalam pelayanan/pekerjaan yang dikenan Tuhan, keempat karakter Love (L), Good (G), Paid (P), dan Need (N) harus kita miliki di dalam diri kita, sebab bila salah satu karakter itu tidak ada maka kehidupan kita akan tergoncang. Keempat karakter di dunia kerja itu harus berkembang secara bersama‑samaan.
+Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas karya. Dalam menekuni aktivitas atau dalam pelayanan/pekerjaan yang dikenan Tuhan, keempat karakter Love (L), Good (G), Need (N), dan Paid (P) harus kita miliki di dalam diri kita, sebab bila salah satu karakter itu tidak ada maka kehidupan kita akan tergoncang. Keempat karakter di dunia kerja itu harus berkembang secara bersama‑samaan.
 
 ---
 
@@ -185,18 +185,18 @@ Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas kar
 
 ![Love but uncertainty](/assets/images/mencintai_diri/image7.jpg)
 
-- Karakter seperti ini adalah orang yang tidak mau mencari Tuhan, sebab seseorang yang di dalam dirinya ada **Good (G), Paid (P), dan Need (N)**, tapi tidak punya **Love (L)**, maka ini tandanya hilangnya Roh Kudus dari dalam dirinya. Orang tersebut tidak mau tahu dengan orang lain, ia berbuat untuk perkembangan dirinya sendiri, ia tidak mau mengalah terhadap orang lain.
+- Karakter seperti ini adalah orang yang tidak mau mencari Tuhan, sebab seseorang yang di dalam dirinya ada **Good (G), Need (N), dan Paid (P)**, tapi tidak punya **Love (L)**, maka ini tandanya hilangnya Roh Kudus dari dalam dirinya. Orang tersebut tidak mau tahu dengan orang lain, ia berbuat untuk perkembangan dirinya sendiri, ia tidak mau mengalah terhadap orang lain.
 
 Penerapan kombinasi 4 karakter ini pada diri kita, alangkah lebih baiknya hilang satu karakter yang di sisi *outside* (Paid atau Need) daripada hilangnya satu karakter yang di sisi *inside* (Good atau Love), tapi lebih baik lagi bila keempat karakter pelayanan pekerjaan Tuhan itu lengkap semuanya dalam diri kita, tanpa ada yang terhilang.
 
-Tujuan kita beraktivitas/bekerja atau melayani pekerjaan Tuhan adalah untuk memberi buah yang dapat dinikmati orang banyak. Tujuan kita ini harus berhasil agar dapat memperluas Kerajaan Sorga. Kehidupan pekerjaan atau pelayanan pekerjaan Tuhan yang berjalan dengan baik adalah sinkronnya Kecerdasan karakter Love, Good, Paid, dan Need dengan kecerdasan karya IQ, EQ, SQ, dan AQ yang berfungsi dengan baik menurut sistemnya Kecerdasan karakter dan kecerdasan karya.
+Tujuan kita beraktivitas/bekerja atau melayani pekerjaan Tuhan adalah untuk memberi buah yang dapat dinikmati orang banyak. Tujuan kita ini harus berhasil agar dapat memperluas Kerajaan Sorga. Kehidupan pekerjaan atau pelayanan pekerjaan Tuhan yang berjalan dengan baik adalah sinkronnya Kecerdasan karakter Love, Good, Need, dan Paid dengan kecerdasan karya IQ, EQ, SQ, dan AQ yang berfungsi dengan baik menurut sistemnya Kecerdasan karakter dan kecerdasan karya.
 
 Inilah yang Tuhan berikan kepada kita manusia supaya kita berhasil dalam kehidupan di dunia ini.
 
 **
 Dari kombinasi Love – Good - Paid – Need di atas, coba Anda temukan yang mana atau di posisi mana terdapat: 
-"Penyelamatan"
-"Pengorbanan".
+- "Penyelamatan"
+- "Pengorbanan".
 
 
 **
