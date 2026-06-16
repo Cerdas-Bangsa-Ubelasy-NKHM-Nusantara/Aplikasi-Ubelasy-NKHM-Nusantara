@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "text": "Candi Borobudur terletak di provinsi mana?",
+    "options": [
+      "A. Jawa Timur",
+      "B. Jawa Tengah",
+      "C. Jawa Barat",
+      "D. Yogyakarta"
+    ],
+    "correct": "B. Jawa Tengah",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 2,
+    "text": "Prasasti Yupa merupakan peninggalan kerajaan ...",
+    "options": [
+      "A. Kutai",
+      "B. Tarumanegara",
+      "C. Sriwijaya",
+      "D. Majapahit"
+    ],
+    "correct": "A. Kutai",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 3,
+    "text": "Candi Prambanan merupakan candi Hindu yang didedikasikan untuk Trimurti, yaitu ...",
+    "options": [
+      "A. Brahma, Wisnu, Siwa",
+      "B. Brahma, Wisnu, Indra",
+      "C. Siwa, Ganesha, Wisnu",
+      "D. Brahma, Siwa, Agni"
+    ],
+    "correct": "A. Brahma, Wisnu, Siwa",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 4,
+    "text": "Kerajaan Sriwijaya merupakan kerajaan maritim yang berpusat di daerah ...",
+    "options": [
+      "A. Jawa",
+      "B. Sumatra",
+      "C. Kalimantan",
+      "D. Sulawesi"
+    ],
+    "correct": "B. Sumatra",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 5,
+    "text": "Candi Mendut terletak di dekat Candi Borobudur dan merupakan peninggalan dari kerajaan ...",
+    "options": [
+      "A. Mataram Kuno",
+      "B. Sriwijaya",
+      "C. Majapahit",
+      "D. Kutai"
+    ],
+    "correct": "A. Mataram Kuno",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 6,
+    "text": "Kerajaan Majapahit mencapai puncak kejayaan pada masa pemerintahan ...",
+    "options": [
+      "A. Hayam Wuruk",
+      "B. Raden Wijaya",
+      "C. Gajah Mada",
+      "D. Tribhuwana Tunggadewi"
+    ],
+    "correct": "A. Hayam Wuruk",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 7,
+    "text": "Prasasti Tugu merupakan peninggalan kerajaan ...",
+    "options": [
+      "A. Tarumanegara",
+      "B. Sriwijaya",
+      "C. Kutai",
+      "D. Majapahit"
+    ],
+    "correct": "A. Tarumanegara",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 8,
+    "text": "Candi Penataran merupakan candi peninggalan dari kerajaan ...",
+    "options": [
+      "A. Majapahit",
+      "B. Singasari",
+      "C. Kediri",
+      "D. Mataram Kuno"
+    ],
+    "correct": "A. Majapahit",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 9,
+    "text": "Kerajaan Samudera Pasai merupakan kerajaan Islam pertama di Indonesia yang terletak di ...",
+    "options": [
+      "A. Sumatra Utara",
+      "B. Aceh",
+      "C. Riau",
+      "D. Jambi"
+    ],
+    "correct": "B. Aceh",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 10,
+    "text": "Masjid Agung Demak merupakan peninggalan dari kerajaan ...",
+    "options": [
+      "A. Demak",
+      "B. Mataram Islam",
+      "C. Banten",
+      "D. Cirebon"
+    ],
+    "correct": "A. Demak",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 11,
+    "text": "Candi Jago merupakan peninggalan dari kerajaan ...",
+    "options": [
+      "A. Singasari",
+      "B. Majapahit",
+      "C. Kediri",
+      "D. Mataram Kuno"
+    ],
+    "correct": "A. Singasari",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 12,
+    "text": "Kerajaan Sriwijaya dikenal sebagai kerajaan maritim karena menguasai ...",
+    "options": [
+      "A. Selat Malaka",
+      "B. Selat Sunda",
+      "C. Selat Bali",
+      "D. Laut Jawa"
+    ],
+    "correct": "A. Selat Malaka",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 13,
+    "text": "Prasasti Nalanda merupakan bukti hubungan antara kerajaan ... dengan India.",
+    "options": [
+      "A. Sriwijaya",
+      "B. Majapahit",
+      "C. Kutai",
+      "D. Tarumanegara"
+    ],
+    "correct": "A. Sriwijaya",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 14,
+    "text": "Candi Sewu terletak di kompleks Candi Prambanan dan dibangun pada masa kerajaan ...",
+    "options": [
+      "A. Mataram Kuno",
+      "B. Singasari",
+      "C. Kediri",
+      "D. Majapahit"
+    ],
+    "correct": "A. Mataram Kuno",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 15,
+    "text": "Kerajaan Kutai merupakan kerajaan Hindu tertua di Indonesia yang terletak di ...",
+    "options": [
+      "A. Kalimantan Timur",
+      "B. Kalimantan Selatan",
+      "C. Kalimantan Tengah",
+      "D. Kalimantan Barat"
+    ],
+    "correct": "A. Kalimantan Timur",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 16,
+    "text": "Candi Surawana merupakan peninggalan dari kerajaan ...",
+    "options": [
+      "A. Majapahit",
+      "B. Kediri",
+      "C. Singasari",
+      "D. Mataram Kuno"
+    ],
+    "correct": "A. Majapahit",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 17,
+    "text": "Prasasti Kudadu merupakan peninggalan dari kerajaan ...",
+    "options": [
+      "A. Majapahit",
+      "B. Singasari",
+      "C. Kediri",
+      "D. Mataram Kuno"
+    ],
+    "correct": "A. Majapahit",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 18,
+    "text": "Kerajaan Banten merupakan kerajaan Islam yang terletak di ...",
+    "options": [
+      "A. Banten",
+      "B. Cirebon",
+      "C. Demak",
+      "D. Mataram Islam"
+    ],
+    "correct": "A. Banten",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 19,
+    "text": "Candi Tikus merupakan peninggalan dari kerajaan ...",
+    "options": [
+      "A. Majapahit",
+      "B. Singasari",
+      "C. Kediri",
+      "D. Mataram Kuno"
+    ],
+    "correct": "A. Majapahit",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 20,
+    "text": "Prasasti Kebon Kopi merupakan peninggalan kerajaan ...",
+    "options": [
+      "A. Tarumanegara",
+      "B. Kutai",
+      "C. Sriwijaya",
+      "D. Majapahit"
+    ],
+    "correct": "A. Tarumanegara",
+    "type": "Nasionalisme",
+    "national": true
+  }
+]
