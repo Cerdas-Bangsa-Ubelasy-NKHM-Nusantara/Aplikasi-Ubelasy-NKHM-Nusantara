@@ -1,1 +1,263 @@
 
+[
+  {
+    "id": 1,
+    "text": "Butir Pancasila 'Kami bangsa Indonesia menyatakan kebhinekaan sebagai anugerah Tuhan Yang Maha Esa' merupakan pengamalan dari sila ke-...",
+    "options": [
+      "A. Satu",
+      "B. Dua",
+      "C. Tiga",
+      "D. Lima"
+    ],
+    "correct": "A. Satu",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 2,
+    "text": "Butir Pancasila 'Mengakui persamaan derajat, persamaan hak, dan kewajiban antara sesama manusia' merupakan pengamalan dari sila ke-...",
+    "options": [
+      "A. Satu",
+      "B. Dua",
+      "C. Tiga",
+      "D. Empat"
+    ],
+    "correct": "B. Dua",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 3,
+    "text": "Butir Pancasila 'Mengutamakan kepentingan negara dan masyarakat di atas kepentingan pribadi dan golongan' merupakan pengamalan dari sila ke-...",
+    "options": [
+      "A. Satu",
+      "B. Dua",
+      "C. Tiga",
+      "D. Empat"
+    ],
+    "correct": "C. Tiga",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 4,
+    "text": "Butir Pancasila 'Tidak memaksakan kehendak kepada orang lain' merupakan pengamalan dari sila ke-...",
+    "options": [
+      "A. Satu",
+      "B. Dua",
+      "C. Tiga",
+      "D. Empat"
+    ],
+    "correct": "D. Empat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 5,
+    "text": "Butir Pancasila 'Mengembangkan perbuatan yang luhur yang mencerminkan sikap dan suasana kekeluargaan dan gotong royong' merupakan pengamalan dari sila ke-...",
+    "options": [
+      "A. Satu",
+      "B. Dua",
+      "C. Tiga",
+      "D. Lima"
+    ],
+    "correct": "D. Lima",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 6,
+    "text": "Bunyi butir Pancasila sila pertama 'Ketuhanan Yang Maha Esa' adalah ...",
+    "options": [
+      "A. Percaya dan takwa kepada Tuhan Yang Maha Esa sesuai dengan agama dan kepercayaannya masing-masing menurut dasar kemanusiaan yang adil dan beradab",
+      "B. Mengakui persamaan derajat, hak, dan kewajiban asasi setiap manusia",
+      "C. Cinta tanah air dan bangsa Indonesia",
+      "D. Menjunjung tinggi nilai-nilai kemanusiaan"
+    ],
+    "correct": "A. Percaya dan takwa kepada Tuhan Yang Maha Esa sesuai dengan agama dan kepercayaannya masing-masing menurut dasar kemanusiaan yang adil dan beradab",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 7,
+    "text": "Butir Pancasila 'Saling mencintai sesama manusia' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Keadilan Sosial bagi Seluruh Rakyat Indonesia"
+    ],
+    "correct": "B. Kemanusiaan yang Adil dan Beradab",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 8,
+    "text": "Butir Pancasila 'Menjunjung tinggi nilai-nilai kemanusiaan' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Keadilan Sosial bagi Seluruh Rakyat Indonesia"
+    ],
+    "correct": "B. Kemanusiaan yang Adil dan Beradab",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 9,
+    "text": "Butir Pancasila 'Tidak semena-mena terhadap orang lain' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan"
+    ],
+    "correct": "B. Kemanusiaan yang Adil dan Beradab",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 10,
+    "text": "Butir Pancasila 'Menjaga keseimbangan antara hak dan kewajiban' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Keadilan Sosial bagi Seluruh Rakyat Indonesia"
+    ],
+    "correct": "D. Keadilan Sosial bagi Seluruh Rakyat Indonesia",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 11,
+    "text": "Butir Pancasila 'Mengembangkan sikap tenggang rasa' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan"
+    ],
+    "correct": "B. Kemanusiaan yang Adil dan Beradab",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 12,
+    "text": "Butir Pancasila 'Mengutamakan kepentingan bersama di atas kepentingan pribadi' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan"
+    ],
+    "correct": "C. Persatuan Indonesia",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 13,
+    "text": "Butir Pancasila 'Mengutamakan musyawarah dalam mengambil keputusan untuk kepentingan bersama' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan"
+    ],
+    "correct": "D. Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 14,
+    "text": "Butir Pancasila 'Memberi kepercayaan kepada wakil-wakil yang dipercaya untuk melaksanakan permusyawaratan' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan"
+    ],
+    "correct": "D. Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 15,
+    "text": "Butir Pancasila 'Mengembangkan sikap adil terhadap sesama' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Keadilan Sosial bagi Seluruh Rakyat Indonesia"
+    ],
+    "correct": "D. Keadilan Sosial bagi Seluruh Rakyat Indonesia",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 16,
+    "text": "Butir Pancasila 'Menghormati hak-hak orang lain' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Keadilan Sosial bagi Seluruh Rakyat Indonesia"
+    ],
+    "correct": "B. Kemanusiaan yang Adil dan Beradab",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 17,
+    "text": "Butir Pancasila 'Menjunjung tinggi nilai persatuan dan kesatuan bangsa' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan"
+    ],
+    "correct": "C. Persatuan Indonesia",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 18,
+    "text": "Butir Pancasila 'Mengembangkan sikap kekeluargaan dan gotong royong' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Keadilan Sosial bagi Seluruh Rakyat Indonesia"
+    ],
+    "correct": "D. Keadilan Sosial bagi Seluruh Rakyat Indonesia",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 19,
+    "text": "Butir Pancasila 'Menjaga keseimbangan antara hak dan kewajiban' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Keadilan Sosial bagi Seluruh Rakyat Indonesia"
+    ],
+    "correct": "D. Keadilan Sosial bagi Seluruh Rakyat Indonesia",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 20,
+    "text": "Butir Pancasila 'Mengutamakan musyawarah dalam mengambil keputusan' termasuk dalam sila ...",
+    "options": [
+      "A. Ketuhanan Yang Maha Esa",
+      "B. Kemanusiaan yang Adil dan Beradab",
+      "C. Persatuan Indonesia",
+      "D. Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan"
+    ],
+    "correct": "D. Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan",
+    "type": "Nasionalisme",
+    "national": true
+  }
+]
