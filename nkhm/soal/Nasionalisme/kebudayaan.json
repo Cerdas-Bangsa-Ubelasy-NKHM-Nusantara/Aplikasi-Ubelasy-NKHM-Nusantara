@@ -1,1 +1,262 @@
-
+[
+  {
+    "id": 1,
+    "text": "Tari Saman merupakan tarian tradisional yang berasal dari provinsi mana?",
+    "options": [
+      "A. Aceh",
+      "B. Sumatera Utara",
+      "C. Sumatera Barat",
+      "D. Riau"
+    ],
+    "correct": "A. Aceh",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 2,
+    "text": "Rumah adat Honai adalah rumah tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Papua",
+      "B. Maluku",
+      "C. Nusa Tenggara Timur",
+      "D. Sulawesi"
+    ],
+    "correct": "A. Papua",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 3,
+    "text": "Alat musik Angklung merupakan alat musik tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Jawa Barat",
+      "B. Jawa Tengah",
+      "C. Jawa Timur",
+      "D. Banten"
+    ],
+    "correct": "A. Jawa Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 4,
+    "text": "Upacara Ngaben adalah upacara kematian yang berasal dari daerah mana?",
+    "options": [
+      "A. Bali",
+      "B. Lombok",
+      "C. Jawa",
+      "D. Sumatera"
+    ],
+    "correct": "A. Bali",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 5,
+    "text": "Makanan khas Rendang berasal dari daerah mana?",
+    "options": [
+      "A. Sumatera Barat",
+      "B. Sumatera Utara",
+      "C. Riau",
+      "D. Jambi"
+    ],
+    "correct": "A. Sumatera Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 6,
+    "text": "Batik diakui oleh UNESCO sebagai Warisan Budaya Takbenda pada tahun berapa?",
+    "options": [
+      "A. 2009",
+      "B. 2010",
+      "C. 2011",
+      "D. 2012"
+    ],
+    "correct": "A. 2009",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 7,
+    "text": "Tari Kecak merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Bali",
+      "B. Jawa",
+      "C. Sumatera",
+      "D. Kalimantan"
+    ],
+    "correct": "A. Bali",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 8,
+    "text": "Suku Dayak merupakan suku asli yang berasal dari pulau mana?",
+    "options": [
+      "A. Kalimantan",
+      "B. Sulawesi",
+      "C. Sumatera",
+      "D. Papua"
+    ],
+    "correct": "A. Kalimantan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 9,
+    "text": "Rumah Gadang adalah rumah adat yang berasal dari daerah mana?",
+    "options": [
+      "A. Sumatera Barat",
+      "B. Sumatera Utara",
+      "C. Riau",
+      "D. Jambi"
+    ],
+    "correct": "A. Sumatera Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 10,
+    "text": "Alat musik Gamelan merupakan alat musik tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Jawa",
+      "B. Bali",
+      "C. Sumatera",
+      "D. Sulawesi"
+    ],
+    "correct": "A. Jawa",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 11,
+    "text": "Upacara Rambu Solo merupakan upacara adat yang berasal dari daerah mana?",
+    "options": [
+      "A. Toraja, Sulawesi Selatan",
+      "B. Minangkabau",
+      "C. Batak",
+      "D. Dayak"
+    ],
+    "correct": "A. Toraja, Sulawesi Selatan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 12,
+    "text": "Tari Piring merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Sumatera Barat",
+      "B. Sumatera Utara",
+      "C. Riau",
+      "D. Aceh"
+    ],
+    "correct": "A. Sumatera Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 13,
+    "text": "Makanan Ketupat biasanya disajikan pada hari raya apa?",
+    "options": [
+      "A. Idul Fitri",
+      "B. Idul Adha",
+      "C. Natal",
+      "D. Nyepi"
+    ],
+    "correct": "A. Idul Fitri",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 14,
+    "text": "Pencak Silat adalah seni bela diri tradisional yang berasal dari negara mana?",
+    "options": [
+      "A. Indonesia",
+      "B. Malaysia",
+      "C. Filipina",
+      "D. Thailand"
+    ],
+    "correct": "A. Indonesia",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 15,
+    "text": "Rumah adat Tongkonan berasal dari daerah mana?",
+    "options": [
+      "A. Toraja, Sulawesi Selatan",
+      "B. Minangkabau",
+      "C. Batak",
+      "D. Dayak"
+    ],
+    "correct": "A. Toraja, Sulawesi Selatan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 16,
+    "text": "Alat musik Sasando berasal dari daerah mana?",
+    "options": [
+      "A. Nusa Tenggara Timur",
+      "B. Bali",
+      "C. Maluku",
+      "D. Papua"
+    ],
+    "correct": "A. Nusa Tenggara Timur",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 17,
+    "text": "Tari Tor-Tor merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Sumatera Utara (Batak)",
+      "B. Sumatera Barat",
+      "C. Aceh",
+      "D. Riau"
+    ],
+    "correct": "A. Sumatera Utara (Batak)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 18,
+    "text": "Upacara Sekaten diselenggarakan di kota mana?",
+    "options": [
+      "A. Yogyakarta dan Surakarta",
+      "B. Semarang",
+      "C. Surabaya",
+      "D. Bandung"
+    ],
+    "correct": "A. Yogyakarta dan Surakarta",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 19,
+    "text": "Makanan Pempek berasal dari daerah mana?",
+    "options": [
+      "A. Palembang, Sumatera Selatan",
+      "B. Padang",
+      "C. Medan",
+      "D. Aceh"
+    ],
+    "correct": "A. Palembang, Sumatera Selatan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 20,
+    "text": "Wayang Kulit adalah seni pertunjukan tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Jawa",
+      "B. Bali",
+      "C. Sumatera",
+      "D. Kalimantan"
+    ],
+    "correct": "A. Jawa",
+    "type": "Nasionalisme",
+    "national": true
+  }
+]
