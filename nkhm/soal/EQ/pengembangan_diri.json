@@ -51,7 +51,10 @@
       "Melihat ke bawah dan membandingkan diri dengan orang yang bernasib sama.",
       "Menghindari jika menghadapi pekerjaan yang sama di kemudian hari."
     ],
-    "correct": "Mencari cara untuk memperbaiki kesalahan tersebut dan mencoba lagi., Melihat ke belakang dan merefleksi diri agar tidak melakukan kesalahan yang sama.",
+    "correct": [
+      "Mencari cara untuk memperbaiki kesalahan tersebut dan mencoba lagi.",
+      "Melihat ke belakang dan merefleksi diri agar tidak melakukan kesalahan yang sama."
+    ],
     "type": "EQ",
     "national": false
   },
