@@ -1,1 +1,262 @@
-
+[
+  {
+    "id": 1,
+    "text": "Kekuasaan tertinggi negara Indonesia dipegang oleh ...",
+    "options": [
+      "A. Presiden",
+      "B. Majelis Permusyawaratan Rakyat (MPR)",
+      "C. Dewan Perwakilan Rakyat (DPR)",
+      "D. Mahkamah Agung (MA)"
+    ],
+    "correct": "B. Majelis Permusyawaratan Rakyat (MPR)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 2,
+    "text": "Presiden dan Wakil Presiden Indonesia dipilih langsung oleh rakyat dalam ...",
+    "options": [
+      "A. Pemilihan umum (Pemilu)",
+      "B. Pemilihan kepala daerah (Pilkada)",
+      "C. Musyawarah nasional",
+      "D. Sidang istimewa MPR"
+    ],
+    "correct": "A. Pemilihan umum (Pemilu)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 3,
+    "text": "Lembaga negara yang berwenang mengubah dan menetapkan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 adalah ...",
+    "options": [
+      "A. Presiden",
+      "B. Dewan Perwakilan Rakyat (DPR)",
+      "C. Majelis Permusyawaratan Rakyat (MPR)",
+      "D. Mahkamah Konstitusi (MK)"
+    ],
+    "correct": "C. Majelis Permusyawaratan Rakyat (MPR)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 4,
+    "text": "Jumlah anggota Dewan Perwakilan Rakyat (DPR) Republik Indonesia saat ini adalah ...",
+    "options": [
+      "A. 500 orang",
+      "B. 550 orang",
+      "C. 575 orang",
+      "D. 600 orang"
+    ],
+    "correct": "C. 575 orang",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 5,
+    "text": "Lembaga yang bertugas memeriksa pengelolaan dan tanggung jawab keuangan negara adalah ...",
+    "options": [
+      "A. Mahkamah Agung (MA)",
+      "B. Mahkamah Konstitusi (MK)",
+      "C. Badan Pemeriksa Keuangan (BPK)",
+      "D. Komisi Yudisial (KY)"
+    ],
+    "correct": "C. Badan Pemeriksa Keuangan (BPK)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 6,
+    "text": "Kekuasaan kehakiman di Indonesia dijalankan oleh Mahkamah Agung (MA) dan ...",
+    "options": [
+      "A. Mahkamah Konstitusi (MK)",
+      "B. Komisi Yudisial (KY)",
+      "C. Badan Pemeriksa Keuangan (BPK)",
+      "D. Dewan Perwakilan Rakyat (DPR)"
+    ],
+    "correct": "A. Mahkamah Konstitusi (MK)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 7,
+    "text": "Masa jabatan Presiden Republik Indonesia adalah ...",
+    "options": [
+      "A. 4 tahun",
+      "B. 5 tahun",
+      "C. 6 tahun",
+      "D. 7 tahun"
+    ],
+    "correct": "B. 5 tahun",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 8,
+    "text": "Dewan Perwakilan Daerah (DPD) merupakan lembaga perwakilan yang berasal dari tingkat ...",
+    "options": [
+      "A. Kabupaten/kota",
+      "B. Provinsi",
+      "C. Kecamatan",
+      "D. Desa"
+    ],
+    "correct": "B. Provinsi",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 9,
+    "text": "Lembaga negara yang berwenang menyelesaikan sengketa hasil pemilihan umum adalah ...",
+    "options": [
+      "A. Mahkamah Agung (MA)",
+      "B. Mahkamah Konstitusi (MK)",
+      "C. Badan Pengawas Pemilu (Bawaslu)",
+      "D. Komisi Pemilihan Umum (KPU)"
+    ],
+    "correct": "B. Mahkamah Konstitusi (MK)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 10,
+    "text": "Sistem pemerintahan yang dianut oleh Negara Indonesia adalah ...",
+    "options": [
+      "A. Parlementer",
+      "B. Presidensial",
+      "C. Semi-parlementer",
+      "D. Monarki konstitusional"
+    ],
+    "correct": "B. Presidensial",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 11,
+    "text": "Jumlah menteri dalam Kabinet Indonesia ditetapkan oleh ...",
+    "options": [
+      "A. MPR",
+      "B. DPR",
+      "C. Presiden",
+      "D. Wakil Presiden"
+    ],
+    "correct": "C. Presiden",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 12,
+    "text": "Lembaga yang berwenang mengangkat dan memberhentikan hakim agung adalah ...",
+    "options": [
+      "A. Presiden atas usul Komisi Yudisial (KY)",
+      "B. DPR atas usul Presiden",
+      "C. MPR atas usul DPR",
+      "D. Mahkamah Konstitusi"
+    ],
+    "correct": "A. Presiden atas usul Komisi Yudisial (KY)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 13,
+    "text": "Majelis Permusyawaratan Rakyat (MPR) terdiri dari ...",
+    "options": [
+      "A. DPR dan DPD",
+      "B. DPR dan BPK",
+      "C. DPD dan BPK",
+      "D. DPR dan MA"
+    ],
+    "correct": "A. DPR dan DPD",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 14,
+    "text": "Pemilihan umum (Pemilu) di Indonesia dilaksanakan setiap ...",
+    "options": [
+      "A. 4 tahun sekali",
+      "B. 5 tahun sekali",
+      "C. 6 tahun sekali",
+      "D. 7 tahun sekali"
+    ],
+    "correct": "B. 5 tahun sekali",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 15,
+    "text": "Lembaga yang berwenang mengusulkan pengangkatan hakim agung adalah ...",
+    "options": [
+      "A. DPR",
+      "B. Presiden",
+      "C. Komisi Yudisial (KY)",
+      "D. Mahkamah Agung"
+    ],
+    "correct": "C. Komisi Yudisial (KY)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 16,
+    "text": "Badan Pemeriksa Keuangan (BPK) terdiri dari ... orang anggota.",
+    "options": [
+      "A. 7",
+      "B. 8",
+      "C. 9",
+      "D. 10"
+    ],
+    "correct": "C. 9",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 17,
+    "text": "Salah satu kewenangan Mahkamah Konstitusi (MK) adalah ...",
+    "options": [
+      "A. Mengubah Undang-Undang Dasar",
+      "B. Menguji Undang-Undang terhadap Undang-Undang Dasar",
+      "C. Menetapkan APBN",
+      "D. Mengangkat presiden"
+    ],
+    "correct": "B. Menguji Undang-Undang terhadap Undang-Undang Dasar",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 18,
+    "text": "Wakil Presiden Republik Indonesia memiliki tugas utama ...",
+    "options": [
+      "A. Memimpin DPR",
+      "B. Membantu Presiden dalam menjalankan pemerintahan",
+      "C. Memimpin MPR",
+      "D. Mengawasi BPK"
+    ],
+    "correct": "B. Membantu Presiden dalam menjalankan pemerintahan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 19,
+    "text": "Presiden dan Wakil Presiden dapat diberhentikan oleh MPR melalui mekanisme ...",
+    "options": [
+      "A. Reshuffle kabinet",
+      "B. Impeachment",
+      "C. Pemilihan umum",
+      "D. Referendum"
+    ],
+    "correct": "B. Impeachment",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 20,
+    "text": "Lembaga yang berwenang menetapkan Anggaran Pendapatan dan Belanja Negara (APBN) adalah ...",
+    "options": [
+      "A. MPR",
+      "B. DPR bersama Presiden",
+      "C. DPD",
+      "D. BPK"
+    ],
+    "correct": "B. DPR bersama Presiden",
+    "type": "Nasionalisme",
+    "national": true
+  }
+]
