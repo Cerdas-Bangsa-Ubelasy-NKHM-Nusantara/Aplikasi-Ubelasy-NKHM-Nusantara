@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "text": "Tari Saman merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Aceh",
+      "B. Sumatera Utara",
+      "C. Sumatera Barat",
+      "D. Riau"
+    ],
+    "correct": "A. Aceh",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 2,
+    "text": "Tari Kecak merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Jawa Timur",
+      "B. Bali",
+      "C. Jawa Tengah",
+      "D. Lombok"
+    ],
+    "correct": "B. Bali",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 3,
+    "text": "Tari Piring merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Sumatera Utara",
+      "B. Sumatera Barat",
+      "C. Riau",
+      "D. Jambi"
+    ],
+    "correct": "B. Sumatera Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 4,
+    "text": "Tari Tor-Tor merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Sumatera Barat",
+      "B. Aceh",
+      "C. Sumatera Utara (Batak)",
+      "D. Kalimantan"
+    ],
+    "correct": "C. Sumatera Utara (Batak)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 5,
+    "text": "Tari Jaipong merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Jawa Tengah",
+      "B. Jawa Timur",
+      "C. Jawa Barat",
+      "D. Banten"
+    ],
+    "correct": "C. Jawa Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 6,
+    "text": "Tari Serimpi merupakan tarian klasik yang berasal dari daerah mana?",
+    "options": [
+      "A. Jawa Barat",
+      "B. Jawa Tengah",
+      "C. Jawa Timur",
+      "D. Yogyakarta"
+    ],
+    "correct": "B. Jawa Tengah",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 7,
+    "text": "Tari Remo merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Jawa Tengah",
+      "B. Yogyakarta",
+      "C. Jawa Timur",
+      "D. Bali"
+    ],
+    "correct": "C. Jawa Timur",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 8,
+    "text": "Tari Pendet merupakan tarian pemujaan yang berasal dari daerah mana?",
+    "options": [
+      "A. Jawa",
+      "B. Lombok",
+      "C. Bali",
+      "D. Sumatera"
+    ],
+    "correct": "C. Bali",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 9,
+    "text": "Tari Legong merupakan tarian klasik yang berasal dari daerah mana?",
+    "options": [
+      "A. Jawa Timur",
+      "B. Bali",
+      "C. Jawa Tengah",
+      "D. Sumatera"
+    ],
+    "correct": "B. Bali",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 10,
+    "text": "Tari Topeng merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Betawi (Jakarta)",
+      "B. Jawa Barat",
+      "C. Banten",
+      "D. Sumatera"
+    ],
+    "correct": "A. Betawi (Jakarta)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 11,
+    "text": "Tari Gandrung merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Banyuwangi, Jawa Timur",
+      "B. Bali",
+      "C. Jawa Tengah",
+      "D. Sumatera"
+    ],
+    "correct": "A. Banyuwangi, Jawa Timur",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 12,
+    "text": "Tari Dayak merupakan tarian tradisional yang berasal dari pulau mana?",
+    "options": [
+      "A. Sumatera",
+      "B. Sulawesi",
+      "C. Kalimantan",
+      "D. Papua"
+    ],
+    "correct": "C. Kalimantan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 13,
+    "text": "Tari Pakarena merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Sulawesi Selatan",
+      "B. Sulawesi Utara",
+      "C. Sulawesi Tengah",
+      "D. Maluku"
+    ],
+    "correct": "A. Sulawesi Selatan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 14,
+    "text": "Tari Cakalele merupakan tarian perang tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Maluku",
+      "B. Papua",
+      "C. Nusa Tenggara Timur",
+      "D. Sulawesi"
+    ],
+    "correct": "A. Maluku",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 15,
+    "text": "Tari Yospan merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Maluku",
+      "B. Papua",
+      "C. Nusa Tenggara Timur",
+      "D. Sulawesi"
+    ],
+    "correct": "B. Papua",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 16,
+    "text": "Tari Baksa Kembang merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Kalimantan Selatan",
+      "B. Kalimantan Timur",
+      "C. Kalimantan Tengah",
+      "D. Kalimantan Barat"
+    ],
+    "correct": "A. Kalimantan Selatan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 17,
+    "text": "Tari Sekapur Sirih merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Riau",
+      "B. Jambi",
+      "C. Sumatera Selatan",
+      "D. Lampung"
+    ],
+    "correct": "B. Jambi",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 18,
+    "text": "Tari Zapin merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Aceh",
+      "B. Sumatera Utara",
+      "C. Riau",
+      "D. Sumatera Barat"
+    ],
+    "correct": "C. Riau",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 19,
+    "text": "Tari Gending Sriwijaya merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Sumatera Selatan",
+      "B. Lampung",
+      "C. Jambi",
+      "D. Bengkulu"
+    ],
+    "correct": "A. Sumatera Selatan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 20,
+    "text": "Tari Lenggang Nyai merupakan tarian tradisional yang berasal dari daerah mana?",
+    "options": [
+      "A. Betawi (Jakarta)",
+      "B. Jawa Barat",
+      "C. Banten",
+      "D. Sumatera"
+    ],
+    "correct": "A. Betawi (Jakarta)",
+    "type": "Nasionalisme",
+    "national": true
+  }
+]
