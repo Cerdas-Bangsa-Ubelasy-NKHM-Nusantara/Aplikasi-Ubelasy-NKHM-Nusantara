@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "text": "Indonesia memiliki target untuk menjadi negara maju pada tahun ...",
+    "options": [
+      "A. 2030",
+      "B. 2045",
+      "C. 2050",
+      "D. 2060"
+    ],
+    "correct": "B. 2045",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 2,
+    "text": "Salah satu program unggulan pemerintah Indonesia untuk meningkatkan konektivitas antar daerah adalah ...",
+    "options": [
+      "A. Jalan Tol Trans-Sumatera",
+      "B. Kereta Api Cepat Jakarta-Bandung",
+      "C. Tol Laut",
+      "D. Bandara Internasional"
+    ],
+    "correct": "C. Tol Laut",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 3,
+    "text": "Pertumbuhan ekonomi Indonesia di masa depan sangat bergantung pada pengembangan sumber daya manusia melalui program ...",
+    "options": [
+      "A. Kartu Prakerja",
+      "B. Bantuan Langsung Tunai",
+      "C. Program Keluarga Harapan",
+      "D. Kartu Indonesia Sehat"
+    ],
+    "correct": "A. Kartu Prakerja",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 4,
+    "text": "Indonesia memiliki potensi besar dalam energi terbarukan, salah satunya adalah ...",
+    "options": [
+      "A. Energi panas bumi (geothermal)",
+      "B. Energi nuklir",
+      "C. Energi batubara",
+      "D. Energi minyak bumi"
+    ],
+    "correct": "A. Energi panas bumi (geothermal)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 5,
+    "text": "Sektor pariwisata Indonesia di masa depan akan fokus pada pengembangan ...",
+    "options": [
+      "A. Wisata halal",
+      "B. Wisata alam",
+      "C. Wisata budaya",
+      "D. Wisata buatan"
+    ],
+    "correct": "A. Wisata halal",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 6,
+    "text": "Salah satu tantangan besar Indonesia di masa depan adalah ...",
+    "options": [
+      "A. Bonus demografi",
+      "B. Krisis air bersih",
+      "C. Urbanisasi berlebihan",
+      "D. Perubahan iklim"
+    ],
+    "correct": "D. Perubahan iklim",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 7,
+    "text": "Program 'Makanan Bergizi Gratis' yang dicanangkan pemerintah bertujuan untuk ...",
+    "options": [
+      "A. Mengurangi stunting",
+      "B. Meningkatkan ekonomi lokal",
+      "C. Mengurangi pengangguran",
+      "D. Memperkuat ketahanan pangan"
+    ],
+    "correct": "A. Mengurangi stunting",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 8,
+    "text": "Indonesia menjadi tuan rumah KTT G20 pada tahun ...",
+    "options": [
+      "A. 2021",
+      "B. 2022",
+      "C. 2023",
+      "D. 2024"
+    ],
+    "correct": "B. 2022",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 9,
+    "text": "Visi Indonesia Emas 2045 berfokus pada pengembangan ...",
+    "options": [
+      "A. Sumber daya alam",
+      "B. Sumber daya manusia",
+      "C. Infrastruktur",
+      "D. Teknologi"
+    ],
+    "correct": "B. Sumber daya manusia",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 10,
+    "text": "Salah satu langkah Indonesia dalam menghadapi bonus demografi adalah ...",
+    "options": [
+      "A. Meningkatkan kualitas pendidikan",
+      "B. Membatasi kelahiran",
+      "C. Memperbanyak lapangan kerja",
+      "D. Meningkatkan impor"
+    ],
+    "correct": "A. Meningkatkan kualitas pendidikan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 11,
+    "text": "Program 'Lumbung Pangan Nasional' bertujuan untuk ...",
+    "options": [
+      "A. Mencukupi kebutuhan pangan nasional",
+      "B. Mengekspor beras",
+      "C. Mengurangi impor beras",
+      "D. Meningkatkan produksi beras"
+    ],
+    "correct": "A. Mencukupi kebutuhan pangan nasional",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 12,
+    "text": "Salah satu sektor yang menjadi andalan Indonesia di masa depan adalah ...",
+    "options": [
+      "A. Industri kreatif",
+      "B. Industri tekstil",
+      "C. Industri otomotif",
+      "D. Industri pertambangan"
+    ],
+    "correct": "A. Industri kreatif",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 13,
+    "text": "Program 'Makanan Bergizi Gratis' yang dicanangkan pemerintah bertujuan untuk ...",
+    "options": [
+      "A. Mengurangi stunting",
+      "B. Meningkatkan ekonomi lokal",
+      "C. Mengurangi pengangguran",
+      "D. Memperkuat ketahanan pangan"
+    ],
+    "correct": "A. Mengurangi stunting",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 14,
+    "text": "Salah satu tantangan Indonesia dalam mencapai kemajuan di masa depan adalah ...",
+    "options": [
+      "A. Kesenjangan ekonomi",
+      "B. Kemajuan teknologi",
+      "C. Sumber daya alam melimpah",
+      "D. Tenaga kerja terampil"
+    ],
+    "correct": "A. Kesenjangan ekonomi",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 15,
+    "text": "Program 'Makanan Bergizi Gratis' yang dicanangkan pemerintah bertujuan untuk ...",
+    "options": [
+      "A. Mengurangi stunting",
+      "B. Meningkatkan ekonomi lokal",
+      "C. Mengurangi pengangguran",
+      "D. Memperkuat ketahanan pangan"
+    ],
+    "correct": "A. Mengurangi stunting",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 16,
+    "text": "Indonesia memiliki target untuk menjadi negara maju pada tahun ...",
+    "options": [
+      "A. 2030",
+      "B. 2045",
+      "C. 2050",
+      "D. 2060"
+    ],
+    "correct": "B. 2045",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 17,
+    "text": "Salah satu program unggulan pemerintah Indonesia untuk meningkatkan konektivitas antar daerah adalah ...",
+    "options": [
+      "A. Jalan Tol Trans-Sumatera",
+      "B. Kereta Api Cepat Jakarta-Bandung",
+      "C. Tol Laut",
+      "D. Bandara Internasional"
+    ],
+    "correct": "C. Tol Laut",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 18,
+    "text": "Pertumbuhan ekonomi Indonesia di masa depan sangat bergantung pada pengembangan sumber daya manusia melalui program ...",
+    "options": [
+      "A. Kartu Prakerja",
+      "B. Bantuan Langsung Tunai",
+      "C. Program Keluarga Harapan",
+      "D. Kartu Indonesia Sehat"
+    ],
+    "correct": "A. Kartu Prakerja",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 19,
+    "text": "Indonesia memiliki potensi besar dalam energi terbarukan, salah satunya adalah ...",
+    "options": [
+      "A. Energi panas bumi (geothermal)",
+      "B. Energi nuklir",
+      "C. Energi batubara",
+      "D. Energi minyak bumi"
+    ],
+    "correct": "A. Energi panas bumi (geothermal)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 20,
+    "text": "Visi Indonesia Emas 2045 berfokus pada pengembangan ...",
+    "options": [
+      "A. Sumber daya alam",
+      "B. Sumber daya manusia",
+      "C. Infrastruktur",
+      "D. Teknologi"
+    ],
+    "correct": "B. Sumber daya manusia",
+    "type": "Nasionalisme",
+    "national": true
+  }
+]
