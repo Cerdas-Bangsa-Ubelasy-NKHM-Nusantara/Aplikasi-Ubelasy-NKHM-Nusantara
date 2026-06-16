@@ -1,1 +1,262 @@
-
+[
+  {
+    "id": 1,
+    "text": "Kapan Proklamasi Kemerdekaan Indonesia dibacakan oleh Soekarno dan Mohammad Hatta?",
+    "options": [
+      "A. 17 Agustus 1945",
+      "B. 17 Agustus 1946",
+      "C. 17 Agustus 1947",
+      "D. 17 Agustus 1948"
+    ],
+    "correct": "A. 17 Agustus 1945",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 2,
+    "text": "Peristiwa Bandung Lautan Api terjadi pada tahun berapa?",
+    "options": [
+      "A. 1945",
+      "B. 1946",
+      "C. 1947",
+      "D. 1948"
+    ],
+    "correct": "B. 1946",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 3,
+    "text": "Siapakah tokoh yang dikenal sebagai 'Bapak Pendidikan Nasional' Indonesia?",
+    "options": [
+      "A. Soekarno",
+      "B. Mohammad Hatta",
+      "C. Ki Hajar Dewantara",
+      "D. Ahmad Dahlan"
+    ],
+    "correct": "C. Ki Hajar Dewantara",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 4,
+    "text": "Di manakah teks Proklamasi Kemerdekaan Indonesia dibacakan?",
+    "options": [
+      "A. Gedung Merdeka, Bandung",
+      "B. Jalan Pegangsaan Timur 56, Jakarta",
+      "C. Istana Merdeka, Jakarta",
+      "D. Gedung Sate, Bandung"
+    ],
+    "correct": "B. Jalan Pegangsaan Timur 56, Jakarta",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 5,
+    "text": "Siapakah tokoh yang memimpin perlawanan rakyat Surabaya pada 10 November 1945?",
+    "options": [
+      "A. Soekarno",
+      "B. Mohammad Hatta",
+      "C. Bung Tomo",
+      "D. Jenderal Sudirman"
+    ],
+    "correct": "C. Bung Tomo",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 6,
+    "text": "Peristiwa Rengasdengklok terjadi pada tahun berapa?",
+    "options": [
+      "A. 1945",
+      "B. 1946",
+      "C. 1947",
+      "D. 1948"
+    ],
+    "correct": "A. 1945",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 7,
+    "text": "Siapakah presiden pertama Indonesia?",
+    "options": [
+      "A. Mohammad Hatta",
+      "B. Soekarno",
+      "C. Soeharto",
+      "D. B.J. Habibie"
+    ],
+    "correct": "B. Soekarno",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 8,
+    "text": "Kapan Peristiwa G30S/PKI terjadi?",
+    "options": [
+      "A. 30 September 1965",
+      "B. 30 September 1966",
+      "C. 30 September 1967",
+      "D. 30 September 1968"
+    ],
+    "correct": "A. 30 September 1965",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 9,
+    "text": "Apa nama pertempuran besar yang terjadi antara rakyat Indonesia dan tentara Sekutu di Surabaya?",
+    "options": [
+      "A. Pertempuran Bandung Lautan Api",
+      "B. Pertempuran Ambarawa",
+      "C. Pertempuran Surabaya",
+      "D. Pertempuran Medan Area"
+    ],
+    "correct": "C. Pertempuran Surabaya",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 10,
+    "text": "Siapakah tokoh yang memproklamasikan kemerdekaan Indonesia bersama Soekarno?",
+    "options": [
+      "A. Mohammad Hatta",
+      "B. Ki Hajar Dewantara",
+      "C. Ahmad Dahlan",
+      "D. Wahidin Sudirohusodo"
+    ],
+    "correct": "A. Mohammad Hatta",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 11,
+    "text": "Pada tahun berapa Indonesia menjadi anggota PBB?",
+    "options": [
+      "A. 1950",
+      "B. 1955",
+      "C. 1960",
+      "D. 1965"
+    ],
+    "correct": "A. 1950",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 12,
+    "text": "Siapakah tokoh yang dikenal sebagai 'Jenderal Besar' dan memimpin perang gerilya melawan Belanda?",
+    "options": [
+      "A. Soeharto",
+      "B. Jenderal Sudirman",
+      "C. Jenderal A.H. Nasution",
+      "D. Jenderal Ahmad Yani"
+    ],
+    "correct": "B. Jenderal Sudirman",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 13,
+    "text": "Kapan Perjanjian Linggarjati ditandatangani?",
+    "options": [
+      "A. 1946",
+      "B. 1947",
+      "C. 1948",
+      "D. 1949"
+    ],
+    "correct": "B. 1947",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 14,
+    "text": "Apa nama organisasi yang didirikan oleh Soekarno pada tahun 1927?",
+    "options": [
+      "A. Budi Utomo",
+      "B. Sarekat Islam",
+      "C. Partai Nasional Indonesia (PNI)",
+      "D. Muhammadiyah"
+    ],
+    "correct": "C. Partai Nasional Indonesia (PNI)",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 15,
+    "text": "Siapakah tokoh yang dikenal sebagai 'Pahlawan Proklamasi' bersama Soekarno?",
+    "options": [
+      "A. Mohammad Hatta",
+      "B. Ki Hajar Dewantara",
+      "C. Ahmad Dahlan",
+      "D. Jenderal Sudirman"
+    ],
+    "correct": "A. Mohammad Hatta",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 16,
+    "text": "Peristiwa Serangan Umum 1 Maret 1949 terjadi di kota mana?",
+    "options": [
+      "A. Yogyakarta",
+      "B. Surabaya",
+      "C. Bandung",
+      "D. Jakarta"
+    ],
+    "correct": "A. Yogyakarta",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 17,
+    "text": "Siapakah tokoh yang mengusulkan lima dasar negara yang kemudian dikenal sebagai Pancasila?",
+    "options": [
+      "A. Mohammad Hatta",
+      "B. Soekarno",
+      "C. Ki Hajar Dewantara",
+      "D. Ahmad Dahlan"
+    ],
+    "correct": "B. Soekarno",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 18,
+    "text": "Pada tahun berapa Konferensi Meja Bundar (KMB) dilaksanakan di Den Haag?",
+    "options": [
+      "A. 1948",
+      "B. 1949",
+      "C. 1950",
+      "D. 1951"
+    ],
+    "correct": "B. 1949",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 19,
+    "text": "Siapakah tokoh yang memimpin perjuangan rakyat Aceh melawan Belanda?",
+    "options": [
+      "A. Cut Nyak Dien",
+      "B. Teuku Umar",
+      "C. Cut Nyak Dhien",
+      "D. Sultan Agung"
+    ],
+    "correct": "B. Teuku Umar",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 20,
+    "text": "Kapan Hari Pahlawan diperingati setiap tahun di Indonesia?",
+    "options": [
+      "A. 10 November",
+      "B. 17 Agustus",
+      "C. 28 Oktober",
+      "D. 20 Mei"
+    ],
+    "correct": "A. 10 November",
+    "type": "Nasionalisme",
+    "national": true
+  }
+]
