@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "text": "Bahasa resmi negara Indonesia adalah ...",
+    "options": [
+      "A. Bahasa Melayu",
+      "B. Bahasa Indonesia",
+      "C. Bahasa Jawa",
+      "D. Bahasa Sunda"
+    ],
+    "correct": "B. Bahasa Indonesia",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 2,
+    "text": "Bahasa daerah dengan jumlah penutur terbanyak di Indonesia adalah ...",
+    "options": [
+      "A. Bahasa Sunda",
+      "B. Bahasa Jawa",
+      "C. Bahasa Madura",
+      "D. Bahasa Minangkabau"
+    ],
+    "correct": "B. Bahasa Jawa",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 3,
+    "text": "Kapan Bahasa Indonesia secara resmi diakui sebagai bahasa nasional?",
+    "options": [
+      "A. 17 Agustus 1945",
+      "B. 28 Oktober 1928",
+      "C. 18 Agustus 1945",
+      "D. 20 Mei 1908"
+    ],
+    "correct": "B. 28 Oktober 1928",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 4,
+    "text": "Apa nama bahasa daerah yang digunakan oleh suku Batak Toba?",
+    "options": [
+      "A. Bahasa Batak",
+      "B. Bahasa Toba",
+      "C. Bahasa Batak Toba",
+      "D. Bahasa Angkola"
+    ],
+    "correct": "C. Bahasa Batak Toba",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 5,
+    "text": "Bahasa daerah 'Gayo' berasal dari provinsi mana?",
+    "options": [
+      "A. Sumatera Barat",
+      "B. Aceh",
+      "C. Sumatera Utara",
+      "D. Riau"
+    ],
+    "correct": "B. Aceh",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 6,
+    "text": "UNESCO menetapkan bahasa daerah tertentu sebagai bahasa terancam punah. Salah satu bahasa daerah yang terancam punah di Indonesia adalah ...",
+    "options": [
+      "A. Bahasa Jawa",
+      "B. Bahasa Sunda",
+      "C. Bahasa Betawi",
+      "D. Bahasa Sasak"
+    ],
+    "correct": "C. Bahasa Betawi",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 7,
+    "text": "Bahasa daerah 'Banjar' digunakan oleh masyarakat di provinsi mana?",
+    "options": [
+      "A. Kalimantan Selatan",
+      "B. Kalimantan Timur",
+      "C. Kalimantan Tengah",
+      "D. Kalimantan Barat"
+    ],
+    "correct": "A. Kalimantan Selatan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 8,
+    "text": "Bahasa 'Bugis' merupakan bahasa daerah yang berasal dari provinsi mana?",
+    "options": [
+      "A. Sulawesi Selatan",
+      "B. Sulawesi Utara",
+      "C. Sulawesi Tenggara",
+      "D. Sulawesi Barat"
+    ],
+    "correct": "A. Sulawesi Selatan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 9,
+    "text": "Bahasa 'Madura' digunakan oleh masyarakat di pulau mana?",
+    "options": [
+      "A. Madura",
+      "B. Lombok",
+      "C. Bali",
+      "D. Sumbawa"
+    ],
+    "correct": "A. Madura",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 10,
+    "text": "Bahasa 'Minangkabau' berasal dari provinsi mana?",
+    "options": [
+      "A. Sumatera Utara",
+      "B. Sumatera Barat",
+      "C. Riau",
+      "D. Jambi"
+    ],
+    "correct": "B. Sumatera Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 11,
+    "text": "Bahasa 'Bali' ditulis dengan aksara ...",
+    "options": [
+      "A. Aksara Bali",
+      "B. Aksara Jawa",
+      "C. Aksara Sunda",
+      "D. Aksara Latin"
+    ],
+    "correct": "A. Aksara Bali",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 12,
+    "text": "Bahasa 'Sasak' digunakan oleh masyarakat di pulau mana?",
+    "options": [
+      "A. Lombok",
+      "B. Sumbawa",
+      "C. Flores",
+      "D. Timor"
+    ],
+    "correct": "A. Lombok",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 13,
+    "text": "Bahasa daerah yang digunakan di Provinsi Nusa Tenggara Timur yang paling luas penuturnya adalah ...",
+    "options": [
+      "A. Bahasa Dawan",
+      "B. Bahasa Sabu",
+      "C. Bahasa Kupang",
+      "D. Bahasa Lamaholot"
+    ],
+    "correct": "A. Bahasa Dawan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 14,
+    "text": "Bahasa 'Ternate' berasal dari provinsi mana?",
+    "options": [
+      "A. Maluku Utara",
+      "B. Maluku",
+      "C. Sulawesi Utara",
+      "D. Papua"
+    ],
+    "correct": "A. Maluku Utara",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 15,
+    "text": "Bahasa daerah 'Dayak' terdiri dari berbagai dialek, salah satunya adalah ...",
+    "options": [
+      "A. Dayak Ngaju",
+      "B. Dayak Jawa",
+      "C. Dayak Sunda",
+      "D. Dayak Melayu"
+    ],
+    "correct": "A. Dayak Ngaju",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 16,
+    "text": "Bahasa 'Melayu' merupakan induk dari bahasa ...",
+    "options": [
+      "A. Indonesia",
+      "B. Jawa",
+      "C. Sunda",
+      "D. Madura"
+    ],
+    "correct": "A. Indonesia",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 17,
+    "text": "Bahasa daerah 'Aceh' memiliki kemiripan dengan bahasa ...",
+    "options": [
+      "A. Melayu",
+      "B. Minangkabau",
+      "C. Batak",
+      "D. Sunda"
+    ],
+    "correct": "A. Melayu",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 18,
+    "text": "Pemerintah Indonesia melalui Kemendikbud menetapkan bahasa daerah tertentu sebagai Warisan Budaya Takbenda. Salah satunya adalah ...",
+    "options": [
+      "A. Bahasa Jawa",
+      "B. Bahasa Sunda",
+      "C. Bahasa Bali",
+      "D. Bahasa Gayo"
+    ],
+    "correct": "C. Bahasa Bali",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 19,
+    "text": "Bahasa 'Papua' terdiri dari banyak bahasa daerah, salah satunya adalah ...",
+    "options": [
+      "A. Bahasa Biak",
+      "B. Bahasa Ternate",
+      "C. Bahasa Tidore",
+      "D. Bahasa Sula"
+    ],
+    "correct": "A. Bahasa Biak",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 20,
+    "text": "Bahasa Indonesia secara resmi diakui sebagai bahasa negara dalam ...",
+    "options": [
+      "A. UUD 1945",
+      "B. Sumpah Pemuda 1928",
+      "C. Konstitusi RIS 1949",
+      "D. UU No. 24 Tahun 2009"
+    ],
+    "correct": "A. UUD 1945",
+    "type": "Nasionalisme",
+    "national": true
+  }
+]
