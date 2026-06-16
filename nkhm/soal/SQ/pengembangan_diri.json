@@ -10,7 +10,7 @@
       "Growth mindset bermanfaat untuk Self-development karena Growth mindset dapat mendorong seseorang untuk terus belajar dan berkembang meskipun menghadapi kesulitan."
     ],
     "correct": "Growth mindset bermanfaat untuk Self-development karena Growth mindset dapat mendorong seseorang untuk terus belajar dan berkembang meskipun menghadapi kesulitan.",
-    "type": "EQ",
+    "type": "SQ",
     "national": false
   },
   {
@@ -24,7 +24,7 @@
       "3 dan 5"
     ],
     "correct": "1, 2, dan 4",
-    "type": "EQ",
+    "type": "SQ",
     "national": false
   },
   {
@@ -38,7 +38,7 @@
       "Untuk mendalami kemampuan teknis yang sudah dimiliki seiring perkembangan zaman."
     ],
     "correct": "Untuk mendalami kemampuan teknis yang sudah dimiliki seiring perkembangan zaman.",
-    "type": "EQ",
+    "type": "SQ",
     "national": false
   },
   {
@@ -55,7 +55,7 @@
       "Mencari cara untuk memperbaiki kesalahan tersebut dan mencoba lagi.",
       "Melihat ke belakang dan merefleksi diri agar tidak melakukan kesalahan yang sama."
     ],
-    "type": "EQ",
+    "type": "SQ",
     "national": false
   },
   {
@@ -69,7 +69,7 @@
       "Mental"
     ],
     "correct": "Sosial",
-    "type": "EQ",
+    "type": "SQ",
     "national": false
   },
   {
@@ -83,7 +83,7 @@
       "Mental"
     ],
     "correct": "Spiritual",
-    "type": "EQ",
+    "type": "SQ",
     "national": false
   },
   {
@@ -97,7 +97,7 @@
       "Saya tidak memiliki koneksi dan jejaring, dan itu merupakan kelemahan. Padahal koneksi ini dapat menjadi jalur saya untuk mendapatkan pekerjaan dan membuka bisnis di bidang IT."
     ],
     "correct": "Technical skill saya tentunya tidak sebanding dengan lulusan IT, tapi saya dapat meningkatkannya dengan belajar di komunitas, kursus, proyek, atau mengambil sertifikasi yang dapat memvalidasi kemampuan IT saya.",
-    "type": "EQ",
+    "type": "SQ",
     "national": false
   },
   {
@@ -111,7 +111,7 @@
       "Saya memiliki koneksi dan jejaring yang dapat menjadi peluang. Koneksi ini dapat menjadi jalur saya untuk mendapatkan pekerjaan dan membuka bisnis di bidang IT."
     ],
     "correct": "Peluang saya adalah memiliki kemampuan IT, saya masih dapat mendalaminya dengan belajar di komunitas, kursus, proyek, atau mengambil sertifikasi global.",
-    "type": "EQ",
+    "type": "SQ",
     "national": false
   },
   {
@@ -125,7 +125,7 @@
       "4 dan 5"
     ],
     "correct": "3 dan 5",
-    "type": "EQ",
+    "type": "SQ",
     "national": false
   },
   {
@@ -139,7 +139,7 @@
       "Hidup yang lebih teratur"
     ],
     "correct": "Hidup yang lebih teratur",
-    "type": "EQ",
+    "type": "SQ",
     "national": false
   }
 ]
