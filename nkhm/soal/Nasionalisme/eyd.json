@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "text": "Penulisan kata yang sesuai dengan Ejaan Yang Disempurnakan (EYD) adalah ...",
+    "options": [
+      "A. Aktipitas",
+      "B. Aktifitas",
+      "C. Aktivitas",
+      "D. Aktipitas"
+    ],
+    "correct": "C. Aktivitas",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 2,
+    "text": "Penulisan kata depan 'di' yang benar terdapat pada kalimat ...",
+    "options": [
+      "A. Dia di panggil oleh guru.",
+      "B. Ibu pergi di pasar.",
+      "C. Buku itu di atas meja.",
+      "D. Dia di lahirkan di Jakarta."
+    ],
+    "correct": "C. Buku itu di atas meja.",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 3,
+    "text": "Penggunaan tanda koma (,) yang benar terdapat pada kalimat ...",
+    "options": [
+      "A. Saya membeli buku, pensil dan penghapus.",
+      "B. Saya membeli buku, pensil, dan penghapus.",
+      "C. Saya membeli buku pensil, dan penghapus.",
+      "D. Saya, membeli buku pensil dan penghapus."
+    ],
+    "correct": "B. Saya membeli buku, pensil, dan penghapus.",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 4,
+    "text": "Penulisan huruf kapital yang benar terdapat pada kalimat ...",
+    "options": [
+      "A. Hari raya Idul Fitri jatuh pada bulan Mei.",
+      "B. Hari Raya Idul Fitri jatuh pada bulan Mei.",
+      "C. Hari raya idul fitri jatuh pada bulan Mei.",
+      "D. Hari Raya idul Fitri jatuh pada bulan Mei."
+    ],
+    "correct": "B. Hari Raya Idul Fitri jatuh pada bulan Mei.",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 5,
+    "text": "Penulisan kata ulang yang benar adalah ...",
+    "options": [
+      "A. Anak-anak",
+      "B. Anak anak",
+      "C. Anak-anak",
+      "D. Anak2"
+    ],
+    "correct": "A. Anak-anak",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 6,
+    "text": "Penulisan kata dasar dan turunan yang benar adalah ...",
+    "options": [
+      "A. Memperhatikan",
+      "B. Memperhatiakan",
+      "C. Memperhatian",
+      "D. Memperhatiakan"
+    ],
+    "correct": "A. Memperhatikan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 7,
+    "text": "Penggunaan tanda titik (.) yang benar terdapat pada kalimat ...",
+    "options": [
+      "A. Saya pergi ke pasar.",
+      "B. Saya pergi ke pasar",
+      "C. Saya pergi ke pasar..",
+      "D. Saya pergi ke pasar,"
+    ],
+    "correct": "A. Saya pergi ke pasar.",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 8,
+    "text": "Penggunaan tanda tanya (?) yang benar terdapat pada kalimat ...",
+    "options": [
+      "A. Siapa nama Anda.",
+      "B. Siapa nama Anda?",
+      "C. Siapa nama Anda,",
+      "D. Siapa nama Anda!"
+    ],
+    "correct": "B. Siapa nama Anda?",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 9,
+    "text": "Penulisan angka dan bilangan yang benar adalah ...",
+    "options": [
+      "A. 20 orang",
+      "B. Dua puluh orang",
+      "C. 20 (dua puluh) orang",
+      "D. 20 dua puluh orang"
+    ],
+    "correct": "C. 20 (dua puluh) orang",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 10,
+    "text": "Penulisan gelar yang benar adalah ...",
+    "options": [
+      "A. Dr. Ir. Soekarno",
+      "B. Dr. Ir Soekarno",
+      "C. Dr.Ir. Soekarno",
+      "D. Dr Ir Soekarno"
+    ],
+    "correct": "A. Dr. Ir. Soekarno",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 11,
+    "text": "Penulisan singkatan yang benar adalah ...",
+    "options": [
+      "A. Dpr",
+      "B. DPR",
+      "C. dpr",
+      "D. D.P.R."
+    ],
+    "correct": "B. DPR",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 12,
+    "text": "Penulisan akronim yang benar adalah ...",
+    "options": [
+      "A. SIM",
+      "B. Sim",
+      "C. S.I.M.",
+      "D. sim"
+    ],
+    "correct": "A. SIM",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 13,
+    "text": "Penulisan partikel -lah, -kah, -tah yang benar adalah ...",
+    "options": [
+      "A. Pergilah",
+      "B. Pergi-lah",
+      "C. Pergi lah",
+      "D. Pergi_lah"
+    ],
+    "correct": "A. Pergilah",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 14,
+    "text": "Penulisan kata gabungan yang benar adalah ...",
+    "options": [
+      "A. Kambing hitam",
+      "B. Kambing-hitam",
+      "C. Kambinghitam",
+      "D. Kambing Hitam"
+    ],
+    "correct": "A. Kambing hitam",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 15,
+    "text": "Penggunaan tanda hubung (-) yang benar terdapat pada kata ...",
+    "options": [
+      "A. Antarbangsa",
+      "B. Antar-bangsa",
+      "C. Antar bangsa",
+      "D. Antarbangsa"
+    ],
+    "correct": "A. Antarbangsa",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 16,
+    "text": "Penulisan unsur serapan yang benar adalah ...",
+    "options": [
+      "A. Kwalitas",
+      "B. Kualitas",
+      "C. Kwalitet",
+      "D. Kwalitas"
+    ],
+    "correct": "B. Kualitas",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 17,
+    "text": "Penulisan kalimat efektif yang benar adalah ...",
+    "options": [
+      "A. Bagi semua peserta harap hadir tepat waktu.",
+      "B. Kepada semua peserta harap hadir tepat waktu.",
+      "C. Semua peserta harap hadir tepat waktu.",
+      "D. Untuk semua peserta harap hadir tepat waktu."
+    ],
+    "correct": "C. Semua peserta harap hadir tepat waktu.",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 18,
+    "text": "Penggunaan tanda petik (\" \") yang benar terdapat pada kalimat ...",
+    "options": [
+      "A. Dia berkata, \"Saya akan pergi.\"",
+      "B. Dia berkata, 'Saya akan pergi.'",
+      "C. Dia berkata, “Saya akan pergi.”",
+      "D. Dia berkata, \"Saya akan pergi\"."
+    ],
+    "correct": "A. Dia berkata, \"Saya akan pergi.\"",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 19,
+    "text": "Penulisan kata depan 'ke' yang benar adalah ...",
+    "options": [
+      "A. Saya pergi ke sekolah.",
+      "B. Saya pergi kesekolah.",
+      "C. Saya pergi ke-sekolah.",
+      "D. Saya pergi ke sekolah"
+    ],
+    "correct": "A. Saya pergi ke sekolah.",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 20,
+    "text": "Penulisan angka romawi yang benar adalah ...",
+    "options": [
+      "A. IV",
+      "B. iV",
+      "C. Iv",
+      "D. vI"
+    ],
+    "correct": "A. IV",
+    "type": "Nasionalisme",
+    "national": true
+  }
+]
