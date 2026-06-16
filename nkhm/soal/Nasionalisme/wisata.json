@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "text": "Candi Borobudur merupakan tempat wisata budaya yang terletak di provinsi mana?",
+    "options": [
+      "A. Jawa Timur",
+      "B. Jawa Tengah",
+      "C. Jawa Barat",
+      "D. Yogyakarta"
+    ],
+    "correct": "B. Jawa Tengah",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 2,
+    "text": "Danau Toba, salah satu danau vulkanik terbesar di dunia, terletak di provinsi mana?",
+    "options": [
+      "A. Sumatera Barat",
+      "B. Sumatera Utara",
+      "C. Riau",
+      "D. Aceh"
+    ],
+    "correct": "B. Sumatera Utara",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 3,
+    "text": "Kawasan wisata pantai Kuta terletak di pulau mana?",
+    "options": [
+      "A. Jawa",
+      "B. Lombok",
+      "C. Bali",
+      "D. Sumatera"
+    ],
+    "correct": "C. Bali",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 4,
+    "text": "Taman Nasional Komodo, rumah bagi komodo, terletak di provinsi mana?",
+    "options": [
+      "A. Nusa Tenggara Barat",
+      "B. Nusa Tenggara Timur",
+      "C. Bali",
+      "D. Sulawesi"
+    ],
+    "correct": "B. Nusa Tenggara Timur",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 5,
+    "text": "Raja Ampat, destinasi wisata bahari yang terkenal, terletak di provinsi mana?",
+    "options": [
+      "A. Maluku Utara",
+      "B. Papua Barat",
+      "C. Papua",
+      "D. Sulawesi Utara"
+    ],
+    "correct": "B. Papua Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 6,
+    "text": "Candi Prambanan, candi Hindu terbesar di Indonesia, terletak di perbatasan provinsi mana?",
+    "options": [
+      "A. Jawa Tengah dan Yogyakarta",
+      "B. Jawa Timur dan Jawa Tengah",
+      "C. Yogyakarta dan Jawa Timur",
+      "D. Jawa Barat dan Banten"
+    ],
+    "correct": "A. Jawa Tengah dan Yogyakarta",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 7,
+    "text": "Gunung Bromo merupakan gunung berapi aktif yang terletak di provinsi mana?",
+    "options": [
+      "A. Jawa Tengah",
+      "B. Jawa Timur",
+      "C. Jawa Barat",
+      "D. Yogyakarta"
+    ],
+    "correct": "B. Jawa Timur",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 8,
+    "text": "Kepulauan Derawan, destinasi wisata bahari yang indah, terletak di provinsi mana?",
+    "options": [
+      "A. Kalimantan Selatan",
+      "B. Kalimantan Timur",
+      "C. Kalimantan Tengah",
+      "D. Kalimantan Barat"
+    ],
+    "correct": "B. Kalimantan Timur",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 9,
+    "text": "Kawah Ijen, terkenal dengan fenomena blue fire, terletak di provinsi mana?",
+    "options": [
+      "A. Jawa Barat",
+      "B. Jawa Tengah",
+      "C. Jawa Timur",
+      "D. Bali"
+    ],
+    "correct": "C. Jawa Timur",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 10,
+    "text": "Istana Maimun, istana kesultanan Melayu, terletak di kota mana?",
+    "options": [
+      "A. Pekanbaru",
+      "B. Medan",
+      "C. Palembang",
+      "D. Jambi"
+    ],
+    "correct": "B. Medan",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 11,
+    "text": "Taman Mini Indonesia Indah (TMII) merupakan taman wisata budaya yang terletak di kota mana?",
+    "options": [
+      "A. Bandung",
+      "B. Surabaya",
+      "C. Jakarta",
+      "D. Yogyakarta"
+    ],
+    "correct": "C. Jakarta",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 12,
+    "text": "Gunung Rinjani, gunung tertinggi kedua di Indonesia, terletak di pulau mana?",
+    "options": [
+      "A. Bali",
+      "B. Lombok",
+      "C. Sumbawa",
+      "D. Flores"
+    ],
+    "correct": "B. Lombok",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 13,
+    "text": "Ngarai Sianok, sebuah lembah curam yang indah, terletak di provinsi mana?",
+    "options": [
+      "A. Sumatera Utara",
+      "B. Sumatera Barat",
+      "C. Riau",
+      "D. Jambi"
+    ],
+    "correct": "B. Sumatera Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 14,
+    "text": "Pantai Pink di Lombok terkenal karena pasirnya yang berwarna merah muda, terletak di provinsi mana?",
+    "options": [
+      "A. Nusa Tenggara Barat",
+      "B. Nusa Tenggara Timur",
+      "C. Bali",
+      "D. Sulawesi"
+    ],
+    "correct": "A. Nusa Tenggara Barat",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 15,
+    "text": "Candi Penataran, candi Hindu terbesar di Jawa Timur, terletak di kabupaten mana?",
+    "options": [
+      "A. Malang",
+      "B. Blitar",
+      "C. Kediri",
+      "D. Tulungagung"
+    ],
+    "correct": "B. Blitar",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 16,
+    "text": "Kepulauan Seribu merupakan gugusan pulau yang terletak di provinsi mana?",
+    "options": [
+      "A. Jawa Barat",
+      "B. Banten",
+      "C. Jakarta",
+      "D. Lampung"
+    ],
+    "correct": "C. Jakarta",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 17,
+    "text": "Air Terjun Tumpak Sewu, air terjun spektakuler di Jawa Timur, terletak di kabupaten mana?",
+    "options": [
+      "A. Malang",
+      "B. Lumajang",
+      "C. Jember",
+      "D. Probolinggo"
+    ],
+    "correct": "B. Lumajang",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 18,
+    "text": "Objek wisata Gunung Merapi, gunung berapi aktif, terletak di perbatasan provinsi mana?",
+    "options": [
+      "A. Jawa Tengah dan Yogyakarta",
+      "B. Jawa Timur dan Jawa Tengah",
+      "C. Yogyakarta dan Jawa Timur",
+      "D. Jawa Barat dan Banten"
+    ],
+    "correct": "A. Jawa Tengah dan Yogyakarta",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 19,
+    "text": "Kampung Warna-Warni Jodipan, destinasi wisata warna-warni, terletak di kota mana?",
+    "options": [
+      "A. Malang",
+      "B. Surabaya",
+      "C. Bandung",
+      "D. Yogyakarta"
+    ],
+    "correct": "A. Malang",
+    "type": "Nasionalisme",
+    "national": true
+  },
+  {
+    "id": 20,
+    "text": "Bukit Lawang, tempat wisata alam untuk melihat orangutan, terletak di provinsi mana?",
+    "options": [
+      "A. Sumatera Utara",
+      "B. Sumatera Barat",
+      "C. Aceh",
+      "D. Riau"
+    ],
+    "correct": "A. Sumatera Utara",
+    "type": "Nasionalisme",
+    "national": true
+  }
+]
