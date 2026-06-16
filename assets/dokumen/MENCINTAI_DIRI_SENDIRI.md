@@ -44,18 +44,18 @@ Mencintai diri sendiri berarti kamu bersedia meningkatkan kualitas kecerdasan ka
 - Kecerdasan Spiritual (SQ)
 - Kecerdasan Daya Juang (AQ) atau Attitude (VQ)
 
+**Kecerdasan Karya Manusia** dapat didefinisikan sebagai suatu kemampuan, bakat, dan keterampilan manusia untuk berpikir, mengolah informasi, belajar dari pengalaman, beradaptasi, mengambil keputusan, dan mengkombinasikan satu sama lainnya untuk memecahkan persoalan atau permasalahan hidup yang sedang dihadapi, dan daya menyesuaikan diri pada keadaan baru dengan menggunakan alat‑alat berpikir, emosi, spiritual, dan *attitude* menurut tujuannya.
+
 > Untuk lebih jelas mengenai Kecerdasan Karya Manusia dapat dilihat dan berkunjung ke situs kami di [link ini](https://contoh.link).
 
-**Kecerdasan Karakter Manusia** juga terkombinasi dari 4 jenis karakter dalam ke‑khusus‑annya. Di dalam diri individu ada 4 jenis karakter yang berperan penting dalam membentuk kecerdasan karakter pelakunya yaitu:
+**Kecerdasan Karakter Manusia** Terkombinasi dari 4 jenis karakter dalam ke‑khusus‑annya. Di dalam diri individu ada 4 jenis karakter yang berperan penting dalam membentuk kecerdasan karakter pelakunya yaitu:
 
 1. ** Love (LC)** = Mencintai
 2. **Karakter Good (GC)** = Berbuat baik
 3. **Karakter Paid (PC)** = Menghargai/dihargai
 4. **Karakter Need (NC)** = Membutuhkan/Dibutuhkan
 
-**Kecerdasan Karya Manusia** dapat didefinisikan sebagai suatu kemampuan, bakat, dan keterampilan manusia untuk berpikir, mengolah informasi, belajar dari pengalaman, beradaptasi, mengambil keputusan, dan mengkombinasikan satu sama lainnya untuk memecahkan persoalan atau permasalahan hidup yang sedang dihadapi, dan daya menyesuaikan diri pada keadaan baru dengan menggunakan alat‑alat berpikir, emosi, spiritual, dan *attitude* menurut tujuannya.
-
-Sedangkan **Kecerdasan Karakter Manusia** adalah suatu kemampuan, kebajikan, dan kematangan moral manusia dengan menggunakan seperangkat budi pekerti seperti karakter baik, cinta, menghargai, butuh, dan tidak tertutup kemungkinan kombinasi satu sama lainnya dalam mempertahankan tujuan yang telah tercapai, dan daya kekuatan memecahkan persoalan atau permasalahan ekspresi hidup yang sedang dihadapi untuk perubahan hidup menjadi hidup baru yang lebih baik dari sebelumnya.
+**Kecerdasan Karakter Manusia** adalah suatu kemampuan, kebajikan, dan kematangan moral manusia dengan menggunakan seperangkat budi pekerti seperti karakter baik, cinta, menghargai, butuh, dan tidak tertutup kemungkinan kombinasi satu sama lainnya dalam mempertahankan tujuan yang telah tercapai, dan daya kekuatan memecahkan persoalan atau permasalahan ekspresi hidup yang sedang dihadapi untuk perubahan hidup menjadi hidup baru yang lebih baik dari sebelumnya.
 
 Pada umumnya para ahli sepakat bahwa masing-masing individu memiliki skor inteligensi (kecerdasan) yang berbeda‑beda, karena itu setiap individu juga tidak sama kemampuannya dalam memecahkan persoalan atau permasalahan hidup yang dihadapi.
 
@@ -80,23 +80,23 @@ Ada 4 unsur kecerdasan karakter manusia individu yaitu **Love (L)**, **Good (G)*
 
 ![Bagan 4 Karakter](/assets/images/mencintai_diri/image2.jpg)
 
-Dari gambar tersebut di atas, menjelaskan karakter **Love** dan **Paid** sebagai penentu karakter individu, sedangkan karakter **Good** dan **Need** sebagai pendamping atau bukan penentu, di mana karakter Good mendampingi karakter Love, sedangkan karakter Need mendampingi karakter Paid.
+Dari gambar tersebut di atas, menjelaskan karakter **Love** dan **Need** sebagai penentu karakter individu, sedangkan karakter **Good** dan **Paid** sebagai pendamping atau bukan penentu, di mana karakter Good mendampingi karakter Love, sedangkan karakter Need mendampingi karakter Paid.
 
 - Karakter **Love** dan **Good** inilah sebagai *inside* (sisi dalam) karakter yang dipengaruhi oleh atau membentuk tekad dari si pelakunya.
 - Sedangkan karakter **Paid** dan **Need** sebagai *outside* (sisi luar) karakter yang dipengaruhi atau situasi harus dihadapi dengan hikmat dari si pelakunya.
 
-**Love** sebagai penentu terbesar dasar karakter, dan **Paid** penentu kecil dasar karakter.
+**Love** sebagai penentu terbesar dasar karakter, dan **Need** penentu kecil dasar karakter.
 
-Karakter **Love** bersifat *menginvert* karena Love adalah karakter terawal yang dapat dikontrol, keadaannya tetap, dan bergantung kepada respon si pelakunya dalam mempengaruhi lingkungan dunia sekitar si pelaku. Bila karakter Love diaktifkan dari A‑Z dalam dunia kerja, maka karakter Need aktif dari Z‑A dalam bagian partialnya. Karakter **Need** adalah karakter yang paling kecil yang bersifat *menginvert* dari Love karena Need tidak dapat dikontrol, keadaannya tidak tetap (selalu berubah), dan dipengaruhi oleh hikmat dari si pelakunya.
+Karakter **Love** bersifat *menginvert* karena Love adalah karakter terawal yang dapat dikontrol, keadaannya tetap, dan bergantung kepada respon si pelakunya dalam mempengaruhi lingkungan dunia sekitar si pelaku. Bila karakter Love diaktifkan dari A‑Z dalam dunia kerja, maka karakter Paid aktif dari Z‑A dalam bagian partialnya. Karakter **Paid** adalah karakter yang paling kecil yang bersifat *menginvert* dari Love karena Paid tidak dapat dikontrol, keadaannya tidak tetap (selalu berubah), dan dipengaruhi oleh hikmat dari si pelakunya.
 
 - Love cenderung dipengaruhi oleh alat pikir (otak)
 - Good cenderung memakai hati
-- Paid memakai spiritual
-- Need dipengaruhi oleh daya juang (*attitude*) dari si pelakunya di dalam suatu pelayanan/pekerjaan yang dilakukan.
+- Need memakai spiritual
+- Paid dipengaruhi oleh daya juang (*attitude*) dari si pelakunya di dalam suatu pelayanan/pekerjaan yang dilakukan.
 
-Pengkombinasian atau gabungan beberapa karakter antara Love, Good, Paid, dan Need dapat dilakukan satu sama lain dengan urutan yang benar melihat sifat dan tujuan pembentukan kombinasi karakter dalam susunan yang teratur **Love – Good – Paid – Need** agar si pelaku dalam hidupnya menghasilkan buah. Buah karakter di dunia kerja itulah yang bermanfaat yang dapat diteladani atau dinikmati semua orang untuk saling melengkapi pertumbuhan diri masing‑masing individu di antara anggota‑anggota suatu organisasi/group sebagai wujud talenta (karunia) oleh Roh Kudus Allah. Sehingga di dunia kerja seorang pekerja yang bekerja di tempat kerja, ia harus bekerja keras, rajin, dan disiplin dengan menggunakan kecerdasan karakter Love – Good - Paid – Need yang harus ia miliki di samping memiliki Kecerdasan Inteligensi (Karya) nya.
+Pengkombinasian atau gabungan beberapa karakter antara Love, Good, Paid, dan Need dapat dilakukan satu sama lain dengan urutan yang benar melihat sifat dan tujuan pembentukan kombinasi karakter dalam susunan yang teratur **Love – Good – Need – Paid** agar si pelaku dalam hidupnya menghasilkan buah. Buah karakter di dunia kerja itulah yang bermanfaat yang dapat diteladani atau dinikmati semua orang untuk saling melengkapi pertumbuhan diri masing‑masing individu di antara anggota‑anggota suatu organisasi/group sebagai wujud talenta (karunia) oleh Roh Kudus Allah. Sehingga di dunia kerja seorang pekerja yang bekerja di tempat kerja, ia harus bekerja keras, rajin, dan disiplin dengan menggunakan kecerdasan karakter Love – Good - Need – Paid yang harus ia miliki di samping memiliki Kecerdasan Inteligensi (Karya) nya.
 
-Pengkombinasian unsur dasar karakter diri manusia individu dari Love, Good, Paid, dan Need tersebut dalam pelayanan/pekerjaan dapat dilakukan untuk menghasilkan suatu keinginan baik yang diharapkan seperti dari kombinasi 2 karakter, 3 karakter, atau 4 karakter seperti berikut ini:
+Pengkombinasian unsur dasar karakter diri manusia individu dari Love, Good, Need, dan Paid tersebut dalam pelayanan/pekerjaan dapat dilakukan untuk menghasilkan suatu keinginan baik yang diharapkan seperti dari kombinasi 2 karakter, 3 karakter, atau 4 karakter seperti berikut ini:
 
 ![Kombinasi Karakter](/assets/images/mencintai_diri/image3.jpg))
 
@@ -104,19 +104,19 @@ Pengkombinasian unsur dasar karakter diri manusia individu dari Love, Good, Paid
 
 *Passion* adalah perbuatan baik, hasrat suka dan cinta seseorang melakukan sesuatu pekerjaan atau karya cipta yang berguna untuk orang banyak.
 
-### 2. Penggabungan 2 karakter: Love dan Paid – inilah yang disebut dengan **Profesi**
+### 2. Penggabungan 2 karakter: Good dan Paid – inilah yang disebut dengan **Profesi**
 
 *Profesi* adalah pekerjaan atau aktivitas rutin dan kontinu yang dilakukan seseorang dengan baik dan dari hasil pekerjaannya itu ia mendapat upah atau bayaran sebagai *reward* dari jerih payahnya.
 
-Hidup ini menuntut pemenuhan kebutuhan‑kebutuhan pokok dan kebutuhan lainnya, oleh karena itu manusia harus bekerja supaya dapat memenuhi kebutuhan pokoknya dan kebutuhan lainnya. Padahal sesungguhnya bekerja bukan hanya sekadar cari nafkah pergi pagi pulang petang bergelut di bawah terik matahari, tetapi lebih dari itu bekerja adalah sarana untuk pembentukan karakter kita menjadi lebih baik dari sebelumnya.
+Hidup ini menuntut pemenuhan kebutuhan‑kebutuhan pokok dan kebutuhan lainnya, oleh karena itu manusia harus bekerja supaya dapat memenuhi kebutuhan pokok dan kebutuhan lainnya. Padahal sesungguhnya bekerja bukan hanya sekadar cari nafkah pergi pagi pulang petang bergelut di bawah terik matahari, tetapi lebih dari itu bekerja adalah sarana untuk pembentukan karakter kita menjadi lebih baik dari sebelumnya.
 
 Kita dipanggil untuk bekerja dalam pelayanan pekerjaan Tuhan dengan memelihara aspek keberadaan (karakter) kita dan aspek karya kita, kedua aspek tersebut keseriusannya adalah sama dan kita harus menjaganya dalam urutan yang benar, **karakter yang diutamakan, baru kemudian karya**. Bila kita serius dan menjaga prioritasnya maka hal ini akan memberi martabat dan nilai yang sangat berarti kepada pekerjaan kita sehari‑hari.
 
-### 3. Penggabungan 2 karakter: Good dan Need – inilah yang disebut dengan **Mission**
+### 3. Penggabungan 2 karakter: Love dan Need – inilah yang disebut dengan **Mission**
 
 *Mission* atau Misi adalah prioritas, metode, atau nilai‑nilai kerja yang menjadi landasan untuk memberi petunjuk garis besar dalam mewujudkan sebuah visi, dan usaha pekerjaan itu dilakukan dengan cinta untuk menghasilkan buah pekerjaan yang baik yang dibutuhkan orang banyak.
 
-### 4. Penggabungan 2 karakter: Paid dan Need – inilah yang disebut dengan **Lapangan Kerja**
+### 4. Penggabungan 2 karakter: Need dan Paid – inilah yang disebut dengan **Lapangan Kerja**
 
 *Lapangan kerja* adalah tempat/sektor bagi seseorang bukan hanya sekadar mencari nafkah (bekerja) untuk memenuhi kebutuhan pokoknya, tetapi lebih dari itu adalah bagian dari usaha untuk mengisi masa hidupnya agar lebih bermakna dari sebelumnya. Bekerja adalah panggilan hidup manusia dalam pelayanan/pekerjaan yang dikenan Tuhan.
 
