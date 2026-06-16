@@ -52,8 +52,8 @@ Mencintai diri sendiri berarti kamu bersedia meningkatkan kualitas kecerdasan ka
 
 1. **Karakter love (LC)** = Mencintai/Dicintai
 2. **Karakter Good (GC)** = Berbuat baik
-3. **Karakter Paid (PC)** = Menghargai/dihargai
-4. **Karakter Need (NC)** = Membutuhkan/Dibutuhkan
+3. **Karakter Need (NC)** = Membutuhkan/Dibutuhkan
+4. **Karakter Paid (PC)** = Menghargai/dihargai.
 
 **Kecerdasan Karakter Manusia** adalah suatu kemampuan, kebajikan, dan kematangan moral manusia dengan menggunakan seperangkat budi pekerti seperti karakter baik, cinta, menghargai, butuh, dan tidak tertutup kemungkinan kombinasi satu sama lainnya dalam mempertahankan tujuan yang telah tercapai, dan daya kekuatan memecahkan persoalan atau permasalahan ekspresi hidup yang sedang dihadapi untuk perubahan hidup menjadi hidup baru yang lebih baik dari sebelumnya.
 
