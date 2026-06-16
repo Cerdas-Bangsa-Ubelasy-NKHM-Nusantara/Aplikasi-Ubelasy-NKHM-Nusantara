@@ -50,7 +50,7 @@ Mencintai diri sendiri berarti kamu bersedia meningkatkan kualitas kecerdasan ka
 
 **Kecerdasan Karakter Manusia** Terkombinasi dari 4 jenis karakter dalam ke‑khusus‑annya. Di dalam diri individu ada 4 jenis karakter yang berperan penting dalam membentuk kecerdasan karakter pelakunya yaitu:
 
-1. ** Love (LC)** = Mencintai
+1. **Karakter love (LC)** = Mencintai
 2. **Karakter Good (GC)** = Berbuat baik
 3. **Karakter Paid (PC)** = Menghargai/dihargai
 4. **Karakter Need (NC)** = Membutuhkan/Dibutuhkan
@@ -76,7 +76,7 @@ Keberhasilan suatu layanan konseling dapat diukur dari 4 hal pribadi konseli, ya
 
 ## Unsur Kecerdasan Karakter Manusia
 
-Ada 4 unsur kecerdasan karakter manusia individu yaitu **Love (L)**, **Good (G)**, **Paid (P)**, dan **Need (N)** yang dikombinasikan satu sama lain menurut tujuan dan manfaatnya, seperti tergambar pada bagan berikut:
+Ada 4 unsur kecerdasan karakter manusia individu yaitu **Love (L)**, **Good (G)**, **Need (N)**, dan **Paid (P)** yang dikombinasikan satu sama lain menurut tujuan dan manfaatnya, seperti tergambar pada bagan berikut:
 
 ![Bagan 4 Karakter](/assets/images/mencintai_diri/image2.jpg)
 
