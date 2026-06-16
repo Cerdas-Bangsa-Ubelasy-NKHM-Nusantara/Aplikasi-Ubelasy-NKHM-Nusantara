@@ -50,7 +50,7 @@ Mencintai diri sendiri berarti kamu bersedia meningkatkan kualitas kecerdasan ka
 
 **Kecerdasan Karakter Manusia** Terkombinasi dari 4 jenis karakter dalam ke‑khusus‑annya. Di dalam diri individu ada 4 jenis karakter yang berperan penting dalam membentuk kecerdasan karakter pelakunya yaitu:
 
-1. **Karakter love (LC)** = Mencintai
+1. **Karakter love (LC)** = Mencintai/Dicintai
 2. **Karakter Good (GC)** = Berbuat baik
 3. **Karakter Paid (PC)** = Menghargai/dihargai
 4. **Karakter Need (NC)** = Membutuhkan/Dibutuhkan
