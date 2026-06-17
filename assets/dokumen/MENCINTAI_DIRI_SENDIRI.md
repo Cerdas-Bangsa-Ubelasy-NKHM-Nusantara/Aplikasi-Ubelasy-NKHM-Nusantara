@@ -116,7 +116,7 @@ Kita dipanggil untuk bekerja dalam pelayanan pekerjaan Tuhan dengan memelihara a
 
 *Mission* atau Misi adalah prioritas, metode, atau nilai‑nilai kerja yang menjadi landasan untuk memberi petunjuk garis besar dalam mewujudkan sebuah visi, dan usaha pekerjaan itu dilakukan dengan cinta untuk menghasilkan buah pekerjaan yang baik yang dibutuhkan orang banyak.
 
-### 4. Penggabungan 2 karakter: Need dan Paid – inilah yang disebut dengan **Lapangan Kerja**
+### 4. Penggabungan 2 karakter: Good dan Paid – inilah yang disebut dengan **Lapangan Kerja**
 
 *Lapangan kerja* adalah tempat/sektor bagi seseorang bukan hanya sekadar mencari nafkah (bekerja) untuk memenuhi kebutuhan pokoknya, tetapi lebih dari itu adalah bagian dari usaha untuk mengisi masa hidupnya agar lebih bermakna dari sebelumnya. Bekerja adalah panggilan hidup manusia dalam pelayanan/pekerjaan yang dikenan Tuhan.
 
