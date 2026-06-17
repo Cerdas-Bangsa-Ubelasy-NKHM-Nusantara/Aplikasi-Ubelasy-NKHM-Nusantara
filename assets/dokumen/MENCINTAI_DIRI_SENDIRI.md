@@ -98,7 +98,7 @@ Pengkombinasian atau gabungan beberapa karakter antara Love, Good, Need, dan  Pa
 
 Pengkombinasian unsur dasar karakter diri manusia individu dari Love, Good, Need, dan Paid tersebut dalam pelayanan/pekerjaan dapat dilakukan untuk menghasilkan suatu keinginan baik yang diharapkan seperti dari kombinasi 2 karakter, 3 karakter, atau 4 karakter seperti berikut ini:
 
-![Kombinasi Karakter](/assets/images/mencintai_diri/image3.jpg))
+![Kombinasi Karakter](/assets/images/mencintai_diri/image3.jpg)
 
 ### 1. Penggabungan 2 karakter: Love dan Need – inilah yang disebut dengan **Passion**
 
