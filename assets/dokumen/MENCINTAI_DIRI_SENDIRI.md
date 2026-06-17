@@ -187,7 +187,7 @@ Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas kar
 
 - Karakter seperti ini adalah orang yang tidak mau mencari Tuhan, sebab seseorang yang di dalam dirinya ada **Good (G), Need (N), dan Paid (P)**, tapi tidak punya **Love (L)**, maka ini tandanya hilangnya Roh Kudus dari dalam dirinya. Orang tersebut tidak mau tahu dengan orang lain, ia berbuat untuk perkembangan dirinya sendiri, ia tidak mau mengalah terhadap orang lain.
 
-Penerapan kombinasi 4 karakter ini pada diri kita, alangkah lebih baiknya hilang satu karakter yang di sisi *outside* (Paid atau Need) daripada hilangnya satu karakter yang di sisi *inside* (Good atau Love), tapi lebih baik lagi bila keempat karakter pelayanan pekerjaan Tuhan itu lengkap semuanya dalam diri kita, tanpa ada yang terhilang.
+Penerapan kombinasi 4 karakter ini pada diri kita, alangkah lebih baiknya hilang satu karakter yang di sisi *outside* (Good atau Paid) daripada hilangnya satu karakter yang di sisi *inside* (Love atau Need), tapi lebih baik lagi bila keempat karakter pelayanan pekerjaan Tuhan itu lengkap semuanya dalam diri kita, tanpa ada yang terhilang.
 
 Tujuan kita beraktivitas/bekerja atau melayani pekerjaan Tuhan adalah untuk memberi buah yang dapat dinikmati orang banyak. Tujuan kita ini harus berhasil agar dapat memperluas Kerajaan Sorga. Kehidupan pekerjaan atau pelayanan pekerjaan Tuhan yang berjalan dengan baik adalah sinkronnya Kecerdasan karakter Love, Good, Need, dan Paid dengan kecerdasan karya IQ, EQ, SQ, dan AQ yang berfungsi dengan baik menurut sistemnya Kecerdasan karakter dan kecerdasan karya.
 
