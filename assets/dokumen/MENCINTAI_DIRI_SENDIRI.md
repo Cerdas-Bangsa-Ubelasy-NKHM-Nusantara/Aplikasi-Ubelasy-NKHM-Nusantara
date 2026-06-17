@@ -193,7 +193,6 @@ Tujuan kita beraktivitas/bekerja atau melayani pekerjaan Tuhan adalah untuk memb
 
 Inilah yang Tuhan berikan kepada kita manusia supaya kita berhasil dalam kehidupan di dunia ini.
 
-
 **
 Dari kombinasi Love – Good - Paid – Need di atas, coba Anda temukan yang mana atau di posisi mana terdapat: 
 - "Penyelamatan"
