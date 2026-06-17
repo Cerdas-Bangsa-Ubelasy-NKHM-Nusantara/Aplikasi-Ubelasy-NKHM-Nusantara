@@ -100,11 +100,11 @@ Pengkombinasian unsur dasar karakter diri manusia individu dari Love, Good, Need
 
 ![Kombinasi Karakter](/assets/images/mencintai_diri/image3.jpg))
 
-### 1. Penggabungan 2 karakter: Love dan Good – inilah yang disebut dengan **Passion**
+### 1. Penggabungan 2 karakter: Love dan Need – inilah yang disebut dengan **Passion**
 
 *Passion* adalah perbuatan baik, hasrat suka dan cinta seseorang melakukan sesuatu pekerjaan atau karya cipta yang berguna untuk orang banyak.
 
-### 2. Penggabungan 2 karakter: Good dan Paid – inilah yang disebut dengan **Profesi**
+### 2. Penggabungan 2 karakter: love dan Good – inilah yang disebut dengan **Profesi**
 
 *Profesi* adalah pekerjaan atau aktivitas rutin dan kontinu yang dilakukan seseorang dengan baik dan dari hasil pekerjaannya itu ia mendapat upah atau bayaran sebagai *reward* dari jerih payahnya.
 
@@ -112,7 +112,7 @@ Hidup ini menuntut pemenuhan kebutuhan‑kebutuhan pokok dan kebutuhan lainnya, 
 
 Kita dipanggil untuk bekerja dalam pelayanan pekerjaan Tuhan dengan memelihara aspek keberadaan (karakter) kita dan aspek karya kita, kedua aspek tersebut keseriusannya adalah sama dan kita harus menjaganya dalam urutan yang benar, **karakter yang diutamakan, baru kemudian karya**. Bila kita serius dan menjaga prioritasnya maka hal ini akan memberi martabat dan nilai yang sangat berarti kepada pekerjaan kita sehari‑hari.
 
-### 3. Penggabungan 2 karakter: Love dan Need – inilah yang disebut dengan **Mission**
+### 3. Penggabungan 2 karakter: Need dan Paid – inilah yang disebut dengan **Mission**
 
 *Mission* atau Misi adalah prioritas, metode, atau nilai‑nilai kerja yang menjadi landasan untuk memberi petunjuk garis besar dalam mewujudkan sebuah visi, dan usaha pekerjaan itu dilakukan dengan cinta untuk menghasilkan buah pekerjaan yang baik yang dibutuhkan orang banyak.
 
@@ -148,7 +148,7 @@ Jadi, dapat disimpulkan bahwa **visi** adalah bayangan dan cara kita melihat gam
 - **Misi Pribadi:** Memenangkan banyak jiwa untuk ikut ambil bagian dalam Penyelamatan yang dari Allah melalui penyelesaian Amanat Agung Yesus Kristus.
 - **Lapangan kerja:** Pemberitaan Injil di Ladang‑Nya Tuhan.
 
-Bila dilihat lagi gambar tersebut di atas, bila seorang pekerja (si A) bersama dengan orang lain (si B) maka bagian diri si A ada pada sisi karakter Good (G) dan Paid (P), sedangkan orang lain sesamanya itu (si B) yang di dalam diri si A, si B berada pada sisi karakter Love (L) dan Need (N). Oleh karena itu si A (seorang) harus berbuat baik kepada sesamanya dan membayar hal‑hal baik dan yang berguna yang telah diperbuat sesamanya itu (si B) bagi orang banyak, terlebih lagi bagi diri si A.
+Bila dilihat lagi gambar tersebut di atas, bila seorang pekerja (si A) bersama dengan orang lain (si B) maka bagian diri si A ada pada sisi karakter Need (N) dan Paid (P), sedangkan orang lain sesamanya itu (si B) yang di dalam diri si A, si B berada pada sisi karakter Love (L) dan Good (G). Oleh karena itu si A (seorang) harus berbuat baik kepada sesamanya dan membayar hal‑hal baik dan yang berguna yang telah diperbuat sesamanya itu (si B) bagi orang banyak, terlebih lagi yang diberikan si B bagi si A.
 
 Dalam kesendiriannya si A (diri sendiri) maka di dalam dirinya memiliki Kecerdasan Karakter yang memuat 4 karakter yaitu Love (L), Good (G), Need (N), dan Paid (P) bersama dengan Kecerdasan Karyanya untuk menghasilkan suatu karya cipta baik berbentuk karya nyata maupun karya abstrak yang berguna bagi orang banyak. Oleh karena itu ia harus mencintai dirinya sendiri.
 
@@ -173,7 +173,7 @@ Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas kar
 
 ![Fullness but not paid](/assets/images/mencintai_diri/image5.jpg)
 
-- Karakter seperti ini cocok untuk pekerjaan amal, atau pelayanan yang tidak mengharapkan keuntungan (non profit). Tapi bila di dunia kerja yang komersial, seseorang yang sudah bekerja dengan baik (G), mencintai pekerjaannya (L), dan produk yang ia hasilkan dibutuhkan orang banyak (N), tapi bila ia tidak dibayar, maka ini akan menjadi sesuatu yang berbahaya.
+- Karakter seperti ini cocok untuk pekerjaan amal, atau pelayanan yang tidak mengharapkan keuntungan (non profit). Tapi bila di dunia kerja yang komersil, seseorang yang sudah bekerja dengan baik (G), mencintai pekerjaannya (L), dan produk yang ia hasilkan dibutuhkan orang banyak (N), tapi bila ia tidak dibayar, maka ini akan menjadi sesuatu yang berbahaya.
 
 ### 3. Comfortable but empty (merasa nyaman tapi hampa)
 
