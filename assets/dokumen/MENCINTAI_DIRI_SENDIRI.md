@@ -100,11 +100,11 @@ Pengkombinasian unsur dasar karakter diri manusia individu dari Love, Good, Need
 
 ![Kombinasi Karakter](/assets/images/mencintai_diri/image3.jpg)
 
-### 1. Penggabungan 2 karakter: Love dan Need – inilah yang disebut dengan **Passion**
+### 1. Penggabungan 2 karakter: Love dan Good – inilah yang disebut dengan **Passion**
 
 *Passion* adalah perbuatan baik, hasrat suka dan cinta seseorang melakukan sesuatu pekerjaan atau karya cipta yang berguna untuk orang banyak.
 
-### 2. Penggabungan 2 karakter: Need dan Paid – inilah yang disebut dengan **Profesi**
+### 2. Penggabungan 2 karakter: Good dan Paid – inilah yang disebut dengan **Profesi**
 
 *Profesi* adalah pekerjaan atau aktivitas rutin dan kontinu yang dilakukan seseorang dengan baik dan dari hasil pekerjaannya itu ia mendapat upah atau bayaran sebagai *reward* dari jerih payahnya.
 
@@ -112,11 +112,11 @@ Hidup ini menuntut pemenuhan kebutuhan‑kebutuhan pokok dan kebutuhan lainnya, 
 
 Kita dipanggil untuk bekerja dalam pelayanan pekerjaan Tuhan dengan memelihara aspek keberadaan (karakter) kita dan aspek karya kita, kedua aspek tersebut keseriusannya adalah sama dan kita harus menjaganya dalam urutan yang benar, **karakter yang diutamakan, baru kemudian karya**. Bila kita serius dan menjaga prioritasnya maka hal ini akan memberi martabat dan nilai yang sangat berarti kepada pekerjaan kita sehari‑hari.
 
-### 3. Penggabungan 2 karakter: Love dan Good – inilah yang disebut dengan **Mission**
+### 3. Penggabungan 2 karakter: Love dan Need – inilah yang disebut dengan **Mission**
 
 *Mission* atau Misi adalah prioritas, metode, atau nilai‑nilai kerja yang menjadi landasan untuk memberi petunjuk garis besar dalam mewujudkan sebuah visi, dan usaha pekerjaan itu dilakukan dengan cinta untuk menghasilkan buah pekerjaan yang baik yang dibutuhkan banyak orang.
 
-### 4. Penggabungan 2 karakter: Good dan Paid – inilah yang disebut dengan **Lapangan Kerja**
+### 4. Penggabungan 2 karakter: Need dan Paid – inilah yang disebut dengan **Lapangan Kerja**
 
 *Lapangan kerja* adalah tempat/sektor bagi seseorang bukan hanya sekadar mencari nafkah (bekerja) untuk memenuhi kebutuhan pokoknya, tetapi lebih dari itu adalah bagian dari usaha untuk mengisi masa hidupnya agar lebih bermakna dari sebelumnya. Bekerja adalah panggilan hidup manusia dalam pelayanan/pekerjaan yang dikenan Tuhan.
 
