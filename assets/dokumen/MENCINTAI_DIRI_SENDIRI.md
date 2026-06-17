@@ -48,7 +48,7 @@ Mencintai diri sendiri berarti kamu bersedia meningkatkan kualitas kecerdasan ka
 
 > Untuk lebih jelas mengenai Kecerdasan Karya Manusia dapat dilihat dan berkunjung ke situs kami di [link ini](https://contoh.link).
 
-**Kecerdasan Karakter Manusia** Terkombinasi dari 4 jenis karakter dalam ke‑khusus‑annya. Di dalam diri individu ada 4 jenis karakter yang berperan penting dalam membentuk kecerdasan karakter pelakunya yaitu:
+Sedangkan **Kecerdasan Karakter Manusia** Terkombinasi dari 4 jenis karakter dalam ke‑khusus‑annya. Di dalam diri individu ada 4 jenis karakter yang berperan penting dalam membentuk kecerdasan karakter pelakunya yaitu:
 
 1. **Karakter love (LC)** = Mencintai/Dicintai
 2. **Karakter Good (GC)** = Berbuat baik
@@ -80,21 +80,21 @@ Ada 4 unsur kecerdasan karakter manusia individu yaitu **Love (L)**, **Good (G)*
 
 ![Bagan 4 Karakter](/assets/images/mencintai_diri/image2.jpg)
 
-Dari gambar tersebut di atas, menjelaskan karakter **Love** dan **Need** sebagai penentu karakter individu, sedangkan karakter **Good** dan **Paid** sebagai pendamping atau bukan penentu, di mana karakter Good mendampingi karakter Love, sedangkan karakter Paid mendampingi karakter Need.
+Dari gambar tersebut di atas, menjelaskan karakter **Love** dan **Good** sebagai penentu karakter individu, sedangkan karakter **Need** dan **Paid** sebagai pendamping atau bukan penentu, di mana karakter Need mendampingi karakter Love, sedangkan karakter Paid mendampingi karakter Good.
 
-- Karakter **Love** dan **Good** inilah sebagai *inside* (sisi dalam) karakter yang dipengaruhi oleh atau membentuk tekad dari si pelakunya.
-- Sedangkan karakter **Paid** dan **Need** sebagai *outside* (sisi luar) karakter yang dipengaruhi atau situasi harus dihadapi dengan hikmat dari si pelakunya.
+- Karakter **Love** dan **Need** inilah sebagai *inside* (sisi dalam) karakter yang dipengaruhi oleh atau membentuk tekad dari si pelakunya.
+- Sedangkan karakter **Good** dan **Paid** sebagai *outside* (sisi luar) karakter yang dipengaruhi atau situasi harus dihadapi dengan hikmat dari si pelakunya.
 
-**Love** sebagai penentu terbesar dasar karakter, dan **Need** penentu kecil dasar karakter.
+**Love** sebagai penentu terbesar dasar karakter, dan **Good** penentu kecil dasar karakter.
 
 Karakter **Love** bersifat *menginvert* karena Love adalah karakter terawal/utama yang dapat dikontrol, keadaannya tetap, dan bergantung kepada respon si pelakunya dalam mempengaruhi lingkungan dunia sekitar si pelaku. Bila karakter Love diaktifkan dari A‑Z dalam dunia kerja, maka karakter Paid aktif dari Z‑A dalam bagian partialnya. Karakter **Paid** adalah karakter yang paling kecil yang bersifat *menginvert* dari Love karena Paid tidak dapat dikontrol, keadaannya tidak tetap (selalu berubah), dan dipengaruhi oleh hikmat dari si pelakunya.
 
 - Love cenderung dipengaruhi oleh alat pikir (otak)
-- Good cenderung memakai hati
-- Need memakai spiritual
+- Need cenderung memakai hati
+- Good memakai spiritual
 - Paid dipengaruhi oleh daya juang (*attitude*) dari si pelakunya di dalam suatu pelayanan/pekerjaan yang dilakukan.
 
-Pengkombinasian atau gabungan beberapa karakter antara Love, Good, Paid, dan Need dapat dilakukan satu sama lain dengan urutan yang benar melihat sifat dan tujuan pembentukan kombinasi karakter dalam susunan yang teratur **Love – Good – Need – Paid** agar si pelaku dalam hidupnya menghasilkan buah. Buah karakter di dunia kerja itulah yang bermanfaat yang dapat diteladani atau dinikmati semua orang untuk saling melengkapi pertumbuhan diri masing‑masing individu di antara anggota‑anggota suatu organisasi/group sebagai wujud talenta (karunia) oleh Roh Kudus Allah. Sehingga di dunia kerja seorang pekerja yang bekerja di tempat kerja, ia harus bekerja keras, rajin, dan disiplin dengan menggunakan kecerdasan karakter Love – Good - Need – Paid yang harus ia miliki di samping memiliki Kecerdasan Inteligensi (Karya) nya.
+Pengkombinasian atau gabungan beberapa karakter antara Love, Good, Need, dan  Paid dapat dilakukan satu sama lain dengan urutan yang benar melihat sifat dan tujuan pembentukan kombinasi karakter dalam susunan yang teratur **Love – Need – Good – Paid** agar si pelaku dalam hidupnya menghasilkan buah. Buah karakter di dunia kerja itulah yang bermanfaat yang dapat diteladani atau dinikmati semua orang untuk saling melengkapi pertumbuhan diri masing‑masing individu di antara anggota‑anggota suatu organisasi/group sebagai wujud talenta (karunia) oleh Roh Kudus Allah. Sehingga di dunia kerja seorang pekerja yang bekerja di tempat kerja, ia harus bekerja keras, rajin, dan disiplin dengan menggunakan kecerdasan karakter Love – Good - Need – Paid yang harus ia miliki di samping memiliki Kecerdasan Inteligensi (Karya) nya.
 
 Pengkombinasian unsur dasar karakter diri manusia individu dari Love, Good, Need, dan Paid tersebut dalam pelayanan/pekerjaan dapat dilakukan untuk menghasilkan suatu keinginan baik yang diharapkan seperti dari kombinasi 2 karakter, 3 karakter, atau 4 karakter seperti berikut ini:
 
