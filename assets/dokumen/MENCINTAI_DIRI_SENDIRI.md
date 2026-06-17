@@ -114,7 +114,7 @@ Kita dipanggil untuk bekerja dalam pelayanan pekerjaan Tuhan dengan memelihara a
 
 ### 3. Penggabungan 2 karakter: Need dan Paid – inilah yang disebut dengan **Mission**
 
-*Mission* atau Misi adalah prioritas, metode, atau nilai‑nilai kerja yang menjadi landasan untuk memberi petunjuk garis besar dalam mewujudkan sebuah visi, dan usaha pekerjaan itu dilakukan dengan cinta untuk menghasilkan buah pekerjaan yang baik yang dibutuhkan orang banyak.
+*Mission* atau Misi adalah prioritas, metode, atau nilai‑nilai kerja yang menjadi landasan untuk memberi petunjuk garis besar dalam mewujudkan sebuah visi, dan usaha pekerjaan itu dilakukan dengan cinta untuk menghasilkan buah pekerjaan yang baik yang dibutuhkan banyak orang.
 
 ### 4. Penggabungan 2 karakter: Good dan Paid – inilah yang disebut dengan **Lapangan Kerja**
 
@@ -179,7 +179,7 @@ Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas kar
 
 ![Comfortable but empty](/assets/images/mencintai_diri/image6.jpg)
 
-- Keadaan seperti ini mayoritas dihinggapi pada para pekerja di dunia usaha sekarang ini. Mereka punya cinta (L), mereka dibayar (P), dan produk yang mereka hasilkan dibutuhkan orang banyak (N), tapi mereka bekerja **tidak melakukannya dengan baik**. Mereka bekerja hanya supaya dapat uang saja, tidak melakukan dengan baik pekerjaannya atau pelayanannya. Mereka mendapat pujian karena berhasil menciptakan suatu produk, tapi tidak ada kebaikan di sana.
+- Keadaan seperti ini mayoritas dihinggapi pada para pekerja di dunia usaha sekarang ini. Mereka punya cinta (L), mereka dibayar (P), dan produk yang mereka hasilkan dibutuhkan banyak orang (N), tapi mereka bekerja **tidak melakukannya dengan baik**. Mereka bekerja hanya supaya dapat uang saja, tidak melakukan dengan baik pekerjaannya atau pelayanannya. Mereka mendapat pujian karena berhasil menciptakan suatu produk, tapi tidak ada kebaikan di sana.
 
 ### 4. Love but uncertainty (suka tapi dalam ketidakpastian)
 
