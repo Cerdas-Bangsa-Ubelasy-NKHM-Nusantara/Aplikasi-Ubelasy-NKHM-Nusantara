@@ -74,9 +74,9 @@ Keberhasilan suatu layanan konseling dapat diukur dari 4 hal pribadi konseli, ya
 
 ---
 
-## Unsur Kecerdasan Karakter Manusia
+## Unsur Dasar Kecerdasan Karakter Manusia
 
-Ada 4 unsur kecerdasan karakter manusia individu yaitu **Love (L)**, **Good (G)**, **Need (N)**, dan **Paid (P)** yang dikombinasikan satu sama lain menurut tujuan dan manfaatnya, seperti tergambar pada bagan berikut:
+Ada 4 unsur dasar kecerdasan karakter manusia individu yaitu **Love (L)**, **Good (G)**, **Need (N)**, dan **Paid (P)** yang dikombinasikan satu sama lain menurut tujuan dan manfaatnya, seperti tergambar pada bagan berikut:
 
 ![Bagan 4 Karakter](/assets/images/mencintai_diri/image2.jpg)
 
@@ -132,7 +132,7 @@ Meskipun Visi dan misi memiliki perbedaan, namun misi dan visi merupakan satu ke
 
 Jadi, dapat disimpulkan bahwa **visi** adalah bayangan dan cara kita melihat gambaran suatu tujuan pada masa depan, sedangkan **misi** adalah cara dan langkah‑langkah yang bisa kita lakukan saat ini juga demi mewujudkan visi yang sudah direncanakan.
 
-**Contohnya:**
+**Contoh Penerapannya:**
 
 - **Visi Kerajaan Sorga:** Semua untuk satu (hal apapun semua yang baik benar, kudus, dan mulia untuk Tuhan), Langit baru bumi baru.
 - **Passion Kerajaan Sorga:** Pengorbanan Yesus Kristus di kayu salib, Kebangkitan Yesus Kristus, Pencurahan Roh Kudus bagi orang percaya.
@@ -160,7 +160,7 @@ Untuk hidup sempurna di hadapan Tuhan, kita harus cerdas karakter dan cerdas kar
 
 ---
 
-## Penerapan Formula 4 Karakter dalam Diri sebagai Keajaiban dalam Hidup Kita
+## Penerapan Formula 4 Dasar Karakter dalam Diri sebagai Keajaiban dalam Hidup Kita
 
 ### 1. Satisfy but useless (puas, tapi merasa tidak berguna)
 
