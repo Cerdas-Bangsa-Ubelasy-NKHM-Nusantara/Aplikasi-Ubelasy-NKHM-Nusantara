@@ -2,6 +2,16 @@
 import os
 import random
 
+# nkhm/ai_assistant.py
+import os
+import random
+from dotenv import load_dotenv  # ← tambahkan
+
+# Muat file .env jika ada (untuk lokal)
+load_dotenv()  # ← tambahkan
+
+# ... kode selanjutnya (sama seperti sebelumnya)
+
 # === CEK KETERSEDIAAN LIBRARY ===
 try:
     import google.generativeai as genai
