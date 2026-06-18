@@ -16,7 +16,7 @@ def get_ai_response(user_input, history, user_name, nkhm_score, nkhm_level):
     Jika API key tidak tersedia atau library tidak ada, gunakan fallback random.
     """
     # Ambil API key dari environment variable
-    api_key = os.getenv("GOOGLE_GEMINI_API_KEY") or os.getenv("AIzaSyALLmT6l7ip3m0YvODND36S7ENrwEKWBCY")
+    api_key = os.getenv("GOOGLE_GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY")
 
     if GEMINI_AVAILABLE and api_key:
         try:
