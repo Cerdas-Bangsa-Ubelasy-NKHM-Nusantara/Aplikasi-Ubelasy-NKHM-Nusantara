@@ -201,4 +201,4 @@ Dari kombinasi Love – Good - Paid – Need di atas, coba Anda temukan yang man
 
 **
 > Unsur kecerdasan karya selalu ada pada dirimu, tapi unsur kecerdasan karakter tidak mesti selalu ada pada dirimu, oleh karena itu selalu berkarakter baiklah engkau pada semua orang dalam kehidupan ini.
-*(Oleh: SR Pakpahan, SST)*
+*(Oleh: SR Pakpahan, SST)
