@@ -1,37 +1,41 @@
 # nkhm/ai_assistant.py
 import os
 import random
+import logging
+from dotenv import load_dotenv  # pastikan library ini terinstall
 
-# nkhm/ai_assistant.py
-import os
-import random
-from dotenv import load_dotenv  # ← tambahkan
+# Load .env (untuk lokal)
+load_dotenv()
 
-# Muat file .env jika ada (untuk lokal)
-load_dotenv()  # ← tambahkan
+# Logging agar error terlihat di terminal
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-# ... kode selanjutnya (sama seperti sebelumnya)
-
-# === CEK KETERSEDIAAN LIBRARY ===
+# Cek library
 try:
     import google.generativeai as genai
     GEMINI_AVAILABLE = True
 except ImportError:
     GEMINI_AVAILABLE = False
+    logger.warning("⚠️ google-generativeai tidak terinstall.")
 
 try:
     from openai import OpenAI
     OPENAI_AVAILABLE = True
 except ImportError:
     OPENAI_AVAILABLE = False
+    logger.warning("⚠️ openai tidak terinstall.")
+
 
 def get_ai_response(user_input, history, user_name, nkhm_score, nkhm_level):
     """
     Menghasilkan respons AI menggunakan Google Gemini (prioritas) atau OpenAI.
-    Fallback ke random jika tidak ada API key atau library tidak tersedia.
+    Fallback ke random jika API gagal.
     """
-    # ========== 1. COBA GOOGLE GEMINI ==========
+    # ===== 1. COBA GEMINI =====
     gemini_key = os.getenv("GOOGLE_GEMINI_API_KEY")
+    logger.info(f"Gemini API Key exists: {bool(gemini_key)}")
+
     if GEMINI_AVAILABLE and gemini_key:
         try:
             genai.configure(api_key=gemini_key)
@@ -51,15 +55,18 @@ def get_ai_response(user_input, history, user_name, nkhm_score, nkhm_level):
 
             prompt = context + "\n" + history_text + f"Pengguna: {user_input}\nKi Hajar:"
 
+            logger.info("🔄 Memanggil Gemini API...")
             response = model.generate_content(prompt)
+            logger.info("✅ Gemini berhasil.")
             return response.text
 
         except Exception as e:
-            print(f"⚠️ Error Gemini: {e}")
-            # Jika Gemini gagal, lanjut ke OpenAI
+            logger.error(f"❌ Error Gemini: {e}")
 
-    # ========== 2. COBA OPENAI ==========
+    # ===== 2. COBA OPENAI =====
     openai_key = os.getenv("OPENAI_API_KEY")
+    logger.info(f"OpenAI API Key exists: {bool(openai_key)}")
+
     if OPENAI_AVAILABLE and openai_key:
         try:
             client = OpenAI(api_key=openai_key)
@@ -77,19 +84,21 @@ def get_ai_response(user_input, history, user_name, nkhm_score, nkhm_level):
                 messages.append({"role": role, "content": msg["content"]})
             messages.append({"role": "user", "content": user_input})
 
+            logger.info("🔄 Memanggil OpenAI API...")
             response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=messages,
                 max_tokens=300,
                 temperature=0.7
             )
+            logger.info("✅ OpenAI berhasil.")
             return response.choices[0].message.content
 
         except Exception as e:
-            print(f"⚠️ Error OpenAI: {e}")
+            logger.error(f"❌ Error OpenAI: {e}")
 
-    # ========== 3. FALLBACK ==========
-    print("⚠️ Tidak ada AI yang tersedia. Gunakan fallback random.")
+    # ===== 3. FALLBACK =====
+    logger.warning("⚠️ Tidak ada AI yang tersedia. Gunakan fallback random.")
     responses = [
         f"Halo {user_name}! Teruslah belajar. NKHM-mu {nkhm_score} ({nkhm_level}).",
         f"Menarik! {user_input} ... Coba cari tahu lebih lanjut tentang sejarah Indonesia.",
