@@ -196,7 +196,7 @@ Inilah yang Tuhan berikan kepada kita manusia supaya kita berhasil dalam kehidup
 **
 Dari kombinasi Love – Good - Paid – Need di atas, coba Anda temukan yang mana atau di posisi mana terdapat: 
 - "Penyelamatan"
-- "Pengorbanan".
+- "Pengorbanan"
 
 
 **
