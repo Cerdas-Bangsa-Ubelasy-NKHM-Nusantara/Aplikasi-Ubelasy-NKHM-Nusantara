@@ -1,0 +1,366 @@
+[
+  {
+    "id": 1,
+    "text": "Ketika menghadapi situasi sulit, saya merasa ada kekuatan yang lebih besar yang membantu saya melewatinya.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 2,
+    "text": "Saya percaya bahwa setiap orang memiliki tujuan hidup yang unik dan bermakna.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 3,
+    "text": "Saya sering merenungkan makna dan tujuan hidup saya secara mendalam.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 4,
+    "text": "Ketika melihat penderitaan orang lain, saya merasa tergerak untuk berbuat sesuatu.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 5,
+    "text": "Saya menemukan kedamaian batin melalui meditasi, doa, atau kontemplasi.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 6,
+    "text": "Saya percaya bahwa ada hubungan antara semua makhluk hidup di alam semesta.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 7,
+    "text": "Saya sering merasa terhubung dengan sesuatu yang lebih besar dari diri saya sendiri.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 8,
+    "text": "Saya percaya bahwa kebaikan akan selalu membawa kebaikan kembali pada pelakunya.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 9,
+    "text": "Saya merasa bahwa hidup memiliki makna yang lebih dalam daripada sekadar memenuhi kebutuhan fisik.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 10,
+    "text": "Saya sering menemukan pelajaran berharga dari setiap pengalaman hidup, baik positif maupun negatif.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 11,
+    "text": "Saya percaya bahwa ada kebenaran universal yang berlaku untuk semua orang di segala zaman.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 12,
+    "text": "Saya sering membantu orang lain tanpa mengharapkan imbalan apa pun.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 13,
+    "text": "Saya percaya bahwa setiap orang berhak mendapatkan perlakuan yang adil dan bermartabat.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 14,
+    "text": "Saya merasa bahwa kehidupan ini adalah perjalanan spiritual yang terus berkembang.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 15,
+    "text": "Saya sering menyempatkan waktu untuk merenung dan introspeksi diri.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 16,
+    "text": "Saya percaya bahwa cinta dan kasih sayang adalah kekuatan paling besar di dunia.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 17,
+    "text": "Saya sering merasa bersyukur atas hal-hal kecil dalam hidup yang sering terabaikan.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 18,
+    "text": "Saya percaya bahwa setiap orang memiliki potensi untuk berubah menjadi lebih baik.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 19,
+    "text": "Saya merasa bahwa hidup ini penuh dengan keajaiban yang tidak bisa dijelaskan oleh logika.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 20,
+    "text": "Saya sering melakukan hal-hal yang membawa kebaikan bagi lingkungan dan masyarakat.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 21,
+    "text": "Saya percaya bahwa doa atau harapan memiliki kekuatan untuk mengubah keadaan.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 22,
+    "text": "Saya sering menemukan kebenaran dalam pengalaman-pengalaman hidup sehari-hari.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 23,
+    "text": "Saya percaya bahwa nilai-nilai moral lebih penting daripada aturan-aturan formal.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 24,
+    "text": "Saya sering berbagi pengalaman spiritual atau pemikiran mendalam dengan orang lain.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 25,
+    "text": "Saya percaya bahwa ada tujuan yang lebih besar dalam setiap kejadian yang terjadi.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 26,
+    "text": "Saya sering merasa damai dan tenang meskipun di tengah kekacauan.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "B. Setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 27,
+    "text": "Saya percaya bahwa kebahagiaan sejati berasal dari dalam diri, bukan dari faktor eksternal.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  },
+  {
+    "id": 28,
+    "text": "Saya merasa bahwa hidup ini memiliki dimensi spiritual yang penting untuk dijaga dan dikembangkan.",
+    "options": [
+      "A. Sangat setuju",
+      "B. Setuju",
+      "C. Tidak setuju",
+      "D. Sangat tidak setuju"
+    ],
+    "correct": "A. Sangat setuju",
+    "type": "SQ",
+    "national": false
+  }
+]
