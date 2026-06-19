@@ -1,0 +1,263 @@
+[
+  {
+    "id": 1,
+    "text": "Jika 5 + 3 = 16, 7 + 2 = 25, dan 6 + 4 = 20, maka 8 + 3 = ?",
+    "options": ["A. 24", "B. 26", "C. 22", "D. 28"],
+    "correct": "A. 24",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 2,
+    "text": "Susunan huruf berikut ini memiliki pola tertentu: B, C, E, H, L, ?",
+    "options": ["A. N", "B. O", "C. P", "D. Q"],
+    "correct": "D. Q",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 3,
+    "text": "Sebuah kotak berbentuk persegi memiliki luas 144 cm². Berapa panjang sisi kotak tersebut?",
+    "options": ["A. 10 cm", "B. 11 cm", "C. 12 cm", "D. 13 cm"],
+    "correct": "C. 12 cm",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 4,
+    "text": "Jika semua A adalah B, dan semua B adalah C, maka pernyataan yang benar adalah:",
+    "options": [
+      "A. Semua C adalah A",
+      "B. Semua A adalah C",
+      "C. Beberapa C adalah B",
+      "D. Tidak ada A yang C"
+    ],
+    "correct": "B. Semua A adalah C",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 5,
+    "text": "Ayah berusia 3 kali lipat usia anaknya. Jika usia anak 12 tahun, berapa usia ayah 5 tahun yang akan datang?",
+    "options": ["A. 36 tahun", "B. 41 tahun", "C. 46 tahun", "D. 51 tahun"],
+    "correct": "B. 41 tahun",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 6,
+    "text": "Deret angka: 2, 6, 12, 20, 30, ?",
+    "options": ["A. 38", "B. 40", "C. 42", "D. 44"],
+    "correct": "C. 42",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 7,
+    "text": "Jika 3 ekor ayam membutuhkan waktu 3 hari untuk menghasilkan 3 butir telur, berapa hari yang dibutuhkan 6 ekor ayam untuk menghasilkan 6 butir telur?",
+    "options": ["A. 1.5 hari", "B. 3 hari", "C. 6 hari", "D. 9 hari"],
+    "correct": "B. 3 hari",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 8,
+    "text": "Mana kata yang berbeda dari yang lain?",
+    "options": ["A. Apel", "B. Jeruk", "C. Pisang", "D. Semangka"],
+    "correct": "B. Jeruk",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 9,
+    "text": "Jika 'KUCING' ditulis sebagai 'LCVJOH', maka 'ANJING' ditulis sebagai:",
+    "options": ["A. BOKJOH", "B. BOKJHO", "C. BKMJOH", "D. BOKNPH"],
+    "correct": "A. BOKJOH",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 10,
+    "text": "Berapa sudut dalam segi lima (pentagon)?",
+    "options": ["A. 360°", "B. 450°", "C. 540°", "D. 720°"],
+    "correct": "C. 540°",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 11,
+    "text": "Seorang pedagang membeli 5 kg apel seharga Rp 75.000 dan menjualnya Rp 18.000 per kg. Berapa keuntungan yang diperoleh?",
+    "options": ["A. Rp 10.000", "B. Rp 12.000", "C. Rp 15.000", "D. Rp 18.000"],
+    "correct": "C. Rp 15.000",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 12,
+    "text": "Jika hari ini adalah Selasa, maka hari ke-100 dari sekarang adalah?",
+    "options": ["A. Minggu", "B. Senin", "C. Selasa", "D. Rabu"],
+    "correct": "D. Rabu",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 13,
+    "text": "Manakah yang termasuk dalam kelompok kata yang sama?",
+    "options": ["A. Taksi", "B. Bus", "C. Kereta", "D. Sepeda"],
+    "correct": "C. Kereta",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 14,
+    "text": "Nilai dari 25% × 80 + 50% × 40 = ?",
+    "options": ["A. 30", "B. 35", "C. 40", "D. 45"],
+    "correct": "C. 40",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 15,
+    "text": "Berapa banyak angka 7 yang muncul dari angka 1 sampai 100?",
+    "options": ["A. 10", "B. 18", "C. 19", "D. 20"],
+    "correct": "D. 20",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 16,
+    "text": "Jika 1/2 dari x adalah 15, maka 3/4 dari x adalah?",
+    "options": ["A. 20", "B. 22.5", "C. 25", "D. 30"],
+    "correct": "B. 22.5",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 17,
+    "text": "Urutan berikut: 3, 8, 15, 24, 35, ?",
+    "options": ["A. 45", "B. 47", "C. 48", "D. 50"],
+    "correct": "C. 48",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 18,
+    "text": "Sebuah jam menunjukkan pukul 3:15. Berapa sudut terkecil antara jarum jam dan jarum menit?",
+    "options": ["A. 7.5°", "B. 15°", "C. 22.5°", "D. 30°"],
+    "correct": "A. 7.5°",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 19,
+    "text": "Manakah yang merupakan bentuk kebalikan dari 'CERAH'?",
+    "options": ["A. GELAP", "B. HUJAN", "C. MENDUNG", "D. PANAS"],
+    "correct": "A. GELAP",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 20,
+    "text": "Sebuah keluarga terdiri dari ayah, ibu, dan 3 anak. Berapa banyak pasangan tangan yang ada di keluarga tersebut?",
+    "options": ["A. 5", "B. 10", "C. 15", "D. 20"],
+    "correct": "B. 10",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 21,
+    "text": "Jika A = 1, B = 2, C = 3, ..., maka nilai dari K + A + R + Y + A = ?",
+    "options": ["A. 60", "B. 62", "C. 64", "D. 66"],
+    "correct": "D. 66",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 22,
+    "text": "Berapa hasil dari √(144) + √(64) - √(36)?",
+    "options": ["A. 10", "B. 12", "C. 14", "D. 16"],
+    "correct": "C. 14",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 23,
+    "text": "Seorang siswa memiliki 5 mata pelajaran dengan rata-rata 80. Jika satu nilai ditambahkan dengan nilai 90, berapa rata-rata baru?",
+    "options": ["A. 81", "B. 82", "C. 83", "D. 84"],
+    "correct": "B. 82",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 24,
+    "text": "Jika 'PAGI' ditulis sebagai 'QBIH', maka 'MALAM' ditulis sebagai:",
+    "options": ["A. NBMBN", "B. NBMBN", "C. NBMBM", "D. NBNBM"],
+    "correct": "C. NBMBM",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 25,
+    "text": "Manakah yang paling dekat dengan 20/100?",
+    "options": ["A. 1/5", "B. 1/4", "C. 1/3", "D. 1/2"],
+    "correct": "A. 1/5",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 26,
+    "text": "Deret angka: 1, 4, 9, 16, 25, 36, ?",
+    "options": ["A. 42", "B. 45", "C. 49", "D. 52"],
+    "correct": "C. 49",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 27,
+    "text": "Jika 2x + 5 = 15, maka nilai x adalah:",
+    "options": ["A. 3", "B. 4", "C. 5", "D. 6"],
+    "correct": "C. 5",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 28,
+    "text": "Berapa banyak hari dalam 5 minggu?",
+    "options": ["A. 30 hari", "B. 35 hari", "C. 40 hari", "D. 45 hari"],
+    "correct": "B. 35 hari",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 29,
+    "text": "Sebuah toko memberikan diskon 20% untuk semua barang. Jika harga asli sebuah barang Rp 50.000, berapa harga setelah diskon?",
+    "options": ["A. Rp 35.000", "B. Rp 40.000", "C. Rp 45.000", "D. Rp 48.000"],
+    "correct": "B. Rp 40.000",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 30,
+    "text": "Manakah yang merupakan bentuk jamak yang benar?",
+    "options": ["A. Anak-anak", "B. Anak-anak", "C. Anak-anak", "D. Anak-anak"],
+    "correct": "A. Anak-anak",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 31,
+    "text": "Jika 2/3 dari x adalah 12, maka 1/2 dari x adalah:",
+    "options": ["A. 6", "B. 8", "C. 9", "D. 10"],
+    "correct": "C. 9",
+    "type": "IQ",
+    "national": false
+  },
+  {
+    "id": 32,
+    "text": "Manakah kata yang paling berbeda?",
+    "options": ["A. Kucing", "B. Anjing", "C. Burung", "D. Ikan"],
+    "correct": "D. Ikan",
+    "type": "IQ",
+    "national": false
+  }
+]
