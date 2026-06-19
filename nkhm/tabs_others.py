@@ -10,6 +10,7 @@ from nkhm.tebak_pahlawan import show_tebak_pahlawan
 from nkhm.angka_rahasia import show_angka_rahasia
 from nkhm.seberang_sungai import show_river_game
 from nkhm.tutorial import show_tutorial
+from nkhm.tiang_bendera import show_tiang_bendera
 
 # Import opsional
 try:
