@@ -1,0 +1,496 @@
+[
+  {
+    "id": 1,
+    "text": "Seorang teman datang kepada Anda dengan wajah sedih dan mengatakan bahwa dia baru saja gagal dalam ujian penting. Respon pertama yang paling tepat adalah...",
+    "options": [
+      "A. Memberi tahu dia bahwa dia seharusnya belajar lebih giat",
+      "B. Mendengarkan dengan penuh perhatian dan menanyakan apa yang dia rasakan",
+      "C. Langsung memberikan solusi tentang cara belajar yang efektif",
+      "D. Mengatakan bahwa ujian itu tidak penting dan dia tidak perlu khawatir"
+    ],
+    "correct": "B. Mendengarkan dengan penuh perhatian dan menanyakan apa yang dia rasakan",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 2,
+    "text": "Saat Anda merasa sangat marah karena seseorang memperlakukan Anda dengan tidak adil, cara terbaik untuk mengelola emosi adalah...",
+    "options": [
+      "A. Melampiaskan kemarahan dengan berteriak kepada orang tersebut",
+      "B. Menahan emosi dan berpura-pura tidak marah",
+      "C. Mengambil jeda, menenangkan diri, lalu berbicara dengan kepala dingin",
+      "D. Menyimpan kemarahan dan membalas di lain waktu"
+    ],
+    "correct": "C. Mengambil jeda, menenangkan diri, lalu berbicara dengan kepala dingin",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 3,
+    "text": "Rekan kerja Anda baru saja mendapat promosi yang Anda inginkan. Reaksi paling dewasa adalah...",
+    "options": [
+      "A. Merasa iri dan menghindari rekan kerja tersebut",
+      "B. Mengucapkan selamat dengan tulus dan belajar dari keberhasilannya",
+      "C. Mengeluh kepada atasan tentang ketidakadilan",
+      "D. Menyabotase pekerjaan rekan kerja tersebut"
+    ],
+    "correct": "B. Mengucapkan selamat dengan tulus dan belajar dari keberhasilannya",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 4,
+    "text": "Anda melihat seorang teman sedang diejek oleh sekelompok orang. Tindakan yang paling tepat adalah...",
+    "options": [
+      "A. Menghindari tempat itu agar tidak terlibat",
+      "B. Bergabung dengan kelompok yang mengejek agar diterima",
+      "C. Membela teman dengan tenang dan membawanya pergi dari situasi tersebut",
+      "D. Melaporkan kejadian tersebut tanpa melakukan apapun langsung"
+    ],
+    "correct": "C. Membela teman dengan tenang dan membawanya pergi dari situasi tersebut",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 5,
+    "text": "Ketika Anda membuat kesalahan yang merugikan orang lain, langkah terbaik adalah...",
+    "options": [
+      "A. Menutupi kesalahan agar tidak diketahui",
+      "B. Menyalahkan orang lain atas kesalahan tersebut",
+      "C. Mengakui kesalahan dengan jujur dan meminta maaf",
+      "D. Mengabaikan kesalahan dan berharap tidak ada yang peduli"
+    ],
+    "correct": "C. Mengakui kesalahan dengan jujur dan meminta maaf",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 6,
+    "text": "Saat Anda merasa cemas menghadapi presentasi penting, strategi terbaik adalah...",
+    "options": [
+      "A. Menghindari presentasi dengan alasan sakit",
+      "B. Berlatih dengan baik, bernapas dalam-dalam, dan fokus pada materi",
+      "C. Mengkhawatirkan semua hal yang bisa salah",
+      "D. Mengandalkan catatan dan berharap tidak ada pertanyaan sulit"
+    ],
+    "correct": "B. Berlatih dengan baik, bernapas dalam-dalam, dan fokus pada materi",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 7,
+    "text": "Pasangan Anda datang dengan wajah cemberut tanpa menjelaskan alasannya. Respon terbaik adalah...",
+    "options": [
+      "A. Mengabaikan dan melanjutkan aktivitas Anda",
+      "B. Bertanya dengan lembut, 'Apakah ada sesuatu yang ingin kamu bicarakan?'",
+      "C. Memaksa pasangan untuk memberi tahu alasannya",
+      "D. Mengambil sikap yang sama dan cemberut juga"
+    ],
+    "correct": "B. Bertanya dengan lembut, 'Apakah ada sesuatu yang ingin kamu bicarakan?'",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 8,
+    "text": "Saat Anda merasa sangat sedih karena kehilangan seseorang, hal yang paling sehat adalah...",
+    "options": [
+      "A. Menahan tangisan dan menunjukkan bahwa Anda kuat",
+      "B. Mengekspresikan kesedihan dengan menangis dan mencari dukungan dari orang terdekat",
+      "C. Menghindari semua kenangan tentang orang yang pergi",
+      "D. Membatasi diri dan tidak ingin bertemu siapapun"
+    ],
+    "correct": "B. Mengekspresikan kesedihan dengan menangis dan mencari dukungan dari orang terdekat",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 9,
+    "text": "Rekan kerja Anda terlihat sangat stres dengan beban kerja. Cara terbaik untuk membantu adalah...",
+    "options": [
+      "A. Mengabaikan karena itu adalah tanggung jawabnya sendiri",
+      "B. Menawarkan bantuan dan bertanya apa yang bisa Anda lakukan",
+      "C. Memberi tahu atasan bahwa dia tidak mampu mengelola pekerjaannya",
+      "D. Memberi nasihat panjang tentang manajemen waktu"
+    ],
+    "correct": "B. Menawarkan bantuan dan bertanya apa yang bisa Anda lakukan",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 10,
+    "text": "Ketika Anda harus memberikan feedback negatif kepada seseorang, cara paling efektif adalah...",
+    "options": [
+      "A. Secara langsung mengatakan semua kesalahan dengan blak-blakan",
+      "B. Menyampaikan kritik dengan cara yang membangun dan fokus pada solusi",
+      "C. Menghindari feedback negatif agar tidak menyakiti perasaan",
+      "D. Memberi feedback melalui orang lain"
+    ],
+    "correct": "B. Menyampaikan kritik dengan cara yang membangun dan fokus pada solusi",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 11,
+    "text": "Saat Anda merasa diabaikan oleh teman-teman dalam suatu acara, respon terbaik adalah...",
+    "options": [
+      "A. Pergi dari acara tanpa mengucapkan apa-apa",
+      "B. Berusaha bergabung dalam percakapan dengan cara yang alami",
+      "C. Mengeluh kepada orang lain tentang sikap teman-teman",
+      "D. Menganggap itu sebagai tanda bahwa Anda tidak diterima"
+    ],
+    "correct": "B. Berusaha bergabung dalam percakapan dengan cara yang alami",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 12,
+    "text": "Anak Anda menangis karena keinginannya tidak dipenuhi di toko mainan. Pendekatan terbaik adalah...",
+    "options": [
+      "A. Membeli mainan itu agar dia berhenti menangis",
+      "B. Memarahi dan mengancam akan meninggalkannya di toko",
+      "C. Mengakui perasaannya dan menjelaskan dengan tenang mengapa tidak bisa dibeli",
+      "D. Mengabaikan tangisan sampai dia berhenti sendiri"
+    ],
+    "correct": "C. Mengakui perasaannya dan menjelaskan dengan tenang mengapa tidak bisa dibeli",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 13,
+    "text": "Seorang kolega tiba-tiba berhenti berbicara dengan Anda tanpa alasan yang jelas. Langkah terbaik adalah...",
+    "options": [
+      "A. Membalas dengan sikap yang sama dan tidak peduli",
+      "B. Bertanya secara langsung dan tidak konfrontatif apakah ada masalah",
+      "C. Bergosip tentang kolega tersebut kepada orang lain",
+      "D. Menunggu kolega tersebut yang mendekati Anda terlebih dahulu"
+    ],
+    "correct": "B. Bertanya secara langsung dan tidak konfrontatif apakah ada masalah",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 14,
+    "text": "Ketika Anda sangat lelah namun masih banyak pekerjaan yang harus diselesaikan, yang terbaik adalah...",
+    "options": [
+      "A. Memaksakan diri dan bekerja sampai selesai",
+      "B. Beristirahat sejenak, lalu melanjutkan dengan energi yang pulih",
+      "C. Mengurangi kualitas pekerjaan agar cepat selesai",
+      "D. Menyerah dan melanjutkan keesokan harinya"
+    ],
+    "correct": "B. Beristirahat sejenak, lalu melanjutkan dengan energi yang pulih",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 15,
+    "text": "Orang tua Anda mulai menunjukkan tanda-tanda pikun dan sulit mengingat hal-hal sederhana. Tanggapan yang penuh empati adalah...",
+    "options": [
+      "A. Kesal dan sering mengingatkan dengan nada tinggi",
+      "B. Sabar, menggunakan pengingat, dan membantu dengan cara yang lembut",
+      "C. Membiarkan mereka karena menganggap itu bagian dari penuaan normal",
+      "D. Menghindari situasi yang membuat mereka bingung"
+    ],
+    "correct": "B. Sabar, menggunakan pengingat, dan membantu dengan cara yang lembut",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 16,
+    "text": "Tim Anda sedang dalam tekanan dan suasana hati menurun. Sebagai pemimpin, langkah terbaik adalah...",
+    "options": [
+      "A. Memotivasi dengan kata-kata penyemangat dan mengakui kontribusi mereka",
+      "B. Meningkatkan tekanan agar mereka bekerja lebih cepat",
+      "C. Mengabaikan suasana hati dan fokus pada target",
+      "D. Mengambil alih semua pekerjaan untuk meringankan beban"
+    ],
+    "correct": "A. Memotivasi dengan kata-kata penyemangat dan mengakui kontribusi mereka",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 17,
+    "text": "Saat Anda mendengar gosip negatif tentang teman dekat, tindakan terbaik adalah...",
+    "options": [
+      "A. Mempercayai gosip tersebut dan menjauhi teman itu",
+      "B. Menyebarkan gosip lebih lanjut karena informasinya penting",
+      "C. Mengabaikan gosip dan menilai berdasarkan pengalaman pribadi",
+      "D. Langsung mengonfrontasi teman dengan tuduhan tersebut"
+    ],
+    "correct": "C. Mengabaikan gosip dan menilai berdasarkan pengalaman pribadi",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 18,
+    "text": "Anda sedang berada di pertemuan dan seseorang memotong pembicaraan Anda. Respon yang dewasa adalah...",
+    "options": [
+      "A. Diam dan tidak melanjutkan pembicaraan karena tersinggung",
+      "B. Dengan tenang mengatakan, 'Saya belum selesai berbicara, tolong dengarkan dulu'",
+      "C. Memotong kembali pembicaraan orang tersebut sebagai balasan",
+      "D. Mengabaikan dan melanjutkan pembicaraan dengan suara lebih keras"
+    ],
+    "correct": "B. Dengan tenang mengatakan, 'Saya belum selesai berbicara, tolong dengarkan dulu'",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 19,
+    "text": "Saat Anda melihat seseorang kesulitan dengan tugas yang mudah bagi Anda, tindakan terbaik adalah...",
+    "options": [
+      "A. Membiarkannya karena mereka harus belajar sendiri",
+      "B. Menawarkan bantuan dengan cara yang tidak merendahkan",
+      "C. Mengambil alih tugas dan menyelesaikannya sendiri",
+      "D. Memberi tahu orang lain tentang ketidakmampuan orang tersebut"
+    ],
+    "correct": "B. Menawarkan bantuan dengan cara yang tidak merendahkan",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 20,
+    "text": "Pasangan Anda lupa janji penting. Cara terbaik menanggapinya adalah...",
+    "options": [
+      "A. Marah dan mengingatkan tentang semua kesalahan sebelumnya",
+      "B. Mendiskusikan perasaan Anda dengan tenang dan mencari pemahaman",
+      "C. Merencanakan balasan yang sama agar dia merasakan hal yang sama",
+      "D. Memaafkan dan tidak pernah mengangkat masalah itu lagi"
+    ],
+    "correct": "B. Mendiskusikan perasaan Anda dengan tenang dan mencari pemahaman",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 21,
+    "text": "Ketika seorang teman berbagi masalah yang sangat berat, hal paling penting adalah...",
+    "options": [
+      "A. Memberikan solusi langsung agar dia cepat selesai",
+      "B. Menunjukkan bahwa Anda peduli dan mendengarkan dengan penuh perhatian",
+      "C. Menceritakan masalah pribadi Anda agar dia merasa tidak sendirian",
+      "D. Mengalihkan pembicaraan ke topik yang lebih ringan"
+    ],
+    "correct": "B. Menunjukkan bahwa Anda peduli dan mendengarkan dengan penuh perhatian",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 22,
+    "text": "Saat Anda merasa sangat gugup saat wawancara kerja, cara terbaik untuk mengatasi adalah...",
+    "options": [
+      "A. Mengakui rasa gugup dan mencoba rileks dengan pernapasan dalam",
+      "B. Berpura-pura percaya diri meskipun sangat gugup",
+      "C. Menghindari kontak mata agar tidak terlihat gugup",
+      "D. Meminta wawancara dijadwalkan ulang"
+    ],
+    "correct": "A. Mengakui rasa gugup dan mencoba rileks dengan pernapasan dalam",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 23,
+    "text": "Rekan kerja Anda sangat kompetitif dan sering membandingkan pencapaiannya dengan Anda. Sikap yang sehat adalah...",
+    "options": [
+      "A. Bersaing balik dengan segala cara untuk menang",
+      "B. Fokus pada perkembangan diri sendiri dan mengabaikan perbandingan",
+      "C. Mengurangi interaksi dengan rekan kerja tersebut",
+      "D. Menghindari rekan kerja tersebut sepenuhnya"
+    ],
+    "correct": "B. Fokus pada perkembangan diri sendiri dan mengabaikan perbandingan",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 24,
+    "text": "Anak Anda baru saja gagal dalam kompetisi yang sangat dia inginkan. Cara terbaik mendukungnya adalah...",
+    "options": [
+      "A. Menghibur dengan mengatakan kompetisi itu tidak penting",
+      "B. Mengakui perasaannya dan membantunya melihat pelajaran dari kegagalan",
+      "C. Memberitahu dia untuk berlatih lebih keras lagi",
+      "D. Mengalihkan perhatiannya dengan kegiatan lain"
+    ],
+    "correct": "B. Mengakui perasaannya dan membantunya melihat pelajaran dari kegagalan",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 25,
+    "text": "Saat diundang ke acara sosial dan Anda tidak mengenal siapa pun, cara terbaik untuk beradaptasi adalah...",
+    "options": [
+      "A. Berdiri di sudut dan menunggu ada yang mendekati",
+      "B. Memulai percakapan ringan dengan orang di sekitar Anda",
+      "C. Sering memeriksa ponsel untuk menghilangkan rasa canggung",
+      "D. Meninggalkan acara lebih awal jika tidak nyaman"
+    ],
+    "correct": "B. Memulai percakapan ringan dengan orang di sekitar Anda",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 26,
+    "text": "Seorang atasan memberi kritik yang sangat pedas di depan umum. Tanggapan yang profesional adalah...",
+    "options": [
+      "A. Menangis atau menunjukkan bahwa Anda tersinggung",
+      "B. Mendengarkan dengan tenang dan menanyakan detail untuk perbaikan",
+      "C. Membela diri dan menjelaskan mengapa kritik itu tidak tepat",
+      "D. Mengkritik balik atasan di tempat yang sama"
+    ],
+    "correct": "B. Mendengarkan dengan tenang dan menanyakan detail untuk perbaikan",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 27,
+    "text": "Anda merasa mulai bosan dengan rutinitas harian yang monoton. Cara paling konstruktif adalah...",
+    "options": [
+      "A. Mengeluh tentang kebosanan kepada semua orang",
+      "B. Mencari tantangan atau kegiatan baru untuk variasi",
+      "C. Membiarkan hari berlalu tanpa perubahan",
+      "D. Mengabaikan perasaan bosan dan terus bekerja"
+    ],
+    "correct": "B. Mencari tantangan atau kegiatan baru untuk variasi",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 28,
+    "text": "Saat seorang teman berbagi kesuksesannya dengan sangat antusias, respons terbaik adalah...",
+    "options": [
+      "A. Merasa iri dan mengubah topik pembicaraan",
+      "B. Bergembira bersama dan merayakan kesuksesan teman",
+      "C. Membandingkan kesuksesan teman dengan pencapaian Anda",
+      "D. Menambahkan kritik ringan agar teman tidak terlalu bangga"
+    ],
+    "correct": "B. Bergembira bersama dan merayakan kesuksesan teman",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 29,
+    "text": "Kelompok kerja Anda tidak bisa mencapai konsensus. Peran terbaik yang bisa Anda ambil adalah...",
+    "options": [
+      "A. Memaksakan pendapat Anda sebagai yang terbaik",
+      "B. Menjadi mediator yang membantu menemukan titik tengah",
+      "C. Menyerah dan mengikuti mayoritas tanpa berkontribusi",
+      "D. Menghindari pengambilan keputusan"
+    ],
+    "correct": "B. Menjadi mediator yang membantu menemukan titik tengah",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 30,
+    "text": "Saat Anda mendengar berita buruk yang mempengaruhi banyak orang di sekitar Anda, respons pertama adalah...",
+    "options": [
+      "A. Menghindari situasi dan berpura-pura tidak tahu",
+      "B. Mencari informasi yang akurat dan memikirkan cara membantu",
+      "C. Panik dan menyebarkan berita tanpa memverifikasi",
+      "D. Mengabaikan karena tidak langsung mempengaruhi Anda"
+    ],
+    "correct": "B. Mencari informasi yang akurat dan memikirkan cara membantu",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 31,
+    "text": "Seorang anggota tim selalu datang terlambat dan mengganggu kelancaran kerja. Pendekatan terbaik sebagai pimpinan adalah...",
+    "options": [
+      "A. Langsung memberikan sanksi tegas",
+      "B. Mendiskusikan secara pribadi tentang dampak keterlambatan dan mencari solusi",
+      "C. Mengabaikan karena takut konflik",
+      "D. Mengurangi tanggung jawabnya agar tidak mengganggu"
+    ],
+    "correct": "B. Mendiskusikan secara pribadi tentang dampak keterlambatan dan mencari solusi",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 32,
+    "text": "Saat orang lain marah pada Anda, respons paling bijaksana adalah...",
+    "options": [
+      "A. Marah balik agar mereka tahu perasaan Anda",
+      "B. Tetap tenang dan mencoba memahami sumber kemarahannya",
+      "C. Menghindari orang tersebut sampai mereka tenang",
+      "D. Mengabaikan kemarahan mereka"
+    ],
+    "correct": "B. Tetap tenang dan mencoba memahami sumber kemarahannya",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 33,
+    "text": "Anda melihat orang lain dibully di tempat kerja. Langkah paling bertanggung jawab adalah...",
+    "options": [
+      "A. Melaporkan kejadian tersebut kepada HRD atau manajemen",
+      "B. Menghibur korban secara pribadi tanpa intervensi",
+      "C. Menghindari situasi untuk melindungi diri sendiri",
+      "D. Berpura-pura tidak melihat"
+    ],
+    "correct": "A. Melaporkan kejadian tersebut kepada HRD atau manajemen",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 34,
+    "text": "Pasangan Anda tampak menarik diri dan tidak mau berbicara. Pendekatan terbaik adalah...",
+    "options": [
+      "A. Memberi ruang dan menunggu dia datang sendiri",
+      "B. Mengungkapkan perhatian dengan lembut dan menawarkan dukungan",
+      "C. Memaksa dia untuk berbicara tentang masalahnya",
+      "D. Menganggap itu sebagai tanda masalah dalam hubungan dan bereaksi berlebihan"
+    ],
+    "correct": "B. Mengungkapkan perhatian dengan lembut dan menawarkan dukungan",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 35,
+    "text": "Setelah berdebat dengan teman, langkah pertama untuk memperbaiki hubungan adalah...",
+    "options": [
+      "A. Menunggu teman yang meminta maaf terlebih dahulu",
+      "B. Mengambil inisiatif untuk membuka komunikasi dan mendiskusikan masalah",
+      "C. Berpura-pura tidak ada yang terjadi dan melanjutkan seperti biasa",
+      "D. Mengakhiri pertemanan karena konflik yang terjadi"
+    ],
+    "correct": "B. Mengambil inisiatif untuk membuka komunikasi dan mendiskusikan masalah",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 36,
+    "text": "Ketika Anda merasa sangat kecewa dengan keputusan yang diambil oleh orang lain, cara paling sehat untuk mengekspresikannya adalah...",
+    "options": [
+      "A. Menyimpan kekecewaan dan diam-diam merasa sakit hati",
+      "B. Mengekspresikan perasaan dengan cara yang jujur namun tidak menyalahkan",
+      "C. Mengkritik keputusan tersebut secara langsung di depan umum",
+      "D. Menghindari orang yang membuat keputusan"
+    ],
+    "correct": "B. Mengekspresikan perasaan dengan cara yang jujur namun tidak menyalahkan",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 37,
+    "text": "Saat melihat orang lain kesulitan mengendalikan emosi di tempat umum, tindakan paling tepat adalah...",
+    "options": [
+      "A. Menonton dan menilai mereka secara negatif",
+      "B. Menawarkan bantuan atau ruang yang tenang jika diperlukan",
+      "C. Berpura-pura tidak memperhatikan untuk menghindari situasi canggung",
+      "D. Memberi tahu orang lain tentang perilaku mereka"
+    ],
+    "correct": "B. Menawarkan bantuan atau ruang yang tenang jika diperlukan",
+    "type": "EQ",
+    "national": false
+  },
+  {
+    "id": 38,
+    "text": "Setelah mengalami hari yang sangat berat dan penuh tekanan, cara terbaik untuk memulihkan diri adalah...",
+    "options": [
+      "A. Memikirkan kembali semua hal yang salah sepanjang hari",
+      "B. Melakukan aktivitas yang menyenangkan dan memulihkan energi",
+      "C. Berbicara dengan semua orang tentang hari buruk Anda",
+      "D. Langsung tidur tanpa melakukan apapun"
+    ],
+    "correct": "B. Melakukan aktivitas yang menyenangkan dan memulihkan energi",
+    "type": "EQ",
+    "national": false
+  }
+]
