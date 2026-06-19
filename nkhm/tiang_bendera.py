@@ -9,7 +9,7 @@ def init_game_state():
             "A": ["biru", "kuning", "hijau", "merah_putih"],
             "B": [],
             "C": [],
-            "selected": None,  # tiang yang dipilih untuk mengambil cakram
+            "selected": None,
             "message": "",
             "win": False,
             "moves": 0,
@@ -30,14 +30,12 @@ def check_win():
 def is_valid_move(from_tower, to_tower):
     state = st.session_state.tiang_bendera
     if not state[from_tower]:
-        return False, "Tiang asal kosong!"
-    # Ambil cakram paling atas dari tiang asal
+        return False, "❌ Tiang asal kosong!"
     top_from = state[from_tower][-1]
-    # Cek tiang tujuan (jika kosong, boleh)
     if not state[to_tower]:
         return True, ""
     top_to = state[to_tower][-1]
-    # Urutan ukuran (dari kecil ke besar): merah_putih (terkecil), hijau, kuning, biru (terbesar)
+    # Urutan ukuran (dari kecil ke besar): merah_putih (1), hijau (2), kuning (3), biru (4)
     size_order = {"merah_putih": 1, "hijau": 2, "kuning": 3, "biru": 4}
     if size_order[top_from] < size_order[top_to]:
         return True, ""
@@ -48,21 +46,15 @@ def move_disk(from_tower, to_tower):
     state = st.session_state.tiang_bendera
     if state["win"]:
         return
-    
-    # Validasi
     valid, msg = is_valid_move(from_tower, to_tower)
     if not valid:
         state["message"] = msg
         return
-    
-    # Pindahkan cakram
     disk = state[from_tower].pop()
     state[to_tower].append(disk)
     state["moves"] += 1
     state["message"] = f"✅ Memindahkan {disk.capitalize()} dari tiang {from_tower} ke tiang {to_tower}"
     state["selected"] = None
-    
-    # Cek kemenangan
     check_win()
 
 # ========== RESET PERMAINAN ==========
@@ -73,29 +65,26 @@ def reset_game():
 
 # ========== FUNGSI MENAMPILKAN TIANG ==========
 def draw_tower(tower_name, disks):
-    # Konversi warna ke emoji
     disk_icons = {
-        "merah_putih": "🚩",
-        "hijau": "🟢",
+        "biru": "🔵",
         "kuning": "🟡",
-        "biru": "🔵"        
+        "hijau": "🟢",
+        "merah_putih": "🚩"
     }
     
-    # Tampilkan tiang
     st.markdown(f"### 🏗️ Tiang {tower_name}")
     
-    # Tampilkan cakram dari bawah ke atas (agar terlihat seperti tiang)
     if not disks:
         st.markdown("*Kosong*")
     else:
-        for disk in disks:
+        # Tampilkan dari ATAS ke BAWAH (agar visual sesuai)
+        # disks disimpan dari bawah ke atas, jadi kita tampilkan terbalik
+        for disk in reversed(disks):
             icon = disk_icons.get(disk, "⬤")
             st.markdown(f"{icon} {disk.capitalize()}")
     
-    # Tampilkan batang tiang
     st.markdown("⬇️ **|**")
     
-    # Tombol untuk memilih tiang (ambil cakram)
     col1, col2 = st.columns(2)
     with col1:
         if st.button(f"📥 Ambil dari {tower_name}", key=f"take_{tower_name}", use_container_width=True):
@@ -112,7 +101,6 @@ def draw_tower(tower_name, disks):
                 else:
                     state["message"] = f"❌ Tiang {tower_name} kosong!"
             else:
-                # Ada tiang yang sudah dipilih, coba pindahkan ke tiang ini
                 move_disk(state["selected"], tower_name)
             st.rerun()
     
@@ -154,7 +142,6 @@ def show_tiang_bendera():
     init_game_state()
     state = st.session_state.tiang_bendera
     
-    # Tampilkan skor dan status
     col1, col2, col3 = st.columns(3)
     with col1:
         st.metric("🎯 Langkah", state["moves"])
@@ -168,7 +155,6 @@ def show_tiang_bendera():
     
     st.markdown("---")
     
-    # Tampilkan pesan
     if state["message"]:
         if "SELAMAT" in state["message"]:
             st.success(state["message"])
@@ -179,7 +165,6 @@ def show_tiang_bendera():
     
     st.markdown("---")
     
-    # Tampilkan 3 tiang dalam 3 kolom
     col_a, col_b, col_c = st.columns(3)
     
     with col_a:
@@ -192,12 +177,10 @@ def show_tiang_bendera():
         draw_tower("C", state["C"])
         st.caption("📍 Tiang C (Tujuan)")
     
-    # Info tambahan
     st.markdown("---")
     st.markdown("**🔢 Urutan Ukuran (dari kecil ke besar):**")
     st.markdown("🚩 Merah Putih → 🟢 Hijau → 🟡 Kuning → 🔵 Biru")
     
-    # Jika menang, tampilkan efek
     if state["win"]:
         st.balloons()
         st.success("🎉 **SELAMAT! Anda berhasil menyelesaikan permainan!** 🎉")
