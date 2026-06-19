@@ -161,7 +161,7 @@ def show_tab7():
     else:
         st.info("💡 Gambar 'hadiah.gif' belum tersedia.")
     st.markdown("---")
-    sub_tab1, sub_tab2, sub_tab3, sub_tab4  sub_tab5 = st.tabs([
+    sub_tab1, sub_tab2, sub_tab3, sub_tab4,  sub_tab5 = st.tabs([
         "🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🏗️ Tiang & Bendera", "🎲 Lainnya (Coming Soon)"
     ])
     with sub_tab1:
