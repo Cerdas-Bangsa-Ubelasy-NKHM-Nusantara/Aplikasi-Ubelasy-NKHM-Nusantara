@@ -1,0 +1,366 @@
+[
+  {
+    "id": 1,
+    "text": "Ketika menghadapi kegagalan besar dalam proyek yang sudah Anda kerjakan berbulan-bulan, langkah pertama yang Anda ambil adalah...",
+    "options": [
+      "A. Langsung mencari proyek baru untuk melupakan kegagalan",
+      "B. Menganalisis penyebab kegagalan dan mencari pelajaran berharga",
+      "C. Menyalahkan rekan tim atas kegagalan tersebut",
+      "D. Menyerah dan berhenti mengerjakan proyek serupa"
+    ],
+    "correct": "B. Menganalisis penyebab kegagalan dan mencari pelajaran berharga",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 2,
+    "text": "Saat atasan memberikan kritik tajam terhadap pekerjaan Anda, reaksi terbaik adalah...",
+    "options": [
+      "A. Menanggapi dengan emosi dan membela diri",
+      "B. Menerima kritik sebagai masukan untuk perbaikan",
+      "C. Mengabaikan kritik karena dianggap tidak membangun",
+      "D. Mencari kesalahan atasan sebagai pembalasan"
+    ],
+    "correct": "B. Menerima kritik sebagai masukan untuk perbaikan",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 3,
+    "text": "Ketika menghadapi tekanan pekerjaan yang sangat tinggi, hal yang paling tepat dilakukan adalah...",
+    "options": [
+      "A. Membiarkan diri stres hingga pekerjaan selesai",
+      "B. Mengambil jeda sejenak dan mengatur prioritas kerja",
+      "C. Menambah jam kerja tanpa istirahat",
+      "D. Menghindari pekerjaan tersebut"
+    ],
+    "correct": "B. Mengambil jeda sejenak dan mengatur prioritas kerja",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 4,
+    "text": "Ketika rencana yang sudah matang gagal di tengah jalan, sikap Anda adalah...",
+    "options": [
+      "A. Menyerah dan menganggap rencana tidak mungkin berhasil",
+      "B. Membuat rencana alternatif dengan cepat",
+      "C. Menyalahkan keadaan atas kegagalan",
+      "D. Menunggu orang lain memberikan solusi"
+    ],
+    "correct": "B. Membuat rencana alternatif dengan cepat",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 5,
+    "text": "Ketika Anda ditugaskan untuk memimpin tim yang sulit diatur, pendekatan terbaik adalah...",
+    "options": [
+      "A. Memaksakan gaya kepemimpinan yang otoriter",
+      "B. Mendengarkan masukan tim dan mencari solusi bersama",
+      "C. Menghindari konflik dengan membiarkan tim bekerja sendiri",
+      "D. Mengganti anggota tim yang dianggap bermasalah"
+    ],
+    "correct": "B. Mendengarkan masukan tim dan mencari solusi bersama",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 6,
+    "text": "Setelah mengalami kegagalan dalam ujian, langkah paling konstruktif adalah...",
+    "options": [
+      "A. Menganggap ujian tidak penting",
+      "B. Menganalisis kelemahan dan membuat strategi belajar baru",
+      "C. Menyalahkan guru atas nilai buruk",
+      "D. Berhenti belajar untuk sementara waktu"
+    ],
+    "correct": "B. Menganalisis kelemahan dan membuat strategi belajar baru",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 7,
+    "text": "Ketika menghadapi perubahan kebijakan perusahaan yang tidak Anda setujui, hal yang bijak adalah...",
+    "options": [
+      "A. Langsung mengajukan protes",
+      "B. Mencari tahu alasan di balik kebijakan dan beradaptasi",
+      "C. Mengabaikan kebijakan dan tetap bekerja seperti biasa",
+      "D. Mempertimbangkan untuk keluar dari perusahaan"
+    ],
+    "correct": "B. Mencari tahu alasan di balik kebijakan dan beradaptasi",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 8,
+    "text": "Ketika Anda kehilangan pekerjaan secara tiba-tiba, langkah pertama yang harus dilakukan adalah...",
+    "options": [
+      "A. Panik dan menyalahkan diri sendiri",
+      "B. Mengevaluasi diri dan menyusun rencana karier baru",
+      "C. Mengambil cuti panjang untuk menghilangkan stres",
+      "D. Langsung mencari pekerjaan tanpa evaluasi"
+    ],
+    "correct": "B. Mengevaluasi diri dan menyusun rencana karier baru",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 9,
+    "text": "Ketika konflik dengan rekan kerja terjadi, pendekatan terbaik adalah...",
+    "options": [
+      "A. Menghindari rekan kerja tersebut",
+      "B. Berkomunikasi secara terbuka untuk mencari solusi",
+      "C. Melaporkan rekan kerja ke atasan",
+      "D. Membalas dengan sikap yang sama"
+    ],
+    "correct": "B. Berkomunikasi secara terbuka untuk mencari solusi",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 10,
+    "text": "Saat menghadapi tugas yang sangat sulit dan baru, sikap paling tepat adalah...",
+    "options": [
+      "A. Menolak tugas karena tidak yakin bisa",
+      "B. Menerima tugas dan mencari cara untuk belajar",
+      "C. Mengerjakan asal-asalan agar cepat selesai",
+      "D. Meminta orang lain mengerjakan tugas tersebut"
+    ],
+    "correct": "B. Menerima tugas dan mencari cara untuk belajar",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 11,
+    "text": "Ketika usaha bisnis pertama Anda gagal, tindakan terbaik adalah...",
+    "options": [
+      "A. Menganggap bisnis tidak cocok untuk Anda",
+      "B. Menganalisis penyebab kegagalan dan mencoba lagi",
+      "C. Menyalahkan kondisi ekonomi",
+      "D. Berhenti berbisnis selamanya"
+    ],
+    "correct": "B. Menganalisis penyebab kegagalan dan mencoba lagi",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 12,
+    "text": "Ketika menghadapi deadline yang sangat mepet, sikap terbaik adalah...",
+    "options": [
+      "A. Mengabaikan deadline dan meminta perpanjangan",
+      "B. Menyusun prioritas dan bekerja lebih fokus",
+      "C. Bekerja dengan panik tanpa perencanaan",
+      "D. Menyerah karena waktu terlalu singkat"
+    ],
+    "correct": "B. Menyusun prioritas dan bekerja lebih fokus",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 13,
+    "text": "Ketika rencana Anda tidak mendapat dukungan dari tim, langkah terbaik adalah...",
+    "options": [
+      "A. Memaksakan rencana Anda",
+      "B. Mendengarkan masukan dan mencari kompromi",
+      "C. Membatalkan rencana dan mengikuti keinginan tim",
+      "D. Mengeluh tentang kurangnya dukungan"
+    ],
+    "correct": "B. Mendengarkan masukan dan mencari kompromi",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 14,
+    "text": "Saat kesehatan Anda menurun karena pekerjaan, tindakan terbaik adalah...",
+    "options": [
+      "A. Mengabaikan kesehatan dan terus bekerja",
+      "B. Mengatur ulang pola kerja dan memperhatikan kesehatan",
+      "C. Berhenti bekerja untuk pemulihan total",
+      "D. Menyalahkan pekerjaan atas masalah kesehatan"
+    ],
+    "correct": "B. Mengatur ulang pola kerja dan memperhatikan kesehatan",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 15,
+    "text": "Ketika Anda melakukan kesalahan besar dalam pekerjaan, langkah paling bertanggung jawab adalah...",
+    "options": [
+      "A. Menutupi kesalahan agar tidak diketahui",
+      "B. Mengakui kesalahan dan mencari solusi perbaikan",
+      "C. Menyalahkan sistem atau orang lain",
+      "D. Menghindari pekerjaan tersebut"
+    ],
+    "correct": "B. Mengakui kesalahan dan mencari solusi perbaikan",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 16,
+    "text": "Ketika menghadapi situasi krisis yang tidak terduga, sikap terbaik adalah...",
+    "options": [
+      "A. Panik dan mengambil keputusan terburu-buru",
+      "B. Tetap tenang dan mencari solusi terbaik",
+      "C. Menunggu orang lain mengambil inisiatif",
+      "D. Menghindari situasi tersebut"
+    ],
+    "correct": "B. Tetap tenang dan mencari solusi terbaik",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 17,
+    "text": "Saat investasi Anda mengalami kerugian besar, langkah terbaik adalah...",
+    "options": [
+      "A. Langsung menjual semua investasi",
+      "B. Mengevaluasi strategi investasi dan belajar dari pengalaman",
+      "C. Menyalahkan pasar atau orang lain",
+      "D. Berhenti berinvestasi selamanya"
+    ],
+    "correct": "B. Mengevaluasi strategi investasi dan belajar dari pengalaman",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 18,
+    "text": "Ketika dihadapkan pada tugas yang sangat monoton dan membosankan, cara terbaik adalah...",
+    "options": [
+      "A. Menghindari tugas tersebut",
+      "B. Mencari cara untuk membuat tugas lebih menarik",
+      "C. Mengerjakan dengan malas-malasan",
+      "D. Meminta orang lain mengerjakan"
+    ],
+    "correct": "B. Mencari cara untuk membuat tugas lebih menarik",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 19,
+    "text": "Saat Anda merasa tidak diperhatikan oleh atasan, respons terbaik adalah...",
+    "options": [
+      "A. Mengeluh dan menurunkan produktivitas",
+      "B. Berkomunikasi secara profesional dengan atasan",
+      "C. Mencari perhatian dengan cara negatif",
+      "D. Diam dan berharap atasan menyadari"
+    ],
+    "correct": "B. Berkomunikasi secara profesional dengan atasan",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 20,
+    "text": "Ketika target penjualan sulit dicapai, strategi terbaik adalah...",
+    "options": [
+      "A. Menurunkan target",
+      "B. Mengevaluasi strategi dan mencari pendekatan baru",
+      "C. Menyalahkan kondisi pasar",
+      "D. Menyerah dan menerima kegagalan"
+    ],
+    "correct": "B. Mengevaluasi strategi dan mencari pendekatan baru",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 21,
+    "text": "Saat menghadapi persaingan bisnis yang ketat, sikap terbaik adalah...",
+    "options": [
+      "A. Menghindari persaingan",
+      "B. Meningkatkan kualitas dan inovasi produk",
+      "C. Menyalin strategi pesaing",
+      "D. Menurunkan harga secara drastis"
+    ],
+    "correct": "B. Meningkatkan kualitas dan inovasi produk",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 22,
+    "text": "Ketika menghadapi kegagalan dalam hubungan personal, langkah terbaik adalah...",
+    "options": [
+      "A. Mengisolasi diri dan menghindari hubungan baru",
+      "B. Mengambil waktu untuk refleksi dan belajar dari pengalaman",
+      "C. Menyalahkan pasangan atas kegagalan",
+      "D. Langsung mencari hubungan baru"
+    ],
+    "correct": "B. Mengambil waktu untuk refleksi dan belajar dari pengalaman",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 23,
+    "text": "Saat Anda mengalami kebangkrutan finansial, langkah pertama adalah...",
+    "options": [
+      "A. Panik dan tidak berbuat apa-apa",
+      "B. Menyusun rencana pemulihan finansial",
+      "C. Menyalahkan orang lain atau nasib buruk",
+      "D. Menghabiskan sisa uang untuk hiburan"
+    ],
+    "correct": "B. Menyusun rencana pemulihan finansial",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 24,
+    "text": "Ketika teknologi baru mengancam pekerjaan Anda, langkah terbaik adalah...",
+    "options": [
+      "A. Menolak perubahan dan mempertahankan cara lama",
+      "B. Mempelajari teknologi baru dan beradaptasi",
+      "C. Mengabaikan teknologi baru",
+      "D. Mencari pekerjaan di bidang lain"
+    ],
+    "correct": "B. Mempelajari teknologi baru dan beradaptasi",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 25,
+    "text": "Saat tim Anda mengalami konflik internal, pendekatan terbaik adalah...",
+    "options": [
+      "A. Mengabaikan konflik dan berharap selesai sendiri",
+      "B. Memfasilitasi komunikasi terbuka dan mencari solusi bersama",
+      "C. Memilih salah satu pihak untuk dimenangkan",
+      "D. Membubarkan tim dan membentuk tim baru"
+    ],
+    "correct": "B. Memfasilitasi komunikasi terbuka dan mencari solusi bersama",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 26,
+    "text": "Ketika pengembangan diri terasa jalan di tempat, langkah terbaik adalah...",
+    "options": [
+      "A. Berhenti mencoba dan menerima keadaan",
+      "B. Mengevaluasi metode dan mencari cara belajar baru",
+      "C. Menyalahkan kurangnya bakat atau kemampuan",
+      "D. Mengikuti perkembangan tanpa usaha"
+    ],
+    "correct": "B. Mengevaluasi metode dan mencari cara belajar baru",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 27,
+    "text": "Saat menghadapi kritik dari pelanggan, respons terbaik adalah...",
+    "options": [
+      "A. Marah dan membela diri",
+      "B. Mendengarkan dengan terbuka dan mencari solusi",
+      "C. Mengabaikan kritik karena pelanggan tidak penting",
+      "D. Mengalihkan kesalahan ke bagian lain"
+    ],
+    "correct": "B. Mendengarkan dengan terbuka dan mencari solusi",
+    "type": "AQ",
+    "national": false
+  },
+  {
+    "id": 28,
+    "text": "Ketika Anda mengalami kegagalan berulang kali dalam mencapai tujuan, sikap terbaik adalah...",
+    "options": [
+      "A. Menyerah dan menganggap tujuan tidak penting",
+      "B. Mengevaluasi strategi dan terus mencoba dengan pendekatan baru",
+      "C. Menyalahkan nasib atau faktor eksternal",
+      "D. Mengambil cuti panjang untuk menghilangkan stres"
+    ],
+    "correct": "B. Mengevaluasi strategi dan terus mencoba dengan pendekatan baru",
+    "type": "AQ",
+    "national": false
+  }
+]
