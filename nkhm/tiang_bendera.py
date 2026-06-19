@@ -36,7 +36,6 @@ def is_valid_move(from_tower, to_tower):
     if not state[to_tower]:
         return True, ""
     top_to = state[to_tower][-1]
-    # Aturan: cakram yang lebih kecil di atas cakram yang lebih besar
     # Urutan ukuran (dari kecil ke besar): merah_putih (terkecil), kuning, hijau, biru (terbesar)
     size_order = {"merah_putih": 1, "kuning": 2, "hijau": 3, "biru": 4}
     if size_order[top_from] < size_order[top_to]:
@@ -78,9 +77,9 @@ def draw_tower(tower_name, disks):
         "biru": "🔵",
         "hijau": "🟢",
         "kuning": "🟡",
-        "merah_putih": "🔴⚪"
+        "merah_putih": "🚩"
     }
-    # Warna untuk teks
+    # Warna untuk teks (opsional)
     disk_colors = {
         "biru": "blue",
         "hijau": "green",
@@ -91,17 +90,19 @@ def draw_tower(tower_name, disks):
     # Tampilkan tiang
     st.markdown(f"### 🏗️ Tiang {tower_name}")
     
-    # Tampilkan cakram dari atas ke bawah
+    # Tampilkan cakram dari bawah ke atas (agar terlihat seperti tiang)
     if not disks:
         st.markdown("*Kosong*")
     else:
-        for disk in reversed(disks):
-            color = disk_colors.get(disk, "black")
+        # Tampilkan dari bawah ke atas (index 0 = bawah, index terakhir = atas)
+        for disk in disks:
             icon = disk_icons.get(disk, "⬤")
-            st.markdown(f'<span style="color:{color}; font-size:24px;">{icon}</span>', unsafe_allow_html=True)
+            # Gunakan markdown biasa dengan warna
+            color = disk_colors.get(disk, "black")
+            st.markdown(f'<span style="color:{color}; font-size:28px;">{icon} {disk.capitalize()}</span>', unsafe_allow_html=True)
     
     # Tampilkan batang tiang
-    st.markdown("⬇️")
+    st.markdown("⬇️ **|**")
     
     # Tombol untuk memilih tiang (ambil cakram)
     col1, col2 = st.columns(2)
@@ -141,7 +142,7 @@ def show_tiang_bendera():
     st.markdown("""
     **Aturan:**
     - Ada 3 tiang: **A**, **B**, dan **C**.
-    - Tiang A memiliki 3 cakram (biru 🔵, hijau 🟢, kuning 🟡) dan bendera merah putih 🔴⚪ di atasnya.
+    - Tiang A memiliki 3 cakram (biru 🔵, hijau 🟢, kuning 🟡) dan bendera merah putih 🚩 di atasnya.
     - Tujuan: pindahkan semua cakram dan bendera ke tiang **C** dengan susunan: biru → kuning → hijau → merah putih (dari bawah ke atas).
     - **Aturan:** Cakram yang lebih kecil tidak boleh berada di bawah cakram yang lebih besar.
     - **Langkah:** Klik "Ambil dari [tiang]" untuk mengambil cakram paling atas, lalu klik "Letakkan ke [tiang]" untuk memindahkan.
@@ -187,16 +188,16 @@ def show_tiang_bendera():
     
     # Info tambahan
     st.markdown("---")
-    st.caption("💡 Petunjuk: Urutan ukuran cakram (kecil ke besar): Bendera 🟥⚪ → Kuning 🟡 → Hijau 🟢 → Biru 🔵")
+    st.caption("💡 Petunjuk: Urutan ukuran cakram (kecil ke besar): Bendera 🚩 → Kuning 🟡 → Hijau 🟢 → Biru 🔵")
     
     # Jika menang, tampilkan efek
     if state["win"]:
         st.balloons()
-        st. Success("🎉 **SELAMAT! Anda berhasil menyelesaikan permainan!** 🎉")
+        st.success("🎉 **SELAMAT! Anda berhasil menyelesaikan permainan!** 🎉")
         st.markdown("""
         **Goal State tercapai!**  
         Tiang C sekarang berisi (dari bawah ke atas):  
-        🔵 Biru → 🟡 Kuning → 🟢 Hijau → 🔴⚪ Merah Putih
+        🔵 Biru → 🟡 Kuning → 🟢 Hijau → 🚩 Merah Putih
         """)
 
 if __name__ == "__main__":
