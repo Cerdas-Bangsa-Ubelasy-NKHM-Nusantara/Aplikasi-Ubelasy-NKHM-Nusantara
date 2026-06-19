@@ -75,10 +75,10 @@ def reset_game():
 def draw_tower(tower_name, disks):
     # Konversi warna ke emoji
     disk_icons = {
-        "biru": "🔵",
-        "kuning": "🟡",
+        "merah_putih": "🚩",
         "hijau": "🟢",
-        "merah_putih": "🚩"
+        "kuning": "🟡",
+        "biru": "🔵"        
     }
     
     # Tampilkan tiang
