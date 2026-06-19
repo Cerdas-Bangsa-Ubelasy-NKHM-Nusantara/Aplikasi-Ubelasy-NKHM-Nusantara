@@ -161,8 +161,8 @@ def show_tab7():
     else:
         st.info("💡 Gambar 'hadiah.gif' belum tersedia.")
     st.markdown("---")
-    sub_tab1, sub_tab2, sub_tab3, sub_tab4 = st.tabs([
-        "🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🎲 Lainnya (Coming Soon)"
+    sub_tab1, sub_tab2, sub_tab3, sub_tab4  sub_tab5 = st.tabs([
+        "🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🏗️ Tiang & Bendera", "🎲 Lainnya (Coming Soon)"
     ])
     with sub_tab1:
         show_tebak_pahlawan()
@@ -171,6 +171,9 @@ def show_tab7():
     with sub_tab3:
         show_river_game()
     with sub_tab4:
+        from nkhm.tiang_bendera import show_tiang_bendera
+        show_tiang_bendera()
+    with sub_tab5:
         st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
 
 # ========== TAB 8: TUTORIAL ==========
