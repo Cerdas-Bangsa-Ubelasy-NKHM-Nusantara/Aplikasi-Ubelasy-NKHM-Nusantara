@@ -11,6 +11,7 @@ from nkhm.angka_rahasia import show_angka_rahasia
 from nkhm.seberang_sungai import show_river_game
 from nkhm.tutorial import show_tutorial
 from nkhm.tiang_bendera import show_tiang_bendera
+from nkhm.karunia import show_karunia  # Langsung import tanpa try-except
 
 # Import opsional
 try:
@@ -21,16 +22,27 @@ except ImportError:
     show_tournament = None
 
 try:
-    from nkhm.karunia import show_karunia
-    KARUNIA_AVAILABLE = True
+    from nkhm.karunia_140_karakter import show_karunia_140_karakter
+    KARUNIA_140_AVAILABLE = True
 except ImportError:
-    KARUNIA_AVAILABLE = False
-    show_karunia = None
+    KARUNIA_140_AVAILABLE = False
+
+try:
+    from nkhm.karunia_karakter_masalah import show_karunia_karakter_masalah
+    KARUNIA_KARAKTER_AVAILABLE = True
+except ImportError:
+    KARUNIA_KARAKTER_AVAILABLE = False
+
+try:
+    from nkhm.pengembangan_diri import show_pengembangan_diri
+    PENGEMBANGAN_DIRI_AVAILABLE = True
+except ImportError:
+    PENGEMBANGAN_DIRI_AVAILABLE = False
 
 # ========== TAB 2: DASHBOARD ==========
 def show_tab2():
     st.markdown("### Dashboard")
-    from nkhm.main import get_current_nkhm  # import lokal agar tidak circular
+    from nkhm.main import get_current_nkhm
     _, _, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct = get_current_nkhm()
     df_chart = pd.DataFrame({
         "Kecerdasan": ["IQ", "EQ", "SQ", "AQ", "Nasionalisme"],
@@ -123,34 +135,22 @@ def show_tab6():
             "📜 Karunia Umum", "✨ Karunia 140 Karakter", "📋 Karakter & Masalah", "📚 Pengembangan Diri"
         ])
         with subsub_tab1:
-            if KARUNIA_AVAILABLE and show_karunia is not None:
-                show_karunia()
-            else:
-                st.info("🎁 Fitur Karunia Motivasi akan segera hadir!")
+            show_karunia()
         with subsub_tab2:
-            try:
-                from nkhm.karunia_140_karakter import show_karunia_140_karakter
+            if KARUNIA_140_AVAILABLE:
                 show_karunia_140_karakter()
-            except ImportError:
-                st.error("❌ Modul 'karunia_140_karakter' tidak ditemukan. Pastikan file sudah ada di folder nkhm.")
-            except Exception as e:
-                st.error(f"Terjadi error: {e}")
+            else:
+                st.error("❌ Modul 'karunia_140_karakter' tidak ditemukan.")
         with subsub_tab3:
-            try:
-                from nkhm.karunia_karakter_masalah import show_karunia_karakter_masalah
+            if KARUNIA_KARAKTER_AVAILABLE:
                 show_karunia_karakter_masalah()
-            except ImportError:
+            else:
                 st.error("❌ Modul 'karunia_karakter_masalah' tidak ditemukan.")
-            except Exception as e:
-                st.error(f"Terjadi error: {e}")
         with subsub_tab4:
-            try:
-                from nkhm.pengembangan_diri import show_pengembangan_diri
+            if PENGEMBANGAN_DIRI_AVAILABLE:
                 show_pengembangan_diri()
-            except ImportError:
+            else:
                 st.error("❌ Modul 'pengembangan_diri' tidak ditemukan.")
-            except Exception as e:
-                st.error(f"Terjadi error: {e}")
     with sub_tab2:
         show_stomata()
 
@@ -172,7 +172,6 @@ def show_tab7():
     with sub_tab3:
         show_river_game()
     with sub_tab4:
-        from nkhm.tiang_bendera import show_tiang_bendera
         show_tiang_bendera()
     with sub_tab5:
         st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
