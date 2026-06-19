@@ -19,8 +19,9 @@ def init_game_state():
 # ========== CEK KONDISI MENANG ==========
 def check_win():
     state = st.session_state.tiang_bendera
-    # Goal: tiang C berisi ["biru", "kuning", "hijau", "merah_putih"] (bawah ke atas)
-    goal = ["biru", "kuning", "hijau", "merah_putih"]
+    # Goal: tiang C berisi ["biru", "hijau", "kuning", "merah_putih"] (bawah ke atas)
+    # Artinya dari atas ke bawah: Merah Putih → Kuning → Hijau → Biru
+    goal = ["biru", "hijau", "kuning", "merah_putih"]
     if state["C"] == goal:
         state["win"] = True
         state["message"] = "🎉 SELAMAT! Anda berhasil memindahkan semua cakram dan bendera ke tiang C! 🎉"
@@ -36,14 +37,7 @@ def is_valid_move(from_tower, to_tower):
     if not state[to_tower]:
         return True, ""
     top_to = state[to_tower][-1]
-    # Urutan ukuran (dari kecil ke besar): merah_putih (1), hijau (2), kuning (3), biru (4)
-    # Perhatikan: hijau (2) lebih kecil dari kuning (3), sehingga hijau bisa di atas kuning.
-    # Namun yang diminta: Kuning di atas Hijau? Tunggu, aturan standar: yang lebih kecil di atas yang lebih besar.
-    # Di sini kita ingin Kuning boleh di atas Hijau? Sebelumnya kita set Kuning=2, Hijau=3, maka Kuning (2) lebih kecil dari Hijau (3), sehingga Kuning boleh di atas Hijau.
-    # Tapi di deskripsi awal: dari atas ke bawah: Merah Putih → Hijau → Kuning → Biru. Berarti Hijau di atas Kuning? Itu berarti Hijau lebih kecil dari Kuning.
-    # Mari kita perjelas: Urutan ukuran sebenarnya: Merah Putih (terkecil) → Hijau → Kuning → Biru (terbesar). Maka Hijau (2) < Kuning (3), sehingga Hijau boleh di atas Kuning.
-    # Namun permintaan Anda: "cakram kuning boleh diletakkan di atas hijau" artinya Kuning di atas Hijau, berarti Kuning lebih kecil dari Hijau. Jadi urutan: Merah Putih (1) → Kuning (2) → Hijau (3) → Biru (4).
-    # Maka kita gunakan ukuran: merah_putih=1, kuning=2, hijau=3, biru=4.
+    # Urutan ukuran (dari kecil ke besar): merah_putih (1), kuning (2), hijau (3), biru (4)
     size_order = {"merah_putih": 1, "kuning": 2, "hijau": 3, "biru": 4}
     if size_order[top_from] < size_order[top_to]:
         return True, ""
@@ -132,13 +126,13 @@ def show_tiang_bendera():
     🚩 Merah Putih → 🟢 Hijau → 🟡 Kuning → 🔵 Biru
     
     **🎯 Susunan Akhir (Tiang C - dari atas ke bawah):**
-    🚩 Merah Putih → 🟢 Hijau → 🟡 Kuning → 🔵 Biru
+    🚩 Merah Putih → 🟡 Kuning → 🟢 Hijau → 🔵 Biru
     
     **📋 Aturan:**
     1. Hanya satu cakram yang bisa dipindahkan dalam satu langkah.
     2. Cakram yang lebih besar TIDAK boleh diletakkan di atas cakram yang lebih kecil.
     3. 🚩 Bendera adalah yang terkecil, 🔵 Biru adalah yang terbesar.
-    4. 🟢 Hijau boleh diletakkan di atas 🟡 Kuning (karena Hijau lebih kecil dari Kuning).
+    4. 🟡 Kuning boleh diletakkan di atas 🟢 Hijau (karena Kuning lebih kecil dari Hijau).
     5. Anda bisa memindahkan cakram teratas dari satu tiang ke tiang lain.
     
     **💡 Cara Bermain:**
@@ -187,7 +181,7 @@ def show_tiang_bendera():
     
     st.markdown("---")
     st.markdown("**🔢 Urutan Ukuran (dari kecil ke besar):**")
-    st.markdown("🚩 Merah Putih → 🟢 Hijau → 🟡 Kuning → 🔵 Biru")
+    st.markdown("🚩 Merah Putih → 🟡 Kuning → 🟢 Hijau → 🔵 Biru")
     
     if state["win"]:
         st.balloons()
@@ -195,10 +189,10 @@ def show_tiang_bendera():
         st.markdown("""
         **✅ Goal State tercapai!**  
         Tiang C sekarang berisi (dari bawah ke atas):  
-        🔵 Biru → 🟡 Kuning → 🟢 Hijau → 🚩 Merah Putih
+        🔵 Biru → 🟢 Hijau → 🟡 Kuning → 🚩 Merah Putih
         
         **(dari atas ke bawah):**  
-        🚩 Merah Putih → 🟢 Hijau → 🟡 Kuning → 🔵 Biru
+        🚩 Merah Putih → 🟡 Kuning → 🟢 Hijau → 🔵 Biru
         """)
 
 if __name__ == "__main__":
