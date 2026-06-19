@@ -6,7 +6,7 @@ def init_game_state():
     if "tiang_bendera" not in st.session_state:
         st.session_state.tiang_bendera = {
             # Susunan dari BAWAH ke ATAS: Biru (bawah), Kuning, Hijau, Merah Putih (atas)
-            # Artinya dari atas ke bawah: Merah Putih → Hijau → Kuning → Biru
+            # Artinya dari atas ke bawah: 🚩 Merah Putih → 🟢 Hijau → 🟡 Kuning → 🔵 Biru
             "A": ["biru", "kuning", "hijau", "merah_putih"],
             "B": [],
             "C": [],
@@ -20,7 +20,7 @@ def init_game_state():
 def check_win():
     state = st.session_state.tiang_bendera
     # Goal: tiang C berisi ["biru", "hijau", "kuning", "merah_putih"] (bawah ke atas)
-    # Artinya dari atas ke bawah: Merah Putih → Kuning → Hijau → Biru
+    # Artinya dari atas ke bawah: 🚩 Merah Putih → 🟡 Kuning → 🟢 Hijau → 🔵 Biru
     goal = ["biru", "hijau", "kuning", "merah_putih"]
     if state["C"] == goal:
         state["win"] = True
