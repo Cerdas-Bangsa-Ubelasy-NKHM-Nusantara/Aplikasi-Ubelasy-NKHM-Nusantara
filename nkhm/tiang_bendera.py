@@ -104,12 +104,12 @@ def draw_tower(tower_name, disks):
 
 # ========== FUNGSI UTAMA ==========
 def show_tiang_bendera():
-    st.markdown("## 🏗️ Permainan Tiang & Bendera")
+    st.markdown("## 🏗️ Permainan Tiang & Bendera Merah Putih")
     st.markdown("""
     **Aturan:**
     - Ada 3 tiang: **A**, **B**, dan **C**.
     - Tiang A memiliki 3 cakram (biru 🔵, hijau 🟢, kuning 🟡) dan bendera merah putih 🚩 di atasnya.
-    - Tujuan: pindahkan semua cakram dan bendera ke tiang **C** dengan susunan: biru → kuning → hijau → merah putih.
+    - Tujuan: "Merdeka", pindahkan semua cakram dan bendera ke tiang **C** dengan susunan: biru → kuning → hijau → merah putih.
     - **Aturan:** Cakram yang lebih kecil tidak boleh berada di bawah cakram yang lebih besar.
     - **Langkah:** Klik "Ambil dari [tiang]" lalu "Letakkan ke [tiang]".
     """)
