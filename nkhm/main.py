@@ -298,7 +298,6 @@ def init_session_state():
         "current_scale_type": None,
         "nkhm_multi_answers": {},
         "nkhm_seen_questions": set(),
-        # State untuk menyimpan jawaban yang dipilih sebelum submit
         "nkhm_selected_answer": None,
         "nkhm_multi_selected": [],
     }
@@ -311,6 +310,19 @@ def get_next_question(filtered_questions):
     seen = st.session_state.nkhm_seen_questions
     available = [q for q in filtered_questions if q['text'] not in seen]
     return random.choice(available) if available else None
+
+
+def reset_quiz_state():
+    """Reset state kuis setelah pindah soal"""
+    st.session_state.nkhm_answered = False
+    st.session_state.nkhm_feedback = None
+    st.session_state.nkhm_selected_answer = None
+    st.session_state.nkhm_multi_selected = []
+    st.session_state.nkhm_multi_answers = {}
+    # Hapus semua state temporary
+    for key in list(st.session_state.keys()):
+        if key.startswith("radio_q_") or key.startswith("temp_multi_q_"):
+            del st.session_state[key]
 
 
 # ==================== MAIN ====================
@@ -525,31 +537,33 @@ def main():
                 # Gunakan key yang unik untuk setiap soal agar tidak tercampur
                 question_key = f"q_{q['text'][:30]}_{q.get('type', '')}"
 
+                # ============================================
+                # RADIO BUTTON / CHECKBOX - PERHATIKAN disabled
+                # ============================================
+                is_disabled = st.session_state.nkhm_answered  # <-- Kunci utama
+
                 if is_multi:
                     st.markdown("**Pilih semua jawaban yang benar:**")
                     selected_options = []
-                    # Gunakan session state untuk menyimpan pilihan sementara
                     temp_key = f"temp_multi_{question_key}"
                     if temp_key not in st.session_state:
                         st.session_state[temp_key] = []
                     
-                    saved = st.session_state[temp_key] if not st.session_state.nkhm_answered else []
+                    saved = st.session_state[temp_key] if not is_disabled else []
                     for opt in q['options']:
                         checked = st.checkbox(
                             opt,
                             value=(opt in saved),
                             key=f"multi_{question_key}_{opt}",
-                            disabled=st.session_state.nkhm_answered
+                            disabled=is_disabled  # <-- Pakai is_disabled
                         )
                         if checked:
                             selected_options.append(opt)
-                    # Simpan pilihan sementara
-                    if not st.session_state.nkhm_answered:
+                    if not is_disabled:
                         st.session_state[temp_key] = selected_options
-                    selected = selected_options if not st.session_state.nkhm_answered else saved
+                    selected = selected_options if not is_disabled else saved
                 else:
                     radio_label = "Pilih jawabanmu:" if q.get("type") not in ["EQ_scale", "AQ_scale"] else "Pilih skor tanggapan:"
-                    # Gunakan index yang disimpan di session state
                     radio_key = f"radio_{question_key}"
                     if radio_key not in st.session_state:
                         st.session_state[radio_key] = None
@@ -559,10 +573,10 @@ def main():
                         q['options'], 
                         key=radio_key,
                         index=None, 
-                        disabled=st.session_state.nkhm_answered
+                        disabled=is_disabled  # <-- Pakai is_disabled
                     )
 
-                # Tombol Jawab
+                # Tombol Jawab - disabled jika sudah menjawab
                 if is_multi:
                     disable_btn = st.session_state.nkhm_answered or not selected
                 else:
@@ -573,7 +587,7 @@ def main():
                     disable_btn = True
 
                 if st.button("✅ JAWAB", disabled=disable_btn, use_container_width=True, key=f"jawab_{question_key}"):
-                    # Reset selected answer sebelum diproses
+                    # Proses jawaban...
                     st.session_state.nkhm_selected_answer = selected
                     if is_multi:
                         st.session_state.nkhm_multi_selected = selected
@@ -582,6 +596,7 @@ def main():
                     st.session_state.nkhm_answered = True
                     st.session_state.nkhm_total_questions += 1
 
+                    # ... (proses scoring sama seperti sebelumnya, tidak diubah)
                     if q.get("type") in ["EQ_scale", "AQ_scale"]:
                         section = q.get("section", "Unknown")
                         q_type = q.get("type")
@@ -715,7 +730,9 @@ def main():
                             st.session_state.nkhm_current_q = get_next_question(filtered)
                             st.rerun()
 
-                # Navigasi - HANYA TAMPILKAN SETELAH MENJAWAB
+                # ============================================
+                # NAVIGASI - RESET STATE DENGAN BENAR
+                # ============================================
                 if st.session_state.nkhm_answered and q.get("type") not in ["EQ_scale", "AQ_scale"]:
                     st.markdown("---")
                     col_nav1, col_nav2 = st.columns(2)
@@ -727,13 +744,14 @@ def main():
                                     st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter.")
                                     st.session_state.nkhm_answered = True
                                 else:
+                                    # ====== RESET STATE UNTUK SOAL BARU ======
                                     st.session_state.nkhm_current_q = next_q
                                     st.session_state.nkhm_answered = False
                                     st.session_state.nkhm_feedback = None
                                     st.session_state.nkhm_multi_answers = {}
                                     st.session_state.nkhm_selected_answer = None
                                     st.session_state.nkhm_multi_selected = []
-                                    # Hapus state radio temporary
+                                    # Hapus state temporary radio/checkbox
                                     for key in list(st.session_state.keys()):
                                         if key.startswith("radio_q_") or key.startswith("temp_multi_q_"):
                                             del st.session_state[key]
@@ -741,6 +759,7 @@ def main():
                     with col_nav2:
                         if st.button("🎮 KUIS BARU", use_container_width=True):
                             if filtered:
+                                # ====== RESET STATE UNTUK KUIS BARU ======
                                 st.session_state.nkhm_seen_questions = set()
                                 next_q = get_next_question(filtered)
                                 if next_q is None:
