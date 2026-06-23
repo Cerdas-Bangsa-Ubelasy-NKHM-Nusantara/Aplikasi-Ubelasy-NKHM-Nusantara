@@ -680,8 +680,7 @@ def main():
                 if q.get("type") in ["EQ_scale", "AQ_scale"] and st.session_state.current_section:
                     if st.button("✅ Selesai Bagian Ini", use_container_width=True):
                         section = st.session_state.current_section
-                        q_type = st.session_state.current_scale_type
-                        
+                        q_type = st.session_state.current_scale_type                        
                         if q_type == "EQ_scale":
                             section_answers = st.session_state.eq_section_answers.get(section, [0,0,0,0])
                             section_value = calculate_section_value(section_answers)
