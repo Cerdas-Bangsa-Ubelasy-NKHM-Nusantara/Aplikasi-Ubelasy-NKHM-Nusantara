@@ -6,7 +6,6 @@ import os
 from pathlib import Path
 from datetime import datetime
 import base64
-import importlib
 from nkhm.questions import load_all_questions
 from nkhm.scoring import (
     MAX_SCORE, get_increment, get_column_index, calculate_section_value,
@@ -16,7 +15,7 @@ from nkhm.scoring import (
 )
 from nkhm.ai_assistant import get_ai_response
 from nkhm.leaderboard import show_leaderboard, save_score
-from nkhm.current_score import get_current_nkhm
+from nkhm.current_score import get_current_nkhm  # <-- IMPORT DARI current_score
 
 # ========== FUNGSI UNTUK MENAMPILKAN VIDEO MP4 ==========
 def show_quiz_media():
@@ -30,17 +29,13 @@ def show_quiz_media():
     # Coba tampilkan MP4 terlebih dahulu
     if video_path.exists():
         try:
-            # Baca file video sebagai bytes
             with open(video_path, "rb") as f:
                 video_bytes = f.read()
-            
-            # Tampilkan video dengan st.video (cara termudah)
             st.video(video_bytes, loop=True, autoplay=True)
             st.caption("🎬 Video pengantar kuis NKHM Nusantara")
             return True
         except Exception as e:
             st.warning(f"Gagal memuat video MP4: {e}")
-            # Lanjut ke fallback GIF
     
     # Fallback ke GIF
     if gif_path.exists():
@@ -48,37 +43,28 @@ def show_quiz_media():
         st.caption("🔄 Menampilkan GIF sebagai alternatif (kuis.mp4 tidak ditemukan atau error)")
         return True
     
-    # Jika keduanya tidak ada
     st.info("💡 Video/Gambar kuis belum tersedia. Silakan upload 'kuis.mp4' atau 'kuis.gif' ke folder assets.")
     return False
 
-# ========== FUNGSI UNTUK MEMUAT TAB DENGAN importlib ==========
-def load_tab_function(tab_name):
-    """
-    Memuat fungsi tab secara lazy menggunakan importlib untuk menghindari circular import.
-    """
+# ========== FUNGSI UNTUK MEMUAT TAB ==========
+def load_tab_functions():
+    """Memuat fungsi tab dari tabs_others"""
     try:
-        # Import module secara dinamis
-        tabs_others = importlib.import_module('nkhm.tabs_others')
-        
-        # Mapping nama tab ke fungsi
-        tab_mapping = {
-            'tab2': 'show_tab2',
-            'tab3': 'show_tab3',
-            'tab4': 'show_tab4',
-            'tab5': 'show_tab5',
-            'tab6': 'show_tab6',
-            'tab7': 'show_tab7',
-            'tab8': 'show_tab8'
+        from nkhm.tabs_others import (
+            show_tab2, show_tab3, show_tab4, show_tab5,
+            show_tab6, show_tab7, show_tab8
+        )
+        return {
+            'tab2': show_tab2,
+            'tab3': show_tab3,
+            'tab4': show_tab4,
+            'tab5': show_tab5,
+            'tab6': show_tab6,
+            'tab7': show_tab7,
+            'tab8': show_tab8
         }
-        
-        func_name = tab_mapping.get(tab_name)
-        if func_name and hasattr(tabs_others, func_name):
-            return getattr(tabs_others, func_name)
-        else:
-            return None
-    except Exception as e:
-        st.error(f"Gagal memuat tab {tab_name}: {e}")
+    except ImportError as e:
+        st.error(f"Gagal memuat fungsi tab: {e}")
         return None
 
 # ========== INISIALISASI SESSION STATE ==========
@@ -107,7 +93,6 @@ def init_session_state():
         st.session_state.nkhm_feedback = None
     if "last_score_type" not in st.session_state:
         st.session_state.last_score_type = ""
-    # State untuk skor tanggapan (EQ dan AQ) dalam poin mentah
     if "eq_scale_total" not in st.session_state:
         st.session_state.eq_scale_total = 0
     if "aq_scale_total" not in st.session_state:
@@ -120,14 +105,12 @@ def init_session_state():
         st.session_state.current_section = None
     if "current_scale_type" not in st.session_state:
         st.session_state.current_scale_type = None
-    # State untuk multi-jawaban
     if "nkhm_multi_answers" not in st.session_state:
-        st.session_state.nkhm_multi_answers = {}  # key: question text, value: list of selected options
-    # State untuk melacak soal yang sudah ditampilkan (hindari duplikat)
+        st.session_state.nkhm_multi_answers = {}
     if "nkhm_seen_questions" not in st.session_state:
         st.session_state.nkhm_seen_questions = set()
 
-# ========== FUNGSI BANTU UNTUK MEMILIH SOAL BELUM TERLIHAT ==========
+# ========== FUNGSI BANTU UNTUK MEMILIH SOAL ==========
 def get_next_question(filtered_questions):
     """Pilih soal secara acak dari filtered_questions yang belum pernah ditampilkan."""
     seen = st.session_state.nkhm_seen_questions
@@ -135,21 +118,6 @@ def get_next_question(filtered_questions):
     if not available:
         return None
     return random.choice(available)
-
-# ========== FUNGSI UNTUK MENAMPILKAN TAB DENGAN ERROR HANDLING ==========
-def render_tab(tab_container, tab_name, fallback_message="Tab sedang dalam pengembangan"):
-    """
-    Render tab dengan error handling yang baik.
-    """
-    func = load_tab_function(tab_name)
-    if func:
-        try:
-            func()
-        except Exception as e:
-            st.error(f"Error pada tab {tab_name}: {e}")
-            st.info(fallback_message)
-    else:
-        st.info(fallback_message)
 
 # ========== MAIN ==========
 def main():
@@ -185,15 +153,6 @@ def main():
         st.error("Bank soal kosong. Pastikan folder 'soal' berisi JSON.")
         return
     
-    # DEBUG (bisa dihapus nanti)
-    with st.expander("🔧 Debug Info (klik untuk lihat)"):
-        st.write(f"Total soal: {len(QUESTION_BANK)}")
-        type_counts = {}
-        for q in QUESTION_BANK:
-            t = q.get("type", "TIDAK ADA TYPE")
-            type_counts[t] = type_counts.get(t, 0) + 1
-        st.write(f"Distribusi type: {type_counts}")
-    
     nkhm_q, nkhm_total, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct = get_current_nkhm()
     nkhm_level, _ = get_nkhm_level(nkhm_total)
     
@@ -225,7 +184,6 @@ def main():
             st.session_state.aq_section_answers = {}
             st.session_state.current_section = None
             st.session_state.current_scale_type = None
-            # Reset seen questions
             st.session_state.nkhm_seen_questions = set()
             st.rerun()
         st.markdown("---")
@@ -250,14 +208,13 @@ def main():
     
     # ========== TAB UTAMA ==========
     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
-    "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL"
-])
+        "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", 
+        "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL"
+    ])
     
     # ========== TAB 1: KUIS ==========
     with tab1:
-        # Tampilkan media (MP4 atau GIF)
         show_quiz_media()
-        
         st.markdown("---")
         
         st.markdown("### Pilih Kuis")
@@ -309,21 +266,17 @@ def main():
             st.session_state.nkhm_feedback = None
             st.session_state.current_section = None
             st.session_state.current_scale_type = None
-            # Reset multi-answers dan seen questions
             st.session_state.nkhm_multi_answers = {}
             st.session_state.nkhm_seen_questions = set()
-            # Pilih soal pertama
             if filtered_questions:
                 st.session_state.nkhm_current_q = get_next_question(filtered_questions)
             else:
                 st.session_state.nkhm_current_q = None
         else:
-            # Jika filter tidak berubah, tapi belum ada soal atau soal sudah dilihat semua
             if filtered_questions:
                 if st.session_state.nkhm_current_q is None:
                     st.session_state.nkhm_current_q = get_next_question(filtered_questions)
                 elif st.session_state.nkhm_current_q['text'] in st.session_state.nkhm_seen_questions:
-                    # Jika soal saat ini sudah pernah dilihat (misal karena duplikat), ambil baru
                     st.session_state.nkhm_current_q = get_next_question(filtered_questions)
             else:
                 st.session_state.nkhm_current_q = None
@@ -331,12 +284,10 @@ def main():
         if not filtered_questions:
             st.warning("Tidak ada soal dengan filter ini. Coba pilih filter lain!")
         else:
-            # Jika current_q None atau sudah dilihat, ambil baru
             if st.session_state.nkhm_current_q is None:
                 st.session_state.nkhm_current_q = get_next_question(filtered_questions)
             if st.session_state.nkhm_current_q is None:
                 st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter atau reset.")
-                # Nonaktifkan tombol JAWAB dan navigasi
                 st.session_state.nkhm_answered = True
             else:
                 q = st.session_state.nkhm_current_q
@@ -350,7 +301,6 @@ def main():
                 else:
                     col_tag2.info("📚 Umum")
                 
-                # Tampilkan progress: sudah berapa soal dilihat dari total
                 seen_count = len(st.session_state.nkhm_seen_questions)
                 total_available = len(filtered_questions)
                 st.caption(f"📊 Soal dilihat: {seen_count} / {total_available}")
@@ -360,7 +310,7 @@ def main():
                         st.caption(f"📂 **{q['section']}** — *{q['scale']}*")
                     st.info(
                         "📌 **Petunjuk Skor Tanggapan:**\n\n"
-                        "Berikan skor tanggapan dalam pilihan Anda (angka 0, 1, 2 atau 3) yang menggambarkan pikiran atau perasaan Anda terhadap hal yang diuraikan:\n"
+                        "Berikan skor tanggapan dalam pilihan Anda (angka 0, 1, 2 atau 3):\n"
                         "- **3** = Setuju sekali\n"
                         "- **2** = Setuju\n"
                         "- **1** = Kurang setuju\n"
@@ -379,7 +329,6 @@ def main():
                     is_multi = True
                 
                 if is_multi:
-                    # Soal multi-jawaban: gunakan checkbox
                     st.markdown("**Pilih semua jawaban yang benar:**")
                     selected_options = []
                     saved = st.session_state.nkhm_multi_answers.get(q['text'], [])
@@ -404,13 +353,11 @@ def main():
                 else:
                     disable_btn = st.session_state.nkhm_answered or selected is None
                 
-                # Jika semua soal sudah dijawab, nonaktifkan tombol
                 if seen_count >= total_available:
                     st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter atau reset.")
                     disable_btn = True
                 
                 if st.button("✅ JAWAB", disabled=disable_btn, use_container_width=True):
-                    # Tandai soal ini sudah dilihat
                     st.session_state.nkhm_seen_questions.add(q['text'])
                     st.session_state.nkhm_answered = True
                     st.session_state.nkhm_total_questions += 1
@@ -521,7 +468,7 @@ def main():
                 elif st.session_state.nkhm_feedback == "scale_answered":
                     st.success(f"✅ Jawaban tercatat für {st.session_state.last_score_type}")
                 
-                # ========== TOMBOL SELESAI BAGIAN (skala) ==========
+                # ========== TOMBOL SELESAI BAGIAN ==========
                 if q.get("type") in ["EQ_scale", "AQ_scale"] and st.session_state.current_section:
                     if st.button("✅ Selesai Bagian Ini", use_container_width=True):
                         section = st.session_state.current_section
@@ -556,7 +503,6 @@ def main():
                     with col_nav1:
                         if st.button("⏩ SOAL SELANJUTNYA", use_container_width=True):
                             if filtered_questions:
-                                # Pilih soal berikutnya yang belum dilihat
                                 next_q = get_next_question(filtered_questions)
                                 if next_q is None:
                                     st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter.")
@@ -570,7 +516,6 @@ def main():
                     with col_nav2:
                         if st.button("🎮 KUIS BARU", use_container_width=True):
                             if filtered_questions:
-                                # Reset seen questions agar semua soal bisa diulang
                                 st.session_state.nkhm_seen_questions = set()
                                 next_q = get_next_question(filtered_questions)
                                 if next_q is None:
@@ -583,27 +528,38 @@ def main():
                                     st.session_state.nkhm_multi_answers = {}
                                     st.rerun()
     
-    # ========== TAB 2–8: render dengan lazy loading ==========
-    with tab2:
-        render_tab(tab2, 'tab2', "📊 Dashboard sedang dalam pengembangan")
-    
-    with tab3:
-        render_tab(tab3, 'tab3', "🏆 Prestasi sedang dalam pengembangan")
-    
-    with tab4:
-        render_tab(tab4, 'tab4', "👤 Dasbor Saya sedang dalam pengembangan")
-    
-    with tab5:
-        render_tab(tab5, 'tab5', "⚔️ Tanding sedang dalam pengembangan")
-    
-    with tab6:
-        render_tab(tab6, 'tab6', "🎁 Karunia sedang dalam pengembangan")
-    
-    with tab7:
-        render_tab(tab7, 'tab7', "🎁 Hadiah sedang dalam pengembangan")
-    
-    with tab8:
-        render_tab(tab8, 'tab8', "📘 Tutorial sedang dalam pengembangan")
+    # ========== TAB 2–8 ==========
+    tab_functions = load_tab_functions()
+    if tab_functions:
+        with tab2:
+            tab_functions['tab2']()
+        with tab3:
+            tab_functions['tab3']()
+        with tab4:
+            tab_functions['tab4']()
+        with tab5:
+            tab_functions['tab5']()
+        with tab6:
+            tab_functions['tab6']()
+        with tab7:
+            tab_functions['tab7']()
+        with tab8:
+            tab_functions['tab8']()
+    else:
+        with tab2:
+            st.warning("Tab Dashboard tidak dapat dimuat")
+        with tab3:
+            st.warning("Tab Prestasi tidak dapat dimuat")
+        with tab4:
+            st.warning("Tab Dasbor Saya tidak dapat dimuat")
+        with tab5:
+            st.warning("Tab Tanding tidak dapat dimuat")
+        with tab6:
+            st.warning("Tab Karunia tidak dapat dimuat")
+        with tab7:
+            st.warning("Tab Hadiah tidak dapat dimuat")
+        with tab8:
+            st.warning("Tab Tutorial tidak dapat dimuat")
 
 if __name__ == "__main__":
     main()
