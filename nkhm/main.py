@@ -265,49 +265,32 @@ def show_tab8():
 
 # ========== INISIALISASI SESSION STATE ==========
 def init_session_state():
-    if "nkhm_user" not in st.session_state:
-        st.session_state.nkhm_user = ""
-    if "nkhm_scores" not in st.session_state:
-        st.session_state.nkhm_scores = {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0, "Nasionalisme": 0}
-    if "nkhm_history" not in st.session_state:
-        st.session_state.nkhm_history = []
-    if "nkhm_total_questions" not in st.session_state:
-        st.session_state.nkhm_total_questions = 0
-    if "nkhm_ai_conversation" not in st.session_state:
-        st.session_state.nkhm_ai_conversation = []
-    if "nkhm_current_q" not in st.session_state:
-        st.session_state.nkhm_current_q = None
-    if "nkhm_answered" not in st.session_state:
-        st.session_state.nkhm_answered = False
-    if "nkhm_current_filtered" not in st.session_state:
-        st.session_state.nkhm_current_filtered = []
-    if "nkhm_current_kategori" not in st.session_state:
-        st.session_state.nkhm_current_kategori = "✨ Semua"
-    if "nkhm_current_kecerdasan" not in st.session_state:
-        st.session_state.nkhm_current_kecerdasan = "Semua"
-    if "nkhm_feedback" not in st.session_state:
-        st.session_state.nkhm_feedback = None
-    if "last_score_type" not in st.session_state:
-        st.session_state.last_score_type = ""
-    # State untuk skor tanggapan (EQ dan AQ) dalam poin mentah
-    if "eq_scale_total" not in st.session_state:
-        st.session_state.eq_scale_total = 0
-    if "aq_scale_total" not in st.session_state:
-        st.session_state.aq_scale_total = 0
-    if "eq_section_answers" not in st.session_state:
-        st.session_state.eq_section_answers = {}
-    if "aq_section_answers" not in st.session_state:
-        st.session_state.aq_section_answers = {}
-    if "current_section" not in st.session_state:
-        st.session_state.current_section = None
-    if "current_scale_type" not in st.session_state:
-        st.session_state.current_scale_type = None
-    # State untuk multi-jawaban
-    if "nkhm_multi_answers" not in st.session_state:
-        st.session_state.nkhm_multi_answers = {}  # key: question text, value: list of selected options
-    # State untuk melacak soal yang sudah ditampilkan (hindari duplikat)
-    if "nkhm_seen_questions" not in st.session_state:
-        st.session_state.nkhm_seen_questions = set()
+    defaults = {
+        "nkhm_user": "",
+        "nkhm_scores": {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0, "Nasionalisme": 0},
+        "nkhm_history": [],
+        "nkhm_total_questions": 0,
+        "nkhm_ai_conversation": [],
+        "nkhm_current_q": None,
+        "nkhm_answered": False,
+        "nkhm_current_filtered": [],
+        "nkhm_current_kategori": "✨ Semua",
+        "nkhm_current_kecerdasan": "Semua",
+        "nkhm_feedback": None,
+        "last_score_type": "",
+        "eq_scale_total": 0,
+        "aq_scale_total": 0,
+        "eq_section_answers": {},
+        "aq_section_answers": {},
+        "current_section": None,
+        "current_scale_type": None,
+        "nkhm_multi_answers": {},
+        "nkhm_seen_questions": set(),
+        "nkhm_last_q_id": "",  # Untuk deteksi perubahan soal
+    }
+    for key, val in defaults.items():
+        if key not in st.session_state:
+            st.session_state[key] = val
 
 # ========== FUNGSI BANTU UNTUK MEMILIH SOAL BELUM TERLIHAT ==========
 def get_next_question(filtered_questions):
@@ -392,8 +375,8 @@ def main():
             st.session_state.aq_section_answers = {}
             st.session_state.current_section = None
             st.session_state.current_scale_type = None
-            # Reset seen questions
             st.session_state.nkhm_seen_questions = set()
+            st.session_state.nkhm_last_q_id = ""
             st.rerun()
         st.markdown("---")
         st.markdown("## 🤖 Ki Hajar")
@@ -432,7 +415,7 @@ def main():
         with col_f2:
             kecerdasan = st.selectbox("Fokus", ["Semua", "IQ", "EQ", "SQ", "AQ", "Nasionalisme"], key="kecerdasan_filter_kuis")
         
-        # Filter soal (sama seperti sebelumnya)
+        # Filter soal
         filtered_questions = []
         for q in QUESTION_BANK:
             if kecerdasan == "Nasionalisme":
@@ -474,21 +457,18 @@ def main():
             st.session_state.nkhm_feedback = None
             st.session_state.current_section = None
             st.session_state.current_scale_type = None
-            # Reset multi-answers dan seen questions
             st.session_state.nkhm_multi_answers = {}
             st.session_state.nkhm_seen_questions = set()
-            # Pilih soal pertama
+            st.session_state.nkhm_last_q_id = ""
             if filtered_questions:
                 st.session_state.nkhm_current_q = get_next_question(filtered_questions)
             else:
                 st.session_state.nkhm_current_q = None
         else:
-            # Jika filter tidak berubah, tapi belum ada soal atau soal sudah dilihat semua
             if filtered_questions:
                 if st.session_state.nkhm_current_q is None:
                     st.session_state.nkhm_current_q = get_next_question(filtered_questions)
                 elif st.session_state.nkhm_current_q['text'] in st.session_state.nkhm_seen_questions:
-                    # Jika soal saat ini sudah pernah dilihat (misal karena duplikat), ambil baru
                     st.session_state.nkhm_current_q = get_next_question(filtered_questions)
             else:
                 st.session_state.nkhm_current_q = None
@@ -496,15 +476,28 @@ def main():
         if not filtered_questions:
             st.warning("Tidak ada soal dengan filter ini. Coba pilih filter lain!")
         else:
-            # Jika current_q None atau sudah dilihat, ambil baru
             if st.session_state.nkhm_current_q is None:
                 st.session_state.nkhm_current_q = get_next_question(filtered_questions)
             if st.session_state.nkhm_current_q is None:
                 st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter atau reset.")
-                # Nonaktifkan tombol JAWAB dan navigasi
                 st.session_state.nkhm_answered = True
             else:
                 q = st.session_state.nkhm_current_q
+                
+                # ============================================================
+                # ====== DETEKSI PERUBAHAN SOAL - RESET STATE OTOMATIS ======
+                # ============================================================
+                current_q_id = q.get('text', '')
+                
+                # Jika soal berubah dan sebelumnya answered = True, reset state
+                if st.session_state.nkhm_last_q_id != current_q_id and st.session_state.nkhm_answered:
+                    st.session_state.nkhm_answered = False
+                    st.session_state.nkhm_feedback = None
+                    st.session_state.nkhm_multi_answers = {}
+                
+                # Update last_q_id dengan ID soal baru
+                st.session_state.nkhm_last_q_id = current_q_id
+                # ============================================================
                 
                 st.markdown(f"### 📝 {q['text']}")
                 col_tag1, col_tag2 = st.columns(2)
@@ -515,7 +508,7 @@ def main():
                 else:
                     col_tag2.info("📚 Umum")
                 
-                # Tampilkan progress: sudah berapa soal dilihat dari total
+                # Tampilkan progress
                 seen_count = len(st.session_state.nkhm_seen_questions)
                 total_available = len(filtered_questions)
                 st.caption(f"📊 Soal dilihat: {seen_count} / {total_available}")
@@ -525,7 +518,7 @@ def main():
                         st.caption(f"📂 **{q['section']}** — *{q['scale']}*")
                     st.info(
                         "📌 **Petunjuk Skor Tanggapan:**\n\n"
-                        "Berikan skor tanggapan dalam pilihan Anda (angka 0, 1, 2 atau 3) yang menggambarkan pikiran atau perasaan Anda terhadap hal yang diuraikan:\n"
+                        "Berikan skor tanggapan dalam pilihan Anda (angka 0, 1, 2 atau 3):\n"
                         "- **3** = Setuju sekali\n"
                         "- **2** = Setuju\n"
                         "- **1** = Kurang setuju\n"
@@ -544,7 +537,6 @@ def main():
                     is_multi = True
                 
                 if is_multi:
-                    # Soal multi-jawaban: gunakan checkbox
                     st.markdown("**Pilih semua jawaban yang benar:**")
                     selected_options = []
                     saved = st.session_state.nkhm_multi_answers.get(q['text'], [])
@@ -561,7 +553,13 @@ def main():
                     selected = selected_options
                 else:
                     radio_label = "Pilih jawabanmu:" if q.get("type") not in ["EQ_scale", "AQ_scale"] else "Pilih skor tanggapan:"
-                    selected = st.radio(radio_label, q['options'], key=f"radio_{q['text']}", index=None, disabled=st.session_state.nkhm_answered)
+                    selected = st.radio(
+                        radio_label, 
+                        q['options'], 
+                        key=f"radio_{q['text']}", 
+                        index=None, 
+                        disabled=st.session_state.nkhm_answered
+                    )
                 
                 # ========== TOMBOL JAWAB ==========
                 if is_multi:
@@ -569,13 +567,11 @@ def main():
                 else:
                     disable_btn = st.session_state.nkhm_answered or selected is None
                 
-                # Jika semua soal sudah dijawab, nonaktifkan tombol
                 if seen_count >= total_available:
                     st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter atau reset.")
                     disable_btn = True
                 
                 if st.button("✅ JAWAB", disabled=disable_btn, use_container_width=True):
-                    # Tandai soal ini sudah dilihat
                     st.session_state.nkhm_seen_questions.add(q['text'])
                     st.session_state.nkhm_answered = True
                     st.session_state.nkhm_total_questions += 1
@@ -687,7 +683,7 @@ def main():
                     st.success(f"✅ Jawaban tercatat für {st.session_state.last_score_type}")
                 
                 # ========== TOMBOL SELESAI BAGIAN (skala) ==========
-                if q.get("type") in ["EQ_scale", "AQ_scale"] and st.session_state.current_section:
+                if q.get("type") in ["EQ_scale", "AQ_scale"] and st.session_state.current_section and st.session_state.nkhm_answered:
                     if st.button("✅ Selesai Bagian Ini", use_container_width=True):
                         section = st.session_state.current_section
                         q_type = st.session_state.current_scale_type
@@ -709,45 +705,40 @@ def main():
                         
                         st.session_state.current_section = None
                         st.session_state.current_scale_type = None
+                        st.session_state.nkhm_answered = False
+                        st.session_state.nkhm_feedback = None
                         if filtered_questions:
                             st.session_state.nkhm_current_q = get_next_question(filtered_questions)
-                            st.session_state.nkhm_answered = False
-                            st.session_state.nkhm_feedback = None
                             st.rerun()
                 
                 # ========== TOMBOL NAVIGASI ==========
+                # Tombol navigasi tetap tersedia, tapi tidak wajib karena soal otomatis berganti
                 if st.session_state.nkhm_answered and q.get("type") not in ["EQ_scale", "AQ_scale"]:
+                    st.markdown("---")
+                    st.caption("💡 Atau klik tombol di bawah untuk navigasi manual:")
                     col_nav1, col_nav2 = st.columns(2)
                     with col_nav1:
                         if st.button("⏩ SOAL SELANJUTNYA", use_container_width=True):
                             if filtered_questions:
-                                # Pilih soal berikutnya yang belum dilihat
                                 next_q = get_next_question(filtered_questions)
                                 if next_q is None:
                                     st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter.")
                                     st.session_state.nkhm_answered = True
                                 else:
-                                    # ====== RESET STATE UNTUK SOAL BARU ======
                                     st.session_state.nkhm_current_q = next_q
-                                    st.session_state.nkhm_answered = False
-                                    st.session_state.nkhm_feedback = None
-                                    st.session_state.nkhm_multi_answers = {}
+                                    # State akan di-reset otomatis oleh deteksi perubahan soal
                                     st.rerun()
                     with col_nav2:
                         if st.button("🎮 KUIS BARU", use_container_width=True):
                             if filtered_questions:
-                                # Reset seen questions agar semua soal bisa diulang
                                 st.session_state.nkhm_seen_questions = set()
                                 next_q = get_next_question(filtered_questions)
                                 if next_q is None:
                                     st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter.")
                                     st.session_state.nkhm_answered = True
                                 else:
-                                    # ====== RESET STATE UNTUK KUIS BARU ======
                                     st.session_state.nkhm_current_q = next_q
-                                    st.session_state.nkhm_answered = False
-                                    st.session_state.nkhm_feedback = None
-                                    st.session_state.nkhm_multi_answers = {}
+                                    # State akan di-reset otomatis oleh deteksi perubahan soal
                                     st.rerun()
                                     
     # ========== TAB 2–8 ==========
