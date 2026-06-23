@@ -21,6 +21,8 @@ from nkhm.dasbor import show_dasbor
 from nkhm.tebak_pahlawan import show_tebak_pahlawan
 from nkhm.angka_rahasia import show_angka_rahasia
 from nkhm.seberang_sungai import show_river_game
+from nkhm.tiang_bendera import show_tiang_bendera
+
 
 # Import opsional
 try:
@@ -549,7 +551,7 @@ def main():
     
     # ========== TAB 2: DASHBOARD ==========
     with tab2:
-        st.markdown("### Dashboard")
+        st.markdown("### Dashboard NKHM")
         _, _, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct = get_current_nkhm()
         df_chart = pd.DataFrame({
             "Kecerdasan": ["IQ", "EQ", "SQ", "AQ", "Nasionalisme"],
@@ -679,7 +681,7 @@ def main():
         else:
             st.info("💡 Gambar 'hadiah.gif' belum tersedia.")
         st.markdown("---")
-        sub_tab1, sub_tab2, sub_tab3, sub_tab4 = st.tabs(["🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🎲 Lainnya (Coming Soon)"])
+        sub_tab1, sub_tab2, sub_tab3, sub_tab4, sub_tab5 = st.tabs(["🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🇮🇩 Tiang Bendera", "🎲 Lainnya (Coming Soon)"])
         with sub_tab1:
             from nkhm.tebak_pahlawan import show_tebak_pahlawan
             show_tebak_pahlawan()
@@ -689,6 +691,9 @@ def main():
             from nkhm.seberang_sungai import show_river_game
             show_river_game()
         with sub_tab4:
+            from nkhm.tiang_bendera import show_tiang_bendera
+            show_tiang_bendera()
+        with sub_tab5:
             st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
     
     # ========== TAB 8: TUTORIAL ==========
