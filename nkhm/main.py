@@ -15,7 +15,79 @@ from nkhm.scoring import (
 )
 from nkhm.ai_assistant import get_ai_response
 from nkhm.leaderboard import show_leaderboard, save_score
-from nkhm.current_score import get_current_nkhm  # <-- IMPORT DARI current_score
+from nkhm.current_score import get_current_nkhm
+
+# ========== IMPORT MODUL LAIN (TANPA CIRCULAR) ==========
+# Import semua modul yang diperlukan untuk tab
+try:
+    from nkhm.dasbor import show_dasbor
+except ImportError:
+    show_dasbor = None
+
+try:
+    from nkhm.battle import show_battle
+except ImportError:
+    show_battle = None
+
+try:
+    from nkhm.stomata import show_stomata
+except ImportError:
+    show_stomata = None
+
+try:
+    from nkhm.tebak_pahlawan import show_tebak_pahlawan
+except ImportError:
+    show_tebak_pahlawan = None
+
+try:
+    from nkhm.angka_rahasia import show_angka_rahasia
+except ImportError:
+    show_angka_rahasia = None
+
+try:
+    from nkhm.seberang_sungai import show_river_game
+except ImportError:
+    show_river_game = None
+
+try:
+    from nkhm.tutorial import show_tutorial
+except ImportError:
+    show_tutorial = None
+
+try:
+    from nkhm.tiang_bendera import show_tiang_bendera
+except ImportError:
+    show_tiang_bendera = None
+
+try:
+    from nkhm.karunia import show_karunia
+except ImportError:
+    show_karunia = None
+
+try:
+    from nkhm.tournament import show_tournament
+    TOURNAMENT_AVAILABLE = True
+except ImportError:
+    TOURNAMENT_AVAILABLE = False
+    show_tournament = None
+
+try:
+    from nkhm.karunia_140_karakter import show_karunia_140_karakter
+    KARUNIA_140_AVAILABLE = True
+except ImportError:
+    KARUNIA_140_AVAILABLE = False
+
+try:
+    from nkhm.karunia_karakter_masalah import show_karunia_karakter_masalah
+    KARUNIA_KARAKTER_AVAILABLE = True
+except ImportError:
+    KARUNIA_KARAKTER_AVAILABLE = False
+
+try:
+    from nkhm.pengembangan_diri import show_pengembangan_diri
+    PENGEMBANGAN_DIRI_AVAILABLE = True
+except ImportError:
+    PENGEMBANGAN_DIRI_AVAILABLE = False
 
 # ========== FUNGSI UNTUK MENAMPILKAN VIDEO MP4 ==========
 def show_quiz_media():
@@ -26,7 +98,6 @@ def show_quiz_media():
     video_path = script_dir / "assets" / "kuis.mp4"
     gif_path = script_dir / "assets" / "kuis.gif"
     
-    # Coba tampilkan MP4 terlebih dahulu
     if video_path.exists():
         try:
             with open(video_path, "rb") as f:
@@ -37,7 +108,6 @@ def show_quiz_media():
         except Exception as e:
             st.warning(f"Gagal memuat video MP4: {e}")
     
-    # Fallback ke GIF
     if gif_path.exists():
         st.image(str(gif_path), caption="Asah 4 Kecerdasan dan Nasionalisme 🇮🇩", use_container_width=True)
         st.caption("🔄 Menampilkan GIF sebagai alternatif (kuis.mp4 tidak ditemukan atau error)")
@@ -46,26 +116,170 @@ def show_quiz_media():
     st.info("💡 Video/Gambar kuis belum tersedia. Silakan upload 'kuis.mp4' atau 'kuis.gif' ke folder assets.")
     return False
 
-# ========== FUNGSI UNTUK MEMUAT TAB ==========
-def load_tab_functions():
-    """Memuat fungsi tab dari tabs_others"""
-    try:
-        from nkhm.tabs_others import (
-            show_tab2, show_tab3, show_tab4, show_tab5,
-            show_tab6, show_tab7, show_tab8
+# ========== TAB 2: DASHBOARD ==========
+def show_tab2():
+    st.markdown("### Dashboard")
+    _, _, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct = get_current_nkhm()
+    df_chart = pd.DataFrame({
+        "Kecerdasan": ["IQ", "EQ", "SQ", "AQ", "Nasionalisme"],
+        "Skor": [iq_pct, eq_pct, sq_pct, aq_pct, nas_pct]
+    })
+    st.bar_chart(df_chart.set_index("Kecerdasan"), height=400)
+    with st.expander("📖 Tentang Rumus NKHM"):
+        st.markdown("""
+        **NKHM_Q** = ((IQ + EQ) × (SQ + AQ)) / ((IQ + EQ) + (SQ + AQ))
+        **NKHM_Total** = (NKHM_Q + Nasionalisme) / 2
+        Dimana: IQ, EQ, SQ, AQ, Nasionalisme dalam skala 0-100
+        """)
+    if st.session_state.nkhm_history:
+        st.markdown("### Riwayat Kuis")
+        history_df = pd.DataFrame(st.session_state.nkhm_history[-10:])
+        history_df = history_df[["timestamp", "type", "question", "correct", "nkhm_total"]]
+        history_df["correct"] = history_df["correct"].map({True: "✅", False: "❌"})
+        history_df.columns = ["Waktu", "Tipe", "Soal", "Hasil", "NKHM Total"]
+        st.dataframe(history_df, use_container_width=True, hide_index=True)
+
+# ========== TAB 3: PRESTASI ==========
+def show_tab3():
+    st.markdown("### Pencapaian")
+    cols = st.columns(5)
+    badges = {"IQ": "🧠 Cendekia", "EQ": "❤️ Empati", "SQ": "🙏 Bhinneka", "AQ": "💪 Tangguh", "Nasionalisme": "🇮🇩 Patriot"}
+    _, _, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct = get_current_nkhm()
+    scores_pct = {
+        "IQ": iq_pct,
+        "EQ": eq_pct,
+        "SQ": sq_pct,
+        "AQ": aq_pct,
+        "Nasionalisme": nas_pct
+    }
+    for i, (t, label) in enumerate(badges.items()):
+        if scores_pct[t] >= 50:
+            cols[i].success(f"✅ **{label}**")
+        else:
+            cols[i].info(f"🔒 {label} (50+)")
+    if all(scores_pct[t] >= 50 for t in ["IQ", "EQ", "SQ", "AQ", "Nasionalisme"]):
+        st.balloons()
+        st.success("🎉 **GELAR: PAHLAWAN CERDAS NUSANTARA!** 🎉")
+    answered = len(st.session_state.nkhm_history)
+    correct = sum(1 for h in st.session_state.nkhm_history if isinstance(h.get("correct"), bool) and h["correct"])
+    accuracy = (correct / answered * 100) if answered > 0 else 0
+    col1, col2, col3 = st.columns(3)
+    col1.metric("📖 Total Soal", answered)
+    col2.metric("✅ Benar", correct)
+    col3.metric("📊 Akurasi", f"{accuracy:.1f}%")
+    show_leaderboard()
+
+# ========== TAB 4: DASBOR SAYA ==========
+def show_tab4():
+    if show_dasbor:
+        show_dasbor()
+    else:
+        st.info("📊 Dasbor Saya sedang dalam pengembangan")
+
+# ========== TAB 5: TANDING ==========
+def show_tab5():
+    img_path = Path(__file__).parent.parent / "assets" / "garuda.jpg"
+    if img_path.exists():
+        st.image(str(img_path), caption="Bertanding Untuk Menang 🇮🇩", use_container_width=True)
+    else:
+        st.info("💡 Gambar 'garuda.jpg' belum tersedia.")
+    st.markdown("---")
+    if TOURNAMENT_AVAILABLE and show_tournament is not None and show_battle is not None:
+        tanding_mode = st.radio(
+            "Pilih Mode Tanding:",
+            ["⚔️ Mode 1v1 (Hot Seat)", "🏆 Mode Turnamen Kelas"],
+            horizontal=True,
+            key="tanding_mode"
         )
-        return {
-            'tab2': show_tab2,
-            'tab3': show_tab3,
-            'tab4': show_tab4,
-            'tab5': show_tab5,
-            'tab6': show_tab6,
-            'tab7': show_tab7,
-            'tab8': show_tab8
-        }
-    except ImportError as e:
-        st.error(f"Gagal memuat fungsi tab: {e}")
-        return None
+        if tanding_mode == "⚔️ Mode 1v1 (Hot Seat)":
+            show_battle()
+        else:
+            show_tournament()
+    elif show_battle is not None:
+        show_battle()
+        st.info("🏆 Mode Turnamen Kelas akan segera hadir!")
+    else:
+        st.info("⚔️ Mode Tanding sedang dalam pengembangan")
+
+# ========== TAB 6: KARUNIA & STOMATA ==========
+def show_tab6():
+    sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Sto-mata Hati"])
+    with sub_tab1:
+        img_path = Path(__file__).parent.parent / "assets" / "karunia.jpg"
+        if img_path.exists():
+            st.image(str(img_path), caption="Grow in Grace 🇮🇩", use_container_width=True)
+        else:
+            st.info("💡 Gambar 'karunia.jpg' belum tersedia.")
+        st.markdown("---")
+        subsub_tab1, subsub_tab2, subsub_tab3, subsub_tab4 = st.tabs([
+            "📜 Karunia Umum", "✨ Karunia 140 Karakter", "📋 Karakter & Masalah", "📚 Pengembangan Diri"
+        ])
+        with subsub_tab1:
+            if show_karunia:
+                show_karunia()
+            else:
+                st.info("📜 Karunia Umum sedang dalam pengembangan")
+        with subsub_tab2:
+            if KARUNIA_140_AVAILABLE and show_karunia_140_karakter:
+                show_karunia_140_karakter()
+            else:
+                st.error("❌ Modul 'karunia_140_karakter' tidak ditemukan.")
+        with subsub_tab3:
+            if KARUNIA_KARAKTER_AVAILABLE and show_karunia_karakter_masalah:
+                show_karunia_karakter_masalah()
+            else:
+                st.error("❌ Modul 'karunia_karakter_masalah' tidak ditemukan.")
+        with subsub_tab4:
+            if PENGEMBANGAN_DIRI_AVAILABLE and show_pengembangan_diri:
+                show_pengembangan_diri()
+            else:
+                st.error("❌ Modul 'pengembangan_diri' tidak ditemukan.")
+    with sub_tab2:
+        if show_stomata:
+            show_stomata()
+        else:
+            st.info("💖 Sto-mata Hati sedang dalam pengembangan")
+
+# ========== TAB 7: HADIAH ==========
+def show_tab7():
+    img_path = Path(__file__).parent.parent / "assets" / "hadiah.gif"
+    if img_path.exists():
+        st.image(str(img_path), caption="A Giveaway 🇮🇩", use_container_width=True)
+    else:
+        st.info("💡 Gambar 'hadiah.gif' belum tersedia.")
+    st.markdown("---")
+    sub_tab1, sub_tab2, sub_tab3, sub_tab4, sub_tab5 = st.tabs([
+        "🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🏗️ Tiang & Bendera", "🎲 Lainnya (Coming Soon)"
+    ])
+    with sub_tab1:
+        if show_tebak_pahlawan:
+            show_tebak_pahlawan()
+        else:
+            st.info("🦅 Tebak Pahlawan sedang dalam pengembangan")
+    with sub_tab2:
+        if show_angka_rahasia:
+            show_angka_rahasia()
+        else:
+            st.info("🔢 Angka Rahasia sedang dalam pengembangan")
+    with sub_tab3:
+        if show_river_game:
+            show_river_game()
+        else:
+            st.info("🚣 Pahlawan Menyeberang Sungai sedang dalam pengembangan")
+    with sub_tab4:
+        if show_tiang_bendera:
+            show_tiang_bendera()
+        else:
+            st.info("🏗️ Tiang & Bendera sedang dalam pengembangan")
+    with sub_tab5:
+        st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
+
+# ========== TAB 8: TUTORIAL ==========
+def show_tab8():
+    if show_tutorial:
+        show_tutorial()
+    else:
+        st.info("📘 Tutorial sedang dalam pengembangan")
 
 # ========== INISIALISASI SESSION STATE ==========
 def init_session_state():
@@ -224,7 +438,6 @@ def main():
         with col_f2:
             kecerdasan = st.selectbox("Fokus", ["Semua", "IQ", "EQ", "SQ", "AQ", "Nasionalisme"], key="kecerdasan_filter_kuis")
         
-        # Filter soal
         filtered_questions = []
         for q in QUESTION_BANK:
             if kecerdasan == "Nasionalisme":
@@ -255,7 +468,6 @@ def main():
             if fokus_ok:
                 filtered_questions.append(q)
         
-        # Deteksi perubahan filter
         filter_berubah = (st.session_state.nkhm_current_kategori != kategori or 
                           st.session_state.nkhm_current_kecerdasan != kecerdasan)
         if filter_berubah:
@@ -319,7 +531,6 @@ def main():
                     if st.session_state.current_section:
                         st.info(f"📌 Sedang mengerjakan bagian: **{st.session_state.current_section}**")
                 
-                # ========== DETEKSI MULTI-JAWABAN ==========
                 is_multi = False
                 correct_list = q.get('correct')
                 if isinstance(correct_list, list):
@@ -347,7 +558,6 @@ def main():
                     radio_label = "Pilih jawabanmu:" if q.get("type") not in ["EQ_scale", "AQ_scale"] else "Pilih skor tanggapan:"
                     selected = st.radio(radio_label, q['options'], key=f"radio_{q['text']}", index=None, disabled=st.session_state.nkhm_answered)
                 
-                # ========== TOMBOL JAWAB ==========
                 if is_multi:
                     disable_btn = st.session_state.nkhm_answered or not selected
                 else:
@@ -454,7 +664,6 @@ def main():
                             })
                     st.rerun()
                 
-                # ========== FEEDBACK ==========
                 if st.session_state.nkhm_feedback == "benar":
                     st.success(f"✅ BENAR! + poin untuk {st.session_state.last_score_type}")
                 elif st.session_state.nkhm_feedback == "salah":
@@ -468,7 +677,6 @@ def main():
                 elif st.session_state.nkhm_feedback == "scale_answered":
                     st.success(f"✅ Jawaban tercatat für {st.session_state.last_score_type}")
                 
-                # ========== TOMBOL SELESAI BAGIAN ==========
                 if q.get("type") in ["EQ_scale", "AQ_scale"] and st.session_state.current_section:
                     if st.button("✅ Selesai Bagian Ini", use_container_width=True):
                         section = st.session_state.current_section
@@ -497,7 +705,6 @@ def main():
                             st.session_state.nkhm_feedback = None
                             st.rerun()
                 
-                # ========== TOMBOL NAVIGASI ==========
                 if st.session_state.nkhm_answered and q.get("type") not in ["EQ_scale", "AQ_scale"]:
                     col_nav1, col_nav2 = st.columns(2)
                     with col_nav1:
@@ -529,37 +736,20 @@ def main():
                                     st.rerun()
     
     # ========== TAB 2–8 ==========
-    tab_functions = load_tab_functions()
-    if tab_functions:
-        with tab2:
-            tab_functions['tab2']()
-        with tab3:
-            tab_functions['tab3']()
-        with tab4:
-            tab_functions['tab4']()
-        with tab5:
-            tab_functions['tab5']()
-        with tab6:
-            tab_functions['tab6']()
-        with tab7:
-            tab_functions['tab7']()
-        with tab8:
-            tab_functions['tab8']()
-    else:
-        with tab2:
-            st.warning("Tab Dashboard tidak dapat dimuat")
-        with tab3:
-            st.warning("Tab Prestasi tidak dapat dimuat")
-        with tab4:
-            st.warning("Tab Dasbor Saya tidak dapat dimuat")
-        with tab5:
-            st.warning("Tab Tanding tidak dapat dimuat")
-        with tab6:
-            st.warning("Tab Karunia tidak dapat dimuat")
-        with tab7:
-            st.warning("Tab Hadiah tidak dapat dimuat")
-        with tab8:
-            st.warning("Tab Tutorial tidak dapat dimuat")
+    with tab2:
+        show_tab2()
+    with tab3:
+        show_tab3()
+    with tab4:
+        show_tab4()
+    with tab5:
+        show_tab5()
+    with tab6:
+        show_tab6()
+    with tab7:
+        show_tab7()
+    with tab8:
+        show_tab8()
 
 if __name__ == "__main__":
     main()
