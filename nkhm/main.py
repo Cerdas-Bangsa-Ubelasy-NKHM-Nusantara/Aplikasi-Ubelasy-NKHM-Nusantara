@@ -14,10 +14,14 @@ from nkhm.scoring import (
 )
 from nkhm.ai_assistant import get_ai_response
 from nkhm.leaderboard import show_leaderboard, save_score
+from nkhm.current_score import get_current_nkhm  # <-- IMPORT DARI current_score
 # Import fungsi untuk tab-tab lain dari modul terpisah
 from nkhm.tabs_others import (
     show_tab2, show_tab3, show_tab4, show_tab5, show_tab6, show_tab7, show_tab8
 )
+
+# ========== HAPUS FUNGSI get_current_nkhm() dari sini ==========
+# (Sudah dipindahkan ke current_score.py)
 
 # ========== INISIALISASI SESSION STATE ==========
 def init_session_state():
@@ -64,26 +68,6 @@ def init_session_state():
     # State untuk melacak soal yang sudah ditampilkan (hindari duplikat)
     if "nkhm_seen_questions" not in st.session_state:
         st.session_state.nkhm_seen_questions = set()
-
-# ========== FUNGSI UNTUK MENDAPATKAN NILAI PERSENTASE FINAL ==========
-def get_current_nkhm():
-    """Menghitung NKHM_Q, NKHM_Total, dan nilai persentase semua kecerdasan"""
-    raw = st.session_state.nkhm_scores
-    
-    # Hitung total raw points untuk EQ dan AQ (PG + skala)
-    eq_raw_total = raw["EQ"] + st.session_state.eq_scale_total
-    aq_raw_total = raw["AQ"] + st.session_state.aq_scale_total
-    
-    # Konversi ke persentase (0-100)
-    iq_pct = get_normalized_score(raw["IQ"], MAX_POIN_IQ)
-    eq_pct = get_normalized_score(eq_raw_total, MAX_POIN_EQ)
-    sq_pct = get_normalized_score(raw["SQ"], MAX_POIN_SQ)
-    aq_pct = get_normalized_score(aq_raw_total, MAX_POIN_AQ)
-    nas_pct = get_normalized_score(raw["Nasionalisme"], MAX_POIN_NASIONALISME)
-    
-    nkhm_q = calculate_nkhm_q(iq_pct, eq_pct, sq_pct, aq_pct)
-    nkhm_total = calculate_nkhm_total(nkhm_q, nas_pct)
-    return nkhm_q, nkhm_total, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct
 
 # ========== FUNGSI BANTU UNTUK MEMILIH SOAL BELUM TERLIHAT ==========
 def get_next_question(filtered_questions):
@@ -547,4 +531,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
