@@ -727,6 +727,7 @@ def main():
                                     st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter.")
                                     st.session_state.nkhm_answered = True
                                 else:
+                                    # ====== RESET STATE UNTUK SOAL BARU ======
                                     st.session_state.nkhm_current_q = next_q
                                     st.session_state.nkhm_answered = False
                                     st.session_state.nkhm_feedback = None
@@ -742,6 +743,7 @@ def main():
                                     st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter.")
                                     st.session_state.nkhm_answered = True
                                 else:
+                                    # ====== RESET STATE UNTUK KUIS BARU ======
                                     st.session_state.nkhm_current_q = next_q
                                     st.session_state.nkhm_answered = False
                                     st.session_state.nkhm_feedback = None
