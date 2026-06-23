@@ -1,0 +1,12 @@
+# .streamlit/config.toml
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+
+[runner]
+magicEnabled = false
+
+[server]
+fileWatcherType = "none"
