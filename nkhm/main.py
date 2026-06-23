@@ -15,45 +15,9 @@ from nkhm.scoring import (
 )
 from nkhm.ai_assistant import get_ai_response
 from nkhm.leaderboard import show_leaderboard, save_score
-# Import fungsi untuk tab-tab lain dari modul terpisah
-from nkhm.tabs_others import (
-    show_tab2, show_tab3, show_tab4, show_tab5, show_tab6, show_tab7, show_tab8
-)
+# Hapus import langsung dari tabs_others, gunakan fungsi wrapper
 
 # ========== FUNGSI UNTUK MENAMPILKAN VIDEO MP4 ==========
-def get_video_html(video_path, autoplay=True, loop=True, muted=True, width="100%", height="auto"):
-    """
-    Menghasilkan HTML untuk menampilkan video MP4 dengan kontrol.
-    """
-    try:
-        # Baca file video sebagai base64
-        with open(video_path, "rb") as f:
-            video_bytes = f.read()
-        video_base64 = base64.b64encode(video_bytes).decode()
-        
-        # Buat HTML untuk video
-        html = f"""
-        <div style="display: flex; justify-content: center; margin: 10px 0;">
-            <video 
-                width="{width}" 
-                height="{height}" 
-                {'autoplay' if autoplay else ''} 
-                {'loop' if loop else ''} 
-                {'muted' if muted else ''}
-                controls
-                style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); max-width: 100%;"
-            >
-                <source src="data:video/mp4;base64,{video_base64}" type="video/mp4">
-                Browser Anda tidak mendukung pemutar video.
-            </video>
-        </div>
-        """
-        return html
-    except Exception as e:
-        return f"<p style='color: red;'>Error memuat video: {e}</p>"
-
-
-# ========== FUNGSI UNTUK MENAMPILKAN VIDEO ATAU FALLBACK ==========
 def show_quiz_media():
     """
     Menampilkan video kuis (MP4) jika tersedia, atau fallback ke GIF jika tidak.
@@ -64,26 +28,49 @@ def show_quiz_media():
     
     # Coba tampilkan MP4 terlebih dahulu
     if video_path.exists():
-        video_html = get_video_html(
-            video_path,
-            autoplay=True,
-            loop=True,
-            muted=True,
-            width="100%",
-            height="auto"
-        )
-        st.markdown(video_html, unsafe_allow_html=True)
-        st.caption("🎬 Video pengantar kuis NKHM Nusantara")
-        return True
-    elif gif_path.exists():
-        # Fallback ke GIF
+        try:
+            # Baca file video sebagai bytes
+            with open(video_path, "rb") as f:
+                video_bytes = f.read()
+            
+            # Tampilkan video dengan st.video (cara termudah)
+            st.video(video_bytes, loop=True, autoplay=True)
+            st.caption("🎬 Video pengantar kuis NKHM Nusantara")
+            return True
+        except Exception as e:
+            st.warning(f"Gagal memuat video MP4: {e}")
+            # Lanjut ke fallback GIF
+    
+    # Fallback ke GIF
+    if gif_path.exists():
         st.image(str(gif_path), caption="Asah 4 Kecerdasan dan Nasionalisme 🇮🇩", use_container_width=True)
-        st.caption("🔄 Menampilkan GIF sebagai alternatif (kuis.mp4 tidak ditemukan)")
+        st.caption("🔄 Menampilkan GIF sebagai alternatif (kuis.mp4 tidak ditemukan atau error)")
         return True
-    else:
-        st.info("💡 Video/Gambar kuis belum tersedia. Silakan upload 'kuis.mp4' atau 'kuis.gif' ke folder assets.")
-        return False
+    
+    # Jika keduanya tidak ada
+    st.info("💡 Video/Gambar kuis belum tersedia. Silakan upload 'kuis.mp4' atau 'kuis.gif' ke folder assets.")
+    return False
 
+# ========== FUNGSI WRAPPER UNTUK TAB ==========
+def load_tab_functions():
+    """Memuat fungsi tab secara lazy untuk menghindari circular import"""
+    try:
+        from nkhm.tabs_others import (
+            show_tab2, show_tab3, show_tab4, show_tab5, 
+            show_tab6, show_tab7, show_tab8
+        )
+        return {
+            'tab2': show_tab2,
+            'tab3': show_tab3,
+            'tab4': show_tab4,
+            'tab5': show_tab5,
+            'tab6': show_tab6,
+            'tab7': show_tab7,
+            'tab8': show_tab8
+        }
+    except ImportError as e:
+        st.error(f"Gagal memuat fungsi tab: {e}")
+        return None
 
 # ========== INISIALISASI SESSION STATE ==========
 def init_session_state():
@@ -131,7 +118,6 @@ def init_session_state():
     if "nkhm_seen_questions" not in st.session_state:
         st.session_state.nkhm_seen_questions = set()
 
-
 # ========== FUNGSI UNTUK MENDAPATKAN NILAI PERSENTASE FINAL ==========
 def get_current_nkhm():
     """Menghitung NKHM_Q, NKHM_Total, dan nilai persentase semua kecerdasan"""
@@ -152,7 +138,6 @@ def get_current_nkhm():
     nkhm_total = calculate_nkhm_total(nkhm_q, nas_pct)
     return nkhm_q, nkhm_total, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct
 
-
 # ========== FUNGSI BANTU UNTUK MEMILIH SOAL BELUM TERLIHAT ==========
 def get_next_question(filtered_questions):
     """Pilih soal secara acak dari filtered_questions yang belum pernah ditampilkan."""
@@ -161,7 +146,6 @@ def get_next_question(filtered_questions):
     if not available:
         return None
     return random.choice(available)
-
 
 # ========== MAIN ==========
 def main():
@@ -267,9 +251,9 @@ def main():
         
     # ========== TAB 1: KUIS ==========
     with tab1:
-        # ========== TAMPILKAN VIDEO MP4 ATAU FALLBACK GIF ==========
+        # ========== TAMPILKAN MEDIA (MP4 atau GIF) ==========
         show_quiz_media()
-            
+        
         st.markdown("---")
         
         st.markdown("### Pilih Kuis")
@@ -594,22 +578,40 @@ def main():
                                     st.session_state.nkhm_feedback = None
                                     st.session_state.nkhm_multi_answers = {}
                                     st.rerun()
-                                    
-    # ========== TAB 2–8: dipanggil dari tabs_others ==========
-    with tab2:
-        show_tab2()
-    with tab3:
-        show_tab3()
-    with tab4:
-        show_tab4()
-    with tab5:
-        show_tab5()
-    with tab6:
-        show_tab6()
-    with tab7:
-        show_tab7()
-    with tab8:
-        show_tab8()
+    
+    # ========== TAB 2–8: dipanggil dengan lazy loading ==========
+    tab_functions = load_tab_functions()
+    if tab_functions:
+        with tab2:
+            tab_functions['tab2']()
+        with tab3:
+            tab_functions['tab3']()
+        with tab4:
+            tab_functions['tab4']()
+        with tab5:
+            tab_functions['tab5']()
+        with tab6:
+            tab_functions['tab6']()
+        with tab7:
+            tab_functions['tab7']()
+        with tab8:
+            tab_functions['tab8']()
+    else:
+        # Fallback jika gagal memuat
+        with tab2:
+            st.warning("Tab Dashboard tidak dapat dimuat")
+        with tab3:
+            st.warning("Tab Prestasi tidak dapat dimuat")
+        with tab4:
+            st.warning("Tab Dasbor Saya tidak dapat dimuat")
+        with tab5:
+            st.warning("Tab Tanding tidak dapat dimuat")
+        with tab6:
+            st.warning("Tab Karunia tidak dapat dimuat")
+        with tab7:
+            st.warning("Tab Hadiah tidak dapat dimuat")
+        with tab8:
+            st.warning("Tab Tutorial tidak dapat dimuat")
 
 if __name__ == "__main__":
     main()
