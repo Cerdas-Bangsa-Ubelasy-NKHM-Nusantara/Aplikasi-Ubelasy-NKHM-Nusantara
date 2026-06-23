@@ -1,4 +1,4 @@
-# nkhm/main.py ---> Lengkap
+# nkhm/main.py
 import streamlit as st
 import pandas as pd
 import random
@@ -21,7 +21,6 @@ from nkhm.dasbor import show_dasbor
 from nkhm.tebak_pahlawan import show_tebak_pahlawan
 from nkhm.angka_rahasia import show_angka_rahasia
 from nkhm.seberang_sungai import show_river_game
-from nkhm.current_score import get_current_nkhm
 
 # Import opsional
 try:
