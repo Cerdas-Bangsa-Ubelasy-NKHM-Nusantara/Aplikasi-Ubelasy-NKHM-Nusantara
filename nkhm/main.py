@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 from datetime import datetime
 import base64
+import importlib
 from nkhm.questions import load_all_questions
 from nkhm.scoring import (
     MAX_SCORE, get_increment, get_column_index, calculate_section_value,
@@ -15,7 +16,6 @@ from nkhm.scoring import (
 )
 from nkhm.ai_assistant import get_ai_response
 from nkhm.leaderboard import show_leaderboard, save_score
-# Hapus import langsung dari tabs_others, gunakan fungsi wrapper
 
 # ========== FUNGSI UNTUK MENAMPILKAN VIDEO MP4 ==========
 def show_quiz_media():
@@ -51,25 +51,33 @@ def show_quiz_media():
     st.info("💡 Video/Gambar kuis belum tersedia. Silakan upload 'kuis.mp4' atau 'kuis.gif' ke folder assets.")
     return False
 
-# ========== FUNGSI WRAPPER UNTUK TAB ==========
-def load_tab_functions():
-    """Memuat fungsi tab secara lazy untuk menghindari circular import"""
+# ========== FUNGSI UNTUK MEMUAT TAB DENGAN importlib ==========
+def load_tab_function(tab_name):
+    """
+    Memuat fungsi tab secara lazy menggunakan importlib untuk menghindari circular import.
+    """
     try:
-        from nkhm.tabs_others import (
-            show_tab2, show_tab3, show_tab4, show_tab5, 
-            show_tab6, show_tab7, show_tab8
-        )
-        return {
-            'tab2': show_tab2,
-            'tab3': show_tab3,
-            'tab4': show_tab4,
-            'tab5': show_tab5,
-            'tab6': show_tab6,
-            'tab7': show_tab7,
-            'tab8': show_tab8
+        # Import module secara dinamis
+        tabs_others = importlib.import_module('nkhm.tabs_others')
+        
+        # Mapping nama tab ke fungsi
+        tab_mapping = {
+            'tab2': 'show_tab2',
+            'tab3': 'show_tab3',
+            'tab4': 'show_tab4',
+            'tab5': 'show_tab5',
+            'tab6': 'show_tab6',
+            'tab7': 'show_tab7',
+            'tab8': 'show_tab8'
         }
-    except ImportError as e:
-        st.error(f"Gagal memuat fungsi tab: {e}")
+        
+        func_name = tab_mapping.get(tab_name)
+        if func_name and hasattr(tabs_others, func_name):
+            return getattr(tabs_others, func_name)
+        else:
+            return None
+    except Exception as e:
+        st.error(f"Gagal memuat tab {tab_name}: {e}")
         return None
 
 # ========== INISIALISASI SESSION STATE ==========
@@ -146,6 +154,21 @@ def get_next_question(filtered_questions):
     if not available:
         return None
     return random.choice(available)
+
+# ========== FUNGSI UNTUK MENAMPILKAN TAB DENGAN ERROR HANDLING ==========
+def render_tab(tab_container, tab_name, fallback_message="Tab sedang dalam pengembangan"):
+    """
+    Render tab dengan error handling yang baik.
+    """
+    func = load_tab_function(tab_name)
+    if func:
+        try:
+            func()
+        except Exception as e:
+            st.error(f"Error pada tab {tab_name}: {e}")
+            st.info(fallback_message)
+    else:
+        st.info(fallback_message)
 
 # ========== MAIN ==========
 def main():
@@ -248,10 +271,10 @@ def main():
     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
     "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL"
 ])
-        
+    
     # ========== TAB 1: KUIS ==========
     with tab1:
-        # ========== TAMPILKAN MEDIA (MP4 atau GIF) ==========
+        # Tampilkan media (MP4 atau GIF)
         show_quiz_media()
         
         st.markdown("---")
@@ -263,7 +286,7 @@ def main():
         with col_f2:
             kecerdasan = st.selectbox("Fokus", ["Semua", "IQ", "EQ", "SQ", "AQ", "Nasionalisme"], key="kecerdasan_filter_kuis")
         
-        # Filter soal (sama seperti sebelumnya)
+        # Filter soal
         filtered_questions = []
         for q in QUESTION_BANK:
             if kecerdasan == "Nasionalisme":
@@ -579,39 +602,27 @@ def main():
                                     st.session_state.nkhm_multi_answers = {}
                                     st.rerun()
     
-    # ========== TAB 2–8: dipanggil dengan lazy loading ==========
-    tab_functions = load_tab_functions()
-    if tab_functions:
-        with tab2:
-            tab_functions['tab2']()
-        with tab3:
-            tab_functions['tab3']()
-        with tab4:
-            tab_functions['tab4']()
-        with tab5:
-            tab_functions['tab5']()
-        with tab6:
-            tab_functions['tab6']()
-        with tab7:
-            tab_functions['tab7']()
-        with tab8:
-            tab_functions['tab8']()
-    else:
-        # Fallback jika gagal memuat
-        with tab2:
-            st.warning("Tab Dashboard tidak dapat dimuat")
-        with tab3:
-            st.warning("Tab Prestasi tidak dapat dimuat")
-        with tab4:
-            st.warning("Tab Dasbor Saya tidak dapat dimuat")
-        with tab5:
-            st.warning("Tab Tanding tidak dapat dimuat")
-        with tab6:
-            st.warning("Tab Karunia tidak dapat dimuat")
-        with tab7:
-            st.warning("Tab Hadiah tidak dapat dimuat")
-        with tab8:
-            st.warning("Tab Tutorial tidak dapat dimuat")
+    # ========== TAB 2–8: render dengan lazy loading ==========
+    with tab2:
+        render_tab(tab2, 'tab2', "📊 Dashboard sedang dalam pengembangan")
+    
+    with tab3:
+        render_tab(tab3, 'tab3', "🏆 Prestasi sedang dalam pengembangan")
+    
+    with tab4:
+        render_tab(tab4, 'tab4', "👤 Dasbor Saya sedang dalam pengembangan")
+    
+    with tab5:
+        render_tab(tab5, 'tab5', "⚔️ Tanding sedang dalam pengembangan")
+    
+    with tab6:
+        render_tab(tab6, 'tab6', "🎁 Karunia sedang dalam pengembangan")
+    
+    with tab7:
+        render_tab(tab7, 'tab7', "🎁 Hadiah sedang dalam pengembangan")
+    
+    with tab8:
+        render_tab(tab8, 'tab8', "📘 Tutorial sedang dalam pengembangan")
 
 if __name__ == "__main__":
     main()
