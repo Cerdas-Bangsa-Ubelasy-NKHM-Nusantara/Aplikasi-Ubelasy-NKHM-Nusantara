@@ -16,7 +16,7 @@ from nkhm.scoring import (
 )
 from nkhm.ai_assistant import get_ai_response
 from nkhm.leaderboard import show_leaderboard, save_score
-from nkhm.current_score import get_current_nkhm  # Import dari modul terpisah
+from nkhm.current_score import get_current_nkhm
 
 # ========== FUNGSI UNTUK MENAMPILKAN VIDEO MP4 ==========
 def show_quiz_media():
