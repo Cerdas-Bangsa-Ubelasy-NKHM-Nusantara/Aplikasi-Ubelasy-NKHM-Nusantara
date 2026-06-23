@@ -298,6 +298,9 @@ def init_session_state():
         "current_scale_type": None,
         "nkhm_multi_answers": {},
         "nkhm_seen_questions": set(),
+        # State untuk menyimpan jawaban yang dipilih sebelum submit
+        "nkhm_selected_answer": None,
+        "nkhm_multi_selected": [],
     }
     for key, val in defaults.items():
         if key not in st.session_state:
@@ -377,6 +380,8 @@ def main():
             st.session_state.current_section = None
             st.session_state.current_scale_type = None
             st.session_state.nkhm_seen_questions = set()
+            st.session_state.nkhm_selected_answer = None
+            st.session_state.nkhm_multi_selected = []
             st.rerun()
         st.markdown("---")
         st.markdown("## 🤖 Ki Hajar")
@@ -446,7 +451,7 @@ def main():
             if fokus_ok:
                 filtered.append(q)
 
-        # Perubahan filter
+        # Perubahan filter - reset state
         if (st.session_state.nkhm_current_kategori != kategori or
             st.session_state.nkhm_current_kecerdasan != kecerdasan):
             st.session_state.nkhm_current_kategori = kategori
@@ -458,12 +463,15 @@ def main():
             st.session_state.current_scale_type = None
             st.session_state.nkhm_multi_answers = {}
             st.session_state.nkhm_seen_questions = set()
+            st.session_state.nkhm_selected_answer = None
+            st.session_state.nkhm_multi_selected = []
             st.session_state.nkhm_current_q = get_next_question(filtered) if filtered else None
         else:
             if filtered:
                 if st.session_state.nkhm_current_q is None:
                     st.session_state.nkhm_current_q = get_next_question(filtered)
-                elif st.session_state.nkhm_current_q['text'] in st.session_state.nkhm_seen_questions:
+                elif (st.session_state.nkhm_current_q and 
+                      st.session_state.nkhm_current_q['text'] in st.session_state.nkhm_seen_questions):
                     st.session_state.nkhm_current_q = get_next_question(filtered)
             else:
                 st.session_state.nkhm_current_q = None
@@ -482,7 +490,10 @@ def main():
                 col_tag1, col_tag2 = st.columns(2)
                 display_type = "🇮🇩 Nasionalisme" if q.get('type') == "Nasionalisme" else f"🧠 {q['type']}"
                 col_tag1.info(display_type)
-                col_tag2.success("🇮🇩 Nasional") if q.get('national') else col_tag2.info("📚 Umum")
+                if q.get('national'):
+                    col_tag2.success("🇮🇩 Nasional")
+                else:
+                    col_tag2.info("📚 Umum")
 
                 seen_count = len(st.session_state.nkhm_seen_questions)
                 total_available = len(filtered)
@@ -511,33 +522,62 @@ def main():
                     correct_list = [c.strip() for c in correct_list.split(',')]
                     is_multi = True
 
+                # Gunakan key yang unik untuk setiap soal agar tidak tercampur
+                question_key = f"q_{q['text'][:30]}_{q.get('type', '')}"
+
                 if is_multi:
                     st.markdown("**Pilih semua jawaban yang benar:**")
                     selected_options = []
-                    saved = st.session_state.nkhm_multi_answers.get(q['text'], [])
+                    # Gunakan session state untuk menyimpan pilihan sementara
+                    temp_key = f"temp_multi_{question_key}"
+                    if temp_key not in st.session_state:
+                        st.session_state[temp_key] = []
+                    
+                    saved = st.session_state[temp_key] if not st.session_state.nkhm_answered else []
                     for opt in q['options']:
                         checked = st.checkbox(
                             opt,
                             value=(opt in saved),
-                            key=f"multi_{q['text']}_{opt}",
+                            key=f"multi_{question_key}_{opt}",
                             disabled=st.session_state.nkhm_answered
                         )
                         if checked:
                             selected_options.append(opt)
-                    st.session_state.nkhm_multi_answers[q['text']] = selected_options
-                    selected = selected_options
+                    # Simpan pilihan sementara
+                    if not st.session_state.nkhm_answered:
+                        st.session_state[temp_key] = selected_options
+                    selected = selected_options if not st.session_state.nkhm_answered else saved
                 else:
                     radio_label = "Pilih jawabanmu:" if q.get("type") not in ["EQ_scale", "AQ_scale"] else "Pilih skor tanggapan:"
-                    selected = st.radio(radio_label, q['options'], key=f"radio_{q['text']}",
-                                        index=None, disabled=st.session_state.nkhm_answered)
+                    # Gunakan index yang disimpan di session state
+                    radio_key = f"radio_{question_key}"
+                    if radio_key not in st.session_state:
+                        st.session_state[radio_key] = None
+                    
+                    selected = st.radio(
+                        radio_label, 
+                        q['options'], 
+                        key=radio_key,
+                        index=None, 
+                        disabled=st.session_state.nkhm_answered
+                    )
 
                 # Tombol Jawab
-                disable_btn = st.session_state.nkhm_answered or (not selected) if not is_multi else (st.session_state.nkhm_answered or not selected)
+                if is_multi:
+                    disable_btn = st.session_state.nkhm_answered or not selected
+                else:
+                    disable_btn = st.session_state.nkhm_answered or selected is None
+                
                 if seen_count >= total_available:
                     st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter atau reset.")
                     disable_btn = True
 
-                if st.button("✅ JAWAB", disabled=disable_btn, use_container_width=True):
+                if st.button("✅ JAWAB", disabled=disable_btn, use_container_width=True, key=f"jawab_{question_key}"):
+                    # Reset selected answer sebelum diproses
+                    st.session_state.nkhm_selected_answer = selected
+                    if is_multi:
+                        st.session_state.nkhm_multi_selected = selected
+                    
                     st.session_state.nkhm_seen_questions.add(q['text'])
                     st.session_state.nkhm_answered = True
                     st.session_state.nkhm_total_questions += 1
@@ -577,7 +617,7 @@ def main():
                         st.session_state.last_score_type = score_type
 
                         if is_multi:
-                            user_answers = st.session_state.nkhm_multi_answers.get(q['text'], [])
+                            user_answers = selected
                             total_correct = len(correct_list)
                             user_correct = sum(1 for ans in user_answers if ans in correct_list)
                             raw_increment = 10 * (user_correct / total_correct)
@@ -625,6 +665,13 @@ def main():
                                 "correct": selected == q['correct'],
                                 "nkhm_total": nkhm_total_now
                             })
+                    
+                    # Hapus state temporary setelah submit
+                    if is_multi:
+                        temp_key = f"temp_multi_{question_key}"
+                        if temp_key in st.session_state:
+                            del st.session_state[temp_key]
+                    
                     st.rerun()
 
                 # Feedback
@@ -642,7 +689,7 @@ def main():
                     st.success(f"✅ Jawaban tercatat für {st.session_state.last_score_type}")
 
                 # Tombol selesai bagian skala
-                if q.get("type") in ["EQ_scale", "AQ_scale"] and st.session_state.current_section:
+                if q.get("type") in ["EQ_scale", "AQ_scale"] and st.session_state.current_section and st.session_state.nkhm_answered:
                     if st.button("✅ Selesai Bagian Ini", use_container_width=True):
                         section = st.session_state.current_section
                         q_type = st.session_state.current_scale_type
@@ -662,14 +709,15 @@ def main():
                             st.success(f"✅ Bagian '{section}' selesai! +{section_value} poin. Total AQ Skor Tanggapan: {st.session_state.aq_scale_total}")
                         st.session_state.current_section = None
                         st.session_state.current_scale_type = None
+                        st.session_state.nkhm_answered = False
+                        st.session_state.nkhm_feedback = None
                         if filtered:
                             st.session_state.nkhm_current_q = get_next_question(filtered)
-                            st.session_state.nkhm_answered = False
-                            st.session_state.nkhm_feedback = None
                             st.rerun()
 
-                # Navigasi
+                # Navigasi - HANYA TAMPILKAN SETELAH MENJAWAB
                 if st.session_state.nkhm_answered and q.get("type") not in ["EQ_scale", "AQ_scale"]:
+                    st.markdown("---")
                     col_nav1, col_nav2 = st.columns(2)
                     with col_nav1:
                         if st.button("⏩ SOAL SELANJUTNYA", use_container_width=True):
@@ -683,6 +731,12 @@ def main():
                                     st.session_state.nkhm_answered = False
                                     st.session_state.nkhm_feedback = None
                                     st.session_state.nkhm_multi_answers = {}
+                                    st.session_state.nkhm_selected_answer = None
+                                    st.session_state.nkhm_multi_selected = []
+                                    # Hapus state radio temporary
+                                    for key in list(st.session_state.keys()):
+                                        if key.startswith("radio_q_") or key.startswith("temp_multi_q_"):
+                                            del st.session_state[key]
                                     st.rerun()
                     with col_nav2:
                         if st.button("🎮 KUIS BARU", use_container_width=True):
@@ -697,6 +751,11 @@ def main():
                                     st.session_state.nkhm_answered = False
                                     st.session_state.nkhm_feedback = None
                                     st.session_state.nkhm_multi_answers = {}
+                                    st.session_state.nkhm_selected_answer = None
+                                    st.session_state.nkhm_multi_selected = []
+                                    for key in list(st.session_state.keys()):
+                                        if key.startswith("radio_q_") or key.startswith("temp_multi_q_"):
+                                            del st.session_state[key]
                                     st.rerun()
 
     # ===== TAB LAINNYA =====
