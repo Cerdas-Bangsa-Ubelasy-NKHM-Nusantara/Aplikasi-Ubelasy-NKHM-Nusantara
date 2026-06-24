@@ -94,6 +94,9 @@ def init_session_state():
     # State untuk deteksi perubahan soal
     if "nkhm_last_q_id" not in st.session_state:
         st.session_state.nkhm_last_q_id = ""
+    # State untuk menampilkan tombol navigasi
+    if "nkhm_show_navigation" not in st.session_state:
+        st.session_state.nkhm_show_navigation = False
 
 # ========== FUNGSI UNTUK MENDAPATKAN NILAI PERSENTASE FINAL ==========
 def get_current_nkhm():
@@ -133,6 +136,7 @@ def reset_quiz_state():
     st.session_state.nkhm_feedback_display = None
     st.session_state.nkhm_feedback_correct = None
     st.session_state.nkhm_feedback_is_multi = False
+    st.session_state.nkhm_show_navigation = False
 
 # ========== MAIN ==========
 def main():
@@ -339,10 +343,11 @@ def main():
                 question_key = f"q_{hash(q['text'])}"
                 
                 # ============================================================
-                # TAMPILKAN FEEDBACK DI ATAS SOAL
+                # TAMPILKAN FEEDBACK DI ATAS SOAL (jika ada)
                 # ============================================================
                 if st.session_state.nkhm_feedback_display == "benar":
                     st.success(f"✅ BENAR! + poin untuk {st.session_state.last_score_type}")
+                    st.balloons()
                 elif st.session_state.nkhm_feedback_display == "salah":
                     if st.session_state.nkhm_feedback_is_multi:
                         correct_list = st.session_state.nkhm_feedback_correct
@@ -399,128 +404,127 @@ def main():
                     is_multi = True
                 
                 # ============================================================
-                # RADIO BUTTON / CHECKBOX
+                # RADIO BUTTON / CHECKBOX - Aktif hanya jika belum menjawab
                 # ============================================================
-                if is_multi:
-                    st.markdown("**Pilih semua jawaban yang benar:**")
-                    selected_options = []
-                    saved = st.session_state.nkhm_multi_answers.get(q['text'], [])
-                    for opt in q['options']:
-                        checked = st.checkbox(
-                            opt,
-                            value=(opt in saved),
-                            key=f"multi_{question_key}_{opt}",
-                            disabled=st.session_state.nkhm_answered
+                if not st.session_state.nkhm_answered:
+                    if is_multi:
+                        st.markdown("**Pilih semua jawaban yang benar:**")
+                        selected_options = []
+                        saved = st.session_state.nkhm_multi_answers.get(q['text'], [])
+                        for opt in q['options']:
+                            checked = st.checkbox(
+                                opt,
+                                value=(opt in saved),
+                                key=f"multi_{question_key}_{opt}",
+                                disabled=False
+                            )
+                            if checked:
+                                selected_options.append(opt)
+                        st.session_state.nkhm_multi_answers[q['text']] = selected_options
+                        selected = selected_options
+                    else:
+                        radio_label = "Pilih jawabanmu:" if q.get("type") not in ["EQ_scale", "AQ_scale"] else "Pilih skor tanggapan:"
+                        selected = st.radio(
+                            radio_label, 
+                            q['options'], 
+                            key=f"radio_{question_key}", 
+                            index=None, 
+                            disabled=False
                         )
-                        if checked:
-                            selected_options.append(opt)
-                    st.session_state.nkhm_multi_answers[q['text']] = selected_options
-                    selected = selected_options
                 else:
-                    radio_label = "Pilih jawabanmu:" if q.get("type") not in ["EQ_scale", "AQ_scale"] else "Pilih skor tanggapan:"
-                    selected = st.radio(
-                        radio_label, 
-                        q['options'], 
-                        key=f"radio_{question_key}", 
-                        index=None, 
-                        disabled=st.session_state.nkhm_answered
-                    )
+                    # Jika sudah menjawab, tampilkan pilihan tetapi disabled
+                    if is_multi:
+                        st.markdown("**Pilih semua jawaban yang benar:**")
+                        saved = st.session_state.nkhm_multi_answers.get(q['text'], [])
+                        for opt in q['options']:
+                            st.checkbox(
+                                opt,
+                                value=(opt in saved),
+                                key=f"multi_{question_key}_{opt}_disabled",
+                                disabled=True
+                            )
+                        selected = saved
+                    else:
+                        radio_label = "Pilih jawabanmu:" if q.get("type") not in ["EQ_scale", "AQ_scale"] else "Pilih skor tanggapan:"
+                        # Simpan pilihan sebelumnya
+                        if f"radio_{question_key}" in st.session_state:
+                            previous_selection = st.session_state[f"radio_{question_key}"]
+                        else:
+                            previous_selection = None
+                        selected = st.radio(
+                            radio_label, 
+                            q['options'], 
+                            key=f"radio_{question_key}", 
+                            index=q['options'].index(previous_selection) if previous_selection in q['options'] else None,
+                            disabled=True
+                        )
                 # ============================================================
                 
                 # ========== TOMBOL JAWAB ==========
-                if is_multi:
-                    disable_btn = st.session_state.nkhm_answered or not selected
-                else:
-                    disable_btn = st.session_state.nkhm_answered or selected is None
-                
-                if seen_count >= total_available:
-                    st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter atau reset.")
-                    disable_btn = True
-                
-                if st.button("✅ JAWAB", disabled=disable_btn, use_container_width=True, key=f"jawab_{question_key}"):
-                    # Tandai soal ini sudah dilihat
-                    st.session_state.nkhm_seen_questions.add(q['text'])
-                    st.session_state.nkhm_answered = True
-                    st.session_state.nkhm_total_questions += 1
-                    
-                    if q.get("type") in ["EQ_scale", "AQ_scale"]:
-                        section = q.get("section", "Unknown")
-                        q_type = q.get("type")
-                        selected_value = int(selected) if not is_multi else 0
-                        column_index = get_column_index(selected_value, q['options'])
-                        
-                        if st.session_state.current_section != section:
-                            st.session_state.current_section = section
-                            st.session_state.current_scale_type = q_type
-                        
-                        if q_type == "EQ_scale":
-                            if section not in st.session_state.eq_section_answers:
-                                st.session_state.eq_section_answers[section] = [0, 0, 0, 0]
-                            st.session_state.eq_section_answers[section][column_index] += 1
-                        else:
-                            if section not in st.session_state.aq_section_answers:
-                                st.session_state.aq_section_answers[section] = [0, 0, 0, 0]
-                            st.session_state.aq_section_answers[section][column_index] += 1
-                        
-                        # Set feedback untuk ditampilkan
-                        st.session_state.nkhm_feedback_display = "scale_answered"
-                        st.session_state.nkhm_feedback = "scale_answered"
-                        st.session_state.last_score_type = f"{q_type} (skala)"
-                        st.session_state.nkhm_history.append({
-                            "timestamp": datetime.now().strftime("%H:%M:%S"),
-                            "question": q['text'][:50],
-                            "type": q_type,
-                            "correct": f"Pilihan {selected} (kolom {column_index+1})",
-                            "nkhm_total": get_current_nkhm()[1]
-                        })
+                # Tombol JAWAB hanya muncul jika belum menjawab
+                if not st.session_state.nkhm_answered:
+                    if is_multi:
+                        disable_btn = not selected
                     else:
-                        if q['type'] == "Nasionalisme":
-                            score_type = "Nasionalisme"
-                        elif q['type'] in ["EQ", "IQ", "SQ", "AQ"]:
-                            score_type = q['type']
-                        else:
-                            score_type = q['type']
+                        disable_btn = selected is None
+                    
+                    if seen_count >= total_available:
+                        st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter atau reset.")
+                        disable_btn = True
+                    
+                    if st.button("✅ JAWAB", disabled=disable_btn, use_container_width=True, key=f"jawab_{question_key}"):
+                        # Tandai soal ini sudah dilihat
+                        st.session_state.nkhm_seen_questions.add(q['text'])
+                        st.session_state.nkhm_answered = True
+                        st.session_state.nkhm_total_questions += 1
+                        st.session_state.nkhm_show_navigation = True
                         
-                        st.session_state.last_score_type = score_type
-                        
-                        if is_multi:
-                            user_answers = st.session_state.nkhm_multi_answers.get(q['text'], [])
-                            total_correct = len(correct_list)
-                            user_correct = sum(1 for ans in user_answers if ans in correct_list)
-                            raw_increment = 10 * (user_correct / total_correct)
-                            increment = round(raw_increment)
-                            max_raw_map = {
-                                "IQ": MAX_POIN_IQ,
-                                "EQ": MAX_POIN_EQ,
-                                "SQ": MAX_POIN_SQ,
-                                "AQ": MAX_POIN_AQ,
-                                "Nasionalisme": MAX_POIN_NASIONALISME
-                            }
-                            max_raw = max_raw_map.get(score_type, 100)
-                            new_raw = min(max_raw, st.session_state.nkhm_scores[score_type] + increment)
-                            st.session_state.nkhm_scores[score_type] = new_raw
+                        if q.get("type") in ["EQ_scale", "AQ_scale"]:
+                            section = q.get("section", "Unknown")
+                            q_type = q.get("type")
+                            selected_value = int(selected) if not is_multi else 0
+                            column_index = get_column_index(selected_value, q['options'])
+                            
+                            if st.session_state.current_section != section:
+                                st.session_state.current_section = section
+                                st.session_state.current_scale_type = q_type
+                            
+                            if q_type == "EQ_scale":
+                                if section not in st.session_state.eq_section_answers:
+                                    st.session_state.eq_section_answers[section] = [0, 0, 0, 0]
+                                st.session_state.eq_section_answers[section][column_index] += 1
+                            else:
+                                if section not in st.session_state.aq_section_answers:
+                                    st.session_state.aq_section_answers[section] = [0, 0, 0, 0]
+                                st.session_state.aq_section_answers[section][column_index] += 1
                             
                             # Set feedback untuk ditampilkan
-                            if user_correct > 0:
-                                st.session_state.nkhm_feedback_display = "benar"
-                                st.session_state.nkhm_feedback = "benar"
-                            else:
-                                st.session_state.nkhm_feedback_display = "salah"
-                                st.session_state.nkhm_feedback = "salah"
-                                st.session_state.nkhm_feedback_correct = correct_list
-                                st.session_state.nkhm_feedback_is_multi = True
-                            
-                            _, nkhm_total_now, _, _, _, _, _ = get_current_nkhm()
+                            st.session_state.nkhm_feedback_display = "scale_answered"
+                            st.session_state.nkhm_feedback = "scale_answered"
+                            st.session_state.last_score_type = f"{q_type} (skala)"
                             st.session_state.nkhm_history.append({
                                 "timestamp": datetime.now().strftime("%H:%M:%S"),
                                 "question": q['text'][:50],
-                                "type": score_type,
-                                "correct": f"{user_correct}/{total_correct} benar",
-                                "nkhm_total": nkhm_total_now
+                                "type": q_type,
+                                "correct": f"Pilihan {selected} (kolom {column_index+1})",
+                                "nkhm_total": get_current_nkhm()[1]
                             })
                         else:
-                            if selected == q['correct']:
-                                raw_increment = get_increment(score_type)
+                            if q['type'] == "Nasionalisme":
+                                score_type = "Nasionalisme"
+                            elif q['type'] in ["EQ", "IQ", "SQ", "AQ"]:
+                                score_type = q['type']
+                            else:
+                                score_type = q['type']
+                            
+                            st.session_state.last_score_type = score_type
+                            
+                            if is_multi:
+                                user_answers = selected
+                                total_correct = len(correct_list)
+                                user_correct = sum(1 for ans in user_answers if ans in correct_list)
+                                raw_increment = 10 * (user_correct / total_correct)
+                                increment = round(raw_increment)
                                 max_raw_map = {
                                     "IQ": MAX_POIN_IQ,
                                     "EQ": MAX_POIN_EQ,
@@ -529,34 +533,67 @@ def main():
                                     "Nasionalisme": MAX_POIN_NASIONALISME
                                 }
                                 max_raw = max_raw_map.get(score_type, 100)
-                                new_raw = min(max_raw, st.session_state.nkhm_scores[score_type] + raw_increment)
+                                new_raw = min(max_raw, st.session_state.nkhm_scores[score_type] + increment)
                                 st.session_state.nkhm_scores[score_type] = new_raw
                                 
                                 # Set feedback untuk ditampilkan
-                                st.session_state.nkhm_feedback_display = "benar"
-                                st.session_state.nkhm_feedback = "benar"
+                                if user_correct > 0:
+                                    st.session_state.nkhm_feedback_display = "benar"
+                                    st.session_state.nkhm_feedback = "benar"
+                                else:
+                                    st.session_state.nkhm_feedback_display = "salah"
+                                    st.session_state.nkhm_feedback = "salah"
+                                    st.session_state.nkhm_feedback_correct = correct_list
+                                    st.session_state.nkhm_feedback_is_multi = True
                                 
-                                _, nkhm_total_baru, _, _, _, _, _ = get_current_nkhm()
-                                save_score(st.session_state.nkhm_user, nkhm_total_baru)
+                                _, nkhm_total_now, _, _, _, _, _ = get_current_nkhm()
+                                st.session_state.nkhm_history.append({
+                                    "timestamp": datetime.now().strftime("%H:%M:%S"),
+                                    "question": q['text'][:50],
+                                    "type": score_type,
+                                    "correct": f"{user_correct}/{total_correct} benar",
+                                    "nkhm_total": nkhm_total_now
+                                })
                             else:
-                                # Set feedback untuk ditampilkan
-                                st.session_state.nkhm_feedback_display = "salah"
-                                st.session_state.nkhm_feedback = "salah"
-                                st.session_state.nkhm_feedback_correct = q['correct']
-                                st.session_state.nkhm_feedback_is_multi = False
-                            
-                            _, nkhm_total_now, _, _, _, _, _ = get_current_nkhm()
-                            st.session_state.nkhm_history.append({
-                                "timestamp": datetime.now().strftime("%H:%M:%S"),
-                                "question": q['text'][:50],
-                                "type": score_type,
-                                "correct": selected == q['correct'],
-                                "nkhm_total": nkhm_total_now
-                            })
-                    
-                    # Set last_q_id ke soal ini
-                    st.session_state.nkhm_last_q_id = current_q_id
-                    st.rerun()
+                                if selected == q['correct']:
+                                    raw_increment = get_increment(score_type)
+                                    max_raw_map = {
+                                        "IQ": MAX_POIN_IQ,
+                                        "EQ": MAX_POIN_EQ,
+                                        "SQ": MAX_POIN_SQ,
+                                        "AQ": MAX_POIN_AQ,
+                                        "Nasionalisme": MAX_POIN_NASIONALISME
+                                    }
+                                    max_raw = max_raw_map.get(score_type, 100)
+                                    new_raw = min(max_raw, st.session_state.nkhm_scores[score_type] + raw_increment)
+                                    st.session_state.nkhm_scores[score_type] = new_raw
+                                    
+                                    # Set feedback untuk ditampilkan
+                                    st.session_state.nkhm_feedback_display = "benar"
+                                    st.session_state.nkhm_feedback = "benar"
+                                    
+                                    _, nkhm_total_baru, _, _, _, _, _ = get_current_nkhm()
+                                    save_score(st.session_state.nkhm_user, nkhm_total_baru)
+                                else:
+                                    # Set feedback untuk ditampilkan
+                                    st.session_state.nkhm_feedback_display = "salah"
+                                    st.session_state.nkhm_feedback = "salah"
+                                    st.session_state.nkhm_feedback_correct = q['correct']
+                                    st.session_state.nkhm_feedback_is_multi = False
+                                
+                                _, nkhm_total_now, _, _, _, _, _ = get_current_nkhm()
+                                st.session_state.nkhm_history.append({
+                                    "timestamp": datetime.now().strftime("%H:%M:%S"),
+                                    "question": q['text'][:50],
+                                    "type": score_type,
+                                    "correct": selected == q['correct'],
+                                    "nkhm_total": nkhm_total_now
+                                })
+                        
+                        # Set last_q_id ke soal ini
+                        st.session_state.nkhm_last_q_id = current_q_id
+                        st.rerun()
+                # ============================================================
                 
                 # ========== TOMBOL SELESAI BAGIAN (skala) ==========
                 if q.get("type") in ["EQ_scale", "AQ_scale"] and st.session_state.current_section and st.session_state.nkhm_answered:
@@ -588,25 +625,27 @@ def main():
                             st.rerun()
                 
                 # ========== TOMBOL NAVIGASI ==========
+                # Tampilkan tombol navigasi hanya jika sudah menjawab
                 if st.session_state.nkhm_answered and q.get("type") not in ["EQ_scale", "AQ_scale"]:
                     st.markdown("---")
-                    st.caption("💡 Klik tombol di bawah untuk lanjut ke soal berikutnya:")
                     col_nav1, col_nav2 = st.columns(2)
                     with col_nav1:
-                        if st.button("⏩ SOAL SELANJUTNYA", use_container_width=True, key=f"next_{question_key}"):
+                        if st.button("⏩ SOAL BERIKUTNYA", use_container_width=True, key=f"next_{question_key}"):
                             if filtered_questions:
                                 next_q = get_next_question(filtered_questions)
                                 if next_q is None:
                                     st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter.")
                                     st.session_state.nkhm_answered = True
                                 else:
+                                    # Reset state dan pindah ke soal berikutnya
                                     reset_quiz_state()
                                     st.session_state.nkhm_current_q = next_q
                                     st.session_state.nkhm_last_q_id = next_q.get('text', '')
                                     st.rerun()
                     with col_nav2:
-                        if st.button("🎮 KUIS BARU", use_container_width=True, key=f"reset_{question_key}"):
+                        if st.button("🔄 KUIS BARU", use_container_width=True, key=f"reset_{question_key}"):
                             if filtered_questions:
+                                # Reset semua, mulai dari awal
                                 st.session_state.nkhm_seen_questions = set()
                                 next_q = get_next_question(filtered_questions)
                                 if next_q is None:
