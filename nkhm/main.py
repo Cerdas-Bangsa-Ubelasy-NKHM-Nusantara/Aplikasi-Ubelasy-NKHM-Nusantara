@@ -239,9 +239,17 @@ def main():
         
     # ========== TAB 1: KUIS ==========
     with tab1:
-        img_path = Path(__file__).parent.parent / "assets" / "kuis.gif"
-        if img_path.exists():
-            st.image(str(img_path), caption="Asah 4 Kecerdasan dan Nasionalisme 🇮🇩", use_container_width=True)
+        # ========== GANTI DENGAN VIDEO ==========
+        video_path = Path(__file__).parent.parent / "assets" / "kuis.mp4"
+        if video_path.exists():
+            # Baca file video sebagai bytes
+            with open(video_path, "rb") as f:
+                video_bytes = f.read()
+            st.video(video_bytes, loop=True, autoplay=True)
+        else:
+            img_path = Path(__file__).parent.parent / "assets" / "kuis.gif"
+            if img_path.exists():
+                st.image(str(img_path), caption="Asah 4 Kecerdasan dan Nasionalisme 🇮🇩", use_container_width=True)
         else:
             st.info("💡 Gambar kuis belum tersedia. Silakan upload 'kuis.gif' ke folder assets.")
             
