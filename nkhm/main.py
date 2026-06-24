@@ -128,15 +128,16 @@ def get_next_question(filtered_questions):
     return random.choice(available)
 
 # ========== RESET STATE KUIS ==========
-def reset_quiz_state():
+def reset_quiz_state(keep_feedback=False):
     """Reset semua state kuis untuk soal baru."""
     st.session_state.nkhm_answered = False
-    st.session_state.nkhm_feedback = None
     st.session_state.nkhm_multi_answers = {}
-    st.session_state.nkhm_feedback_display = None
-    st.session_state.nkhm_feedback_correct = None
-    st.session_state.nkhm_feedback_is_multi = False
-    st.session_state.nkhm_show_navigation = False
+    if not keep_feedback:
+        st.session_state.nkhm_feedback = None
+        st.session_state.nkhm_feedback_display = None
+        st.session_state.nkhm_feedback_correct = None
+        st.session_state.nkhm_feedback_is_multi = False
+        st.session_state.nkhm_show_navigation = False
 
 # ========== MAIN ==========
 def main():
@@ -249,7 +250,7 @@ def main():
             # Baca file video sebagai bytes
             with open(video_path, "rb") as f:
                 video_bytes = f.read()
-            st.video(video_bytes, loop=True, autoplay=True)
+            st.video(video_bytes, loop=True, autoplay=False)
         
         st.markdown("---")
         
@@ -331,11 +332,16 @@ def main():
                 q = st.session_state.nkhm_current_q
                 
                 # ============================================================
-                # DETEKSI PERUBAHAN SOAL - RESET STATE OTOMATIS
+                # DETEKSI PERUBAHAN SOAL - HANYA RESET JIKA SOAL BERBEDA
                 # ============================================================
                 current_q_id = q.get('text', '')
-                if st.session_state.nkhm_last_q_id != current_q_id:
-                    reset_quiz_state()
+                is_new_question = st.session_state.nkhm_last_q_id != current_q_id
+                
+                if is_new_question:
+                    # Jika soal baru dan kita sudah menjawab sebelumnya, reset answered saja
+                    # Tapi JANGAN reset feedback_display karena kita ingin menampilkannya
+                    st.session_state.nkhm_answered = False
+                    st.session_state.nkhm_multi_answers = {}
                     st.session_state.nkhm_last_q_id = current_q_id
                 # ============================================================
                 
@@ -404,7 +410,7 @@ def main():
                     is_multi = True
                 
                 # ============================================================
-                # RADIO BUTTON / CHECKBOX - Aktif hanya jika belum menjawab
+                # RADIO BUTTON / CHECKBOX - Aktif jika belum menjawab
                 # ============================================================
                 if not st.session_state.nkhm_answered:
                     if is_multi:
@@ -446,11 +452,7 @@ def main():
                         selected = saved
                     else:
                         radio_label = "Pilih jawabanmu:" if q.get("type") not in ["EQ_scale", "AQ_scale"] else "Pilih skor tanggapan:"
-                        # Simpan pilihan sebelumnya
-                        if f"radio_{question_key}" in st.session_state:
-                            previous_selection = st.session_state[f"radio_{question_key}"]
-                        else:
-                            previous_selection = None
+                        previous_selection = st.session_state.get(f"radio_{question_key}", None)
                         selected = st.radio(
                             radio_label, 
                             q['options'], 
@@ -625,9 +627,10 @@ def main():
                             st.rerun()
                 
                 # ========== TOMBOL NAVIGASI ==========
-                # Tampilkan tombol navigasi hanya jika sudah menjawab
+                # Tampilkan tombol navigasi jika sudah menjawab
                 if st.session_state.nkhm_answered and q.get("type") not in ["EQ_scale", "AQ_scale"]:
                     st.markdown("---")
+                    st.markdown("### 📌 Navigasi")
                     col_nav1, col_nav2 = st.columns(2)
                     with col_nav1:
                         if st.button("⏩ SOAL BERIKUTNYA", use_container_width=True, key=f"next_{question_key}"):
@@ -638,9 +641,11 @@ def main():
                                     st.session_state.nkhm_answered = True
                                 else:
                                     # Reset state dan pindah ke soal berikutnya
-                                    reset_quiz_state()
+                                    # TAPI tetap pertahankan feedback yang sudah ada
                                     st.session_state.nkhm_current_q = next_q
+                                    st.session_state.nkhm_answered = False
                                     st.session_state.nkhm_last_q_id = next_q.get('text', '')
+                                    # Jangan reset feedback_display agar tetap tampil
                                     st.rerun()
                     with col_nav2:
                         if st.button("🔄 KUIS BARU", use_container_width=True, key=f"reset_{question_key}"):
@@ -652,7 +657,7 @@ def main():
                                     st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter.")
                                     st.session_state.nkhm_answered = True
                                 else:
-                                    reset_quiz_state()
+                                    reset_quiz_state()  # Reset semua termasuk feedback
                                     st.session_state.nkhm_current_q = next_q
                                     st.session_state.nkhm_last_q_id = next_q.get('text', '')
                                     st.rerun()
