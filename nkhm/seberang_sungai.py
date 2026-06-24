@@ -299,7 +299,7 @@ def show_buttons():
             # Baca file video sebagai bytes
             with open(video_path, "rb") as f:
                 video_bytes = f.read()
-            st.video(video_bytes, loop=True, autoplay=True)
+            st.video(video_bytes, loop=True, autoplay=False)
         else:
             # Fallback ke teks jika video tidak ada
             st.markdown("### 🌊🌊🌊")
