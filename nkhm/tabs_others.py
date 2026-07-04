@@ -12,6 +12,7 @@ from nkhm.seberang_sungai import show_river_game
 from nkhm.tutorial import show_tutorial
 from nkhm.tiang_bendera import show_tiang_bendera
 from nkhm.karunia import show_karunia  # Langsung import tanpa try-except
+from nkhm.jarimatika import show_jarimatika
 
 # Import opsional
 try:
