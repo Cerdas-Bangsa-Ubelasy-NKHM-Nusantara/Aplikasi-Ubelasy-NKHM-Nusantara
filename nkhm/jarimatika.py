@@ -6,7 +6,7 @@ def show_jarimatika():
     
     # URL aplikasi Jarimatika yang di-deploy di Netlify
     # Ganti dengan URL Netlify Anda
-    jarimatika_url = "https://jarimatika-app.netlify.app"
+    jarimatika_url = "https://jarimatika-app.streamlit.app/"
     
     # Tampilkan iframe
     st.markdown(f"""
