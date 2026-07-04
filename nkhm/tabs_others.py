@@ -12,7 +12,7 @@ from nkhm.seberang_sungai import show_river_game
 from nkhm.tutorial import show_tutorial
 from nkhm.tiang_bendera import show_tiang_bendera
 from nkhm.karunia import show_karunia  # Langsung import tanpa try-except
-# from nkhm.jarimatika import show_jarimatika
+from nkhm.jarimatika import show_jarimatika
 
 # Import opsional
 try:
@@ -163,8 +163,8 @@ def show_tab7():
     else:
         st.info("💡 Gambar 'hadiah.gif' belum tersedia.")
     st.markdown("---")
-    sub_tab1, sub_tab2, sub_tab3, sub_tab4, sub_tab5 = st.tabs([
-        "🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🏗️ Tiang & Bendera", "🎲 Lainnya (Coming Soon)"
+    sub_tab1, sub_tab2, sub_tab3, sub_tab4, sub_tab5, sub_tab6 = st.tabs([
+        "🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🏗️ Tiang & Bendera", "Jarimatika", "🎲 Lainnya (Coming Soon)"
     ])
     with sub_tab1:
         show_tebak_pahlawan()
@@ -175,6 +175,8 @@ def show_tab7():
     with sub_tab4:
         show_tiang_bendera()
     with sub_tab5:
+        show_jarimatika()
+    with sub_tab6:
         st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
 
 # ========== TAB 8: TUTORIAL ==========
