@@ -182,3 +182,4 @@ def show_tab7():
 # ========== TAB 8: TUTORIAL ==========
 def show_tab8():
     show_tutorial()
+
