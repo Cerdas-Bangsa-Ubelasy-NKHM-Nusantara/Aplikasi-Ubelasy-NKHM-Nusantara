@@ -1,23 +1,14 @@
 import streamlit as st
-from pathlib import Path
 
 def show_jarimatika():
     st.markdown("## 🖐️ Jarimatika App")
     st.markdown("Belajar berhitung dengan jari menggunakan AI dan kamera.")
     
-    # Cek apakah folder jarimatika-app ada di root
-    jarimatika_dir = Path(__file__).parent.parent / "jarimatika-app"
-    index_path = jarimatika_dir / "index.html"
+    # URL aplikasi Jarimatika yang di-deploy di Netlify
+    # Ganti dengan URL Netlify Anda
+    jarimatika_url = "https://jarimatika-app.netlify.app"
     
-    if not index_path.exists():
-        st.error("❌ Folder 'jarimatika-app' tidak ditemukan. Pastikan folder tersebut ada di root proyek Ubelasy + NKHM.")
-        st.info("📁 Struktur yang diharapkan:\n```\nUbelasy-NKHM-Nusantara/\n├── jarimatika-app/\n│   ├── index.html\n│   ├── css/\n│   ├── js/\n│   └── ...\n├── nkhm/\n│   └── jarimatika.py\n└── ...\n```")
-        return
-    
-    # Tampilkan iframe yang mengarah ke index.html
-    # Asumsikan server melayani folder jarimatika-app sebagai statis
-    jarimatika_url = "/jarimatika-app/index.html"
-    
+    # Tampilkan iframe
     st.markdown(f"""
     <div style="width:100%; height:80vh; border-radius:12px; overflow:hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
         <iframe 
