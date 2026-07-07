@@ -1,0 +1,41 @@
+name: Deploy Jarimatika Flutter to Netlify
+
+on:
+  push:
+    paths:
+      - 'jarimatika_flutter/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0'
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: |
+          cd jarimatika_flutter
+          flutter pub get
+
+      - name: Build web
+        run: |
+          cd jarimatika_flutter
+          flutter build web --release
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: './jarimatika_flutter/build/web'
+          production-branch: main
+          deploy-message: "Deploy from GitHub Actions"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
