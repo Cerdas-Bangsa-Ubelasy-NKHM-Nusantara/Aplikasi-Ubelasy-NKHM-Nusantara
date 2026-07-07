@@ -11,7 +11,7 @@ class HandDetectionService {
   factory HandDetectionService() => _instance;
   HandDetectionService._internal();
 
-  late HandDetector _handDetector;
+  HandDetector? _handDetector;
   bool _isInitialized = false;
   
   // Landmark yang terdeteksi
@@ -22,22 +22,33 @@ class HandDetectionService {
     if (_isInitialized) return;
     
     try {
-      // Load model dari assets
-      final modelBytes = await _loadModel();
+      // Opsi 1: Load model dari assets
+      try {
+        _handDetector = await HandDetector.fromAsset(
+          'assets/models/hand_landmark.tflite',
+        );
+        print('✅ Hand detector loaded from assets');
+      } catch (e) {
+        print('⚠️ Gagal load dari assets, mencoba create default: $e');
+        // Opsi 2: Gunakan model default dari package
+        _handDetector = await HandDetector.create();
+        print('✅ Hand detector created with default model');
+      }
       
-      // Inisialisasi detektor (menggunakan hand_detection package)
-      _handDetector = await HandDetector.fromAsset(
-        'assets/models/hand_landmark.tflite',
-      );
-      
-      _isInitialized = true;
+      if (_handDetector != null) {
+        _isInitialized = true;
+      } else {
+        throw Exception('Tidak dapat inisialisasi hand detector');
+      }
     } catch (e) {
       print('❌ Gagal inisialisasi hand detector: $e');
-      // Fallback: inisialisasi dengan google_ml_kit
+      // Fallback: inisialisasi dengan google_ml_kit (jika diperlukan)
       try {
-        final options = PoseDetectorOptions();
+        // Contoh fallback dengan pose detector (hanya placeholder)
+        // final options = PoseDetectorOptions();
         // _poseDetector = PoseDetector(options: options);
-        _isInitialized = true;
+        // _isInitialized = true;
+        throw Exception('Tidak dapat inisialisasi detektor tangan');
       } catch (e2) {
         print('❌ Gagal inisialisasi fallback: $e2');
         throw Exception('Tidak dapat inisialisasi detektor tangan');
@@ -45,64 +56,17 @@ class HandDetectionService {
     }
   }
 
-  /// Load model dari assets
-  Future<ByteData> _loadModel() async {
-    try {
-      return await rootBundle.load(AppConstants.modelPath);
-    } catch (e) {
-      print('⚠️ Model tidak ditemukan di assets, gunakan fallback');
-      // Fallback: model default dari package
-      throw Exception('Model file not found');
-    }
-  }
-
   /// Deteksi tangan dari frame kamera
   Future<List<HandLandmark>?> detectHand(CameraImage image) async {
-    if (!_isInitialized) return null;
+    if (!_isInitialized || _handDetector == null) return null;
     
     try {
-      // Konversi CameraImage ke InputImage (untuk google_ml_kit)
-      final inputImage = _convertCameraImageToInputImage(image);
-      
-      if (inputImage == null) return null;
-      
       // Deteksi menggunakan hand_detection
-      final landmarks = await _handDetector.detect(image);
-      
+      final landmarks = await _handDetector!.detect(image);
       _currentLandmarks = landmarks;
       return landmarks;
     } catch (e) {
       print('❌ Error deteksi tangan: $e');
-      return null;
-    }
-  }
-
-  /// Konversi CameraImage ke InputImage
-  InputImage? _convertCameraImageToInputImage(CameraImage image) {
-    try {
-      final format = image.format.group;
-      final bytes = image.planes[0].bytes;
-      final width = image.width;
-      final height = image.height;
-      
-      final inputImageData = InputImageData(
-        size: Size(width.toDouble(), height.toDouble()),
-        imageRotation: InputImageRotation.rotation0deg,
-        inputImageFormat: InputImageFormat.nv21,
-        planeData: image.planes.map((plane) {
-          return InputImagePlaneMetadata(
-            bytesPerRow: plane.bytesPerRow,
-            height: plane.height,
-            width: plane.width,
-          );
-        }).toList(),
-      );
-      
-      return InputImage.fromByteData(
-        bytes: bytes as ByteData? ?? ByteData(0),
-        metadata: inputImageData,
-      );
-    } catch (e) {
       return null;
     }
   }
@@ -137,7 +101,8 @@ class HandDetectionService {
   
   /// Bersihkan resources
   void dispose() {
-    _handDetector.dispose();
+    _handDetector?.dispose();
+    _handDetector = null;
     _isInitialized = false;
   }
 }
