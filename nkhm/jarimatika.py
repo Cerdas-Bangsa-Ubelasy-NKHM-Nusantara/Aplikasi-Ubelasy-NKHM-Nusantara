@@ -4,10 +4,10 @@ def show_jarimatika():
     st.markdown("## 🖐️ Jarimatika App")
     st.markdown("Belajar berhitung dengan jari menggunakan AI dan kamera.")
     
-    # URL aplikasi Jarimatika yang di-deploy di Netlify
-    # Ganti dengan URL Netlify Anda
-    jarimatika_url = "https://jarimatika-app.streamlit.app/"
-    
+    # URL aplikasi Jarimatika (Flutter) yang di‑deploy di Netlify
+    # Ganti dengan URL Netlify Anda setelah build web Flutter
+    jarimatika_url = "https://jarimatika-flutter.netlify.app"  # <-- ganti dengan URL asli
+
     # Tampilkan iframe
     st.markdown(f"""
     <div style="width:100%; height:80vh; border-radius:12px; overflow:hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
@@ -19,7 +19,7 @@ def show_jarimatika():
         ></iframe>
     </div>
     """, unsafe_allow_html=True)
-    
+
     # Info tambahan
     with st.expander("ℹ️ Cara Menggunakan Jarimatika App"):
         st.markdown("""
