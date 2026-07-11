@@ -57,8 +57,8 @@ if not st.session_state.splash_selesai:
                 """,
                 unsafe_allow_html=True
             )
-            # Tombol Mulai
-            if st.button("🚀 Mulai", width='stretch'):  # <-- PERUBAHAN
+            # Tombol Mulai - HAPUS width parameter
+            if st.button("🚀 Mulai"):  # <-- PERUBAHAN
                 st.session_state.splash_selesai = True
                 st.rerun()
     
@@ -109,8 +109,8 @@ if app_mode == "🌿 NKHM Nusantara (Gamifikasi)":
     nkhm_url = "https://tim-cerdas-bangsa-ubelasy-nkhm-nusantara.streamlit.app"
     target_url = f"{nkhm_url}?tab=dasbor&subtab=catatan"
   
-    # Tombol Catatan Pribadi (membuka di tab baru)
-    st.sidebar.link_button("📝 Catatan Pribadi", vercel_url, width='stretch')  # <-- PERUBAHAN
+    # Tombol Catatan Pribadi - HAPUS width parameter
+    st.sidebar.link_button("📝 Catatan Pribadi", vercel_url)  # <-- PERUBAHAN
     
     st.sidebar.markdown("---")   # separator setelah tombol
     
