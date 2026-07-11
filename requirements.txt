@@ -1,10 +1,17 @@
-Aplikasi-Ubelasy-NKHM-Nusantara/
-├── app.py
-├── assets/
-│   └── dokumen/
-│       └── Pola Hidup dan Pola Pikir yang Arif Bijaksana Melalui Disiplin Rohani.md
-├── nkhm/
-│   ├── main.py
-│   └── pengembangan_diri.py  ← File ini
-└── ubelasy/
-    └── main.py
+streamlit==1.37.0
+pandas>=1.5.0
+numpy>=1.23.0
+matplotlib>=3.5.0
+openai>=1.0.0
+fpdf2>=2.7.0
+python-docx
+PyPDF2
+google-generativeai>=0.3.0
+python-dotenv>=1.0.0
+google-genai>=1.0.0
+openpyxl>=3.0.0
+pillow>=9.0.0
+reportlab>=4.0.0
+setuptools>=65.0.0
+wheel>=0.38.0
+markdown>=3.4.0
