@@ -39,6 +39,38 @@ except ImportError:
     KARUNIA_AVAILABLE = False
     show_karunia = None
 
+# ========== CSS UNTUK GAMBAR FULL WIDTH ==========
+def inject_image_css():
+    """Menambahkan CSS untuk membuat gambar full width"""
+    st.markdown("""
+    <style>
+    .full-width-image img {
+        width: 100%;
+        height: auto;
+    }
+    .full-width-image {
+        margin: 10px 0;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+def show_full_width_image(image_path, caption=None):
+    """Menampilkan gambar dengan full width menggunakan CSS"""
+    if image_path.exists():
+        if caption:
+            with st.container():
+                st.markdown('<div class="full-width-image">', unsafe_allow_html=True)
+                st.image(str(image_path))
+                st.markdown('</div>', unsafe_allow_html=True)
+                st.caption(caption)
+        else:
+            with st.container():
+                st.markdown('<div class="full-width-image">', unsafe_allow_html=True)
+                st.image(str(image_path))
+                st.markdown('</div>', unsafe_allow_html=True)
+    else:
+        st.info(f"💡 Gambar '{image_path.name}' belum tersedia.")
+
 # ========== INISIALISASI SESSION STATE ==========
 def init_session_state():
     if "nkhm_user" not in st.session_state:
@@ -141,6 +173,9 @@ def reset_quiz_state(keep_feedback=False):
 
 # ========== MAIN ==========
 def main():
+    # Inject CSS untuk gambar
+    inject_image_css()
+    
     init_session_state()
     
     # Splash screen / login
@@ -722,10 +757,7 @@ def main():
     # ========== TAB 5: TANDING ==========
     with tab5:
         img_path = Path(__file__).parent.parent / "assets" / "garuda.jpg"
-        if img_path.exists():
-            st.image(str(img_path), caption="Bertanding Untuk Menang 🇮🇩", width='stretch')
-        else:
-            st.info("💡 Gambar 'garuda.jpg' belum tersedia.")
+        show_full_width_image(img_path, caption="Bertanding Untuk Menang 🇮🇩")
         st.markdown("---")
         if TOURNAMENT_AVAILABLE and show_tournament is not None:
             tanding_mode = st.radio(
@@ -747,10 +779,7 @@ def main():
         sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Sto-mata Hati"])
         with sub_tab1:
             img_path = Path(__file__).parent.parent / "assets" / "karunia.jpg"
-            if img_path.exists():
-                st.image(str(img_path), caption="Grow in Grace 🇮🇩", width='stretch')
-            else:
-                st.info("💡 Gambar 'karunia.jpg' belum tersedia.")
+            show_full_width_image(img_path, caption="Grow in Grace 🇮🇩")
             st.markdown("---")
             subsub_tab1, subsub_tab2, subsub_tab3, subsub_tab4 = st.tabs(["📜 Karunia Umum", "✨ Karunia 140 Karakter", "📋 Karakter & Masalah", "📚 Pengembangan Diri"])
             with subsub_tab1:
@@ -789,10 +818,7 @@ def main():
     # ========== TAB 7: HADIAH ==========
     with tab7:
         img_path = Path(__file__).parent.parent / "assets" / "hadiah.gif"
-        if img_path.exists():
-            st.image(str(img_path), caption="A Giveaway 🇮🇩", width='stretch')
-        else:
-            st.info("💡 Gambar 'hadiah.gif' belum tersedia.")
+        show_full_width_image(img_path, caption="A Giveaway 🇮🇩")
         st.markdown("---")
         sub_tab1, sub_tab2, sub_tab3, sub_tab4, sub_tab5 = st.tabs(["🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🇮🇩 Tiang Bendera", "🎲 Lainnya (Coming Soon)"])
         with sub_tab1:
