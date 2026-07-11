@@ -5,6 +5,7 @@ import random
 import os
 from pathlib import Path
 from datetime import datetime
+import base64
 from nkhm.questions import load_all_questions
 from nkhm.scoring import (
     MAX_SCORE, get_increment, get_column_index, calculate_section_value,
@@ -39,37 +40,40 @@ except ImportError:
     KARUNIA_AVAILABLE = False
     show_karunia = None
 
-# ========== CSS UNTUK GAMBAR FULL WIDTH ==========
-def inject_image_css():
-    """Menambahkan CSS untuk membuat gambar full width"""
-    st.markdown("""
-    <style>
-    .full-width-image img {
-        width: 100%;
-        height: auto;
-    }
-    .full-width-image {
-        margin: 10px 0;
-    }
-    </style>
-    """, unsafe_allow_html=True)
 
-def show_full_width_image(image_path, caption=None):
-    """Menampilkan gambar dengan full width menggunakan CSS"""
+# ========== FUNGSI UNTUK MENAMPILKAN GAMBAR DENGAN COLUMNS ==========
+def show_image_centered(image_path, caption=None, width_ratio=2):
+    """
+    Menampilkan gambar di tengah dengan menggunakan columns.
+    width_ratio: 1 untuk kecil, 2 untuk sedang, 3 untuk besar
+    """
     if image_path.exists():
-        if caption:
-            with st.container():
-                st.markdown('<div class="full-width-image">', unsafe_allow_html=True)
-                st.image(str(image_path))
-                st.markdown('</div>', unsafe_allow_html=True)
+        col1, col2, col3 = st.columns([1, width_ratio, 1])
+        with col2:
+            st.image(str(image_path))
+            if caption:
                 st.caption(caption)
-        else:
-            with st.container():
-                st.markdown('<div class="full-width-image">', unsafe_allow_html=True)
-                st.image(str(image_path))
-                st.markdown('</div>', unsafe_allow_html=True)
+        return True
     else:
         st.info(f"💡 Gambar '{image_path.name}' belum tersedia.")
+        return False
+
+
+def show_video_centered(video_path, width_ratio=2):
+    """Menampilkan video di tengah dengan menggunakan columns."""
+    if video_path.exists():
+        with open(video_path, "rb") as f:
+            video_bytes = f.read()
+        col1, col2, col3 = st.columns([1, width_ratio, 1])
+        with col2:
+            st.video(video_bytes, loop=True, autoplay=False)
+        return True
+    else:
+        col1, col2, col3 = st.columns([1, width_ratio, 1])
+        with col2:
+            st.info("💡 Video 'kuis.mp4' belum tersedia.")
+        return False
+
 
 # ========== INISIALISASI SESSION STATE ==========
 def init_session_state():
@@ -130,6 +134,7 @@ def init_session_state():
     if "nkhm_show_navigation" not in st.session_state:
         st.session_state.nkhm_show_navigation = False
 
+
 # ========== FUNGSI UNTUK MENDAPATKAN NILAI PERSENTASE FINAL ==========
 def get_current_nkhm():
     """Menghitung NKHM_Q, NKHM_Total, dan nilai persentase semua kecerdasan"""
@@ -150,6 +155,7 @@ def get_current_nkhm():
     nkhm_total = calculate_nkhm_total(nkhm_q, nas_pct)
     return nkhm_q, nkhm_total, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct
 
+
 # ========== FUNGSI BANTU UNTUK MEMILIH SOAL BELUM TERLIHAT ==========
 def get_next_question(filtered_questions):
     """Pilih soal secara acak dari filtered_questions yang belum pernah ditampilkan."""
@@ -158,6 +164,7 @@ def get_next_question(filtered_questions):
     if not available:
         return None
     return random.choice(available)
+
 
 # ========== RESET STATE KUIS ==========
 def reset_quiz_state(keep_feedback=False):
@@ -171,11 +178,9 @@ def reset_quiz_state(keep_feedback=False):
         st.session_state.nkhm_feedback_is_multi = False
         st.session_state.nkhm_show_navigation = False
 
+
 # ========== MAIN ==========
 def main():
-    # Inject CSS untuk gambar
-    inject_image_css()
-    
     init_session_state()
     
     # Splash screen / login
@@ -279,13 +284,9 @@ def main():
         
     # ========== TAB 1: KUIS ==========
     with tab1:
-        # ========== GANTI DENGAN VIDEO ==========
+        # ========== VIDEO ==========
         video_path = Path(__file__).parent.parent / "assets" / "kuis.mp4"
-        if video_path.exists():
-            # Baca file video sebagai bytes
-            with open(video_path, "rb") as f:
-                video_bytes = f.read()
-            st.video(video_bytes, loop=True, autoplay=False)
+        show_video_centered(video_path, width_ratio=2)
         
         st.markdown("---")
         
@@ -678,8 +679,7 @@ def main():
                                     # Reset state dan pindah ke soal berikutnya
                                     # TAPI tetap pertahankan feedback yang sudah ada
                                     st.session_state.nkhm_current_q = next_q
-                                    st.session_state.nkhm_answered = False
-                                    st.session_state.nkhm_last_q_id = next_q.get('text', '')
+                                    st.session_state.nkhm_answered = False                                    st.session_state.nkhm_last_q_id = next_q.get('text', '')
                                     # Jangan reset feedback_display agar tetap tampil
                                     st.rerun()
                     with col_nav2:
@@ -757,7 +757,7 @@ def main():
     # ========== TAB 5: TANDING ==========
     with tab5:
         img_path = Path(__file__).parent.parent / "assets" / "garuda.jpg"
-        show_full_width_image(img_path, caption="Bertanding Untuk Menang 🇮🇩")
+        show_image_centered(img_path, caption="Bertanding Untuk Menang 🇮🇩", width_ratio=2)
         st.markdown("---")
         if TOURNAMENT_AVAILABLE and show_tournament is not None:
             tanding_mode = st.radio(
@@ -779,7 +779,7 @@ def main():
         sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Sto-mata Hati"])
         with sub_tab1:
             img_path = Path(__file__).parent.parent / "assets" / "karunia.jpg"
-            show_full_width_image(img_path, caption="Grow in Grace 🇮🇩")
+            show_image_centered(img_path, caption="Grow in Grace 🇮🇩", width_ratio=2)
             st.markdown("---")
             subsub_tab1, subsub_tab2, subsub_tab3, subsub_tab4 = st.tabs(["📜 Karunia Umum", "✨ Karunia 140 Karakter", "📋 Karakter & Masalah", "📚 Pengembangan Diri"])
             with subsub_tab1:
@@ -818,7 +818,7 @@ def main():
     # ========== TAB 7: HADIAH ==========
     with tab7:
         img_path = Path(__file__).parent.parent / "assets" / "hadiah.gif"
-        show_full_width_image(img_path, caption="A Giveaway 🇮🇩")
+        show_image_centered(img_path, caption="A Giveaway 🇮🇩", width_ratio=2)
         st.markdown("---")
         sub_tab1, sub_tab2, sub_tab3, sub_tab4, sub_tab5 = st.tabs(["🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🇮🇩 Tiang Bendera", "🎲 Lainnya (Coming Soon)"])
         with sub_tab1:
@@ -838,6 +838,7 @@ def main():
     # ========== TAB 8: TUTORIAL ==========
     with tab8:
         show_tutorial()
+
 
 if __name__ == "__main__":
     main()
