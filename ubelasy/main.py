@@ -573,7 +573,7 @@ def main():
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         if image_path.exists():
-            st.image(str(image_path), use_container_width=True)
+            st.image(str(image_path), width='stretch')  # <-- PERUBAHAN
         else:
             st.warning("Gambar ubelasy.jpg tidak ditemukan di folder assets/")
         st.markdown(
@@ -617,7 +617,7 @@ def main():
             m = st.number_input("Tahun bayar di periode terakhir", min_value=0.0, max_value=30.0, value=2.0, step=0.5)
             bank_type = st.selectbox("Tipe Bank", ["desa", "kota"], format_func=lambda x: "🏡 Pedesaan" if x=="desa" else "🏙️ Perkotaan")
             biaya_dana = st.number_input("Biaya Dana+Overhead (%)", value=9.0, step=0.5)
-            hitung = st.button("🚀 Hitung Simulasi", type="primary", use_container_width=True)
+            hitung = st.button("🚀 Hitung Simulasi", type="primary", width='stretch')  # <-- PERUBAHAN
     
     # ========== INJECT CSS DOKUMEN ==========
     inject_ubelasy_document_css()
@@ -633,7 +633,7 @@ def main():
             st.markdown("---")
             st.caption("💡 Untuk menyimpan dokumen ini, gunakan fitur 'Print' di browser Anda (Ctrl+P) dan pilih 'Save as PDF'.")
             
-            if st.button("📄 Download Dokumen (PDF)", use_container_width=True):
+            if st.button("📄 Download Dokumen (PDF)", width='stretch'):  # <-- PERUBAHAN
                 st.info("Fitur download PDF akan segera tersedia. Saat ini silakan gunakan Print > Save as PDF.")
     
     else:
@@ -663,7 +663,7 @@ def main():
             col4.metric("📊 Spread", f"{hasil['spread']:.2f}%")
         
             st.subheader("📋 Detail per Periode")
-            st.dataframe(pd.DataFrame(hasil['detail']), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(hasil['detail']), width='stretch', hide_index=True)  # <-- PERUBAHAN
         
             st.subheader("📌 Status Debitur")
             st.info(f"**{hasil['status']}** (dPSH = {hasil['dPSH']:.4f})")
@@ -687,7 +687,7 @@ def main():
                         data=f,
                         file_name=f"ubelasy_simulasi_{hasil['T']}tahun.pdf",
                         mime="application/pdf",
-                        use_container_width=True,
+                        width='stretch',  # <-- PERUBAHAN
                         key="download_pdf_btn"
                     ):
                         show_toast("✅ Laporan berhasil diunduh!", type="success")
