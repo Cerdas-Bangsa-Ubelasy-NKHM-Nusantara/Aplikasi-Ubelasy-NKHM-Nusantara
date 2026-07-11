@@ -570,10 +570,24 @@ def main():
     script_dir = Path(__file__).parent.parent
     image_path = script_dir / "assets" / "ubelasy.jpg"
     
+    # CSS untuk membuat gambar selebar kolom
+    st.markdown("""
+    <style>
+    .full-width-image img {
+        width: 100%;
+        height: auto;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         if image_path.exists():
-            st.image(str(image_path), use_column_width=True)  # <-- PERUBAHAN
+            # Gunakan container dengan CSS class untuk full width
+            with st.container():
+                st.markdown('<div class="full-width-image">', unsafe_allow_html=True)
+                st.image(str(image_path))
+                st.markdown('</div>', unsafe_allow_html=True)
         else:
             st.warning("Gambar ubelasy.jpg tidak ditemukan di folder assets/")
         st.markdown(
