@@ -279,9 +279,10 @@ def main():
     
     # ========== TAB UTAMA ==========
     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
-    "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL"
-])
-        
+        "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", 
+        "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL"
+    ])
+    
     # ========== TAB 1: KUIS ==========
     with tab1:
         # ========== VIDEO ==========
@@ -679,7 +680,8 @@ def main():
                                     # Reset state dan pindah ke soal berikutnya
                                     # TAPI tetap pertahankan feedback yang sudah ada
                                     st.session_state.nkhm_current_q = next_q
-                                    st.session_state.nkhm_answered = False                                    st.session_state.nkhm_last_q_id = next_q.get('text', '')
+                                    st.session_state.nkhm_answered = False
+                                    st.session_state.nkhm_last_q_id = next_q.get('text', '')
                                     # Jangan reset feedback_display agar tetap tampil
                                     st.rerun()
                     with col_nav2:
@@ -781,7 +783,10 @@ def main():
             img_path = Path(__file__).parent.parent / "assets" / "karunia.jpg"
             show_image_centered(img_path, caption="Grow in Grace 🇮🇩", width_ratio=2)
             st.markdown("---")
-            subsub_tab1, subsub_tab2, subsub_tab3, subsub_tab4 = st.tabs(["📜 Karunia Umum", "✨ Karunia 140 Karakter", "📋 Karakter & Masalah", "📚 Pengembangan Diri"])
+            subsub_tab1, subsub_tab2, subsub_tab3, subsub_tab4 = st.tabs([
+                "📜 Karunia Umum", "✨ Karunia 140 Karakter", 
+                "📋 Karakter & Masalah", "📚 Pengembangan Diri"
+            ])
             with subsub_tab1:
                 if KARUNIA_AVAILABLE and show_karunia is not None:
                     show_karunia()
@@ -820,7 +825,10 @@ def main():
         img_path = Path(__file__).parent.parent / "assets" / "hadiah.gif"
         show_image_centered(img_path, caption="A Giveaway 🇮🇩", width_ratio=2)
         st.markdown("---")
-        sub_tab1, sub_tab2, sub_tab3, sub_tab4, sub_tab5 = st.tabs(["🦅 Tebak Pahlawan", "🔢 Angka Rahasia", "🚣 Pahlawan Menyeberang Sungai", "🇮🇩 Tiang Bendera", "🎲 Lainnya (Coming Soon)"])
+        sub_tab1, sub_tab2, sub_tab3, sub_tab4, sub_tab5 = st.tabs([
+            "🦅 Tebak Pahlawan", "🔢 Angka Rahasia", 
+            "🚣 Pahlawan Menyeberang Sungai", "🇮🇩 Tiang Bendera", "🎲 Lainnya (Coming Soon)"
+        ])
         with sub_tab1:
             from nkhm.tebak_pahlawan import show_tebak_pahlawan
             show_tebak_pahlawan()
