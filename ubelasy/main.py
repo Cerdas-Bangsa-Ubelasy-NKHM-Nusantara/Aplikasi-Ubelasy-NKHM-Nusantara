@@ -573,7 +573,7 @@ def main():
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         if image_path.exists():
-            st.image(str(image_path), width='stretch')
+            st.image(str(image_path), use_column_width=True)  # <-- PERUBAHAN
         else:
             st.warning("Gambar ubelasy.jpg tidak ditemukan di folder assets/")
         st.markdown(
