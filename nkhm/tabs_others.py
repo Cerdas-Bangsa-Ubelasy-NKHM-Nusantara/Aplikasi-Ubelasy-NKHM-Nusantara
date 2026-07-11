@@ -61,7 +61,7 @@ def show_tab2():
         history_df = history_df[["timestamp", "type", "question", "correct", "nkhm_total"]]
         history_df["correct"] = history_df["correct"].map({True: "✅", False: "❌"})
         history_df.columns = ["Waktu", "Tipe", "Soal", "Hasil", "NKHM Total"]
-        st.dataframe(history_df, use_container_width=True, hide_index=True)
+        st.dataframe(history_df, width='stretch', hide_index=True)  # <-- PERUBAHAN
 
 # ========== TAB 3: PRESTASI ==========
 def show_tab3():
@@ -102,7 +102,7 @@ def show_tab4():
 def show_tab5():
     img_path = Path(__file__).parent.parent / "assets" / "garuda.jpg"
     if img_path.exists():
-        st.image(str(img_path), caption="Bertanding Untuk Menang 🇮🇩", use_container_width=True)
+        st.image(str(img_path), caption="Bertanding Untuk Menang 🇮🇩", width='stretch')  # <-- PERUBAHAN
     else:
         st.info("💡 Gambar 'garuda.jpg' belum tersedia.")
     st.markdown("---")
@@ -127,7 +127,7 @@ def show_tab6():
     with sub_tab1:
         img_path = Path(__file__).parent.parent / "assets" / "karunia.jpg"
         if img_path.exists():
-            st.image(str(img_path), caption="Grow in Grace 🇮🇩", use_container_width=True)
+            st.image(str(img_path), caption="Grow in Grace 🇮🇩", width='stretch')  # <-- PERUBAHAN
         else:
             st.info("💡 Gambar 'karunia.jpg' belum tersedia.")
         st.markdown("---")
@@ -158,7 +158,7 @@ def show_tab6():
 def show_tab7():
     img_path = Path(__file__).parent.parent / "assets" / "hadiah.gif"
     if img_path.exists():
-        st.image(str(img_path), caption="A Giveaway 🇮🇩", use_container_width=True)
+        st.image(str(img_path), caption="A Giveaway 🇮🇩", width='stretch')  # <-- PERUBAHAN
     else:
         st.info("💡 Gambar 'hadiah.gif' belum tersedia.")
     st.markdown("---")
@@ -179,4 +179,3 @@ def show_tab7():
 # ========== TAB 8: TUTORIAL ==========
 def show_tab8():
     show_tutorial()
-
