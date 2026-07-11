@@ -166,7 +166,7 @@ def main():
                     st.rerun()
                 else:
                     st.error("Masukkan nama dulu!")
-        return  # <-- PERHATIKAN: return harus di sini, di dalam if block
+        return
     
     QUESTION_BANK = load_all_questions()
     if not QUESTION_BANK:
