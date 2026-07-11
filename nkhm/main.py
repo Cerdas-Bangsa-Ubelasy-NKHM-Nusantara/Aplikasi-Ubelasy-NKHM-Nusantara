@@ -160,7 +160,7 @@ def main():
             </style>
             """, unsafe_allow_html=True)
             name = st.text_input("Masukkan namamu", placeholder="contoh: Budi Santoso", label_visibility="collapsed")
-            if st.button("🚀 MULAI BELAJAR", use_container_width=True):
+            if st.button("🚀 MULAI BELAJAR", width='stretch'):  # <-- PERUBAHAN
                 if name and name.strip():
                     st.session_state.nkhm_user = name.strip()
                     st.rerun()
@@ -203,7 +203,7 @@ def main():
         col1.metric("📖 Total Soal", st.session_state.nkhm_total_questions)
         best = max([h.get("nkhm_total", 0) for h in st.session_state.nkhm_history] + [nkhm_total])
         col2.metric("🏆 Best NKHM", f"{best:.1f}")
-        if st.button("🔄 Reset Skor", use_container_width=True):
+        if st.button("🔄 Reset Skor", width='stretch'):  # <-- PERUBAHAN
             st.session_state.nkhm_scores = {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0, "Nasionalisme": 0}
             st.session_state.nkhm_history = []
             st.session_state.nkhm_total_questions = 0
@@ -231,7 +231,7 @@ def main():
             st.session_state.nkhm_ai_conversation.append({"role": "assistant", "content": resp})
             st.rerun()
         st.markdown("---")
-        if st.button("🚪 Keluar / Ganti Pengguna", use_container_width=True):
+        if st.button("🚪 Keluar / Ganti Pengguna", width='stretch'):  # <-- PERUBAHAN
             for key in list(st.session_state.keys()):
                 if key.startswith("nkhm_"):
                     del st.session_state[key]
@@ -474,7 +474,7 @@ def main():
                         st.info("🎉 Semua soal sudah dijawab! Silakan ganti filter atau reset.")
                         disable_btn = True
                     
-                    if st.button("✅ JAWAB", disabled=disable_btn, use_container_width=True, key=f"jawab_{question_key}"):
+                    if st.button("✅ JAWAB", disabled=disable_btn, width='stretch', key=f"jawab_{question_key}"):  # <-- PERUBAHAN
                         # Tandai soal ini sudah dilihat
                         st.session_state.nkhm_seen_questions.add(q['text'])
                         st.session_state.nkhm_answered = True
@@ -599,7 +599,7 @@ def main():
                 
                 # ========== TOMBOL SELESAI BAGIAN (skala) ==========
                 if q.get("type") in ["EQ_scale", "AQ_scale"] and st.session_state.current_section and st.session_state.nkhm_answered:
-                    if st.button("✅ Selesai Bagian Ini", use_container_width=True, key=f"selesai_{question_key}"):
+                    if st.button("✅ Selesai Bagian Ini", width='stretch', key=f"selesai_{question_key}"):  # <-- PERUBAHAN
                         section = st.session_state.current_section
                         q_type = st.session_state.current_scale_type
                         
@@ -633,7 +633,7 @@ def main():
                     st.markdown("### 📌 Navigasi")
                     col_nav1, col_nav2 = st.columns(2)
                     with col_nav1:
-                        if st.button("⏩ SOAL BERIKUTNYA", use_container_width=True, key=f"next_{question_key}"):
+                        if st.button("⏩ SOAL BERIKUTNYA", width='stretch', key=f"next_{question_key}"):  # <-- PERUBAHAN
                             if filtered_questions:
                                 next_q = get_next_question(filtered_questions)
                                 if next_q is None:
@@ -648,7 +648,7 @@ def main():
                                     # Jangan reset feedback_display agar tetap tampil
                                     st.rerun()
                     with col_nav2:
-                        if st.button("🔄 KUIS BARU", use_container_width=True, key=f"reset_{question_key}"):
+                        if st.button("🔄 KUIS BARU", width='stretch', key=f"reset_{question_key}"):  # <-- PERUBAHAN
                             if filtered_questions:
                                 # Reset semua, mulai dari awal
                                 st.session_state.nkhm_seen_questions = set()
@@ -683,7 +683,7 @@ def main():
             history_df = history_df[["timestamp", "type", "question", "correct", "nkhm_total"]]
             history_df["correct"] = history_df["correct"].map({True: "✅", False: "❌"})
             history_df.columns = ["Waktu", "Tipe", "Soal", "Hasil", "NKHM Total"]
-            st.dataframe(history_df, use_container_width=True, hide_index=True)
+            st.dataframe(history_df, width='stretch', hide_index=True)  # <-- PERUBAHAN
     
     # ========== TAB 3: PRESTASI ==========
     with tab3:
@@ -723,7 +723,7 @@ def main():
     with tab5:
         img_path = Path(__file__).parent.parent / "assets" / "garuda.jpg"
         if img_path.exists():
-            st.image(str(img_path), caption="Bertanding Untuk Menang 🇮🇩", use_container_width=True)
+            st.image(str(img_path), caption="Bertanding Untuk Menang 🇮🇩", width='stretch')  # <-- PERUBAHAN
         else:
             st.info("💡 Gambar 'garuda.jpg' belum tersedia.")
         st.markdown("---")
@@ -748,7 +748,7 @@ def main():
         with sub_tab1:
             img_path = Path(__file__).parent.parent / "assets" / "karunia.jpg"
             if img_path.exists():
-                st.image(str(img_path), caption="Grow in Grace 🇮🇩", use_container_width=True)
+                st.image(str(img_path), caption="Grow in Grace 🇮🇩", width='stretch')  # <-- PERUBAHAN
             else:
                 st.info("💡 Gambar 'karunia.jpg' belum tersedia.")
             st.markdown("---")
@@ -790,7 +790,7 @@ def main():
     with tab7:
         img_path = Path(__file__).parent.parent / "assets" / "hadiah.gif"
         if img_path.exists():
-            st.image(str(img_path), caption="A Giveaway 🇮🇩", use_container_width=True)
+            st.image(str(img_path), caption="A Giveaway 🇮🇩", width='stretch')  # <-- PERUBAHAN
         else:
             st.info("💡 Gambar 'hadiah.gif' belum tersedia.")
         st.markdown("---")
