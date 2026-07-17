@@ -8,6 +8,7 @@ from ubelasy.calculator import calculate_loan
 from ubelasy.aggregator import get_recommendations, submit_application, get_all_applications_for_user
 from ubelasy.pdf_export import export_simulation_to_pdf
 from shared.notifications import show_toast
+from ubelasy.edukasi import show_edukasi  # <-- PERUBAHAN: import modul edukasi
 
 # ========== KONTEN DOKUMEN SISTEM UBELASY (LENGKAP) ==========
 def get_ubelasy_document():
@@ -583,7 +584,6 @@ def main():
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         if image_path.exists():
-            # Gunakan container dengan CSS class untuk full width
             with st.container():
                 st.markdown('<div class="full-width-image">', unsafe_allow_html=True)
                 st.image(str(image_path))
@@ -613,9 +613,9 @@ def main():
         
         # ========== TAB SELECTOR DI SIDEBAR ==========
         st.header("📑 Navigasi Ubelasy")
-        tab_mode = st.radio(
+        tab_mode = st.radio(                                              # <-- PERUBAHAN: tambah opsi "📚 Edukasi"
             "Pilih Tab",
-            ["📖 Sistem Ubelasy", "⚙️ Simulasi & Agregator"],
+            ["📖 Sistem Ubelasy", "⚙️ Simulasi & Agregator", "📚 Edukasi"],
             index=1,
             label_visibility="collapsed"
         )
@@ -646,9 +646,11 @@ def main():
         with col2:
             st.markdown("---")
             st.caption("💡 Untuk menyimpan dokumen ini, gunakan fitur 'Print' di browser Anda (Ctrl+P) dan pilih 'Save as PDF'.")
-            
             if st.button("📄 Download Dokumen (PDF)"):
                 st.info("Fitur download PDF akan segera tersedia. Saat ini silakan gunakan Print > Save as PDF.")
+    
+    elif tab_mode == "📚 Edukasi":                                       # <-- PERUBAHAN: tambah blok untuk tab Edukasi
+        show_edukasi()
     
     else:
         # ========== TAB SIMULASI & AGREGATOR ==========
