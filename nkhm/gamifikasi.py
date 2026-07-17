@@ -89,31 +89,22 @@ def get_leaderboard_file():
     return data_dir / "leaderboard.json"
 
 def load_leaderboard():
-    """Muat data leaderboard dari file JSON dengan error handling"""
     file_path = get_leaderboard_file()
-    
-    # Jika file belum ada, buat dengan data kosong
     if not file_path.exists():
-        save_leaderboard([])  # buat file dengan list kosong
+        save_leaderboard([])
         return []
-    
-    # Coba baca file
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             data = json.load(f)
-            # Pastikan data adalah list
             if not isinstance(data, list):
                 data = []
                 save_leaderboard(data)
             return data
-    except (json.JSONDecodeError, ValueError) as e:
-        # Jika file corrupt, buat ulang
-        st.warning("⚠️ Data leaderboard rusak, dibuat ulang.")
+    except (json.JSONDecodeError, ValueError):
         save_leaderboard([])
         return []
 
 def save_leaderboard(data):
-    """Simpan data leaderboard ke file JSON"""
     file_path = get_leaderboard_file()
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
@@ -145,16 +136,18 @@ def init_mission_progress():
                 "completed": False,
                 "claimed": False
             }
+    # Flag untuk menandai perlu rerun
+    if "nkhm_mission_needs_rerun" not in st.session_state:
+        st.session_state.nkhm_mission_needs_rerun = False
 
 def check_mission_progress():
-    """Periksa progress misi, import get_current_nkhm lokal untuk hindari circular"""
+    """Periksa progress misi dan tandai yang selesai, tanpa langsung st.rerun()"""
     init_mission_progress()
     
     # Import lokal agar tidak circular
     try:
         from nkhm.main import get_current_nkhm
     except ImportError:
-        # Jika belum bisa import, skip
         return
     
     nkhm_q, nkhm_total, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct = get_current_nkhm()
@@ -193,8 +186,10 @@ def check_mission_progress():
         if completed:
             progress[mission["id"]]["completed"] = True
             any_completed = True
+    
+    # Jika ada misi baru selesai, tandai perlu rerun (tanpa langsung rerun)
     if any_completed:
-        st.rerun()
+        st.session_state.nkhm_mission_needs_rerun = True
 
 def get_total_reward():
     progress = st.session_state.get("nkhm_mission_progress", {})
@@ -207,6 +202,11 @@ def get_total_reward():
 def show_missions():
     init_mission_progress()
     check_mission_progress()
+    
+    # Jika perlu rerun, lakukan di sini (setelah semua state siap)
+    if st.session_state.get("nkhm_mission_needs_rerun", False):
+        st.session_state.nkhm_mission_needs_rerun = False
+        st.rerun()
     
     st.markdown("## 🎯 Misi & Tantangan")
     st.markdown("Selesaikan misi untuk mengumpulkan koin! 🪙")
@@ -240,7 +240,6 @@ def show_missions():
             elif status["claimed"]:
                 st.button("✅", disabled=True, key=f"done_{mission['id']}")
             else:
-                # tampilkan progress bar sederhana
                 if mission["type"] == "total_questions":
                     current = st.session_state.get("nkhm_total_questions", 0)
                     st.progress(min(current / mission["target"], 1.0), text=f"{current}/{mission['target']}")
