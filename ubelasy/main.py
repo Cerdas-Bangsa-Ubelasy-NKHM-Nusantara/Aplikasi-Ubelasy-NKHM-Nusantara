@@ -8,7 +8,8 @@ from ubelasy.calculator import calculate_loan
 from ubelasy.aggregator import get_recommendations, submit_application, get_all_applications_for_user
 from ubelasy.pdf_export import export_simulation_to_pdf
 from shared.notifications import show_toast
-from ubelasy.edukasi import show_edukasi  # <-- PERUBAHAN: import modul edukasi
+from ubelasy.edukasi import show_edukasi
+from ubelasy.kredit_report import show_kredit_report
 
 # ========== KONTEN DOKUMEN SISTEM UBELASY (LENGKAP) ==========
 def get_ubelasy_document():
@@ -613,9 +614,9 @@ def main():
         
         # ========== TAB SELECTOR DI SIDEBAR ==========
         st.header("📑 Navigasi Ubelasy")
-        tab_mode = st.radio(                                              # <-- PERUBAHAN: tambah opsi "📚 Edukasi"
+        tab_mode = st.radio(
             "Pilih Tab",
-            ["📖 Sistem Ubelasy", "⚙️ Simulasi & Agregator", "📚 Edukasi"],
+            ["📖 Sistem Ubelasy", "⚙️ Simulasi & Agregator", "📚 Edukasi", "📊 Rapor Kredit"],
             index=1,
             label_visibility="collapsed"
         )
@@ -649,8 +650,11 @@ def main():
             if st.button("📄 Download Dokumen (PDF)"):
                 st.info("Fitur download PDF akan segera tersedia. Saat ini silakan gunakan Print > Save as PDF.")
     
-    elif tab_mode == "📚 Edukasi":                                       # <-- PERUBAHAN: tambah blok untuk tab Edukasi
+    elif tab_mode == "📚 Edukasi":
         show_edukasi()
+    
+    elif tab_mode == "📊 Rapor Kredit":
+        show_kredit_report()
     
     else:
         # ========== TAB SIMULASI & AGREGATOR ==========
