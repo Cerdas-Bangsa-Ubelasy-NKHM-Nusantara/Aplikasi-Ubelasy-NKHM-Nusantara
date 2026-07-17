@@ -294,5 +294,5 @@ Investasi adalah perjalanan, bukan tujuan. Mulailah sekarang, sekecil apa pun, d
 
 **Mulailah investasi hari ini untuk masa depan yang lebih cerah!**
 
-**Jika sudah berpenghasilan dari Investasi maka jangan lupa untuk berbagi (member) sebagian hasilnya untuk orang lain, sebab pada dadarnya (fundamen) dari berinvestasi yang berhasil adalah berbagi (memberi) sebagian untuk orang lain**
+**Jika sudah berpenghasilan dari Investasi maka jangan lupa untuk berbagi (member) sebagian hasilnya untuk orang lain, sebab pada dadarnya (fundamen) dari berinvestasi yang berhasil adalah berbagi (memberi) perpuluhan untuk Tuhan atau sebagian untuk orang lain**
 
