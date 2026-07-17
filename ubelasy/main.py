@@ -618,7 +618,7 @@ def main():
         st.header("📑 Navigasi Ubelasy")
         tab_mode = st.radio(
             "Pilih Tab",
-            ["📖 Sistem Ubelasy", "⚙️ Simulasi & Agregator", "📚 Edukasi", "📊 Rapor Kredit", "💰 Perencanaan Keuangan"],
+            ["📖 Sistem Ubelasy", "⚙️ Simulasi & Agregator", "📚 Edukasi", "📊 Rapor Kredit", "💰 Perencanaan Keuangan", "📊 Dashboard Keuangan"],
             index=1,
             label_visibility="collapsed"
         )
@@ -660,6 +660,9 @@ def main():
     
     elif tab_mode == "💰 Perencanaan Keuangan":
         show_keuangan()
+    
+    elif tab_mode == "📊 Dashboard Keuangan":
+        show_dashboard_keuangan()
     
     else:
         # ========== TAB SIMULASI & AGREGATOR ==========
