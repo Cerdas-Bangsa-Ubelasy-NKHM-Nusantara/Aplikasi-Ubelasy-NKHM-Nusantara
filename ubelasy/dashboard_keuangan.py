@@ -40,7 +40,6 @@ def show_dashboard_keuangan():
     col3.metric("📊 Saldo", f"Rp {saldo:,.0f}".replace(",", "."), 
                 delta="Positif" if saldo >= 0 else "Negatif")
     
-    # Rasio pengeluaran terhadap pemasukan
     if total_pemasukan > 0:
         rasio = total_pengeluaran / total_pemasukan
         status = "Sehat" if rasio < 0.7 else "Perlu Perhatian"
@@ -53,7 +52,6 @@ def show_dashboard_keuangan():
     # ========== GRAFIK ARUS KAS BULANAN ==========
     st.subheader("📉 Arus Kas Bulanan")
     
-    # Gabungkan semua transaksi dengan tanggal
     all_trans = []
     for p in pemasukan:
         all_trans.append({"tanggal": p["tanggal"], "tipe": "Pemasukan", "nominal": p["nominal"], "deskripsi": p["deskripsi"]})
@@ -65,10 +63,8 @@ def show_dashboard_keuangan():
         df["tanggal"] = pd.to_datetime(df["tanggal"])
         df["bulan"] = df["tanggal"].dt.to_period("M")
         
-        # Aggregate per bulan
         bulanan = df.groupby(["bulan", "tipe"])["nominal"].sum().unstack().fillna(0)
         if not bulanan.empty:
-            # Plot
             fig, ax = plt.subplots(figsize=(10, 5))
             bulanan.plot(kind="bar", ax=ax, color=["#2ecc71", "#e74c3c"])
             ax.set_title("Arus Kas Bulanan")
@@ -100,14 +96,11 @@ def show_dashboard_keuangan():
     # ========== ASET & KEWAJIBAN ==========
     st.subheader("🏦 Aset & Kewajiban")
     
-    # Tampilkan form untuk menambah aset
+    # Form untuk menambah aset
     with st.expander("➕ Tambah Aset", expanded=False):
-        col1, col2 = st.columns(2)
-        with col1:
-            nama_aset = st.text_input("Nama Aset", placeholder="Misal: Tabungan, Emas, Properti")
-        with col2:
-            nilai_aset = st.number_input("Nilai (Rp)", min_value=0, value=0, step=100_000)
-        if st.button("✅ Tambah Aset", use_container_width=True):
+        nama_aset = st.text_input("Nama Aset", placeholder="Misal: Tabungan, Emas, Properti", key="nama_aset_input")
+        nilai_aset = st.number_input("Nilai (Rp)", min_value=0, value=0, step=100_000, key="nilai_aset_input")
+        if st.button("✅ Tambah Aset", use_container_width=True, key="tambah_aset_btn"):
             if nama_aset.strip() and nilai_aset > 0:
                 st.session_state.aset_kewajiban["aset"].append({
                     "nama": nama_aset,
@@ -119,14 +112,11 @@ def show_dashboard_keuangan():
             else:
                 st.warning("Isi nama dan nilai aset.")
     
-    # Tampilkan form untuk menambah kewajiban
+    # Form untuk menambah kewajiban
     with st.expander("➕ Tambah Kewajiban (Utang)", expanded=False):
-        col1, col2 = st.columns(2)
-        with col1:
-            nama_kewajiban = st.text_input("Nama Kewajiban", placeholder="Misal: Sisa Utang, Pinjaman")
-        with col2:
-            nilai_kewajiban = st.number_input("Nilai (Rp)", min_value=0, value=0, step=100_000)
-        if st.button("✅ Tambah Kewajiban", use_container_width=True):
+        nama_kewajiban = st.text_input("Nama Kewajiban", placeholder="Misal: Sisa Utang, Pinjaman", key="nama_kewajiban_input")
+        nilai_kewajiban = st.number_input("Nilai (Rp)", min_value=0, value=0, step=100_000, key="nilai_kewajiban_input")
+        if st.button("✅ Tambah Kewajiban", use_container_width=True, key="tambah_kewajiban_btn"):
             if nama_kewajiban.strip() and nilai_kewajiban > 0:
                 st.session_state.aset_kewajiban["kewajiban"].append({
                     "nama": nama_kewajiban,
@@ -163,7 +153,7 @@ def show_dashboard_keuangan():
         st.dataframe(df_kewajiban[["nama", "nilai", "tanggal"]], use_container_width=True, hide_index=True)
     
     # Tombol reset data aset & kewajiban
-    if st.button("🗑️ Reset Semua Data Aset & Kewajiban", use_container_width=True):
+    if st.button("🗑️ Reset Semua Data Aset & Kewajiban", use_container_width=True, key="reset_aset_btn"):
         st.session_state.aset_kewajiban = {"aset": [], "kewajiban": []}
         st.rerun()
     
