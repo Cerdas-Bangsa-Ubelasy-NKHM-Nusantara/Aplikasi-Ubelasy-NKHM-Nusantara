@@ -216,8 +216,8 @@ Spread Keuntungan Bank = 1,75% per tahun
 Dalam sistem Ubelasy, suku bunga yang lebih rendah berdampak positif terhadap PSH yang diterima debitur:
 
 PSH = SHA × (T / 50) → Desa
-PSH = SHA × (T / 60) → Kota
 
+PSH = SHA × (T / 60) → Kota
 
 **Semakin rendah suku bunga, maka:**
 1. TSH (Total Sisa Hutang) lebih kecil
