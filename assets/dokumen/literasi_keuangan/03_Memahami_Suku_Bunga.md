@@ -143,4 +143,169 @@ Sistem Ubelasy menerapkan **penurunan suku bunga 0,5% per periode**. Ini adalah 
 
 **Perhitungan Spread:**
 
+Rata-rata SBDK = 10,75%
+Biaya Dana+Overhead = 9%
+Spread Keuntungan Bank = 1,75% per tahun
+
+
+### Varian Lain sebagai Pembanding
+
+| **Varian** | **Periode** | **Suku Bunga** | **Rata-rata** |
+|------------|-------------|----------------|---------------|
+| **A** (Alternatif Desa) | 3 × 2 tahun | 11%; 10,5%; 10% | 10,50% |
+| **B** (Alternatif Kota) | 6 × 1 tahun | 11%; 10,5%; 10%; 9,5%; 9%; 8,5% | 9,75% |
+
+> "Janganlah kamu memikirkan hal-hal yang lebih tinggi dari pada yang patut kamu pikirkan, tetapi hendaklah kamu berpikir begitu rupa, sehingga kamu menguasai diri menurut ukuran iman." - Roma 12:3
+
+---
+
+## 5. Dampak Suku Bunga terhadap Keuangan Anda
+
+### Jika Suku Bunga Naik:
+
+| **Dampak** | **Penjelasan** |
+|------------|----------------|
+| ⬆️ Cicilan meningkat | Beban bulanan lebih besar |
+| ⬇️ Daya beli menurun | Lebih sedikit uang untuk kebutuhan lain |
+| 📉 Risiko gagal bayar meningkat | Jika tidak diantisipasi |
+| 🏦 Keuntungan bank meningkat | Spread lebih besar |
+
+### Jika Suku Bunga Turun:
+
+| **Dampak** | **Penjelasan** |
+|------------|----------------|
+| ⬇️ Cicilan menurun | Beban bulanan lebih ringan |
+| ⬆️ Daya beli meningkat | Ada ruang untuk tabungan/investasi |
+| 📈 Peluang usaha lebih besar | Biaya modal lebih murah |
+| 💰 PSH lebih besar | Dalam sistem Ubelasy, PSH juga meningkat |
+
+> "Siapa yang mengasihi uang tidak akan puas dengan uang, dan siapa yang mengasihi kekayaan tidak akan puas dengan penghasilan. Inipun sia-sia." - Pengkhotbah 5:10
+
+---
+
+## 6. Tips Memilih Pinjaman Berdasarkan Suku Bunga
+
+### Checklist Sebelum Meminjam:
+
+- [ ] **Bandingkan beberapa bank/kreditur** - Jangan tergiur iklan
+- [ ] **Hitung total biaya** (bunga + administrasi + asuransi)
+- [ ] **Perhatikan metode perhitungan** (Flat vs Efektif)
+- [ ] **Cek kemungkinan penurunan bunga** (seperti Ubelasy)
+- [ ] **Pastikan tenor sesuai kemampuan**
+- [ ] **Baca seluruh perjanjian dengan cermat**
+
+> "Orang yang bijaksana menyembunyikan pengetahuannya, tetapi hati orang bebal menyeru-nyerukan kebenaran." - Amsal 12:23
+
+### Contoh Perbandingan:
+
+| **Aspek** | **Bank Konvensional** | **Sistem Ubelasy** |
+|-----------|----------------------|-------------------|
+| Metode bunga | Efektif/Anuitas | Flat |
+| Suku bunga | Tetap 11% | 11% → 10,5% (turun 0,5%) |
+| PSH | Tidak ada | Ada (proporsional) |
+| dPSH | Tidak ada | Skala 0-2 |
+| Keuntungan bank | 1,3-3,5% | 1,75% (spread) |
+| Return tahunan | 4,5-5,5% (NIM) | 4,94-5,01% |
+
+---
+
+## 7. Dampak Suku Bunga terhadap PSH (Pembebasan Sisa Hutang)
+
+Dalam sistem Ubelasy, suku bunga yang lebih rendah berdampak positif terhadap PSH yang diterima debitur:
+
+PSH = SHA × (T / 50) → Desa
+PSH = SHA × (T / 60) → Kota
+
+
+**Semakin rendah suku bunga, maka:**
+1. TSH (Total Sisa Hutang) lebih kecil
+2. SHA (Sisa Hutang Akhir) lebih kecil
+3. Tapi PSH tetap dihitung proporsional dari SHA
+4. Debitur tetap mendapatkan keringanan
+
+**Contoh Numerik (T=6 tahun):**
+
+| **Parameter** | **Nilai** |
+|---------------|-----------|
+| Pinjaman per periode | Rp 36.000.000 |
+| Suku bunga awal | 11% |
+| Suku bunga akhir | 10,5% |
+| TSH₁ | Rp 47.880.000 |
+| TSH₂ | Rp 47.340.000 |
+| SHA | Rp 15.780.000 |
+| PSH Desa | Rp 1.893.600 (12% dari SHA) |
+| PSH Kota | Rp 1.578.000 (10% dari SHA) |
+
+> "Penolong yang baik akan diberkati, karena ia membagi rotinya dengan orang miskin." - Amsal 22:9
+
+---
+
+## 8. Hubungan Suku Bunga dengan dPSH (Derajat PSH)
+
+dPSH adalah skala yang menunjukkan tingkat keringanan / pembebasan sisa hutang:
+
+dPSH = T / 25
+
+
+| **dPSH** | **Status** | **Makna** |
+|----------|------------|-----------|
+| 0,00 – 0,20 | 🟢 Pemula | PSH kecil, edukasi keuangan |
+| 0,21 – 0,50 | 🔵 Berkembang | PSH mulai terasa (target implementasi awal) |
+| 0,51 – 1,00 | 🟡 Madya | PSH signifikan |
+| 1,01 – 1,80 | 🟠 Lanjut | Mendekati Tahun Yobel |
+| 1,81 – 2,00 | 🔴 Yobel | Pembebasan total |
+
+**Dalam Varian C (T=6 tahun):**
+
+dPSH = 6/25 = 0,24
+
+Termasuk dalam status **BERKEMBANG (Developing)**. Debitur menerima PSH sebesar 12% (desa) atau 10% (kota) dari Sisa Hutang Akhir.
+
+> "Berbahagialah orang yang berdukacita, karena mereka akan dihibur." - Matius 5:4
+
+---
+
+## 9. Kesimpulan
+
+Memahami suku bunga adalah keterampilan hidup yang penting. Dengan pengetahuan yang benar, Anda dapat:
+
+1. **Memilih produk pinjaman yang tepat** - sesuai kebutuhan dan kemampuan
+2. **Menghitung biaya pinjaman secara akurat** - menghindari kejutan
+3. **Memanfaatkan penurunan suku bunga** - seperti dalam sistem Ubelasy
+4. **Mendapatkan PSH yang maksimal** - melalui pemahaman dPSH
+
+### Prinsip Utama:
+
+| **Prinsip** | **Penerapan** |
+|-------------|---------------|
+| **Transparansi** | Pahami seluruh biaya sebelum meminjam |
+| **Keadilan** | Sistem Ubelasy memberikan PSH proporsional |
+| **Berkelanjutan** | Suku bunga yang wajar mendukung keberlanjutan usaha |
+| **Tahun Yobel** | Pembebasan sisa hutang secara berkala |
+
+> "Taatilah pemimpin-pemimpinmu dan tunduklah kepada mereka, sebab mereka berjaga-jaga atas jiwamu, sebagai orang-orang yang harus bertanggung jawab atasnya." - Ibrani 13:17
+
+---
+
+### Refleksi:
+
+Sebelum mengambil pinjaman, tanyakan pada diri sendiri:
+
+1. Apakah saya memahami seluruh biaya yang akan saya bayar?
+2. Apakah saya mampu membayar cicilan jika terjadi hal tidak terduga?
+3. Apakah saya membandingkan beberapa pilihan sebelum memutuskan?
+4. Apakah pinjaman ini akan membantu saya mencapai tujuan, atau justru membebani?
+
+> "Orang yang berpengetahuan menahan perkataannya, dan orang yang berakal budi tetap tenang." - Amsal 17:27
+
+---
+
+*"Siapa yang menjaga mulut, siapa memelihara nyawanya, yang lebar bibir, akan ditimpa kebinasaan." - Amsal 13:3*
+
+---
+
+**Punya pertanyaan tentang suku bunga atau pinjaman? Tanyakan melalui fitur "Ki Hajar" di sidebar!**
+
+
+
 
