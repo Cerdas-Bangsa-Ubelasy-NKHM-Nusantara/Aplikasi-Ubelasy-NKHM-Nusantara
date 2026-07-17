@@ -39,14 +39,13 @@ Utang adalah bagian dari kehidupan ekonomi modern. Dalam sistem Ubelasy, utang d
 ### a. Pahami Kemampuan Anda
 
 **Rumus Rasio Utang terhadap Pendapatan:**
+Rasio Utang = (Total Cicilan per Bulan / Pendapatan Bersih) × 100%
 
 **Kategori:**
 
 - **Sehat**: ≤ 30%
 - **Waspada**: 31% - 40%
 - **Berbahaya**: > 40%
-
-Rasio Utang = (Total Cicilan per Bulan / Pendapatan Bersih) × 100%
 
 > "Siapa yang mengasihi harta benda tidak akan berkecukupan dengan harta." - Pengkhotbah 5:10
 
