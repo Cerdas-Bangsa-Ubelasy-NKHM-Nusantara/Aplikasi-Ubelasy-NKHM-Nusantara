@@ -11,6 +11,7 @@ from shared.notifications import show_toast
 from ubelasy.edukasi import show_edukasi
 from ubelasy.kredit_report import show_kredit_report
 from ubelasy.keuangan import show_keuangan
+from ubelasy.dashboard_keuangan import show_dashboard_keuangan
 
 # ========== KONTEN DOKUMEN SISTEM UBELASY (LENGKAP) ==========
 def get_ubelasy_document():
