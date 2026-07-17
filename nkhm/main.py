@@ -23,7 +23,6 @@ from nkhm.tebak_pahlawan import show_tebak_pahlawan
 from nkhm.angka_rahasia import show_angka_rahasia
 from nkhm.seberang_sungai import show_river_game
 from nkhm.tiang_bendera import show_tiang_bendera
-from nkhm.gamifikasi import show_missions, show_leaderboard   # <-- TAMBAHAN
 
 
 # Import opsional
@@ -279,10 +278,9 @@ def main():
             st.rerun()
     
     # ========== TAB UTAMA ==========
-    # Menambahkan tab baru "🎮 GAMIFIKASI" di akhir
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
         "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", 
-        "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL", "🎮 GAMIFIKASI"
+        "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL"
     ])
     
     # ========== TAB 1: KUIS ==========
@@ -722,7 +720,7 @@ def main():
             history_df = history_df[["timestamp", "type", "question", "correct", "nkhm_total"]]
             history_df["correct"] = history_df["correct"].map({True: "✅", False: "❌"})
             history_df.columns = ["Waktu", "Tipe", "Soal", "Hasil", "NKHM Total"]
-            st.dataframe(history_df, width='stretch', hide_index=True)  # Biarkan seperti original
+            st.dataframe(history_df, width='stretch', hide_index=True)
     
     # ========== TAB 3: PRESTASI ==========
     with tab3:
@@ -848,14 +846,6 @@ def main():
     # ========== TAB 8: TUTORIAL ==========
     with tab8:
         show_tutorial()
-
-    # ========== TAB 9: GAMIFIKASI ==========
-    with tab9:
-        sub_tab1, sub_tab2 = st.tabs(["🎯 Misi", "🏆 Leaderboard"])
-        with sub_tab1:
-            show_missions()
-        with sub_tab2:
-            show_leaderboard()
 
 
 if __name__ == "__main__":
