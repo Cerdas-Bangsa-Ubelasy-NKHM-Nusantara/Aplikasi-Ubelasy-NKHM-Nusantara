@@ -23,7 +23,7 @@ from nkhm.tebak_pahlawan import show_tebak_pahlawan
 from nkhm.angka_rahasia import show_angka_rahasia
 from nkhm.seberang_sungai import show_river_game
 from nkhm.tiang_bendera import show_tiang_bendera
-from nkhm.gamifikasi import show_missions, show_leaderboard
+from nkhm.gamifikasi import show_missions, show_leaderboard  # <-- TAMBAHAN
 
 
 # Import opsional
@@ -280,8 +280,8 @@ def main():
     
     # ========== TAB UTAMA ==========
     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs([
-        "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "🎮 GAMIFIKASI", "👤 DASBOR SAYA", 
-        "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL"
+        "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA", 
+        "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL", "🎮 GAMIFIKASI"  # <-- TAMBAHAN
     ])
     
     # ========== TAB 1: KUIS ==========
@@ -753,20 +753,12 @@ def main():
         col3.metric("📊 Akurasi", f"{accuracy:.1f}%")
         show_leaderboard()
 
-    # ========== TAB 4: GAMIFIKASI ==========
+    # ========== TAB 4: DASBOR SAYA ==========
     with tab4:
-        sub_tab1, sub_tab2 = st.tabs(["🎯 Misi", "🏆 Leaderboard"])
-        with sub_tab1:
-            show_missions()
-        with sub_tab2:
-            show_leaderboard()
-
-    # ========== TAB 5: DASBOR SAYA ==========
-    with tab5:
         show_dasbor()
     
-    # ========== TAB 6: TANDING ==========
-    with tab6:
+    # ========== TAB 5: TANDING ==========
+    with tab5:
         img_path = Path(__file__).parent.parent / "assets" / "garuda.jpg"
         show_image_centered(img_path, caption="Bertanding Untuk Menang 🇮🇩", width_ratio=2)
         st.markdown("---")
@@ -785,8 +777,8 @@ def main():
             show_battle()
             st.info("🏆 Mode Turnamen Kelas akan segera hadir!")
 
-    # ========== TAB 7: KARUNIA & STOMATA =========
-    with tab7:
+    # ========== TAB 6: KARUNIA & STOMATA =========
+    with tab6:
         sub_tab1, sub_tab2 = st.tabs(["🎁 Karunia Motivasi", "💖 Sto-mata Hati"])
         with sub_tab1:
             img_path = Path(__file__).parent.parent / "assets" / "karunia.jpg"
@@ -829,8 +821,8 @@ def main():
         with sub_tab2:
             show_stomata()
       
-    # ========== TAB 8: HADIAH ==========
-    with tab8:
+    # ========== TAB 7: HADIAH ==========
+    with tab7:
         img_path = Path(__file__).parent.parent / "assets" / "hadiah.gif"
         show_image_centered(img_path, caption="A Giveaway 🇮🇩", width_ratio=2)
         st.markdown("---")
@@ -852,9 +844,17 @@ def main():
         with sub_tab5:
             st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
     
-    # ========== TAB 9: TUTORIAL ==========
-    with tab9:
+    # ========== TAB 8: TUTORIAL ==========
+    with tab8:
         show_tutorial()
+
+    # ========== TAB 9: GAMIFIKASI ==========
+    with tab9:
+        sub_tab1, sub_tab2 = st.tabs(["🎯 Misi", "🏆 Leaderboard"])
+        with sub_tab1:
+            show_missions()
+        with sub_tab2:
+            show_leaderboard()
 
 
 if __name__ == "__main__":
