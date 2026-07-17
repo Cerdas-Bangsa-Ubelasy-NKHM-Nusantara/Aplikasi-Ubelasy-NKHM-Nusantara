@@ -23,7 +23,7 @@ from nkhm.tebak_pahlawan import show_tebak_pahlawan
 from nkhm.angka_rahasia import show_angka_rahasia
 from nkhm.seberang_sungai import show_river_game
 from nkhm.tiang_bendera import show_tiang_bendera
-from nkhm.gamifikasi import show_missions, show_leaderboard   # <-- IMPORT GAMIFIKASI
+from nkhm.gamifikasi import show_missions, show_leaderboard
 
 
 # Import opsional
@@ -721,7 +721,7 @@ def main():
             history_df = history_df[["timestamp", "type", "question", "correct", "nkhm_total"]]
             history_df["correct"] = history_df["correct"].map({True: "✅", False: "❌"})
             history_df.columns = ["Waktu", "Tipe", "Soal", "Hasil", "NKHM Total"]
-            st.dataframe(history_df, width='stretch', hide_index=True)
+            st.dataframe(history_df, use_container_width=True, hide_index=True)  # <-- PERBAIKAN
     
     # ========== TAB 3: PRESTASI ==========
     with tab3:
