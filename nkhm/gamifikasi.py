@@ -129,7 +129,7 @@ def update_leaderboard(username, total_reward):
 
 # ========== FUNGSI MISI ==========
 def init_mission_progress():
-    """Inisialisasi progress misi di session state"""
+    """Inisialisasi progress misi di session state (tanpa rerun)"""
     if "nkhm_mission_progress" not in st.session_state:
         st.session_state.nkhm_mission_progress = {}
         for mission in MISSIONS:
@@ -139,7 +139,10 @@ def init_mission_progress():
             }
 
 def check_mission_progress():
-    """Periksa progress misi dan update status di session state (tanpa rerun)"""
+    """
+    Periksa progress misi dan update status di session state.
+    TIDAK ADA st.rerun() di sini untuk menghindari error SessionInfo.
+    """
     init_mission_progress()
     try:
         from nkhm.main import get_current_nkhm
@@ -183,7 +186,6 @@ def check_mission_progress():
             progress[mission["id"]]["completed"] = True
 
 def get_total_reward():
-    """Hitung total koin yang sudah diklaim"""
     progress = st.session_state.get("nkhm_mission_progress", {})
     total = 0
     for mission in MISSIONS:
@@ -192,7 +194,7 @@ def get_total_reward():
     return total
 
 def show_missions():
-    """Tampilkan daftar misi dan status"""
+    """Tampilkan daftar misi dan status (AMAN - tidak ada rerun otomatis)"""
     init_mission_progress()
     check_mission_progress()
     
@@ -222,12 +224,13 @@ def show_missions():
         
         with col3:
             if status["completed"] and not status["claimed"]:
+                # HANYA di sini st.rerun() dipanggil, karena dipicu oleh aksi pengguna (klik tombol)
                 if st.button("Klaim", key=f"claim_{mission['id']}"):
                     progress[mission["id"]]["claimed"] = True
                     username = st.session_state.get("nkhm_user", "Anonymous")
                     new_total = get_total_reward() + mission["reward"]
                     update_leaderboard(username, new_total)
-                    st.rerun()  # Hanya rerun saat klaim, aman karena dipicu oleh aksi pengguna
+                    st.rerun()  # AMAN: dipicu oleh klik pengguna
             elif status["claimed"]:
                 st.button("✅", disabled=True, key=f"done_{mission['id']}")
             else:
