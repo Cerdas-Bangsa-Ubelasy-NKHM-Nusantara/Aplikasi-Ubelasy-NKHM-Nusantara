@@ -1,3 +1,44 @@
+# Mengelola Utang dengan Bijak
+
+> "Orang benar memberi pinjaman dan tidak meminta kembali, tetapi orang fasik tidak membayar hutang." - Mazmur 37:21
+
+## Pendahuluan
+
+Utang adalah bagian dari kehidupan ekonomi modern. Dalam sistem Ubelasy, utang dipandang sebagai **alat untuk memberdayakan**, bukan untuk membebani. Namun, tanpa pengelolaan yang bijak, utang dapat menjadi jerat yang menghancurkan.
+
+**Prinsip Tahun Yobel** mengajarkan pembebasan sisa hutang secara berkala. Ini bukan berarti kita bebas berutang seenaknya, tetapi ada mekanisme keadilan dan pengampunan dalam sistem keuangan yang sehat.
+
+---
+
+## 1. Memahami Jenis Utang
+
+### Utang Produktif vs Utang Konsumtif
+
+| **Utang Produktif** | **Utang Konsumtif** |
+|---------------------|---------------------|
+| Untuk investasi usaha | Untuk gaya hidup |
+| Menghasilkan pendapatan | Menghabiskan pendapatan |
+| Contoh: Modal usaha, pembelian mesin | Contoh: HP baru, liburan, fashion |
+| **Nilai tambah** | **Nilai berkurang** |
+
+> "Orang yang mengerjakan tanahnya akan kenyang dengan makanan, tetapi orang yang mengejar barang yang sia-sia tidak berakal budi." - Amsal 12:11
+
+### Utang Sehat vs Utang Berbahaya
+
+| **Utang Sehat** | **Utang Berbahaya** |
+|-----------------|---------------------|
+| Rasio cicilan ≤ 30% pendapatan | Rasio cicilan > 40% pendapatan |
+| Jangka waktu jelas | Perpanjangan terus-menerus |
+| Bunga wajar | Bunga selangit (rentenir) |
+| Ada rencana pelunasan | Tidak ada rencana |
+
+---
+
+## 2. Prinsip Dasar Mengelola Utang
+
+### a. Pahami Kemampuan Anda
+
+**Rumus Rasio Utang terhadap Pendapatan:**
 
 **Kategori:**
 
