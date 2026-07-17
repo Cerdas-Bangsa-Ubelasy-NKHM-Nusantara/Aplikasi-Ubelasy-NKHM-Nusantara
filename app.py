@@ -13,31 +13,26 @@ if "dark_mode" not in st.session_state:
 if not st.session_state.splash_selesai:
     st.set_page_config(page_title="Ubelasy + NKHM Nusantara", page_icon="🇮🇩", layout="wide")
     
-    # Kosongkan area utama
     splash_holder = st.empty()
     
     with splash_holder.container():
         col_kiri, col_tengah, col_kanan = st.columns([1, 2, 1])
         with col_tengah:
-            # Logo dari raw GitHub
             logo_url = "https://raw.githubusercontent.com/Cerdas-Bangsa-Ubelasy-NKHM-Nusantara/Aplikasi-Ubelasy-NKHM-Nusantara/refs/heads/main/assets/ubelasy+nkhm.jpg"
             st.markdown(
                 f'<div style="display: flex; justify-content: center;"><img src="{logo_url}" width="300"></div>',
                 unsafe_allow_html=True
             )
-            # Judul
             st.markdown(
                 "<h1 style='text-align: center;'>Ubelasy + NKHM Nusantara</h1>",
                 unsafe_allow_html=True
             )
-            # Deskripsi
             st.markdown(
                 "<p style='text-align: center; font-size: 18px;'>Aplikasi Sistem Pinjaman Model Ubelasy Berbasis PSH<br>"
                 "+ Aplikasi gaming 4 Kecerdasan (IQ, EQ, SQ, AQ) + Nasionalisme<br>"
                 "Berbasis Perkembangan Data Personal</p>",
                 unsafe_allow_html=True
             )
-            # CSS tombol
             st.markdown(
                 """
                 <style>
@@ -57,8 +52,7 @@ if not st.session_state.splash_selesai:
                 """,
                 unsafe_allow_html=True
             )
-            # Tombol Mulai - HAPUS width parameter
-            if st.button("🚀 Mulai"):  # <-- PERUBAHAN
+            if st.button("🚀 Mulai"):
                 st.session_state.splash_selesai = True
                 st.rerun()
     
@@ -98,32 +92,38 @@ app_mode = st.sidebar.radio(
     label_visibility="collapsed"
 )
 
-# Label tips
 st.sidebar.caption("💡 Tips: Aplikasi ada dalam 2 sidebar: kanan dan kiri. Klik tanda << atau >>, lalu sentuh layar di sisi kanan")
-
 st.sidebar.markdown("---")
 
 # ========== TOMBOL CATATAN PRIBADI (HANYA UNTUK NKHM) ==========
 if app_mode == "🌿 NKHM Nusantara (Gamifikasi)":
     vercel_url = "https://my-personal-notes-app-187q.vercel.app"
-    nkhm_url = "https://tim-cerdas-bangsa-ubelasy-nkhm-nusantara.streamlit.app"
-    target_url = f"{nkhm_url}?tab=dasbor&subtab=catatan"
-  
-    # Tombol Catatan Pribadi - HAPUS width parameter
-    st.sidebar.link_button("📝 Catatan Pribadi", vercel_url)  # <-- PERUBAHAN
-    
-    st.sidebar.markdown("---")   # separator setelah tombol
-    
-# ========== IMPORT MODUL ==========
+    st.sidebar.link_button("📝 Catatan Pribadi", vercel_url)
+    st.sidebar.markdown("---")
+
+# ========== IMPORT MODUL DENGAN ERROR HANDLING ==========
 try:
     from ubelasy.main import main as ubelasy_main
+except ImportError as e:
+    st.error(f"❌ Gagal memuat modul Ubelasy: {e}")
+    st.info("💡 Pastikan folder 'ubelasy' dan file 'main.py' ada. Periksa juga requirements.txt.")
+    ubelasy_main = None
+
+try:
     from nkhm.main import main as nkhm_main
-except Exception as e:
-    st.error(f"Gagal memuat modul: {e}")
-    st.stop()
+except ImportError as e:
+    st.error(f"❌ Gagal memuat modul NKHM: {e}")
+    st.info("💡 Pastikan folder 'nkhm' dan file 'main.py' ada. Periksa juga requirements.txt.")
+    nkhm_main = None
 
 # ========== JALANKAN MODUL YANG DIPILIH ==========
 if app_mode == "🌾 Ubelasy (Loan Aggregator)":
-    ubelasy_main()
+    if ubelasy_main:
+        ubelasy_main()
+    else:
+        st.warning("⚠️ Modul Ubelasy tidak tersedia. Silakan perbaiki instalasi.")
 else:
-    nkhm_main()
+    if nkhm_main:
+        nkhm_main()
+    else:
+        st.warning("⚠️ Modul NKHM tidak tersedia. Silakan perbaiki instalasi.")
