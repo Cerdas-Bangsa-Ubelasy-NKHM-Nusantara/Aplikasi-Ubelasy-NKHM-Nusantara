@@ -106,14 +106,14 @@ try:
     from ubelasy.main import main as ubelasy_main
 except ImportError as e:
     st.error(f"❌ Gagal memuat modul Ubelasy: {e}")
-    st.info("💡 Pastikan folder 'ubelasy' dan file 'main.py' ada. Periksa juga requirements.txt.")
+    st.info("💡 Pastikan folder 'ubelasy' dan file 'main.py' ada.")
     ubelasy_main = None
 
 try:
     from nkhm.main import main as nkhm_main
 except ImportError as e:
     st.error(f"❌ Gagal memuat modul NKHM: {e}")
-    st.info("💡 Pastikan folder 'nkhm' dan file 'main.py' ada. Periksa juga requirements.txt.")
+    st.info("💡 Pastikan folder 'nkhm' dan file 'main.py' ada.")
     nkhm_main = None
 
 # ========== JALANKAN MODUL YANG DIPILIH ==========
@@ -121,9 +121,9 @@ if app_mode == "🌾 Ubelasy (Loan Aggregator)":
     if ubelasy_main:
         ubelasy_main()
     else:
-        st.warning("⚠️ Modul Ubelasy tidak tersedia. Silakan perbaiki instalasi.")
+        st.warning("⚠️ Modul Ubelasy tidak tersedia.")
 else:
     if nkhm_main:
         nkhm_main()
     else:
-        st.warning("⚠️ Modul NKHM tidak tersedia. Silakan perbaiki instalasi.")
+        st.warning("⚠️ Modul NKHM tidak tersedia.")
