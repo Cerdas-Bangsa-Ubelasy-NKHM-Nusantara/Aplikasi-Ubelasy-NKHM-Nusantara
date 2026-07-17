@@ -3,7 +3,6 @@ import streamlit as st
 import json
 from pathlib import Path
 from datetime import datetime
-import pandas as pd
 
 # ========== DATA MISI ==========
 MISSIONS = [
@@ -13,7 +12,7 @@ MISSIONS = [
         "deskripsi": "Jawab 5 soal kuis (IQ, EQ, SQ, AQ, atau Nasionalisme)",
         "target": 5,
         "reward": 5,
-        "type": "total_questions"
+        "type": "total_questions"  # berdasarkan st.session_state.nkhm_total_questions
     },
     {
         "id": "jawab_10",
@@ -81,36 +80,21 @@ MISSIONS = [
     }
 ]
 
-# ========== FUNGSI LEADERBOARD ==========
+# ========== FUNGSI UNTUK LEADERBOARD ==========
 def get_leaderboard_file():
+    """Path ke file leaderboard.json"""
     data_dir = Path(__file__).parent.parent / "data"
     if not data_dir.exists():
         data_dir.mkdir(parents=True, exist_ok=True)
     return data_dir / "leaderboard.json"
 
 def load_leaderboard():
-    """Muat data leaderboard dari file JSON dengan error handling"""
+    """Muat data leaderboard dari file JSON"""
     file_path = get_leaderboard_file()
-    
-    # Jika file belum ada, buat dengan data kosong
-    if not file_path.exists():
-        save_leaderboard([])  # buat file dengan list kosong
-        return []
-    
-    # Coba baca file
-    try:
+    if file_path.exists():
         with open(file_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            # Pastikan data adalah list
-            if not isinstance(data, list):
-                data = []
-                save_leaderboard(data)
-            return data
-    except (json.JSONDecodeError, ValueError) as e:
-        # Jika file corrupt, buat ulang
-        st.warning("⚠️ Data leaderboard rusak, dibuat ulang.")
-        save_leaderboard([])
-        return []
+            return json.load(f)
+    return []
 
 def save_leaderboard(data):
     """Simpan data leaderboard ke file JSON"""
@@ -119,7 +103,9 @@ def save_leaderboard(data):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 def update_leaderboard(username, total_reward):
+    """Update atau tambah pengguna di leaderboard"""
     data = load_leaderboard()
+    # cari user
     found = False
     for entry in data:
         if entry["username"] == username:
@@ -133,11 +119,13 @@ def update_leaderboard(username, total_reward):
             "total_reward": total_reward,
             "last_update": datetime.now().strftime("%Y-%m-%d %H:%M")
         })
+    # urutkan descending
     data.sort(key=lambda x: x["total_reward"], reverse=True)
     save_leaderboard(data)
 
-# ========== FUNGSI MISI ==========
+# ========== FUNGSI UNTUK MISI ==========
 def init_mission_progress():
+    """Inisialisasi progress misi di session state"""
     if "nkhm_mission_progress" not in st.session_state:
         st.session_state.nkhm_mission_progress = {}
         for mission in MISSIONS:
@@ -147,16 +135,11 @@ def init_mission_progress():
             }
 
 def check_mission_progress():
-    """Periksa progress misi, import get_current_nkhm lokal untuk hindari circular"""
+    """Periksa progress misi dan update status"""
+    from nkhm.main import get_current_nkhm  # import lokal untuk hindari circular
     init_mission_progress()
     
-    # Import lokal agar tidak circular
-    try:
-        from nkhm.main import get_current_nkhm
-    except ImportError:
-        # Jika belum bisa import, skip
-        return
-    
+    # Ambil skor saat ini
     nkhm_q, nkhm_total, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct = get_current_nkhm()
     total_q = st.session_state.get("nkhm_total_questions", 0)
     
@@ -165,10 +148,12 @@ def check_mission_progress():
     
     for mission in MISSIONS:
         if progress[mission["id"]]["completed"]:
-            continue
+            continue  # sudah selesai
+        
         m_type = mission["type"]
         target = mission["target"]
         completed = False
+        
         if m_type == "total_questions":
             if total_q >= target:
                 completed = True
@@ -190,13 +175,17 @@ def check_mission_progress():
         elif m_type == "nkhm_total":
             if nkhm_total >= target:
                 completed = True
+        
         if completed:
             progress[mission["id"]]["completed"] = True
             any_completed = True
+    
+    # Jika ada misi baru selesai, refresh tampilan
     if any_completed:
         st.rerun()
 
 def get_total_reward():
+    """Hitung total reward yang sudah diklaim"""
     progress = st.session_state.get("nkhm_mission_progress", {})
     total = 0
     for mission in MISSIONS:
@@ -205,6 +194,7 @@ def get_total_reward():
     return total
 
 def show_missions():
+    """Tampilkan daftar misi dan status"""
     init_mission_progress()
     check_mission_progress()
     
@@ -213,12 +203,16 @@ def show_missions():
     
     progress = st.session_state.nkhm_mission_progress
     total_reward = get_total_reward()
+    
+    # Tampilkan total koin
     st.metric("🪙 Total Koin", total_reward)
     st.markdown("---")
     
+    # Tampilkan daftar misi
     for mission in MISSIONS:
         status = progress[mission["id"]]
         col1, col2, col3 = st.columns([4, 1, 1])
+        
         with col1:
             if status["claimed"]:
                 st.markdown(f"✅ ~~{mission['nama']}~~ *(selesai)*")
@@ -227,12 +221,16 @@ def show_missions():
             else:
                 st.markdown(f"⬜ {mission['nama']}")
             st.caption(mission["deskripsi"])
+        
         with col2:
             st.caption(f"🎁 {mission['reward']} koin")
+        
         with col3:
             if status["completed"] and not status["claimed"]:
                 if st.button("Klaim", key=f"claim_{mission['id']}"):
+                    # tandai sudah diklaim
                     progress[mission["id"]]["claimed"] = True
+                    # update leaderboard
                     username = st.session_state.get("nkhm_user", "Anonymous")
                     new_total = get_total_reward() + mission["reward"]
                     update_leaderboard(username, new_total)
@@ -240,7 +238,7 @@ def show_missions():
             elif status["claimed"]:
                 st.button("✅", disabled=True, key=f"done_{mission['id']}")
             else:
-                # tampilkan progress bar sederhana
+                # belum selesai, tampilkan progress
                 if mission["type"] == "total_questions":
                     current = st.session_state.get("nkhm_total_questions", 0)
                     st.progress(min(current / mission["target"], 1.0), text=f"{current}/{mission['target']}")
@@ -248,15 +246,21 @@ def show_missions():
                     st.caption("🔒 Belum tercapai")
 
 def show_leaderboard():
+    """Tampilkan leaderboard"""
     st.markdown("## 🏆 Leaderboard")
     st.markdown("Peringkat berdasarkan total koin yang dikumpulkan.")
+    
     data = load_leaderboard()
     if not data:
         st.info("Belum ada peserta. Mulailah mengumpulkan koin!")
         return
+    
+    # Tampilkan tabel
     df = pd.DataFrame(data)
     df = df[["username", "total_reward", "last_update"]]
     df.columns = ["Pengguna", "🪙 Koin", "Terakhir Update"]
     st.dataframe(df, use_container_width=True, hide_index=True)
+    
+    # Beri badge untuk peringkat teratas
     if len(data) >= 1:
         st.success(f"👑 Juara saat ini: **{data[0]['username']}** dengan {data[0]['total_reward']} koin!")
