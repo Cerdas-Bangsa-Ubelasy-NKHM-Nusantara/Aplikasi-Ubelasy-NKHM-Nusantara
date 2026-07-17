@@ -10,6 +10,7 @@ from ubelasy.pdf_export import export_simulation_to_pdf
 from shared.notifications import show_toast
 from ubelasy.edukasi import show_edukasi
 from ubelasy.kredit_report import show_kredit_report
+from ubelasy.keuangan import show_keuangan
 
 # ========== KONTEN DOKUMEN SISTEM UBELASY (LENGKAP) ==========
 def get_ubelasy_document():
@@ -616,7 +617,7 @@ def main():
         st.header("📑 Navigasi Ubelasy")
         tab_mode = st.radio(
             "Pilih Tab",
-            ["📖 Sistem Ubelasy", "⚙️ Simulasi & Agregator", "📚 Edukasi", "📊 Rapor Kredit"],
+            ["📖 Sistem Ubelasy", "⚙️ Simulasi & Agregator", "📚 Edukasi", "📊 Rapor Kredit", "💰 Perencanaan Keuangan"],
             index=1,
             label_visibility="collapsed"
         )
@@ -655,6 +656,9 @@ def main():
     
     elif tab_mode == "📊 Rapor Kredit":
         show_kredit_report()
+    
+    elif tab_mode == "💰 Perencanaan Keuangan":
+        show_keuangan()
     
     else:
         # ========== TAB SIMULASI & AGREGATOR ==========
