@@ -144,7 +144,9 @@ Sistem Ubelasy menerapkan **penurunan suku bunga 0,5% per periode**. Ini adalah 
 **Perhitungan Spread:**
 
 Rata-rata SBDK = 10,75%
+
 Biaya Dana+Overhead = 9%
+
 Spread Keuntungan Bank = 1,75% per tahun
 
 
