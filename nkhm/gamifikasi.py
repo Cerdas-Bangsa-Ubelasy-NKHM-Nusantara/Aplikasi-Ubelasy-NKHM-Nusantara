@@ -129,6 +129,7 @@ def update_leaderboard(username, total_reward):
 
 # ========== FUNGSI MISI ==========
 def init_mission_progress():
+    """Inisialisasi progress misi di session state"""
     if "nkhm_mission_progress" not in st.session_state:
         st.session_state.nkhm_mission_progress = {}
         for mission in MISSIONS:
@@ -136,15 +137,10 @@ def init_mission_progress():
                 "completed": False,
                 "claimed": False
             }
-    # Flag untuk menandai perlu rerun
-    if "nkhm_mission_needs_rerun" not in st.session_state:
-        st.session_state.nkhm_mission_needs_rerun = False
 
 def check_mission_progress():
-    """Periksa progress misi dan tandai yang selesai, tanpa langsung st.rerun()"""
+    """Periksa progress misi dan update status di session state (tanpa rerun)"""
     init_mission_progress()
-    
-    # Import lokal agar tidak circular
     try:
         from nkhm.main import get_current_nkhm
     except ImportError:
@@ -152,9 +148,7 @@ def check_mission_progress():
     
     nkhm_q, nkhm_total, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct = get_current_nkhm()
     total_q = st.session_state.get("nkhm_total_questions", 0)
-    
     progress = st.session_state.nkhm_mission_progress
-    any_completed = False
     
     for mission in MISSIONS:
         if progress[mission["id"]]["completed"]:
@@ -162,6 +156,7 @@ def check_mission_progress():
         m_type = mission["type"]
         target = mission["target"]
         completed = False
+        
         if m_type == "total_questions":
             if total_q >= target:
                 completed = True
@@ -183,15 +178,12 @@ def check_mission_progress():
         elif m_type == "nkhm_total":
             if nkhm_total >= target:
                 completed = True
+        
         if completed:
             progress[mission["id"]]["completed"] = True
-            any_completed = True
-    
-    # Jika ada misi baru selesai, tandai perlu rerun (tanpa langsung rerun)
-    if any_completed:
-        st.session_state.nkhm_mission_needs_rerun = True
 
 def get_total_reward():
+    """Hitung total koin yang sudah diklaim"""
     progress = st.session_state.get("nkhm_mission_progress", {})
     total = 0
     for mission in MISSIONS:
@@ -200,13 +192,9 @@ def get_total_reward():
     return total
 
 def show_missions():
+    """Tampilkan daftar misi dan status"""
     init_mission_progress()
     check_mission_progress()
-    
-    # Jika perlu rerun, lakukan di sini (setelah semua state siap)
-    if st.session_state.get("nkhm_mission_needs_rerun", False):
-        st.session_state.nkhm_mission_needs_rerun = False
-        st.rerun()
     
     st.markdown("## 🎯 Misi & Tantangan")
     st.markdown("Selesaikan misi untuk mengumpulkan koin! 🪙")
@@ -219,6 +207,7 @@ def show_missions():
     for mission in MISSIONS:
         status = progress[mission["id"]]
         col1, col2, col3 = st.columns([4, 1, 1])
+        
         with col1:
             if status["claimed"]:
                 st.markdown(f"✅ ~~{mission['nama']}~~ *(selesai)*")
@@ -227,8 +216,10 @@ def show_missions():
             else:
                 st.markdown(f"⬜ {mission['nama']}")
             st.caption(mission["deskripsi"])
+        
         with col2:
             st.caption(f"🎁 {mission['reward']} koin")
+        
         with col3:
             if status["completed"] and not status["claimed"]:
                 if st.button("Klaim", key=f"claim_{mission['id']}"):
@@ -236,7 +227,7 @@ def show_missions():
                     username = st.session_state.get("nkhm_user", "Anonymous")
                     new_total = get_total_reward() + mission["reward"]
                     update_leaderboard(username, new_total)
-                    st.rerun()
+                    st.rerun()  # Hanya rerun saat klaim, aman karena dipicu oleh aksi pengguna
             elif status["claimed"]:
                 st.button("✅", disabled=True, key=f"done_{mission['id']}")
             else:
@@ -247,15 +238,18 @@ def show_missions():
                     st.caption("🔒 Belum tercapai")
 
 def show_leaderboard():
+    """Tampilkan leaderboard"""
     st.markdown("## 🏆 Leaderboard")
     st.markdown("Peringkat berdasarkan total koin yang dikumpulkan.")
     data = load_leaderboard()
     if not data:
         st.info("Belum ada peserta. Mulailah mengumpulkan koin!")
         return
+    
     df = pd.DataFrame(data)
     df = df[["username", "total_reward", "last_update"]]
     df.columns = ["Pengguna", "🪙 Koin", "Terakhir Update"]
     st.dataframe(df, use_container_width=True, hide_index=True)
+    
     if len(data) >= 1:
         st.success(f"👑 Juara saat ini: **{data[0]['username']}** dengan {data[0]['total_reward']} koin!")
