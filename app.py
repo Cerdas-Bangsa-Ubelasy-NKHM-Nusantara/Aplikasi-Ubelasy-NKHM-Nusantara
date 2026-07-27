@@ -2,6 +2,10 @@
 import streamlit as st
 import os
 from pathlib import Path
+import logging  # <-- Tambahan untuk logging
+
+# Konfigurasi logging dasar
+logging.basicConfig(level=logging.INFO)
 
 # ========== INISIALISASI SESSION STATE ==========
 if "splash_selesai" not in st.session_state:
@@ -116,14 +120,18 @@ except ImportError as e:
     st.info("💡 Pastikan folder 'nkhm' dan file 'main.py' ada.")
     nkhm_main = None
 
-# ========== JALANKAN MODUL YANG DIPILIH ==========
-if app_mode == "🌾 Ubelasy (Loan Aggregator)":
-    if ubelasy_main:
-        ubelasy_main()
+# ========== JALANKAN MODUL YANG DIPILIH (DENGAN TRY-EXCEPT) ==========
+try:
+    if app_mode == "🌾 Ubelasy (Loan Aggregator)":
+        if ubelasy_main:
+            ubelasy_main()
+        else:
+            st.warning("⚠️ Modul Ubelasy tidak tersedia.")
     else:
-        st.warning("⚠️ Modul Ubelasy tidak tersedia.")
-else:
-    if nkhm_main:
-        nkhm_main()
-    else:
-        st.warning("⚠️ Modul NKHM tidak tersedia.")
+        if nkhm_main:
+            nkhm_main()
+        else:
+            st.warning("⚠️ Modul NKHM tidak tersedia.")
+except Exception as e:
+    st.error(f"❌ Terjadi error saat menjalankan aplikasi: {e}")
+    st.exception(e)  # menampilkan traceback lengkap
