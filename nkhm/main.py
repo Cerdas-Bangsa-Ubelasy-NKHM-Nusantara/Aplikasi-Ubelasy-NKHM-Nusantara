@@ -7,7 +7,6 @@ import sys
 import logging
 from pathlib import Path
 from datetime import datetime
-import base64
 
 # Konfigurasi logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -204,12 +203,11 @@ def reset_quiz_state(keep_feedback=False):
         st.session_state.nkhm_feedback_is_multi = False
         st.session_state.nkhm_show_navigation = False
 
-# ========== MAIN (dengan try-except global) ==========
+# ========== MAIN ==========
 def main():
     try:
         init_session_state()
 
-        # Splash screen / login
         if not st.session_state.nkhm_user:
             st.empty()
             col1, col2, col3 = st.columns([1, 2, 1])
@@ -686,10 +684,13 @@ def main():
             if st.session_state.nkhm_history:
                 st.markdown("### Riwayat Kuis")
                 history_df = pd.DataFrame(st.session_state.nkhm_history[-10:])
-                history_df = history_df[["timestamp", "type", "question", "correct", "nkhm_total"]]
+                # Pastikan kolom yang diperlukan ada
+                required_cols = ["timestamp", "type", "question", "correct", "nkhm_total"]
+                existing_cols = [col for col in required_cols if col in history_df.columns]
+                history_df = history_df[existing_cols]
                 history_df["correct"] = history_df["correct"].map({True: "✅", False: "❌"})
                 history_df.columns = ["Waktu", "Tipe", "Soal", "Hasil", "NKHM Total"]
-                st.dataframe(history_df, width='stretch', hide_index=True)
+                st.dataframe(history_df, use_container_width=True, hide_index=True)
 
         # ========== TAB 3: PRESTASI ==========
         with tab3:
@@ -816,7 +817,7 @@ def main():
     except Exception as e:
         logging.error(f"Terjadi error di NKHM: {e}", exc_info=True)
         st.error(f"❌ Terjadi error di aplikasi NKHM: {e}")
-        st.exception(e)  # tampilkan traceback di UI untuk debugging
+        st.exception(e)
 
 if __name__ == "__main__":
     main()
