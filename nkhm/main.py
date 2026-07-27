@@ -5,18 +5,18 @@ import random
 import os
 import sys
 import logging
+import time
 from pathlib import Path
 from datetime import datetime
 
-# Konfigurasi logging
+# ========== LOGGING ==========
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# ========== IMPORT MODUL DENGAN ERROR HANDLING ==========
+# ========== IMPORT MODUL DENGAN FALLBACK ==========
 try:
     from nkhm.questions import load_all_questions
-except ImportError as e:
-    logging.error(f"Gagal import nkhm.questions: {e}")
-    st.error("❌ Modul 'questions' tidak ditemukan. Pastikan folder nkhm lengkap.")
+except ImportError:
+    st.error("❌ Modul 'questions' tidak ditemukan.")
     st.stop()
 
 try:
@@ -26,22 +26,20 @@ try:
         get_normalized_score,
         MAX_POIN_IQ, MAX_POIN_EQ, MAX_POIN_SQ, MAX_POIN_AQ, MAX_POIN_NASIONALISME
     )
-except ImportError as e:
-    logging.error(f"Gagal import nkhm.scoring: {e}")
+except ImportError:
     st.error("❌ Modul 'scoring' tidak ditemukan.")
     st.stop()
 
+# Modul opsional dengan fallback
 try:
     from nkhm.ai_assistant import get_ai_response
 except ImportError:
-    logging.warning("Modul ai_assistant tidak ditemukan, fungsi AI dinonaktifkan")
     def get_ai_response(*args, **kwargs):
         return "Fitur AI belum tersedia."
 
 try:
     from nkhm.leaderboard import show_leaderboard, save_score
 except ImportError:
-    logging.warning("Modul leaderboard tidak ditemukan")
     show_leaderboard = lambda: st.info("Fitur leaderboard belum tersedia.")
     save_score = lambda *args, **kwargs: None
 
@@ -85,7 +83,6 @@ try:
 except ImportError:
     show_tiang_bendera = lambda: st.info("Tiang bendera belum tersedia.")
 
-# Import opsional
 TOURNAMENT_AVAILABLE = False
 show_tournament = None
 try:
@@ -115,8 +112,7 @@ def show_image_centered(image_path, caption=None, width_ratio=2):
         else:
             st.info(f"💡 Gambar '{image_path.name}' belum tersedia.")
             return False
-    except Exception as e:
-        st.warning(f"Gagal menampilkan gambar: {e}")
+    except Exception:
         return False
 
 def show_video_centered(video_path, width_ratio=2):
@@ -133,8 +129,7 @@ def show_video_centered(video_path, width_ratio=2):
             with col2:
                 st.info("💡 Video 'kuis.mp4' belum tersedia.")
             return False
-    except Exception as e:
-        st.warning(f"Gagal menampilkan video: {e}")
+    except Exception:
         return False
 
 # ========== INISIALISASI SESSION STATE ==========
@@ -208,6 +203,7 @@ def main():
     try:
         init_session_state()
 
+        # SPLASH / LOGIN
         if not st.session_state.nkhm_user:
             st.empty()
             col1, col2, col3 = st.columns([1, 2, 1])
@@ -310,6 +306,7 @@ def main():
             with col_f2:
                 kecerdasan = st.selectbox("Fokus", ["Semua", "IQ", "EQ", "SQ", "AQ", "Nasionalisme"], key="kecerdasan_filter_kuis")
 
+            # Filter soal
             filtered_questions = []
             for q in QUESTION_BANK:
                 if kecerdasan == "Nasionalisme":
@@ -383,6 +380,7 @@ def main():
 
                     question_key = f"q_{hash(q['text'])}"
 
+                    # Tampilkan feedback
                     if st.session_state.nkhm_feedback_display == "benar":
                         st.success(f"✅ BENAR! + poin untuk {st.session_state.last_score_type}")
                         st.balloons()
@@ -434,6 +432,7 @@ def main():
                         correct_list = [c.strip() for c in correct_list.split(',')]
                         is_multi = True
 
+                    # Pilihan jawaban
                     if not st.session_state.nkhm_answered:
                         if is_multi:
                             st.markdown("**Pilih semua jawaban yang benar:**")
@@ -482,6 +481,7 @@ def main():
                                 disabled=True
                             )
 
+                    # Tombol jawab
                     if not st.session_state.nkhm_answered:
                         if is_multi:
                             disable_btn = not selected
@@ -608,6 +608,7 @@ def main():
                             st.session_state.nkhm_last_q_id = current_q_id
                             st.rerun()
 
+                    # Selesai bagian skala
                     if q.get("type") in ["EQ_scale", "AQ_scale"] and st.session_state.current_section and st.session_state.nkhm_answered:
                         if st.button("✅ Selesai Bagian Ini", key=f"selesai_{question_key}"):
                             section = st.session_state.current_section
@@ -636,6 +637,7 @@ def main():
                                 st.session_state.nkhm_last_q_id = st.session_state.nkhm_current_q.get('text', '') if st.session_state.nkhm_current_q else ""
                                 st.rerun()
 
+                    # Navigasi
                     if st.session_state.nkhm_answered and q.get("type") not in ["EQ_scale", "AQ_scale"]:
                         st.markdown("---")
                         st.markdown("### 📌 Navigasi")
@@ -684,7 +686,6 @@ def main():
             if st.session_state.nkhm_history:
                 st.markdown("### Riwayat Kuis")
                 history_df = pd.DataFrame(st.session_state.nkhm_history[-10:])
-                # Pastikan kolom yang diperlukan ada
                 required_cols = ["timestamp", "type", "question", "correct", "nkhm_total"]
                 existing_cols = [col for col in required_cols if col in history_df.columns]
                 history_df = history_df[existing_cols]
@@ -767,9 +768,9 @@ def main():
                         from nkhm.karunia_140_karakter import show_karunia_140_karakter
                         show_karunia_140_karakter()
                     except ImportError:
-                        st.error("❌ Modul 'karunia_140_karakter' tidak ditemukan. Pastikan file sudah ada di folder nkhm.")
+                        st.error("❌ Modul 'karunia_140_karakter' tidak ditemukan.")
                     except Exception as e:
-                        st.error(f"Terjadi error: {e}")
+                        st.error(f"Error: {e}")
                 with subsub_tab3:
                     try:
                         from nkhm.karunia_karakter_masalah import show_karunia_karakter_masalah
@@ -777,7 +778,7 @@ def main():
                     except ImportError:
                         st.error("❌ Modul 'karunia_karakter_masalah' tidak ditemukan.")
                     except Exception as e:
-                        st.error(f"Terjadi error: {e}")
+                        st.error(f"Error: {e}")
                 with subsub_tab4:
                     try:
                         from nkhm.pengembangan_diri import show_pengembangan_diri
@@ -785,8 +786,7 @@ def main():
                     except ImportError:
                         st.error("❌ Modul 'pengembangan_diri' tidak ditemukan.")
                     except Exception as e:
-                        st.error(f"Terjadi error: {e}")
-
+                        st.error(f"Error: {e}")
             with sub_tab2:
                 show_stomata()
 
@@ -815,8 +815,8 @@ def main():
             show_tutorial()
 
     except Exception as e:
-        logging.error(f"Terjadi error di NKHM: {e}", exc_info=True)
-        st.error(f"❌ Terjadi error di aplikasi NKHM: {e}")
+        logging.error(f"Error di NKHM: {e}", exc_info=True)
+        st.error(f"❌ Terjadi error: {e}")
         st.exception(e)
 
 if __name__ == "__main__":
