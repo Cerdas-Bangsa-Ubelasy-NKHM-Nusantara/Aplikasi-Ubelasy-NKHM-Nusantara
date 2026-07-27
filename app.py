@@ -2,9 +2,9 @@
 import streamlit as st
 import os
 from pathlib import Path
-import logging  # <-- Tambahan untuk logging
+import logging
 
-# Konfigurasi logging dasar
+# Konfigurasi logging
 logging.basicConfig(level=logging.INFO)
 
 # ========== INISIALISASI SESSION STATE ==========
@@ -13,10 +13,16 @@ if "splash_selesai" not in st.session_state:
 if "dark_mode" not in st.session_state:
     st.session_state.dark_mode = False
 
+# ========== PENGATURAN PAGE (HANYA SEKALI) ==========
+st.set_page_config(
+    page_title="Ubelasy + NKHM Nusantara",
+    page_icon="🇮🇩",
+    layout="wide"
+)
+
 # ========== SPLASH SCREEN ==========
 if not st.session_state.splash_selesai:
-    st.set_page_config(page_title="Ubelasy + NKHM Nusantara", page_icon="🇮🇩", layout="wide")
-    
+    # Tampilkan splash screen
     splash_holder = st.empty()
     
     with splash_holder.container():
@@ -58,17 +64,21 @@ if not st.session_state.splash_selesai:
             )
             if st.button("🚀 Mulai"):
                 st.session_state.splash_selesai = True
+                # Tidak perlu st.rerun() di sini, karena perubahan state akan memicu render ulang
+                # Namun untuk memaksa refresh, gunakan st.rerun() tanpa st.stop()
                 st.rerun()
     
+    # Hentikan eksekusi agar tidak melanjutkan ke konten utama
     st.stop()
 
 # ========== SETELAH SPLASH (HALAMAN UTAMA) ==========
-st.set_page_config(page_title="Ubelasy + NKHM Nusantara", page_icon="🇮🇩", layout="wide")
+# (st.set_page_config sudah dipanggil, tidak perlu diulang)
 
 # ========== DARK MODE TOGGLE DI SIDEBAR ==========
 dark_mode_toggle = st.sidebar.toggle("🌙 Mode Gelap", value=st.session_state.dark_mode)
 if dark_mode_toggle != st.session_state.dark_mode:
     st.session_state.dark_mode = dark_mode_toggle
+    # Gunakan st.rerun() dengan aman
     st.rerun()
 
 if st.session_state.dark_mode:
@@ -134,4 +144,4 @@ try:
             st.warning("⚠️ Modul NKHM tidak tersedia.")
 except Exception as e:
     st.error(f"❌ Terjadi error saat menjalankan aplikasi: {e}")
-    st.exception(e)  # menampilkan traceback lengkap
+    st.exception(e)
