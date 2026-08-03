@@ -314,7 +314,7 @@ def main():
 
         # ========== TAB UTAMA ==========
         tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
-            "🎮 KUIS", "📊 DASHBOARD", "🏆 PRESTASI", "👤 DASBOR SAYA",
+            "🎮 KUIS", "📊 DASBOR NKHM", "🏆 PRESTASI", "👤 DASBOR SAYA",
             "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL"
         ])
 
@@ -704,7 +704,7 @@ def main():
                 logging.error(f"Error di Tab Kuis: {e}", exc_info=True)
                 st.error(f"Error di Tab Kuis: {e}")
 
-        # ========== TAB 2: DASHBOARD ==========
+        # ========== TAB 2: DASBOR NKHM ==========
         with tab2:
             try:
                 show_dasbor_nkhm()
