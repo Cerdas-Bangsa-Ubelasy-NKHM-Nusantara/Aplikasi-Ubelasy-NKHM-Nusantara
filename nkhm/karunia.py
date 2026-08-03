@@ -1,6 +1,18 @@
 # nkhm/karunia.py
 import streamlit as st
 import pandas as pd
+import logging
+
+# ========== LOGGING ==========
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# ========== FUNGSI BANTU UNTUK RERUN YANG AMAN ==========
+def safe_rerun():
+    """Memanggil st.rerun() dengan penanganan error untuk menghindari crash."""
+    try:
+        st.rerun()
+    except Exception as e:
+        logging.warning(f"st.rerun gagal di karunia: {e}")
 
 # Daftar 70 pernyataan (tetap sama)
 QUESTIONS = [
@@ -89,102 +101,131 @@ KARUNIA_NAMES = [
 ]
 
 def init_karunia_state():
-    if "karunia_answers" not in st.session_state:
-        st.session_state.karunia_answers = [0] * 70
-    if "karunia_submitted" not in st.session_state:
-        st.session_state.karunia_submitted = False
+    try:
+        if "karunia_answers" not in st.session_state:
+            st.session_state.karunia_answers = [0] * 70
+        if "karunia_submitted" not in st.session_state:
+            st.session_state.karunia_submitted = False
+        if "karunia_totals" not in st.session_state:
+            st.session_state.karunia_totals = None
+    except Exception as e:
+        logging.error(f"Error init_karunia_state: {e}")
 
 def reset_karunia():
-    st.session_state.karunia_answers = [0] * 70
-    st.session_state.karunia_submitted = False
+    try:
+        st.session_state.karunia_answers = [0] * 70
+        st.session_state.karunia_submitted = False
+        st.session_state.karunia_totals = None
+        logging.info("Karunia state direset")
+    except Exception as e:
+        logging.error(f"Error reset_karunia: {e}")
 
 def show_karunia():
-    init_karunia_state()
-    
-    st.markdown("## 🎁 Tes Karunia Motivasi")
-    st.markdown("""
-    **Petunjuk:** Bacalah setiap pernyataan dengan seksama. Berikan nilai 0–5 sesuai dengan seberapa sering pernyataan tersebut menggambarkan diri Anda:
-    
-    - **0** = Tidak pernah
-    - **1** = Jarang
-    - **2** = Kadang-kadang
-    - **3** = Biasanya
-    - **4** = Kebanyakan
-    - **5** = Selalu
-    
-    Jawablah dengan **jujur** dan tidak perlu takut terhadap penilaian orang lain.
-    """)
-    
-    st.markdown("### 📋 Kuesioner (70 pernyataan)")
-    
-    for i, question in enumerate(QUESTIONS):
-        col1, col2 = st.columns([8, 1])
-        with col1:
-            st.markdown(f"**{i+1}. {question}**")
-        with col2:
-            current_val = st.session_state.karunia_answers[i]
-            selected = st.selectbox(
-                "Nilai",
-                options=[0, 1, 2, 3, 4, 5],
-                index=current_val,
-                key=f"karunia_{i}",
-                label_visibility="collapsed"
-            )
-            st.session_state.karunia_answers[i] = selected
-    
-    st.markdown("---")
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("📊 Hitung Skor Karunia", use_container_width=True):
-            totals = [0] * 7
-            for i, val in enumerate(st.session_state.karunia_answers):
-                col_idx = i % 7   # pola 1-7 berulang
-                totals[col_idx] += val
-            st.session_state.karunia_totals = totals
-            st.session_state.karunia_submitted = True
-            st.rerun()
-    with col2:
-        if st.button("🔄 Reset", use_container_width=True):
-            reset_karunia()
-            st.rerun()
-    
-    if st.session_state.get("karunia_submitted", False):
-        totals = st.session_state.karunia_totals
-        st.markdown("---")
-        st.subheader("📊 Hasil Tes Karunia Motivasi")
+    try:
+        init_karunia_state()
         
-        df = pd.DataFrame({
-            "Karunia": KARUNIA_NAMES,
-            "Total Skor": totals
-        })
-        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.markdown("## 🎁 Tes Karunia Motivasi")
+        st.markdown("""
+        **Petunjuk:** Bacalah setiap pernyataan dengan seksama. Berikan nilai 0–5 sesuai dengan seberapa sering pernyataan tersebut menggambarkan diri Anda:
         
-        sorted_idx = sorted(range(7), key=lambda i: totals[i], reverse=True)
-        top3 = [(KARUNIA_NAMES[i], totals[i]) for i in sorted_idx[:3]]
+        - **0** = Tidak pernah
+        - **1** = Jarang
+        - **2** = Kadang-kadang
+        - **3** = Biasanya
+        - **4** = Kebanyakan
+        - **5** = Selalu
         
-        st.markdown("### 🏆 Tiga Karunia Motivasi Tertinggi Anda:")
-        for rank, (name, score) in enumerate(top3, 1):
-            st.success(f"{rank}. **{name}** – Skor: {score}")
+        Jawablah dengan **jujur** dan tidak perlu takut terhadap penilaian orang lain.
+        """)
         
-        with st.expander("📖 Penjelasan Karunia"):
-            st.markdown("""
-            **A. Karunia Bernubuat (Perceiver)** – Kemampuan melihat kebenaran, membedakan yang baik dan jahat, serta menyatakan kebenaran dengan tegas.
-            
-            **B. Karunia Melayani (Doer)** – Kemampuan menolong, memenuhi kebutuhan praktis orang lain, dan bekerja dengan rajin.
-            
-            **C. Karunia Mengajar (Teacher)** – Kemampuan menyampaikan kebenaran secara logis, sistematis, dan mengajar orang lain.
-            
-            **D. Karunia Menasihati (Encourager)** – Kemampuan mendorong, memotivasi, dan menasihati orang lain untuk bertumbuh.
-            
-            **E. Karunia Memberi (Giver)** – Kemampuan memberi dengan sukacita, mengelola sumber daya untuk memberkati.
-            
-            **F. Karunia Memimpin (Leader)** – Kemampuan memimpin, mengatur, dan mengarahkan orang lain.
-            
-            **G. Karunia Kemurahan Hati / Berbelas Kasihan (Compassion)** – Kemampuan mengasihi, berbelas kasihan, dan menolong yang menderita.
-            """)
+        st.markdown("### 📋 Kuesioner (70 pernyataan)")
         
-        st.info("Hasil tes ini dapat membantu Anda memahami talenta/potensi diri dan area pengembangan.")
+        # Gunakan form untuk menghindari rerun conflict
+        with st.form(key="karunia_form"):
+            for i, question in enumerate(QUESTIONS):
+                col1, col2 = st.columns([8, 1])
+                with col1:
+                    st.markdown(f"**{i+1}. {question}**")
+                with col2:
+                    current_val = st.session_state.karunia_answers[i]
+                    selected = st.selectbox(
+                        "Nilai",
+                        options=[0, 1, 2, 3, 4, 5],
+                        index=current_val,
+                        key=f"karunia_{i}",
+                        label_visibility="collapsed"
+                    )
+                    st.session_state.karunia_answers[i] = selected
+            
+            st.markdown("---")
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                submit_btn = st.form_submit_button("📊 Hitung Skor Karunia", use_container_width=True)
+                if submit_btn:
+                    try:
+                        totals = [0] * 7
+                        for i, val in enumerate(st.session_state.karunia_answers):
+                            col_idx = i % 7  # pola 1-7 berulang
+                            totals[col_idx] += val
+                        st.session_state.karunia_totals = totals
+                        st.session_state.karunia_submitted = True
+                        safe_rerun()
+                    except Exception as e:
+                        logging.error(f"Error menghitung skor karunia: {e}")
+                        st.error(f"Terjadi error saat menghitung: {e}")
+            
+            with col2:
+                reset_btn = st.form_submit_button("🔄 Reset", use_container_width=True)
+                if reset_btn:
+                    reset_karunia()
+                    safe_rerun()
+        
+        if st.session_state.get("karunia_submitted", False) and st.session_state.get("karunia_totals") is not None:
+            try:
+                totals = st.session_state.karunia_totals
+                st.markdown("---")
+                st.subheader("📊 Hasil Tes Karunia Motivasi")
+                
+                df = pd.DataFrame({
+                    "Karunia": KARUNIA_NAMES,
+                    "Total Skor": totals
+                })
+                st.dataframe(df, use_container_width=True, hide_index=True)
+                
+                sorted_idx = sorted(range(7), key=lambda i: totals[i], reverse=True)
+                top3 = [(KARUNIA_NAMES[i], totals[i]) for i in sorted_idx[:3]]
+                
+                st.markdown("### 🏆 Tiga Karunia Motivasi Tertinggi Anda:")
+                for rank, (name, score) in enumerate(top3, 1):
+                    st.success(f"{rank}. **{name}** – Skor: {score}")
+                
+                with st.expander("📖 Penjelasan Karunia"):
+                    st.markdown("""
+                    **A. Karunia Bernubuat (Perceiver)** – Kemampuan melihat kebenaran, membedakan yang baik dan jahat, serta menyatakan kebenaran dengan tegas.
+                    
+                    **B. Karunia Melayani (Doer)** – Kemampuan menolong, memenuhi kebutuhan praktis orang lain, dan bekerja dengan rajin.
+                    
+                    **C. Karunia Mengajar (Teacher)** – Kemampuan menyampaikan kebenaran secara logis, sistematis, dan mengajar orang lain.
+                    
+                    **D. Karunia Menasihati (Encourager)** – Kemampuan mendorong, memotivasi, dan menasihati orang lain untuk bertumbuh.
+                    
+                    **E. Karunia Memberi (Giver)** – Kemampuan memberi dengan sukacita, mengelola sumber daya untuk memberkati.
+                    
+                    **F. Karunia Memimpin (Leader)** – Kemampuan memimpin, mengatur, dan mengarahkan orang lain.
+                    
+                    **G. Karunia Kemurahan Hati / Berbelas Kasihan (Compassion)** – Kemampuan mengasihi, berbelas kasihan, dan menolong yang menderita.
+                    """)
+                
+                st.info("Hasil tes ini dapat membantu Anda memahami talenta/potensi diri dan area pengembangan.")
+            except Exception as e:
+                logging.error(f"Error menampilkan hasil karunia: {e}")
+                st.error(f"Terjadi error saat menampilkan hasil: {e}")
+    
+    except Exception as e:
+        logging.error(f"Error di show_karunia: {e}", exc_info=True)
+        st.error(f"❌ Terjadi error di Karunia Motivasi: {e}")
+        st.exception(e)
 
 if __name__ == "__main__":
     show_karunia()
