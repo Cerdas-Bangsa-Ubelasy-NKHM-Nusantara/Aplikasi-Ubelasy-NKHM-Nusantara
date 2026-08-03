@@ -33,6 +33,7 @@ def show_dasbor():
         
         # Definisikan URL catatan pribadi
         vercel_url = "https://my-personal-notes-app-187q.vercel.app"
+        nkhm_url = "https://tim-cerdas-bangsa-ubelasy-nkhm-nusantara.streamlit.app"
         
         st.markdown("## 👤 Dasbor Saya")
         st.markdown("Ringkasan perkembangan dan rekomendasi personal Anda.")
@@ -40,7 +41,7 @@ def show_dasbor():
         # ========== SUBTAB DENGAN RADIO HORIZONTAL ==========
         # Tentukan subtab aktif dari query parameter atau session state
         try:
-            if "subtab" in st.query_params and st.query_params["subtab"] == "catatan":
+            if "subtab" in st.query_params and st.query_params.get("subtab") == "catatan":
                 default_subtab = "Catatan"
             else:
                 default_subtab = "Ringkasan & Progres"
@@ -60,10 +61,10 @@ def show_dasbor():
         # ========== RINGKASAN & PROGRES ==========
         if subtab == "Ringkasan & Progres":
             try:
-                scores = st.session_state.nkhm_scores
-                history = st.session_state.nkhm_history
-                total_questions = st.session_state.nkhm_total_questions
-                user_name = st.session_state.nkhm_user
+                scores = st.session_state.get("nkhm_scores", {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0, "Nasionalisme": 0})
+                history = st.session_state.get("nkhm_history", [])
+                total_questions = st.session_state.get("nkhm_total_questions", 0)
+                user_name = st.session_state.get("nkhm_user", "Pengguna")
                 
                 nkhm_q = calculate_nkhm_q(scores["IQ"], scores["EQ"], scores["SQ"], scores["AQ"])
                 nkhm_total = calculate_nkhm_total(nkhm_q, scores["Nasionalisme"])
@@ -189,7 +190,10 @@ def show_dasbor():
                 st.markdown("### 🎯 Target Berikutnya")
                 try:
                     target = min(100, nkhm_total + 10)
-                    st.progress(nkhm_total / 100, text=f"Menuju {target:.0f}")
+                    if nkhm_total > 0:
+                        st.progress(min(nkhm_total / 100, 1.0), text=f"Menuju {target:.0f}")
+                    else:
+                        st.progress(0.0, text="Mulai kerjakan soal untuk memulai progress!")
                     if nkhm_total >= 100:
                         st.success("🎉 Selamat! Anda sudah mencapai NKHM Total 100!")
                     else:
@@ -228,7 +232,8 @@ def show_dasbor():
                     st.markdown("#### ✏️ Catatan Cepat")
                     st.caption("Catatan disimpan di server. Simpan akan membersihkan kotak, buka untuk memuat catatan yang tersimpan.")
                     
-                    note_filename = f"notes_{st.session_state.nkhm_user}.txt" if st.session_state.nkhm_user else "notes_default.txt"
+                    user_name = st.session_state.get("nkhm_user", "pengguna")
+                    note_filename = f"notes_{user_name}.txt"
                     
                     try:
                         if "simple_note" not in st.session_state:
@@ -297,14 +302,45 @@ def show_dasbor():
                 with col_right:
                     st.markdown("#### 📱 Catatan Pribadi (React)")
                     st.markdown("Aplikasi catatan interaktif dengan fitur lengkap.")
+                    
+                    # ========== IFRAME DENGAN MULTIPLE FALLBACK ==========
                     try:
-                        st.components.v1.iframe(vercel_url, height=450, scrolling=True)
+                        iframe_html = f"""
+                        <iframe
+                            src="{vercel_url}"
+                            style="width: 100%; height: 450px; border: none; border-radius: 8px;"
+                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                            loading="lazy"
+                            allow="clipboard-read; clipboard-write"
+                        ></iframe>
+                        """
+                        
+                        # Coba metode 1: st.components.v1.html
+                        try:
+                            st.components.v1.html(iframe_html, height=470)
+                        except AttributeError:
+                            # Metode 2: st.components.html
+                            try:
+                                st.components.html(iframe_html, height=470)
+                            except AttributeError:
+                                # Metode 3: markdown dengan iframe
+                                st.markdown(iframe_html, unsafe_allow_html=True)
+                            except Exception as e:
+                                logging.error(f"Error dengan components.html: {e}")
+                                st.markdown(iframe_html, unsafe_allow_html=True)
+                        except Exception as e:
+                            logging.error(f"Error dengan components.v1.html: {e}")
+                            try:
+                                st.components.html(iframe_html, height=470)
+                            except Exception as e2:
+                                logging.error(f"Error dengan components.html fallback: {e2}")
+                                st.markdown(iframe_html, unsafe_allow_html=True)
+                                
                     except Exception as e:
                         logging.error(f"Error menampilkan iframe: {e}")
-                        st.warning("Gagal menampilkan aplikasi catatan. Silakan buka di tab baru.")
+                        st.warning("⚠️ Gagal menampilkan aplikasi catatan. Silakan buka di tab baru.")
                     
                     st.markdown("---")
-                    nkhm_url = "https://tim-cerdas-bangsa-ubelasy-nkhm-nusantara.streamlit.app"
                     st.link_button("🔗 Buka di tab baru", vercel_url, use_container_width=True)
                     st.link_button("⬅️ Kembali ke NKHM", nkhm_url, use_container_width=True)
                     st.caption("💡 Tips: Gunakan tombol 'Kembali ke NKHM' untuk kembali ke aplikasi NKHM.")
