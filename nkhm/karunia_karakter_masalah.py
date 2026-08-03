@@ -1,6 +1,18 @@
 # nkhm/karunia_karakter_masalah.py
 import streamlit as st
 import pandas as pd
+import logging
+
+# ========== LOGGING ==========
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# ========== FUNGSI BANTU UNTUK RERUN YANG AMAN ==========
+def safe_rerun():
+    """Memanggil st.rerun() dengan penanganan error untuk menghindari crash."""
+    try:
+        st.rerun()
+    except Exception as e:
+        logging.warning(f"st.rerun gagal di karunia_karakter_masalah: {e}")
 
 # ========== BAGIAN I: KARAKTERISTIK (140 SOAL) ==========
 # Berdasarkan PDF, 140 pernyataan karakteristik (urutan 1-140)
@@ -199,124 +211,153 @@ KARUNIA_NAMES = [
 ]
 
 def init_state():
-    prefix = "karunia_km_"
-    if f"{prefix}answers_karakter" not in st.session_state:
-        st.session_state[f"{prefix}answers_karakter"] = [0] * 140
-    if f"{prefix}answers_masalah" not in st.session_state:
-        st.session_state[f"{prefix}answers_masalah"] = [0] * 35
-    if f"{prefix}submitted" not in st.session_state:
-        st.session_state[f"{prefix}submitted"] = False
-    if f"{prefix}totals" not in st.session_state:
-        st.session_state[f"{prefix}totals"] = [0] * 7
+    try:
+        prefix = "karunia_km_"
+        if f"{prefix}answers_karakter" not in st.session_state:
+            st.session_state[f"{prefix}answers_karakter"] = [0] * 140
+        if f"{prefix}answers_masalah" not in st.session_state:
+            st.session_state[f"{prefix}answers_masalah"] = [0] * 35
+        if f"{prefix}submitted" not in st.session_state:
+            st.session_state[f"{prefix}submitted"] = False
+        if f"{prefix}totals" not in st.session_state:
+            st.session_state[f"{prefix}totals"] = [0] * 7
+    except Exception as e:
+        logging.error(f"Error init_state: {e}")
 
 def reset_state():
-    prefix = "karunia_km_"
-    st.session_state[f"{prefix}answers_karakter"] = [0] * 140
-    st.session_state[f"{prefix}answers_masalah"] = [0] * 35
-    st.session_state[f"{prefix}submitted"] = False
-    st.session_state[f"{prefix}totals"] = [0] * 7
+    try:
+        prefix = "karunia_km_"
+        st.session_state[f"{prefix}answers_karakter"] = [0] * 140
+        st.session_state[f"{prefix}answers_masalah"] = [0] * 35
+        st.session_state[f"{prefix}submitted"] = False
+        st.session_state[f"{prefix}totals"] = [0] * 7
+        logging.info("Karunia karakter masalah state direset")
+    except Exception as e:
+        logging.error(f"Error reset_state: {e}")
 
 def show_karunia_karakter_masalah():
-    init_state()
-    prefix = "karunia_km_"
-    
-    st.markdown("## 📋 Karakter & Masalah (175 Soal)")
-    st.markdown("""
-    **Petunjuk:** Berikan nilai 0–5 untuk setiap pernyataan sesuai dengan frekuensi yang Anda alami:
-    - **0** = Tidak pernah
-    - **1** = Jarang
-    - **2** = Kadang-kadang
-    - **3** = Biasa
-    - **4** = Kebanyakan
-    - **5** = Selalu
-    
-    Terdapat **140 pernyataan Karakteristik** + **35 pernyataan Masalah**. Setelah selesai, klik **Hitung Skor**.
-    """)
-    
-    # ========== BAGIAN I: KARAKTERISTIK ==========
-    st.markdown("### I. Karakteristik (140 pernyataan)")
-    for i, q in enumerate(QUESTIONS_KARAKTER):
-        col1, col2 = st.columns([8, 1])
-        with col1:
-            st.markdown(f"**{i+1}. {q}**")
-        with col2:
-            val = st.selectbox(
-                "Nilai",
-                [0,1,2,3,4,5],
-                index=st.session_state[f"{prefix}answers_karakter"][i],
-                key=f"karakter_{i}",
-                label_visibility="collapsed"
-            )
-            st.session_state[f"{prefix}answers_karakter"][i] = val
-    
-    st.markdown("---")
-    st.markdown("### II. Masalah yang Dihadapi (35 pernyataan)")
-    for i, q in enumerate(QUESTIONS_MASALAH):
-        col1, col2 = st.columns([8, 1])
-        with col1:
-            st.markdown(f"**{i+1}. {q}**")
-        with col2:
-            val = st.selectbox(
-                "Nilai",
-                [0,1,2,3,4,5],
-                index=st.session_state[f"{prefix}answers_masalah"][i],
-                key=f"masalah_{i}",
-                label_visibility="collapsed"
-            )
-            st.session_state[f"{prefix}answers_masalah"][i] = val
-    
-    st.markdown("---")
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("📊 Hitung Skor Karakter & Masalah", key="hitung_km_button", use_container_width=True):
-            # Hitung total per kolom untuk bagian I (140 soal, pola i%7)
-            totals = [0] * 7
-            for i, val in enumerate(st.session_state[f"{prefix}answers_karakter"]):
-                col_idx = i % 7
-                totals[col_idx] += val
-            # Hitung total per kolom untuk bagian II (35 soal, pola i%7 juga)
-            for i, val in enumerate(st.session_state[f"{prefix}answers_masalah"]):
-                col_idx = i % 7
-                totals[col_idx] += val
-            st.session_state[f"{prefix}totals"] = totals
-            st.session_state[f"{prefix}submitted"] = True
-            st.rerun()
-    with col2:
-        if st.button("🔄 Reset", key="reset_km_button", use_container_width=True):
-            reset_state()
-            st.rerun()
-    
-    if st.session_state.get(f"{prefix}submitted", False):
-        totals = st.session_state[f"{prefix}totals"]
-        st.markdown("---")
-        st.subheader("📊 Hasil Karakter & Masalah")
+    try:
+        init_state()
+        prefix = "karunia_km_"
         
-        df = pd.DataFrame({
-            "Karunia": KARUNIA_NAMES,
-            "Total Skor (Karakter + Masalah)": totals
-        })
-        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.markdown("## 📋 Karakter & Masalah (175 Soal)")
+        st.markdown("""
+        **Petunjuk:** Berikan nilai 0–5 untuk setiap pernyataan sesuai dengan frekuensi yang Anda alami:
+        - **0** = Tidak pernah
+        - **1** = Jarang
+        - **2** = Kadang-kadang
+        - **3** = Biasa
+        - **4** = Kebanyakan
+        - **5** = Selalu
         
-        sorted_idx = sorted(range(7), key=lambda i: totals[i], reverse=True)
-        top3 = [(KARUNIA_NAMES[i], totals[i]) for i in sorted_idx[:3]]
+        Terdapat **140 pernyataan Karakteristik** + **35 pernyataan Masalah**. Setelah selesai, klik **Hitung Skor**.
+        """)
         
-        st.markdown("### 🏆 Tiga Karunia Tertinggi Anda:")
-        for rank, (name, score) in enumerate(top3, 1):
-            st.success(f"{rank}. **{name}** – Skor: {score}")
+        # ========== BAGIAN I: KARAKTERISTIK ==========
+        st.markdown("### I. Karakteristik (140 pernyataan)")
         
-        with st.expander("📖 Penjelasan 7 Karunia Motivasi"):
-            st.markdown("""
-            **1. Karunia Bernubuat (Perceiver)** – Kemampuan melihat kebenaran, membedakan yang baik dan jahat, menyatakan kebenaran dengan tegas.
-            **2. Karunia Memimpin (Leader)** – Kemampuan memimpin, mengatur, mengarahkan, dan mendelegasikan tugas.
-            **3. Karunia Melayani (Doer)** – Kemampuan menolong, memenuhi kebutuhan praktis, bekerja dengan rajin dan tanggap.
-            **4. Karunia Menasihati (Encourager)** – Kemampuan mendorong, memotivasi, dan menasihati untuk pertumbuhan rohani.
-            **5. Karunia Memberi (Giver)** – Kemampuan memberi dengan sukacita, mengelola sumber daya untuk memberkati.
-            **6. Karunia Mengajar (Teacher)** – Kemampuan menyampaikan kebenaran secara logis, sistematis, dan mengajar.
-            **7. Karunia Berbelas Kasihan (Compassion)** – Kemampuan mengasihi, berbelas kasihan, dan menolong yang menderita.
-            """)
+        # Gunakan form untuk menghindari rerun conflict
+        with st.form(key="karunia_km_form"):
+            for i, q in enumerate(QUESTIONS_KARAKTER):
+                col1, col2 = st.columns([8, 1])
+                with col1:
+                    st.markdown(f"**{i+1}. {q}**")
+                with col2:
+                    current_val = st.session_state[f"{prefix}answers_karakter"][i]
+                    val = st.selectbox(
+                        "Nilai",
+                        [0, 1, 2, 3, 4, 5],
+                        index=current_val,
+                        key=f"karakter_{i}",
+                        label_visibility="collapsed"
+                    )
+                    st.session_state[f"{prefix}answers_karakter"][i] = val
+            
+            st.markdown("---")
+            st.markdown("### II. Masalah yang Dihadapi (35 pernyataan)")
+            for i, q in enumerate(QUESTIONS_MASALAH):
+                col1, col2 = st.columns([8, 1])
+                with col1:
+                    st.markdown(f"**{i+1}. {q}**")
+                with col2:
+                    current_val = st.session_state[f"{prefix}answers_masalah"][i]
+                    val = st.selectbox(
+                        "Nilai",
+                        [0, 1, 2, 3, 4, 5],
+                        index=current_val,
+                        key=f"masalah_{i}",
+                        label_visibility="collapsed"
+                    )
+                    st.session_state[f"{prefix}answers_masalah"][i] = val
+            
+            st.markdown("---")
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                submit_btn = st.form_submit_button("📊 Hitung Skor Karakter & Masalah", use_container_width=True)
+                if submit_btn:
+                    try:
+                        # Hitung total per kolom untuk bagian I (140 soal, pola i%7)
+                        totals = [0] * 7
+                        for i, val in enumerate(st.session_state[f"{prefix}answers_karakter"]):
+                            col_idx = i % 7
+                            totals[col_idx] += val
+                        # Hitung total per kolom untuk bagian II (35 soal, pola i%7 juga)
+                        for i, val in enumerate(st.session_state[f"{prefix}answers_masalah"]):
+                            col_idx = i % 7
+                            totals[col_idx] += val
+                        st.session_state[f"{prefix}totals"] = totals
+                        st.session_state[f"{prefix}submitted"] = True
+                        safe_rerun()
+                    except Exception as e:
+                        logging.error(f"Error menghitung skor karakter masalah: {e}")
+                        st.error(f"Terjadi error saat menghitung: {e}")
+            
+            with col2:
+                reset_btn = st.form_submit_button("🔄 Reset", use_container_width=True)
+                if reset_btn:
+                    reset_state()
+                    safe_rerun()
         
-        st.info("Hasil ini menggabungkan skor dari Karakteristik (140 soal) dan Masalah (35 soal). Tiga karunia tertinggi menunjukkan potensi diri Anda.")
+        if st.session_state.get(f"{prefix}submitted", False):
+            try:
+                totals = st.session_state[f"{prefix}totals"]
+                st.markdown("---")
+                st.subheader("📊 Hasil Karakter & Masalah")
+                
+                df = pd.DataFrame({
+                    "Karunia": KARUNIA_NAMES,
+                    "Total Skor (Karakter + Masalah)": totals
+                })
+                st.dataframe(df, use_container_width=True, hide_index=True)
+                
+                sorted_idx = sorted(range(7), key=lambda i: totals[i], reverse=True)
+                top3 = [(KARUNIA_NAMES[i], totals[i]) for i in sorted_idx[:3]]
+                
+                st.markdown("### 🏆 Tiga Karunia Tertinggi Anda:")
+                for rank, (name, score) in enumerate(top3, 1):
+                    st.success(f"{rank}. **{name}** – Skor: {score}")
+                
+                with st.expander("📖 Penjelasan 7 Karunia Motivasi"):
+                    st.markdown("""
+                    **1. Karunia Bernubuat (Perceiver)** – Kemampuan melihat kebenaran, membedakan yang baik dan jahat, menyatakan kebenaran dengan tegas.
+                    **2. Karunia Memimpin (Leader)** – Kemampuan memimpin, mengatur, mengarahkan, dan mendelegasikan tugas.
+                    **3. Karunia Melayani (Doer)** – Kemampuan menolong, memenuhi kebutuhan praktis, bekerja dengan rajin dan tanggap.
+                    **4. Karunia Menasihati (Encourager)** – Kemampuan mendorong, memotivasi, dan menasihati untuk pertumbuhan rohani.
+                    **5. Karunia Memberi (Giver)** – Kemampuan memberi dengan sukacita, mengelola sumber daya untuk memberkati.
+                    **6. Karunia Mengajar (Teacher)** – Kemampuan menyampaikan kebenaran secara logis, sistematis, dan mengajar.
+                    **7. Karunia Berbelas Kasihan (Compassion)** – Kemampuan mengasihi, berbelas kasihan, dan menolong yang menderita.
+                    """)
+                
+                st.info("Hasil ini menggabungkan skor dari Karakteristik (140 soal) dan Masalah (35 soal). Tiga karunia tertinggi menunjukkan potensi diri Anda.")
+            except Exception as e:
+                logging.error(f"Error menampilkan hasil karakter masalah: {e}")
+                st.error(f"Terjadi error saat menampilkan hasil: {e}")
+    
+    except Exception as e:
+        logging.error(f"Error di show_karunia_karakter_masalah: {e}", exc_info=True)
+        st.error(f"❌ Terjadi error di Karakter & Masalah: {e}")
+        st.exception(e)
 
 if __name__ == "__main__":
     show_karunia_karakter_masalah()
