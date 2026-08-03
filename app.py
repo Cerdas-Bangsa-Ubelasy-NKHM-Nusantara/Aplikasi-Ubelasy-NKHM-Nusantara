@@ -70,10 +70,10 @@ if not st.session_state.splash_selesai:
             )
             if st.button("🚀 Mulai"):
                 st.session_state.splash_selesai = True
-                # Gunakan safe_rerun
                 safe_rerun()
-    # Hentikan eksekusi agar tidak melanjutkan ke konten utama
-    st.stop()
+                # HAPUS: st.stop() di sini karena safe_rerun() sudah menghentikan eksekusi
+    # Gunakan st.stop() di sini, di luar blok if button
+    st.stop()  # ← Pindahkan ke sini, di luar blok if button
 
 # ========== SETELAH SPLASH ==========
 # (st.set_page_config sudah dipanggil)
