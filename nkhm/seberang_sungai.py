@@ -1,58 +1,88 @@
 # nkhm/seberang_sungai.py
 import streamlit as st
+import logging
 from pathlib import Path
+
+# ========== LOGGING ==========
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# ========== FUNGSI BANTU UNTUK RERUN YANG AMAN ==========
+def safe_rerun():
+    """Memanggil st.rerun() dengan penanganan error untuk menghindari crash."""
+    try:
+        st.rerun()
+    except Exception as e:
+        logging.warning(f"st.rerun gagal di seberang_sungai: {e}")
 
 # ========== STATE PERMANEN (SKOR HANYA SEKALI) ==========
 def init_permanent_state():
-    if "seberang_score" not in st.session_state:
-        st.session_state.seberang_score = 0
-    if "seberang_has_played" not in st.session_state:
-        st.session_state.seberang_has_played = False
+    try:
+        if "seberang_score" not in st.session_state:
+            st.session_state.seberang_score = 0
+        if "seberang_has_played" not in st.session_state:
+            st.session_state.seberang_has_played = False
+    except Exception as e:
+        logging.error(f"Error init_permanent_state: {e}")
 
 # ========== STATE PERMAINAN (POSISI, PELANGGARAN) ==========
 def init_game_state():
-    if "river_game" not in st.session_state:
-        st.session_state.river_game = {
-            "left": {
-                "pahlawan": True,
-                "tawanan": True,
-                "perbekalan": True,
-                "anak": True
-            },
-            "right": {
-                "pahlawan": False,
-                "tawanan": False,
-                "perbekalan": False,
-                "anak": False
-            },
-            "boat": [],
-            "message": "",
-            "win": False,
-            "last_direction": None,
-            "game_over": False,
-            "violated_rule2": False,
-            "show_balloons": False,
-        }
+    try:
+        if "river_game" not in st.session_state:
+            st.session_state.river_game = {
+                "left": {
+                    "pahlawan": True,
+                    "tawanan": True,
+                    "perbekalan": True,
+                    "anak": True
+                },
+                "right": {
+                    "pahlawan": False,
+                    "tawanan": False,
+                    "perbekalan": False,
+                    "anak": False
+                },
+                "boat": [],
+                "message": "",
+                "win": False,
+                "last_direction": None,
+                "game_over": False,
+                "violated_rule2": False,
+                "show_balloons": False,
+            }
+    except Exception as e:
+        logging.error(f"Error init_game_state: {e}")
 
 def reset_game():
-    if "river_game" in st.session_state:
-        del st.session_state.river_game
-    init_game_state()
+    try:
+        if "river_game" in st.session_state:
+            del st.session_state.river_game
+        init_game_state()
+        logging.info("Game seberang sungai direset")
+    except Exception as e:
+        logging.error(f"Error reset_game: {e}")
 
 # ========== FUNGSI PENGECEKAN ==========
 def check_violation_type(side):
-    if not side["pahlawan"]:
-        if side["tawanan"] and side["perbekalan"]:
-            return "rule1"
-    return None
+    try:
+        if not side["pahlawan"]:
+            if side["tawanan"] and side["perbekalan"]:
+                return "rule1"
+        return None
+    except Exception as e:
+        logging.error(f"Error check_violation_type: {e}")
+        return None
 
 def check_rule2_violation(side):
-    if not side["pahlawan"]:
-        if side["tawanan"] and side["anak"]:
-            return True
-    return False
+    try:
+        if not side["pahlawan"]:
+            if side["tawanan"] and side["anak"]:
+                return True
+        return False
+    except Exception as e:
+        logging.error(f"Error check_rule2_violation: {e}")
+        return False
 
-# ========== PESAN-PESAN (disederhanakan namun lengkap) ==========
+# ========== PESAN-PESAN ==========
 def get_failure_rule1_message(location):
     if location == "awal":
         return """❌ GAGAL! Di sisi awal, tawanan merusak perbekalan, atau tawanan dan anak buah bertarung duel!
@@ -117,233 +147,258 @@ Pahlawan ini memang berhasil mencapai tujuan, tetapi dengan cara yang ceroboh...
 
 # ========== PROSES PERJALANAN ==========
 def check_all_sides():
-    state = st.session_state.river_game
-    v_left = check_violation_type(state["left"])
-    if v_left:
-        state["message"] = get_failure_rule1_message("awal")
-        state["game_over"] = True
+    try:
+        state = st.session_state.river_game
+        v_left = check_violation_type(state["left"])
+        if v_left:
+            state["message"] = get_failure_rule1_message("awal")
+            state["game_over"] = True
+            return False
+        if check_rule2_violation(state["left"]):
+            state["violated_rule2"] = True
+            state["message"] = get_rule2_violation_message("sisi awal")
+        v_right = check_violation_type(state["right"])
+        if v_right:
+            state["message"] = get_failure_rule1_message("seberang")
+            state["game_over"] = True
+            return False
+        if check_rule2_violation(state["right"]):
+            state["violated_rule2"] = True
+            state["message"] = get_rule2_violation_message("seberang")
+        if not state["message"] or "Peringatan" not in state["message"]:
+            state["message"] = "✅ Aman. Silakan lanjut pilih (tekan tombol) entitas."
+        return True
+    except Exception as e:
+        logging.error(f"Error check_all_sides: {e}")
         return False
-    if check_rule2_violation(state["left"]):
-        state["violated_rule2"] = True
-        state["message"] = get_rule2_violation_message("sisi awal")
-    v_right = check_violation_type(state["right"])
-    if v_right:
-        state["message"] = get_failure_rule1_message("seberang")
-        state["game_over"] = True
-        return False
-    if check_rule2_violation(state["right"]):
-        state["violated_rule2"] = True
-        state["message"] = get_rule2_violation_message("seberang")
-    if not state["message"] or "Peringatan" not in state["message"]:
-        state["message"] = "✅ Aman. Silakan lanjut pilih (tekan tombol) entitas."
-    return True
 
 def check_win():
-    state = st.session_state.river_game
-    if (state["right"]["pahlawan"] and state["right"]["tawanan"] and 
-        state["right"]["perbekalan"] and state["right"]["anak"]):
-        state["win"] = True
-        state["game_over"] = True
-        if not st.session_state.seberang_has_played:
-            if not state["violated_rule2"]:
-                st.session_state.seberang_score = 10
-                st.session_state.seberang_has_played = True
-                state["message"] = get_success_normal_message(True)
-                state["show_balloons"] = True
+    try:
+        state = st.session_state.river_game
+        if (state["right"]["pahlawan"] and state["right"]["tawanan"] and 
+            state["right"]["perbekalan"] and state["right"]["anak"]):
+            state["win"] = True
+            state["game_over"] = True
+            if not st.session_state.seberang_has_played:
+                if not state["violated_rule2"]:
+                    st.session_state.seberang_score = 10
+                    st.session_state.seberang_has_played = True
+                    state["message"] = get_success_normal_message(True)
+                    state["show_balloons"] = True
+                else:
+                    st.session_state.seberang_has_played = True
+                    state["message"] = get_success_tricked_message()
+                    state["show_balloons"] = False
             else:
-                st.session_state.seberang_has_played = True
-                state["message"] = get_success_tricked_message()
-                state["show_balloons"] = False
-        else:
-            if state["violated_rule2"]:
-                state["message"] = get_success_tricked_message() + "\n\n📝 (Ini permainan latihan, skor tetap)"
-                state["show_balloons"] = False
-            else:
-                state["message"] = get_success_normal_message(False)
-                state["show_balloons"] = True
-        return True
-    return False
+                if state["violated_rule2"]:
+                    state["message"] = get_success_tricked_message() + "\n\n📝 (Ini permainan latihan, skor tetap)"
+                    state["show_balloons"] = False
+                else:
+                    state["message"] = get_success_normal_message(False)
+                    state["show_balloons"] = True
+            return True
+        return False
+    except Exception as e:
+        logging.error(f"Error check_win: {e}")
+        return False
 
 def travel(entitas1, entitas2):
-    state = st.session_state.river_game
-    if state["win"] or state["game_over"]:
-        state["message"] = "Permainan sudah selesai. Klik 'Reset Permainan' untuk bermain lagi."
-        return
-    if state["left"]["pahlawan"]:
-        from_side = "left"
-        to_side = "right"
-        arah = "Dari Sisi Awal → Seberang"
-    elif state["right"]["pahlawan"]:
-        from_side = "right"
-        to_side = "left"
-        arah = "Dari Seberang → Sisi Awal"
-    else:
-        state["message"] = "❌ ERROR: Pahlawan tidak ditemukan!"
-        return
-    to_move = []
-    for e in ["pahlawan", entitas1, entitas2]:
-        if e:
-            to_move.append(e)
-    to_move = list(set(to_move))
-    if len(to_move) > 2:
-        state["message"] = f"⚠️ Perahu hanya bisa memuat maksimal 2 entitas (termasuk pahlawan). {arah} dibatalkan."
-        return
-    for e in to_move:
-        if not state[from_side].get(e, False):
-            state["message"] = f"❌ {e.capitalize()} tidak berada di sisi {'asal' if from_side=='left' else 'seberang'}! {arah} dibatalkan."
+    try:
+        state = st.session_state.river_game
+        if state["win"] or state["game_over"]:
+            state["message"] = "Permainan sudah selesai. Klik 'Reset Permainan' untuk bermain lagi."
             return
-    is_first_step = (state["left"]["pahlawan"] and state["left"]["tawanan"] and 
-                     state["left"]["perbekalan"] and state["left"]["anak"] and 
-                     not any(state["right"].values()))
-    if is_first_step:
-        if entitas1 == "anak":
-            state["message"] = get_failure_first_step_anak_message()
-            state["game_over"] = True
+        if state["left"]["pahlawan"]:
+            from_side = "left"
+            to_side = "right"
+            arah = "Dari Sisi Awal → Seberang"
+        elif state["right"]["pahlawan"]:
+            from_side = "right"
+            to_side = "left"
+            arah = "Dari Seberang → Sisi Awal"
+        else:
+            state["message"] = "❌ ERROR: Pahlawan tidak ditemukan!"
             return
-        elif entitas1 == "perbekalan":
-            state["violated_rule2"] = True
-            state["message"] = get_first_step_perbekalan_warning()
-        elif entitas1 is None:
-            state["violated_rule2"] = True
-            state["message"] = get_first_step_sendiri_warning()
-    state["last_direction"] = arah
-    for e in to_move:
-        state[from_side][e] = False
-        state[to_side][e] = True
-    state["boat"] = to_move
-    if len(to_move) == 1:
-        state["message"] = f"🚣 {arah}: Pahlawan menyeberang sendirian."
-    else:
-        nama_entitas = []
+        to_move = []
+        for e in ["pahlawan", entitas1, entitas2]:
+            if e:
+                to_move.append(e)
+        to_move = list(set(to_move))
+        if len(to_move) > 2:
+            state["message"] = f"⚠️ Perahu hanya bisa memuat maksimal 2 entitas (termasuk pahlawan). {arah} dibatalkan."
+            return
         for e in to_move:
-            if e == "tawanan": nama_entitas.append("Tawanan")
-            elif e == "perbekalan": nama_entitas.append("Perbekalan")
-            elif e == "anak": nama_entitas.append("Anak Buah")
-        state["message"] = f"🚣 {arah}: Pahlawan membawa {', '.join(nama_entitas)}."
-    if check_all_sides():
-        check_win()
-    else:
-        if "GAGAL" in state["message"]:
+            if not state[from_side].get(e, False):
+                state["message"] = f"❌ {e.capitalize()} tidak berada di sisi {'asal' if from_side=='left' else 'seberang'}! {arah} dibatalkan."
+                return
+        is_first_step = (state["left"]["pahlawan"] and state["left"]["tawanan"] and 
+                         state["left"]["perbekalan"] and state["left"]["anak"] and 
+                         not any(state["right"].values()))
+        if is_first_step:
+            if entitas1 == "anak":
+                state["message"] = get_failure_first_step_anak_message()
+                state["game_over"] = True
+                return
+            elif entitas1 == "perbekalan":
+                state["violated_rule2"] = True
+                state["message"] = get_first_step_perbekalan_warning()
+            elif entitas1 is None:
+                state["violated_rule2"] = True
+                state["message"] = get_first_step_sendiri_warning()
+        state["last_direction"] = arah
+        for e in to_move:
+            state[from_side][e] = False
+            state[to_side][e] = True
+        state["boat"] = to_move
+        if len(to_move) == 1:
+            state["message"] = f"🚣 {arah}: Pahlawan menyeberang sendirian."
+        else:
+            nama_entitas = []
             for e in to_move:
-                state[from_side][e] = True
-                state[to_side][e] = False
-            state["boat"] = []
-            state["last_direction"] = None
+                if e == "tawanan": nama_entitas.append("Tawanan")
+                elif e == "perbekalan": nama_entitas.append("Perbekalan")
+                elif e == "anak": nama_entitas.append("Anak Buah")
+            state["message"] = f"🚣 {arah}: Pahlawan membawa {', '.join(nama_entitas)}."
+        if check_all_sides():
+            check_win()
+        else:
+            if "GAGAL" in state["message"]:
+                for e in to_move:
+                    state[from_side][e] = True
+                    state[to_side][e] = False
+                state["boat"] = []
+                state["last_direction"] = None
+    except Exception as e:
+        logging.error(f"Error travel: {e}")
+        st.error(f"Terjadi error saat perjalanan: {e}")
 
 # ========== TAMPILAN TOMBOL DAN PETA ==========
 def show_buttons():
-    state = st.session_state.river_game
-    if st.session_state.seberang_has_played:
-        st.metric("🏆 Skor Resmi", f"{st.session_state.seberang_score} / 10")
-    else:
-        st.metric("🏆 Skor", "Belum ada (permainan pertama)")
-    if state["win"] or state["game_over"]:
-        if state["win"]:
-            if state.get("show_balloons", False):
-                st.balloons()
+    try:
+        state = st.session_state.river_game
+        if st.session_state.seberang_has_played:
+            st.metric("🏆 Skor Resmi", f"{st.session_state.seberang_score} / 10")
+        else:
+            st.metric("🏆 Skor", "Belum ada (permainan pertama)")
+        if state["win"] or state["game_over"]:
+            if state["win"]:
+                if state.get("show_balloons", False):
+                    st.balloons()
+                else:
+                    st.snow()
+                st.success(state["message"])
             else:
-                st.snow()
-            st.success(state["message"])
+                st.error(state["message"])
+            if st.button("🔄 Main Lagi", key="main_lagi_seberang"):
+                reset_game()
+                safe_rerun()
+            return
+        if state["left"]["pahlawan"]:
+            arah_yang_akan_datang = "🚣 Arah: Sisi Awal → Seberang"
+            available = [e for e in ["tawanan", "perbekalan", "anak"] if state["left"][e]]
         else:
-            st.error(state["message"])
-        if st.button("🔄 Main Lagi", key="main_lagi_seberang"):
-            reset_game()
-            st.rerun()
-        return
-    if state["left"]["pahlawan"]:
-        arah_yang_akan_datang = "🚣 Arah: Sisi Awal → Seberang"
-        available = [e for e in ["tawanan", "perbekalan", "anak"] if state["left"][e]]
-    else:
-        arah_yang_akan_datang = "🚣 Arah: Seberang → Sisi Awal"
-        available = [e for e in ["tawanan", "perbekalan", "anak"] if state["right"][e]]
-    st.info(arah_yang_akan_datang)
-    st.markdown("**Pahlawan siap menyeberang. Pilih siapa yang akan dibawa:**")
-    st.caption("Pilih satu entitas (selain pahlawan) untuk ikut menyeberang. Pahlawan akan selalu ikut.")
-    if not available:
-        st.info("Tidak ada entitas lain di sisi ini. Pahlawan akan menyeberang sendiri.")
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        if st.button("⛓️ Tawanan Perang", use_container_width=True, disabled=("tawanan" not in available), key="btn_tawanan"):
-            travel("tawanan", None)
-            st.rerun()
-    with col2:
-        if st.button("🍞 Perbekalan Pangan", use_container_width=True, disabled=("perbekalan" not in available), key="btn_perbekalan"):
-            travel("perbekalan", None)
-            st.rerun()
-    with col3:
-        if st.button("👤 Anak Buah", use_container_width=True, disabled=("anak" not in available), key="btn_anak"):
-            travel("anak", None)
-            st.rerun()
-    if st.button("🚣 Sendirian (hanya pahlawan)", use_container_width=True, key="btn_sendiri"):
-        travel(None, None)
-        st.rerun()
-    st.divider()
-    st.markdown("### 🗺️ Peta Penyeberangan")
-    colA, colRiver, colB = st.columns([2, 1, 2])
-    with colA:
-        st.markdown("**🏝️ SISI AWAL**")
-        left_items = []
-        if state["left"]["pahlawan"]: left_items.append("🦸 Pahlawan")
-        if state["left"]["tawanan"]: left_items.append("⛓️ Tawanan")
-        if state["left"]["perbekalan"]: left_items.append("🍞 Perbekalan")
-        if state["left"]["anak"]: left_items.append("👤 Anak Buah")
-        if left_items:
-            for item in left_items:
-                st.markdown(f"- {item}")
-        else:
-            st.markdown("*Kosong*")
-    with colRiver:
-        # ========== GANTI DENGAN VIDEO ==========
-        video_path = Path(__file__).parent.parent / "assets" / "perahu.mp4"
-        if video_path.exists():
-            # Baca file video sebagai bytes
-            with open(video_path, "rb") as f:
-                video_bytes = f.read()
-            st.video(video_bytes, loop=True, autoplay=False)
-        else:
-            # Fallback ke teks jika video tidak ada
-            st.markdown("### 🌊🌊🌊")
-            st.markdown("### 🚣‍♂️")
-            st.markdown("### 🌊🌊🌊")
-            st.warning("Video perahu.mp4 tidak ditemukan di folder assets")
-        st.caption("Sungai")
-    with colB:
-        st.markdown("**🏝️ SEBERANG**")
-        right_items = []
-        if state["right"]["pahlawan"]: right_items.append("🦸 Pahlawan")
-        if state["right"]["tawanan"]: right_items.append("⛓️ Tawanan")
-        if state["right"]["perbekalan"]: right_items.append("🍞 Perbekalan")
-        if state["right"]["anak"]: right_items.append("👤 Anak Buah")
-        if right_items:
-            for item in right_items:
-                st.markdown(f"- {item}")
-        else:
-            st.markdown("*Kosong*")
-    st.divider()
-    if not state["game_over"] and state["message"]:
-        if "Peringatan" in state["message"]:
-            st.warning(state["message"])
-        else:
-            st.info(state["message"])
+            arah_yang_akan_datang = "🚣 Arah: Seberang → Sisi Awal"
+            available = [e for e in ["tawanan", "perbekalan", "anak"] if state["right"][e]]
+        st.info(arah_yang_akan_datang)
+        st.markdown("**Pahlawan siap menyeberang. Pilih siapa yang akan dibawa:**")
+        st.caption("Pilih satu entitas (selain pahlawan) untuk ikut menyeberang. Pahlawan akan selalu ikut.")
+        if not available:
+            st.info("Tidak ada entitas lain di sisi ini. Pahlawan akan menyeberang sendiri.")
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            if st.button("⛓️ Tawanan Perang", use_container_width=True, disabled=("tawanan" not in available), key="btn_tawanan"):
+                travel("tawanan", None)
+                safe_rerun()
+        with col2:
+            if st.button("🍞 Perbekalan Pangan", use_container_width=True, disabled=("perbekalan" not in available), key="btn_perbekalan"):
+                travel("perbekalan", None)
+                safe_rerun()
+        with col3:
+            if st.button("👤 Anak Buah", use_container_width=True, disabled=("anak" not in available), key="btn_anak"):
+                travel("anak", None)
+                safe_rerun()
+        if st.button("🚣 Sendirian (hanya pahlawan)", use_container_width=True, key="btn_sendiri"):
+            travel(None, None)
+            safe_rerun()
+        st.divider()
+        st.markdown("### 🗺️ Peta Penyeberangan")
+        colA, colRiver, colB = st.columns([2, 1, 2])
+        with colA:
+            st.markdown("**🏝️ SISI AWAL**")
+            left_items = []
+            if state["left"]["pahlawan"]: left_items.append("🦸 Pahlawan")
+            if state["left"]["tawanan"]: left_items.append("⛓️ Tawanan")
+            if state["left"]["perbekalan"]: left_items.append("🍞 Perbekalan")
+            if state["left"]["anak"]: left_items.append("👤 Anak Buah")
+            if left_items:
+                for item in left_items:
+                    st.markdown(f"- {item}")
+            else:
+                st.markdown("*Kosong*")
+        with colRiver:
+            video_path = Path(__file__).parent.parent / "assets" / "perahu.mp4"
+            if video_path.exists():
+                try:
+                    with open(video_path, "rb") as f:
+                        video_bytes = f.read()
+                    st.video(video_bytes, loop=True, autoplay=False)
+                except Exception as e:
+                    logging.error(f"Error membaca video perahu.mp4: {e}")
+                    st.markdown("### 🌊🌊🌊")
+                    st.markdown("### 🚣‍♂️")
+                    st.markdown("### 🌊🌊🌊")
+                    st.warning("Video perahu.mp4 tidak dapat dibaca")
+            else:
+                st.markdown("### 🌊🌊🌊")
+                st.markdown("### 🚣‍♂️")
+                st.markdown("### 🌊🌊🌊")
+                st.warning("Video perahu.mp4 tidak ditemukan di folder assets")
+            st.caption("Sungai")
+        with colB:
+            st.markdown("**🏝️ SEBERANG**")
+            right_items = []
+            if state["right"]["pahlawan"]: right_items.append("🦸 Pahlawan")
+            if state["right"]["tawanan"]: right_items.append("⛓️ Tawanan")
+            if state["right"]["perbekalan"]: right_items.append("🍞 Perbekalan")
+            if state["right"]["anak"]: right_items.append("👤 Anak Buah")
+            if right_items:
+                for item in right_items:
+                    st.markdown(f"- {item}")
+            else:
+                st.markdown("*Kosong*")
+        st.divider()
+        if not state["game_over"] and state["message"]:
+            if "Peringatan" in state["message"]:
+                st.warning(state["message"])
+            else:
+                st.info(state["message"])
+    except Exception as e:
+        logging.error(f"Error show_buttons: {e}")
+        st.error(f"Terjadi error: {e}")
 
 def show_river_game():
-    init_permanent_state()
-    init_game_state()
-    st.markdown("## 🚣‍♂️ Pahlawan Menyeberang Sungai")
-    st.markdown("""
-    **Aturan:**
-    - Perahu hanya bisa memuat **maksimal 2 entitas** (termasuk pahlawan).
-    - **Tawanan perang dan perbekalan pangan tidak boleh ditinggal berdua tanpa pengawasan pahlawan** (aturan 1) → LANGSUNG GAGAL.
-    - **Tawanan dan Anak Buah tidak boleh ditinggal berdua tanpa bersama pahlawan** (aturan 2) → TIDAK GAGAL, tetapi dicatat. Jika aturan 2 dilanggar, Anda TIDAK akan mendapat poin meskipun berhasil.
-    - **Langkah pertama**: membawa Perbekalan atau Sendirian melanggar aturan 2 (tidak gagal). Membawa Anak langsung gagal (aturan 1).
-    - **Poin:** Hanya pada permainan pertama yang sukses tanpa melanggar aturan 2 mendapat 10 poin. Selanjutnya latihan.
-    - **Efek:** Balon (sempurna) atau Salju (terkecoh).
-    - **Visual:** Video perahu animasi di tengah.
-    """)
-    show_buttons()
-    if st.button("🔄 Reset Permainan", use_container_width=True, key="reset_seberang"):
-        reset_game()
-        st.rerun()
+    try:
+        init_permanent_state()
+        init_game_state()
+        st.markdown("## 🚣‍♂️ Pahlawan Menyeberang Sungai")
+        st.markdown("""
+        **Aturan:**
+        - Perahu hanya bisa memuat **maksimal 2 entitas** (termasuk pahlawan).
+        - **Tawanan perang dan perbekalan pangan tidak boleh ditinggal berdua tanpa pengawasan pahlawan** (aturan 1) → LANGSUNG GAGAL.
+        - **Tawanan dan Anak Buah tidak boleh ditinggal berdua tanpa bersama pahlawan** (aturan 2) → TIDAK GAGAL, tetapi dicatat. Jika aturan 2 dilanggar, Anda TIDAK akan mendapat poin meskipun berhasil.
+        - **Langkah pertama**: membawa Perbekalan atau Sendirian melanggar aturan 2 (tidak gagal). Membawa Anak langsung gagal (aturan 1).
+        - **Poin:** Hanya pada permainan pertama yang sukses tanpa melanggar aturan 2 mendapat 10 poin. Selanjutnya latihan.
+        - **Efek:** Balon (sempurna) atau Salju (terkecoh).
+        - **Visual:** Video perahu animasi di tengah.
+        """)
+        show_buttons()
+        if st.button("🔄 Reset Permainan", use_container_width=True, key="reset_seberang"):
+            reset_game()
+            safe_rerun()
+    except Exception as e:
+        logging.error(f"Error show_river_game: {e}", exc_info=True)
+        st.error(f"❌ Terjadi error di Seberang Sungai: {e}")
+        st.exception(e)
 
 if __name__ == "__main__":
     show_river_game()
