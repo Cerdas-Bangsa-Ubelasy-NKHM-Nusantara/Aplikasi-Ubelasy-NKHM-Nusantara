@@ -668,9 +668,9 @@ def main():
                                         st.session_state.nkhm_last_q_id = next_q.get('text', '')
                                         st.rerun()
 
-        # ========== TAB 2: DASHBOARD ==========
+        # ========== TAB 2: DASBOR NKHM ==========
         with tab2:
-            st.markdown("### Dashboard NKHM")
+            st.markdown("### Dasbor NKHM")
             _, _, iq_pct, eq_pct, sq_pct, aq_pct, nas_pct = get_current_nkhm()
             df_chart = pd.DataFrame({
                 "Kecerdasan": ["IQ", "EQ", "SQ", "AQ", "Nasionalisme"],
