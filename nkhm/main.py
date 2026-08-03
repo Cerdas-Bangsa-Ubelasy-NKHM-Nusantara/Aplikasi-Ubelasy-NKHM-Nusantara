@@ -124,22 +124,41 @@ def show_image_centered(image_path, caption=None, width_ratio=2):
     except Exception:
         return False
 
-def show_video_centered(video_path, width_ratio=2):
+def show_small_video(video_path, caption=None):
+    """
+    Menampilkan video dalam ukuran kecil (thumbnail).
+    Cocok untuk area yang tidak membutuhkan video besar.
+    """
     try:
         if video_path.exists():
             with open(video_path, "rb") as f:
                 video_bytes = f.read()
-            col1, col2, col3 = st.columns([1, width_ratio, 1])
+            
+            # Gunakan columns dengan rasio 1:1:1 agar video di tengah dengan ukuran kecil
+            col1, col2, col3 = st.columns([1.5, 1, 1.5])
             with col2:
-                st.video(video_bytes, loop=True, autoplay=False)
+                st.video(video_bytes, loop=True, autoplay=False, format="video/mp4")
+                if caption:
+                    st.caption(caption)
+            
+            # Tambahkan CSS untuk membatasi ukuran
+            st.markdown("""
+            <style>
+            .stVideo video {
+                max-width: 250px !important;
+                max-height: 180px !important;
+                border-radius: 10px !important;
+            }
+            </style>
+            """, unsafe_allow_html=True)
             return True
         else:
-            col1, col2, col3 = st.columns([1, width_ratio, 1])
-            with col2:
-                st.info("💡 Video 'kuis.mp4' belum tersedia.")
+            st.info("💡 Video pembelajaran belum tersedia.")
             return False
-    except Exception:
+    except Exception as e:
+        logging.error(f"Error show_small_video: {e}")
         return False
+
 
 # ========== INISIALISASI SESSION STATE ==========
 def init_session_state():
@@ -322,8 +341,11 @@ def main():
         with tab1:
             try:
                 video_path = Path(__file__).parent.parent / "assets" / "kuis.mp4"
-                show_video_centered(video_path, width_ratio=2)
+                show_small_video(video_path, caption="🎯 Video Pembelajaran Singkat")
                 st.markdown("---")
+        # ... lanjutkan kode kuis ...
+        
+
                 st.markdown("### Pilih Kuis")
                 col_f1, col_f2 = st.columns(2)
                 with col_f1:
