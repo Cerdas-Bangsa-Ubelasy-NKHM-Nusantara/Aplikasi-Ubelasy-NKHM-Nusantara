@@ -9,6 +9,31 @@ import time
 from pathlib import Path
 from datetime import datetime
 from nkhm.dasbor_nkhm import show_dasbor_nkhm
+# nkhm/main.py - Tambahkan di bagian import (setelah import lainnya)
+from nkhm.gamifikasi import show_gamifikasi
+
+# ========== TAB UTAMA ==========
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs([
+    "🎮 KUIS", 
+    "📊 DASBOR NKHM", 
+    "🏆 PRESTASI", 
+    "👤 DASBOR SAYA",
+    "⚔️ TANDING", 
+    "🎁 KARUNIA", 
+    "🎁 HADIAH", 
+    "📘 TUTORIAL",
+    "🎮 GAMIFIKASI"
+])
+
+# ... (kode tab lain tetap sama) ...
+
+# ========== TAB 9: GAMIFIKASI ==========
+with tab9:
+    try:
+        show_gamifikasi()
+    except Exception as e:
+        logging.error(f"Error di Tab Gamifikasi: {e}", exc_info=True)
+        st.error(f"Error di Tab Gamifikasi: {e}")
 
 # ========== LOGGING ==========
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
