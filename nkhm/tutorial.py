@@ -18,23 +18,25 @@ def inject_tutorial_css():
     .tutorial-container {
         max-width: 1000px;
         margin: 0 auto;
-        padding: 20px;
+        padding: 10px 0;
     }
     .tutorial-card {
         background-color: #f8f9fa;
         border-radius: 12px;
-        padding: 20px;
+        padding: 20px 24px;
         margin-bottom: 20px;
         border-left: 4px solid #2e7daf;
         box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-    .tutorial-card:hover {
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
     .tutorial-card h3 {
         color: #1a3c6e;
         margin-top: 0;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
+    }
+    .tutorial-card h4 {
+        color: #2e7daf;
+        margin-top: 16px;
+        margin-bottom: 8px;
     }
     .tutorial-card ul {
         padding-left: 20px;
@@ -42,7 +44,11 @@ def inject_tutorial_css():
     }
     .tutorial-card li {
         margin: 6px 0;
-        line-height: 1.6;
+        line-height: 1.7;
+    }
+    .tutorial-card p {
+        line-height: 1.7;
+        margin: 8px 0;
     }
     .tutorial-step {
         display: flex;
@@ -67,29 +73,25 @@ def inject_tutorial_css():
         flex-shrink: 0;
         font-size: 14px;
     }
-    .tutorial-icon {
-        font-size: 28px;
-        margin-right: 10px;
-    }
     .tutorial-tip {
         background-color: #e8f0fe;
         border-radius: 8px;
         padding: 12px 16px;
-        margin: 10px 0;
+        margin: 12px 0;
         border-left: 4px solid #2e7daf;
     }
     .tutorial-warning {
         background-color: #fff3cd;
         border-radius: 8px;
         padding: 12px 16px;
-        margin: 10px 0;
+        margin: 12px 0;
         border-left: 4px solid #ffc107;
     }
     .tutorial-success {
         background-color: #d4edda;
         border-radius: 8px;
         padding: 12px 16px;
-        margin: 10px 0;
+        margin: 12px 0;
         border-left: 4px solid #28a745;
     }
     .dark-mode .tutorial-card {
@@ -98,6 +100,9 @@ def inject_tutorial_css():
     }
     .dark-mode .tutorial-card h3 {
         color: #7ab7e0;
+    }
+    .dark-mode .tutorial-card h4 {
+        color: #5a9acf;
     }
     .dark-mode .tutorial-step {
         border-bottom-color: #333;
@@ -114,37 +119,25 @@ def inject_tutorial_css():
         background-color: #0a2a1a;
         border-left-color: #28a745;
     }
+    .dark-mode .tutorial-card p,
+    .dark-mode .tutorial-card li {
+        color: #d0d0e0;
+    }
     </style>
     """, unsafe_allow_html=True)
 
-# ========== FUNGSI BANTU ==========
-def create_step(number, icon, title, description):
-    """Membuat elemen step tutorial."""
-    return f"""
-    <div class="tutorial-step">
-        <div class="tutorial-number">{number}</div>
-        <div>
-            <div style="font-weight: bold; font-size: 16px;">
-                <span class="tutorial-icon">{icon}</span> {title}
-            </div>
-            <div style="color: #555; margin-top: 4px; line-height: 1.6;">{description}</div>
-        </div>
-    </div>
-    """
-
-# ========== KONTEN TUTORIAL ==========
 def show_tutorial_umum():
     """Tutorial umum tentang aplikasi NKHM."""
     st.markdown("""
     <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 30px;">
+        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
             🌿 Selamat Datang di NKHM Nusantara
         </h2>
         
-        <div style="text-align: center; margin-bottom: 30px; font-size: 16px; color: #555;">
+        <p style="text-align: center; font-size: 16px; color: #555; margin-bottom: 25px;">
             Aplikasi pembelajaran berbasis kecerdasan untuk mengembangkan 
             <strong>IQ, EQ, SQ, AQ</strong> dan <strong>Nasionalisme</strong>.
-        </div>
+        </p>
         
         <div class="tutorial-card">
             <h3>🎯 Apa itu NKHM?</h3>
@@ -163,7 +156,7 @@ def show_tutorial_umum():
         
         <div class="tutorial-card">
             <h3>📊 Rumus NKHM</h3>
-            <div style="background-color: #e8f0fe; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 16px;">
+            <div style="background-color: #e8f0fe; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 16px; margin: 10px 0;">
                 <strong>NKHM_Q</strong> = ((IQ + EQ) × (SQ + AQ)) / ((IQ + EQ) + (SQ + AQ))
                 <br><br>
                 <strong>NKHM_Total</strong> = (NKHM_Q + Nasionalisme) / 2
@@ -172,6 +165,10 @@ def show_tutorial_umum():
                 💡 Semakin tinggi NKHM Total, semakin baik perkembangan kecerdasan Anda!
             </p>
         </div>
+        
+        <div class="tutorial-tip">
+            💡 <strong>Tips Awal:</strong> Mulailah dengan mengerjakan kuis untuk mendapatkan skor awal Anda.
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -179,7 +176,7 @@ def show_tutorial_kuis():
     """Tutorial fitur Kuis."""
     st.markdown("""
     <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 30px;">
+        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
             🎮 Fitur Kuis
         </h2>
         
@@ -256,7 +253,7 @@ def show_tutorial_dasbor():
     """Tutorial fitur Dasbor."""
     st.markdown("""
     <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 30px;">
+        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
             📊 Fitur Dasbor
         </h2>
         
@@ -304,7 +301,7 @@ def show_tutorial_prestasi():
     """Tutorial fitur Prestasi."""
     st.markdown("""
     <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 30px;">
+        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
             🏆 Fitur Prestasi
         </h2>
         
@@ -353,7 +350,7 @@ def show_tutorial_tanding():
     """Tutorial fitur Tanding."""
     st.markdown("""
     <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 30px;">
+        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
             ⚔️ Fitur Tanding
         </h2>
         
@@ -417,7 +414,7 @@ def show_tutorial_karunia():
     """Tutorial fitur Karunia."""
     st.markdown("""
     <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 30px;">
+        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
             🎁 Fitur Karunia Motivasi
         </h2>
         
@@ -489,7 +486,7 @@ def show_tutorial_hadiah():
     """Tutorial fitur Hadiah."""
     st.markdown("""
     <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 30px;">
+        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
             🎁 Fitur Hadiah & Permainan
         </h2>
         
@@ -546,7 +543,7 @@ def show_tutorial_gamifikasi():
     """Tutorial fitur Gamifikasi."""
     st.markdown("""
     <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 30px;">
+        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
             🎮 Fitur Gamifikasi
         </h2>
         
@@ -637,7 +634,7 @@ def show_tutorial_tips():
     """Tips dan trik menggunakan aplikasi."""
     st.markdown("""
     <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 30px;">
+        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
             💡 Tips & Trik
         </h2>
         
