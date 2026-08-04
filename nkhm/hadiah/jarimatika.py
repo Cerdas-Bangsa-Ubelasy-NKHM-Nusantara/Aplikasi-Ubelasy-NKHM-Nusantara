@@ -13,53 +13,27 @@ from datetime import datetime
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # ========== KONFIGURASI ==========
-# Mapping jari ke angka (6-10)
-FINGER_MAP = {
-    6: {"nama": "Kelingking", "icon": "🖐️", "posisi": 0},
-    7: {"nama": "Manis", "icon": "🖐️", "posisi": 1},
-    8: {"nama": "Tengah", "icon": "🖐️", "posisi": 2},
-    9: {"nama": "Telunjuk", "icon": "🖐️", "posisi": 3},
-    10: {"nama": "Jempol", "icon": "👍", "posisi": 4}
-}
-
 FINGER_NAMES = ["Kelingking", "Manis", "Tengah", "Telunjuk", "Jempol"]
 
 # ========== FUNGSI PERHITUNGAN JARIMATIKA PMD ==========
 def hitung_jarimatika(num1, num2):
-    """
-    Menghitung perkalian menggunakan metode Jarimatika PMD.
-    
-    Args:
-        num1: Angka pertama (6-10)
-        num2: Angka kedua (6-10)
-    
-    Returns:
-        dict: Hasil perhitungan dengan detail langkah
-    """
+    """Menghitung perkalian menggunakan metode Jarimatika PMD."""
     try:
-        # Indeks jari (0 = Kelingking, 1 = Manis, 2 = Tengah, 3 = Telunjuk, 4 = Jempol)
         idx1 = num1 - 6
         idx2 = num2 - 6
         
-        # Nama jari
         finger1 = FINGER_NAMES[idx1]
         finger2 = FINGER_NAMES[idx2]
         
-        # Jari bawah (dari pertemuan ke bawah)
         bawah_kiri = idx1 + 1
         bawah_kanan = idx2 + 1
         
-        # Jari atas (dari pertemuan ke atas)
         atas_kiri = 5 - bawah_kiri
         atas_kanan = 5 - bawah_kanan
         
-        # Total bawah (dijumlahkan) = puluhan
         total_bawah = bawah_kiri + bawah_kanan
-        
-        # Total atas (dikalikan) = satuan
         total_atas = atas_kiri * atas_kanan
         
-        # Hasil akhir
         hasil = total_bawah * 10 + total_atas
         
         return {
@@ -77,7 +51,6 @@ def hitung_jarimatika(num1, num2):
             "total_atas": total_atas,
             "hasil": hasil
         }
-        
     except Exception as e:
         logging.error(f"Error hitung_jarimatika: {e}")
         return None
@@ -96,23 +69,16 @@ def get_jari_visualisasi(angka, tangan="kiri"):
     """Mendapatkan visualisasi jari untuk angka tertentu."""
     try:
         idx = angka - 6
-        # Jari yang terangkat (bawah)
         jari_bawah = idx + 1
-        # Jari yang dilipat (atas)
         jari_atas = 5 - jari_bawah
         
-        # Emoji untuk jari
-        jari_emoji = ["🖐️", "🖐️", "🖐️", "🖐️", "👍"]
         jari_nama = ["Kelingking", "Manis", "Tengah", "Telunjuk", "Jempol"]
         
-        # Tampilkan jari dari bawah ke atas (kelingking ke jempol)
         visual = []
         for i in range(5):
             if i < jari_bawah:
-                # Jari bawah (terangkat) - hijau
                 visual.append(f"🟢 {jari_nama[i]}")
             else:
-                # Jari atas (dilipat) - merah
                 visual.append(f"🔴 {jari_nama[i]}")
         
         return {
@@ -149,6 +115,10 @@ def init_jarimatika_state():
             st.session_state.jarimatika_soal_aktif = False
         if "jarimatika_history" not in st.session_state:
             st.session_state.jarimatika_history = []
+        if "jarimatika_level" not in st.session_state:
+            st.session_state.jarimatika_level = "Mudah"
+        if "jarimatika_counter" not in st.session_state:
+            st.session_state.jarimatika_counter = 0
     except Exception as e:
         logging.error(f"Error init_jarimatika_state: {e}")
 
@@ -165,10 +135,12 @@ def reset_jarimatika():
         st.session_state.jarimatika_detail = None
         st.session_state.jarimatika_soal_aktif = False
         st.session_state.jarimatika_history = []
+        st.session_state.jarimatika_counter += 1
         logging.info("Jarimatika state direset")
     except Exception as e:
         logging.error(f"Error reset_jarimatika: {e}")
 
+# ========== FUNGSI UTAMA ==========
 def show_jarimatika():
     """Menampilkan fitur Jarimatika PMD."""
     try:
@@ -220,8 +192,13 @@ def show_jarimatika_latihan():
             level = st.selectbox(
                 "📊 Level",
                 ["Mudah (6-7)", "Sedang (6-9)", "Sulit (6-10)"],
-                key="jarimatika_level"
+                key="jarimatika_level_select"
             )
+            # Update level di session state
+            level_key = level.split()[0]  # "Mudah", "Sedang", "Sulit"
+            if st.session_state.jarimatika_level != level_key:
+                st.session_state.jarimatika_level = level_key
+                st.session_state.jarimatika_soal_aktif = False
         
         with col2:
             st.metric("🏆 Skor", st.session_state.jarimatika_skor)
@@ -235,9 +212,10 @@ def show_jarimatika_latihan():
         # ===== GENERATE SOAL =====
         if not st.session_state.jarimatika_soal_aktif:
             # Tentukan rentang berdasarkan level
-            if level == "Mudah (6-7)":
+            level_name = st.session_state.jarimatika_level
+            if level_name == "Mudah":
                 range_min, range_max = 6, 7
-            elif level == "Sedang (6-9)":
+            elif level_name == "Sedang":
                 range_min, range_max = 6, 9
             else:
                 range_min, range_max = 6, 10
@@ -279,15 +257,19 @@ def show_jarimatika_latihan():
             # ===== INPUT JAWABAN =====
             col_input1, col_input2, col_input3 = st.columns([2, 1, 2])
             with col_input2:
+                # Unique key untuk input
+                input_key = f"jarimatika_input_{st.session_state.jarimatika_counter}"
                 jawaban_user = st.number_input(
                     "Masukkan jawaban:",
                     min_value=0,
                     max_value=100,
                     step=1,
-                    key="jarimatika_input"
+                    key=input_key
                 )
                 
-                if st.button("✅ Jawab", use_container_width=True, type="primary"):
+                # Unique key untuk tombol Jawab
+                btn_key = f"jawab_btn_{st.session_state.jarimatika_counter}_{a}_{b}"
+                if st.button("✅ Jawab", key=btn_key, use_container_width=True, type="primary"):
                     proses_jawaban_jarimatika(a, b, jawaban_user)
                     st.rerun()
             
@@ -334,14 +316,19 @@ def show_jarimatika_latihan():
             st.markdown("---")
             col_btn1, col_btn2 = st.columns(2)
             with col_btn1:
-                if st.button("🎲 Soal Baru", use_container_width=True):
+                # Unique key untuk tombol soal baru
+                new_btn_key = f"soal_baru_btn_{st.session_state.jarimatika_counter}"
+                if st.button("🎲 Soal Baru", key=new_btn_key, use_container_width=True):
                     st.session_state.jarimatika_soal_aktif = False
                     st.session_state.jarimatika_detail = None
                     st.session_state.jarimatika_feedback = None
+                    st.session_state.jarimatika_counter += 1
                     st.rerun()
             
             with col_btn2:
-                if st.button("🔄 Reset Permainan", use_container_width=True):
+                # Unique key untuk tombol reset
+                reset_btn_key = f"reset_btn_{st.session_state.jarimatika_counter}"
+                if st.button("🔄 Reset Permainan", key=reset_btn_key, use_container_width=True):
                     reset_jarimatika()
                     st.rerun()
         
@@ -359,7 +346,6 @@ def show_jarimatika_latihan():
 def proses_jawaban_jarimatika(a, b, jawaban_user):
     """Memproses jawaban pengguna."""
     try:
-        # Hitung dengan metode Jarimatika
         detail = hitung_jarimatika(a, b)
         
         if detail is None:
@@ -369,7 +355,6 @@ def proses_jawaban_jarimatika(a, b, jawaban_user):
         st.session_state.jarimatika_detail = detail
         jawaban_benar = detail["hasil"]
         
-        # Cek jawaban
         if jawaban_user == jawaban_benar:
             st.session_state.jarimatika_skor += 10
             st.session_state.jarimatika_benar += 1
@@ -380,7 +365,6 @@ def proses_jawaban_jarimatika(a, b, jawaban_user):
         
         st.session_state.jarimatika_total += 1
         
-        # Simpan riwayat
         st.session_state.jarimatika_history.append({
             "timestamp": datetime.now().strftime("%H:%M:%S"),
             "soal": f"{a} × {b}",
@@ -389,7 +373,7 @@ def proses_jawaban_jarimatika(a, b, jawaban_user):
             "benar": jawaban_user == jawaban_benar
         })
         
-        logging.info(f"Jarimatika: {a}×{b} = {jawaban_benar}, user: {jawaban_user}, benar: {jawaban_user == jawaban_benar}")
+        st.session_state.jarimatika_counter += 1
         
     except Exception as e:
         logging.error(f"Error proses_jawaban_jarimatika: {e}")
@@ -421,7 +405,6 @@ def show_jarimatika_panduan():
         | Jempol | 10 | Teratas |
         """)
         
-        # Visualisasi jari
         st.markdown("**Visualisasi dari bawah ke atas:**")
         col1, col2, col3, col4, col5 = st.columns(5)
         with col1:
@@ -473,7 +456,6 @@ def show_jarimatika_riwayat():
         st.info("Belum ada riwayat. Mulai latihan Jarimatika!")
         return
     
-    # Statistik
     total = len(st.session_state.jarimatika_history)
     benar = sum(1 for h in st.session_state.jarimatika_history if h["benar"])
     akurasi = (benar / total * 100) if total > 0 else 0
@@ -488,7 +470,6 @@ def show_jarimatika_riwayat():
     
     st.markdown("---")
     
-    # Tabel riwayat
     import pandas as pd
     df = pd.DataFrame(st.session_state.jarimatika_history[-20:])
     df = df[["timestamp", "soal", "jawaban_user", "jawaban_benar", "benar"]]
