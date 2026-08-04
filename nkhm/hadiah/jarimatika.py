@@ -133,7 +133,6 @@ def init_state():
         "jarimatika_mode": "Manual",
         "jarimatika_detected_fingers": None,
         "jarimatika_annotated_image": None,
-        "jarimatika_initialized": True,   # <-- flag inisialisasi
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -153,7 +152,7 @@ def reset_state():
 
 # ========== UI UTAMA ==========
 def show_jarimatika():
-    init_state()  # Pastikan state diinisialisasi
+    init_state()
 
     st.markdown("""
     <div style="background: linear-gradient(135deg, #1a3c6e 0%, #2e7daf 100%);
@@ -181,6 +180,7 @@ def show_jarimatika():
 # ========== LATIHAN ==========
 def show_latihan():
     try:
+        # ===== KONTROL =====
         col1, col2, col3 = st.columns(3)
         with col1:
             mode = st.radio("Pilih Mode", ["✍️ Manual", "📷 Kamera"], horizontal=True, key="jarimatika_mode_select")
@@ -227,14 +227,20 @@ def show_latihan():
 
         st.markdown("---")
 
-        # ===== MODE MANUAL (dengan form) =====
+        # ===== MODE MANUAL =====
         if st.session_state.jarimatika_mode == "✍️ Manual":
-            with st.form(key="manual_form"):
-                jawaban_user = st.number_input("Masukkan jawaban:", min_value=0, max_value=100, step=1, key=f"manual_input_{st.session_state.jarimatika_counter}")
+            with st.form(key=f"manual_form_{st.session_state.jarimatika_counter}"):
+                jawaban_user = st.number_input(
+                    "Masukkan jawaban:",
+                    min_value=0,
+                    max_value=100,
+                    step=1,
+                    key=f"manual_input_{st.session_state.jarimatika_counter}"
+                )
                 submitted = st.form_submit_button("✅ Jawab", use_container_width=True, type="primary")
                 if submitted:
                     proses_jawaban(a, b, jawaban_user)
-                    # Tidak perlu st.rerun() karena form submit otomatis melakukan rerun
+                    # form submit otomatis rerun
 
         # ===== MODE KAMERA =====
         else:
@@ -242,7 +248,10 @@ def show_latihan():
                 st.error("❌ OpenCV/MediaPipe tidak terinstall. Mode kamera tidak tersedia. Gunakan mode Manual.")
             else:
                 st.markdown("#### 📷 Ambil Foto Jari Anda")
-                cam_image = st.camera_input("Klik untuk mengambil foto", key=f"camera_{st.session_state.jarimatika_counter}")
+                cam_image = st.camera_input(
+                    "Klik untuk mengambil foto",
+                    key=f"camera_{st.session_state.jarimatika_counter}"
+                )
 
                 if cam_image is not None:
                     try:
@@ -259,8 +268,7 @@ def show_latihan():
 
                         if fingers is not None:
                             st.info(f"🖐️ Jumlah jari terdeteksi: **{fingers}**")
-                            # Gunakan form untuk tombol jawab CV
-                            with st.form(key="cv_form"):
+                            with st.form(key=f"cv_form_{st.session_state.jarimatika_counter}"):
                                 submitted_cv = st.form_submit_button("✅ Jawab dengan deteksi ini", use_container_width=True)
                                 if submitted_cv:
                                     proses_jawaban(a, b, fingers)
@@ -269,20 +277,6 @@ def show_latihan():
                     except Exception as e:
                         st.error(f"Error memproses gambar: {e}")
                         logger.error(f"CV error: {e}")
-
-        # ===== TOMBOL SOAL BARU =====
-        col_btn1, col_btn2 = st.columns(2)
-        with col_btn1:
-            if st.button("🎲 Soal Baru", key=f"new_soal_{st.session_state.jarimatika_counter}", use_container_width=True):
-                st.session_state.jarimatika_soal_aktif = False
-                st.session_state.jarimatika_feedback = None
-                st.session_state.jarimatika_detail = None
-                st.session_state.jarimatika_counter += 1
-                st.rerun()   # Di sini kita tetap perlu rerun untuk mereset tampilan
-        with col_btn2:
-            if st.button("🔄 Reset Permainan", use_container_width=True):
-                reset_state()
-                st.rerun()
 
         # ===== FEEDBACK & DETAIL =====
         if st.session_state.jarimatika_feedback:
@@ -307,6 +301,29 @@ def show_latihan():
 
                 **4. Hasil: {d['num1']} × {d['num2']} = {d['hasil']}** ✅
                 """)
+
+        st.markdown("---")
+
+        # ===== TOMBOL SOAL BARU & RESET (di luar kondisi mode) =====
+        # Gunakan form agar key unik dan aman
+        with st.form(key=f"nav_form_{st.session_state.jarimatika_counter}"):
+            col_btn1, col_btn2 = st.columns(2)
+            with col_btn1:
+                submitted_new = st.form_submit_button("🎲 Soal Baru", use_container_width=True)
+            with col_btn2:
+                submitted_reset = st.form_submit_button("🔄 Reset Permainan", use_container_width=True)
+
+            if submitted_new:
+                st.session_state.jarimatika_soal_aktif = False
+                st.session_state.jarimatika_feedback = None
+                st.session_state.jarimatika_detail = None
+                st.session_state.jarimatika_counter += 1
+                # form submit otomatis rerun
+
+            if submitted_reset:
+                reset_state()
+                st.session_state.jarimatika_counter += 1
+                # form submit otomatis rerun
 
     except Exception as e:
         st.error(f"Error: {e}")
