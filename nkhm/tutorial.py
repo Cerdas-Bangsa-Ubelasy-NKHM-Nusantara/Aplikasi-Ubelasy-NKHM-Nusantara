@@ -10,51 +10,16 @@ import logging
 # ========== LOGGING ==========
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# ========== CSS KUSTOM UNTUK TUTORIAL ==========
+# ========== STYLING ==========
 def inject_tutorial_css():
     """Menambahkan CSS kustom untuk tampilan tutorial."""
     st.markdown("""
     <style>
-    .tutorial-container {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 10px 0;
-    }
-    .tutorial-card {
-        background-color: #f8f9fa;
-        border-radius: 12px;
-        padding: 20px 24px;
-        margin-bottom: 20px;
-        border-left: 4px solid #2e7daf;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    .tutorial-card h3 {
-        color: #1a3c6e;
-        margin-top: 0;
-        margin-bottom: 12px;
-    }
-    .tutorial-card h4 {
-        color: #2e7daf;
-        margin-top: 16px;
-        margin-bottom: 8px;
-    }
-    .tutorial-card ul {
-        padding-left: 20px;
-        margin-bottom: 0;
-    }
-    .tutorial-card li {
-        margin: 6px 0;
-        line-height: 1.7;
-    }
-    .tutorial-card p {
-        line-height: 1.7;
-        margin: 8px 0;
-    }
     .tutorial-step {
         display: flex;
         align-items: flex-start;
         gap: 15px;
-        padding: 10px 0;
+        padding: 12px 0;
         border-bottom: 1px solid #e9ecef;
     }
     .tutorial-step:last-child {
@@ -72,6 +37,10 @@ def inject_tutorial_css():
         font-weight: bold;
         flex-shrink: 0;
         font-size: 14px;
+    }
+    .tutorial-icon {
+        font-size: 24px;
+        margin-right: 8px;
     }
     .tutorial-tip {
         background-color: #e8f0fe;
@@ -94,16 +63,6 @@ def inject_tutorial_css():
         margin: 12px 0;
         border-left: 4px solid #28a745;
     }
-    .dark-mode .tutorial-card {
-        background-color: #1a1a2e;
-        border-left-color: #4a8abf;
-    }
-    .dark-mode .tutorial-card h3 {
-        color: #7ab7e0;
-    }
-    .dark-mode .tutorial-card h4 {
-        color: #5a9acf;
-    }
     .dark-mode .tutorial-step {
         border-bottom-color: #333;
     }
@@ -119,566 +78,344 @@ def inject_tutorial_css():
         background-color: #0a2a1a;
         border-left-color: #28a745;
     }
-    .dark-mode .tutorial-card p,
-    .dark-mode .tutorial-card li {
-        color: #d0d0e0;
-    }
     </style>
     """, unsafe_allow_html=True)
 
+def create_step(number, title, description):
+    """Membuat elemen step tutorial menggunakan columns."""
+    col1, col2 = st.columns([1, 11])
+    with col1:
+        st.markdown(f'<div class="tutorial-number">{number}</div>', unsafe_allow_html=True)
+    with col2:
+        st.markdown(f"**{title}**")
+        st.markdown(description)
+
 def show_tutorial_umum():
     """Tutorial umum tentang aplikasi NKHM."""
-    st.markdown("""
-    <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
-            🌿 Selamat Datang di NKHM Nusantara
-        </h2>
+    st.markdown("## 🌿 Selamat Datang di NKHM Nusantara")
+    st.markdown("Aplikasi pembelajaran berbasis kecerdasan untuk mengembangkan **IQ, EQ, SQ, AQ** dan **Nasionalisme**.")
+    
+    with st.expander("🎯 Apa itu NKHM?", expanded=True):
+        st.markdown("""
+        **NKHM** adalah singkatan dari **Nusantara Kecerdasan Hati dan Minda**.
+        Aplikasi ini dirancang untuk mengembangkan 4 kecerdasan utama:
         
-        <p style="text-align: center; font-size: 16px; color: #555; margin-bottom: 25px;">
-            Aplikasi pembelajaran berbasis kecerdasan untuk mengembangkan 
-            <strong>IQ, EQ, SQ, AQ</strong> dan <strong>Nasionalisme</strong>.
-        </p>
-        
-        <div class="tutorial-card">
-            <h3>🎯 Apa itu NKHM?</h3>
-            <p>
-                <strong>NKHM</strong> adalah singkatan dari <strong>Nusantara Kecerdasan Hati dan Minda</strong>.
-                Aplikasi ini dirancang untuk mengembangkan 4 kecerdasan utama:
-            </p>
-            <ul>
-                <li><strong>🧠 IQ (Intelligence Quotient)</strong> – Kecerdasan intelektual, logika, dan analisis</li>
-                <li><strong>❤️ EQ (Emotional Quotient)</strong> – Kecerdasan emosional, empati, dan sosial</li>
-                <li><strong>🙏 SQ (Spiritual Quotient)</strong> – Kecerdasan spiritual, nilai, dan makna hidup</li>
-                <li><strong>💪 AQ (Adversity Quotient)</strong> – Kecerdasan menghadapi tantangan dan kesulitan</li>
-                <li><strong>🇮🇩 Nasionalisme</strong> – Cinta tanah air dan kebangsaan</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-card">
-            <h3>📊 Rumus NKHM</h3>
-            <div style="background-color: #e8f0fe; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 16px; margin: 10px 0;">
-                <strong>NKHM_Q</strong> = ((IQ + EQ) × (SQ + AQ)) / ((IQ + EQ) + (SQ + AQ))
-                <br><br>
-                <strong>NKHM_Total</strong> = (NKHM_Q + Nasionalisme) / 2
-            </div>
-            <p style="margin-top: 10px; font-size: 14px; color: #666;">
-                💡 Semakin tinggi NKHM Total, semakin baik perkembangan kecerdasan Anda!
-            </p>
-        </div>
-        
-        <div class="tutorial-tip">
-            💡 <strong>Tips Awal:</strong> Mulailah dengan mengerjakan kuis untuk mendapatkan skor awal Anda.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+        - **🧠 IQ (Intelligence Quotient)** – Kecerdasan intelektual, logika, dan analisis
+        - **❤️ EQ (Emotional Quotient)** – Kecerdasan emosional, empati, dan sosial
+        - **🙏 SQ (Spiritual Quotient)** – Kecerdasan spiritual, nilai, dan makna hidup
+        - **💪 AQ (Adversity Quotient)** – Kecerdasan menghadapi tantangan dan kesulitan
+        - **🇮🇩 Nasionalisme** – Cinta tanah air dan kebangsaan
+        """)
+    
+    with st.expander("📊 Rumus NKHM", expanded=True):
+        st.markdown("""
+        ```
+        NKHM_Q = ((IQ + EQ) × (SQ + AQ)) / ((IQ + EQ) + (SQ + AQ))
+        NKHM_Total = (NKHM_Q + Nasionalisme) / 2
+        ```
+        💡 Semakin tinggi NKHM Total, semakin baik perkembangan kecerdasan Anda!
+        """)
+    
+    st.info("💡 **Tips Awal:** Mulailah dengan mengerjakan kuis untuk mendapatkan skor awal Anda.")
 
 def show_tutorial_kuis():
     """Tutorial fitur Kuis."""
-    st.markdown("""
-    <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
-            🎮 Fitur Kuis
-        </h2>
-        
-        <div class="tutorial-card">
-            <h3>📝 Cara Menggunakan Kuis</h3>
-            
-            <div class="tutorial-step">
-                <div class="tutorial-number">1</div>
-                <div>
-                    <div style="font-weight: bold; font-size: 16px;">Pilih Filter Soal</div>
-                    <div style="color: #555; margin-top: 4px; line-height: 1.6;">
-                        Gunakan filter <strong>Kategori</strong> (Semua, Nasionalisme, Umum) dan 
-                        <strong>Fokus</strong> (Semua, IQ, EQ, SQ, AQ, Nasionalisme) untuk memilih jenis soal.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tutorial-step">
-                <div class="tutorial-number">2</div>
-                <div>
-                    <div style="font-weight: bold; font-size: 16px;">Baca Soal dengan Seksama</div>
-                    <div style="color: #555; margin-top: 4px; line-height: 1.6;">
-                        Setiap soal memiliki teks dan pilihan jawaban. Pilih jawaban yang menurut Anda benar.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tutorial-step">
-                <div class="tutorial-number">3</div>
-                <div>
-                    <div style="font-weight: bold; font-size: 16px;">Klik "JAWAB"</div>
-                    <div style="color: #555; margin-top: 4px; line-height: 1.6;">
-                        Setelah memilih jawaban, klik tombol <strong>JAWAB</strong> untuk mengirimkan jawaban.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tutorial-step">
-                <div class="tutorial-number">4</div>
-                <div>
-                    <div style="font-weight: bold; font-size: 16px;">Lihat Feedback</div>
-                    <div style="color: #555; margin-top: 4px; line-height: 1.6;">
-                        Setelah menjawab, Anda akan melihat feedback <strong>✅ BENAR</strong> atau <strong>❌ SALAH</strong>.
-                        Jawaban benar akan menambah poin sesuai kategori.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tutorial-step">
-                <div class="tutorial-number">5</div>
-                <div>
-                    <div style="font-weight: bold; font-size: 16px;">Navigasi ke Soal Berikutnya</div>
-                    <div style="color: #555; margin-top: 4px; line-height: 1.6;">
-                        Gunakan tombol <strong>⏩ SOAL BERIKUTNYA</strong> untuk melanjutkan ke soal berikutnya,
-                        atau <strong>🔄 KUIS BARU</strong> untuk memulai ulang dari awal.
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tutorial-tip">
-            💡 <strong>Tips:</strong> Kerjakan soal sebanyak-banyaknya untuk meningkatkan skor NKHM Anda!
-            Setiap jawaban benar akan menambah poin pada kategori yang bersangkutan.
-        </div>
-        
-        <div class="tutorial-warning">
-            ⚠️ <strong>Perhatikan:</strong> Soal dengan filter berbeda akan menghasilkan soal yang berbeda pula.
-            Ganti filter untuk variasi soal yang lebih banyak.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("## 🎮 Fitur Kuis")
+    
+    with st.expander("📝 Cara Menggunakan Kuis", expanded=True):
+        create_step(1, "Pilih Filter Soal", "Gunakan filter **Kategori** (Semua, Nasionalisme, Umum) dan **Fokus** (Semua, IQ, EQ, SQ, AQ, Nasionalisme) untuk memilih jenis soal.")
+        create_step(2, "Baca Soal dengan Seksama", "Setiap soal memiliki teks dan pilihan jawaban. Pilih jawaban yang menurut Anda benar.")
+        create_step(3, "Klik 'JAWAB'", "Setelah memilih jawaban, klik tombol **JAWAB** untuk mengirimkan jawaban.")
+        create_step(4, "Lihat Feedback", "Setelah menjawab, Anda akan melihat feedback **✅ BENAR** atau **❌ SALAH**. Jawaban benar akan menambah poin sesuai kategori.")
+        create_step(5, "Navigasi ke Soal Berikutnya", "Gunakan tombol **⏩ SOAL BERIKUTNYA** untuk melanjutkan ke soal berikutnya, atau **🔄 KUIS BARU** untuk memulai ulang dari awal.")
+    
+    st.success("💡 **Tips:** Kerjakan soal sebanyak-banyaknya untuk meningkatkan skor NKHM Anda! Setiap jawaban benar akan menambah poin pada kategori yang bersangkutan.")
+    st.warning("⚠️ **Perhatikan:** Soal dengan filter berbeda akan menghasilkan soal yang berbeda pula. Ganti filter untuk variasi soal yang lebih banyak.")
 
 def show_tutorial_dasbor():
     """Tutorial fitur Dasbor."""
-    st.markdown("""
-    <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
-            📊 Fitur Dasbor
-        </h2>
+    st.markdown("## 📊 Fitur Dasbor")
+    
+    with st.expander("👤 Dasbor Saya", expanded=True):
+        st.markdown("Dasbor menampilkan ringkasan perkembangan dan rekomendasi personal Anda.")
         
-        <div class="tutorial-card">
-            <h3>👤 Dasbor Saya</h3>
-            <p>Dasbor menampilkan ringkasan perkembangan dan rekomendasi personal Anda.</p>
-            
-            <h4>📋 Ringkasan & Progres</h4>
-            <ul>
-                <li><strong>👤 Nama Pengguna</strong> – Nama yang Anda gunakan saat login</li>
-                <li><strong>📖 Total Soal Dikerjakan</strong> – Jumlah soal yang sudah Anda jawab</li>
-                <li><strong>🏆 NKHM Total</strong> – Skor NKHM keseluruhan Anda</li>
-                <li><strong>📈 Perkembangan NKHM</strong> – Grafik perkembangan skor Anda</li>
-                <li><strong>🧠 Analisis Kecerdasan</strong> – Skor per kategori (IQ, EQ, SQ, AQ, Nasionalisme)</li>
-                <li><strong>💡 Rekomendasi Personal</strong> – Saran untuk meningkatkan setiap kategori</li>
-                <li><strong>📋 Riwayat Terbaru</strong> – 5 soal terakhir yang Anda kerjakan</li>
-                <li><strong>🎯 Target Berikutnya</strong> – Target skor berikutnya untuk dicapai</li>
-            </ul>
-            
-            <h4>📝 Catatan</h4>
-            <ul>
-                <li><strong>✏️ Catatan Cepat</strong> – Tulis catatan harian atau ide belajar</li>
-                <li><strong>📱 Catatan Pribadi (React)</strong> – Aplikasi catatan interaktif dengan fitur lengkap</li>
-            </ul>
-        </div>
+        st.markdown("#### 📋 Ringkasan & Progres")
+        st.markdown("""
+        - **👤 Nama Pengguna** – Nama yang Anda gunakan saat login
+        - **📖 Total Soal Dikerjakan** – Jumlah soal yang sudah Anda jawab
+        - **🏆 NKHM Total** – Skor NKHM keseluruhan Anda
+        - **📈 Perkembangan NKHM** – Grafik perkembangan skor Anda
+        - **🧠 Analisis Kecerdasan** – Skor per kategori (IQ, EQ, SQ, AQ, Nasionalisme)
+        - **💡 Rekomendasi Personal** – Saran untuk meningkatkan setiap kategori
+        - **📋 Riwayat Terbaru** – 5 soal terakhir yang Anda kerjakan
+        - **🎯 Target Berikutnya** – Target skor berikutnya untuk dicapai
+        """)
         
-        <div class="tutorial-card">
-            <h3>📊 Dasbor NKHM</h3>
-            <ul>
-                <li><strong>🧠 NKHM_Q</strong> – Skor kombinasi IQ, EQ, SQ, dan AQ</li>
-                <li><strong>🏆 NKHM Total</strong> – Gabungan NKHM_Q dan Nasionalisme</li>
-                <li><strong>📊 Grafik Skor</strong> – Visualisasi skor per kategori</li>
-                <li><strong>📖 Tentang Rumus</strong> – Penjelasan rumus perhitungan NKHM</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-tip">
-            💡 <strong>Tips:</strong> Gunakan fitur <strong>Catatan</strong> untuk mencatat hal-hal penting yang Anda pelajari.
-            Catatan disimpan di server dan bisa diakses kembali kapan saja.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+        st.markdown("#### 📝 Catatan")
+        st.markdown("""
+        - **✏️ Catatan Cepat** – Tulis catatan harian atau ide belajar
+        - **📱 Catatan Pribadi (React)** – Aplikasi catatan interaktif dengan fitur lengkap
+        """)
+    
+    with st.expander("📊 Dasbor NKHM", expanded=True):
+        st.markdown("""
+        - **🧠 NKHM_Q** – Skor kombinasi IQ, EQ, SQ, dan AQ
+        - **🏆 NKHM Total** – Gabungan NKHM_Q dan Nasionalisme
+        - **📊 Grafik Skor** – Visualisasi skor per kategori
+        - **📖 Tentang Rumus** – Penjelasan rumus perhitungan NKHM
+        """)
+    
+    st.info("💡 **Tips:** Gunakan fitur **Catatan** untuk mencatat hal-hal penting yang Anda pelajari. Catatan disimpan di server dan bisa diakses kembali kapan saja.")
 
 def show_tutorial_prestasi():
     """Tutorial fitur Prestasi."""
-    st.markdown("""
-    <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
-            🏆 Fitur Prestasi
-        </h2>
-        
-        <div class="tutorial-card">
-            <h3>🏅 Pencapaian</h3>
-            <p>Fitur ini menampilkan badge yang Anda peroleh berdasarkan pencapaian:</p>
-            <ul>
-                <li><strong>🧠 Cendekia</strong> – IQ ≥ 50</li>
-                <li><strong>❤️ Empati</strong> – EQ ≥ 50</li>
-                <li><strong>🙏 Bhinneka</strong> – SQ ≥ 50</li>
-                <li><strong>💪 Tangguh</strong> – AQ ≥ 50</li>
-                <li><strong>🇮🇩 Patriot</strong> – Nasionalisme ≥ 50</li>
-                <li><strong>🌟 Pahlawan Cerdas Nusantara</strong> – Semua kategori ≥ 50</li>
-            </ul>
-            <p>Jika semua kategori ≥ 50, Anda akan mendapatkan gelar <strong>PAHLAWAN CERDAS NUSANTARA</strong>! 🎉</p>
-        </div>
-        
-        <div class="tutorial-card">
-            <h3>📊 Statistik</h3>
-            <ul>
-                <li><strong>📖 Total Soal</strong> – Jumlah soal yang sudah dikerjakan</li>
-                <li><strong>✅ Benar</strong> – Jumlah jawaban benar</li>
-                <li><strong>📊 Akurasi</strong> – Persentase jawaban benar</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-card">
-            <h3>🏆 Leaderboard</h3>
-            <ul>
-                <li><strong>🏅 Peringkat</strong> – 10 pemain teratas berdasarkan skor NKHM</li>
-                <li><strong>🎖️ Peraih Medali</strong> – 3 pemain teratas mendapat medali emas, perak, perunggu</li>
-                <li><strong>📊 Statistik Kompetitif</strong> – Total peserta, rata-rata skor, skor tertinggi</li>
-                <li><strong>🎯 Level & Progress</strong> – Level Anda dan progress menuju level berikutnya</li>
-                <li><strong>📈 Tren Skor</strong> – Distribusi skor semua peserta</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-tip">
-            💡 <strong>Tips:</strong> Semakin tinggi skor Anda, semakin tinggi posisi Anda di leaderboard.
-            Kejar posisi teratas dan raih medali emas! 🥇
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("## 🏆 Fitur Prestasi")
+    
+    with st.expander("🏅 Pencapaian", expanded=True):
+        st.markdown("Fitur ini menampilkan badge yang Anda peroleh berdasarkan pencapaian:")
+        st.markdown("""
+        - **🧠 Cendekia** – IQ ≥ 50
+        - **❤️ Empati** – EQ ≥ 50
+        - **🙏 Bhinneka** – SQ ≥ 50
+        - **💪 Tangguh** – AQ ≥ 50
+        - **🇮🇩 Patriot** – Nasionalisme ≥ 50
+        - **🌟 Pahlawan Cerdas Nusantara** – Semua kategori ≥ 50
+        """)
+        st.success("Jika semua kategori ≥ 50, Anda akan mendapatkan gelar **PAHLAWAN CERDAS NUSANTARA**! 🎉")
+    
+    with st.expander("📊 Statistik", expanded=True):
+        st.markdown("""
+        - **📖 Total Soal** – Jumlah soal yang sudah dikerjakan
+        - **✅ Benar** – Jumlah jawaban benar
+        - **📊 Akurasi** – Persentase jawaban benar
+        """)
+    
+    with st.expander("🏆 Leaderboard", expanded=True):
+        st.markdown("""
+        - **🏅 Peringkat** – 10 pemain teratas berdasarkan skor NKHM
+        - **🎖️ Peraih Medali** – 3 pemain teratas mendapat medali emas, perak, perunggu
+        - **📊 Statistik Kompetitif** – Total peserta, rata-rata skor, skor tertinggi
+        - **🎯 Level & Progress** – Level Anda dan progress menuju level berikutnya
+        - **📈 Tren Skor** – Distribusi skor semua peserta
+        """)
+    
+    st.info("💡 **Tips:** Semakin tinggi skor Anda, semakin tinggi posisi Anda di leaderboard. Kejar posisi teratas dan raih medali emas! 🥇")
 
 def show_tutorial_tanding():
     """Tutorial fitur Tanding."""
-    st.markdown("""
-    <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
-            ⚔️ Fitur Tanding
-        </h2>
-        
-        <div class="tutorial-card">
-            <h3>⚔️ Mode 1v1 (Hot Seat)</h3>
-            <p>Dua pemain bergantian menjawab soal menggunakan <strong>perangkat yang sama</strong>.</p>
-            
-            <h4>📋 Cara Bermain:</h4>
-            <div class="tutorial-step">
-                <div class="tutorial-number">1</div>
-                <div>
-                    <div style="font-weight: bold; font-size: 16px;">Atur Pertandingan</div>
-                    <div style="color: #555; margin-top: 4px; line-height: 1.6;">
-                        Masukkan nama kedua pemain, pilih jumlah soal (3, 5, 7, atau 10), 
-                        dan tentukan waktu per giliran (15, 30, 45, atau 60 detik).
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tutorial-step">
-                <div class="tutorial-number">2</div>
-                <div>
-                    <div style="font-weight: bold; font-size: 16px;">Bergantian Menjawab</div>
-                    <div style="color: #555; margin-top: 4px; line-height: 1.6;">
-                        Pemain bergiliran menjawab soal. Pemain yang gilirannya sedang aktif 
-                        harus menjawab sebelum waktu habis.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tutorial-step">
-                <div class="tutorial-number">3</div>
-                <div>
-                    <div style="font-weight: bold; font-size: 16px;">Lihat Hasil</div>
-                    <div style="color: #555; margin-top: 4px; line-height: 1.6;">
-                        Setelah semua soal selesai, aplikasi akan menampilkan pemenang 
-                        berdasarkan poin tertinggi.
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tutorial-card">
-            <h3>🏆 Mode Turnamen Kelas</h3>
-            <p>Sistem gugur untuk kompetisi antar peserta.</p>
-            <ul>
-                <li><strong>Peserta</strong> – Masukkan nama peserta (pisahkan dengan koma)</li>
-                <li><strong>Bracket</strong> – Sistem pertandingan gugur</li>
-                <li><strong>Pemenang</strong> – Peserta yang memenangkan semua pertandingan</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-tip">
-            💡 <strong>Tips:</strong> Mode Tanding sangat cocok untuk kompetisi di kelas atau antar teman.
-            Semakin banyak soal, semakin seru pertandingannya!
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("## ⚔️ Fitur Tanding")
+    
+    with st.expander("⚔️ Mode 1v1 (Hot Seat)", expanded=True):
+        st.markdown("Dua pemain bergantian menjawab soal menggunakan **perangkat yang sama**.")
+        st.markdown("#### 📋 Cara Bermain:")
+        create_step(1, "Atur Pertandingan", "Masukkan nama kedua pemain, pilih jumlah soal (3, 5, 7, atau 10), dan tentukan waktu per giliran (15, 30, 45, atau 60 detik).")
+        create_step(2, "Bergantian Menjawab", "Pemain bergiliran menjawab soal. Pemain yang gilirannya sedang aktif harus menjawab sebelum waktu habis.")
+        create_step(3, "Lihat Hasil", "Setelah semua soal selesai, aplikasi akan menampilkan pemenang berdasarkan poin tertinggi.")
+    
+    with st.expander("🏆 Mode Turnamen Kelas", expanded=True):
+        st.markdown("Sistem gugur untuk kompetisi antar peserta.")
+        st.markdown("""
+        - **Peserta** – Masukkan nama peserta (pisahkan dengan koma)
+        - **Bracket** – Sistem pertandingan gugur
+        - **Pemenang** – Peserta yang memenangkan semua pertandingan
+        """)
+    
+    st.info("💡 **Tips:** Mode Tanding sangat cocok untuk kompetisi di kelas atau antar teman. Semakin banyak soal, semakin seru pertandingannya!")
 
 def show_tutorial_karunia():
     """Tutorial fitur Karunia."""
-    st.markdown("""
-    <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
-            🎁 Fitur Karunia Motivasi
-        </h2>
-        
-        <div class="tutorial-card">
-            <h3>📜 Karunia Umum</h3>
-            <p>Tes untuk mengetahui 7 karunia motivasi Anda:</p>
-            <ol>
-                <li><strong>Bernubuat (Perceiver)</strong> – Melihat kebenaran, membedakan baik dan jahat</li>
-                <li><strong>Melayani (Doer)</strong> – Menolong dan memenuhi kebutuhan praktis</li>
-                <li><strong>Mengajar (Teacher)</strong> – Menyampaikan kebenaran secara logis</li>
-                <li><strong>Menasihati (Encourager)</strong> – Mendorong dan memotivasi orang lain</li>
-                <li><strong>Memberi (Giver)</strong> – Memberi dengan sukacita</li>
-                <li><strong>Memimpin (Leader)</strong> – Memimpin dan mengarahkan orang lain</li>
-                <li><strong>Berbelas Kasihan (Compassion)</strong> – Mengasihi dan menolong yang menderita</li>
-            </ol>
-            <p>
-                <strong>Cara:</strong> Jawab 70 pernyataan dengan nilai 0-5. 
-                Hasil akan menunjukkan 3 karunia tertinggi Anda.
-            </p>
-        </div>
-        
-        <div class="tutorial-card">
-            <h3>✨ Karunia 140 Karakter</h3>
-            <p>Versi lebih detail dengan 140 pernyataan untuk mengidentifikasi karunia motivasi.</p>
-            <ul>
-                <li>140 pernyataan dengan skala 0-5</li>
-                <li>Hasil menunjukkan 3 karunia tertinggi</li>
-                <li>Cocok untuk analisis yang lebih mendalam</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-card">
-            <h3>📋 Karakter & Masalah</h3>
-            <p>Menggabungkan 140 pernyataan karakteristik dengan 35 pernyataan masalah.</p>
-            <ul>
-                <li>Total 175 pernyataan</li>
-                <li>Membantu mengidentifikasi potensi dan area pengembangan</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-card">
-            <h3>💖 Sto-mata Hati</h3>
-            <p>Alat uji tingkat Iman, Kasih, dan Pengharapan (IKP) dengan 3 mode:</p>
-            <ul>
-                <li><strong>📝 Tanggapan (Skala Likert)</strong> – 33 pernyataan dengan skala 0-4</li>
-                <li><strong>✅ Pilihan Benar/Salah</strong> – 33 pernyataan benar/salah</li>
-                <li><strong>🔢 Pilihan Ganda</strong> – 33 soal pilihan ganda (a, b, c, d)</li>
-            </ul>
-            <p>Hasil menunjukkan posisi Stomata Hati berdasarkan 12 sisi.</p>
-        </div>
-        
-        <div class="tutorial-card">
-            <h3>📚 Pengembangan Diri</h3>
-            <p>Materi edukasi dalam format markdown untuk pengembangan diri dan literasi keuangan.</p>
-            <ul>
-                <li><strong>📚 Pengembangan Diri</strong> – Materi spiritual, mental, dan karakter</li>
-                <li><strong>💰 Literasi Keuangan</strong> – Panduan mengelola keuangan dan investasi</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-tip">
-            💡 <strong>Tips:</strong> Tes karunia membantu Anda memahami potensi diri 
-            dan area pengembangan dalam pelayanan.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("## 🎁 Fitur Karunia Motivasi")
+    
+    with st.expander("📜 Karunia Umum", expanded=True):
+        st.markdown("Tes untuk mengetahui 7 karunia motivasi Anda:")
+        st.markdown("""
+        1. **Bernubuat (Perceiver)** – Melihat kebenaran, membedakan baik dan jahat
+        2. **Melayani (Doer)** – Menolong dan memenuhi kebutuhan praktis
+        3. **Mengajar (Teacher)** – Menyampaikan kebenaran secara logis
+        4. **Menasihati (Encourager)** – Mendorong dan memotivasi orang lain
+        5. **Memberi (Giver)** – Memberi dengan sukacita
+        6. **Memimpin (Leader)** – Memimpin dan mengarahkan orang lain
+        7. **Berbelas Kasihan (Compassion)** – Mengasihi dan menolong yang menderita
+        """)
+        st.markdown("**Cara:** Jawab 70 pernyataan dengan nilai 0-5. Hasil akan menunjukkan 3 karunia tertinggi Anda.")
+    
+    with st.expander("✨ Karunia 140 Karakter", expanded=True):
+        st.markdown("""
+        Versi lebih detail dengan 140 pernyataan untuk mengidentifikasi karunia motivasi.
+        - 140 pernyataan dengan skala 0-5
+        - Hasil menunjukkan 3 karunia tertinggi
+        - Cocok untuk analisis yang lebih mendalam
+        """)
+    
+    with st.expander("📋 Karakter & Masalah", expanded=True):
+        st.markdown("""
+        Menggabungkan 140 pernyataan karakteristik dengan 35 pernyataan masalah.
+        - Total 175 pernyataan
+        - Membantu mengidentifikasi potensi dan area pengembangan
+        """)
+    
+    with st.expander("💖 Sto-mata Hati", expanded=True):
+        st.markdown("Alat uji tingkat Iman, Kasih, dan Pengharapan (IKP) dengan 3 mode:")
+        st.markdown("""
+        - **📝 Tanggapan (Skala Likert)** – 33 pernyataan dengan skala 0-4
+        - **✅ Pilihan Benar/Salah** – 33 pernyataan benar/salah
+        - **🔢 Pilihan Ganda** – 33 soal pilihan ganda (a, b, c, d)
+        """)
+        st.markdown("Hasil menunjukkan posisi Stomata Hati berdasarkan 12 sisi.")
+    
+    with st.expander("📚 Pengembangan Diri", expanded=True):
+        st.markdown("Materi edukasi dalam format markdown untuk pengembangan diri dan literasi keuangan.")
+        st.markdown("""
+        - **📚 Pengembangan Diri** – Materi spiritual, mental, dan karakter
+        - **💰 Literasi Keuangan** – Panduan mengelola keuangan dan investasi
+        """)
+    
+    st.info("💡 **Tips:** Tes karunia membantu Anda memahami potensi diri dan area pengembangan dalam pelayanan.")
 
 def show_tutorial_hadiah():
     """Tutorial fitur Hadiah."""
-    st.markdown("""
-    <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
-            🎁 Fitur Hadiah & Permainan
-        </h2>
-        
-        <div class="tutorial-card">
-            <h3>🦅 Tebak Pahlawan</h3>
-            <p>Tebak pahlawan nasional dari 12 pahlawan yang tersedia.</p>
-            <ul>
-                <li><strong>Aturan:</strong> 5 kesempatan untuk mengumpulkan skor</li>
-                <li><strong>Benar:</strong> +10 poin</li>
-                <li><strong>Target:</strong> Pahlawan berganti setelah setiap tebakan</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-card">
-            <h3>🔢 Angka Rahasia</h3>
-            <p>Permainan angka untuk melatih logika dan perhitungan.</p>
-            <ul>
-                <li>Tuliskan deretan angka di Baris 1</li>
-                <li>Aplikasi menyiapkan jawaban rahasia</li>
-                <li>Lengkapi Baris 2-5 sesuai petunjuk</li>
-                <li>Cocokkan hasil penjumlahan dengan jawaban rahasia</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-card">
-            <h3>🚣 Pahlawan Menyeberang Sungai</h3>
-            <p>Permainan strategi menyeberangkan 4 entitas dengan aturan tertentu.</p>
-            <ul>
-                <li><strong>Entitas:</strong> Pahlawan, Tawanan, Perbekalan, Anak Buah</li>
-                <li><strong>Aturan 1:</strong> Tawanan + Perbekalan tanpa pahlawan = GAGAL</li>
-                <li><strong>Aturan 2:</strong> Tawanan + Anak Buah tanpa pahlawan = TIDAK GAGAL, tapi tidak dapat poin</li>
-                <li><strong>Poin:</strong> 10 poin jika berhasil tanpa melanggar aturan</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-card">
-            <h3>🇮🇩 Tiang Bendera</h3>
-            <p>Permainan menara Hanoi versi Indonesia dengan bendera.</p>
-            <ul>
-                <li><strong>Susunan Awal:</strong> 🚩 Merah Putih → 🟢 Hijau → 🟡 Kuning → 🔵 Biru</li>
-                <li><strong>Target:</strong> Pindahkan semua ke Tiang C</li>
-                <li><strong>Aturan:</strong> Cakram besar tidak boleh di atas cakram kecil</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-tip">
-            💡 <strong>Tips:</strong> Permainan hadiah melatih berbagai keterampilan: 
-            pengetahuan sejarah, logika, strategi, dan pemecahan masalah.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("## 🎁 Fitur Hadiah & Permainan")
+    
+    with st.expander("🦅 Tebak Pahlawan", expanded=True):
+        st.markdown("Tebak pahlawan nasional dari 12 pahlawan yang tersedia.")
+        st.markdown("""
+        - **Aturan:** 5 kesempatan untuk mengumpulkan skor
+        - **Benar:** +10 poin
+        - **Target:** Pahlawan berganti setelah setiap tebakan
+        """)
+    
+    with st.expander("🔢 Angka Rahasia", expanded=True):
+        st.markdown("Permainan angka untuk melatih logika dan perhitungan.")
+        st.markdown("""
+        - Tuliskan deretan angka di Baris 1
+        - Aplikasi menyiapkan jawaban rahasia
+        - Lengkapi Baris 2-5 sesuai petunjuk
+        - Cocokkan hasil penjumlahan dengan jawaban rahasia
+        """)
+    
+    with st.expander("🚣 Pahlawan Menyeberang Sungai", expanded=True):
+        st.markdown("Permainan strategi menyeberangkan 4 entitas dengan aturan tertentu.")
+        st.markdown("""
+        - **Entitas:** Pahlawan, Tawanan, Perbekalan, Anak Buah
+        - **Aturan 1:** Tawanan + Perbekalan tanpa pahlawan = GAGAL
+        - **Aturan 2:** Tawanan + Anak Buah tanpa pahlawan = TIDAK GAGAL, tapi tidak dapat poin
+        - **Poin:** 10 poin jika berhasil tanpa melanggar aturan
+        """)
+    
+    with st.expander("🇮🇩 Tiang Bendera", expanded=True):
+        st.markdown("Permainan menara Hanoi versi Indonesia dengan bendera.")
+        st.markdown("""
+        - **Susunan Awal:** 🚩 Merah Putih → 🟢 Hijau → 🟡 Kuning → 🔵 Biru
+        - **Target:** Pindahkan semua ke Tiang C
+        - **Aturan:** Cakram besar tidak boleh di atas cakram kecil
+        """)
+    
+    st.info("💡 **Tips:** Permainan hadiah melatih berbagai keterampilan: pengetahuan sejarah, logika, strategi, dan pemecahan masalah.")
 
 def show_tutorial_gamifikasi():
     """Tutorial fitur Gamifikasi."""
-    st.markdown("""
-    <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
-            🎮 Fitur Gamifikasi
-        </h2>
+    st.markdown("## 🎮 Fitur Gamifikasi")
+    
+    with st.expander("🎯 Misi & Tantangan", expanded=True):
+        st.markdown("Selesaikan misi untuk mendapatkan poin reward dan naik level!")
         
-        <div class="tutorial-card">
-            <h3>🎯 Misi & Tantangan</h3>
-            <p>Selesaikan misi untuk mendapatkan poin reward dan naik level!</p>
-            
-            <h4>📅 Tantangan Harian</h4>
-            <p>Setiap hari Anda mendapatkan tantangan berbeda:</p>
-            <ul>
-                <li><strong>Senin:</strong> 📝 Senin Cerdas – 10 soal</li>
-                <li><strong>Selasa:</strong> 🧠 Selasa Analisis – 10 soal IQ</li>
-                <li><strong>Rabu:</strong> ❤️ Rabu Empati – 10 soal EQ</li>
-                <li><strong>Kamis:</strong> 🙏 Kamis Spiritual – 10 soal SQ</li>
-                <li><strong>Jumat:</strong> 💪 Jumat Tangguh – 10 soal AQ</li>
-                <li><strong>Sabtu:</strong> 🇮🇩 Sabtu Patriot – 10 soal Nasionalisme</li>
-                <li><strong>Minggu:</strong> 🏆 Minggu Juara – 15 soal</li>
-            </ul>
-            <p>✅ Selesaikan tantangan harian untuk mendapatkan <strong>5-8 poin reward</strong>!</p>
-            
-            <h4>📋 Daftar Misi (12 Misi)</h4>
-            
-            <p><strong>🌱 Level Pemula:</strong></p>
-            <ul>
-                <li>🌱 Perintis Jalan – 10 soal → 5 poin</li>
-                <li>📖 Penjelajah Ilmu – 50 soal → 10 poin</li>
-            </ul>
-            
-            <p><strong>📚 Level Menengah:</strong></p>
-            <ul>
-                <li>📚 Cendekia Muda – 100 soal → 15 poin</li>
-                <li>🎯 Akurasi 80% – 80% akurasi → 10 poin</li>
-                <li>🧠 Master IQ – IQ ≥ 80 → 15 poin</li>
-                <li>❤️ Master EQ – EQ ≥ 80 → 15 poin</li>
-                <li>🙏 Master SQ – SQ ≥ 80 → 15 poin</li>
-                <li>💪 Master AQ – AQ ≥ 80 → 15 poin</li>
-            </ul>
-            
-            <p><strong>🌟 Level Lanjutan:</strong></p>
-            <ul>
-                <li>🌟 Pahlawan Cerdas – 200 soal → 25 poin</li>
-                <li>🏆 Akurasi 90% – 90% akurasi → 20 poin</li>
-                <li>🇮🇩 Patriot Sejati – Nasionalisme ≥ 80 → 20 poin</li>
-                <li>💎 NKHM 100 – NKHM Total 100 → 30 poin</li>
-            </ul>
-        </div>
+        st.markdown("#### 📅 Tantangan Harian")
+        st.markdown("Setiap hari Anda mendapatkan tantangan berbeda:")
+        st.markdown("""
+        - **Senin:** 📝 Senin Cerdas – 10 soal
+        - **Selasa:** 🧠 Selasa Analisis – 10 soal IQ
+        - **Rabu:** ❤️ Rabu Empati – 10 soal EQ
+        - **Kamis:** 🙏 Kamis Spiritual – 10 soal SQ
+        - **Jumat:** 💪 Jumat Tangguh – 10 soal AQ
+        - **Sabtu:** 🇮🇩 Sabtu Patriot – 10 soal Nasionalisme
+        - **Minggu:** 🏆 Minggu Juara – 15 soal
+        """)
+        st.success("✅ Selesaikan tantangan harian untuk mendapatkan **5-8 poin reward**!")
         
-        <div class="tutorial-card">
-            <h3>🏆 Leaderboard</h3>
-            <p>Kompetisi sehat untuk meraih posisi teratas!</p>
-            
-            <h4>📊 Sistem Level</h4>
-            <ul>
-                <li><strong>🌿 Novice</strong> – Skor 0-19 (Merah)</li>
-                <li><strong>📖 Beginner</strong> – Skor 20-39 (Abu-abu)</li>
-                <li><strong>🌱 Learner</strong> – Skor 40-59 (Oranye)</li>
-                <li><strong>📚 Expert</strong> – Skor 60-74 (Hijau)</li>
-                <li><strong>🏆 Master</strong> – Skor 75-89 (Biru)</li>
-                <li><strong>🌟 Grand Master</strong> – Skor 90-100 (Emas)</li>
-            </ul>
-            
-            <h4>🎖️ Medali</h4>
-            <ul>
-                <li>🥇 Emas – Peringkat 1</li>
-                <li>🥈 Perak – Peringkat 2</li>
-                <li>🥉 Perunggu – Peringkat 3</li>
-            </ul>
-        </div>
+        st.markdown("#### 📋 Daftar Misi (12 Misi)")
         
-        <div class="tutorial-tip">
-            💡 <strong>Tips Gamifikasi:</strong>
-            <ul>
-                <li>Kerjakan tantangan harian setiap hari untuk mengumpulkan poin</li>
-                <li>Fokus selesaikan misi level pemula terlebih dahulu</li>
-                <li>Kejar posisi teratas di leaderboard</li>
-                <li>Semakin tinggi level, semakin besar reward yang didapat</li>
-            </ul>
-        </div>
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.markdown("**🌱 Level Pemula:**")
+            st.markdown("""
+            - 🌱 Perintis Jalan – 10 soal → 5 poin
+            - 📖 Penjelajah Ilmu – 50 soal → 10 poin
+            """)
+        with col2:
+            st.markdown("**📚 Level Menengah:**")
+            st.markdown("""
+            - 📚 Cendekia Muda – 100 soal → 15 poin
+            - 🎯 Akurasi 80% – 80% akurasi → 10 poin
+            - 🧠 Master IQ – IQ ≥ 80 → 15 poin
+            - ❤️ Master EQ – EQ ≥ 80 → 15 poin
+            - 🙏 Master SQ – SQ ≥ 80 → 15 poin
+            - 💪 Master AQ – AQ ≥ 80 → 15 poin
+            """)
+        with col3:
+            st.markdown("**🌟 Level Lanjutan:**")
+            st.markdown("""
+            - 🌟 Pahlawan Cerdas – 200 soal → 25 poin
+            - 🏆 Akurasi 90% – 90% akurasi → 20 poin
+            - 🇮🇩 Patriot Sejati – Nasionalisme ≥ 80 → 20 poin
+            - 💎 NKHM 100 – NKHM Total 100 → 30 poin
+            """)
+    
+    with st.expander("🏆 Leaderboard", expanded=True):
+        st.markdown("Kompetisi sehat untuk meraih posisi teratas!")
         
-        <div class="tutorial-success">
-            🎉 <strong>Target Akhir:</strong> Capai <strong>🌟 Grand Master</strong> dan raih posisi 
-            <strong>🥇 Juara 1</strong> di leaderboard!
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+        st.markdown("#### 📊 Sistem Level")
+        st.markdown("""
+        - **🌿 Novice** – Skor 0-19 (Merah)
+        - **📖 Beginner** – Skor 20-39 (Abu-abu)
+        - **🌱 Learner** – Skor 40-59 (Oranye)
+        - **📚 Expert** – Skor 60-74 (Hijau)
+        - **🏆 Master** – Skor 75-89 (Biru)
+        - **🌟 Grand Master** – Skor 90-100 (Emas)
+        """)
+        
+        st.markdown("#### 🎖️ Medali")
+        st.markdown("""
+        - 🥇 Emas – Peringkat 1
+        - 🥈 Perak – Peringkat 2
+        - 🥉 Perunggu – Peringkat 3
+        """)
+    
+    st.info("💡 **Tips Gamifikasi:** Kerjakan tantangan harian setiap hari untuk mengumpulkan poin. Fokus selesaikan misi level pemula terlebih dahulu. Kejar posisi teratas di leaderboard. Semakin tinggi level, semakin besar reward yang didapat.")
+    
+    st.success("🎉 **Target Akhir:** Capai **🌟 Grand Master** dan raih posisi **🥇 Juara 1** di leaderboard!")
 
 def show_tutorial_tips():
     """Tips dan trik menggunakan aplikasi."""
-    st.markdown("""
-    <div class="tutorial-container">
-        <h2 style="text-align: center; color: #1a3c6e; margin-bottom: 25px;">
-            💡 Tips & Trik
-        </h2>
-        
-        <div class="tutorial-card">
-            <h3>🎯 Tips Umum</h3>
-            <ul>
-                <li><strong>Konsistensi:</strong> Kerjakan soal setiap hari untuk meningkatkan skor</li>
-                <li><strong>Variasi:</strong> Gunakan filter berbeda untuk variasi soal</li>
-                <li><strong>Catatan:</strong> Gunakan fitur catatan untuk mencatat hal penting</li>
-                <li><strong>Kompetisi:</strong> Tantang teman di mode Tanding</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-card">
-            <h3>🚀 Tips Meningkatkan Skor</h3>
-            <ul>
-                <li><strong>IQ:</strong> Banyak membaca dan latihan logika</li>
-                <li><strong>EQ:</strong> Latih empati dan kesadaran diri</li>
-                <li><strong>SQ:</strong> Refleksi dan meditasi nilai-nilai kehidupan</li>
-                <li><strong>AQ:</strong> Hadapi tantangan dengan sikap positif</li>
-                <li><strong>Nasionalisme:</strong> Pelajari sejarah dan budaya Indonesia</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-card">
-            <h3>🎮 Tips Gamifikasi</h3>
-            <ul>
-                <li><strong>Tantangan Harian:</strong> Jangan lewatkan reward harian</li>
-                <li><strong>Misi:</strong> Selesaikan misi level pemula terlebih dahulu</li>
-                <li><strong>Leaderboard:</strong> Pantau posisi Anda dan kejar ranking</li>
-                <li><strong>Level:</strong> Semakin tinggi level, semakin besar prestise</li>
-            </ul>
-        </div>
-        
-        <div class="tutorial-warning">
-            ⚠️ <strong>Ingat!</strong> Aplikasi ini adalah alat bantu belajar. 
-            Kunci utama adalah <strong>konsistensi</strong> dan <strong>niat belajar</strong> yang tulus.
-        </div>
-        
-        <div class="tutorial-success">
-            🌟 <strong>Selamat belajar!</strong> Semoga Anda menjadi <strong>Pahlawan Cerdas Nusantara</strong>! 🇮🇩
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("## 💡 Tips & Trik")
+    
+    with st.expander("🎯 Tips Umum", expanded=True):
+        st.markdown("""
+        - **Konsistensi:** Kerjakan soal setiap hari untuk meningkatkan skor
+        - **Variasi:** Gunakan filter berbeda untuk variasi soal
+        - **Catatan:** Gunakan fitur catatan untuk mencatat hal penting
+        - **Kompetisi:** Tantang teman di mode Tanding
+        """)
+    
+    with st.expander("🚀 Tips Meningkatkan Skor", expanded=True):
+        st.markdown("""
+        - **IQ:** Banyak membaca dan latihan logika
+        - **EQ:** Latih empati dan kesadaran diri
+        - **SQ:** Refleksi dan meditasi nilai-nilai kehidupan
+        - **AQ:** Hadapi tantangan dengan sikap positif
+        - **Nasionalisme:** Pelajari sejarah dan budaya Indonesia
+        """)
+    
+    with st.expander("🎮 Tips Gamifikasi", expanded=True):
+        st.markdown("""
+        - **Tantangan Harian:** Jangan lewatkan reward harian
+        - **Misi:** Selesaikan misi level pemula terlebih dahulu
+        - **Leaderboard:** Pantau posisi Anda dan kejar ranking
+        - **Level:** Semakin tinggi level, semakin besar prestise
+        """)
+    
+    st.warning("⚠️ **Ingat!** Aplikasi ini adalah alat bantu belajar. Kunci utama adalah **konsistensi** dan **niat belajar** yang tulus.")
+    
+    st.success("🌟 **Selamat belajar!** Semoga Anda menjadi **Pahlawan Cerdas Nusantara**! 🇮🇩")
 
 # ========== FUNGSI UTAMA ==========
 def show_tutorial():
@@ -732,12 +469,8 @@ def show_tutorial():
         
         # ===== FOOTER =====
         st.markdown("---")
-        st.markdown("""
-        <div style="text-align: center; padding: 20px 0; color: #888; font-size: 14px;">
-            <p>🌿 NKHM Nusantara – Aplikasi Gaming 4 Kecerdasan + Nasionalisme</p>
-            <p style="font-size: 12px;">Berbasis Perkembangan Data Personal | © 2026</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.caption("🌿 NKHM Nusantara – Aplikasi Gaming 4 Kecerdasan + Nasionalisme")
+        st.caption("Berbasis Perkembangan Data Personal | © 2026")
         
     except Exception as e:
         logging.error(f"Error di show_tutorial: {e}", exc_info=True)
