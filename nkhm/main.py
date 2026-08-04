@@ -374,9 +374,9 @@ def main():
                     st.error(f"Gagal logout: {e}")
 
         # ========== TAB UTAMA ==========
-        tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
+        tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs([
             "🎮 KUIS", "📊 DASBOR NKHM", "🏆 PRESTASI", "👤 DASBOR SAYA",
-            "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "📘 TUTORIAL"
+            "⚔️ TANDING", "🎁 KARUNIA", "🎁 HADIAH", "🎮 GAMIFIKASI", "📘 TUTORIAL"
         ])
 
         # ========== TAB 1: KUIS ==========
@@ -923,8 +923,16 @@ def main():
                 logging.error(f"Error di Tab Hadiah: {e}", exc_info=True)
                 st.error(f"Error di Tab Hadiah: {e}")
 
-        # ========== TAB 8: TUTORIAL ==========
+        # ========== TAB 8: GAMIFIKASI ==========
         with tab8:
+            try:
+                show_gamifikasi()
+            except Exception as e:
+                logging.error(f"Error di Tab Gamifikasi: {e}", exc_info=True)
+                st.error(f"Error di Tab Gamifikasi: {e}")
+
+        # ========== TAB 9: TUTORIAL ==========
+        with tab9:
             try:
                 show_tutorial()
             except Exception as e:
