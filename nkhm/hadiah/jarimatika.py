@@ -1,45 +1,131 @@
 # nkhm/hadiah/jarimatika.py
 """
-Fitur Jarimatika dengan Computer Vision.
-Mendeteksi jari tangan dari kamera untuk menghitung perkalian.
+Fitur Jarimatika PMD (Pedang Mata Dua) - Perkalian 6-10.
+Menggunakan logika perhitungan jari tanpa memerlukan OpenCV/MediaPipe.
 """
 
 import streamlit as st
-import cv2
-import numpy as np
 import random
-import time
 import logging
-from PIL import Image
-from nkhm.hadiah.jarimatika_utils import detect_fingers_from_frame, MEDIAPIPE_AVAILABLE
+from datetime import datetime
 
 # ========== LOGGING ==========
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # ========== KONFIGURASI ==========
-LEVELS = {
-    "Mudah": {"min": 1, "max": 5},
-    "Sedang": {"min": 2, "max": 7},
-    "Sulit": {"min": 3, "max": 9}
+# Mapping jari ke angka (6-10)
+FINGER_MAP = {
+    6: {"nama": "Kelingking", "icon": "🖐️", "posisi": 0},
+    7: {"nama": "Manis", "icon": "🖐️", "posisi": 1},
+    8: {"nama": "Tengah", "icon": "🖐️", "posisi": 2},
+    9: {"nama": "Telunjuk", "icon": "🖐️", "posisi": 3},
+    10: {"nama": "Jempol", "icon": "👍", "posisi": 4}
 }
 
-SOAL_TERJEMAHAN = {
-    1: "satu", 2: "dua", 3: "tiga", 4: "empat", 5: "lima",
-    6: "enam", 7: "tujuh", 8: "delapan", 9: "sembilan"
-}
+FINGER_NAMES = ["Kelingking", "Manis", "Tengah", "Telunjuk", "Jempol"]
 
-def generate_soal(level="Mudah"):
-    """Menghasilkan soal perkalian acak."""
+# ========== FUNGSI PERHITUNGAN JARIMATIKA PMD ==========
+def hitung_jarimatika(num1, num2):
+    """
+    Menghitung perkalian menggunakan metode Jarimatika PMD.
+    
+    Args:
+        num1: Angka pertama (6-10)
+        num2: Angka kedua (6-10)
+    
+    Returns:
+        dict: Hasil perhitungan dengan detail langkah
+    """
     try:
-        config = LEVELS.get(level, LEVELS["Mudah"])
-        a = random.randint(config["min"], config["max"])
-        b = random.randint(config["min"], config["max"])
-        jawaban = a * b
-        return a, b, jawaban
+        # Indeks jari (0 = Kelingking, 1 = Manis, 2 = Tengah, 3 = Telunjuk, 4 = Jempol)
+        idx1 = num1 - 6
+        idx2 = num2 - 6
+        
+        # Nama jari
+        finger1 = FINGER_NAMES[idx1]
+        finger2 = FINGER_NAMES[idx2]
+        
+        # Jari bawah (dari pertemuan ke bawah)
+        bawah_kiri = idx1 + 1
+        bawah_kanan = idx2 + 1
+        
+        # Jari atas (dari pertemuan ke atas)
+        atas_kiri = 5 - bawah_kiri
+        atas_kanan = 5 - bawah_kanan
+        
+        # Total bawah (dijumlahkan) = puluhan
+        total_bawah = bawah_kiri + bawah_kanan
+        
+        # Total atas (dikalikan) = satuan
+        total_atas = atas_kiri * atas_kanan
+        
+        # Hasil akhir
+        hasil = total_bawah * 10 + total_atas
+        
+        return {
+            "num1": num1,
+            "num2": num2,
+            "finger1": finger1,
+            "finger2": finger2,
+            "idx1": idx1,
+            "idx2": idx2,
+            "bawah_kiri": bawah_kiri,
+            "bawah_kanan": bawah_kanan,
+            "atas_kiri": atas_kiri,
+            "atas_kanan": atas_kanan,
+            "total_bawah": total_bawah,
+            "total_atas": total_atas,
+            "hasil": hasil
+        }
+        
+    except Exception as e:
+        logging.error(f"Error hitung_jarimatika: {e}")
+        return None
+
+def generate_soal():
+    """Menghasilkan soal perkalian acak 6-10."""
+    try:
+        a = random.randint(6, 10)
+        b = random.randint(6, 10)
+        return a, b
     except Exception as e:
         logging.error(f"Error generate_soal: {e}")
-        return 1, 1, 1
+        return 6, 6
 
+def get_jari_visualisasi(angka, tangan="kiri"):
+    """Mendapatkan visualisasi jari untuk angka tertentu."""
+    try:
+        idx = angka - 6
+        # Jari yang terangkat (bawah)
+        jari_bawah = idx + 1
+        # Jari yang dilipat (atas)
+        jari_atas = 5 - jari_bawah
+        
+        # Emoji untuk jari
+        jari_emoji = ["🖐️", "🖐️", "🖐️", "🖐️", "👍"]
+        jari_nama = ["Kelingking", "Manis", "Tengah", "Telunjuk", "Jempol"]
+        
+        # Tampilkan jari dari bawah ke atas (kelingking ke jempol)
+        visual = []
+        for i in range(5):
+            if i < jari_bawah:
+                # Jari bawah (terangkat) - hijau
+                visual.append(f"🟢 {jari_nama[i]}")
+            else:
+                # Jari atas (dilipat) - merah
+                visual.append(f"🔴 {jari_nama[i]}")
+        
+        return {
+            "jari_bawah": jari_bawah,
+            "jari_atas": jari_atas,
+            "visual": visual,
+            "tangan": tangan
+        }
+    except Exception as e:
+        logging.error(f"Error get_jari_visualisasi: {e}")
+        return {"jari_bawah": 0, "jari_atas": 0, "visual": [], "tangan": tangan}
+
+# ========== INIT STATE ==========
 def init_jarimatika_state():
     """Inisialisasi session state untuk Jarimatika."""
     try:
@@ -47,20 +133,22 @@ def init_jarimatika_state():
             st.session_state.jarimatika_a = None
         if "jarimatika_b" not in st.session_state:
             st.session_state.jarimatika_b = None
-        if "jarimatika_jawaban" not in st.session_state:
-            st.session_state.jarimatika_jawaban = None
+        if "jarimatika_hasil" not in st.session_state:
+            st.session_state.jarimatika_hasil = None
         if "jarimatika_skor" not in st.session_state:
             st.session_state.jarimatika_skor = 0
         if "jarimatika_total" not in st.session_state:
             st.session_state.jarimatika_total = 0
         if "jarimatika_benar" not in st.session_state:
             st.session_state.jarimatika_benar = 0
-        if "jarimatika_level" not in st.session_state:
-            st.session_state.jarimatika_level = "Mudah"
         if "jarimatika_feedback" not in st.session_state:
             st.session_state.jarimatika_feedback = None
+        if "jarimatika_detail" not in st.session_state:
+            st.session_state.jarimatika_detail = None
         if "jarimatika_soal_aktif" not in st.session_state:
             st.session_state.jarimatika_soal_aktif = False
+        if "jarimatika_history" not in st.session_state:
+            st.session_state.jarimatika_history = []
     except Exception as e:
         logging.error(f"Error init_jarimatika_state: {e}")
 
@@ -69,22 +157,23 @@ def reset_jarimatika():
     try:
         st.session_state.jarimatika_a = None
         st.session_state.jarimatika_b = None
-        st.session_state.jarimatika_jawaban = None
+        st.session_state.jarimatika_hasil = None
         st.session_state.jarimatika_skor = 0
         st.session_state.jarimatika_total = 0
         st.session_state.jarimatika_benar = 0
         st.session_state.jarimatika_feedback = None
+        st.session_state.jarimatika_detail = None
         st.session_state.jarimatika_soal_aktif = False
+        st.session_state.jarimatika_history = []
         logging.info("Jarimatika state direset")
     except Exception as e:
         logging.error(f"Error reset_jarimatika: {e}")
 
 def show_jarimatika():
-    """Menampilkan fitur Jarimatika."""
+    """Menampilkan fitur Jarimatika PMD."""
     try:
         init_jarimatika_state()
         
-        st.markdown("## 🧮 Jarimatika dengan Computer Vision")
         st.markdown("""
         <div style="
             background: linear-gradient(135deg, #1a3c6e 0%, #2e7daf 100%);
@@ -96,256 +185,317 @@ def show_jarimatika():
             <div style="display: flex; align-items: center; gap: 15px;">
                 <div style="font-size: 40px;">🖐️</div>
                 <div>
-                    <div style="font-size: 18px; font-weight: bold;">Belajar Perkalian dengan Jari!</div>
+                    <div style="font-size: 18px; font-weight: bold;">JARIMATIKA PMD</div>
                     <div style="font-size: 14px; opacity: 0.9;">
-                        Gunakan kamera untuk mendeteksi jari tangan Anda dan jawab soal perkalian.
+                        Perkalian Angka 6-10 dengan Jari Tangan | Pedang Mata Dua
                     </div>
                 </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
         
-        # ===== CEK KETERSEDIAAN CAMERA =====
-        if not MEDIAPIPE_AVAILABLE:
-            st.error("""
-            ❌ **MediaPipe tidak terinstall!**
-            
-            Untuk menggunakan fitur ini, install dependensi yang diperlukan:
-            ```
-            pip install opencv-python mediapipe numpy
-            ```
-            
-            Atau gunakan mode manual (tanpa kamera).
-            """)
-            
-            # Mode manual sebagai fallback
-            show_jarimatika_manual()
-            return
+        # ===== TAB =====
+        tab1, tab2, tab3 = st.tabs(["🧮 Latihan", "📖 Panduan", "📊 Riwayat"])
         
-        # ===== PILIH LEVEL =====
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            level = st.selectbox(
-                "📊 Level Kesulitan",
-                ["Mudah", "Sedang", "Sulit"],
-                index=["Mudah", "Sedang", "Sulit"].index(st.session_state.jarimatika_level)
-            )
-            if level != st.session_state.jarimatika_level:
-                st.session_state.jarimatika_level = level
-                st.session_state.jarimatika_soal_aktif = False
-                st.rerun()
+        with tab1:
+            show_jarimatika_latihan()
         
-        with col2:
-            st.metric("🏆 Skor", st.session_state.jarimatika_skor)
+        with tab2:
+            show_jarimatika_panduan()
         
-        with col3:
-            config = LEVELS.get(level, LEVELS["Mudah"])
-            st.caption(f"📊 Rentang angka: {config['min']} - {config['max']}")
-        
-        # ===== TAMPILKAN SOAL =====
-        if not st.session_state.jarimatika_soal_aktif:
-            a, b, jawaban = generate_soal(level)
-            st.session_state.jarimatika_a = a
-            st.session_state.jarimatika_b = b
-            st.session_state.jarimatika_jawaban = jawaban
-            st.session_state.jarimatika_soal_aktif = True
-        
-        st.markdown("---")
-        st.markdown(f"### 📝 {st.session_state.jarimatika_a} × {st.session_state.jarimatika_b} = ?")
-        
-        # ===== KAMERA =====
-        st.markdown("### 📷 Kamera")
-        st.markdown("Tunjukkan jari tangan Anda di depan kamera untuk menjawab!")
-        
-        # Placeholder untuk video
-        video_placeholder = st.empty()
-        
-        # ===== KONTROL KAMERA =====
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            start_camera = st.button("📷 Mulai Kamera", use_container_width=True)
-        with col2:
-            stop_camera = st.button("⏹️ Stop Kamera", use_container_width=True)
-        with col3:
-            detect_btn = st.button("🔍 Deteksi Jari", use_container_width=True, type="primary")
-        with col4:
-            if st.button("🔄 Soal Baru", use_container_width=True):
-                a, b, jawaban = generate_soal(level)
-                st.session_state.jarimatika_a = a
-                st.session_state.jarimatika_b = b
-                st.session_state.jarimatika_jawaban = jawaban
-                st.session_state.jarimatika_feedback = None
-                st.rerun()
-        
-        # ===== PROSES KAMERA =====
-        if start_camera:
-            st.session_state.jarimatika_camera_active = True
-        
-        if stop_camera:
-            st.session_state.jarimatika_camera_active = False
-        
-        if st.session_state.get("jarimatika_camera_active", False):
-            try:
-                cap = cv2.VideoCapture(0)
-                if not cap.isOpened():
-                    st.error("❌ Tidak dapat membuka kamera. Pastikan kamera terhubung.")
-                    st.session_state.jarimatika_camera_active = False
-                else:
-                    ret, frame = cap.read()
-                    cap.release()
-                    
-                    if ret:
-                        frame = cv2.flip(frame, 1)
-                        fingers, annotated_frame = detect_fingers_from_frame(frame)
-                        
-                        # Konversi ke RGB untuk Streamlit
-                        annotated_frame_rgb = cv2.cvtColor(annotated_frame, cv2.COLOR_BGR2RGB)
-                        image = Image.fromarray(annotated_frame_rgb)
-                        video_placeholder.image(image, caption="Deteksi Jari", use_container_width=True)
-                        
-                        # Tampilkan jumlah jari yang terdeteksi
-                        st.info(f"🖐️ Jari terdeteksi: {fingers}")
-                        
-                        # Auto-detect jika tombol ditekan atau setiap detik
-                        if detect_btn:
-                            process_jarimatika_answer(fingers)
-                    else:
-                        st.warning("⚠️ Gagal mengambil gambar dari kamera.")
-                        st.session_state.jarimatika_camera_active = False
-            except Exception as e:
-                logging.error(f"Error camera: {e}")
-                st.error(f"Error kamera: {e}")
-                st.session_state.jarimatika_camera_active = False
-        else:
-            # Tampilkan placeholder jika kamera tidak aktif
-            video_placeholder.info("🖐️ Klik 'Mulai Kamera' untuk mengaktifkan kamera")
-        
-        # ===== FEEDBACK =====
-        if st.session_state.jarimatika_feedback:
-            if "✅" in st.session_state.jarimatika_feedback:
-                st.success(st.session_state.jarimatika_feedback)
-            else:
-                st.error(st.session_state.jarimatika_feedback)
-        
-        # ===== STATISTIK =====
-        st.markdown("---")
-        st.markdown("### 📊 Statistik")
-        
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.metric("📝 Total Soal", st.session_state.jarimatika_total)
-        with col2:
-            st.metric("✅ Benar", st.session_state.jarimatika_benar)
-        with col3:
-            akurasi = (st.session_state.jarimatika_benar / st.session_state.jarimatika_total * 100) if st.session_state.jarimatika_total > 0 else 0
-            st.metric("🎯 Akurasi", f"{akurasi:.1f}%")
-        
-        # ===== TOMBOL RESET =====
-        if st.button("🔄 Reset Permainan", use_container_width=True):
-            reset_jarimatika()
-            st.rerun()
-        
-        # ===== PANDUAN =====
-        with st.expander("📖 Panduan Jarimatika"):
-            st.markdown("""
-            ### 🖐️ Cara Menggunakan Jarimatika dengan Kamera
-            
-            1. **Siapkan Kamera** – Klik tombol "Mulai Kamera"
-            2. **Tunjukkan Jari** – Angkat jari sesuai angka yang ingin ditunjukkan
-            3. **Deteksi** – Klik "Deteksi Jari" atau tunggu auto-detect
-            4. **Jawab Soal** – Jumlah jari yang terdeteksi akan menjadi jawaban
-            
-            ### 💡 Tips
-            
-            - Pastikan kamera menghadap tangan Anda dengan jelas
-            - Gunakan latar belakang yang terang
-            - Angkat jari dengan jelas agar terdeteksi dengan baik
-            - Untuk angka 0, tutup semua jari (tinju)
-            
-            ### 🔢 Contoh
-            
-            - Soal: 3 × 4 = ?
-            - Tunjukkan 12 jari (atau 1 jari + 2 jari)
-            - Deteksi jari akan membaca 12
-            - Jawaban: 12 ✅
-            """)
+        with tab3:
+            show_jarimatika_riwayat()
         
     except Exception as e:
         logging.error(f"Error di show_jarimatika: {e}", exc_info=True)
         st.error(f"❌ Terjadi error di Jarimatika: {e}")
         st.exception(e)
 
-def show_jarimatika_manual():
-    """Mode manual Jarimatika tanpa kamera (fallback)."""
-    st.markdown("### 🧮 Mode Manual (Tanpa Kamera)")
-    
-    # ===== PILIH LEVEL =====
-    level = st.selectbox(
-        "📊 Level Kesulitan",
-        ["Mudah", "Sedang", "Sulit"],
-        key="jarimatika_manual_level"
-    )
-    
-    # ===== GENERATE SOAL =====
-    if st.button("🎲 Soal Baru", key="jarimatika_manual_new"):
-        a, b, jawaban = generate_soal(level)
-        st.session_state.jarimatika_a = a
-        st.session_state.jarimatika_b = b
-        st.session_state.jarimatika_jawaban = jawaban
-        st.session_state.jarimatika_feedback = None
-        st.rerun()
-    
-    if st.session_state.jarimatika_a is not None and st.session_state.jarimatika_b is not None:
-        st.markdown(f"### 📝 {st.session_state.jarimatika_a} × {st.session_state.jarimatika_b} = ?")
+def show_jarimatika_latihan():
+    """Menampilkan mode latihan Jarimatika."""
+    try:
+        # ===== PILIH LEVEL =====
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            level = st.selectbox(
+                "📊 Level",
+                ["Mudah (6-7)", "Sedang (6-9)", "Sulit (6-10)"],
+                key="jarimatika_level"
+            )
         
-        # Input jawaban manual
-        jawaban_user = st.number_input(
-            "Masukkan jawaban Anda:",
-            min_value=0,
-            max_value=100,
-            step=1,
-            key="jarimatika_manual_input"
-        )
+        with col2:
+            st.metric("🏆 Skor", st.session_state.jarimatika_skor)
         
-        if st.button("✅ Jawab", key="jarimatika_manual_submit"):
-            process_jarimatika_answer(jawaban_user)
-            st.rerun()
+        with col3:
+            total = st.session_state.jarimatika_total
+            benar = st.session_state.jarimatika_benar
+            akurasi = (benar / total * 100) if total > 0 else 0
+            st.metric("🎯 Akurasi", f"{akurasi:.0f}%")
         
+        # ===== GENERATE SOAL =====
+        if not st.session_state.jarimatika_soal_aktif:
+            # Tentukan rentang berdasarkan level
+            if level == "Mudah (6-7)":
+                range_min, range_max = 6, 7
+            elif level == "Sedang (6-9)":
+                range_min, range_max = 6, 9
+            else:
+                range_min, range_max = 6, 10
+            
+            a = random.randint(range_min, range_max)
+            b = random.randint(range_min, range_max)
+            st.session_state.jarimatika_a = a
+            st.session_state.jarimatika_b = b
+            st.session_state.jarimatika_soal_aktif = True
+            st.session_state.jarimatika_detail = None
+        
+        # ===== TAMPILKAN SOAL =====
+        if st.session_state.jarimatika_a is not None:
+            a = st.session_state.jarimatika_a
+            b = st.session_state.jarimatika_b
+            
+            st.markdown("---")
+            st.markdown(f"### 📝 {a} × {b} = ?")
+            
+            # ===== VISUALISASI JARI =====
+            col_jari1, col_jari2 = st.columns(2)
+            
+            with col_jari1:
+                st.markdown(f"**👈 Tangan Kiri ({a})**")
+                vis_kiri = get_jari_visualisasi(a, "kiri")
+                for item in vis_kiri["visual"]:
+                    st.markdown(f"- {item}")
+                st.caption(f"Jari bawah: {vis_kiri['jari_bawah']} | Jari atas: {vis_kiri['jari_atas']}")
+            
+            with col_jari2:
+                st.markdown(f"**👉 Tangan Kanan ({b})**")
+                vis_kanan = get_jari_visualisasi(b, "kanan")
+                for item in vis_kanan["visual"]:
+                    st.markdown(f"- {item}")
+                st.caption(f"Jari bawah: {vis_kanan['jari_bawah']} | Jari atas: {vis_kanan['jari_atas']}")
+            
+            st.markdown("---")
+            
+            # ===== INPUT JAWABAN =====
+            col_input1, col_input2, col_input3 = st.columns([2, 1, 2])
+            with col_input2:
+                jawaban_user = st.number_input(
+                    "Masukkan jawaban:",
+                    min_value=0,
+                    max_value=100,
+                    step=1,
+                    key="jarimatika_input"
+                )
+                
+                if st.button("✅ Jawab", use_container_width=True, type="primary"):
+                    proses_jawaban_jarimatika(a, b, jawaban_user)
+                    st.rerun()
+            
+            # ===== TAMPILKAN DETAIL PERHITUNGAN =====
+            if st.session_state.jarimatika_detail:
+                detail = st.session_state.jarimatika_detail
+                
+                with st.expander("📊 Lihat Langkah Perhitungan", expanded=True):
+                    st.markdown("### 🔢 Langkah-langkah Jarimatika PMD")
+                    
+                    col_step1, col_step2 = st.columns(2)
+                    with col_step1:
+                        st.markdown(f"""
+                        **1. Identifikasi Jari:**
+                        - {detail['num1']} = Jari **{detail['finger1']}** (tangan kiri)
+                        - {detail['num2']} = Jari **{detail['finger2']}** (tangan kanan)
+                        """)
+                        
+                        st.markdown(f"""
+                        **2. Jari Bawah (dijumlahkan):**
+                        - Tangan kiri: {detail['bawah_kiri']} jari
+                        - Tangan kanan: {detail['bawah_kanan']} jari
+                        - Total: {detail['bawah_kiri']} + {detail['bawah_kanan']} = **{detail['total_bawah']}** (puluhan)
+                        """)
+                    
+                    with col_step2:
+                        st.markdown(f"""
+                        **3. Jari Atas (dikalikan):**
+                        - Tangan kiri: {detail['atas_kiri']} jari
+                        - Tangan kanan: {detail['atas_kanan']} jari
+                        - Total: {detail['atas_kiri']} × {detail['atas_kanan']} = **{detail['total_atas']}** (satuan)
+                        """)
+                        
+                        st.markdown(f"""
+                        **4. Hasil Akhir:**
+                        - Puluhan: {detail['total_bawah']}
+                        - Satuan: {detail['total_atas']}
+                        - **{detail['num1']} × {detail['num2']} = {detail['hasil']}** ✅
+                        """)
+                    
+                    st.success(f"🎯 **Hasil: {detail['num1']} × {detail['num2']} = {detail['hasil']}**")
+            
+            # ===== TOMBOL SOAL BARU =====
+            st.markdown("---")
+            col_btn1, col_btn2 = st.columns(2)
+            with col_btn1:
+                if st.button("🎲 Soal Baru", use_container_width=True):
+                    st.session_state.jarimatika_soal_aktif = False
+                    st.session_state.jarimatika_detail = None
+                    st.session_state.jarimatika_feedback = None
+                    st.rerun()
+            
+            with col_btn2:
+                if st.button("🔄 Reset Permainan", use_container_width=True):
+                    reset_jarimatika()
+                    st.rerun()
+        
+        # ===== TAMPILKAN FEEDBACK =====
         if st.session_state.jarimatika_feedback:
             if "✅" in st.session_state.jarimatika_feedback:
                 st.success(st.session_state.jarimatika_feedback)
             else:
                 st.error(st.session_state.jarimatika_feedback)
-    else:
-        st.info("Klik 'Soal Baru' untuk memulai!")
+                
+    except Exception as e:
+        logging.error(f"Error show_jarimatika_latihan: {e}")
+        st.error(f"Error: {e}")
 
-def process_jarimatika_answer(jawaban_user):
+def proses_jawaban_jarimatika(a, b, jawaban_user):
     """Memproses jawaban pengguna."""
     try:
-        jawaban_benar = st.session_state.jarimatika_jawaban
+        # Hitung dengan metode Jarimatika
+        detail = hitung_jarimatika(a, b)
         
+        if detail is None:
+            st.session_state.jarimatika_feedback = "❌ Error perhitungan. Coba lagi."
+            return
+        
+        st.session_state.jarimatika_detail = detail
+        jawaban_benar = detail["hasil"]
+        
+        # Cek jawaban
         if jawaban_user == jawaban_benar:
             st.session_state.jarimatika_skor += 10
             st.session_state.jarimatika_benar += 1
-            st.session_state.jarimatika_feedback = f"✅ BENAR! Jawabannya adalah {jawaban_benar}. +10 poin!"
+            st.session_state.jarimatika_feedback = f"✅ BENAR! {a} × {b} = {jawaban_benar}. +10 poin! 🎉"
             st.balloons()
         else:
             st.session_state.jarimatika_feedback = f"❌ SALAH! Jawaban yang benar adalah {jawaban_benar}."
         
         st.session_state.jarimatika_total += 1
         
-        # Generate soal baru
-        level = st.session_state.jarimatika_level
-        a, b, jawaban = generate_soal(level)
-        st.session_state.jarimatika_a = a
-        st.session_state.jarimatika_b = b
-        st.session_state.jarimatika_jawaban = jawaban
+        # Simpan riwayat
+        st.session_state.jarimatika_history.append({
+            "timestamp": datetime.now().strftime("%H:%M:%S"),
+            "soal": f"{a} × {b}",
+            "jawaban_user": jawaban_user,
+            "jawaban_benar": jawaban_benar,
+            "benar": jawaban_user == jawaban_benar
+        })
         
-        logging.info(f"Jarimatika: {st.session_state.jarimatika_total} soal, {st.session_state.jarimatika_benar} benar")
+        logging.info(f"Jarimatika: {a}×{b} = {jawaban_benar}, user: {jawaban_user}, benar: {jawaban_user == jawaban_benar}")
         
     except Exception as e:
-        logging.error(f"Error process_jarimatika_answer: {e}")
+        logging.error(f"Error proses_jawaban_jarimatika: {e}")
         st.session_state.jarimatika_feedback = f"❌ Error: {e}"
+
+def show_jarimatika_panduan():
+    """Menampilkan panduan Jarimatika PMD."""
+    st.markdown("## 📖 Panduan Jarimatika PMD")
+    
+    with st.expander("🎯 Apa itu Jarimatika PMD?", expanded=True):
+        st.markdown("""
+        **JARIMATIKA PMD (Pedang Mata Dua)** adalah metode berhitung perkalian 
+        menggunakan jari-jari tangan untuk angka **6-10**.
+        
+        **Konsep Dasar:**
+        - Setiap jari mewakili angka tertentu
+        - Jari bawah dijumlahkan → **puluhan**
+        - Jari atas dikalikan → **satuan**
+        """)
+    
+    with st.expander("🖐️ Representasi Jari", expanded=True):
+        st.markdown("""
+        | Jari | Angka | Posisi |
+        |------|-------|--------|
+        | Kelingking | 6 | Terbawah |
+        | Manis | 7 | Kedua |
+        | Tengah | 8 | Ketiga |
+        | Telunjuk | 9 | Keempat |
+        | Jempol | 10 | Teratas |
+        """)
+        
+        # Visualisasi jari
+        st.markdown("**Visualisasi dari bawah ke atas:**")
+        col1, col2, col3, col4, col5 = st.columns(5)
+        with col1:
+            st.markdown("🟢 Kelingking\n6")
+        with col2:
+            st.markdown("🟢 Manis\n7")
+        with col3:
+            st.markdown("🟢 Tengah\n8")
+        with col4:
+            st.markdown("🟢 Telunjuk\n9")
+        with col5:
+            st.markdown("🟢 Jempol\n10")
+    
+    with st.expander("📝 Contoh Perhitungan 7 × 8", expanded=True):
+        st.markdown("""
+        **Langkah 1: Identifikasi Jari**
+        - 7 = Jari **Manis** (tangan kiri)
+        - 8 = Jari **Tengah** (tangan kanan)
+        
+        **Langkah 2: Jari Bawah (dijumlahkan)**
+        - Tangan kiri (Manis): 2 jari ke bawah
+        - Tangan kanan (Tengah): 3 jari ke bawah
+        - Total: 2 + 3 = **5** (puluhan)
+        
+        **Langkah 3: Jari Atas (dikalikan)**
+        - Tangan kiri: 3 jari ke atas
+        - Tangan kanan: 2 jari ke atas
+        - Total: 3 × 2 = **6** (satuan)
+        
+        **Langkah 4: Hasil Akhir**
+        - Puluhan: 5
+        - Satuan: 6
+        - **7 × 8 = 56** ✅
+        """)
+    
+    with st.expander("💡 Tips Menggunakan Jarimatika"):
+        st.markdown("""
+        1. **Pahami representasi jari** – Hafalkan angka setiap jari
+        2. **Latihan rutin** – Semakin sering berlatih, semakin cepat
+        3. **Gunakan kedua tangan** – Kiri untuk angka pertama, kanan untuk angka kedua
+        4. **Perhatikan posisi** – Jari bawah dijumlahkan, jari atas dikalikan
+        """)
+
+def show_jarimatika_riwayat():
+    """Menampilkan riwayat permainan Jarimatika."""
+    st.markdown("## 📊 Riwayat Permainan")
+    
+    if not st.session_state.jarimatika_history:
+        st.info("Belum ada riwayat. Mulai latihan Jarimatika!")
+        return
+    
+    # Statistik
+    total = len(st.session_state.jarimatika_history)
+    benar = sum(1 for h in st.session_state.jarimatika_history if h["benar"])
+    akurasi = (benar / total * 100) if total > 0 else 0
+    
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("📝 Total Soal", total)
+    with col2:
+        st.metric("✅ Benar", benar)
+    with col3:
+        st.metric("🎯 Akurasi", f"{akurasi:.0f}%")
+    
+    st.markdown("---")
+    
+    # Tabel riwayat
+    import pandas as pd
+    df = pd.DataFrame(st.session_state.jarimatika_history[-20:])
+    df = df[["timestamp", "soal", "jawaban_user", "jawaban_benar", "benar"]]
+    df["benar"] = df["benar"].map({True: "✅", False: "❌"})
+    df.columns = ["Waktu", "Soal", "Jawaban Anda", "Jawaban Benar", "Status"]
+    
+    st.dataframe(df, use_container_width=True, hide_index=True)
 
 if __name__ == "__main__":
     show_jarimatika()
