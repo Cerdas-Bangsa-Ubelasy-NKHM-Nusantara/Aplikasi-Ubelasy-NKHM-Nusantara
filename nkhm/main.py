@@ -930,9 +930,9 @@ def main():
                 img_path = Path(__file__).parent.parent / "assets" / "hadiah.gif"
                 show_image_centered(img_path, caption="A Giveaway 🇮🇩", width_ratio=2)
                 st.markdown("---")
-                sub_tab1, sub_tab2, sub_tab3, sub_tab4, sub_tab5 = st.tabs([
+                sub_tab1, sub_tab2, sub_tab3, sub_tab4, sub_tab5, sub_tab6 = st.tabs([
                     "🦅 Tebak Pahlawan", "🔢 Angka Rahasia",
-                    "🚣 Pahlawan Menyeberang Sungai", "🇮🇩 Tiang Bendera", "🎲 Lainnya (Coming Soon)"
+                    "🚣 Pahlawan Menyeberang Sungai", "🇮🇩 Tiang Bendera", "🧮 Jarimatika", "🎲 Lainnya (Coming Soon)"
                 ])
                 with sub_tab1:
                     show_tebak_pahlawan()
@@ -943,6 +943,9 @@ def main():
                 with sub_tab4:
                     show_tiang_bendera()
                 with sub_tab5:
+                    from nkhm.hadiah.jarimatika import show_jarimatika
+                    show_jarimatika()
+                with sub_tab6:
                     st.info("🎁 Fitur hadiah lainnya akan segera hadir. Dapatkan koin atau reward dengan menjawab kuis!")
             except Exception as e:
                 logging.error(f"Error di Tab Hadiah: {e}", exc_info=True)
