@@ -1,4 +1,4 @@
-# jarimatika.py
+# nkhm/hadiah/jarimatika.py
 """
 JARIMATIKA PMD – Perkalian 6-10 dengan Jari Tangan
 Mode: Computer Vision (deteksi jari dari kamera) + Manual (fallback)
@@ -13,13 +13,6 @@ from datetime import datetime
 
 # ========== LOGGING ==========
 logging.basicConfig(level=logging.INFO)
-
-# ========== FUNGSI BANTU ==========
-def safe_rerun():
-    try:
-        st.rerun()
-    except Exception as e:
-        logging.warning(f"st.rerun gagal: {e}")
 
 # ========== KONSTANTA ==========
 FINGER_NAMES = ["Kelingking", "Manis", "Tengah", "Telunjuk", "Jempol"]
@@ -40,37 +33,25 @@ except ImportError:
     logging.warning("⚠️ MediaPipe/OpenCV tidak terinstall. Mode manual saja.")
 
 def count_fingers_from_image(image):
-    """
-    Deteksi jari dari gambar menggunakan MediaPipe.
-    Returns: (jumlah_jari, annotated_image)
-    """
     if not MEDIAPIPE_AVAILABLE:
         return 0, image
-
     try:
-        # Konversi PIL Image ke numpy array
         if isinstance(image, Image.Image):
             image = np.array(image)
-        
-        # Konversi RGB (MediaPipe membutuhkan RGB)
         if len(image.shape) == 3 and image.shape[2] == 3:
             rgb = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         else:
             rgb = image
-        
         with mp_hands.Hands(
             static_image_mode=True,
             max_num_hands=2,
             min_detection_confidence=0.5
         ) as hands:
             results = hands.process(rgb)
-            
             annotated = image.copy()
             total_fingers = 0
-
             if results.multi_hand_landmarks:
                 for hand_landmarks in results.multi_hand_landmarks:
-                    # Gambar landmark di annotated
                     mp_drawing.draw_landmarks(
                         annotated,
                         hand_landmarks,
@@ -78,28 +59,19 @@ def count_fingers_from_image(image):
                         mp_drawing_styles.get_default_hand_landmarks_style(),
                         mp_drawing_styles.get_default_hand_connections_style()
                     )
-
-                    # Hitung jari terangkat
                     landmarks = hand_landmarks.landmark
                     fingers = 0
-
-                    # Ibu jari (deteksi berdasarkan posisi x)
                     thumb_tip = landmarks[FINGER_TIPS[0]].x
                     thumb_ip = landmarks[FINGER_PIP[0]].x
                     if thumb_tip < thumb_ip - 0.02:
                         fingers += 1
-
-                    # 4 jari lainnya (deteksi berdasarkan y)
                     for i in range(1, 5):
                         tip = landmarks[FINGER_TIPS[i]].y
                         pip = landmarks[FINGER_PIP[i]].y
                         if tip < pip - 0.02:
                             fingers += 1
-
                     total_fingers += fingers
-
             return total_fingers, annotated
-
     except Exception as e:
         logging.error(f"Error count_fingers: {e}")
         return 0, image
@@ -142,7 +114,7 @@ def generate_soal(level="Mudah"):
     min_v, max_v = levels.get(level, (6,7))
     return random.randint(min_v, max_v), random.randint(min_v, max_v)
 
-# ========== STATE MANAGEMENT ==========
+# ========== STATE ==========
 def init_state():
     defaults = {
         "jarimatika_a": None,
@@ -156,7 +128,7 @@ def init_state():
         "jarimatika_history": [],
         "jarimatika_level": "Mudah",
         "jarimatika_counter": 0,
-        "jarimatika_mode": "CV",
+        "jarimatika_mode": "Manual",
         "jarimatika_detected_fingers": None,
         "jarimatika_annotated_image": None,
     }
@@ -179,7 +151,7 @@ def reset_state():
 # ========== UI UTAMA ==========
 def show_jarimatika():
     init_state()
-    
+
     st.markdown("""
     <div style="background: linear-gradient(135deg, #1a3c6e 0%, #2e7daf 100%);
                 padding: 15px 20px; border-radius: 12px; color: white; margin-bottom: 20px;">
@@ -206,6 +178,7 @@ def show_jarimatika():
 # ========== LATIHAN DENGAN COMPUTER VISION ==========
 def show_latihan_cv():
     try:
+        # ----- Kontrol -----
         col1, col2, col3 = st.columns(3)
         with col1:
             mode = st.radio("Mode", ["📷 Kamera", "✍️ Manual"], horizontal=True, key="jarimatika_mode_select")
@@ -223,7 +196,7 @@ def show_latihan_cv():
             akurasi = (benar / total * 100) if total > 0 else 0
             st.caption(f"📊 Akurasi: {akurasi:.0f}%")
 
-        # ===== SOAL =====
+        # ----- Generate soal -----
         if not st.session_state.jarimatika_soal_aktif:
             a, b = generate_soal(st.session_state.jarimatika_level)
             st.session_state.jarimatika_a = a
@@ -240,7 +213,7 @@ def show_latihan_cv():
         st.markdown(f"### 📝 {a} × {b} = ?")
         st.caption("Tunjukkan jawaban dengan jari tangan Anda (sesuai aturan Jarimatika) lalu ambil foto.")
 
-        # ===== VISUALISASI JARI (referensi) =====
+        # ----- Visualisasi jari referensi -----
         col_ref1, col_ref2 = st.columns(2)
         with col_ref1:
             st.markdown(f"**👈 Tangan Kiri ({a})**")
@@ -253,18 +226,16 @@ def show_latihan_cv():
 
         st.markdown("---")
 
-        # ===== MODE KAMERA =====
+        # ----- Mode Kamera -----
         if st.session_state.jarimatika_mode == "📷 Kamera":
             st.markdown("#### 📷 Ambil Foto Jari Anda")
             cam_image = st.camera_input("Klik untuk mengambil foto", key=f"camera_{st.session_state.jarimatika_counter}")
 
             if cam_image is not None:
                 try:
-                    # Baca gambar dari kamera
                     img = Image.open(cam_image)
                     st.image(img, caption="Foto yang diambil", use_container_width=True)
 
-                    # Deteksi jari
                     with st.spinner("🔍 Mendeteksi jari..."):
                         fingers, annotated = count_fingers_from_image(img)
                         st.session_state.jarimatika_detected_fingers = fingers
@@ -275,32 +246,26 @@ def show_latihan_cv():
 
                     if fingers is not None:
                         st.info(f"🖐️ Jumlah jari terdeteksi: **{fingers}**")
-                        if st.button("✅ Jawab dengan deteksi ini", key=f"cv_ans_{st.session_state.jarimatika_counter}"):
-                            proses_jawaban(a, b, fingers)
-                            safe_rerun()
+                        with st.form(key=f"cv_form_{st.session_state.jarimatika_counter}"):
+                            submitted_cv = st.form_submit_button("✅ Jawab dengan deteksi ini", use_container_width=True)
+                            if submitted_cv:
+                                proses_jawaban(a, b, fingers)
                     else:
                         st.warning("Tidak ada tangan terdeteksi. Coba ambil foto lagi dengan tangan yang jelas.")
                 except Exception as e:
                     st.error(f"Error memproses gambar: {e}")
                     logging.error(f"CV error: {e}")
 
-            # Tombol soal baru
-            if st.button("🎲 Soal Baru", key=f"new_cv_{st.session_state.jarimatika_counter}", use_container_width=True):
-                st.session_state.jarimatika_soal_aktif = False
-                st.session_state.jarimatika_feedback = None
-                st.session_state.jarimatika_detail = None
-                st.session_state.jarimatika_counter += 1
-                safe_rerun()
-
         else:
-            # ===== MODE MANUAL =====
+            # ----- Mode Manual -----
             st.markdown("#### ✍️ Mode Manual")
-            jawaban_user = st.number_input("Masukkan jawaban:", min_value=0, max_value=100, step=1, key=f"manual_input_{st.session_state.jarimatika_counter}")
-            if st.button("✅ Jawab", key=f"manual_btn_{st.session_state.jarimatika_counter}", use_container_width=True, type="primary"):
-                proses_jawaban(a, b, jawaban_user)
-                safe_rerun()
+            with st.form(key=f"manual_form_{st.session_state.jarimatika_counter}"):
+                jawaban_user = st.number_input("Masukkan jawaban:", min_value=0, max_value=100, step=1, key=f"manual_input_{st.session_state.jarimatika_counter}")
+                submitted_manual = st.form_submit_button("✅ Jawab", use_container_width=True, type="primary")
+                if submitted_manual:
+                    proses_jawaban(a, b, jawaban_user)
 
-        # ===== FEEDBACK & DETAIL =====
+        # ----- Feedback & Detail (selalu tampil) -----
         if st.session_state.jarimatika_feedback:
             if "✅" in st.session_state.jarimatika_feedback:
                 st.success(st.session_state.jarimatika_feedback)
@@ -324,10 +289,23 @@ def show_latihan_cv():
                 **4. Hasil: {d['num1']} × {d['num2']} = {d['hasil']}** ✅
                 """)
 
-        # Reset
-        if st.button("🔄 Reset Permainan", use_container_width=True):
-            reset_state()
-            safe_rerun()
+        # ----- Navigasi: Soal Baru & Reset (menggunakan form) -----
+        st.markdown("---")
+        with st.form(key=f"nav_form_{st.session_state.jarimatika_counter}"):
+            col_nav1, col_nav2 = st.columns(2)
+            with col_nav1:
+                submitted_new = st.form_submit_button("🎲 Soal Baru", use_container_width=True)
+            with col_nav2:
+                submitted_reset = st.form_submit_button("🔄 Reset Permainan", use_container_width=True)
+
+            if submitted_new:
+                st.session_state.jarimatika_soal_aktif = False
+                st.session_state.jarimatika_feedback = None
+                st.session_state.jarimatika_detail = None
+                st.session_state.jarimatika_counter += 1
+
+            if submitted_reset:
+                reset_state()
 
     except Exception as e:
         st.error(f"Error: {e}")
@@ -360,7 +338,7 @@ def proses_jawaban(a, b, jawaban_user):
             "benar": jawaban_user == jawaban_benar
         })
         st.session_state.jarimatika_counter += 1
-        st.session_state.jarimatika_soal_aktif = False  # soalnya akan diganti di rerun
+        st.session_state.jarimatika_soal_aktif = False
     except Exception as e:
         st.session_state.jarimatika_feedback = f"❌ Error: {e}"
         logging.error(f"proses_jawaban: {e}")
