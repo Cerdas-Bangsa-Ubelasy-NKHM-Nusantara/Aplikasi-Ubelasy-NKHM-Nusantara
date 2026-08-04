@@ -15,17 +15,10 @@ from datetime import datetime
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# ========== FUNGSI BANTU ==========
-def safe_rerun():
-    try:
-        st.rerun()
-    except Exception as e:
-        logger.warning(f"st.rerun gagal: {e}")
-
 # ========== KONSTANTA ==========
 FINGER_NAMES = ["Kelingking", "Manis", "Tengah", "Telunjuk", "Jempol"]
-FINGER_TIPS = [4, 8, 12, 16, 20]   # Landmark jari ujung
-FINGER_PIP = [3, 6, 10, 14, 18]     # Landmark sendi kedua
+FINGER_TIPS = [4, 8, 12, 16, 20]
+FINGER_PIP = [3, 6, 10, 14, 18]
 
 # ========== CEK KETERSEDIAAN CV ==========
 try:
@@ -38,41 +31,29 @@ try:
     logger.info("✅ OpenCV + MediaPipe tersedia")
 except ImportError:
     CV_AVAILABLE = False
-    logger.warning("⚠️ OpenCV/MediaPipe tidak terinstall. Mode kamera tidak tersedia.")
+    logger.warning("⚠️ OpenCV/MediaPipe tidak terinstall.")
 
 # ========== DETEKSI JARI ==========
 def count_fingers_from_image(image):
-    """
-    Deteksi jumlah jari terangkat dari gambar.
-    Returns: (jumlah_jari, annotated_image)
-    """
     if not CV_AVAILABLE:
         return None, image
-
     try:
-        # Konversi PIL Image ke numpy array
         if isinstance(image, Image.Image):
             image = np.array(image)
-
-        # MediaPipe butuh RGB
         if len(image.shape) == 3 and image.shape[2] == 3:
             rgb = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         else:
             rgb = image
-
         with mp_hands.Hands(
             static_image_mode=True,
             max_num_hands=2,
             min_detection_confidence=0.5
         ) as hands:
             results = hands.process(rgb)
-
             annotated = image.copy()
             total_fingers = 0
-
             if results.multi_hand_landmarks:
                 for hand_landmarks in results.multi_hand_landmarks:
-                    # Gambar landmark
                     mp_drawing.draw_landmarks(
                         annotated,
                         hand_landmarks,
@@ -80,27 +61,19 @@ def count_fingers_from_image(image):
                         mp_drawing_styles.get_default_hand_landmarks_style(),
                         mp_drawing_styles.get_default_hand_connections_style()
                     )
-
                     landmarks = hand_landmarks.landmark
                     fingers = 0
-
-                    # Ibu jari (deteksi berdasarkan posisi x)
                     thumb_tip = landmarks[FINGER_TIPS[0]].x
                     thumb_ip = landmarks[FINGER_PIP[0]].x
                     if thumb_tip < thumb_ip - 0.02:
                         fingers += 1
-
-                    # 4 jari lainnya (deteksi y)
                     for i in range(1, 5):
                         tip = landmarks[FINGER_TIPS[i]].y
                         pip = landmarks[FINGER_PIP[i]].y
                         if tip < pip - 0.02:
                             fingers += 1
-
                     total_fingers += fingers
-
             return total_fingers, annotated
-
     except Exception as e:
         logger.error(f"Error count_fingers: {e}")
         return None, image
@@ -160,6 +133,7 @@ def init_state():
         "jarimatika_mode": "Manual",
         "jarimatika_detected_fingers": None,
         "jarimatika_annotated_image": None,
+        "jarimatika_initialized": True,   # <-- flag inisialisasi
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -179,7 +153,7 @@ def reset_state():
 
 # ========== UI UTAMA ==========
 def show_jarimatika():
-    init_state()
+    init_state()  # Pastikan state diinisialisasi
 
     st.markdown("""
     <div style="background: linear-gradient(135deg, #1a3c6e 0%, #2e7daf 100%);
@@ -253,12 +227,14 @@ def show_latihan():
 
         st.markdown("---")
 
-        # ===== MODE MANUAL =====
+        # ===== MODE MANUAL (dengan form) =====
         if st.session_state.jarimatika_mode == "✍️ Manual":
-            jawaban_user = st.number_input("Masukkan jawaban:", min_value=0, max_value=100, step=1, key=f"manual_input_{st.session_state.jarimatika_counter}")
-            if st.button("✅ Jawab", key=f"manual_btn_{st.session_state.jarimatika_counter}", use_container_width=True, type="primary"):
-                proses_jawaban(a, b, jawaban_user)
-                safe_rerun()
+            with st.form(key="manual_form"):
+                jawaban_user = st.number_input("Masukkan jawaban:", min_value=0, max_value=100, step=1, key=f"manual_input_{st.session_state.jarimatika_counter}")
+                submitted = st.form_submit_button("✅ Jawab", use_container_width=True, type="primary")
+                if submitted:
+                    proses_jawaban(a, b, jawaban_user)
+                    # Tidak perlu st.rerun() karena form submit otomatis melakukan rerun
 
         # ===== MODE KAMERA =====
         else:
@@ -283,9 +259,11 @@ def show_latihan():
 
                         if fingers is not None:
                             st.info(f"🖐️ Jumlah jari terdeteksi: **{fingers}**")
-                            if st.button("✅ Jawab dengan deteksi ini", key=f"cv_ans_{st.session_state.jarimatika_counter}"):
-                                proses_jawaban(a, b, fingers)
-                                safe_rerun()
+                            # Gunakan form untuk tombol jawab CV
+                            with st.form(key="cv_form"):
+                                submitted_cv = st.form_submit_button("✅ Jawab dengan deteksi ini", use_container_width=True)
+                                if submitted_cv:
+                                    proses_jawaban(a, b, fingers)
                         else:
                             st.warning("Tidak ada tangan terdeteksi. Coba ambil foto lagi dengan tangan yang jelas.")
                     except Exception as e:
@@ -300,11 +278,11 @@ def show_latihan():
                 st.session_state.jarimatika_feedback = None
                 st.session_state.jarimatika_detail = None
                 st.session_state.jarimatika_counter += 1
-                safe_rerun()
+                st.rerun()   # Di sini kita tetap perlu rerun untuk mereset tampilan
         with col_btn2:
             if st.button("🔄 Reset Permainan", use_container_width=True):
                 reset_state()
-                safe_rerun()
+                st.rerun()
 
         # ===== FEEDBACK & DETAIL =====
         if st.session_state.jarimatika_feedback:
@@ -361,7 +339,7 @@ def proses_jawaban(a, b, jawaban_user):
             "benar": jawaban_user == jawaban_benar
         })
         st.session_state.jarimatika_counter += 1
-        st.session_state.jarimatika_soal_aktif = False  # soal akan diganti di rerun
+        st.session_state.jarimatika_soal_aktif = False   # soal akan diganti di rerun
     except Exception as e:
         st.session_state.jarimatika_feedback = f"❌ Error: {e}"
         logger.error(f"proses_jawaban: {e}")
