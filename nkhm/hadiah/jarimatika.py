@@ -12,6 +12,14 @@ from datetime import datetime
 # ========== LOGGING ==========
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+# ========== FUNGSI BANTU UNTUK RERUN YANG AMAN ==========
+def safe_rerun():
+    """Memanggil st.rerun() dengan penanganan error untuk menghindari crash."""
+    try:
+        st.rerun()
+    except Exception as e:
+        logging.warning(f"st.rerun gagal di jarimatika: {e}")
+
 # ========== KONFIGURASI ==========
 FINGER_NAMES = ["Kelingking", "Manis", "Tengah", "Telunjuk", "Jempol"]
 
@@ -271,7 +279,7 @@ def show_jarimatika_latihan():
                 btn_key = f"jawab_btn_{st.session_state.jarimatika_counter}_{a}_{b}"
                 if st.button("✅ Jawab", key=btn_key, use_container_width=True, type="primary"):
                     proses_jawaban_jarimatika(a, b, jawaban_user)
-                    st.rerun()
+                    safe_rerun()  # ← Gunakan safe_rerun
             
             # ===== TAMPILKAN DETAIL PERHITUNGAN =====
             if st.session_state.jarimatika_detail:
@@ -323,14 +331,14 @@ def show_jarimatika_latihan():
                     st.session_state.jarimatika_detail = None
                     st.session_state.jarimatika_feedback = None
                     st.session_state.jarimatika_counter += 1
-                    st.rerun()
+                    safe_rerun()  # ← Gunakan safe_rerun
             
             with col_btn2:
                 # Unique key untuk tombol reset
                 reset_btn_key = f"reset_btn_{st.session_state.jarimatika_counter}"
                 if st.button("🔄 Reset Permainan", key=reset_btn_key, use_container_width=True):
                     reset_jarimatika()
-                    st.rerun()
+                    safe_rerun()  # ← Gunakan safe_rerun
         
         # ===== TAMPILKAN FEEDBACK =====
         if st.session_state.jarimatika_feedback:
