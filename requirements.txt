@@ -16,4 +16,6 @@ setuptools>=65.0.0
 wheel>=0.38.0
 markdown>=3.4.0
 
+plotly>=5.17.0
+
 
