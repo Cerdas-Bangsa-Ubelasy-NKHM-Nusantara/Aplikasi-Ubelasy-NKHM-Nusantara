@@ -7,7 +7,6 @@ import streamlit as st
 import pandas as pd
 import logging
 from datetime import datetime, timedelta
-from nkhm.gamifikasi import show_gamifikasi
 
 # ========== LOGGING ==========
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -133,87 +132,34 @@ DAFTAR_MISI = [
 def get_tantangan_harian():
     """Menghasilkan tantangan harian berdasarkan hari."""
     try:
-        # Gunakan tanggal untuk menentukan tantangan
         today = datetime.now().date()
-        day_of_week = today.weekday()  # 0=Senin, 6=Minggu
+        day_of_week = today.weekday()
         
         tantangan_harian = [
-            {
-                "nama": "📝 Senin Cerdas",
-                "deskripsi": "Kerjakan 10 soal hari ini!",
-                "target": 10,
-                "reward": 5
-            },
-            {
-                "nama": "🧠 Selasa Analisis",
-                "deskripsi": "Kerjakan 10 soal IQ hari ini!",
-                "target": 10,
-                "reward": 5
-            },
-            {
-                "nama": "❤️ Rabu Empati",
-                "deskripsi": "Kerjakan 10 soal EQ hari ini!",
-                "target": 10,
-                "reward": 5
-            },
-            {
-                "nama": "🙏 Kamis Spiritual",
-                "deskripsi": "Kerjakan 10 soal SQ hari ini!",
-                "target": 10,
-                "reward": 5
-            },
-            {
-                "nama": "💪 Jumat Tangguh",
-                "deskripsi": "Kerjakan 10 soal AQ hari ini!",
-                "target": 10,
-                "reward": 5
-            },
-            {
-                "nama": "🇮🇩 Sabtu Patriot",
-                "deskripsi": "Kerjakan 10 soal Nasionalisme hari ini!",
-                "target": 10,
-                "reward": 5
-            },
-            {
-                "nama": "🏆 Minggu Juara",
-                "deskripsi": "Kerjakan 15 soal hari ini!",
-                "target": 15,
-                "reward": 8
-            },
+            {"nama": "📝 Senin Cerdas", "deskripsi": "Kerjakan 10 soal hari ini!", "target": 10, "reward": 5},
+            {"nama": "🧠 Selasa Analisis", "deskripsi": "Kerjakan 10 soal IQ hari ini!", "target": 10, "reward": 5},
+            {"nama": "❤️ Rabu Empati", "deskripsi": "Kerjakan 10 soal EQ hari ini!", "target": 10, "reward": 5},
+            {"nama": "🙏 Kamis Spiritual", "deskripsi": "Kerjakan 10 soal SQ hari ini!", "target": 10, "reward": 5},
+            {"nama": "💪 Jumat Tangguh", "deskripsi": "Kerjakan 10 soal AQ hari ini!", "target": 10, "reward": 5},
+            {"nama": "🇮🇩 Sabtu Patriot", "deskripsi": "Kerjakan 10 soal Nasionalisme hari ini!", "target": 10, "reward": 5},
+            {"nama": "🏆 Minggu Juara", "deskripsi": "Kerjakan 15 soal hari ini!", "target": 15, "reward": 8},
         ]
         
         return tantangan_harian[day_of_week]
     except Exception as e:
         logging.error(f"Error get_tantangan_harian: {e}")
-        return {
-            "nama": "📝 Tantangan Hari Ini",
-            "deskripsi": "Kerjakan 10 soal hari ini!",
-            "target": 10,
-            "reward": 5
-        }
+        return {"nama": "📝 Tantangan Hari Ini", "deskripsi": "Kerjakan 10 soal hari ini!", "target": 10, "reward": 5}
 
 # ========== FUNGSI CEK MISI ==========
 def cek_misi(history, scores, total_questions):
-    """
-    Mengecek progress misi berdasarkan data pengguna.
-    
-    Args:
-        history: Riwayat jawaban
-        scores: Skor per kategori
-        total_questions: Total soal dikerjakan
-    
-    Returns:
-        list: Daftar misi dengan status progress
-    """
+    """Mengecek progress misi berdasarkan data pengguna."""
     try:
         misi_status = []
         
-        # Hitung akurasi
         total_soal = len(history)
         benar = sum(1 for h in history if isinstance(h.get('correct'), bool) and h['correct'])
         akurasi = (benar / total_soal * 100) if total_soal > 0 else 0
         
-        # NKHM Total
         from nkhm.scoring import calculate_nkhm_q, calculate_nkhm_total
         nkhm_q = calculate_nkhm_q(
             scores.get('IQ', 0),
@@ -232,7 +178,7 @@ def cek_misi(history, scores, total_questions):
                 selesai = total_questions >= misi["target"]
                 
             elif misi["tipe"] == "akurasi":
-                if total_soal >= 20:  # Minimal 20 soal
+                if total_soal >= 20:
                     progress = min(100, (akurasi / misi["target"]) * 100)
                     selesai = akurasi >= misi["target"]
                 else:
@@ -289,7 +235,6 @@ def show_misi_dan_tantangan():
         st.markdown("## 🎯 Misi & Tantangan")
         st.markdown("Selesaikan misi untuk mendapatkan poin reward dan naik level!")
         
-        # Ambil data dari session state
         history = st.session_state.get("nkhm_history", [])
         scores = st.session_state.get("nkhm_scores", {"IQ": 0, "EQ": 0, "SQ": 0, "AQ": 0, "Nasionalisme": 0})
         total_questions = st.session_state.get("nkhm_total_questions", 0)
@@ -304,8 +249,6 @@ def show_misi_dan_tantangan():
         
         tantangan = get_tantangan_harian()
         
-        # Cek progress tantangan harian
-        # Simulasi: berdasarkan total soal hari ini (dari history)
         today = datetime.now().date()
         today_questions = sum(1 for h in history if isinstance(h.get("timestamp"), str) and today.strftime("%Y-%m-%d") in h.get("timestamp", ""))
         
@@ -323,7 +266,7 @@ def show_misi_dan_tantangan():
         if progress_pct >= 100:
             st.success(f"🎉 Selamat! Anda telah menyelesaikan tantangan hari ini! +{tantangan['reward']} poin reward!")
         else:
-            st.info(f"💪 Kerjakan {tantangan['target'] - today_questions} soal lagi untuk menyelesaikan tantangan hari ini!")
+            st.info(f"💪 Kerjakan {max(0, tantangan['target'] - today_questions)} soal lagi untuk menyelesaikan tantangan hari ini!")
         
         st.markdown("---")
         
@@ -347,105 +290,90 @@ def show_misi_dan_tantangan():
         # ===== DAFTAR MISI =====
         st.markdown("### 📋 Daftar Misi")
         
-        # Filter misi berdasarkan level
-        filter_level = st.selectbox(
-            "Filter Level:",
-            ["Semua", "pemula", "menengah", "lanjutan"],
-            format_func=lambda x: {
-                "Semua": "✨ Semua Level",
-                "pemula": "🌱 Pemula",
-                "menengah": "📚 Menengah",
-                "lanjutan": "🌟 Lanjutan"
-            }.get(x, x)
-        )
+        col_filter1, col_filter2 = st.columns(2)
+        with col_filter1:
+            filter_level = st.selectbox(
+                "Filter Level:",
+                ["Semua", "pemula", "menengah", "lanjutan"],
+                format_func=lambda x: {
+                    "Semua": "✨ Semua Level",
+                    "pemula": "🌱 Pemula",
+                    "menengah": "📚 Menengah",
+                    "lanjutan": "🌟 Lanjutan"
+                }.get(x, x)
+            )
         
-        # Filter misi berdasarkan status
-        filter_status = st.selectbox(
-            "Filter Status:",
-            ["Semua", "Belum Selesai", "Selesai"],
-            format_func=lambda x: {
-                "Semua": "📋 Semua Status",
-                "Belum Selesai": "⏳ Belum Selesai",
-                "Selesai": "✅ Selesai"
-            }.get(x, x)
-        )
+        with col_filter2:
+            filter_status = st.selectbox(
+                "Filter Status:",
+                ["Semua", "Belum Selesai", "Selesai"],
+                format_func=lambda x: {
+                    "Semua": "📋 Semua Status",
+                    "Belum Selesai": "⏳ Belum Selesai",
+                    "Selesai": "✅ Selesai"
+                }.get(x, x)
+            )
         
         # Tampilkan misi
         for misi in misi_status:
-            # Filter level
             if filter_level != "Semua" and misi["level"] != filter_level:
                 continue
-            
-            # Filter status
             if filter_status == "Belum Selesai" and misi["selesai"]:
                 continue
             if filter_status == "Selesai" and not misi["selesai"]:
                 continue
             
-            # Tentukan warna dan icon berdasarkan status
-            if misi["selesai"]:
-                status_icon = "✅"
-                status_color = "#28a745"
-                progress_color = "green"
-            else:
-                status_icon = "⏳"
-                status_color = "#fd7e14"
-                progress_color = "blue"
+            status_icon = "✅" if misi["selesai"] else "⏳"
+            status_color = "#28a745" if misi["selesai"] else "#fd7e14"
             
-            # Level icon
-            level_icon = {
-                "pemula": "🌱",
-                "menengah": "📚",
-                "lanjutan": "🌟"
-            }.get(misi["level"], "📝")
+            level_icon = {"pemula": "🌱", "menengah": "📚", "lanjutan": "🌟"}.get(misi["level"], "📝")
             
-            with st.container():
-                st.markdown(
-                    f"""
-                    <div style="
-                        background-color: #f8f9fa;
-                        padding: 12px 15px;
-                        border-radius: 8px;
-                        margin-bottom: 10px;
-                        border-left: 4px solid {status_color};
-                    ">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <span style="font-size: 20px; font-weight: bold;">
-                                    {status_icon} {misi['nama']}
-                                </span>
-                                <span style="font-size: 12px; color: #888; margin-left: 8px;">
-                                    {level_icon} {misi['level'].capitalize()}
-                                </span>
-                            </div>
-                            <div>
-                                <span style="font-size: 14px; font-weight: bold; color: #2e7daf;">
-                                    🏆 +{misi['reward']}
-                                </span>
-                            </div>
+            st.markdown(
+                f"""
+                <div style="
+                    background-color: #f8f9fa;
+                    padding: 12px 15px;
+                    border-radius: 8px;
+                    margin-bottom: 10px;
+                    border-left: 4px solid {status_color};
+                ">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <span style="font-size: 20px; font-weight: bold;">
+                                {status_icon} {misi['nama']}
+                            </span>
+                            <span style="font-size: 12px; color: #888; margin-left: 8px;">
+                                {level_icon} {misi['level'].capitalize()}
+                            </span>
                         </div>
-                        <div style="font-size: 14px; color: #555; margin-top: 4px;">
-                            {misi['deskripsi']}
-                        </div>
-                        <div style="margin-top: 6px;">
-                            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #888;">
-                                <span>Progress</span>
-                                <span>{misi['progress']:.1f}%</span>
-                            </div>
-                            <div style="width: 100%; background-color: #e9ecef; border-radius: 4px; height: 6px; overflow: hidden;">
-                                <div style="
-                                    width: {min(100, misi['progress'])}%;
-                                    background-color: {'#28a745' if misi['selesai'] else '#2e7daf'};
-                                    height: 100%;
-                                    border-radius: 4px;
-                                    transition: width 0.5s;
-                                "></div>
-                            </div>
+                        <div>
+                            <span style="font-size: 14px; font-weight: bold; color: #2e7daf;">
+                                🏆 +{misi['reward']}
+                            </span>
                         </div>
                     </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                    <div style="font-size: 14px; color: #555; margin-top: 4px;">
+                        {misi['deskripsi']}
+                    </div>
+                    <div style="margin-top: 6px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 12px; color: #888;">
+                            <span>Progress</span>
+                            <span>{misi['progress']:.1f}%</span>
+                        </div>
+                        <div style="width: 100%; background-color: #e9ecef; border-radius: 4px; height: 6px; overflow: hidden;">
+                            <div style="
+                                width: {min(100, misi['progress'])}%;
+                                background-color: {'#28a745' if misi['selesai'] else '#2e7daf'};
+                                height: 100%;
+                                border-radius: 4px;
+                                transition: width 0.5s;
+                            "></div>
+                        </div>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
         
         if not misi_status:
             st.info("Belum ada data misi. Mulai kerjakan soal untuk membuka misi!")
