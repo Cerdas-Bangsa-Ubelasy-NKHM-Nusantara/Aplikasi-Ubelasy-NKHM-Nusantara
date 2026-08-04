@@ -228,33 +228,38 @@ def show_latihan_cv():
 
         # ----- Mode Kamera -----
         if st.session_state.jarimatika_mode == "📷 Kamera":
-            st.markdown("#### 📷 Ambil Foto Jari Anda")
-            cam_image = st.camera_input("Klik untuk mengambil foto", key=f"camera_{st.session_state.jarimatika_counter}")
+            if not MEDIAPIPE_AVAILABLE:
+                st.warning("⚠️ OpenCV/MediaPipe tidak terinstall. Mode kamera tidak tersedia. Gunakan mode Manual.")
+            else:
+                st.markdown("#### 📷 Ambil Foto Jari Anda")
+                cam_image = st.camera_input("Klik untuk mengambil foto", key=f"camera_{st.session_state.jarimatika_counter}")
 
-            if cam_image is not None:
-                try:
-                    img = Image.open(cam_image)
-                    st.image(img, caption="Foto yang diambil", use_container_width=True)
+                if cam_image is not None:
+                    try:
+                        img = Image.open(cam_image)
+                        # PERBAIKAN: gunakan use_column_width
+                        st.image(img, caption="Foto yang diambil", use_column_width=True)
 
-                    with st.spinner("🔍 Mendeteksi jari..."):
-                        fingers, annotated = count_fingers_from_image(img)
-                        st.session_state.jarimatika_detected_fingers = fingers
+                        with st.spinner("🔍 Mendeteksi jari..."):
+                            fingers, annotated = count_fingers_from_image(img)
+                            st.session_state.jarimatika_detected_fingers = fingers
 
-                        if annotated is not None and isinstance(annotated, np.ndarray):
-                            annotated_pil = Image.fromarray(annotated)
-                            st.image(annotated_pil, caption="Hasil Deteksi Jari", use_container_width=True)
+                            if annotated is not None and isinstance(annotated, np.ndarray):
+                                annotated_pil = Image.fromarray(annotated)
+                                # PERBAIKAN: gunakan use_column_width
+                                st.image(annotated_pil, caption="Hasil Deteksi Jari", use_column_width=True)
 
-                    if fingers is not None:
-                        st.info(f"🖐️ Jumlah jari terdeteksi: **{fingers}**")
-                        with st.form(key=f"cv_form_{st.session_state.jarimatika_counter}"):
-                            submitted_cv = st.form_submit_button("✅ Jawab dengan deteksi ini", use_container_width=True)
-                            if submitted_cv:
-                                proses_jawaban(a, b, fingers)
-                    else:
-                        st.warning("Tidak ada tangan terdeteksi. Coba ambil foto lagi dengan tangan yang jelas.")
-                except Exception as e:
-                    st.error(f"Error memproses gambar: {e}")
-                    logging.error(f"CV error: {e}")
+                        if fingers is not None:
+                            st.info(f"🖐️ Jumlah jari terdeteksi: **{fingers}**")
+                            with st.form(key=f"cv_form_{st.session_state.jarimatika_counter}"):
+                                submitted_cv = st.form_submit_button("✅ Jawab dengan deteksi ini", use_container_width=True)
+                                if submitted_cv:
+                                    proses_jawaban(a, b, fingers)
+                        else:
+                            st.warning("Tidak ada tangan terdeteksi. Coba ambil foto lagi dengan tangan yang jelas.")
+                    except Exception as e:
+                        st.error(f"Error memproses gambar: {e}")
+                        logging.error(f"CV error: {e}")
 
         else:
             # ----- Mode Manual -----
