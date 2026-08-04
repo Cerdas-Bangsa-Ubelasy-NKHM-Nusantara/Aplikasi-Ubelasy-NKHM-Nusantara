@@ -27,6 +27,34 @@ def init_dasbor_state():
     except Exception as e:
         logging.error(f"Error init_dasbor_state: {e}")
 
+def parse_timestamp(timestamp_str):
+    """
+    Parse timestamp dengan berbagai format yang mungkin.
+    """
+    if not timestamp_str:
+        return None
+    
+    # Format yang mungkin digunakan
+    formats = [
+        '%H:%M:%S',           # 14:30:25
+        '%Y-%m-%d %H:%M:%S',  # 2024-01-01 14:30:25
+        '%d/%m/%Y %H:%M',     # 01/01/2024 14:30
+        '%Y-%m-%dT%H:%M:%S',  # 2024-01-01T14:30:25
+        '%H:%M',              # 14:30
+    ]
+    
+    for fmt in formats:
+        try:
+            return datetime.strptime(timestamp_str, fmt)
+        except (ValueError, TypeError):
+            continue
+    
+    # Jika semua gagal, coba dengan pandas
+    try:
+        return pd.to_datetime(timestamp_str, errors='coerce')
+    except Exception:
+        return None
+
 def show_dasbor():
     try:
         init_dasbor_state()
@@ -79,19 +107,27 @@ def show_dasbor():
                 
                 st.markdown("---")
                 
-                # ===== GRAFIK PERKEMBANGAN =====
+                # ===== GRAFIK PERKEMBANGAN (DIPERBAIKI) =====
                 if history:
                     st.markdown("### 📈 Perkembangan NKHM")
                     try:
                         df_history = pd.DataFrame(history)
                         if "nkhm_total" in df_history.columns and "timestamp" in df_history.columns:
-                            df_history["timestamp"] = pd.to_datetime(df_history["timestamp"])
-                            df_history = df_history.sort_values("timestamp")
-                            st.line_chart(
-                                df_history.set_index("timestamp")["nkhm_total"],
-                                height=300,
-                                use_container_width=True
-                            )
+                            # ===== PERBAIKAN: Parse timestamp dengan fungsi custom =====
+                            df_history['timestamp_parsed'] = df_history['timestamp'].apply(parse_timestamp)
+                            
+                            # Hapus baris dengan timestamp None
+                            df_history = df_history[df_history['timestamp_parsed'].notna()]
+                            
+                            if not df_history.empty:
+                                df_history = df_history.sort_values("timestamp_parsed")
+                                st.line_chart(
+                                    df_history.set_index("timestamp_parsed")["nkhm_total"],
+                                    height=300,
+                                    use_container_width=True
+                                )
+                            else:
+                                st.info("Data timestamp tidak valid untuk ditampilkan.")
                         else:
                             st.info("Data riwayat belum lengkap untuk ditampilkan.")
                     except Exception as e:
