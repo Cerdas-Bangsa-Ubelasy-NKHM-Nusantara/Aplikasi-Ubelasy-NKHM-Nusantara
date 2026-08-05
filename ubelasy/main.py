@@ -7,6 +7,7 @@ import sys
 import logging
 import time
 from pathlib import Path
+from ubelasy.keuangan_real import show_keuangan_real  # ✅ Import tetap
 
 # ========== LOGGING ==========
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -294,7 +295,15 @@ def main():
             st.header("📑 Navigasi Ubelasy")
             tab_mode = st.radio(
                 "Pilih Tab",
-                ["📖 Sistem Ubelasy", "⚙️ Simulasi & Agregator", "📚 Edukasi", "📊 Rapor Kredit", "💰 Perencanaan Keuangan", "📊 Dashboard Keuangan"],
+                [
+                    "📖 Sistem Ubelasy",
+                    "⚙️ Simulasi & Agregator",
+                    "📚 Edukasi",
+                    "📊 Rapor Kredit",
+                    "💰 Perencanaan Keuangan",
+                    "💰 Perencanaan Keuangan Real",   # <--- TAB BARU
+                    "📊 Dashboard Keuangan"
+                ],
                 index=1,
                 label_visibility="collapsed"
             )
@@ -317,15 +326,8 @@ def main():
 
         # ========== TAMPILKAN KONTEN ==========
         if tab_mode == "📖 Sistem Ubelasy":
-            # Ambil konten dokumen (dari file)
             doc_content = get_ubelasy_document()
-            
-            # Jika konten mengandung tag HTML, render dengan unsafe_allow_html=True
-            # Jika konten markdown biasa (tanpa HTML), st.markdown cukup
-            # Karena dokumen berupa markdown dengan beberapa tabel, kita gunakan st.markdown langsung
             st.markdown(doc_content)
-            
-            # Tombol download (opsional)
             st.markdown("---")
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
@@ -341,6 +343,9 @@ def main():
 
         elif tab_mode == "💰 Perencanaan Keuangan":
             show_keuangan()
+
+        elif tab_mode == "💰 Perencanaan Keuangan Real":   # <--- KONDISI BARU
+            show_keuangan_real()
 
         elif tab_mode == "📊 Dashboard Keuangan":
             show_dashboard_keuangan()
