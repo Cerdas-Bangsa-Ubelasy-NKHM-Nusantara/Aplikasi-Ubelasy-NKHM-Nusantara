@@ -1,7 +1,5 @@
 Konversi Dokumen ke Markdown
 
-Saya akan mengkonversi file DOCX ini ke format Markdown dengan struktur yang rapi.
-
 ---
 
 SISTEM PINJAMAN/KREDIT MODEL UBELASY UNTUK UMKM SEKTOR PANGAN DAN ENERGI
