@@ -66,16 +66,34 @@ try:
 except ImportError:
     show_dashboard_keuangan = lambda: st.info("Fitur dashboard keuangan belum tersedia.")
 
-# ========== DOKUMEN UBELASY ==========
+# ========== DOKUMEN UBELASY (BARU: MEMBACA DARI FILE) ==========
+def load_ubelasy_document():
+    """Memuat dokumen Sistem Ubelasy dari file markdown."""
+    doc_path = Path(__file__).parent.parent / "assets" / "dokumen" / "Sistem Pinjaman Ubelasy.md"
+    if doc_path.exists():
+        try:
+            with open(doc_path, "r", encoding="utf-8") as f:
+                return f.read()
+        except Exception as e:
+            logging.error(f"Error membaca dokumen: {e}")
+            return None
+    return None
+
 def get_ubelasy_document():
-    # ... (isi dokumen tetap sama) ...
-    return """
-    <div class="ubelasy-document">
-    <!-- ... konten dokumen lengkap ... -->
-    </div>
-    """
+    """Mengembalikan konten dokumen atau pesan fallback."""
+    content = load_ubelasy_document()
+    if content:
+        return content
+    else:
+        return """
+        <div class="ubelasy-document">
+        <h1>Sistem Pinjaman/Kredit Model Ubelasy</h1>
+        <p>Dokumen belum tersedia. Silakan upload file <strong>Sistem Pinjaman Ubelasy.md</strong> ke folder <strong>assets/dokumen/</strong>.</p>
+        </div>
+        """
 
 def inject_ubelasy_document_css():
+    """Menambahkan CSS untuk tampilan dokumen."""
     st.markdown("""
     <style>
         .ubelasy-document {
@@ -85,8 +103,136 @@ def inject_ubelasy_document_css():
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            line-height: 1.8;
         }
-        /* ... CSS lengkap ... */
+        .ubelasy-document h1 {
+            color: #1a3c6e;
+            border-bottom: 3px solid #2e7daf;
+            padding-bottom: 10px;
+        }
+        .ubelasy-document h2 {
+            color: #1a3c6e;
+            border-left: 5px solid #2e7daf;
+            padding-left: 15px;
+            margin-top: 30px;
+        }
+        .ubelasy-document h3 {
+            color: #2e7daf;
+            margin-top: 25px;
+        }
+        .ubelasy-document table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        .ubelasy-document th {
+            background-color: #1a3c6e;
+            color: white;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+        }
+        .ubelasy-document td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+        }
+        .ubelasy-document tr:nth-child(even) {
+            background-color: #f5f8fc;
+        }
+        .ubelasy-document tr:hover {
+            background-color: #e8f0fe;
+        }
+        .ubelasy-document blockquote {
+            border-left: 4px solid #2e7daf;
+            padding: 10px 20px;
+            margin: 15px 0;
+            background-color: #f0f5fa;
+            border-radius: 0 5px 5px 0;
+        }
+        .ubelasy-document ul, .ubelasy-document ol {
+            padding-left: 25px;
+            line-height: 1.8;
+        }
+        .ubelasy-document p {
+            text-align: justify;
+            line-height: 1.8;
+        }
+        .ubelasy-document hr {
+            border: none;
+            border-top: 2px solid #dce4ec;
+            margin: 30px 0;
+        }
+        /* Dark mode support */
+        .dark-mode .ubelasy-document {
+            background-color: #1a1a2e;
+            color: #d0d0e0;
+        }
+        .dark-mode .ubelasy-document h1,
+        .dark-mode .ubelasy-document h2 {
+            color: #7ab7e0;
+        }
+        .dark-mode .ubelasy-document h3 {
+            color: #5a9acf;
+        }
+        .dark-mode .ubelasy-document th {
+            background-color: #2a3a5a;
+            color: #e0e0e0;
+        }
+        .dark-mode .ubelasy-document tr:nth-child(even) {
+            background-color: #22223a;
+        }
+        .dark-mode .ubelasy-document tr:hover {
+            background-color: #2a2a4a;
+        }
+        .dark-mode .ubelasy-document blockquote {
+            background-color: #1a1a3a;
+            border-left-color: #4a8abf;
+            color: #d0d0e0;
+        }
+        .dark-mode .ubelasy-document p,
+        .dark-mode .ubelasy-document li {
+            color: #d0d0e0;
+        }
+        .dark-mode .ubelasy-document div[style*="background-color: #f5f8fc"] {
+            background-color: #1a1a3a !important;
+            border-color: #444 !important;
+        }
+        .dark-mode .ubelasy-document div[style*="background-color: #e8f0fe"] {
+            background-color: #1a1a4a !important;
+            border-color: #3a6a8a !important;
+        }
+        .dark-mode .ubelasy-document div[style*="background-color: #d1ecf1"] {
+            background-color: #0a2a3a !important;
+            border-color: #2a6a8a !important;
+        }
+        .dark-mode .ubelasy-document div[style*="background-color: #d4edda"] {
+            background-color: #0a2a1a !important;
+            border-color: #2a6a3a !important;
+        }
+        .dark-mode .ubelasy-document div[style*="background-color: #fff3cd"] {
+            background-color: #2a2a0a !important;
+            border-color: #6a6a2a !important;
+        }
+        .dark-mode .ubelasy-document div[style*="background-color: #f8d7da"] {
+            background-color: #3a1a1a !important;
+            border-color: #6a2a2a !important;
+        }
+        .dark-mode .ubelasy-document div[style*="background-color: #f5c6cb"] {
+            background-color: #3a0a0a !important;
+            border-color: #6a1a1a !important;
+        }
+        /* Responsif */
+        @media (max-width: 600px) {
+            .ubelasy-document {
+                padding: 15px;
+            }
+            .ubelasy-document table {
+                font-size: 12px;
+            }
+            .ubelasy-document ul[style*="columns: 2"] {
+                columns: 1 !important;
+            }
+        }
     </style>
     """, unsafe_allow_html=True)
 
@@ -171,12 +317,20 @@ def main():
 
         # ========== TAMPILKAN KONTEN ==========
         if tab_mode == "📖 Sistem Ubelasy":
-            st.markdown(get_ubelasy_document(), unsafe_allow_html=True)
+            # Ambil konten dokumen (dari file)
+            doc_content = get_ubelasy_document()
+            
+            # Jika konten mengandung tag HTML, render dengan unsafe_allow_html=True
+            # Jika konten markdown biasa (tanpa HTML), st.markdown cukup
+            # Karena dokumen berupa markdown dengan beberapa tabel, kita gunakan st.markdown langsung
+            st.markdown(doc_content)
+            
+            # Tombol download (opsional)
+            st.markdown("---")
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
-                st.markdown("---")
                 st.caption("💡 Untuk menyimpan dokumen ini, gunakan fitur 'Print' di browser Anda (Ctrl+P) dan pilih 'Save as PDF'.")
-                if st.button("📄 Download Dokumen (PDF)"):
+                if st.button("📄 Download Dokumen (PDF)", use_container_width=True):
                     st.info("Fitur download PDF akan segera tersedia. Saat ini silakan gunakan Print > Save as PDF.")
 
         elif tab_mode == "📚 Edukasi":
