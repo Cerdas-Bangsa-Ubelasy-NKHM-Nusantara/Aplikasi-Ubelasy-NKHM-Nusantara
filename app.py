@@ -70,10 +70,9 @@ if not st.session_state.splash_selesai:
             )
             if st.button("🚀 Mulai"):
                 st.session_state.splash_selesai = True
-                safe_rerun()
-                # HAPUS: st.stop() di sini karena safe_rerun() sudah menghentikan eksekusi
-    # Gunakan st.stop() di sini, di luar blok if button
-    st.stop()  # ← Pindahkan ke sini, di luar blok if button
+                # TIDAK PERLU st.rerun() DI SINI! Perubahan state otomatis memicu rerun.
+    # Hentikan eksekusi agar tidak melanjutkan ke konten utama
+    st.stop()
 
 # ========== SETELAH SPLASH ==========
 # (st.set_page_config sudah dipanggil)
@@ -82,6 +81,7 @@ if not st.session_state.splash_selesai:
 dark_mode_toggle = st.sidebar.toggle("🌙 Mode Gelap", value=st.session_state.dark_mode)
 if dark_mode_toggle != st.session_state.dark_mode:
     st.session_state.dark_mode = dark_mode_toggle
+    # Tetap gunakan safe_rerun agar perubahan segera terlihat
     safe_rerun()
 
 if st.session_state.dark_mode:
