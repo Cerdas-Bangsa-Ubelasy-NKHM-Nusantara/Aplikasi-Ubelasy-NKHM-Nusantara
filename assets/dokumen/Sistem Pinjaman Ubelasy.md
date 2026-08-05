@@ -1,7 +1,3 @@
-Konversi Dokumen ke Markdown
-
----
-
 SISTEM PINJAMAN/KREDIT MODEL UBELASY UNTUK UMKM SEKTOR PANGAN DAN ENERGI
 
 (Ubelasy Versi 2 Periode, dPSH Maks = 2 untuk tₚ = 25 Tahun dan Penurunan Suku Bunga 0,5% per Periode)
