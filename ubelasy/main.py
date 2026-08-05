@@ -358,12 +358,12 @@ def main():
 
         elif tab_mode == "📊 Dashboard Keuangan Real":
             show_dashboard_keuangan_real()
-
-        elif tab_mode == "🎮 Gamifikasi Ubelasy":
-            show_gamifikasi_ubelasy()
-
-        elif tab_mode == "🤖 AI Penilaian Kredit":   # <--- TAMBAHKAN INI
+      
+        elif tab_mode == "🤖 AI Penilaian Kredit":   
             show_ai_kredit()
+
+        elif tab_mode == "🎮 Gamifikasi Ubelasy":   # <--- TAMBAHKAN INI
+            show_gamifikasi_ubelasy()
 
         else:
             # ========== TAB SIMULASI & AGREGATOR ==========
