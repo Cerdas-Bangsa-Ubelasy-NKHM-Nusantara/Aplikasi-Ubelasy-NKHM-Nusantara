@@ -307,8 +307,8 @@ def main():
                     "💰 Perencanaan Keuangan Real",
                     "📊 Dashboard Keuangan",
                     "📊 Dashboard Keuangan Real",
-                    "🎮 Gamifikasi Ubelasy",
-                    "🤖 AI Penilaian Kredit"   # <--- TAMBAHKAN INI
+      
+                    "🤖 AI Penilaian Kredit", "🎮 Gamifikasi Ubelasy" # <--- TAMBAHKAN INI
                 ],
                 index=1,
                 label_visibility="collapsed"
