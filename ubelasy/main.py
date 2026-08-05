@@ -8,7 +8,8 @@ import logging
 import time
 from pathlib import Path
 from ubelasy.keuangan_real import show_keuangan_real
-from ubelasy.dashboard_keuangan_real import show_dashboard_keuangan_real  # ✅ Tambahkan import ini
+from ubelasy.dashboard_keuangan_real import show_dashboard_keuangan_real
+from ubelasy.gamifikasi import show_gamifikasi_ubelasy  # ✅ Import sudah ada
 
 # ========== LOGGING ==========
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -304,7 +305,8 @@ def main():
                     "💰 Perencanaan Keuangan",
                     "💰 Perencanaan Keuangan Real",
                     "📊 Dashboard Keuangan",
-                    "📊 Dashboard Keuangan Real"   # <--- TAMBAHKAN INI
+                    "📊 Dashboard Keuangan Real",
+                    "🎮 Gamifikasi Ubelasy"   # <--- TAMBAHKAN INI
                 ],
                 index=1,
                 label_visibility="collapsed"
@@ -352,8 +354,11 @@ def main():
         elif tab_mode == "📊 Dashboard Keuangan":
             show_dashboard_keuangan()
 
-        elif tab_mode == "📊 Dashboard Keuangan Real":   # <--- TAMBAHKAN INI
+        elif tab_mode == "📊 Dashboard Keuangan Real":
             show_dashboard_keuangan_real()
+
+        elif tab_mode == "🎮 Gamifikasi Ubelasy":   # <--- TAMBAHKAN INI
+            show_gamifikasi_ubelasy()
 
         else:
             # ========== TAB SIMULASI & AGREGATOR ==========
