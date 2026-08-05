@@ -8,7 +8,6 @@ import streamlit as st
 import pandas as pd
 import logging
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
 
 # ========== LOGGING ==========
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -136,7 +135,6 @@ def show_dashboard_keuangan_real():
                     fig.update_layout(height=300, margin=dict(l=10, r=10, t=20, b=10), showlegend=True)
                     st.plotly_chart(fig, use_container_width=True)
                 else:
-                    # Fallback matplotlib
                     fig, ax = plt.subplots(figsize=(6, 4))
                     ax.pie(df_pendapatan["Nominal"], labels=df_pendapatan["Sumber"], autopct='%1.1f%%', startangle=90)
                     ax.set_title("Sumber Pendapatan")
@@ -168,7 +166,7 @@ def show_dashboard_keuangan_real():
         df_perbandingan = pd.DataFrame({
             "Kategori": semua_kategori,
             "Pendapatan": [pendapatan.get(k, 0) for k in semua_kategori],
-            "Pengeluaran": [pengeluaran.get(k, 0) for k in semua kategori]
+            "Pengeluaran": [pengeluaran.get(k, 0) for k in semua_kategori]
         })
         df_perbandingan = df_perbandingan[(df_perbandingan["Pendapatan"] > 0) | (df_perbandingan["Pengeluaran"] > 0)]
 
