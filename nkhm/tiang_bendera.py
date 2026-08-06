@@ -230,6 +230,34 @@ def show_tiang_bendera():
             **(dari atas ke bawah):**  
             🚩 Merah Putih → 🟡 Kuning → 🟢 Hijau → 🔵 Biru
             """)
+
+            # ===== TAMBAHKAN FILOSOFI KEMERDEKAAN =====
+            with st.expander("📜 Filosofi Kemerdekaan", expanded=True):
+                st.markdown("""
+                ### 🕊️ Filosofi Kemerdekaan
+
+                **Tempat kemerdekaan untuk merdeka dari segala musuh bukanlah di sini (misal Tiang A), tetapi di sana (misal Tiang C).**
+
+                Para pejuang kemerdekaan tempo dulu berjuang meraih kemerdekaan di segala medan perang. Namun, untuk memproklamirkan kemerdekaan itu, mereka tidak melakukannya di tempat mereka berjuang (simbol Tiang A atau Tiang B), melainkan di tempat lain, yaitu di Jakarta (simbol Tiang C).
+
+                - **Tiang A** → Tempat bertahan, tempat awal yang masih kacau dan tidak teratur.  
+                Susunan di Tiang A: 🚩 Merah Putih → 🟢 Hijau → 🟡 Kuning → 🔵 Biru (dari atas ke bawah).  
+                Ini menggambarkan kehidupan yang penuh kerumitan dan ketidakteraturan.
+
+                - **Tiang B** → Medan perang, tempat perjuangan.  
+                Belum ada keteraturan yang sempurna.
+
+                - **Tiang C** → Tempat proklamasi, tempat kemerdekaan yang sesungguhnya.  
+                Susunan akhir yang dicapai: 🚩 Merah Putih → 🟡 Kuning → 🟢 Hijau → 🔵 Biru (dari atas ke bawah).  
+                Ini melambangkan keteraturan, kedamaian, dan kemerdekaan yang sempurna.
+
+                **Makna mendalam:**  
+                Untuk meraih kemerdekaan, segala kerumitan dan masalah hidup harus diselesaikan. Kemerdekaan sejati bukan hanya fisik, tetapi juga rohani. Seperti perjuangan bangsa Israel, kemerdekaan penuh tidak diraih di tempat perjuangan saat ini, tetapi akan digenapi kelak di zaman Milenium, bahkan di Langit Baru dan Bumi Baru, di mana ada Yerusalem Baru yang turun dari Sorga.
+
+                **Pesan:**  
+                Setiap langkah perjuangan, sekecil apa pun, menuju keteraturan dan kebenaran, adalah bagian dari perjalanan menuju kemerdekaan yang hakiki.
+                """)
+
     except Exception as e:
         logging.error(f"Error show_tiang_bendera: {e}", exc_info=True)
         st.error(f"❌ Terjadi error di Tiang Bendera: {e}")
