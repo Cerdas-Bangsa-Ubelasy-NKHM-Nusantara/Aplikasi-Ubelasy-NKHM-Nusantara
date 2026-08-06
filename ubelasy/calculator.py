@@ -1,4 +1,9 @@
 # ubelasy/calculator.py
+import logging
+
+# ========== LOGGING ==========
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 def calculate_loan(K, r1_percent, delta_percent, n, tp, m_years, bank_type, cost_funds_percent):
     """
     Hitung simulasi pinjaman Ubelasy.
@@ -11,6 +16,24 @@ def calculate_loan(K, r1_percent, delta_percent, n, tp, m_years, bank_type, cost
     bank_type: 'desa' atau 'kota'
     cost_funds_percent: biaya dana+overhead (%)
     """
+    # ========== VALIDASI INPUT ==========
+    if K <= 0:
+        logging.error("Pinjaman per periode (K) harus lebih besar dari 0.")
+        raise ValueError("Pinjaman per periode (K) harus lebih besar dari 0.")
+    if tp <= 0:
+        logging.error("Tenor per periode (tp) harus lebih besar dari 0.")
+        raise ValueError("Tenor per periode (tp) harus lebih besar dari 0.")
+    if m_years < 0 or m_years > tp:
+        logging.error(f"Tahun bayar (m_years) harus antara 0 dan {tp}.")
+        raise ValueError(f"Tahun bayar (m_years) harus antara 0 dan {tp}.")
+    if n <= 0:
+        logging.error("Jumlah periode (n) harus lebih besar dari 0.")
+        raise ValueError("Jumlah periode (n) harus lebih besar dari 0.")
+    if bank_type not in ['desa', 'kota']:
+        logging.error("bank_type harus 'desa' atau 'kota'.")
+        raise ValueError("bank_type harus 'desa' atau 'kota'.")
+
+    # ========== PERHITUNGAN ==========
     r = []
     for i in range(n):
         rate = r1_percent - i * delta_percent
@@ -37,10 +60,10 @@ def calculate_loan(K, r1_percent, delta_percent, n, tp, m_years, bank_type, cost
     
     laba_nominal = total_bayar_sesudah_psh - total_pokok
     laba_persen = (laba_nominal / total_pokok) * 100
-    return_tahunan = laba_persen / T
+    return_tahunan = laba_persen / T if T > 0 else 0
     
     weighted_bunga = sum(r[i] * tp for i in range(n))
-    rata_bunga = (weighted_bunga / T) * 100
+    rata_bunga = (weighted_bunga / T) * 100 if T > 0 else 0
     spread = rata_bunga - cost_funds_percent
     
     psh_persen_total = (PSH / total_pokok) * 100
@@ -49,7 +72,7 @@ def calculate_loan(K, r1_percent, delta_percent, n, tp, m_years, bank_type, cost
     for i in range(n):
         bunga_persen = r[i] * 100
         tsh = TSH[i]
-        angsuran_bulan = tsh / (tp * 12)
+        angsuran_bulan = tsh / (tp * 12) if tp > 0 else 0
         is_last = (i == n-1)
         total_dibayar = tsh if not is_last else tsh * (m_years / tp)
         sisa_akhir = 0 if not is_last else SHA
