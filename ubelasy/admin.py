@@ -1,5 +1,18 @@
+# ubelasy/admin.py
 import streamlit as st
+import logging
 from ubelasy.aggregator import load_applications, update_application_status
+
+# ========== LOGGING ==========
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# ========== FUNGSI BANTU UNTUK RERUN YANG AMAN ==========
+def safe_rerun():
+    """Memanggil st.rerun() dengan penanganan error untuk menghindari crash."""
+    try:
+        st.rerun()
+    except Exception as e:
+        logging.warning(f"st.rerun gagal di admin: {e}")
 
 def admin_page():
     st.title("🔐 Admin Panel - Update Status Pengajuan")
@@ -31,4 +44,5 @@ def admin_page():
             if st.button(f"Update {app['id']}", key=f"update_{app['id']}"):
                 update_application_status(app["id"], status_baru, catatan)
                 st.success(f"Status pengajuan {app['id']} diupdate menjadi {status_baru}")
-                st.rerun()
+                # Ganti st.rerun() dengan safe_rerun()
+                safe_rerun()
