@@ -231,7 +231,7 @@ def show_tiang_bendera():
             🚩 Merah Putih → 🟡 Kuning → 🟢 Hijau → 🔵 Biru
             """)
 
-            # ===== TAMBAHKAN FILOSOFI KEMERDEKAAN =====
+            # ===== SIMBOL FILOSOFI KEMERDEKAAN =====
             with st.expander("📜 Filosofi Kemerdekaan", expanded=True):
                 st.markdown("""
                 ### 🕊️ Filosofi Kemerdekaan
