@@ -1,7 +1,18 @@
-
 # ubelasy/bank_admin.py
 import streamlit as st
+import logging
 from ubelasy.aggregator import load_applications, update_application_status
+
+# ========== LOGGING ==========
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# ========== FUNGSI BANTU UNTUK RERUN YANG AMAN ==========
+def safe_rerun():
+    """Memanggil st.rerun() dengan penanganan error untuk menghindari crash."""
+    try:
+        st.rerun()
+    except Exception as e:
+        logging.warning(f"st.rerun gagal di bank_admin: {e}")
 
 def bank_admin_page(bank_id):
     st.title(f"🏦 Admin Dashboard - {bank_id.upper()}")
@@ -34,4 +45,4 @@ def bank_admin_page(bank_id):
             if st.button(f"Update", key=f"update_{app['id']}"):
                 update_application_status(app["id"], new_status, catatan)
                 st.success(f"Status diupdate menjadi {new_status}")
-                st.rerun()
+                safe_rerun()
