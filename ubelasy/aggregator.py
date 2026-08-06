@@ -148,3 +148,4 @@ def get_application(app_id):
 
 def get_all_applications_for_user(profil_hash=None):
     return load_applications()
+
